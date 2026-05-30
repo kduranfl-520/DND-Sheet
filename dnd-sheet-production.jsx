@@ -9,7 +9,10 @@
 // Loaded by dnd-sheet.jsx via <script> tag or window.DND_LIBRARY
 
 
-const { useState, useCallback, useRef } = React;
+// Hooks available as globals (set by index.html) or from React
+const useState = window.useState || React.useState;
+const useCallback = window.useCallback || React.useCallback;
+const useRef = window.useRef || React.useRef;
 
 // COMPENDIUM - sourced from Library (dnd-library-backup-2026-05-24)
 // Races from RACE_COMPENDIUM
