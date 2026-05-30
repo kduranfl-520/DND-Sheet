@@ -6,13 +6,13 @@
   <title>D&D 5e Character Sheet</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0f0f0f; color: #e5e5e5; font-family: system-ui, sans-serif; }
+    body { background: #0f0f0f; }
     #root { min-height: 100vh; }
     #loading {
       position: fixed; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; background: #0f0f0f; gap: 16px; z-index: 9999;
+      align-items: center; justify-content: center; background: #0f0f0f; gap: 16px;
     }
-    #loading h1 { font-size: 24px; color: #a78bfa; font-weight: 700; }
+    #loading h1 { font-size: 22px; color: #a78bfa; font-weight: 700; }
     #loading p { font-size: 13px; color: #666; }
     .spinner { width: 40px; height: 40px; border: 3px solid #1e1e2e; border-top-color: #a78bfa; border-radius: 50%; animation: spin .8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -26,28 +26,26 @@
   </div>
   <div id="root"></div>
 
-  <!-- React + ReactDOM + Babel -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.2/babel.min.js"></script>
-
-  <!-- Load library first as plain JS -->
   <script src="dnd-library.js"></script>
 
-  <!-- Fetch and transform the JSX at runtime -->
   <script>
     fetch('dnd-sheet-production.jsx')
-      .then(r => r.text())
+      .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(code => {
-        const transformed = Babel.transform(code, { presets: ['react'] }).code;
-        const script = document.createElement('script');
-        script.textContent = transformed;
-        document.body.appendChild(script);
+        const out = Babel.transform(code, {
+          presets: [['react', { runtime: 'classic' }]],
+          plugins: []
+        }).code;
+        const fn = new Function('React','ReactDOM', out);
+        fn(React, ReactDOM);
         document.getElementById('loading').style.display = 'none';
       })
       .catch(err => {
         document.getElementById('loading').innerHTML =
-          '<h1 style="color:#f87171">⚠️ Failed to load</h1><p style="color:#888;margin-top:8px">' + err.message + '</p>';
+          '<h1 style="color:#f87171;font-family:sans-serif">⚠️ ' + err.message + '</h1><p style="color:#666;font-family:sans-serif;margin-top:8px">Check browser console for details.</p>';
       });
   </script>
 </body>
