@@ -1,0 +1,6561 @@
+// ===== D&D LIBRARY DATA (from dnd-library.js) =====
+// D&D 5e Library Data
+// Loaded by dnd-sheet.jsx via <script> tag or window.DND_LIBRARY
+
+// D&D 5e Library Data
+// Loaded by dnd-sheet.jsx via <script> tag or window.DND_LIBRARY
+
+// D&D 5e Library Data
+// Loaded by dnd-sheet.jsx via <script> tag or window.DND_LIBRARY
+
+window.DND_LIBRARY = {
+ LIB_KEY: "dnd5e_library_v20",
+ LIB_CATS: ["Race","Subrace","Class","Subclass","Feature","Background","Feat","Armor","Shield","Weapon","Equipment","Tools & Kits","Magic Item","Potion","Scroll","Wand & Rod","Gem","Jewelry","Spell","Component","Deity","Faction","Companion","Other"],
+ LIB_SEED: [
+ {id:"rc_dragonborn", title:"Dragonborn", category:"Race", phb:true, tags:"dragon,breath", desc:"Dragonborn look very much like dragons standing erect in humanoid form, though they lack wings or a tail.", notes:"Ability Score Increase: +2 STR, +1 CHA | Speed: 30ft | Size: Medium | Darkvision: No | Draconic Ancestry: Choose one dragon type (determines breath weapon element and damage resistance) | Languages: Common, Draconic"},
+ {id:"rc_dwarf", title:"Dwarf", category:"Race", phb:true, tags:"hardy,stonecunning", desc:"Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.", notes:"Ability Score Increase: +2 CON | Speed: 25ft (not reduced by heavy armor) | Size: Medium | Darkvision: 60ft | Dwarven Resilience: Advantage on saves vs poison, resistance to poison damage | Dwarven Combat Training: Prof with battleaxe, handaxe, light hammer, warhammer | Tool Proficiency: One of Smith's, Brewer's, or Mason's tools | Stonecunning: Double prof bonus on History checks for stonework | Languages: Common, Dwarvish"},
+ {id:"rc_elf", title:"Elf", category:"Race", phb:true, tags:"fey,trance", desc:"Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.", notes:"Ability Score Increase: +2 DEX | Speed: 30ft | Size: Medium | Darkvision: 60ft | Keen Senses: Perception proficiency | Fey Ancestry: Advantage vs charmed, immune to magic sleep | Trance: 4 hours meditation instead of 8 hours sleep | Languages: Common, Elvish"},
+ {id:"rc_gnome", title:"Gnome", category:"Race", phb:true, tags:"cunning,small", desc:"A gnome's energy and enthusiasm for living shines through every inch of his or her tiny body.", notes:"Ability Score Increase: +2 INT | Speed: 25ft | Size: Small | Darkvision: 60ft | Gnome Cunning: Advantage on all INT/WIS/CHA saving throws against magic | Languages: Common, Gnomish"},
+ {id:"rc_halfelf", title:"Half-Elf", category:"Race", phb:true, tags:"versatile,fey", desc:"Walking in two worlds but truly belonging to neither, half-elves combine what some say are the best qualities of their elf and human parents.", notes:"Ability Score Increase: +2 CHA, +1 to two other ability scores (player choice) | Speed: 30ft | Size: Medium | Darkvision: 60ft | Fey Ancestry: Advantage vs charmed, immune to magic sleep | Skill Versatility: Proficiency in two skills of your choice | Languages: Common, Elvish, one extra language"},
+ {id:"rc_halfling", title:"Halfling", category:"Race", phb:true, tags:"lucky,brave,small", desc:"The comforts of home are the goals of most halflings' lives: a place to settle in peace and quiet, far from marauding monsters and clashing armies.", notes:"Ability Score Increase: +2 DEX | Speed: 25ft | Size: Small | Darkvision: No | Lucky: When you roll a 1 on attack, ability check, or save, reroll and use the new roll | Brave: Advantage on saves vs frightened | Halfling Nimbleness: Move through space of any creature one size larger | Languages: Common, Halfling"},
+ {id:"rc_halforc", title:"Half-Orc", category:"Race", phb:true, tags:"savage,relentless", desc:"Whether united under the leadership of a mighty warlock or having fought without anyone to piece things together, half-orcs' bloodlines reach many corners of the world.", notes:"Ability Score Increase: +2 STR, +1 CON | Speed: 30ft | Size: Medium | Darkvision: 60ft | Menacing: Proficiency in Intimidation | Relentless Endurance: When reduced to 0 HP (not killed outright), drop to 1 HP instead. 1/LR | Savage Attacks: On critical hit with melee weapon, roll one extra weapon damage die | Languages: Common, Orc"},
+ {id:"rc_human", title:"Human", category:"Race", phb:true, tags:"versatile,adaptable", desc:"In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and short-lived in comparison to dwarves, elves, and dragons.", notes:"Ability Score Increase: +1 to all six ability scores | Speed: 30ft | Size: Medium | Darkvision: No | Extra Language: One additional language of your choice | Extra Skill: Proficiency in one additional skill (Variant Human only) | Feat: One feat at 1st level (Variant Human only) | Languages: Common, one extra"},
+ {id:"rc_tiefling", title:"Tiefling", category:"Race", phb:true, tags:"fiend,hellish", desc:"To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling.", notes:"Ability Score Increase: +2 CHA, +1 INT | Speed: 30ft | Size: Medium | Darkvision: 60ft | Hellish Resistance: Resistance to fire damage | Infernal Legacy: Know Thaumaturgy cantrip. At 3rd level cast Hellish Rebuke 1/LR. At 5th level cast Darkness 1/LR. Uses CHA as spellcasting ability | Languages: Common, Infernal"},
+ {id:"rc_orc", title:"Orc", category:"Race", phb:true, tags:"powerful,relentless,PHB2024", desc:"Orcs are one of Exandria's youngest races, and are said to have been born from elves seared by the light of the sun god Corellon.", notes:"Ability Score Increase: +2 STR, +1 CON | Speed: 30ft | Size: Medium | Darkvision: 60ft | Aggressive: As a bonus action, move up to your speed toward a hostile creature you can see | Menacing: Proficiency in Intimidation | Powerful Build: Count as one size larger for carrying capacity and push/drag/lift | Languages: Common, Orc"},
+ {id:"sr_hilldwarf", title:"Hill Dwarf", category:"Subrace", phb:true, tags:"dwarf,wisdom", desc:"As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.", notes:"Ability Score Increase: +1 WIS | Dwarven Toughness: HP maximum increases by 1, and increases by 1 again every time you gain a level"},
+ {id:"sr_mountaindwarf",title:"Mountain Dwarf", category:"Subrace", phb:true, tags:"dwarf,armor", desc:"As a mountain dwarf, you're strong and hardy, acclimated to a difficult life in rugged terrain.", notes:"Ability Score Increase: +2 STR | Dwarven Armor Training: Proficiency with light and medium armor"},
+ {id:"sr_highelf", title:"High Elf", category:"Subrace", phb:true, tags:"elf,magic", desc:"As a high elf, you have a keen mind and a mastery over at least the basics of magic.", notes:"Ability Score Increase: +1 INT | Elf Weapon Training: Proficiency with longsword, shortsword, shortbow, and longbow | Cantrip: Learn one wizard cantrip of your choice (INT is spellcasting ability) | Extra Language: One additional language of your choice"},
+ {id:"sr_woodelf", title:"Wood Elf", category:"Subrace", phb:true, tags:"elf,nature", desc:"As a wood elf, you have keen senses and intuition, and your fleet feet carry you quickly through your native forests.", notes:"Ability Score Increase: +1 WIS | Elf Weapon Training: Proficiency with longsword, shortsword, shortbow, and longbow | Fleet of Foot: Speed increases to 35ft | Mask of the Wild: Can attempt to hide when only lightly obscured by natural phenomena"},
+ {id:"sr_drow", title:"Dark Elf (Drow)", category:"Subrace", phb:true, tags:"elf,underdark", desc:"Descended from an earlier subrace of dark-skinned elves, the drow were banished from the surface world for following the goddess Lolth.", notes:"Ability Score Increase: +1 CHA | Superior Darkvision: 120ft | Sunlight Sensitivity: Disadvantage on attack rolls and Perception checks in direct sunlight | Drow Magic: Dancing Lights cantrip. Faerie Fire 1/LR at 3rd level. Darkness 1/LR at 5th level. CHA is spellcasting ability | Drow Weapon Training: Proficiency with rapiers, shortswords, and hand crossbows"},
+ {id:"sr_lightfoot", title:"Lightfoot Halfling", category:"Subrace", phb:true, tags:"halfling,stealth", desc:"As a lightfoot halfling, you can easily hide from notice, even using other people as cover.", notes:"Ability Score Increase: +1 CHA | Naturally Stealthy: Can attempt to hide even when only obscured by a creature at least one size larger"},
+ {id:"sr_stout", title:"Stout Halfling", category:"Subrace", phb:true, tags:"halfling,tough", desc:"As a stout halfling, you're hardier than average and have some resistance to poison.", notes:"Ability Score Increase: +1 CON | Stout Resilience: Advantage on saving throws against poison, and resistance to poison damage"},
+ {id:"sr_forestgnome", title:"Forest Gnome", category:"Subrace", phb:true, tags:"gnome,illusion", desc:"As a forest gnome, you have a natural knack for illusion and inherent quickness and stealth.", notes:"Ability Score Increase: +1 DEX | Natural Illusionist: Know Minor Illusion cantrip (INT is spellcasting ability) | Speak with Small Beasts: Communicate simple ideas with Small or smaller beasts through sounds and gestures"},
+ {id:"sr_rockgnome", title:"Rock Gnome", category:"Subrace", phb:true, tags:"gnome,tinker", desc:"As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.", notes:"Ability Score Increase: +1 CON | Artificer's Lore: Double proficiency bonus on History checks related to magic items, alchemical objects, or technological devices | Tinker: Proficiency with tinker's tools. Construct Tiny clockwork devices (10gp, 1 hour)"},
+ {id:"sr_db_black", title:"Dragonborn - Black", category:"Subrace", phb:true, tags:"dragonborn,acid", desc:"Black dragonborn carry the legacy of the Black Dragon — acid, cunning, and cruelty.", notes:"Dragon Type: Black | Damage Type: Acid | Damage Resistance: Acid"},
+ {id:"sr_db_blue", title:"Dragonborn - Blue", category:"Subrace", phb:true, tags:"dragonborn,lightning", desc:"Blue dragonborn carry the legacy of the Blue Dragon — lightning and desert storms.", notes:"Dragon Type: Blue | Damage Type: Lightning | Damage Resistance: Lightning"},
+ {id:"sr_db_brass", title:"Dragonborn - Brass", category:"Subrace", phb:true, tags:"dragonborn,fire", desc:"Brass dragonborn carry the legacy of the Brass Dragon — fire and conversation.", notes:"Dragon Type: Brass | Damage Type: Fire | Damage Resistance: Fire"},
+ {id:"sr_db_bronze", title:"Dragonborn - Bronze", category:"Subrace", phb:true, tags:"dragonborn,lightning", desc:"Bronze dragonborn carry the legacy of the Bronze Dragon — lightning and the sea.", notes:"Dragon Type: Bronze | Damage Type: Lightning | Damage Resistance: Lightning"},
+ {id:"sr_db_copper", title:"Dragonborn - Copper", category:"Subrace", phb:true, tags:"dragonborn,acid", desc:"Copper dragonborn carry the legacy of the Copper Dragon — acid and mischief.", notes:"Dragon Type: Copper | Damage Type: Acid | Damage Resistance: Acid"},
+ {id:"sr_db_gold", title:"Dragonborn - Gold", category:"Subrace", phb:true, tags:"dragonborn,fire", desc:"Gold dragonborn carry the legacy of the Gold Dragon — fire and nobility.", notes:"Dragon Type: Gold | Damage Type: Fire | Damage Resistance: Fire"},
+ {id:"sr_db_green", title:"Dragonborn - Green", category:"Subrace", phb:true, tags:"dragonborn,poison", desc:"Green dragonborn carry the legacy of the Green Dragon — poison and deception.", notes:"Dragon Type: Green | Damage Type: Poison | Damage Resistance: Poison"},
+ {id:"sr_db_red", title:"Dragonborn - Red", category:"Subrace", phb:true, tags:"dragonborn,fire", desc:"Red dragonborn carry the legacy of the Red Dragon — fire and dominance.", notes:"Dragon Type: Red | Damage Type: Fire | Damage Resistance: Fire"},
+ {id:"sr_db_silver", title:"Dragonborn - Silver", category:"Subrace", phb:true, tags:"dragonborn,cold", desc:"Silver dragonborn carry the legacy of the Silver Dragon — cold and heroism.", notes:"Dragon Type: Silver | Damage Type: Cold | Damage Resistance: Cold"},
+ {id:"sr_db_white", title:"Dragonborn - White", category:"Subrace", phb:true, tags:"dragonborn,cold", desc:"White dragonborn carry the legacy of the White Dragon — cold and savagery.", notes:"Dragon Type: White | Damage Type: Cold | Damage Resistance: Cold"},
+ {id:"sr_tief_asmo", title:"Asmodeus Tiefling", category:"Subrace", phb:true, tags:"tiefling,infernal,fire", desc:"The tieflings connected to Nessus, the deepest layer of the Nine Hells, command the power of fire and darkness guided by Asmodeus.", notes:"Ability Score Increase: +1 INT, +2 CHA | Infernal Legacy: Thaumaturgy cantrip. Hellish Rebuke 1/LR at 3rd level. Darkness 1/LR at 5th level. CHA is spellcasting ability | PHB p.43 / MToF p.21"},
+ {id:"sr_tief_meph", title:"Mephistopheles Tiefling",category:"Subrace",phb:true,tags:"tiefling,cold,arcane", desc:"Tieflings with a blood tie to Mephistopheles are gifted with a particular flair for arcane magic.", notes:"Ability Score Increase: +1 INT, +2 CHA | Legacy of Cania: Mage Hand cantrip. Burning Hands 1/LR at 3rd level. Flame Blade 1/LR at 5th level. INT is spellcasting ability"},
+ {id:"sr_tief_zari", title:"Zariel Tiefling", category:"Subrace", phb:true, tags:"tiefling,fire,martial", desc:"Tieflings with a blood tie to Zariel are stronger than typical tieflings and receive magical abilities related to fire.", notes:"Ability Score Increase: +1 STR, +2 CHA | Legacy of Avernus: Thaumaturgy cantrip. Searing Smite 1/LR at 3rd level. Branding Smite 1/LR at 5th level. CHA is spellcasting ability"},
+ {id:"cl_barbarian", title:"Barbarian", category:"Class", phb:true, tags:"rage,martial,PHB", desc:"A fierce warrior who can enter a battle rage.", notes:"Hit Die: d12. Primary: STR. Saves: STR, CON. Armor: Light, Medium, Shields. Weapons: Simple, Martial. Multiclass Prereq: STR 13. No spellcasting. Key Features: Rage (bonus dmg, resist), Unarmored Defense (10+DEX+CON), Reckless Attack, Danger Sense, Extra Attack, Brutal Critical, Relentless Rage, Persistent Rage, Indomitable Might."},
+ {id:"cl_bard", title:"Bard", category:"Class", phb:true, tags:"magic,performance,PHB", desc:"An inspiring magician whose power echoes the music of creation.", notes:"Hit Die: d8. Primary: CHA. Saves: DEX, CHA. Armor: Light. Weapons: Simple, hand crossbow, longsword, rapier, shortsword. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, full caster. Key Features: Bardic Inspiration (d6-d12), Jack of All Trades, Song of Rest, Expertise, Font of Inspiration, Countercharm, Magical Secrets."},
+ {id:"cl_cleric", title:"Cleric", category:"Class", phb:true, tags:"divine,healing,PHB", desc:"A priestly champion who wields divine magic in service of a higher power.", notes:"Hit Die: d8. Primary: WIS. Saves: WIS, CHA. Armor: Light, Medium, Shields. Weapons: Simple. Multiclass Prereq: WIS 13. Spellcasting: WIS-based, full caster, all cleric spells. Key Features: Divine Domain (subclass at 1), Channel Divinity, Destroy Undead, Divine Intervention, Turn Undead."},
+ {id:"cl_druid", title:"Druid", category:"Class", phb:true, tags:"nature,wildshape,PHB", desc:"A priest of the Old Faith wielding the powers of nature and adopting animal forms.", notes:"Hit Die: d8. Primary: WIS. Saves: INT, WIS. Armor: Light, Medium (non-metal), Shields (non-metal). Multiclass Prereq: WIS 13. Spellcasting: WIS-based, full caster. Key Features: Druidic, Wild Shape, Timeless Body, Beast Spells, Wild Shape improvement (CR scales with level)."},
+ {id:"cl_fighter", title:"Fighter", category:"Class", phb:true, tags:"combat,martial,PHB", desc:"A master of martial combat, skilled with a variety of weapons and armor.", notes:"Hit Die: d10. Primary: STR or DEX. Saves: STR, CON. Armor: All, Shields. Weapons: Simple, Martial. Multiclass Prereq: STR 13 or DEX 13. No spellcasting (base). Key Features: Fighting Style, Second Wind, Act Surge, Extra Attack (x2 at 11, x3 at 20), Indomitable, Martial Archetype (subclass at 3)."},
+ {id:"cl_monk", title:"Monk", category:"Class", phb:true, tags:"ki,unarmed,PHB", desc:"A master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.", notes:"Hit Die: d8. Primary: DEX, WIS. Saves: STR, DEX. Armor: None. Weapons: Simple, shortswords. Multiclass Prereq: DEX 13 and WIS 13. No spellcasting. Key Features: Martial Arts, Ki Points, Unarmored Defense (10+DEX+WIS), Unarmored Move, Stunning Strike, Deflect Missiles, Slow Fall, Extra Attack, Evasion."},
+ {id:"cl_paladin", title:"Paladin", category:"Class", phb:true, tags:"divine,martial,PHB", desc:"A holy warrior bound to a sacred oath.", notes:"Hit Die: d10. Primary: STR, CHA. Saves: WIS, CHA. Armor: All, Shields. Weapons: Simple, Martial. Multiclass Prereq: STR 13 and CHA 13. Spellcasting: CHA-based, half caster. Key Features: Divine Sense, Lay on Hands, Fighting Style, Divine Smite, Channel Divinity, Aura of Protection (+CHA to saves), Sacred Oath (subclass at 3)."},
+ {id:"cl_ranger", title:"Ranger", category:"Class", phb:true, tags:"nature,combat,PHB", desc:"A warrior who uses martial prowess and nature magic to combat threats on the edges of civilization.", notes:"Hit Die: d10. Primary: DEX, WIS. Saves: STR, DEX. Armor: Light, Medium, Shields. Weapons: Simple, Martial. Multiclass Prereq: DEX 13 and WIS 13. Spellcasting: WIS-based, half caster. Key Features: Favored Enemy, Natural Explorer, Fighting Style, Primeval Awareness, Extra Attack, Land's Stride, Hide in Plain Sight, Feral Senses."},
+ {id:"cl_rogue", title:"Rogue", category:"Class", phb:true, tags:"stealth,sneak,PHB", desc:"A scoundrel who uses stealth and trickery to overcome obstacles and enemies.", notes:"Hit Die: d8. Primary: DEX. Saves: DEX, INT. Armor: Light. Weapons: Simple, hand crossbow, longsword, rapier, shortsword. Multiclass Prereq: DEX 13. No spellcasting (base). Key Features: Expertise, Sneak Attack (1d6, scales), Thieves' Cant, Cunning Act, Uncanny Dodge, Evasion, Reliable Talent, Blindsense, Slippery Mind."},
+ {id:"cl_sorcerer", title:"Sorcerer", category:"Class", phb:true, tags:"innate,magic,PHB", desc:"A spellcaster who draws on inherent magic from a gift or bloodline.", notes:"Hit Die: d6. Primary: CHA. Saves: CON, CHA. Armor: None. Weapons: Simple. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, full caster, limited spells known. Key Features: Sorcerous Origin (subclass at 1), Font of Magic (Sorcery Points), Metamagic, Sorcerous Restoration."},
+ {id:"cl_warlock", title:"Warlock", category:"Class", phb:true, tags:"patron,pact,PHB", desc:"A wielder of magic derived from a bargain with an extraplanar entity.", notes:"Hit Die: d8. Primary: CHA. Saves: WIS, CHA. Armor: Light. Weapons: Simple. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, Pact Magic (SR slots, all slots same level). Key Features: Otherworldly Patron (subclass at 1), Eldritch Invocations, Pact Boon (Blade/Chain/Rod/Tome), Mystic Arcanum, Eldritch Master."},
+ {id:"cl_wizard", title:"Wizard", category:"Class", phb:true, tags:"arcane,scholar,PHB", desc:"A scholarly magic-user capable of manipulating structures of reality.", notes:"Hit Die: d6. Primary: INT. Saves: INT, WIS. Armor: None. Weapons: Simple. Multiclass Prereq: INT 13. Multiclass Gains: Spellcasting (if first level taken). Spellcasting: INT-based, prepared from spellbook, all wizard spells. Slots: Full caster."},
+ {id:"cl_artificer", title:"Artificer", category:"Class", phb:true, tags:"magic,crafting,PHB2024", desc:"Masters of unlocking magic in everyday objects, artificers are supreme inventors who use tools and ingenuity to create.", notes:"Hit Die: d8. Primary: INT. Saves: CON, INT. Armor: Light, Medium, Shields. Weapons: Simple. Tools: Thieves' tools, tinker's tools, one artisan's tools. Multiclass Prereq: INT 13. Multiclass Gains: Light & medium armor, shields, thieves' tools, tinker's tools. Spellcasting: INT-based, half caster. Key Features: Magical Tinkering, Infuse Item, Arcane Armor, Tool Expertise."},
+
+
+ {id:"sp_tce_bonesearth", title:"Bones of the Earth", category:"Spell",phb:false,tags:"6th,transmutation,TCE", desc:"You cause up to six pillars of stone to burst from places on the ground you can see within range.", notes:"Level: 6th | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Instantaneous | Damage: 6d6 bludgeoning per pillar"},
+ {id:"sp_tce_infwind", title:"Investiture of Wind", category:"Spell",phb:false,tags:"6th,transmutation,TCE", desc:"Until the spell ends, wind whirls around you, and you gain several benefits.", notes:"Level: 6th | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: Conc, 10 minutes | Effect: Immune wind conditions, fl"},
+ {id:"sp_tce_sumfey", title:"Summon Fey", category:"Spell",phb:false,tags:"3rd,conjuration,TCE", desc:"You call forth a fey spirit. It manifests in an unoccupied space within range.", notes:"Level: 3rd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 hour | Upcast: Creature improves at higher s"},
+ {id:"sp_tce_sumundead", title:"Summon Undead", category:"Spell",phb:false,tags:"3rd,necromancy,TCE", desc:"You call forth an undead spirit. It manifests in an unoccupied space within range.", notes:"Level: 3rd | School: Necromancy | Classes: Warlock, | Casting Time: Act | Range: 90 ft | Components: V,S,M (undead bone/flesh) | Duration: Conc, 1 hour"},
+ {id:"sp_tce_sumshadow", title:"Summon Shadowspawn", category:"Spell",phb:false,tags:"3rd,conjuration,TCE", desc:"You call forth a shadowy spirit. It manifests in an unoccupied space within range.", notes:"Level: 3rd | School: Conjuration | Classes: Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_tce_mindsliver", title:"Mind Sliver", category:"Spell",phb:false,tags:"cantrip,enchantment,TCE", desc:"You drive a disorienting spike of psychic energy into the mind of one creature.", notes:"Level: Cantrip | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V | Duration: 1 round | Save: INT | Damage: 1d6 psychic + subtract d4"},
+ {id:"sp_tce_intlctsm", title:"Intellect Fortress", category:"Spell",phb:false,tags:"3rd,abjuration,TCE", desc:"For the duration, you or one willing creature you can see within range has resist psychic damage.", notes:"Level: 3rd | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V | Duration: Conc, 1 hour | Upcast: +1 creature per slot above 3rd. Clas"},
+ {id:"sp_tce_spiritshroud", title:"Spirit Shroud", category:"Spell",phb:false,tags:"3rd,necromancy,TCE", desc:"You call forth spirits of the dead, which flit around you for the spell's duration.", notes:"Level: 3rd | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V,S | Duration: Conc, 1 minute | Damage: +1d8 per attack (radiant/necroti"},
+ {id:"sp_tce_magicalmstr", title:"Tasha's Caustic Brew", category:"Spell",phb:false,tags:"1st,evocation,TCE", desc:"A stream of acid emanates from you in a 30-ft line 5 ft wide.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (30 ft line) | Components: V,S,M | Duration: Conc, 1 minute | Save: DEX | Damage: 2d4 ac"},
+ {id:"sp_tce_tashaoth", title:"Tasha's Otherworldly Guise",category:"Spell",phb:false,tags:"6th,transmutation,TCE", desc:"Uttering an incantation, you draw on the magic of the lower planes or upper planes to transform yourself.", notes:"Level: 6th | School: Transmutation | Classes: Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V,S,M | Duration: Conc, 1 minute"},
+ {id:"sp_tce_wrathful", title:"Wrathful Smite", category:"Spell",phb:false,tags:"1st,evocation,TCE", desc:"Also in PHB. The next time you hit with a melee weapon, your strike channels divine wrath.", notes:"Level: 1st | School: Evocation | Classes: Paladin. See PHB entry | Casting Time: BA"},
+ {id:"sp_tce_thunderous", title:"Thunderous Smite", category:"Spell",phb:false,tags:"1st,evocation,TCE", desc:"The first time you hit with a melee weapon attack during this spell's duration, your weapon rings with thunder.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V | Duration: Conc, 1 minute | Damage: +2d6 thunder, push 10 ft, knock pro"},
+ {id:"sp_tce_magnwave", title:"Magnify Gravity", category:"Spell",phb:false,tags:"1st,transmutation,TCE", desc:"The gravity in a 10-ft radius sphere centered on a point you can see within range increases.", notes:"Level: 1st | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: 1 round | Save: CON | Damage: 2d8 force, speed halved. "},
+ {id:"sp_tce_vertstrue", title:"Vortex Warp", category:"Spell",phb:false,tags:"2nd,conjuration,TCE", desc:"You magically twist space around another creature, teleporting it.", notes:"Level: 2nd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S | Duration: Instantaneous | Save: CON (unwilling targets) | Upcast:"},
+ {id:"sp_tce_intlctbolt", title:"Lightning Bolt (Psionic)",category:"Spell",phb:false,tags:"cantrip,evocation,TCE", desc:"Lighting Bolt version for psionic characters.", notes:"Classes: Mystic | Level: Cantrip (variant). See PHB Lightning Bolt entry"},
+ {id:"sp_tce_borealwind", title:"Boreal Wind", category:"Spell",phb:false,tags:"2nd,evocation,TCE", desc:"Icy wind blasts from you in a 15-ft cone.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft cone) | Components: V,S | Duration: Instantaneous | Save: STR | Damage: 3d8 cold"},
+ {id:"sp_tce_borrowedknow", title:"Borrowed Knowledge", category:"Spell",phb:false,tags:"2nd,divination,TCE", desc:"You momentarily borrow the knowledge of a skill.", notes:"Level: 2nd | School: Divination | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S,M | Duration: 1 hour | Effect: Prof in chosen skill for duration. Cl"},
+ {id:"sp_tce_wrdofbloom", title:"Warding Wind", category:"Spell",phb:false,tags:"2nd,evocation,TCE", desc:"A strong wind (20 mph) blows around you in a 10-ft radius.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V | Duration: Conc, 10 minutes | Effect: Deafened, extinguish small flame"},
+
+
+ {id:"ft_tce_tracker",title:"Tracker",category:"Feat",phb:false,tags:"feat,ranger,TCE",desc:"You have spent time hunting creatures and honed your skills, developing a hunter's eye and expertise in reading your environment.",notes:"Prerequisite: None. Benefits: +1 STR, DEX, or WIS. Proficiency in Survival. Learn Hunter's Mark, cast 1/LR without a slot using WIS as spellcasting ability. TCE p.80."},
+ {id:"ft_tce_gift_chromatic",title:"Gift of the Chromatic Dragon",category:"Feat",phb:false,tags:"feat,dragon,TCE",desc:"You've manifested some of the power of chromatic dragons.",notes:"Prerequisite: None. Benefits: Chromatic Infusion: bonus action, touch a simple/martial weapon, deal extra 1d4 of acid/cold/fire/lightning/poison for 1 min (1/LR). Reactive Resistance: reaction when you take acid/cold/fire/lightning/poison damage, gain resistance to that type until end of turn (1/LR). TCE p.79."},
+ {id:"ft_tce_gift_gem",title:"Gift of the Gem Dragon",category:"Feat",phb:false,tags:"feat,dragon,TCE",desc:"You've manifested some of the power of gem dragons.",notes:"Prerequisite: None. Benefits: +1 INT, WIS, or CHA. Telekinetic Reprisal: reaction when you take damage, release telekinetic energy — each creature within 10ft makes STR save (8+prof+mod) or is pushed 10ft. 1/LR. TCE p.79."},
+ {id:"ft_tce_gift_metallic",title:"Gift of the Metallic Dragon",category:"Feat",phb:false,tags:"feat,dragon,TCE",desc:"You've manifested some of the power of metallic dragons.",notes:"Prerequisite: None. Benefits: Learn Cure Wounds, cast 1/LR without a slot using INT/WIS/CHA. Protective Wings: reaction when you or an ally within 5ft is hit, manifest wings that give +1d4 AC bonus against that attack. 1/LR (prof bonus times per LR at higher tiers). TCE p.79."},
+ {id:"ft_tce_artificerini", title:"Artificer Initiate", category:"Feat",phb:false,tags:"feat,artificer,TCE", desc:"You've learned some of an artificer's inventiveness.", notes:"Prerequisite: None. Benefits: Learn 1 artificer cantrip, learn 1 1st-level artificer spell (cast 1/LR without slot), prof in one artisan's tool."},
+ {id:"ft_tce_gunner", title:"Gunner", category:"Feat",phb:false,tags:"feat,ranged,TCE", desc:"You have a quick hand and keen eye when employing firearms.", notes:"Prerequisite: None. Benefits: +1 DEX. Proficiency with all firearms. Ignore the loading property of firearms. Being within 5ft of a hostile creature doesn't impose disadvantage on ranged attack rolls with firearms. TCE p.79."},
+ {id:"ft_tce_chef", title:"Chef", category:"Feat",phb:false,tags:"feat,utility,TCE", desc:"Time spent mastering the culinary arts has paid off.", notes:"Prerequisite: None. Benefits: +1 CON or WIS. Prof with cook's utensils. Special meals during SR (temp HP), bonus food after LR."},
+ {id:"ft_tce_crusher", title:"Crusher", category:"Feat",phb:false,tags:"feat,combat,TCE", desc:"You are practiced in the art of crushing your enemies.", notes:"Prerequisite: None. Benefits: +1 STR or CON. Once /turn: push creature 5 ft on bludgeoning hit. Critical hit with bludgeoning: all attacks against the creature have adv until your next turn."},
+ {id:"ft_tce_eldritch", title:"Eldritch Adept", category:"Feat",phb:false,tags:"feat,warlock,TCE", desc:"Studying occult lore, you have unlocked eldritch power within yourself.", notes:"Prerequisite: Spellcasting or Pact Magic. Benefits: Learn 1 Eldritch Invocation option available to Warlocks. Can replace the invocation when you gain an Ability Score Improvement."},
+ {id:"ft_tce_feytouch", title:"Fey Touched", category:"Feat",phb:false,tags:"feat,magic,TCE", desc:"Your exposure to the Feywild's magic has changed you.", notes:"Prerequisite: None. Benefits: +1 INT, WIS, or CHA. Learn Misty Step and one 1st-level divination or enchantment spell. Cast each once per LR without a slot."},
+ {id:"ft_tce_fighterini", title:"Fighting Initiate", category:"Feat",phb:false,tags:"feat,fighter,TCE", desc:"Your martial training has helped you develop a particular style of fighting.", notes:"Prerequisite: Prof with a martial weapon. Benefits: Learn 1 Fighting Style from the Fighter list. Can replace the style when you gain an Ability Score Improvement."},
+ {id:"ft_tce_metamagic", title:"Metamagic Adept", category:"Feat",phb:false,tags:"feat,sorcerer,TCE", desc:"You've learned how to exert your will on your spells to alter how they function.", notes:"Prerequisite: Spellcasting or Pact Magic. Benefits: Learn 2 Metamagic options from Sorcerer. Gain 2 Sorcery Points (adds to existing pool or creates new one). Can choose new options at ASI."},
+ {id:"ft_tce_piercr", title:"Piercer", category:"Feat",phb:false,tags:"feat,combat,TCE", desc:"You have achieved a penetrating precision in combat.", notes:"Prerequisite: None. Benefits: +1 STR or DEX. Once /turn: reroll one damage die on piercing attack. Critical hit: roll one extra damage die."},
+ {id:"ft_tce_poisoner", title:"Poisoner", category:"Feat",phb:false,tags:"feat,utility,TCE", desc:"You can prepare and deliver deadly poisons.", notes:"Prerequisite: None. Benefits: +1 prof with poisoner's kit. As BA, apply poison to weapon (lasts 1 min, target poisoned on failed CON save DC 14). Resist poison damage. Ignore resist poison."},
+ {id:"ft_tce_shadowtouch", title:"Shadow Touched", category:"Feat",phb:false,tags:"feat,magic,TCE", desc:"Your exposure to the Shadowfell's magic has changed you.", notes:"Prerequisite: None. Benefits: +1 INT, WIS, or CHA. Learn Invisibility and one 1st-level illusion or necromancy spell. Cast each once per LR without a slot."},
+ {id:"ft_tce_skillexpert", title:"Skill Expert", category:"Feat",phb:false,tags:"feat,skills,TCE", desc:"You have honed your prof with particular skills, developing specialized capabilities.", notes:"Prerequisite: None. Benefits: +1 to any ability score. Prof in one skill. Expertise in one skill you're proficient in."},
+ {id:"ft_tce_slasher", title:"Slasher", category:"Feat",phb:false,tags:"feat,combat,TCE", desc:"You've learned where to cut to have the greatest effect.", notes:"Prerequisite: None. Benefits: +1 STR or DEX. Once /turn: reduce speed by 10 ft on slashing hit. Critical hit with slashing: disadv on all atk rolls until start of your next turn."},
+ {id:"ft_tce_spellsniper", title:"Telekinetic", category:"Feat",phb:false,tags:"feat,psionics,TCE", desc:"You learn to move things with your mind.", notes:"Prerequisite: None. Benefits: +1 INT, WIS, or CHA. Learn Mage Hand (invisible, BA). Shove 5 ft any creature within 30 ft as BA (STR save vs 8+prof+mod). If you have Mage Hand, its range increases by 30ft"},
+ {id:"ft_xge_dragon_fear",title:"Dragon Fear",category:"Feat",phb:false,tags:"feat,dragonborn,XGE",desc:"When angered, you can radiate menace. You gain the following benefits.",notes:"Prerequisite: Dragonborn. Benefits: +1 STR, CON, or CHA. Replace your breath weapon: exhale in a 30ft cone, WIS save (8+prof+CHA) or frightened of you until end of your next turn. XGE p.74."},
+ {id:"ft_xge_dragon_hide",title:"Dragon Hide",category:"Feat",phb:false,tags:"feat,dragonborn,XGE",desc:"You manifest scales and claws reminiscent of your draconic ancestors.",notes:"Prerequisite: Dragonborn. Benefits: +1 STR, CON, or CHA. Natural armor: 13+DEX (no armor). Claws: unarmed strike deals 1d4 slashing. XGE p.74."},
+ {id:"ft_xge_dwarven_fortitude",title:"Dwarven Fortitude",category:"Feat",phb:false,tags:"feat,dwarf,XGE",desc:"You have the blood of dwarf heroes flowing through your veins.",notes:"Prerequisite: Dwarf. Benefits: +1 CON. When you Dodge, spend one Hit Die to heal (1 Hit Die + CON mod). XGE p.74."},
+ {id:"ft_xge_elven_accuracy",title:"Elven Accuracy",category:"Feat",phb:false,tags:"feat,elf,XGE",desc:"The accuracy of elves is legendary, especially that of elf archers and spellcasters.",notes:"Prerequisite: Elf or Half-Elf. Benefits: +1 DEX, INT, WIS, or CHA. When you have advantage on an attack using DEX, INT, WIS, or CHA, reroll one of the dice. XGE p.74."},
+ {id:"ft_xge_drow_high_magic",title:"Drow High Magic",category:"Feat",phb:false,tags:"feat,elf,drow,XGE",desc:"You learn more of the magic typical of dark elves.",notes:"Prerequisite: Elf (Drow). Benefits: Learn Detect Magic (at will). Learn Levitate and Dispel Magic, each 1/LR without a slot. Uses CHA as spellcasting ability. XGE p.74."},
+ {id:"ft_xge_fey_teleportation",title:"Fey Teleportation",category:"Feat",phb:false,tags:"feat,elf,high-elf,XGE",desc:"Your study of high elven lore has unlocked fey power that few other elves possess.",notes:"Prerequisite: Elf (High Elf). Benefits: +1 INT or CHA. Learn Misty Step 1/SR without a slot. Uses INT or CHA as spellcasting ability. XGE p.74."},
+ {id:"ft_xge_wood_elf_magic",title:"Wood Elf Magic",category:"Feat",phb:false,tags:"feat,elf,wood-elf,XGE",desc:"You learn the magic of the primeval woods.",notes:"Prerequisite: Elf (Wood Elf). Benefits: Learn one druid cantrip. Learn Longstrider and Pass Without Trace, each 1/LR without a slot. Uses WIS as spellcasting ability. XGE p.75."},
+ {id:"ft_xge_fade_away",title:"Fade Away",category:"Feat",phb:false,tags:"feat,gnome,XGE",desc:"Your people are clever, with a knack for illusion magic.",notes:"Prerequisite: Gnome. Benefits: +1 DEX or INT. When you take damage, use reaction to become invisible until the start of your next turn or until you attack or cast. 1/SR. XGE p.74."},
+ {id:"ft_xge_squat_nimbleness",title:"Squat Nimbleness",category:"Feat",phb:false,tags:"feat,dwarf,gnome,XGE",desc:"You are uncommonly nimble for your race.",notes:"Prerequisite: Dwarf or small race. Benefits: +1 STR or DEX. Speed +5ft. Proficiency in Acrobatics or Athletics. Escape grapple with Acrobatics or Athletics. XGE p.75."},
+ {id:"ft_xge_orcish_fury",title:"Orcish Fury",category:"Feat",phb:false,tags:"feat,half-orc,XGE",desc:"Your fury burns tirelessly.",notes:"Prerequisite: Half-Orc. Benefits: +1 STR or CON. Once/turn extra die of weapon damage when hitting with weapon using STR. When you use Relentless Endurance, use reaction to make one weapon attack. XGE p.75."},
+ {id:"ft_xge_prodigy",title:"Prodigy",category:"Feat",phb:false,tags:"feat,half-elf,half-orc,human,XGE",desc:"You have a knack for learning new things.",notes:"Prerequisite: Half-Elf, Half-Orc, or Human. Benefits: Gain one skill prof, one tool prof, and one language. Expertise in one skill you're proficient in. XGE p.75."},
+ {id:"ft_xge_bountiful_luck",title:"Bountiful Luck",category:"Feat",phb:false,tags:"feat,halfling,XGE",desc:"Your people have extraordinary luck, which you have learned to mystically lend to your companions.",notes:"Prerequisite: Halfling. Benefits: When an ally within 30ft rolls a 1 on an attack, ability check, or saving throw, use your reaction to let them reroll. They must use the new roll. XGE p.73."},
+ {id:"ft_xge_second_chance",title:"Second Chance",category:"Feat",phb:false,tags:"feat,halfling,XGE",desc:"Fortune favors you when someone tries to strike you.",notes:"Prerequisite: Halfling. Benefits: +1 DEX, CON, or CHA. When a creature hits you with an attack, use reaction to force a reroll. 1/SR or LR (recharges on initiative). XGE p.75."},
+ {id:"ft_xge_flames_phlegethos",title:"Flames of Phlegethos",category:"Feat",phb:false,tags:"feat,tiefling,XGE",desc:"You learn to call on hellfire to serve your commands.",notes:"Prerequisite: Tiefling. Benefits: +1 INT or CHA. Reroll 1s on fire spell damage (must use new roll). When you cast a fire spell, wreath yourself in flames until end of next turn: shed bright light 30ft, dim 30ft; melee attackers take 1d4 fire. XGE p.74."},
+ {id:"ft_xge_infernal_constitution",title:"Infernal Constitution",category:"Feat",phb:false,tags:"feat,tiefling,XGE",desc:"Fiendish blood runs strong in you, unlocking a resilience akin to that possessed by some fiends.",notes:"Prerequisite: Tiefling. Benefits: +1 CON. Resistance to cold and poison. Advantage on saves against being poisoned. XGE p.75."},
+ {id:"ft_tce_telepathic", title:"Telepathic", category:"Feat",phb:false,tags:"feat,psionics,TCE", desc:"You awaken the ability to mentally connect with others.", notes:"Prerequisite: None. Benefits: +1 INT, WIS, or CHA. Telepathic communication (can't be overheard) within 60ft Cast Detect Thoughts 1/LR without slot."},
+
+ {id:"ft_phb_alert",title:"Alert",category:"Feat",phb:true,tags:"feat,initiative,PHB",desc:"Always on the lookout for danger.",notes:"Prereq: None. Benefits: +5 initiative. Can't be surprised while conscious. No disadv on atk rolls against hidden creatures."},
+ {id:"ft_phb_athlete",title:"Athlete",category:"Feat",phb:true,tags:"feat,movement,PHB",desc:"You have undergone extensive physical training.",notes:"Prereq: None. Benefits: +1 STR or DEX. Climbing no longer costs extra move. Standing up costs only 5 ft. Running long/high jump with only 5 ft run-up."},
+ {id:"ft_phb_actor",title:"Actor",category:"Feat",phb:true,tags:"feat,deception,PHB",desc:"Skilled at mimicry and dramatics.",notes:"Prereq: None. Benefits: +1 CHA. Adv on Deception and Performance when pretending to be someone else. Mimic another person's speech or creature sounds (Insight DC 8+prof+CHA to detect)."},
+ {id:"ft_phb_charger",title:"Charger",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"When you use your act to Dash, you can use a BA to attack.",notes:"Prereq: None. Benefits: Dash then BA: +5 damage on one weapon attack OR push target 10 ft. Must move 10 ft in straight line before attack."},
+ {id:"ft_phb_crossbow_expert",title:"Crossbow Expert",category:"Feat",phb:true,tags:"feat,ranged,PHB",desc:"You have extensive knowledge and practice with crossbows.",notes:"Prereq: None. Benefits: Ignore loading property. No disadv when making ranged atk within 5 ft of hostile. BA: attack with hand crossbow when you attack with one-handed weapon."},
+ {id:"ft_phb_defensive_duelist",title:"Defensive Duelist",category:"Feat",phb:true,tags:"feat,defense,PHB",desc:"You deflect incoming attacks with a finesse weapon.",notes:"Prereq: DEX 13+. Benefits: Rxn: add prof bonus to AC when holding finesse weapon and hit by melee attack."},
+ {id:"ft_phb_dual_wielder",title:"Dual Wielder",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"You master fighting with two weapons.",notes:"Prereq: None. Benefits: +1 AC while wielding two melee weapons. Two-Weapon Fighting with non-light weapons. Draw or stow two weapons at once."},
+ {id:"ft_phb_dungeon_delver",title:"Dungeon Delver",category:"Feat",phb:true,tags:"feat,exploration,PHB",desc:"Attuned to the hidden traps and secret doors found in dungeons.",notes:"Prereq: None. Benefits: Adv on Perception and Investigation to detect secret doors. Adv on saves vs traps. Resist trap damage. Search for traps at normal pace while traveling."},
+ {id:"ft_phb_durable",title:"Durable",category:"Feat",phb:true,tags:"feat,healing,PHB",desc:"Hardy and resilient.",notes:"Prereq: None. Benefits: +1 CON. Min roll on Hit Dice = 2x CON mod (min 2)."},
+ {id:"ft_phb_elemental_adept",title:"Elemental Adept",category:"Feat",phb:true,tags:"feat,spellcasting,PHB",desc:"Spells of your chosen element are more powerful.",notes:"Prereq: Spellcasting feature. Benefits: Choose acid/cold/fire/lightning/thunder. Spells of that type ignore resist. Treat 1s on damage dice as 2s. Can take multiple times for different elements."},
+ {id:"ft_phb_grappler",title:"Grappler",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"You've developed skills for grappling opponents.",notes:"Prereq: STR 13+. Benefits: Adv on atk rolls against creatures you grapple. Can pin (restrained) as act: STR(Athletics) vs STR(Athletics)/DEX(Acrobatics). Both restrained while pinning."},
+ {id:"ft_phb_great_weapon_master",title:"Great Weapon Master",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Master of heavy weapons.",notes:"Prereq: None. Benefits: On crit or reducing creature to 0 HP with melee: BA to make one melee atk. Before atk with heavy weapon: take -5 atk roll for +10 damage."},
+ {id:"ft_phb_healer",title:"Healer",category:"Feat",phb:true,tags:"feat,healing,PHB",desc:"A practiced healer.",notes:"Prereq: None. Benefits: Stabilize with Healer's Kit as BA. Use Healer's Kit: restore 1d6+4+max_HD HP (not just stabilize). Each use expends one kit use."},
+ {id:"ft_phb_heavily_armored",title:"Heavily Armored",category:"Feat",phb:true,tags:"feat,armor,PHB",desc:"You gain prof with heavy armor.",notes:"Prereq: Medium armor prof. Benefits: +1 STR. Heavy armor prof."},
+ {id:"ft_phb_heavy_armor_master",title:"Heavy Armor Master",category:"Feat",phb:true,tags:"feat,defense,PHB",desc:"Use armor to deflect blows.",notes:"Prereq: Heavy armor prof. Benefits: +1 STR. While wearing heavy armor: reduce B/P/S damage from non-magical attacks by 3."},
+ {id:"ft_phb_inspiring_leader",title:"Inspiring Leader",category:"Feat",phb:true,tags:"feat,support,PHB",desc:"You inspire your companions.",notes:"Prereq: CHA 13+. Benefits: 10-min speech (6 creatures who can hear you): each gains temp HP = your level + CHA mod. Each creature can only benefit once per SR/LR."},
+ {id:"ft_phb_keen_mind",title:"Keen Mind",category:"Feat",phb:true,tags:"feat,intelligence,PHB",desc:"You have a mind like a trap.",notes:"Prereq: None. Benefits: +1 INT. Always know which way is north. Always know hours until sunrise/sunset. Recall anything seen/heard in past month."},
+ {id:"ft_phb_lightly_armored",title:"Lightly Armored",category:"Feat",phb:true,tags:"feat,armor,PHB",desc:"You gain prof with light armor.",notes:"Prereq: None. Benefits: +1 STR or DEX. Light armor prof."},
+ {id:"ft_phb_linguist",title:"Linguist",category:"Feat",phb:true,tags:"feat,languages,PHB",desc:"You study languages and codes.",notes:"Prereq: None. Benefits: +1 INT. Learn 3 languages. Create written ciphers (INT DC = 8+prof+INT to decode)."},
+ {id:"ft_phb_lucky",title:"Lucky",category:"Feat",phb:true,tags:"feat,luck,PHB",desc:"You have inexplicable luck.",notes:"Prereq: None. Benefits: 3 luck points (restore on LR). Spend 1 before an atk/check/save to roll extra d20 and choose which to use. Spend 1 when attacked: roll d20 and choose which the attacker uses."},
+ {id:"ft_phb_mage_slayer",title:"Mage Slayer",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"You have practiced techniques to counter spellcasters.",notes:"Prereq: None. Benefits: Rxn: when creature within 5 ft casts a spell, make a melee atk. Creatures you hit have disadv on conc saves. Adv on saves vs spells cast by adjacent creatures."},
+ {id:"ft_phb_magic_initiate",title:"Magic Initiate",category:"Feat",phb:true,tags:"feat,spellcasting,PHB",desc:"Learn a small amount of magic from another class.",notes:"Prereq: None. Benefits: Choose bard/cleric/druid/sorcerer/warlock/wizard. Learn 2 cantrips + one 1st-level spell from that list. Cast 1st-level spell once per LR without slot (or use slots if you have them)."},
+ {id:"ft_phb_martial_adept",title:"Martial Adept",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Military training that enhances fighting.",notes:"Prereq: None. Benefits: Learn 2 maneuvers from Battle Master (save DC 8+prof+STR or DEX). Gain 1 superiority die (d6, +d8 at 7th, +d10 at 15th). Die recharges on SR/LR."},
+ {id:"ft_phb_medium_armor_master",title:"Medium Armor Master",category:"Feat",phb:true,tags:"feat,armor,PHB",desc:"Master of medium armor.",notes:"Prereq: Medium armor prof. Benefits: No disadv on Stealth in medium armor. +3 DEX bonus to AC instead of +2 when wearing medium armor."},
+ {id:"ft_phb_mobile",title:"Mobile",category:"Feat",phb:true,tags:"feat,movement,PHB",desc:"You are exceptionally speedy.",notes:"Prereq: None. Benefits: +10 ft speed. Difficult terrain doesn't cost extra move when using Dash. If you make a melee atk against a creature, no OA from it until end of turn."},
+ {id:"ft_phb_moderately_armored",title:"Moderately Armored",category:"Feat",phb:true,tags:"feat,armor,PHB",desc:"Gain prof with medium armor and shields.",notes:"Prereq: Light armor prof. Benefits: +1 STR or DEX. Medium armor and shield prof."},
+ {id:"ft_phb_mounted_combatant",title:"Mounted Combatant",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"A formidable mounted warrior.",notes:"Prereq: None. Benefits: Adv on melee atk vs unmounted creatures smaller than mount. Force attacks targeting mount to target you instead. Mount makes DEX saves for half damage; takes no damage on success."},
+ {id:"ft_phb_observant",title:"Observant",category:"Feat",phb:true,tags:"feat,perception,PHB",desc:"Quick to notice details.",notes:"Prereq: None. Benefits: +1 INT or WIS. +5 passive Perception and Investigation. Read lips if you see their mouth and know the language."},
+ {id:"ft_phb_polearm_master",title:"Polearm Master",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Master of polearms.",notes:"Prereq: None. Benefits: BA: attack with opposite end of glaive/halberd/quarterstaff/spear (1d4 bludg). OA when creatures enter reach with polearm weapon."},
+ {id:"ft_phb_resilient",title:"Resilient",category:"Feat",phb:true,tags:"feat,saving throws,PHB",desc:"Gain prof in a save.",notes:"Prereq: None. Benefits: +1 to chosen ability score. Prof in that ability's saves. Can choose each ability once."},
+ {id:"ft_phb_ritual_caster",title:"Ritual Caster",category:"Feat",phb:true,tags:"feat,spellcasting,PHB",desc:"Learn to cast spells as rituals.",notes:"Prereq: INT or WIS 13+. Benefits: Gain a ritual book with 2 ritual spells (1st level, from bard/cleric/druid/sorcerer/warlock/wizard). Can copy ritual spells found. Cast only as rituals (not expend slots)."},
+ {id:"ft_phb_savage_attacker",title:"Savage Attacker",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Twist an attack to land a powerful blow.",notes:"Prereq: None. Benefits: Once /turn on a melee weapon attack, reroll damage and use either result."},
+ {id:"ft_phb_sentinel",title:"Sentinel",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Master of opportunity attacks.",notes:"Prereq: None. Benefits: OA hits reduce target speed to 0 for that turn. Creatures can't Disengage to avoid OAs. Rxn: attack when creature within 5 ft attacks someone other than you."},
+ {id:"ft_phb_sharpshooter",title:"Sharpshooter",category:"Feat",phb:true,tags:"feat,ranged,PHB",desc:"Master of ranged attacks.",notes:"Prereq: None. Benefits: No disadv on ranged attacks at long range. Ignore half/three-quarters cover. Before ranged atk: take -5 atk roll for +10 damage."},
+ {id:"ft_phb_shield_master",title:"Shield Master",category:"Feat",phb:true,tags:"feat,shield,PHB",desc:"Use shields effectively in combat.",notes:"Prereq: None. Benefits: BA: shove with shield after Attack act. Add shield's AC to DEX saves vs spells/effects targeting only you. On DEX save for half damage: no damage on success (shield's AC applies)."},
+ {id:"ft_phb_skilled",title:"Skilled",category:"Feat",phb:true,tags:"feat,skills,PHB",desc:"Gain prof in multiple skills or tools.",notes:"Prereq: None. Benefits: Gain prof in any combination of 3 skills or tools."},
+ {id:"ft_phb_skulker",title:"Skulker",category:"Feat",phb:true,tags:"feat,stealth,PHB",desc:"Expert at lurking and ambushing.",notes:"Prereq: DEX 13+. Benefits: Hide when only lightly obscured. Missing a ranged atk while hidden doesn't reveal position. Dim light doesn't impose disadv on Perception."},
+ {id:"ft_phb_spell_sniper",title:"Spell Sniper",category:"Feat",phb:true,tags:"feat,spellcasting,PHB",desc:"Magical attacks at range.",notes:"Prereq: Spellcasting feature. Benefits: Double range of attack-roll spells. Ignore half/three-quarters cover on attack-roll spells. Learn one attack-roll cantrip."},
+ {id:"ft_phb_tavern_brawler",title:"Tavern Brawler",category:"Feat",phb:true,tags:"feat,combat,PHB",desc:"Accustomed to rough bar fights.",notes:"Prereq: None. Benefits: +1 STR or CON. Unarmed strikes deal 1d4. Prof with improvised weapons. When you hit with unarmed or improvised weapon: BA to grapple."},
+ {id:"ft_phb_tough",title:"Tough",category:"Feat",phb:true,tags:"feat,hp,PHB",desc:"Remarkably hardy.",notes:"Prereq: None. Benefits: HP max +2 per level (retroactive). +2 HP each level thereafter."},
+ {id:"ft_phb_war_caster",title:"War Caster",category:"Feat",phb:true,tags:"feat,spellcasting,PHB",desc:"Practiced in casting spells in combat.",notes:"Prereq: Spellcasting feature. Benefits: Adv on conc saves from taking damage. Can perform somatic components while holding weapons/shield. Rxn: cast a spell (single target, casting time act) as OA instead of melee atk."},
+ {id:"ft_phb_weapon_master",title:"Weapon Master",category:"Feat",phb:true,tags:"feat,weapons,PHB",desc:"Extensive training with weapons.",notes:"Prereq: None. Benefits: +1 STR or DEX. Prof with 4 weapons of your choice."},
+ {id:"sp_firebolt", title:"Fire Bolt", category:"Spell", phb:true, tags:"cantrip,evocation,ranged,PHB", desc:"You hurl a mote of fire at a creature or object within range.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V, S | Duration: Instantaneous. Attack/Save: Ranged spell attack. "},
+ {id:"sp_sacredflame", title:"Sacred Flame", category:"Spell", phb:true, tags:"cantrip,evocation,save,PHB", desc:"Flame-like radiance descends on a creature within range.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V, S | Duration: Instantaneous. Attack/Save: DEX save | Damage: 1d8 ra"},
+ {id:"sp_guidance", title:"Guidance", category:"Spell", phb:true, tags:"cantrip,divination,buff,PHB", desc:"You touch one willing creature and grant it a d4 bonus to one ability check.", notes:"Level: Cantrip | School: Divination | Classes: Cleric, Druid | Casting Time: Act | Range: Touch | Components: V, S | Duration: Conc, up to 1 minute"},
+ {id:"sp_magehand", title:"Mage Hand", category:"Spell", phb:true, tags:"cantrip,conjuration,utility,PHB",desc:"A spectral floating hand appears at a point you choose within range.", notes:"Level: Cantrip | School: Conjuration | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V, S | Duration: 1 minute"},
+ {id:"sp_minorillusion",title:"Minor Illusion", category:"Spell", phb:true, tags:"cantrip,illusion,utility,PHB", desc:"You create a sound or image of an object within range.", notes:"Level: Cantrip | School: Illusion | Classes: Bard, Sorcerer, | Casting Time: Act | Range: 30ft Components: S, M (a bit of fleece) | Duration: 1 minute"},
+ {id:"sp_vicmockery", title:"Vicious Mockery", category:"Spell", phb:true, tags:"cantrip,enchantment,save,PHB", desc:"You unleash a string of insults laced with subtle enchantments.", notes:"Level: Cantrip | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V | Duration: Instantaneous. Attack/Save: WIS save | Damage: 1d4 psy"},
+ {id:"sp_curewounds", title:"Cure Wounds", category:"Spell", phb:true, tags:"1st,evocation,healing,PHB", desc:"A creature you touch regains a number of HP = 1d8 + your spellcasting mod.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V, S | Duration: Instantaneous | Upcast: +1d8 per slot level above 1st. "},
+ {id:"sp_magicmissile",title:"Magic Missile", category:"Spell", phb:true, tags:"1st,evocation,force,PHB", desc:"You create three glowing darts of magical force that automatically hit.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V, S | Duration: Instantaneous | Damage: 3 darts, each 1d4+1 force. Upc"},
+ {id:"sp_shield", title:"Shield", category:"Spell", phb:true, tags:"1st,abjuration,defense,PHB", desc:"An invisible barrier of magical force appears to protect you.", notes:"Level: 1st | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Rxn (when hit or targeted by Magic Missile) | Range: Self | Components: V, S | Duration: 1 round. Effec"},
+ {id:"sp_healingword", title:"Healing Word", category:"Spell", phb:true, tags:"1st,evocation,healing,PHB", desc:"A creature of your choice regains HP = 1d4 + your spellcasting mod.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: 60ft Components: V | Duration: Instantaneous | Upcast: +1d4 per slot level above 1st. Classe"},
+ {id:"sp_bless", title:"Bless", category:"Spell", phb:true, tags:"1st,enchantment,buff,PHB", desc:"You bless up to three creatures of your choice, adding 1d4 to atk rolls and saves.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V, S, M (a sprinkling of holy water) | Duration: Conc, up to 1 minute. "},
+ {id:"sp_charmper", title:"Charm Person", category:"Spell", phb:true, tags:"1st,enchantment,save,PHB", desc:"You attempt to charm a humanoid you can see within range.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V, S | Duration: 1 hour. Attack/Save: WIS save | Upcast: +1 target per s"},
+ {id:"sp_detectmagic", title:"Detect Magic", category:"Spell", phb:true, tags:"1st,divination,ritual,PHB", desc:"For the duration you sense the presence of magic within 30ft of you.", notes:"Level: 1st | School: Divination (Ritual) | Classes: Bard, Cleric | Casting Time: Act | Range: Self | Components: V, S | Duration: Conc, up to 10 minutes"},
+ {id:"sp_sleep", title:"Sleep", category:"Spell", phb:true, tags:"1st,enchantment,save,PHB", desc:"This spell sends creatures into a magical slumber.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V, S, M | Duration: 1 minute | Effect: 5d8 HP worth of creatures fall "},
+ {id:"sp_holdbeast", title:"Hold Person", category:"Spell", phb:true, tags:"2nd,enchantment,save,PHB", desc:"Choose a humanoid within range. The target must succeed on a WIS save or be paralyzed.", notes:"Level: 2nd | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V, S, M | Duration: Conc, up to 1 minute. Attack/Save: WIS save. Upcast"},
+ {id:"sp_mistyste", title:"Misty Step", category:"Spell", phb:true, tags:"2nd,conjuration,teleport,PHB", desc:"Briefly surrounded by silvery mist, you teleport up to 30ft to an unoccupied space you can see.", notes:"Level: 2nd | School: Conjuration | Classes: Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V | Duration: Instantaneous"},
+ {id:"sp_passnotrace", title:"Pass without Trace",category:"Spell",phb:true, tags:"2nd,abjuration,stealth,PHB", desc:"A veil of shadows and silence radiates from you, masking you and your companions.", notes:"Level: 2nd | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V, S, M | Duration: Conc, up to 1 hour | Effect: You and creatures withi"},
+ {id:"sp_invisibility",title:"Invisibility", category:"Spell", phb:true, tags:"2nd,illusion,buff,PHB", desc:"A creature you touch becomes invisible until the spell ends.", notes:"Level: 2nd | School: Illusion | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V, S, M | Duration: Conc, up to 1 hour | Upcast: +1 creature per slot lev"},
+ {id:"sp_fireball", title:"Fireball", category:"Spell", phb:true, tags:"3rd,evocation,fire,PHB", desc:"A bright streak flashes from your finger to a point you choose and then blossoms with a low roar.", notes:"Level: 3rd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 150 ft | Components: V, S, M | Duration: Instantaneous. Attack/Save: DEX save | Damage: 8d6 "},
+ {id:"sp_revivify", title:"Revivify", category:"Spell", phb:true, tags:"3rd,necromancy,healing,PHB", desc:"You touch a creature that has died within the last minute. It returns to life with 1 HP.", notes:"Level: 3rd | School: Necromancy | Classes: Cl | Casting Time: Act | Range: Touch | Components: V, S, M (diamonds worth 300 gp) | Duration: Instantaneous"},
+ {id:"sp_counterspell",title:"Counterspell", category:"Spell", phb:true, tags:"3rd,abjuration,reaction,PHB", desc:"You attempt to interrupt a creature in the process of casting a spell.", notes:"Level: 3rd | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Rxn | Range: 60ft Components: S | Duration: Instantaneous | Effect: Automatically stops spells of 3rd l"},
+ {id:"sp_divination", title:"Divination", category:"Spell", phb:true, tags:"4th,divination,ritual,PHB", desc:"Your magic and an offering put you in contact with a god or a god's servants.", notes:"Level: 4th | School: Divination (Ritual) | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V, S, M (incense and a sacrificial offering) | Duration: Insta"},
+ {id:"sp_greaterrest", title:"Greater Restoration",category:"Spell",phb:true,tags:"5th,abjuration,healing,PHB", desc:"You imbue a creature with positive energy to undo a debilitating effect.", notes:"Level: 5th | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V, S, M (diamond dust worth 100 gp) | Duration: Instantaneous | Effect:"},
+ {id:"sp_masshealing", title:"Mass Cure Wounds", category:"Spell", phb:true, tags:"5th,evocation,healing,PHB", desc:"A wave of healing energy washes out from a point you choose, healing up to 6 creatures.", notes:"Level: 5th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V, S | Duration: Instantaneous. Heal: 3d8 + spellcasting mod each. Upcast"},
+
+ {id:"sp_acidsplash", title:"Acid Splash", category:"Spell",phb:true,tags:"cantrip,conjuration,PHB", desc:"You hurl a bubble of acid. Choose one or two creatures within 5 ft of each other.", notes:"Level: Cantrip | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous | Save: DEX | Damage: 1d6 acid (2d6/5th"},
+ {id:"sp_bladewrd", title:"Blade Ward", category:"Spell",phb:true,tags:"cantrip,abjuration,PHB", desc:"You extend your hand and trace a sigil of warding in the air. Until end of your next turn you have resist bludgeoning, piercing, and slashing damage.", notes:"Level: Cantrip | School: Abjuration | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: 1 round"},
+ {id:"sp_chill", title:"Chill Touch", category:"Spell",phb:true,tags:"cantrip,necromancy,PHB", desc:"You create a ghostly skeletal hand that grabs at a creature. Prevents regaining HP until your next turn.", notes:"Level: Cantrip | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: 1 round. Attack: Ranged spell attack | Damage: 1d8"},
+ {id:"sp_dancinglt", title:"Dancing Lights", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You create up to four torch-sized lights within range. You can move them up to 60 ft as a BA.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute"},
+ {id:"sp_druidcraft", title:"Druidcraft", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"Whispering to the spirits of nature, you can create minor effects that harness nature's power.", notes:"Level: Cantrip | School: Transmutation | Classes: Druid | Casting Time: Act | Range: 30ft Components: V,S | Duration: Instantaneous"},
+ {id:"sp_eldblast", title:"Eldritch Blast", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Instantaneous. Attack: Ranged spell attack. Damage"},
+ {id:"sp_friends", title:"Friends", category:"Spell",phb:true,tags:"cantrip,enchantment,PHB", desc:"You gain adv on CHA checks against one nonhostile creature for the duration.", notes:"Level: Cantrip | School: Enchantment | Classes: Bard, Sorcerer, Warlock, | Casting Time: Act | Range: Self | Components: S,M | Duration: Conc, 1 minute"},
+ {id:"sp_frostbite", title:"Frostbite", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You cause numbing frost to form on one creature. On a failed CON save, it has disadv on its next weapon atk roll before the spell ends.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous | Save: CON | Damage: 1d6 cold (2d6/5th, "},
+ {id:"sp_infestation", title:"Infestation", category:"Spell",phb:true,tags:"cantrip,conjuration,PHB", desc:"You cause a cloud of mites, fleas, and other parasites to appear momentarily on one creature.", notes:"Level: Cantrip | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Instantaneous | Save: CON | Damage: 1d6 poison. Cla"},
+ {id:"sp_light", title:"Light", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You touch one object no larger than 10 ft, causing it to shed bright light in a 20-ft radius.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Sorcerer, Wizard | Casting Time: Act | Range: Touch | Components: V,M | Duration: 1 hour"},
+ {id:"sp_lightning_c", title:"Lightning Lure", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You create a lash of lightning energy that strikes at one creature of your choice that you can see within range.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft) | Components: V | Duration: Instantaneous | Save: STR | Damage: 1d8 lightnin"},
+ {id:"sp_mending", title:"Mending", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"This spell repairs a single break or tear in an object.", notes:"Level: Cantrip | School: Transmutation | Classes: Bard, Cleric, Dr | Casting Time: 1 minute | Range: Touch | Components: V,S,M | Duration: Instantaneous"},
+ {id:"sp_message", title:"Message", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"You point your finger at a creature within range and whisper a message. The target can whisper back.", notes:"Level: Cantrip | School: Transmutation | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: 1 round"},
+ {id:"sp_moldearth", title:"Mold Earth", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"You choose a portion of dirt or stone within range. You can excavate it, move it, or shape it.", notes:"Level: Cantrip | School: Transmutation | Classes: Druid, Sorcerer, | Casting Time: Act | Range: 30ft Components: S | Duration: Instantaneous or 1 hour"},
+ {id:"sp_poisonspray", title:"Poison Spray", category:"Spell",phb:true,tags:"cantrip,conjuration,PHB", desc:"You extend your hand toward a creature you can see within range and project a puff of noxious gas.", notes:"Level: Cantrip | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 10 ft | Components: V,S | Duration: Instantaneous | Save: CON | Damage: 1d12 poison (2d"},
+ {id:"sp_prestig", title:"Prestidigitation", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"This spell is a minor magical trick used by apprentices as practice.", notes:"Level: Cantrip | School: Transmutation | Classes: Bard, Sorcerer, Warlock, | Casting Time: Act | Range: 10 ft | Components: V,S | Duration: Up to 1 hour"},
+ {id:"sp_producefm", title:"Produce Flame", category:"Spell",phb:true,tags:"cantrip,conjuration,PHB", desc:"A flickering flame appears in your hand. You can hurl it as a ranged spell attack.", notes:"Level: Cantrip | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self/30ft Components: V,S | Duration: 10 minutes. Attack: Ranged spell attack. Damag"},
+ {id:"sp_rayoffrost", title:"Ray of Frost", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"A frigid beam of blue-white light streaks toward a creature within range. -10 ft speed on hit.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous. Attack: Ranged spell attack | Damage: 1"},
+ {id:"sp_resistance", title:"Resistance", category:"Spell",phb:true,tags:"cantrip,abjuration,PHB", desc:"You touch one willing creature. Once before the spell ends, the target can roll a d4 and add to one save.", notes:"Level: Cantrip | School: Abjuration | Classes: Cleric, Druid | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 1 minute"},
+ {id:"sp_shapewater", title:"Shape Water", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"You choose an area of water within range and affect it in one of several ways.", notes:"Level: Cantrip | School: Transmutation | Classes: Druid, Sorcerer, | Casting Time: Act | Range: 30ft Components: S | Duration: Instantaneous or 1 hour"},
+ {id:"sp_shockgrsp", title:"Shocking Grasp", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"Lightning springs from your hand to deliver a shock to a creature. Adv if target wears metal armor.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S | Duration: Instantaneous. Attack: Melee spell attack | Damage: "},
+ {id:"sp_sparedying", title:"Spare the Dying", category:"Spell",phb:true,tags:"cantrip,necromancy,PHB", desc:"You touch a living creature with 0 HP. The creature becomes stable.", notes:"Level: Cantrip | School: Necromancy | Classes: Cleric, Druid | Casting Time: Act | Range: Touch | Components: V,S | Duration: Instantaneous"},
+ {id:"sp_starywisp", title:"Starry Wisp", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You launch a mote of light at one creature within range. Marks the target, preventing hiding.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous. Attack: Ranged spell attack | Damage: 1"},
+ {id:"sp_thaumaturgy", title:"Thaumaturgy", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"You manifest a minor wonder, a sign of supernatural power.", notes:"Level: Cantrip | School: Transmutation | Classes: Cleric | Casting Time: Act | Range: 30ft Components: V | Duration: Up to 1 minute"},
+ {id:"sp_thornwhip", title:"Thorn Whip", category:"Spell",phb:true,tags:"cantrip,transmutation,PHB", desc:"You create a long vine-like whip covered in thorns that lashes out at your command.", notes:"Level: Cantrip | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Instantaneous. Attack: Melee spell attack. Dama"},
+ {id:"sp_thunderclap", title:"Thunderclap", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You create a burst of thunderous sound that can be heard up to 100 ft away.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (5 ft) | Components: S | Duration: Instantaneous | Save: CON | Damage: 1d6 thunder. "},
+ {id:"sp_tolldeadcan", title:"Toll the Dead", category:"Spell",phb:true,tags:"cantrip,necromancy,PHB", desc:"You point at one creature you can see within range, and the sound of a dolorous bell fills the air.", notes:"Level: Cantrip | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous | Save: WIS | Damage: 1d8 necrotic (1d12"},
+ {id:"sp_truestrike", title:"True Strike", category:"Spell",phb:true,tags:"cantrip,divination,PHB", desc:"You extend your hand and point a finger at a target in range. Your magic grants you a brief insight into the target's defenses. Adv on next atk roll against the target.", notes:"Level: Cantrip | School: Divination | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: S | Duration: Conc, 1 round"},
+ {id:"sp_wordsofrad", title:"Word of Radiance", category:"Spell",phb:true,tags:"cantrip,evocation,PHB", desc:"You utter a divine word, and burning radiance erupts from you.", notes:"Level: Cantrip | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (5 ft) | Components: V,M | Duration: Instantaneous | Save: CON | Damage: 1d6 radiant"},
+ {id:"sp_absorb", title:"Absorb Elements", category:"Spell",phb:true,tags:"1st,abjuration,PHB", desc:"The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack.", notes:"Level: 1st | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Rxn | Range: Self | Components: S | Duration: 1 round | Effect: Resist triggering damage type, add 1d6 t"},
+ {id:"sp_alarm", title:"Alarm", category:"Spell",phb:true,tags:"1st,abjuration,ritual,PHB", desc:"You set an alarm against unwanted intrusion. An alarm is set for up to a 20-ft cube.", notes:"Level: 1st | School: Abjuration (Ritual) | Classes: Ranger, Wizard | Casting Time: 1 minute | Range: 30ft Components: V,S,M | Duration: 8 hours"},
+ {id:"sp_anfrndsp", title:"Animal Friendship", category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"This spell lets you convince a beast that you mean it no harm. Target beast must have INT 3 or less.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: 24 hours | Save: WIS | Upcast: +1 beast per slot above "},
+ {id:"sp_bane", title:"Bane", category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"Up to three creatures of your choice must subtract 1d4 from attack rolls and saving throws for the duration.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: 1 Action | Range: 30ft | Components: V, S, M (a drop of blood) | Duration: Concentration, up to 1 minute | Save: CHA save or affected | Upcast: +1 creature per spell level above 1st."},
+ {id:"sp_burninghd", title:"Burning Hands", category:"Spell",phb:true,tags:"1st,evocation,fire,PHB", desc:"A thin sheet of flames shoots forth from your outstretched fingertips.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft cone) | Components: V,S | Duration: Instantaneous | Save: DEX | Damage: 3d6 fire"},
+ {id:"sp_colordance", title:"Color Spray", category:"Spell",phb:true,tags:"1st,illusion,PHB", desc:"A dazzling array of flashing, colorful light springs from your hand. Blind creatures by total HP.", notes:"Level: 1st | School: Illusion | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft cone) | Components: V,S,M | Duration: 1 round | Effect: Blind 6d10 HP worth of cr"},
+ {id:"sp_command1", title:"Command", category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"You speak a one-word command to a creature you can see within range.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V | Duration: 1 round | Save: WIS | Upcast: +1 creature per slot above 1s"},
+ {id:"sp_comprln", title:"Comprehend Languages", category:"Spell",phb:true,tags:"1st,divination,ritual,PHB", desc:"You understand the literal meaning of any spoken language or written text that you see.", notes:"Level: 1st | School: Divination (Ritual) | Classes: Bard, Sorcerer, Warlock, Wi | Casting Time: Act | Range: Self | Components: V,S,M | Duration: 1 hour"},
+ {id:"sp_crorndes", title:"Create or Destroy Water",category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"You either create or destroy water. Create 10 gallons in an open container or 30-ft cube of fog.", notes:"Level: 1st | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Instantaneous | Upcast: +10 gallons or +5 ft per slo"},
+ {id:"sp_discvmagic", title:"Disguise Self", category:"Spell",phb:true,tags:"1st,illusion,PHB", desc:"You make yourself look different, changing your appearance including clothing and equipment.", notes:"Level: 1st | School: Illusion | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: 1 hour"},
+ {id:"sp_disonant", title:"Dissonant Whispers", category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"You whisper a discordant melody that only one creature can hear. The target takes 3d6 psychic damage and must use its rxn to move.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V | Duration: Instantaneous | Save: WIS | Damage: 3d6 psychic | Upcast: +1"},
+ {id:"sp_divinefv", title:"Divine Favor", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"Your prayer empowers you with divine radiance. Your weapon attacks deal an extra 1d4 radiant damage.", notes:"Level: 1st | School: Evocation | Classes: Paladin | Casting Time: BA | Range: Self | Components: V,S | Duration: Conc, 1 minute"},
+ {id:"sp_entangle", title:"Entangle", category:"Spell",phb:true,tags:"1st,conjuration,PHB", desc:"Grasping weeds and vines sprout from the ground in a 20-ft square.", notes:"Level: 1st | School: Conjuration | Classes: Druid | Casting Time: Act | Range: 90 ft | Components: V,S | Duration: Conc, 1 minute | Save: STR"},
+ {id:"sp_expret", title:"Expeditious Retreat", category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"This spell allows you to move at incredible speed. You can Dash as a BA for the duration.", notes:"Level: 1st | School: Transmutation | Classes: Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V,S | Duration: Conc, 10 minutes"},
+ {id:"sp_faerief", title:"Faerie Fire", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"Each object in a 20-ft cube is outlined in blue, green, or violet light. Any atk roll against an outlined creature has adv.", notes:"Level: 1st | School: Evocation | Classes: Bard, Druid | Casting Time: Act | Range: 60ft Components: V | Duration: Conc, 1 minute | Save: DEX"},
+ {id:"sp_falslife", title:"False Life", category:"Spell",phb:true,tags:"1st,necromancy,PHB", desc:"Bolstering yourself with a necromantic facsimile of life, you gain 1d4+4 temporary HP.", notes:"Level: 1st | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S,M | Duration: 1 hour | Upcast: +5 temp HP per slot above 1st. Classe"},
+ {id:"sp_feathfall", title:"Feather Fall", category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 ft/round.", notes:"Level: 1st | School: Transmutation | Classes: Bard, Sorcerer, Wizard | Casting Time: Rxn | Range: 60ft Components: V,M | Duration: 1 minute"},
+ {id:"sp_findfam", title:"Find Familiar", category:"Spell",phb:true,tags:"1st,conjuration,ritual,PHB", desc:"You gain the service of a familiar, a spirit that takes an animal form of your choice.", notes:"Level: 1st | School: Conjuration (Ritual) | Classes: Wizard | Casting Time: 1 hour | Range: 10 ft | Components: V,S,M (10 gp) | Duration: Instantaneous"},
+ {id:"sp_fogcloud", title:"Fog Cloud", category:"Spell",phb:true,tags:"1st,conjuration,PHB", desc:"You create a 20-ft radius sphere of fog centered on a point within range.", notes:"Level: 1st | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 1 hour | Upcast: Radius +20 ft per slot above 1"},
+ {id:"sp_goodberry", title:"Goodberry", category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"Up to ten berries appear in your hand, infused with magic for 24 hours. Each berry restores 1 HP.", notes:"Level: 1st | School: Transmutation | Classes: Druid, Ranger | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Instantaneous"},
+ {id:"sp_grease", title:"Grease", category:"Spell",phb:true,tags:"1st,conjuration,PHB", desc:"Slick grease covers the ground in a 10-ft square.", notes:"Level: 1st | School: Conjuration | Classes: Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: 1 minute | Save: DEX"},
+ {id:"sp_guidance1", title:"Guiding Bolt", category:"Spell",phb:true,tags:"1st,evocation,radiant,PHB", desc:"A flash of light streaks toward a creature. The next atk roll against the target has adv.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: 1 round. Attack: Ranged spell attack | Damage: 4d6 radi"},
+ {id:"sp_heroism", title:"Heroism", category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"A willing creature you touch is imbued with bravery. Immune to frightened, gains temp HP = spellcasting mod each turn.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S | Duration: Conc, 1 minute | Upcast: +1 creature per slot above 1s"},
+ {id:"sp_huntersmark", title:"Hunter's Mark", category:"Spell",phb:true,tags:"1st,divination,PHB", desc:"You choose a creature you can see within range. You deal +1d6 damage when you hit it.", notes:"Level: 1st | School: Divination | Classes: Ranger | Casting Time: BA | Range: 90 ft | Components: V | Duration: Conc, 1 hour"},
+ {id:"sp_identify", title:"Identify", category:"Spell",phb:true,tags:"1st,divination,ritual,PHB", desc:"You choose one object you must touch throughout the casting of the spell to learn its properties.", notes:"Level: 1st | School: Divination (Ritual) | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: 1 minute | Range: Touch | Components: V,S,M (pearl worth 100 gp) | Duration: Instantaneous. Cl"},
+ {id:"sp_illfavorite", title:"Inflict Wounds", category:"Spell",phb:true,tags:"1st,necromancy,PHB", desc:"Make a melee spell attack against a creature you can reach. On a hit, deal 3d10 necrotic damage.", notes:"Level: 1st | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S | Duration: Instantaneous. Attack: Melee spell attack | Damage: 3d1"},
+ {id:"sp_jump", title:"Jump", category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"You touch a creature. The creature's jump distance is tripled until the spell ends.", notes:"Level: 1st | School: Transmutation | Classes: Druid, Ranger, Sorcerer, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: 1 minute"},
+ {id:"sp_longstrider", title:"Longstrider", category:"Spell",phb:true,tags:"1st,transmutation,PHB", desc:"You touch a creature. Its speed increases by 10 ft until the spell ends.", notes:"Level: 1st | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: 1 hour | Upcast: +1 creature per slot above 1st. C"},
+ {id:"sp_magearmor", title:"Mage Armor", category:"Spell",phb:true,tags:"1st,abjuration,PHB", desc:"You touch a willing creature who isn't wearing armor. Its AC becomes 13 + DEX mod.", notes:"Level: 1st | School: Abjuration | Classes: Sorcerer, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: 8 hours"},
+ {id:"sp_prtevil", title:"Protection from Evil and Good",category:"Spell",phb:true,tags:"1st,abjuration,PHB", desc:"Until the spell ends, one willing creature you touch is protected against aberrations, celestials, elementals, fey, fiends, and undead.", notes:"Level: 1st | School: Abjuration | Classes: Cleric, Paladin, Warlock, | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 10 minutes"},
+ {id:"sp_rayenf", title:"Ray of Sickness", category:"Spell",phb:true,tags:"1st,necromancy,PHB", desc:"A ray of sickening greenish energy lashes out toward a creature within range.", notes:"Level: 1st | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Instantaneous. Attack: Ranged spell attack | Damage: 2d8 "},
+ {id:"sp_sanctuary", title:"Sanctuary", category:"Spell",phb:true,tags:"1st,abjuration,PHB", desc:"You ward a creature within range against attack. Any creature who targets the warded creature must make a WIS save.", notes:"Level: 1st | School: Abjuration | Classes: Cleric | Casting Time: BA | Range: 30ft Components: V,S,M | Duration: 1 minute | Save: WIS"},
+ {id:"sp_searsmite", title:"Searing Smite", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"The next time you hit a creature with a melee weapon attack, it burns with white-hot intensity.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V | Duration: Conc, 1 minute | Damage: 1d6 fire on hit, then 1d6 each turn"},
+ {id:"sp_silenimg", title:"Silent Image", category:"Spell",phb:true,tags:"1st,illusion,PHB", desc:"You create the image of an object, creature, or visible phenomenon no larger than a 15-ft cube.", notes:"Level: 1st | School: Illusion | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 10 minutes"},
+ {id:"sp_speakdead", title:"Speak with Animals", category:"Spell",phb:true,tags:"1st,divination,ritual,PHB", desc:"You gain the ability to comprehend and verbally communicate with beasts for the duration.", notes:"Level: 1st | School: Divination (Ritual) | Classes: Bard, Druid, Ranger | Casting Time: Act | Range: Self | Components: V,S | Duration: 10 minutes"},
+ {id:"sp_tashal", title:"Tasha's Hideous Laughter",category:"Spell",phb:true,tags:"1st,enchantment,PHB", desc:"A creature of your choice sees everything as hilariously funny and falls into fits of laughter.", notes:"Level: 1st | School: Enchantment | Classes: Bard, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_thunderwave", title:"Thunderwave", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"A wave of thunderous force sweeps out from you. Each creature in a 15-ft cube must make a CON save.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft cube) | Components: V,S | Duration: Instantaneous | Save: CON | Damage: 2d8 thund"},
+ {id:"sp_unseen", title:"Unseen Servant", category:"Spell",phb:true,tags:"1st,conjuration,ritual,PHB", desc:"This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command.", notes:"Level: 1st | School: Conjuration (Ritual) | Classes: Bard, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: 1 hour"},
+ {id:"sp_witchbolt", title:"Witch Bolt", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"A beam of crackling lightning forms between you and a target. You can use your act to deal damage each turn.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Conc, 1 minute. Attack: Ranged spell attack | Damage: 1d"},
+ {id:"sp_wrthfulsmite", title:"Wrathful Smite", category:"Spell",phb:true,tags:"1st,evocation,PHB", desc:"The next time you hit with a melee weapon attack during the spell's duration, your strike channels divine wrath.", notes:"Level: 1st | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V | Duration: Conc, 1 minute | Damage: +1d6 psychic, target frightened on "},
+ {id:"sp_aid", title:"Aid", category:"Spell",phb:true,tags:"2nd,abjuration,PHB", desc:"Your spell bolsters your allies with toughness and resolve. Each creature gains 5 max HP.", notes:"Level: 2nd | School: Abjuration | Classes: Ba | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: 8 hours | Upcast: +5 HP per slot above 2nd"},
+ {id:"sp_altself", title:"Alter Self", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You assume a different form. Choose Aquatic Adaptation, Change Appearance, or Natural Weapons.", notes:"Level: 2nd | School: Transmutation | Classes: Sorcerer, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: Conc, 1 hour"},
+ {id:"sp_anmsg", title:"Animal Messenger", category:"Spell",phb:true,tags:"2nd,enchantment,ritual,PHB", desc:"By means of this spell, you use an animal to deliver a message.", notes:"Level: 2nd | School: Enchantment (Ritual) | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: 24 hours | Upcast: Duration x2 per slot above"},
+ {id:"sp_arclock", title:"Arcane Lock", category:"Spell",phb:true,tags:"2nd,abjuration,PHB", desc:"You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration.", notes:"Level: 2nd | School: Abjuration | Classes: Wizard | Casting Time: Act | Range: Touch | Components: V,S,M (25 gp) | Duration: Until dispelled"},
+ {id:"sp_augury", title:"Augury", category:"Spell",phb:true,tags:"2nd,divination,ritual,PHB", desc:"By casting gem-inlaid sticks, rolling dragon bones, or reading entrails you receive an omen.", notes:"Level: 2nd | School: Divination (Ritual) | Classes: Cleric | Casting Time: 1 minute | Range: Self | Components: V,S,M | Duration: Instantaneous"},
+ {id:"sp_barkskin", title:"Barkskin", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You touch a willing creature. Until the spell ends, the target's skin takes on a rough, bark-like appearance. AC 16.", notes:"Level: 2nd | School: Transmutation | Classes: Druid, Ranger | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_blinddeaf", title:"Blindness/Deafness", category:"Spell",phb:true,tags:"2nd,necromancy,PHB", desc:"You can blind or deafen a foe. Choose one creature within range. Save or be blinded or deafened.", notes:"Level: 2nd | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V | Duration: 1 minute | Save: CON | Upcast: +1 creature per slot above 2n"},
+ {id:"sp_blur", title:"Blur", category:"Spell",phb:true,tags:"2nd,illusion,PHB", desc:"Your body becomes blurred. Attack rolls against you have disadv.", notes:"Level: 2nd | School: Illusion | Classes: Sorcerer, Wizard | Casting Time: Act | Range: Self | Components: V | Duration: Conc, 1 minute"},
+ {id:"sp_calmsm", title:"Calm Emotions", category:"Spell",phb:true,tags:"2nd,enchantment,PHB", desc:"You attempt to suppress strong emotions in a group. Each creature in a 20-ft radius must make a CHA save.", notes:"Level: 2nd | School: Enchantment | Classes: Bard, Cleric | Casting Time: Act | Range: 60ft Components: V,S | Duration: Conc, 1 minute | Save: CHA"},
+ {id:"sp_clouddag", title:"Cloud of Daggers", category:"Spell",phb:true,tags:"2nd,conjuration,PHB", desc:"You fill the air in a 5-ft cube with spinning daggers.", notes:"Level: 2nd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 minute | Damage: 4d4 slashing /turn | Upcast: +"},
+ {id:"sp_crownmad", title:"Crown of Madness", category:"Spell",phb:true,tags:"2nd,enchantment,PHB", desc:"One humanoid within range must make a WIS save or become charmed, forcing it to attack a nearby creature.", notes:"Level: 2nd | School: Enchantment | Classes: Bard, Sorcerer, | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_darkness", title:"Darkness", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"Magical darkness spreads from a point within range to fill a 15-ft radius sphere for the duration.", notes:"Level: 2nd | School: Evocation | Classes: Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,M | Duration: Conc, 10 minutes"},
+ {id:"sp_darkvision", title:"Darkvision", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You touch a willing creature to grant it darkvision out to 60ft", notes:"Level: 2nd | School: Transmutation | Classes: Druid, Ranger, Sorcerer, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: 8 hours"},
+ {id:"sp_detthts", title:"Detect Thoughts", category:"Spell",phb:true,tags:"2nd,divination,PHB", desc:"For the duration, you can read the thoughts of certain creatures.", notes:"Level: 2nd | School: Divination | Classes: Bard, Sorcerer, W | Casting Time: Act | Range: Self | Components: V,S,M | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_enlreduce", title:"Enlarge/Reduce", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You cause a creature or an object within range to grow or shrink in size.", notes:"Level: 2nd | School: Transmutation | Classes: Sorcerer, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Conc, 1 minute | Save: CON"},
+ {id:"sp_enhanceab", title:"Enhance Ability", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You touch a creature and bestow upon it a magical enhancement.", notes:"Level: 2nd | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 1 hour | Upcast: +1 creature per slot above "},
+ {id:"sp_findsteed", title:"Find Steed", category:"Spell",phb:true,tags:"2nd,conjuration,PHB", desc:"You summon a spirit that assumes the form of an unusually intelligent, strong, and loyal steed.", notes:"Level: 2nd | School: Conjuration | Classes: Paladin | Casting Time: 10 minutes | Range: 30ft Components: V,S | Duration: Instantaneous"},
+ {id:"sp_flameblade", title:"Flame Blade", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"You evoke a fiery blade in your free hand. You can use it as a melee spell attack for 3d6 fire.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: BA | Range: Self | Components: V,S,M | Duration: Conc, 10 minutes | Upcast: +1d6 at 4th level, again at 6"},
+ {id:"sp_flmsphr", title:"Flaming Sphere", category:"Spell",phb:true,tags:"2nd,conjuration,PHB", desc:"A 5-ft-diameter sphere of fire appears in an unoccupied space. It deals 2d6 fire damage.", notes:"Level: 2nd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 minute | Save: DEX | Upcast: +1d6 per slot abov"},
+ {id:"sp_gust", title:"Gust of Wind", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"A line of strong wind 60 ft long and 10 ft wide blasts from you in a direction you choose.", notes:"Level: 2nd | School: Evocation | Classes: Druid | Casting Time: Act | Range: Self (60 ft line) | Components: V,S,M | Duration: Conc, 1 minute | Save: STR"},
+ {id:"sp_heatmetal", title:"Heat Metal", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"Choose a manufactured metal object within range. The creature holding it takes 2d8 fire damage.", notes:"Level: 2nd | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 minute | Upcast: +1d8 per slot above 2nd. Cl"},
+ {id:"sp_knocksp", title:"Knock", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"Choose an object within range that is locked. A loud knock sound emanates from it and it becomes unlocked.", notes:"Level: 2nd | School: Transmutation | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: 60ft Components: V | Duration: Instantaneous"},
+ {id:"sp_lessrest", title:"Lesser Restoration", category:"Spell",phb:true,tags:"2nd,abjuration,PHB", desc:"You touch a creature and can end either one disease or one condition afflicting it.", notes:"Level: 2nd | School: Abjuration | Classes: Bard, Cleric, Druid, Paladin, | Casting Time: Act | Range: Touch | Components: V,S | Duration: Instantaneous"},
+ {id:"sp_levitate", title:"Levitate", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"One creature or loose object of your choice that you can see within range rises vertically.", notes:"Level: 2nd | School: Transmutation | Classes: Sorcerer, Wiz | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 10 minutes | Save: CON"},
+ {id:"sp_magicwpn", title:"Magic Weapon", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with +1 to attack and damage.", notes:"Level: 2nd | School: Transmutation | Casting Time: BA | Range: Touch | Components: V,S | Duration: Conc, 1 hour | Upcast: +2 at 4th, +3 at 6th | Classes:"},
+ {id:"sp_mirrimg", title:"Mirror Image", category:"Spell",phb:true,tags:"2nd,illusion,PHB", desc:"Three illusory duplicates of yourself appear in your space.", notes:"Level: 2nd | School: Illusion | Classes: Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: 1 minute"},
+ {id:"sp_moonbeam", title:"Moonbeam", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"A silvery beam of pale light shines down in a 5-ft radius cylinder.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: CON | Damage: 2d10 radiant. Upc"},
+ {id:"sp_prayerheal", title:"Prayer of Healing", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"Up to six creatures each regain HP = 2d8 + spellcasting mod.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: 10 minutes | Range: 30ft Components: V | Duration: Instantaneous | Upcast: +1d8 per slot above 2nd. Clas"},
+ {id:"sp_scorchray", title:"Scorching Ray", category:"Spell",phb:true,tags:"2nd,evocation,fire,PHB", desc:"You create three rays of fire and hurl them at targets within range.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Instantaneous. Attack: Ranged spell attack per ray. Da"},
+ {id:"sp_seeinvis", title:"See Invisibility", category:"Spell",phb:true,tags:"2nd,divination,PHB", desc:"For the duration, you see invisible creatures and objects as if they were visible.", notes:"Level: 2nd | School: Divination | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: Self | Components: V,S,M | Duration: 1 hour"},
+ {id:"sp_shatter", title:"Shatter", category:"Spell",phb:true,tags:"2nd,evocation,PHB", desc:"A sudden loud ringing noise emanates from a point of your choice within range.", notes:"Level: 2nd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Instantaneous | Save: CON | Damage: 3d8 thunder | Upcast: "},
+ {id:"sp_silence", title:"Silence", category:"Spell",phb:true,tags:"2nd,illusion,ritual,PHB", desc:"For the duration, no sound can be created within or pass through a 20-ft radius sphere.", notes:"Level: 2nd | School: Illusion (Ritual) | Classes: Bard, Cleric, Ranger | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 10 minutes"},
+ {id:"sp_spdclimb", title:"Spider Climb", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces.", notes:"Level: 2nd | School: Transmutation | Classes: Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_spikegrow", title:"Spike Growth", category:"Spell",phb:true,tags:"2nd,transmutation,PHB", desc:"The ground in a 20-ft radius centered on a point within range twists and sprouts hard spikes.", notes:"Level: 2nd | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 150 ft | Components: V,S,M | Duration: Conc, 10 minutes | Damage: 2d4 piercing per 5 ft "},
+ {id:"sp_suggestion", title:"Suggestion", category:"Spell",phb:true,tags:"2nd,enchantment,PHB", desc:"You suggest a course of activity to a creature. The creature must succeed on a WIS save or follow it.", notes:"Level: 2nd | School: Enchantment | Classes: Bard, Sorcerer, Warl | Casting Time: Act | Range: 30ft Components: V,M | Duration: Conc, 8 hours | Save: WIS"},
+ {id:"sp_sumbeast", title:"Summon Beast", category:"Spell",phb:true,tags:"2nd,conjuration,PHB", desc:"You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range.", notes:"Level: 2nd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 hour | Upcast: Creature improves at higher l"},
+ {id:"sp_wardingbond", title:"Warding Bond", category:"Spell",phb:true,tags:"2nd,abjuration,PHB", desc:"This spell wards a willing creature you touch and creates a mystic connection between you.", notes:"Level: 2nd | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M (250 gp) | Duration: 1 hour | Effect: +1 AC, +1 saves, resist all"},
+ {id:"sp_web", title:"Web", category:"Spell",phb:true,tags:"2nd,conjuration,PHB", desc:"You conjure a mass of thick, sticky webbing at a point within range.", notes:"Level: 2nd | School: Conjuration | Classes: Sorcerer, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 hour | Save: DEX"},
+ {id:"sp_zonetruth", title:"Zone of Truth", category:"Spell",phb:true,tags:"2nd,enchantment,PHB", desc:"You create a magical zone that guards against deception in a 15-ft radius sphere.", notes:"Level: 2nd | School: Enchantment | Classes: Bard, Cleric, Paladin | Casting Time: Act | Range: 60ft Components: V,S | Duration: 10 minutes | Save: CHA"},
+ {id:"sp_animdead", title:"Animate Dead", category:"Spell",phb:true,tags:"3rd,necromancy,PHB", desc:"This spell creates an undead servant. Choose a pile of bones or corpse within range.", notes:"Level: 3rd | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: 1 minute | Range: 10 ft | Components: V,S,M | Duration: Instantaneous | Effect: Creates skeleton or zomb"},
+ {id:"sp_auraofvit", title:"Aura of Vitality", category:"Spell",phb:true,tags:"3rd,evocation,PHB", desc:"Healing energy radiates from you in an aura with a 30-ft radius. BA to heal 2d6.", notes:"Level: 3rd | School: Evocation | Classes: Paladin | Casting Time: Act | Range: Self (30 ft) | Components: V | Duration: Conc, 1 minute"},
+ {id:"sp_beaconhp", title:"Beacon of Hope", category:"Spell",phb:true,tags:"3rd,abjuration,PHB", desc:"This spell bestows hope and vitality. Creatures have adv on WIS saves and death saves, maximize healing.", notes:"Level: 3rd | School: Abjuration | Classes: Cleric | Casting Time: Act | Range: 30ft Components: V,S | Duration: Conc, 1 minute"},
+ {id:"sp_bestcurse", title:"Bestow Curse", category:"Spell",phb:true,tags:"3rd,necromancy,PHB", desc:"You touch a creature, and that creature must succeed on a WIS save or become cursed.", notes:"Level: 3rd | School: Necromancy | Classes: B | Casting Time: Act | Range: Touch | Components: V,S | Duration: Conc, 1 minute (Upcast: longer) | Save: WIS"},
+ {id:"sp_blink", title:"Blink", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"Roll a d20 at the end of each of your turns. On 11 or higher, you vanish to the Ethereal Plane.", notes:"Level: 3rd | School: Transmutation | Classes: Sorcerer, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: 1 minute"},
+ {id:"sp_calllight", title:"Call Lightning", category:"Spell",phb:true,tags:"3rd,conjuration,PHB", desc:"A storm cloud appears. Each turn, you can call down lightning to deal 3d10 lightning damage.", notes:"Level: 3rd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 10 minutes | Save: DEX | Upcast: +1d10 per slot "},
+ {id:"sp_clairiov", title:"Clairvoyance", category:"Spell",phb:true,tags:"3rd,divination,PHB", desc:"You create an invisible sensor within range in a location familiar to you or in a location.", notes:"Level: 3rd | School: Divination | Classes: Bard, Cl | Casting Time: 10 minutes | Range: 1 mile | Components: V,S,M (100 gp) | Duration: Conc, 10 minutes"},
+ {id:"sp_conjanimals", title:"Conjure Animals", category:"Spell",phb:true,tags:"3rd,conjuration,PHB", desc:"You summon fey spirits that take the form of beasts.", notes:"Level: 3rd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Conc, 1 hour | Upcast: More/stronger beasts per slot abo"},
+ {id:"sp_dispelmagic", title:"Dispel Magic", category:"Spell",phb:true,tags:"3rd,abjuration,PHB", desc:"Choose any creature, object, or magical effect within range. Any spell of 3rd level or lower on it ends.", notes:"Level: 3rd | School: Abjuration | Classes: Bard, Cleric, Druid, Paladin, | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Instantaneous"},
+ {id:"sp_fear3", title:"Fear", category:"Spell",phb:true,tags:"3rd,illusion,PHB", desc:"You project a phantasmal image of a creature's worst fears. Each creature in a 30-ft cone must make a WIS save.", notes:"Level: 3rd | School: Illusion | Classes: Bard, | Casting Time: Act | Range: Self (30 ft cone) | Components: V,S,M | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_fly3", title:"Fly", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"You touch a willing creature. The target gains a flying speed of 60 ft for the duration.", notes:"Level: 3rd | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 10 minutes | Upcast: +1 creature per slot ab"},
+ {id:"sp_gasform", title:"Gaseous Form", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"You transform a willing creature into a misty cloud.", notes:"Level: 3rd | School: Transmutation | Classes: Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_haste3", title:"Haste", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"Choose a willing creature within range. Speed doubled, +2 AC, adv on DEX saves, extra act.", notes:"Level: 3rd | School: Transmutation | Classes: Sorcerer, Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Conc, 1 minute"},
+ {id:"sp_hypnotpat", title:"Hypnotic Pattern", category:"Spell",phb:true,tags:"3rd,illusion,PHB", desc:"You create a twisting pattern of colors in a 30-ft cube. Creatures must make WIS saves or become incapacitated.", notes:"Level: 3rd | School: Illusion | Classes: Bard, Sorcerer, War | Casting Time: Act | Range: 120 ft | Components: S,M | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_lgtbolt", title:"Lightning Bolt", category:"Spell",phb:true,tags:"3rd,evocation,lightning,PHB",desc:"A stroke of lightning forming a line 100 ft long and 5 ft wide blasts out from you.", notes:"Level: 3rd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (100 ft line) | Components: V,S,M | Duration: Instantaneous | Save: DEX | Damage: 8d6 li"},
+ {id:"sp_majimage", title:"Major Image", category:"Spell",phb:true,tags:"3rd,illusion,PHB", desc:"You create the image of an object, creature, or other visible phenomenon that is no larger than a 20-ft cube.", notes:"Level: 3rd | School: Illusion | Classes: Bard, S | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 10 minutes (Permanent at 6th)"},
+ {id:"sp_masshealwrd", title:"Mass Healing Word", category:"Spell",phb:true,tags:"3rd,evocation,PHB", desc:"As you call out words of restoration, up to six creatures of your choice regain 1d4 + spellcasting mod HP.", notes:"Level: 3rd | School: Evocation | Classes: Bar | Casting Time: BA | Range: 60ft Components: V | Duration: Instantaneous | Upcast: +1d4 per slot above 3rd"},
+ {id:"sp_plantgrow", title:"Plant Growth", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"This spell channels vitality into plants within a region or creates difficult terrain.", notes:"Level: 3rd | School: Transmutation | Classes: Bard, Druid, Ra | Casting Time: Act or 8 hours | Range: 150 ft | Components: V,S | Duration: Instantaneous"},
+ {id:"sp_prtfenrgy", title:"Protection from Energy",category:"Spell",phb:true,tags:"3rd,abjuration,PHB", desc:"For the duration, the willing creature you touch has resist one damage type of your choice.", notes:"Level: 3rd | School: Abjuration | Classes: Cleric, Druid, Ranger, Sorcerer | Casting Time: Act | Range: Touch | Components: V,S | Duration: Conc, 1 hour"},
+ {id:"sp_remcurse", title:"Remove Curse", category:"Spell",phb:true,tags:"3rd,abjuration,PHB", desc:"At your touch, all curses affecting one creature or object end.", notes:"Level: 3rd | School: Abjuration | Classes: Cleric, Paladin, Warlock, Wiza | Casting Time: Act | Range: Touch | Components: V,S | Duration: Instantaneous"},
+ {id:"sp_sending", title:"Sending", category:"Spell",phb:true,tags:"3rd,evocation,PHB", desc:"You send a short message of twenty-five words or fewer to a creature with which you are familiar.", notes:"Level: 3rd | School: Evocation | Classes: Bard, Cleric, Wizard | Casting Time: Act | Range: Unlimited | Components: V,S,M | Duration: 1 round"},
+ {id:"sp_sleetstrm", title:"Sleet Storm", category:"Spell",phb:true,tags:"3rd,conjuration,PHB", desc:"Until the spell ends, freezing rain and sleet fall in a 20-ft tall cylinder with a 40-ft radius.", notes:"Level: 3rd | School: Conjuration | Classes: Druid, Sorcere | Casting Time: Act | Range: 150 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: DEX"},
+ {id:"sp_slow", title:"Slow", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"You alter time around up to six creatures of your choice in a 40-ft cube within range.", notes:"Level: 3rd | School: Transmutation | Classes: Sorcerer, Wi | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_speakdead3", title:"Speak with Dead", category:"Spell",phb:true,tags:"3rd,necromancy,PHB", desc:"You grant the semblance of life and intelligence to a corpse. It can answer up to five questions.", notes:"Level: 3rd | School: Necromancy | Classes: Bard, Cleric | Casting Time: Act | Range: 10 ft | Components: V,S,M | Duration: 10 minutes"},
+ {id:"sp_spkplnts", title:"Speak with Plants", category:"Spell",phb:true,tags:"3rd,transmutation,PHB", desc:"You imbue plants within 30 ft with limited sentience and animation.", notes:"Level: 3rd | School: Transmutation | Classes: Bard, Druid, Ranger | Casting Time: Act | Range: Self (30 ft) | Components: V,S | Duration: 10 minutes"},
+ {id:"sp_spgrdns", title:"Spirit Guardians", category:"Spell",phb:true,tags:"3rd,conjuration,PHB", desc:"You call forth spirits to protect you. They flit around you up to 15 ft and slow enemies.", notes:"Level: 3rd | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (15 ft) | Components: V,S,M | Duration: Conc, 10 minutes | Save: WIS | Damage: 3d8 rad"},
+ {id:"sp_stinkcloud", title:"Stinking Cloud", category:"Spell",phb:true,tags:"3rd,conjuration,PHB", desc:"You create a 20-ft radius sphere of yellow, nauseating gas centered on a point within range.", notes:"Level: 3rd | School: Conjuration | Classes: Bard, Sorcerer, | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: CON"},
+ {id:"sp_tongues", title:"Tongues", category:"Spell",phb:true,tags:"3rd,divination,PHB", desc:"This spell grants the creature you touch the ability to understand any spoken language.", notes:"Level: 3rd | School: Divination | Classes: Bard, Cleric, Sorcerer, Warlock, Wiza | Casting Time: Act | Range: Touch | Components: V,M | Duration: 1 hour"},
+ {id:"sp_vamptouch", title:"Vampiric Touch", category:"Spell",phb:true,tags:"3rd,necromancy,PHB", desc:"The touch of your shadow-wreathed hand can siphon life force from others. Deals 3d6 necrotic, heals half.", notes:"Level: 3rd | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self | Components: V,S | Duration: Conc, 1 minute. Attack: Melee spell attack | Damage: 3d6"},
+ {id:"sp_watbreath", title:"Water Breathing", category:"Spell",phb:true,tags:"3rd,transmutation,ritual,PHB",desc:"This spell grants up to ten willing creatures the ability to breathe underwater.", notes:"Level: 3rd | School: Transmutation (Ritual) | Classes: Druid, Ranger, Sorcerer | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: 24 hours"},
+ {id:"sp_windwall", title:"Wind Wall", category:"Spell",phb:true,tags:"3rd,evocation,PHB", desc:"A wall of strong wind rises from the ground at a point you choose within range.", notes:"Level: 3rd | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: STR | Damage: 3d8 bludgeoning. "},
+ {id:"sp_arcneye", title:"Arcane Eye", category:"Spell",phb:true,tags:"4th,divination,PHB", desc:"You create an invisible, magical eye within range that hovers in the air for the duration.", notes:"Level: 4th | School: Divination | Classes: Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_auralife", title:"Aura of Life", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"Life-preserving energy radiates from you. Nonhostile creatures in 30 ft gain resist necrotic damage.", notes:"Level: 4th | School: Abjuration | Classes: Paladin | Casting Time: Act | Range: Self (30 ft) | Components: V | Duration: Conc, 10 minutes"},
+ {id:"sp_aurapurity", title:"Aura of Purity", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"Purifying energy radiates from you in an aura. Creatures in range can't become diseased and have adv on saves vs conditions.", notes:"Level: 4th | School: Abjuration | Classes: Paladin | Casting Time: Act | Range: Self (30 ft) | Components: V | Duration: Conc, 10 minutes"},
+ {id:"sp_banishment", title:"Banishment", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"You attempt to send one creature you can see within range to another plane of existence.", notes:"Level: 4th | School: Abjuration | Classes: Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 minute | Save: CHA | Upcast: +1 creature per slo"},
+ {id:"sp_blight", title:"Blight", category:"Spell",phb:true,tags:"4th,necromancy,PHB", desc:"Necromantic energy washes over a creature, sapping its vitality.", notes:"Level: 4th | School: Necromancy | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V,S | Duration: Instantaneous | Save: CON | Damage: 8d8 necrotic | Upcast: "},
+ {id:"sp_confuse4", title:"Confusion", category:"Spell",phb:true,tags:"4th,enchantment,PHB", desc:"This spell assaults and twists creatures' minds, spawning delusions and provoking uncontrolled act.", notes:"Level: 4th | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: WIS | Upcast: +5 ft radius per"},
+ {id:"sp_ctrlwtr", title:"Control Water", category:"Spell",phb:true,tags:"4th,transmutation,PHB", desc:"Until the spell ends, you control any freestanding water inside an area you choose.", notes:"Level: 4th | School: Transmutation | Classes: Cleric, Druid, Wizard | Casting Time: Act | Range: 300 ft | Components: V,S,M | Duration: Conc, 10 minutes"},
+ {id:"sp_deathward", title:"Death Ward", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"You touch a creature and grant it a measure of protection from death. If it would drop to 0 HP, it drops to 1 instead.", notes:"Level: 4th | School: Abjuration | Classes: Cleric, Paladin | Casting Time: Act | Range: Touch | Components: V,S | Duration: 8 hours"},
+ {id:"sp_dimdr", title:"Dimension Door", category:"Spell",phb:true,tags:"4th,conjuration,PHB", desc:"You teleport yourself from your current location to any other spot within range.", notes:"Level: 4th | School: Conjuration | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 500 ft | Components: V | Duration: Instantaneous"},
+ {id:"sp_divination4", title:"Divination", category:"Spell",phb:true,tags:"4th,divination,ritual,PHB", desc:"Your magic and an offering put you in contact with a god or a god's servants.", notes:"Level: 4th | School: Divination (Ritual) | Classes: Cle | Casting Time: Act | Range: Self | Components: V,S,M (incense, 25 gp) | Duration: Instantaneous"},
+ {id:"sp_domaintest", title:"Dominate Beast", category:"Spell",phb:true,tags:"4th,enchantment,PHB", desc:"You attempt to beguile a beast within range. It must succeed on a WIS save or be charmed.", notes:"Level: 4th | School: Enchantment | Classes: Druid, Ranger, Sorc | Casting Time: Act | Range: 60ft Components: V,S | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_evardblt", title:"Evard's Black Tentacles",category:"Spell",phb:true,tags:"4th,conjuration,PHB", desc:"Squirming black tentacles fill a 20-ft square on ground you can see within range.", notes:"Level: 4th | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: DEX | Damage: 3d6 bludgeoning "},
+ {id:"sp_frshlnd", title:"Freedom of Movement", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"You touch a willing creature. For the duration, the target's move is unaffected by difficult terrain.", notes:"Level: 4th | School: Abjuration | Classes: Bard, Cleric, Druid, Paladin, Ranger | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: 1 hour"},
+ {id:"sp_grdnfaith", title:"Guardian of Faith", category:"Spell",phb:true,tags:"4th,conjuration,PHB", desc:"A Large spectral guardian appears in an unoccupied space of your choice within range.", notes:"Level: 4th | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 30ft Components: V | Duration: 8 hours | Damage: 20 radiant to creatures that move within"},
+ {id:"sp_grtrinvis", title:"Greater Invisibility", category:"Spell",phb:true,tags:"4th,illusion,PHB", desc:"You or a creature you touch becomes invisible until the spell ends. Attacks and spells don't break it.", notes:"Level: 4th | School: Illusion | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: Touch | Components: V,S | Duration: Conc, 1 minute"},
+ {id:"sp_icestorm", title:"Ice Storm", category:"Spell",phb:true,tags:"4th,evocation,cold,PHB", desc:"A hail of rock-hard ice pounds to the ground in a 20-ft radius 40-ft high cylinder.", notes:"Level: 4th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 300 ft | Components: V,S,M | Duration: Instantaneous | Save: DEX | Damage: 2d8 bludgeoning + "},
+ {id:"sp_locatcre", title:"Locate Creature", category:"Spell",phb:true,tags:"4th,divination,PHB", desc:"Describe or name a creature that is familiar to you. If within 1000 ft, you sense its direction.", notes:"Level: 4th | School: Divination | Classes: Bard, Cleric, Druid, Paladin, | Casting Time: Act | Range: Self | Components: V,S,M | Duration: Conc, 1 hour"},
+ {id:"sp_polymorph", title:"Polymorph", category:"Spell",phb:true,tags:"4th,transmutation,PHB", desc:"This spell transforms a creature that you can see within range into a new form.", notes:"Level: 4th | School: Transmutation | Classes: Bard, Cleric, Dru | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Conc, 1 hour | Save: WIS"},
+ {id:"sp_stoneshp", title:"Stone Shape", category:"Spell",phb:true,tags:"4th,transmutation,PHB", desc:"You touch a stone object of Medium size or smaller or a section of stone no more than 5 ft in any dimension.", notes:"Level: 4th | School: Transmutation | Classes: Cleric, Druid, Wizard | Casting Time: Act | Range: Touch | Components: V,S,M | Duration: Instantaneous"},
+ {id:"sp_stoneskin", title:"Stoneskin", category:"Spell",phb:true,tags:"4th,abjuration,PHB", desc:"This spell turns the flesh of a willing creature as hard as stone. Resist nonmagical bludgeoning, piercing, and slashing.", notes:"Level: 4th | School: Abjuration | Classes: Druid, | Casting Time: Act | Range: Touch | Components: V,S,M (diamond dust 100 gp) | Duration: Conc, 1 hour"},
+ {id:"sp_wallfire", title:"Wall of Fire", category:"Spell",phb:true,tags:"4th,evocation,fire,PHB", desc:"You create a wall of fire on a solid surface within range. The wall is opaque and lasts for the duration.", notes:"Level: 4th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: DEX | Damage: 5d8 fire | Upcast:"},
+ {id:"sp_animobj", title:"Animate Objects", category:"Spell",phb:true,tags:"5th,transmutation,PHB", desc:"Objects come to life at your command. Choose up to ten nonmagical objects within range.", notes:"Level: 5th | School: Transmutation | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 1 minute | Upcast: +2 objects per slot above "},
+ {id:"sp_antlshell", title:"Antilife Shell", category:"Spell",phb:true,tags:"5th,abjuration,PHB", desc:"A shimmering barrier extends out from you in a 10-ft radius sphere, preventing living creatures from entering.", notes:"Level: 5th | School: Abjuration | Classes: Druid | Casting Time: Act | Range: Self (10 ft) | Components: V,S | Duration: Conc, 1 hour"},
+ {id:"sp_awaken5", title:"Awaken", category:"Spell",phb:true,tags:"5th,transmutation,PHB", desc:"After spending the casting time tracing magical pathways within a precious gem, you touch a Huge or smaller beast or plant.", notes:"Level: 5th | School: Transmutation | Classes: Bard, D | Casting Time: 8 hours | Range: Touch | Components: V,S,M (1000 gp gem) | Duration: Instantaneous"},
+ {id:"sp_bigbyhand", title:"Bigby's Hand", category:"Spell",phb:true,tags:"5th,evocation,PHB", desc:"You create a Large hand of shimmering force that can serve as a shield or attack.", notes:"Level: 5th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 1 minute | Upcast: +2d8 per slot above 5th. Cla"},
+ {id:"sp_cloudkill", title:"Cloudkill", category:"Spell",phb:true,tags:"5th,conjuration,PHB", desc:"You create a 20-ft radius sphere of poisonous, yellow-green fog.", notes:"Level: 5th | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S | Duration: Conc, 10 minutes | Save: CON | Damage: 5d8 poison /tur"},
+ {id:"sp_conenecold", title:"Cone of Cold", category:"Spell",phb:true,tags:"5th,evocation,cold,PHB", desc:"A blast of cold air erupts from your hands in a 60-ft cone.", notes:"Level: 5th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: Self (60 ft cone) | Components: V,S,M | Duration: Instantaneous | Save: CON | Damage: 8d8 col"},
+ {id:"sp_commune", title:"Commune", category:"Spell",phb:true,tags:"5th,divination,ritual,PHB", desc:"You contact your deity or a divine proxy and ask up to three questions.", notes:"Level: 5th | School: Divination (Ritual) | Classes: Cleric | Casting Time: 1 minute | Range: Self | Components: V,S,M | Duration: 1 minute"},
+ {id:"sp_contelm", title:"Conjure Elemental", category:"Spell",phb:true,tags:"5th,conjuration,PHB", desc:"You call forth an elemental servant to serve you.", notes:"Level: 5th | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: 1 minute | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 hour | Upcast: Higher CR per slot above"},
+ {id:"sp_cncplne", title:"Contact Other Plane", category:"Spell",phb:true,tags:"5th,divination,ritual,PHB", desc:"You mentally contact a demigod, the spirit of a long-dead sage, or some other mysterious entity from another plane.", notes:"Level: 5th | School: Divination (Ritual) | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: 1 minute | Range: Self | Components: V | Duration: 1 minute | Save: INT or 6d6 psychic. Classes"},
+ {id:"sp_contagion", title:"Contagion", category:"Spell",phb:true,tags:"5th,necromancy,PHB", desc:"Your touch inflicts disease. Make a melee spell attack against a creature.", notes:"Level: 5th | School: Necromancy | Classes: Cleric, D | Casting Time: Act | Range: Touch | Components: V,S | Duration: 7 days. Attack: Melee spell attack"},
+ {id:"sp_creation5", title:"Creation", category:"Spell",phb:true,tags:"5th,illusion,PHB", desc:"You pull wisps of shadow material from the Shadowfell to create a nonliving object of vegetable matter.", notes:"Level: 5th | School: Illusion | Classes: Bard, Sorcerer, Warlock, Wizard | Casting Time: 1 minute | Range: 30ft Components: V,S,M | Duration: Special | Upcast: More materials per slot above 5th"},
+ {id:"sp_dsplevgd", title:"Dispel Evil and Good", category:"Spell",phb:true,tags:"5th,abjuration,PHB", desc:"Shimmering energy surrounds and protects you from fey, undead, and creatures originating from outside the Material Plane.", notes:"Level: 5th | School: Abjuration | Classes: Cleric, Paladin | Casting Time: Act | Range: Self | Components: V,S,M | Duration: Conc, 1 minute"},
+ {id:"sp_dominate", title:"Dominate Person", category:"Spell",phb:true,tags:"5th,enchantment,PHB", desc:"You attempt to beguile a humanoid that you can see within range.", notes:"Level: 5th | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Conc, 1 minute | Save: WIS | Upcast: Duration extends per"},
+ {id:"sp_dream5", title:"Dream", category:"Spell",phb:true,tags:"5th,illusion,PHB", desc:"This spell shapes a creature's dreams. Choose a creature known to you as the target.", notes:"Level: 5th | School: Illusion | Classes: Bard, Warlock, Wizard | Casting Time: 1 minute | Range: Special | Components: V,S,M | Duration: 8 hours"},
+ {id:"sp_flmstrike", title:"Flame Strike", category:"Spell",phb:true,tags:"5th,evocation,fire,PHB", desc:"A vertical column of divine fire roars down from the heavens in a 10-ft radius 40-ft high cylinder.", notes:"Level: 5th | School: Evocation | Classes: Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 60ft Components: V,S,M | Duration: Instantaneous | Save: DEX | Damage: 4d6 fire + 4d6 radian"},
+ {id:"sp_geas", title:"Geas", category:"Spell",phb:true,tags:"5th,enchantment,PHB", desc:"You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some act.", notes:"Level: 5th | School: Enchantment | Classes: Bard, Cleric, Druid, Pa | Casting Time: 1 minute | Range: 60ft Components: V | Duration: 30 days | Save: WIS"},
+ {id:"sp_hallow", title:"Hallow", category:"Spell",phb:true,tags:"5th,evocation,PHB", desc:"You touch a point and infuse an area around it with holy or unholy power.", notes:"Level: 5th | School: Evocation | Classes: Cleric | Casting Time: 24 hours | Range: Touch | Components: V,S,M (1000 gp) | Duration: Until dispelled"},
+ {id:"sp_holdmon", title:"Hold Monster", category:"Spell",phb:true,tags:"5th,enchantment,PHB", desc:"Choose a creature that you can see within range. The target must succeed on a WIS save or be paralyzed.", notes:"Level: 5th | School: Enchantment | Classes: Bard, Cleric, Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 90 ft | Components: V,S,M | Duration: Conc, 1 minute | Save: WIS | Upcast: +1 creature per "},
+ {id:"sp_inscplague", title:"Insect Plague", category:"Spell",phb:true,tags:"5th,conjuration,PHB", desc:"Swarming locusts fill a 20-ft radius sphere centered on a point you choose within range.", notes:"Level: 5th | School: Conjuration | Classes: Druid, Sorcerer, Warlock, Wizard | Casting Time: Act | Range: 300 ft | Components: V,S,M | Duration: Conc, 10 minutes | Save: CON | Damage: 4d10 piercing"},
+ {id:"sp_legendlore", title:"Legend Lore", category:"Spell",phb:true,tags:"5th,divination,PHB", desc:"Name or describe a person, place, or object. The spell brings to your mind a brief summary of the knowledge.", notes:"Level: 5th | School: Divination | Classes: Bard, Cleric, | Casting Time: 10 minutes | Range: Self | Components: V,S,M (250 gp) | Duration: Instantaneous"},
+ {id:"sp_mislead5", title:"Mislead", category:"Spell",phb:true,tags:"5th,illusion,PHB", desc:"You become invisible at the same time that an illusory double of you appears where you are standing.", notes:"Level: 5th | School: Illusion | Classes: Bard, Wizard | Casting Time: Act | Range: Self | Components: S | Duration: Conc, 1 hour"},
+ {id:"sp_modfymem", title:"Modify Memory", category:"Spell",phb:true,tags:"5th,enchantment,PHB", desc:"You attempt to reshape another creature's memories.", notes:"Level: 5th | School: Enchantment | Classes: Bard, Wizard | Casting Time: Act | Range: 30ft Components: V,S | Duration: Conc, 1 minute | Save: WIS"},
+ {id:"sp_passwall", title:"Passwall", category:"Spell",phb:true,tags:"5th,transmutation,PHB", desc:"A passage appears at a point of your choice that you can see on a wooden, plaster, or stone surface within range.", notes:"Level: 5th | School: Transmutation | Classes: Wizard | Casting Time: Act | Range: 30ft Components: V,S,M | Duration: 1 hour"},
+ {id:"sp_plntgrow5", title:"Raise Dead", category:"Spell",phb:true,tags:"5th,necromancy,PHB", desc:"You return a dead creature you touch to life, provided that it has been dead no longer than 10 days.", notes:"Level: 5th | School: Necromancy | Classes: Bard, Cl | Casting Time: 1 hour | Range: Touch | Components: V,S,M (500 gp diamond) | Duration: Instantaneous"},
+ {id:"sp_reincarnate", title:"Reincarnate", category:"Spell",phb:true,tags:"5th,transmutation,PHB", desc:"You touch a dead humanoid or a piece of a dead humanoid. If they have been dead no longer than 10 days, the spell forms a new adult body and calls the soul to inhabit it.", notes:"Level: 5th | School: Transmutation | Classes: Druid | Casting Time: 1 hour | Range: Touch | Components: V,S,M (1000 gp) | Duration: Instantaneous"},
+ {id:"sp_scrying5", title:"Scrying", category:"Spell",phb:true,tags:"5th,divination,PHB", desc:"You can see and hear a particular creature you choose that is on the same plane of existence as you.", notes:"Level: 5th | School: Divination | Classes: Bard, Cleric, Druid, Ranger, Sorcerer, Warlock, Wizard | Casting Time: 10 minutes | Range: Self | Components: V,S,M (focus worth 1000 gp) | Duration: Conc, 10 minutes | Save: "},
+ {id:"sp_seeming5", title:"Seeming", category:"Spell",phb:true,tags:"5th,illusion,PHB", desc:"This spell allows you to change the appearance of any number of creatures that you can see within range.", notes:"Level: 5th | School: Illusion | Classes: Bard, Sorcerer, Wizard | Casting Time: Act | Range: 30ft Components: V,S | Duration: 8 hours | Save: CHA"},
+ {id:"sp_telekinesis", title:"Telekinesis", category:"Spell",phb:true,tags:"5th,transmutation,PHB", desc:"You gain the ability to move or manipulate creatures or objects by thought.", notes:"Level: 5th | School: Transmutation | Classes: Sorcerer, Wizard | Casting Time: Act | Range: 60ft Components: V,S | Duration: Conc, 10 minutes | Save: STR"},
+ {id:"sp_telepcircle", title:"Teleportation Circle", category:"Spell",phb:true,tags:"5th,conjuration,PHB", desc:"As you cast the spell, you draw a 10-ft diameter circle on the ground inscribed with sigils.", notes:"Level: 5th | School: Conjuration | Classes: Bard, Sorcerer, Wizard | Casting Time: 1 minute | Range: 10 ft | Components: V,M (50 gp) | Duration: 1 round"},
+ {id:"sp_trueseeing", title:"True Seeing", category:"Spell",phb:true,tags:"6th,divination,PHB", desc:"You give the willing creature you touch the ability to see things as they actually are. Truesight 120 ft.", notes:"Level: 6th | School: Divination | Classes: Bard, Cleric, Sorcerer, War | Casting Time: Act | Range: Touch | Components: V,S,M (25 gp) | Duration: 1 hour"},
+ {id:"sp_wallforce", title:"Wall of Force", category:"Spell",phb:true,tags:"5th,evocation,PHB", desc:"An invisible wall of force springs into existence at a point you choose within range.", notes:"Level: 5th | School: Evocation | Classes: Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 10 minutes"},
+ {id:"sp_wallstone5", title:"Wall of Stone", category:"Spell",phb:true,tags:"5th,evocation,PHB", desc:"A nonmagical wall of solid stone springs into existence at a point you choose within range.", notes:"Level: 5th | School: Evocation | Classes: Druid, Sorcerer, Wizard | Casting Time: Act | Range: 120 ft | Components: V,S,M | Duration: Conc, 10 minutes"},
+ {id:"bg_acolyte", title:"Acolyte", category:"Background", phb:true, tags:"religion,temple,PHB", desc:"You have spent your life in the service of a temple to a specific god or pantheon of gods.", notes:"Skills: Insight, Religion. Languages: Two of your choice. Equipment: Holy symbol, prayer book, 5 sticks of incense, vestments, common clothes, 15 gp. Feature: Shelter of the Faithful."},
+ {id:"bg_charlatan", title:"Charlatan", category:"Background", phb:true, tags:"deception,disguise,PHB", desc:"You have always had a way with people, knowing what to say to get what you want.", notes:"Skills: Deception, Sleight of Hand. Tools: Disguise kit, Forgery kit. Equipment: Fine clothes, disguise kit, tools of the con, 15 gp. Feature: False Identity."},
+ {id:"bg_criminal", title:"Criminal", category:"Background", phb:true, tags:"stealth,underworld,PHB", desc:"You are an experienced criminal with a history of breaking the law.", notes:"Skills: Deception, Stealth. Tools: One type of gaming set, Thieves' tools. Equipment: Crowbar, dark common clothes with hood, 15 gp. Feature: Criminal Contact."},
+ {id:"bg_entertainer", title:"Entertainer", category:"Background", phb:true, tags:"performance,art,PHB", desc:"You thrive in front of an audience, knowing how to entrance them, entertain them, and hold their attention.", notes:"Skills: Acrobatics, Performance. Tools: Disguise kit, one musical instrument. Equipment: Musical instrument, favor of admirer, costume, 15 gp. Feature: By Popular Demand."},
+ {id:"bg_folkhero", title:"Folk Hero", category:"Background", phb:true, tags:"common,tools,PHB", desc:"You come from a humble social rank but are destined for so much more.", notes:"Skills: Animal Handling, Survival. Tools: One type of artisan's tools, Vehicles (land). Equipment: Artisan's tools, shovel, iron pot, common clothes, 10 gp. Feature: Rustic Hospitality."},
+ {id:"bg_guildartisan", title:"Guild Artisan", category:"Background", phb:true, tags:"craft,guild,PHB", desc:"You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans.", notes:"Skills: Insight, Persuasion. Tools: One type of artisan's tools. Languages: One of your choice. Equipment: Artisan's tools, letter of introduction, traveler's clothes, 15 gp. Feature: Guild Membership."},
+ {id:"bg_hermit", title:"Hermit", category:"Background", phb:true, tags:"medicine,solitude,PHB", desc:"You lived in seclusion - either in a sheltered community or entirely alone - for a formative part of your life.", notes:"Skills: Medicine, Religion. Tools: Herbalism kit. Languages: One of your choice. Equipment: Scroll case, winter blanket, common clothes, herbalism kit, 5 gp. Feature: Discovery."},
+ {id:"bg_noble", title:"Noble", category:"Background", phb:true, tags:"history,persuasion,PHB", desc:"You understand wealth, power, and privilege. You carry a noble title and your family owns land.", notes:"Skills: History, Persuasion. Tools: One type of gaming set. Languages: One of your choice. Equipment: Fine clothes, signet ring, scroll of pedigree, 25 gp. Feature: Position of Privilege."},
+ {id:"bg_outlander", title:"Outlander", category:"Background", phb:true, tags:"athletics,survival,PHB", desc:"You grew up in the wilds, far from civilization and the comforts of town and technology.", notes:"Skills: Athletics, Survival. Tools: One type of musical instrument. Languages: One of your choice. Equipment: Staff, hunting trap, trophy, traveler's clothes, 10 gp. Feature: Wanderer."},
+ {id:"bg_sage", title:"Sage", category:"Background", phb:true, tags:"arcana,history,PHB", desc:"You spent years learning the lore of the multiverse, studying in libraries and academies.", notes:"Skills: Arcana, History. Languages: Two of your choice. Equipment: Bottle of ink, quill, small knife, letter with unanswered question, common clothes, 10 gp. Feature: Researcher."},
+ {id:"bg_sailor", title:"Sailor", category:"Background", phb:true, tags:"athletics,perception,PHB", desc:"You sailed on a seagoing vessel for years, weathering mighty storms and surviving the deadly deep.", notes:"Skills: Athletics, Perception. Tools: Navigator's tools, Vehicles (water). Equipment: Belaying pin, 50 ft silk rope, lucky charm, common clothes, 10 gp. Feature: Ship's Passage."},
+ {id:"bg_soldier", title:"Soldier", category:"Background", phb:true, tags:"athletics,intimidation,PHB", desc:"War has been your life for as long as you care to remember.", notes:"Skills: Athletics, Intimidation. Tools: One type of gaming set, Vehicles (land). Equipment: Insignia of rank, trophy, deck of cards, common clothes, 10 gp. Feature: Military Rank."},
+ {id:"bg_urchin", title:"Urchin", category:"Background", phb:true, tags:"sleight,stealth,PHB", desc:"You grew up on the streets alone, orphaned, and poor.", notes:"Skills: Sleight of Hand, Stealth. Tools: Disguise kit, Thieves' tools. Equipment: Small knife, map of home city, pet mouse, token from parents, common clothes, 10 gp. Feature: City Secrets."},
+ {id:"bg_citywatch", title:"City Watch", category:"Background", phb:false, tags:"athletics,insight,SCAG", desc:"You have served the community where you grew up, standing as its first line of defense against crime.", notes:"Skills: Athletics, Insight. Languages: Two of your choice. Equipment: Uniform, horn, manacles, 10 gp. Feature: Watcher's Eye."},
+ {id:"bg_cloistered", title:"Cloistered Scholar",category:"Background",phb:false, tags:"history,arcana,SCAG", desc:"As a child, you were inquisitive when your playmates were possessive, cautious and methodical when they were rash.", notes:"Skills: History, plus one of Arcana, Nature, or Religion. Languages: Two of your choice. Equipment: Scholar's robes, writing materials, 10 gp. Feature: Library Access."},
+ {id:"bg_courtier", title:"Courtier", category:"Background", phb:false, tags:"insight,persuasion,SCAG", desc:"In your earlier days, you were trained in the art of the courtly life at the hand of a noble sponsor.", notes:"Skills: Insight, Persuasion. Languages: Two of your choice. Equipment: Fine clothes, 5 gp. Feature: Court Functionary."},
+ {id:"bg_fartravel", title:"Far Traveler", category:"Background", phb:false, tags:"perception,insight,SCAG", desc:"You came to this land from a distant place, one so remote that few have heard of it.", notes:"Skills: Insight, Perception. Tools: One musical instrument or gaming set. Languages: One of your choice. Equipment: Traveling clothes, maps, 5 gp. Feature: All Eyes on You."},
+ {id:"bg_inheritor", title:"Inheritor", category:"Background", phb:false, tags:"survival,history,SCAG", desc:"You are the heir to something of great value - not merely money or physical wealth, but an object, information, or a title.", notes:"Skills: Survival, History or Arcana or Religion. Tools: One gaming set or musical instrument. Languages: One of your choice. Equipment: Inheritance item, 15 gp. Feature: Inheritance."},
+ {id:"bg_mercenary", title:"Mercenary Veteran",category:"Background", phb:false, tags:"athletics,persuasion,SCAG", desc:"As a sell-sword who fought battles for coin, you are well-acquainted with risking life and limb for a chance at a share.", notes:"Skills: Athletics, Persuasion. Tools: One type of gaming set, Vehicles (land). Equipment: Uniform of your company, gaming set, 10 gp. Feature: Mercenary Life."},
+
+ {id:"sc_scroll_cantrip",title:"Spell Scroll (Cantrip)",category:"Scroll",phb:false,tags:"scroll,cantrip,DMG",desc:"A spell scroll bearing the words of a single cantrip.",notes:"Rarity: Common. DC 13. Atk +5. Must be on spell list or Arcana DC 10. Crumbles after use."},
+ {id:"sc_scroll_1st",title:"Spell Scroll (1st)",category:"Scroll",phb:false,tags:"scroll,1st,DMG",desc:"A spell scroll bearing a 1st-level spell.",notes:"Rarity: Common. DC 13. Atk +5. Must be on spell list or Arcana DC 10."},
+ {id:"sc_scroll_2nd",title:"Spell Scroll (2nd)",category:"Scroll",phb:false,tags:"scroll,2nd,DMG",desc:"A spell scroll bearing a 2nd-level spell.",notes:"Rarity: Uncommon. DC 13. Atk +5."},
+ {id:"sc_scroll_3rd",title:"Spell Scroll (3rd)",category:"Scroll",phb:false,tags:"scroll,3rd,DMG",desc:"A spell scroll bearing a 3rd-level spell.",notes:"Rarity: Uncommon. DC 15. Atk +7."},
+ {id:"sc_scroll_4th",title:"Spell Scroll (4th)",category:"Scroll",phb:false,tags:"scroll,4th,DMG",desc:"A spell scroll bearing a 4th-level spell.",notes:"Rarity: Rare. DC 15. Atk +7."},
+ {id:"sc_scroll_5th",title:"Spell Scroll (5th)",category:"Scroll",phb:false,tags:"scroll,5th,DMG",desc:"A spell scroll bearing a 5th-level spell.",notes:"Rarity: Rare. DC 17. Atk +9."},
+ {id:"sc_scroll_6th",title:"Spell Scroll (6th)",category:"Scroll",phb:false,tags:"scroll,6th,DMG",desc:"A spell scroll bearing a 6th-level spell.",notes:"Rarity: Very Rare. DC 17. Atk +9. Arcana DC 15 to use if not on spell list."},
+ {id:"sc_scroll_7th",title:"Spell Scroll (7th)",category:"Scroll",phb:false,tags:"scroll,7th,DMG",desc:"A spell scroll bearing a 7th-level spell.",notes:"Rarity: Very Rare. DC 18. Atk +10."},
+ {id:"sc_scroll_8th",title:"Spell Scroll (8th)",category:"Scroll",phb:false,tags:"scroll,8th,DMG",desc:"A spell scroll bearing an 8th-level spell.",notes:"Rarity: Very Rare. DC 18. Atk +10."},
+ {id:"sc_scroll_9th",title:"Spell Scroll (9th)",category:"Scroll",phb:false,tags:"scroll,9th,DMG",desc:"A spell scroll bearing a 9th-level spell.",notes:"Rarity: Legendary. DC 19. Atk +11. Arcana DC 19 to use if not on spell list."},
+ {id:"sc_prot_plants",title:"Scroll of Protection (Plants)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"As an action, read the scroll to create a 5ft invisible barrier around you for 5 minutes. Creatures of the specified type cannot enter or affect you unless you allow it or attack them.",notes:"Rarity: Uncommon. DMG p.199."},
+ {id:"sc_prot_undead",title:"Scroll of Protection (Undead)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Reading this scroll names Undead as the protected type.",notes:"Rarity: Rare. Duration: 5 min. Effect: Undead can't attack protected creatures (CHA DC 15). Crumbles after use."},
+ {id:"sc_prot_fiend",title:"Scroll of Protection (Fiends)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Reading this scroll names Fiends as the protected type.",notes:"Rarity: Rare. Duration: 5 min. Effect: Fiends can't attack protected creatures (CHA DC 15)."},
+ {id:"sc_prot_fey",title:"Scroll of Protection (Fey)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Protects against Fey.",notes:"Rarity: Rare. Duration: 5 min. CHA DC 15."},
+ {id:"sc_prot_elem",title:"Scroll of Protection (Elementals)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Protects against Elementals.",notes:"Rarity: Rare. Duration: 5 min. CHA DC 15."},
+ {id:"sc_prot_celest",title:"Scroll of Protection (Celestials)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Protects against Celestials.",notes:"Rarity: Rare. Duration: 5 min. CHA DC 15."},
+ {id:"sc_prot_beast",title:"Scroll of Protection (Beasts)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Protects against Beasts.",notes:"Rarity: Rare. Duration: 5 min. CHA DC 15."},
+ {id:"sc_prot_aberr",title:"Scroll of Protection (Aberrations)",category:"Scroll",phb:false,tags:"scroll,protection,DMG",desc:"Protects against Aberrations.",notes:"Rarity: Rare. Duration: 5 min. CHA DC 15."},
+ {id:"sc_tce_illusscript",title:"Illusory Script",category:"Scroll",phb:false,tags:"scroll,illusion,TCE",desc:"Write a message only designated creatures can read.",notes:"Rarity: Common (TCE). Duration: 10 days. Others see unintelligible text or a different message."},
+ {id:"pt_healing",title:"Potion of Healing",category:"Potion",phb:true,tags:"potion,healing,PHB",desc:"Regain 2d4+2 HP.",notes:"Rarity: Common. 50 gp."},
+ {id:"pt_healing_greater",title:"Potion of Greater Healing",category:"Potion",phb:true,tags:"potion,healing,PHB",desc:"Regain 4d4+4 HP.",notes:"Rarity: Uncommon. 100 gp."},
+ {id:"pt_healing_superior",title:"Potion of Superior Healing",category:"Potion",phb:true,tags:"potion,healing,PHB",desc:"Regain 8d4+8 HP.",notes:"Rarity: Rare. 500 gp."},
+ {id:"pt_healing_supreme",title:"Potion of Supreme Healing",category:"Potion",phb:true,tags:"potion,healing,PHB",desc:"Regain 10d4+20 HP.",notes:"Rarity: Very Rare. 1350 gp."},
+ {id:"pt_speed",title:"Potion of Speed",category:"Potion",phb:false,tags:"potion,movement,DMG",desc:"Gain effect of Haste for 1 minute (no conc).",notes:"Rarity: Very Rare. 400 gp."},
+ {id:"pt_flying",title:"Potion of Flying",category:"Potion",phb:false,tags:"potion,movement,DMG",desc:"Gain fly speed = walk speed for 1 hour.",notes:"Rarity: Very Rare. 500 gp."},
+ {id:"pt_invisibility",title:"Potion of Invisibility",category:"Potion",phb:false,tags:"potion,stealth,DMG",desc:"Become invisible for 1 hour. Ends if you attack or cast.",notes:"Rarity: Very Rare. 180 gp."},
+ {id:"pt_climbing",title:"Potion of Climbing",category:"Potion",phb:false,tags:"potion,movement,DMG",desc:"Gain climb speed = walk speed for 1 hour.",notes:"Rarity: Common. 180 gp."},
+ {id:"pt_heroism",title:"Potion of Heroism",category:"Potion",phb:false,tags:"potion,buff,DMG",desc:"Gain 10 temp HP + Bless effect for 1 hour.",notes:"Rarity: Rare. 180 gp."},
+ {id:"pt_vitality",title:"Potion of Vitality",category:"Potion",phb:false,tags:"potion,healing,DMG",desc:"Remove all exhaustion, diseases, poisons and restore all HP.",notes:"Rarity: Very Rare. 960 gp."},
+ {id:"pt_invulnerability",title:"Potion of Invulnerability",category:"Potion",phb:false,tags:"potion,defense,DMG",desc:"Resist all damage for 1 minute.",notes:"Rarity: Rare. 3000 gp."},
+ {id:"pt_giant_hill",title:"Potion of Giant Strength (Hill)",category:"Potion",phb:false,tags:"potion,strength,DMG",desc:"STR becomes 21 for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_giant_frost",title:"Potion of Giant Strength (Frost/Stone)",category:"Potion",phb:false,tags:"potion,strength,DMG",desc:"STR becomes 23 for 1 hour.",notes:"Rarity: Rare. 500 gp."},
+ {id:"pt_giant_fire",title:"Potion of Giant Strength (Fire)",category:"Potion",phb:false,tags:"potion,strength,DMG",desc:"STR becomes 25 for 1 hour.",notes:"Rarity: Rare. 500 gp."},
+ {id:"pt_giant_cloud",title:"Potion of Giant Strength (Cloud)",category:"Potion",phb:false,tags:"potion,strength,DMG",desc:"STR becomes 25 for 1 hour.",notes:"Rarity: Rare."},
+ {id:"pt_giant_storm",title:"Potion of Giant Strength (Storm)",category:"Potion",phb:false,tags:"potion,strength,DMG",desc:"STR becomes 29 for 1 hour.",notes:"Rarity: Legendary. 5000 gp."},
+ {id:"pt_gaseous",title:"Potion of Gaseous Form",category:"Potion",phb:false,tags:"potion,transformation,DMG",desc:"Gain Gaseous Form effect for 1 hour.",notes:"Rarity: Rare. 300 gp."},
+ {id:"pt_growth",title:"Potion of Growth",category:"Potion",phb:false,tags:"potion,transformation,DMG",desc:"Gain Enlarge effect for 1d4 hours.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_diminution",title:"Potion of Diminution",category:"Potion",phb:false,tags:"potion,transformation,DMG",desc:"Gain Reduce effect for 1d4 hours.",notes:"Rarity: Rare. 270 gp."},
+ {id:"pt_water_breathing",title:"Potion of Water Breathing",category:"Potion",phb:false,tags:"potion,utility,DMG",desc:"Breathe underwater for 1 hour.",notes:"Rarity: Uncommon. 180 gp."},
+ {id:"pt_resistance_fire",title:"Potion of Fire Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Fire resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_cold",title:"Potion of Cold Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Cold resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_acid",title:"Potion of Acid Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Acid resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_pois",title:"Potion of Poison Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Poison resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_light",title:"Potion of Lightning Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Lightning resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_necro",title:"Potion of Necrotic Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Necrotic resist for 1 hour.",notes:"Rarity: Uncommon. 300 gp."},
+ {id:"pt_resistance_radi",title:"Potion of Radiant Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Radiant resist for 1 hour.",notes:"Rarity: Uncommon."},
+ {id:"pt_resistance_psych",title:"Potion of Psychic Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Psychic resist for 1 hour.",notes:"Rarity: Uncommon."},
+ {id:"pt_resistance_thunder",title:"Potion of Thunder Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Thunder resist for 1 hour.",notes:"Rarity: Uncommon. DMG p.188."},
+ {id:"pt_resistance_force",title:"Potion of Force Resistance",category:"Potion",phb:false,tags:"potion,resistance,DMG",desc:"Force resist for 1 hour.",notes:"Rarity: Uncommon."},
+ {id:"pt_poison",title:"Potion of Poison",category:"Potion",phb:false,tags:"potion,poison,DMG",desc:"Looks like a healing potion. On drink: 3d6 poison + poisoned CON DC 13.",notes:"Rarity: Uncommon. 100 gp."},
+ {id:"pt_longevity",title:"Potion of Longevity",category:"Potion",phb:false,tags:"potion,utility,DMG",desc:"Reduce physical age by 1d6+6 years.",notes:"Rarity: Very Rare. 9000 gp. Each use past first has 10% cumulative chance to reverse."},
+ {id:"pt_clairvoyance",title:"Potion of Clairvoyance",category:"Potion",phb:false,tags:"potion,divination,DMG",desc:"Gain Clairvoyance spell effect for 10 min.",notes:"Rarity: Rare. 960 gp."},
+ {id:"pt_mind_reading",title:"Potion of Mind Reading",category:"Potion",phb:false,tags:"potion,divination,DMG",desc:"Gain Detect Thoughts effect for 1 min (DC 13).",notes:"Rarity: Rare. 180 gp."},
+ {id:"pt_comprehension",title:"Potion of Comprehension",category:"Potion",phb:false,tags:"potion,utility,XGE",desc:"For 1 hour you can cast Comprehend Languages at will as a ritual.",notes:"Rarity: Common. XGE p.138."},
+ {id:"pt_tce_watchful",title:"Potion of Watchful Rest",category:"Potion",phb:false,tags:"potion,rest,XGE",desc:"Gain SR benefits while remaining alert.",notes:"Rarity: Common (TCE)."},
+ {id:"pt_tce_possibility",title:"Potion of Possibility",category:"Potion",phb:false,tags:"potion,luck,XGE",desc:"Gain 2 Fragments of Possibility (each adds 1d10 to a d20 roll once). Last 24 hours.",notes:"Rarity: Uncommon (TCE)."},
+
+
+ {id:"pt_animal_friendship",title:"Potion of Animal Friendship",category:"Potion",phb:false,tags:"potion,charm,DMG",desc:"For 1 hour you can cast Animal Friendship (save DC 13) at will.",notes:"Rarity: Uncommon. DMG p.187."},
+ {id:"pt_fire_breath",title:"Potion of Fire Breath",category:"Potion",phb:false,tags:"potion,fire,DMG",desc:"After drinking, you can use a bonus action up to 3 times to exhale fire at a target within 30ft: 4d6 fire damage (DC 13 DEX for half).",notes:"Rarity: Uncommon. DMG p.187."},
+ {id:"pt_elixir_health",title:"Elixir of Health",category:"Potion",phb:false,tags:"potion,healing,DMG",desc:"Cures any disease afflicting you and removes the blinded, deafened, paralyzed, and poisoned conditions.",notes:"Rarity: Rare. DMG p.168."},
+ {id:"pt_oil_etherealness",title:"Oil of Etherealness",category:"Potion",phb:false,tags:"potion,movement,DMG",desc:"Covered in this oil, you and your equipment become Ethereal for 1 hour. Takes 10 minutes to apply.",notes:"Rarity: Rare. DMG p.183."},
+ {id:"pt_oil_sharpness",title:"Oil of Sharpness",category:"Potion",phb:false,tags:"potion,weapon,DMG",desc:"Coat a slashing or piercing weapon. For 1 hour it becomes a +3 magic weapon.",notes:"Rarity: Very Rare. DMG p.184."},
+ {id:"pt_oil_slipperiness",title:"Oil of Slipperiness",category:"Potion",phb:false,tags:"potion,utility,DMG",desc:"Apply to yourself or pour on floor (10ft square). Effect of Freedom of Movement for 8 hours, or slippery floor for 8 hours.",notes:"Rarity: Uncommon. DMG p.184."},
+ {id:"pt_philter_love",title:"Philter of Love",category:"Potion",phb:false,tags:"potion,charm,DMG",desc:"The next creature you see within 10 minutes becomes your charmed, and you are Charmed by it for 1 hour. If the creature is of a type you would normally find attractive, you regard it as your true love while Charmed.",notes:"Rarity: Uncommon. DMG p.184."},
+ {id:"pt_tce_maximum",title:"Potion of Maximum Power",category:"Potion",phb:false,tags:"potion,spellcasting,XGE",desc:"Maximize damage of next qualifying spell within 1 minute.",notes:"Rarity: Rare (TCE)."},
+ {id:"wd_magic_miss",title:"Wand of Magic Missiles",category:"Wand & Rod",phb:false,tags:"wand,DMG",desc:"7 charges. Expend 1+ to cast Magic Missile (+1 dart per extra charge).",notes:"Rarity: Uncommon. No attune. Regain 1d6+1 at dawn; destroyed at 0."},
+ {id:"wd_fireballs",title:"Wand of Fireballs",category:"Wand & Rod",phb:false,tags:"wand,fire,DMG",desc:"7 charges. Cast Fireball (DC 15). Extra charges = higher level.",notes:"Rarity: Rare. Attune: spellcaster. Regain 1d6+1 at dawn."},
+ {id:"wd_lightning",title:"Wand of Lightning Bolts",category:"Wand & Rod",phb:false,tags:"wand,lightning,DMG",desc:"7 charges. Cast Lightning Bolt (DC 15).",notes:"Rarity: Rare. Attune: spellcaster."},
+ {id:"wd_paralysis",title:"Wand of Paralysis",category:"Wand & Rod",phb:false,tags:"wand,control,DMG",desc:"7 charges. 60 ft CON DC 15 or paralyzed 1 min.",notes:"Rarity: Rare. Attune: spellcaster."},
+ {id:"wd_polymorph",title:"Wand of Polymorph",category:"Wand & Rod",phb:false,tags:"wand,transmutation,DMG",desc:"7 charges. Cast Polymorph (WIS DC 15).",notes:"Rarity: Very Rare. Attune: spellcaster."},
+ {id:"wd_fear",title:"Wand of Fear",category:"Wand & Rod",phb:false,tags:"wand,fear,DMG",desc:"7 charges. 1 charge: Command flee. 2 charges: 60 ft cone of fear.",notes:"Rarity: Rare. Attune: spellcaster."},
+ {id:"wd_wonder",title:"Wand of Wonder",category:"Wand & Rod",phb:false,tags:"wand,wild,DMG",desc:"7 charges. Roll d100 for random magical effect.",notes:"Rarity: Rare. Attune: spellcaster."},
+ {id:"wd_binding",title:"Wand of Binding",category:"Wand & Rod",phb:false,tags:"wand,control,DMG",desc:"7 charges. Hold Monster (2 charges, DC 17) or Hold Person (1 charge, DC 17).",notes:"Rarity: Rare. Attune: spellcaster."},
+ {id:"wd_detect_magic",title:"Wand of Magic Detection",category:"Wand & Rod",phb:false,tags:"wand,divination,DMG",desc:"3 charges. Cast Detect Magic.",notes:"Rarity: Uncommon. No attune."},
+ {id:"wd_secrets",title:"Wand of Secrets",category:"Wand & Rod",phb:false,tags:"wand,divination,DMG",desc:"3 charges. Pulses if secret doors or traps within 30ft",notes:"Rarity: Uncommon. No attune."},
+ {id:"wd_web",title:"Wand of Web",category:"Wand & Rod",phb:false,tags:"wand,conjuration,DMG",desc:"7 charges. Cast Web (DC 15).",notes:"Rarity: Uncommon. Attune: spellcaster with Web on spell list."},
+ {id:"rd_absorption",title:"Rod of Absorption",category:"Wand & Rod",phb:false,tags:"rod,defense,DMG",desc:"Rxn: absorb spells targeting only you. Store up to 50 levels, spend as slots.",notes:"Rarity: Very Rare. Attune: Yes."},
+ {id:"rd_rulership",title:"Rod of Rulership",category:"Wand & Rod",phb:false,tags:"rod,charm,DMG",desc:"1/day: Creatures within 120 ft WIS DC 15 or charmed 8 hours.",notes:"Rarity: Rare. Attune: Yes. Recharge: dawn."},
+ {id:"rd_lordly_might",title:"Rod of Lordly Might",category:"Wand & Rod",phb:false,tags:"rod,martial,DMG",desc:"+3 magic mace. 6 buttons: Flame Tongue, Hold Monster, Paralyze, Drain life, Shield, True Seeing.",notes:"Rarity: Legendary. Attune: Yes."},
+ {id:"rd_resurrection",title:"Rod of Resurrection",category:"Wand & Rod",phb:false,tags:"rod,necromancy,DMG",desc:"5 charges. Cast Resurrection spell.",notes:"Rarity: Legendary. Attune: cleric/druid/paladin. Regain 1 charge/dawn if charges remain."},
+ {id:"rd_vonrichten",title:"Rod of the Pact Keeper",category:"Wand & Rod",phb:false,tags:"rod,warlock,DMG",desc:"+1/+2/+3 to spell atk and save DC. 1/day: regain one warlock slot.",notes:"Rarity: Uncommon/Rare/Very Rare. Attune: Warlock."},
+ {id:"wr_staff_healing",title:"Staff of Healing",category:"Wand & Rod",phb:true,tags:"staff,healing,PHB",desc:"10 charges. Expend 1+ charges to cast: Cure Wounds (1 charge/spell level, 1d8+4 per charge), Lesser Restoration (2 charges), Mass Cure Wounds (5 charges). Regains 1d6+4 charges at dawn.",notes:"Rarity: Rare. Attune: Yes (cleric, druid, or paladin). PHB p.202."},
+ {id:"wr_staff_adder",title:"Staff of the Adder",category:"Wand & Rod",phb:true,tags:"staff,poison,PHB",desc:"As a bonus action, cause the head to become a venomous snake for 1 minute. On hit: 1d6 piercing + DC 15 CON save or 3d6 poison damage. As a bonus action, revert to staff. If not reverted, the snake bites you instead.",notes:"Rarity: Uncommon. Attune: Yes (cleric, druid, or warlock). PHB p.202."},
+ {id:"wr_staff_python",title:"Staff of the Python",category:"Wand & Rod",phb:true,tags:"staff,beast,PHB",desc:"As an action, throw the staff to transform it into a giant constrictor snake (use your bonus action to command it). As a bonus action while within 60ft, revert it. If the snake drops to 0 HP, it reverts and is destroyed.",notes:"Rarity: Uncommon. Attune: Yes (cleric, druid, or warlock). PHB p.203."},
+ {id:"wr_staff_withering",title:"Staff of Withering",category:"Wand & Rod",phb:true,tags:"staff,necrotic,PHB",desc:"3 charges. On hit: expend 1 charge to deal extra 2d10 necrotic damage and target makes DC 15 CON save or has disadvantage on CON checks and saves for 1 hour. Regains 1d3 charges at dawn.",notes:"Rarity: Rare. Attune: Yes (cleric, druid, or warlock). PHB p.203."},
+ {id:"wr_wand_war_mage",title:"Wand of the War Mage",category:"Wand & Rod",phb:false,tags:"wand,arcane,DMG",desc:"+1/+2/+3 bonus to spell attack rolls. Ignore half cover when making spell attacks.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (spellcaster). DMG p.212."},
+ {id:"wr_wand_enemy_detect",title:"Wand of Enemy Detection",category:"Wand & Rod",phb:false,tags:"wand,detection,DMG",desc:"7 charges. Action: expend 1 charge to sense the direction of the nearest hostile creature within 60ft for 1 minute (concentration). Regains 1d6+1 charges at dawn.",notes:"Rarity: Rare. Attune: Yes. DMG p.211."},
+ {id:"wr_rod_tentacle",title:"Tentacle Rod",category:"Wand & Rod",phb:false,tags:"rod,melee,DMG",desc:"Rod with 3 tentacles. Each tentacle: +9 to hit, 1d6 bludgeoning. If all 3 hit same target: DC 15 CON save or speed halved, disadvantage on DEX saves, can't use reactions until next turn.",notes:"Rarity: Rare. Attune: Yes. DMG p.208."},
+ {id:"wr_rod_immovable",title:"Immovable Rod",category:"Wand & Rod",phb:false,tags:"rod,utility,DMG",desc:"Press the button to magically fix the rod in place. It can hold up to 8,000 lbs. Press again to release. If the weight limit is exceeded, the rod deactivates. A creature can use an action (DC 30 STR) to move it up to 10ft.",notes:"Rarity: Uncommon. Attune: No. DMG p.175."},
+ {id:"wr_rod_alertness",title:"Rod of Alertness",category:"Wand & Rod",phb:false,tags:"rod,utility,DMG",desc:"While holding: +1 to initiative, advantage on Perception. Spells cast from rod: Detect Evil and Good, Detect Magic, Detect Poison and Disease, See Invisibility (each 1/day). Action: plant rod in ground — creates Hallow effect in 60ft radius for 24 hours (1/day).",notes:"Rarity: Very Rare. Attune: Yes. DMG p.196."},
+ {id:"wr_staff_flowers",title:"Staff of Flowers",category:"Wand & Rod",phb:false,tags:"staff,cosmetic,XGE",desc:"10 charges. Action: expend 1 charge to cause a flower to appear at a point within 30ft. The flower blooms for 24 hours then wilts. You choose the type of flower. Regains 1d6+4 at dawn.",notes:"Rarity: Common. Attune: No. XGE p.139."},
+ {id:"wr_wand_conducting",title:"Wand of Conducting",category:"Wand & Rod",phb:false,tags:"wand,cosmetic,XGE",desc:"3 charges. Action: expend 1 charge to create orchestral music audible within 60ft. The music lasts until you stop (reaction or free action) or the wand runs out of charges. Regains 1d3 at dawn.",notes:"Rarity: Common. Attune: No. XGE p.140."},
+ {id:"wr_wand_pyrotechnics",title:"Wand of Pyrotechnics",category:"Wand & Rod",phb:false,tags:"wand,fire,XGE",desc:"7 charges. Action: expend 1 charge to create a harmless burst of colorful fire and smoke (like Pyrotechnics) at a point within 60ft. Regains 1d6+1 at dawn.",notes:"Rarity: Common. Attune: No. XGE p.140."},
+ {id:"wr_wand_scowls",title:"Wand of Scowls",category:"Wand & Rod",phb:false,tags:"wand,cosmetic,XGE",desc:"3 charges. Action: expend 1 charge. A creature within 30ft must succeed on a DC 10 CHA save or be forced to scowl for 1 minute. Regains 1d3 at dawn.",notes:"Rarity: Common. Attune: No. XGE p.140."},
+ {id:"wr_wand_smiles",title:"Wand of Smiles",category:"Wand & Rod",phb:false,tags:"wand,cosmetic,XGE",desc:"3 charges. Action: expend 1 charge. A creature within 30ft must succeed on a DC 10 CHA save or be forced to smile for 1 minute. Regains 1d3 at dawn.",notes:"Rarity: Common. Attune: No. XGE p.140."},
+ {id:"wr_staff_birdcalls",title:"Staff of Birdcalls",category:"Wand & Rod",phb:false,tags:"staff,utility,XGE",desc:"10 charges. Action: expend 1 charge to produce the call of a bird you have heard. Regains 1d6+4 charges at dawn.",notes:"Rarity: Common. Attune: No. XGE p.139."},
+ {id:"wr_staff_adornment",title:"Staff of Adornment",category:"Wand & Rod",phb:false,tags:"staff,cosmetic,XGE",desc:"While holding, you can cause up to three Tiny nonmagical objects to float in the air, orbiting the staff's tip. Objects can be added or removed as a bonus action.",notes:"Rarity: Common. Attune: No. XGE p.139."},
+ {id:"wr_staff_charming",title:"Staff of Charming",category:"Wand & Rod",phb:false,tags:"staff,charm,DMG",desc:"10 charges. Expend charges: Charm Person (1), Command (1), Comprehend Languages (1). While holding: advantage on saves vs enchantment, can reflect enchantment spells back at caster. Regains 1d8+2 at dawn.",notes:"Rarity: Rare. Attune: Yes (bard, cleric, druid, sorcerer, warlock, or wizard). DMG p.201."},
+ {id:"wr_staff_fire",title:"Staff of Fire",category:"Wand & Rod",phb:false,tags:"staff,fire,DMG",desc:"10 charges. While holding: resistance to fire. Spells (save DC 17): Burning Hands (1), Fireball (3), Wall of Fire (4). Regains 1d6+4 at dawn.",notes:"Rarity: Very Rare. Attune: Yes (druid, sorcerer, warlock, or wizard). DMG p.201."},
+ {id:"wr_staff_frost",title:"Staff of Frost",category:"Wand & Rod",phb:false,tags:"staff,cold,DMG",desc:"10 charges. While holding: resistance to cold. Spells (save DC 17): Cone of Cold (5), Fog Cloud (1), Ice Storm (4), Wall of Ice (4). Regains 1d6+4 at dawn.",notes:"Rarity: Very Rare. Attune: Yes (druid, sorcerer, warlock, or wizard). DMG p.202."},
+ {id:"wr_staff_striking",title:"Staff of Striking",category:"Wand & Rod",phb:false,tags:"staff,melee,DMG",desc:"10 charges. +3 magic quarterstaff. Expend 1-3 charges on hit: deal extra 1d6 force per charge. Regains 1d6+4 at dawn.",notes:"Rarity: Very Rare. Attune: Yes. DMG p.203."},
+ {id:"wr_staff_swarming",title:"Staff of Swarming Insects",category:"Wand & Rod",phb:false,tags:"staff,nature,DMG",desc:"10 charges. Spells (save DC 17): Giant Insect (4), Insect Plague (5). Action: 1 charge — swarm of insects surrounds you in 5ft radius for 10 minutes (disadvantage on attacks against you, DEX save or blinded). Regains 1d6+4 at dawn.",notes:"Rarity: Rare. Attune: Yes (druid, shaman, or warlock). DMG p.203."},
+ {id:"wr_staff_thunder_lightning",title:"Staff of Thunder and Lightning",category:"Wand & Rod",phb:false,tags:"staff,lightning,thunder,DMG",desc:"Lightning (1 charge, +9 atk, 9d6 lightning), Thunder (1 charge, 2d6 thunder + DC 17 STR or stunned), Lightning Strike (1 charge, 9d6 lightning in 5ft wide 120ft line, DC 17 DEX half), Thunderclap (1 charge, 40ft cube, DC 17 CON or deaf 1 min), Thunder & Lightning (2 charges, both effects). Regains all charges at dawn.",notes:"Rarity: Very Rare. Attune: Yes. DMG p.204."},
+ {id:"wr_staff_woodlands",title:"Staff of the Woodlands",category:"Wand & Rod",phb:false,tags:"staff,nature,DMG",desc:"10 charges. +2 quarterstaff. Spells (save DC 17): Animal Friendship (1), Awaken (5), Barkskin (2), Locate Animals or Plants (2), Speak with Animals (1), Speak with Plants (3), Wall of Thorns (6). Plant form: 1 charge — transform into Large tree for up to 1 hour. Regains 1d6+4 at dawn.",notes:"Rarity: Rare. Attune: Yes (druid). DMG p.204."},
+ {id:"wr_staff_magi",title:"Staff of the Magi",category:"Wand & Rod",phb:false,tags:"staff,arcane,DMG",desc:"50 charges. +2 quarterstaff. Absorb spells (regain charges = spell level). 20+ spells castable. Retributive Strike: break staff for 16d6 force damage in 30ft (DC 17 DEX for half). Regains 4d6+2 at dawn.",notes:"Rarity: Legendary. Attune: Yes (sorcerer, warlock, or wizard). DMG p.203."},
+ {id:"rd_security",title:"Rod of Security",category:"Wand & Rod",phb:false,tags:"rod,utility,DMG",desc:"1/10 days: Transport you + up to 199 willing creatures to paradise demiplane.",notes:"Rarity: Very Rare. No attune."},
+ {id:"mi_bag_holding",title:"Bag of Holding",category:"Magic Item",phb:false,tags:"wondrous,utility,TCE",desc:"Interior larger than outside. 500 lbs / 64 cu ft. Weighs 15 lbs.",notes:"Rarity: Uncommon. No attune. Retrieval: act. Placing inside another extradimensional space: 50% chance sucks all to Astral Plane."},
+ {id:"mi_cloak_protect",title:"Cloak of Protection",category:"Magic Item",phb:false,tags:"wondrous,defense,DMG",desc:"+1 AC and all saves.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_cloak_displmt",title:"Cloak of Displacement",category:"Magic Item",phb:false,tags:"wondrous,defense,DMG",desc:"Attackers have disadv. Deactivates when you take damage until start of next turn.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"mi_cloak_elvenkind",title:"Cloak of Elvenkind",category:"Magic Item",phb:false,tags:"wondrous,stealth,DMG",desc:"Hood up: Perception against you has disadv, you have adv on Stealth.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_boots_elvenkind",title:"Boots of Elvenkind",category:"Magic Item",phb:false,tags:"wondrous,stealth,DMG",desc:"Steps make no sound. Adv on Stealth checks involving move.",notes:"Rarity: Uncommon. No attune."},
+ {id:"mi_boots_speed",title:"Boots of Speed",category:"Magic Item",phb:false,tags:"wondrous,movement,DMG",desc:"BA: double speed + disadv on OAs against you. 10 min recharge after deactivating.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"mi_gauntlets_ogre",title:"Gauntlets of Ogre Power",category:"Magic Item",phb:false,tags:"wondrous,strength,DMG",desc:"STR becomes 19.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_gloves_thieving",title:"Gloves of Thievery",category:"Magic Item",phb:false,tags:"wondrous,stealth,DMG",desc:"+5 to Sleight of Hand and lockpicking. Invisible while worn.",notes:"Rarity: Uncommon. No attune."},
+ {id:"mi_hat_disguise",title:"Hat of Disguise",category:"Magic Item",phb:false,tags:"wondrous,illusion,DMG",desc:"Cast Disguise Self at will.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_headband_int",title:"Headband of Intellect",category:"Magic Item",phb:false,tags:"wondrous,intelligence,DMG",desc:"INT becomes 19.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_belt_giantstr",title:"Belt of Giant Strength",category:"Magic Item",phb:false,tags:"wondrous,strength,DMG",desc:"STR set to 21-29 depending on belt type.",notes:"Rarity: Uncommon-Legendary. Attune: Yes."},
+ {id:"mi_gem_seeing",title:"Gem of Seeing",category:"Magic Item",phb:false,tags:"wondrous,divination,DMG",desc:"3 charges. Truesight 120 ft for 10 minutes.",notes:"Rarity: Rare. Attune: Yes. Regain 1d3 at dawn."},
+ {id:"mi_luckstone",title:"Stone of Good Luck",category:"Magic Item",phb:false,tags:"wondrous,luck,DMG",desc:"+1 to all ability checks and saves.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_ioun_stone",title:"Ioun Stone",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Orbiting stone that grants various benefits depending on type.",notes:"Rarity: Varies. Attune: Yes. Types: Agility (DEX 19), Fortitude (CON 19), Insight (WIS 20), Intellect (INT 20), Leadership (CHA 20), STR (STR 20), Protection (+1 AC), Mastery (+1 PB), Regeneration (15 HP/hr)."},
+ {id:"mi_cape_mountebnk",title:"Cape of the Mountebank",category:"Magic Item",phb:false,tags:"wondrous,stealth,DMG",desc:"1/day: Cast Dimension Door. Smoke obscures previous location.",notes:"Rarity: Rare. No attune."},
+ {id:"mi_eversmoking",title:"Eversmoking Bottle",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Uncork: heavy obscurement 60 ft radius. Command word to stop.",notes:"Rarity: Uncommon. No attune."},
+ {id:"mi_cube_force",title:"Cube of Force",category:"Magic Item",phb:false,tags:"wondrous,defense,DMG",desc:"36 charges. Press face to create force barrier blocking various things.",notes:"Rarity: Rare. Attune: Yes. Regain 1d20 at dawn."},
+ {id:"mi_eyes_charming",title:"Eyes of Charming",category:"Magic Item",phb:false,tags:"wondrous,enchantment,DMG",desc:"3 charges. Cast Charm Person (WIS DC 13).",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_eyes_eagle",title:"Eyes of the Eagle",category:"Magic Item",phb:false,tags:"wondrous,perception,DMG",desc:"Adv on Perception (sight). No disadv on Perception in dim light.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"mi_tce_bloodwell",title:"Bloodwell Vial",category:"Magic Item",phb:false,tags:"magic item,sorcerer,TCE",desc:"+1/+2/+3 spell atk and save DC. Recover 5 sorcery points 1/dawn.",notes:"Rarity: Uncommon/Rare/Very Rare (TCE). Attune: Sorcerer."},
+ {id:"mi_tce_devotee",title:"Devotee's Censer",category:"Magic Item",phb:false,tags:"magic item,cleric,TCE",desc:"+2 flail + holy symbol. 5 charges: Channel Divinity on SR.",notes:"Rarity: Rare (TCE). Attune: cleric/paladin."},
+ {id:"mi_tce_atlas",title:"Atlas of Endless Horizons",category:"Magic Item",phb:false,tags:"magic item,wizard,TCE",desc:"+2 spell atk/save DC. 3 charges: planar travel spells.",notes:"Rarity: Very Rare (TCE). Attune: Wizard."},
+ {id:"mi_tce_cauldron",title:"Cauldron of Rebirth",category:"Magic Item",phb:false,tags:"magic item,druid,TCE",desc:"1/LR: Wildshape into cauldron; revive a creature as True Resurrection.",notes:"Rarity: Very Rare (TCE). Attune: druid/warlock."},
+ {id:"ar_padded",title:"Padded Armor",category:"Armor",phb:true,tags:"light,armor,PHB",desc:"Quilted layers of cloth.",notes:"Type: Light. AC: 11+DEX. Cost: 5 gp. Stealth: Disadv."},
+ {id:"ar_leather",title:"Leather Armor",category:"Armor",phb:true,tags:"light,armor,PHB",desc:"Stiffened boiled leather breastplate.",notes:"Type: Light. AC: 11+DEX. Cost: 10 gp."},
+ {id:"ar_studded",title:"Studded Leather",category:"Armor",phb:true,tags:"light,armor,PHB",desc:"Leather reinforced with metal rivets.",notes:"Type: Light. AC: 12+DEX. Cost: 45 gp."},
+ {id:"ar_hide",title:"Hide Armor",category:"Armor",phb:true,tags:"medium,armor,PHB",desc:"Thick furs and pelts.",notes:"Type: Medium. AC: 12+DEX(max2). Cost: 10 gp."},
+ {id:"ar_chainshirt",title:"Chain Shirt",category:"Armor",phb:true,tags:"medium,armor,PHB",desc:"Interlocking metal rings worn under clothes.",notes:"Type: Medium. AC: 13+DEX(max2). Cost: 50 gp."},
+ {id:"ar_scalemail",title:"Scale Mail",category:"Armor",phb:true,tags:"medium,armor,PHB",desc:"Leather covered with overlapping metal plates.",notes:"Type: Medium. AC: 14+DEX(max2). Cost: 50 gp. Stealth: Disadv."},
+ {id:"ar_breastplate",title:"Breastplate",category:"Armor",phb:true,tags:"medium,armor,PHB",desc:"Fitted metal chest piece with leather.",notes:"Type: Medium. AC: 14+DEX(max2). Cost: 400 gp."},
+ {id:"ar_halfplate",title:"Half Plate",category:"Armor",phb:true,tags:"medium,armor,PHB",desc:"Shaped metal plates covering most of body.",notes:"Type: Medium. AC: 15+DEX(max2). Cost: 750 gp. Stealth: Disadv."},
+ {id:"ar_ringmail",title:"Ring Mail",category:"Armor",phb:true,tags:"heavy,armor,PHB",desc:"Leather with heavy rings sewn in.",notes:"Type: Heavy. AC: 14. Cost: 30 gp. Stealth: Disadv."},
+ {id:"ar_chainmail",title:"Chain Mail",category:"Armor",phb:true,tags:"heavy,armor,PHB",desc:"Interlocking metal rings with quilted lining.",notes:"Type: Heavy. AC: 16. Cost: 75 gp. Str Req: 13. Stealth: Disadv."},
+ {id:"ar_splint",title:"Splint Armor",category:"Armor",phb:true,tags:"heavy,armor,PHB",desc:"Narrow vertical strips of metal on leather.",notes:"Type: Heavy. AC: 17. Cost: 200 gp. Str Req: 15. Stealth: Disadv."},
+ {id:"ar_platemail",title:"Plate Armor",category:"Armor",phb:true,tags:"heavy,armor,PHB",desc:"Interlocking shaped metal plates covering entire body.",notes:"Type: Heavy. AC: 18. Cost: 1500 gp. Str Req: 15. Stealth: Disadv."},
+ {id:"ar_plus1",title:"Armor +1 *",category:"Armor",phb:false,tags:"magic,armor,DMG",desc:"+1 AC bonus.",notes:"Rarity: Uncommon. No attune."},
+ {id:"ar_plus2",title:"Armor +2 *",category:"Armor",phb:false,tags:"magic,armor,DMG",desc:"+2 AC bonus.",notes:"Rarity: Rare. No attune."},
+ {id:"ar_plus3",title:"Armor +3 *",category:"Armor",phb:false,tags:"magic,armor,DMG",desc:"+3 AC bonus.",notes:"Rarity: Very Rare. No attune."},
+ {id:"ar_mithral",title:"Mithral Armor *",category:"Armor",phb:false,tags:"magic,armor,DMG",desc:"No Stealth disadv or STR requirement.",notes:"Rarity: Uncommon. No attune. Medium or heavy types."},
+ {id:"ar_adamantine",title:"Adamantine Armor *",category:"Armor",phb:false,tags:"magic,armor,DMG",desc:"Critical hits against you become normal hits.",notes:"Rarity: Uncommon. No attune. Medium or heavy (not hide)."},
+ {id:"ar_dragonscale",title:"Dragonscale Mail *",category:"Armor",phb:false,tags:"magic,armor,dragon,DMG",desc:"Resist dragon type's damage. +1 AC. Adv on saves vs dragon breath.",notes:"Rarity: Very Rare. Attune: Yes."},
+ {id:"ar_bracers",title:"Bracers of Defense",category:"Magic Item",phb:false,tags:"magic,armor,DMG",desc:"+2 AC when unarmored and no shield.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"ar_unarmored",title:"Unarmored Defense",category:"Armor",phb:true,tags:"unarmored,special,PHB",desc:"Some classes compute AC from ability scores instead of armor.",notes:"Barbarian: 10+DEX+CON. Monk: 10+DEX+WIS. Sorcerer Draconic: 13+DEX (always on)."},
+ {id:"wp_dagger",title:"Dagger",category:"Weapon",phb:true,tags:"simple,melee,finesse,PHB",desc:"A short blade.",notes:"Type: Simple Melee. Dmg: 1d4 piercing. Cost: 2 gp. Properties: Finesse, Light, Thrown (20/60)."},
+ {id:"wp_quarterstaff",title:"Quarterstaff",category:"Weapon",phb:true,tags:"simple,melee,versatile,PHB",desc:"A long wooden staff.",notes:"Type: Simple Melee. Dmg: 1d6/1d8 bludg. Cost: 2 sp. Properties: Versatile."},
+ {id:"wp_mace",title:"Mace",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A blunt weapon with a heavy head.",notes:"Type: Simple Melee. Dmg: 1d6 bludg. Cost: 5 gp."},
+ {id:"wp_spear",title:"Spear",category:"Weapon",phb:true,tags:"simple,melee,versatile,PHB",desc:"A pole weapon with pointed head.",notes:"Type: Simple Melee. Dmg: 1d6/1d8 pierc. Cost: 1 gp. Properties: Thrown (20/60), Versatile."},
+ {id:"wp_handaxe",title:"Handaxe",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A small axe.",notes:"Type: Simple Melee. Dmg: 1d6 slash. Cost: 5 gp. Properties: Light, Thrown (20/60)."},
+ {id:"wp_shortbow",title:"Shortbow",category:"Weapon",phb:true,tags:"simple,ranged,PHB",desc:"A small bow.",notes:"Type: Simple Ranged. Dmg: 1d6 pierc. Cost: 25 gp. Properties: Ammunition (80/320), Two-handed."},
+ {id:"wp_longsword",title:"Longsword",category:"Weapon",phb:true,tags:"martial,melee,versatile,PHB",desc:"A straight double-edged blade.",notes:"Type: Martial Melee. Dmg: 1d8/1d10 slash. Cost: 15 gp. Properties: Versatile."},
+ {id:"wp_rapier",title:"Rapier",category:"Weapon",phb:true,tags:"martial,melee,finesse,PHB",desc:"A slender thrusting sword.",notes:"Type: Martial Melee. Dmg: 1d8 pierc. Cost: 25 gp. Properties: Finesse."},
+ {id:"wp_shortsword",title:"Shortsword",category:"Weapon",phb:true,tags:"martial,melee,finesse,PHB",desc:"A light double-edged blade.",notes:"Type: Martial Melee. Dmg: 1d6 pierc. Cost: 10 gp. Properties: Finesse, Light."},
+ {id:"wp_greatsword",title:"Greatsword",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A massive two-handed sword.",notes:"Type: Martial Melee. Dmg: 2d6 slash. Cost: 50 gp. Properties: Heavy, Two-handed."},
+ {id:"wp_battleaxe",title:"Battleaxe",category:"Weapon",phb:true,tags:"martial,melee,versatile,PHB",desc:"A sturdy combat axe.",notes:"Type: Martial Melee. Dmg: 1d8/1d10 slash. Cost: 10 gp. Properties: Versatile."},
+ {id:"wp_greataxe",title:"Greataxe",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A large two-handed axe.",notes:"Type: Martial Melee. Dmg: 1d12 slash. Cost: 30 gp. Properties: Heavy, Two-handed."},
+ {id:"wp_glaive",title:"Glaive",category:"Weapon",phb:true,tags:"martial,melee,reach,PHB",desc:"A pole weapon with single-edged blade.",notes:"Type: Martial Melee. Dmg: 1d10 slash. Cost: 20 gp. Properties: Heavy, Reach, Two-handed."},
+ {id:"wp_halberd",title:"Halberd",category:"Weapon",phb:true,tags:"martial,melee,reach,PHB",desc:"Pole weapon combining axe and spear.",notes:"Type: Martial Melee. Dmg: 1d10 slash. Cost: 20 gp. Properties: Heavy, Reach, Two-handed."},
+ {id:"wp_warhammer",title:"Warhammer",category:"Weapon",phb:true,tags:"martial,melee,versatile,PHB",desc:"A heavy combat hammer.",notes:"Type: Martial Melee. Dmg: 1d8/1d10 bludg. Cost: 15 gp. Properties: Versatile."},
+ {id:"wp_longbow",title:"Longbow",category:"Weapon",phb:true,tags:"martial,ranged,PHB",desc:"A large powerful bow.",notes:"Type: Martial Ranged. Dmg: 1d8 pierc. Cost: 50 gp. Properties: Ammunition (150/600), Heavy, Two-handed."},
+ {id:"wp_crossbow_hv",title:"Crossbow, Heavy",category:"Weapon",phb:true,tags:"martial,ranged,PHB",desc:"A large powerful crossbow.",notes:"Type: Martial Ranged. Dmg: 1d10 pierc. Cost: 50 gp. Properties: Ammunition (100/400), Heavy, Loading, Two-handed."},
+ {id:"wp_crossbow_lt",title:"Crossbow, Light",category:"Weapon",phb:true,tags:"simple,ranged,PHB",desc:"A small crossbow.",notes:"Type: Simple Ranged. Dmg: 1d8 pierc. Cost: 25 gp. Properties: Ammunition (80/320), Loading, Two-handed."},
+ {id:"wp_crossbow_hd",title:"Crossbow, Hand",category:"Weapon",phb:true,tags:"martial,ranged,PHB",desc:"A compact one-handed crossbow.",notes:"Type: Martial Ranged. Dmg: 1d6 pierc. Cost: 75 gp. Properties: Ammunition (30/120), Light, Loading."},
+ {id:"wp_weapon_1",title:"Weapon +1 *",category:"Weapon",phb:false,tags:"magic,weapon,DMG",desc:"+1 to attack and damage.",notes:"Rarity: Uncommon. No attune."},
+ {id:"wp_weapon_2",title:"Weapon +2 *",category:"Weapon",phb:false,tags:"magic,weapon,DMG",desc:"+2 to attack and damage.",notes:"Rarity: Rare. No attune."},
+ {id:"wp_weapon_3",title:"Weapon +3 *",category:"Weapon",phb:false,tags:"magic,weapon,DMG",desc:"+3 to attack and damage.",notes:"Rarity: Very Rare. No attune."},
+ {id:"wp_vorpal",title:"Vorpal Sword *",category:"Weapon",phb:false,tags:"magic,sword,legendary,DMG",desc:"+3 sword. Natural 20: decapitate (CON DC 15 or die).",notes:"Rarity: Legendary. Attune: Yes. Ignores slashing resist."},
+ {id:"wp_flametongue",title:"Flame Tongue *",category:"Weapon",phb:false,tags:"magic,sword,fire,DMG",desc:"BA to ignite. While burning: +2d6 fire damage.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"wp_sunblade",title:"Sun Blade *",category:"Weapon",phb:false,tags:"magic,sword,radiant,DMG",desc:"+2 longsword dealing radiant damage. +1d8 vs undead. Sunlight 15 ft.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"wp_defender",title:"Defender *",category:"Weapon",phb:false,tags:"magic,sword,legendary,DMG",desc:"+3 sword. Transfer up to +3 of bonus to AC each turn.",notes:"Rarity: Legendary. Attune: Yes."},
+ {id:"wp_holy_avenger",title:"Holy Avenger *",category:"Weapon",phb:false,tags:"magic,sword,paladin,DMG",desc:"+3 sword. +2d10 radiant vs fiends/undead. 10 ft aura: adv on magic saves.",notes:"Rarity: Legendary. Attune: Paladin only."},
+ {id:"wp_dagger_venom",title:"Dagger of Venom *",category:"Weapon",phb:false,tags:"magic,dagger,DMG",desc:"+1 dagger. 1/day coat with poison: CON DC 15 or 2d10 poison + poisoned.",notes:"Rarity: Rare. No attune."},
+ {id:"sh_wood",title:"Wooden Shield",category:"Shield",phb:true,tags:"shield,PHB",desc:"A wooden shield.",notes:"AC Bonus: +2. Cost: 10 gp. Weight: 6 lbs. Carried in one hand."},
+ {id:"sh_metal",title:"Metal Shield",category:"Shield",phb:true,tags:"shield,PHB",desc:"A metal shield.",notes:"AC Bonus: +2. Cost: 10 gp. Weight: 6 lbs."},
+ {id:"sh_plus1",title:"Shield +1 *",category:"Shield",phb:false,tags:"magic,shield,DMG",desc:"+1 AC in addition to shield's normal bonus.",notes:"Rarity: Uncommon. No attune. Total: +3 AC."},
+ {id:"sh_plus2",title:"Shield +2 *",category:"Shield",phb:false,tags:"magic,shield,DMG",desc:"+2 AC in addition to shield's normal bonus.",notes:"Rarity: Rare. No attune. Total: +4 AC."},
+ {id:"sh_plus3",title:"Shield +3 *",category:"Shield",phb:false,tags:"magic,shield,DMG",desc:"+3 AC in addition to shield's normal bonus.",notes:"Rarity: Very Rare. No attune. Total: +5 AC."},
+ {id:"sh_animated",title:"Animated Shield *",category:"Shield",phb:false,tags:"magic,shield,DMG",desc:"BA: animate for 1 min - floats and defends without using your hand.",notes:"Rarity: Very Rare. Attune: Yes. Can't move more than 5 ft from you."},
+ {id:"jw_ring_protection",title:"Ring of Protection",category:"Jewelry",phb:false,tags:"ring,defense,DMG",desc:"+1 AC and all saves.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"jw_ring_resist",title:"Ring of Resistance",category:"Jewelry",phb:false,tags:"ring,defense,DMG",desc:"Resist one damage type.",notes:"Rarity: Rare. Attune: Yes. Types: Acid(pearl), Cold(tourmaline), Fire(garnet), Force(sapphire), Lightning(citrine), Necrotic(jet), Poison(amethyst), Psychic(jade), Radiant(topaz), Thunder(spinel)."},
+ {id:"jw_ring_invis",title:"Ring of Invisibility",category:"Jewelry",phb:false,tags:"ring,stealth,DMG",desc:"Act: turn invisible. Ends if you attack or cast.",notes:"Rarity: Legendary. Attune: Yes."},
+ {id:"jw_ring_spell_store",title:"Ring of Spell Storing",category:"Jewelry",phb:false,tags:"ring,spells,DMG",desc:"Stores up to 5 spell levels. Attuned wearer casts stored spells.",notes:"Rarity: Rare. Attune: Yes. Resets at dawn."},
+ {id:"jw_ring_feather",title:"Ring of Feather Falling",category:"Jewelry",phb:false,tags:"ring,movement,DMG",desc:"Fall 60 ft/round, no fall damage.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"jw_ring_regen",title:"Ring of Regeneration",category:"Jewelry",phb:false,tags:"ring,healing,DMG",desc:"Regain 1d6 HP per 10 min if at 1+ HP. Regrows severed limbs.",notes:"Rarity: Very Rare. Attune: Yes."},
+ {id:"jw_ring_free",title:"Ring of Free Action",category:"Jewelry",phb:false,tags:"ring,movement,DMG",desc:"Ignore difficult terrain. Can't be magically paralyzed or restrained.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"jw_ring_mind",title:"Ring of Mind Shielding",category:"Jewelry",phb:false,tags:"ring,psychic,DMG",desc:"Immune to telepathy/Detect Thoughts/know alignment. Soul can enter ring on death.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"jw_ring_warmth",title:"Ring of Warmth",category:"Jewelry",phb:false,tags:"ring,cold,DMG",desc:"Cold resist. Comfortable in temperatures as low as -50F.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"jw_ring_3wishes",title:"Ring of Three Wishes",category:"Jewelry",phb:false,tags:"ring,legendary,DMG",desc:"3 charges (no recharge). Each: cast Wish.",notes:"Rarity: Legendary. No attune."},
+ {id:"jw_ring_evasion",title:"Ring of Evasion",category:"Jewelry",phb:false,tags:"ring,defense,DMG",desc:"3 charges. Rxn: turn failed DEX save into success.",notes:"Rarity: Rare. Attune: Yes. Regain 1d3 at dawn."},
+ {id:"jw_ring_telekin",title:"Ring of Telekinesis",category:"Jewelry",phb:false,tags:"ring,DMG",desc:"Cast Telekinesis at will (objects only).",notes:"Rarity: Very Rare. Attune: Yes."},
+ {id:"jw_pearl_power",title:"Pearl of Power",category:"Jewelry",phb:true,tags:"pearl,spellcasting,PHB",desc:"1/day: Regain one slot of 3rd level or lower.",notes:"Rarity: Uncommon. Attune: spellcaster. Recharge: dawn."},
+ {id:"gm_diamond",title:"Diamond",category:"Gem",phb:false,tags:"gem,5000gp,DMG",desc:"Blue-white to canary, pink, brown, or blue transparent gem.",notes:"Value: 5000 gp. Uses: Revivify (300 gp), Raise Dead (500 gp), True Resurrection (25000 gp), Greater Restoration (100 gp diamond dust)."},
+ {id:"gm_ruby",title:"Ruby",category:"Gem",phb:false,tags:"gem,5000gp,DMG",desc:"Clear red to deep crimson.",notes:"Value: 5000 gp. Finest jewelry, legendary spell components."},
+ {id:"gm_emerald",title:"Emerald",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Deep bright green.",notes:"Value: 1000 gp. Uses: Stoneskin component (100 gp)."},
+ {id:"gm_sapphire",title:"Blue Sapphire",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Blue-white to medium blue.",notes:"Value: 1000 gp. Ring of Resist (force)."},
+ {id:"gm_opal",title:"Opal",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Pale blue with green and golden mottling.",notes:"Value: 1000 gp. Fine jewelry."},
+ {id:"gm_topaz",title:"Topaz",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Golden yellow.",notes:"Value: 500 gp. Ring of Resist (radiant), Necklace of Prayer Beads."},
+ {id:"gm_aquamarine",title:"Aquamarine",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Pale blue-green.",notes:"Value: 500 gp. Necklace of Prayer Beads."},
+ {id:"gm_pearl",title:"Pearl",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Lustrous white, yellow, or pink.",notes:"Value: 100 gp. Identify spell component (100 gp pearl). Ring of Resist (cold)."},
+ {id:"gm_amethyst",title:"Amethyst",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Deep purple.",notes:"Value: 100 gp. Ring of Resist (poison)."},
+ {id:"gm_garnet",title:"Garnet",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Red, brown-green, or violet.",notes:"Value: 100 gp. Ring of Resist (fire)."},
+ {id:"gm_iolite",title:"Iolite",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Transparent violet.",notes:"Value: 50 gp. Semi-precious. DMG p.134."},
+ {id:"gm_jade",title:"Jade",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"White, light green, or deep green.",notes:"Value: 100 gp. Ring of Resist (psychic)."},
+ {id:"gm_jet",title:"Jet",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Deep black.",notes:"Value: 100 gp. Ring of Resist (necrotic)."},
+ {id:"gm_obsidian",title:"Obsidian",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque black.",notes:"Value: 10 gp. Weapons, arcane components."},
+ {id:"gm_azurite",title:"Azurite",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque mottled deep blue.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_banded_agate",title:"Banded Agate",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Translucent striped brown, blue, white, or red.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_blue_quartz",title:"Blue Quartz",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Transparent pale blue.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_eye_agate",title:"Eye Agate",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Translucent circles of gray, white, brown, blue, or green.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_hematite",title:"Hematite",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque gray-black.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_lapis_lazuli",title:"Lapis Lazuli",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque light and dark blue with yellow flecks.",notes:"Value: 10 gp. Ornamental. Used in divine spell components."},
+ {id:"gm_malachite",title:"Malachite",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque striated light and dark green.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_moss_agate",title:"Moss Agate",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Translucent pink or yellow-white with mossy markings.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_rhodonite",title:"Rhodonite",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque pink with black stripes.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_tiger_eye",title:"Tiger Eye",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Translucent brown with golden center.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_turquoise",title:"Turquoise",category:"Gem",phb:false,tags:"gem,10gp,DMG",desc:"Opaque light blue-green.",notes:"Value: 10 gp. Ornamental."},
+ {id:"gm_bloodstone",title:"Bloodstone",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque dark gray with red flecks.",notes:"Value: 50 gp. Semi-precious. Used in Stoneskin (component)."},
+ {id:"gm_carnelian",title:"Carnelian",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque orange to red-brown.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_chalcedony",title:"Chalcedony",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque white.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_chrysoprase",title:"Chrysoprase",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Translucent green.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_citrine",title:"Citrine",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Transparent pale yellow-brown.",notes:"Value: 50 gp. Semi-precious. Ring of Resist (lightning)."},
+ {id:"gm_jasper",title:"Jasper",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque blue, black, or brown.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_moonstone",title:"Moonstone",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Translucent white with pale blue glow.",notes:"Value: 50 gp. Semi-precious. Druid spell components."},
+ {id:"gm_onyx",title:"Onyx",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque banded black and white.",notes:"Value: 50 gp. Semi-precious. Animate Dead component (50 gp)."},
+ {id:"gm_quartz",title:"Rock Crystal (Quartz)",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Transparent colorless.",notes:"Value: 50 gp. Semi-precious. Arcane focus, spell components."},
+ {id:"gm_sardonyx",title:"Sardonyx",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Opaque bands of red and white.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_smoky_quartz",title:"Smoky Quartz",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Transparent gray-brown.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_star_rose",title:"Star Rose Quartz",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Translucent rosy stone with white star center.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_zircon",title:"Zircon",category:"Gem",phb:false,tags:"gem,50gp,DMG",desc:"Transparent pale blue-green.",notes:"Value: 50 gp. Semi-precious."},
+ {id:"gm_amber",title:"Amber",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Transparent watery gold to rich gold.",notes:"Value: 100 gp. Fancy."},
+ {id:"gm_chrysoberyl",title:"Chrysoberyl",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Transparent yellow-green to pale green.",notes:"Value: 100 gp. Fancy."},
+ {id:"gm_coral",title:"Coral",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Opaque crimson.",notes:"Value: 100 gp. Fancy."},
+ {id:"gm_spinel",title:"Spinel",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Transparent red, red-brown, or deep green.",notes:"Value: 100 gp. Fancy. Ring of Resist (thunder)."},
+ {id:"gm_tourmaline",title:"Tourmaline",category:"Gem",phb:false,tags:"gem,100gp,DMG",desc:"Transparent pale green, blue, brown, or red.",notes:"Value: 100 gp. Fancy."},
+ {id:"gm_alexandrite",title:"Alexandrite",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Transparent dark green.",notes:"Value: 500 gp. Precious."},
+ {id:"gm_black_pearl",title:"Black Pearl",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Opaque pure black.",notes:"Value: 500 gp. Precious. Necklace of Prayer Beads."},
+ {id:"gm_blue_spinel",title:"Blue Spinel",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Transparent deep blue.",notes:"Value: 500 gp. Precious."},
+ {id:"gm_peridot",title:"Peridot",category:"Gem",phb:false,tags:"gem,500gp,DMG",desc:"Transparent rich olive green.",notes:"Value: 500 gp. Precious."},
+ {id:"gm_black_opal",title:"Black Opal",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Translucent dark green with black mottling and golden flecks.",notes:"Value: 1000 gp. Gemstone."},
+ {id:"gm_fire_opal",title:"Fire Opal",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Translucent fiery red.",notes:"Value: 1000 gp. Gemstone."},
+ {id:"gm_star_ruby",title:"Star Ruby",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Translucent ruby with white star center.",notes:"Value: 1000 gp. Gemstone."},
+ {id:"gm_star_sapphire",title:"Star Sapphire",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Translucent blue with white star center.",notes:"Value: 1000 gp. Gemstone."},
+ {id:"gm_yellow_sapphire",title:"Yellow Sapphire",category:"Gem",phb:false,tags:"gem,1000gp,DMG",desc:"Transparent fiery yellow or yellow-green.",notes:"Value: 1000 gp. Gemstone."},
+ {id:"gm_black_sapphire",title:"Black Sapphire",category:"Gem",phb:false,tags:"gem,5000gp,DMG",desc:"Translucent lustrous black with glowing highlights.",notes:"Value: 5000 gp. Jewel."},
+ {id:"gm_jacinth",title:"Jacinth",category:"Gem",phb:false,tags:"gem,5000gp,DMG",desc:"Transparent fiery orange.",notes:"Value: 5000 gp. Jewel."},
+
+ {id:"cp_bat",title:"Bat",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small nocturnal flying mammal.",notes:"Familiar. Tiny. AC:12 HP:1. Speed:5ft/fly 30ft. Senses: Blindsight 60ft. Traits: Echolocation (no blindsight while deafened). Acts: Bite (0 dmg)."},
+ {id:"cp_crab",title:"Crab",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small armored crustacean.",notes:"Familiar. Tiny. AC:11 HP:2. Speed:20ft/swim 20ft. Traits: Amphibious, Blindsight 30ft. Acts: Claw (1 bludg, grapple DC 9)."},
+ {id:"cp_frog",title:"Frog",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small amphibian.",notes:"Familiar. Tiny. AC:11 HP:1. Speed:20ft/swim 20ft. Traits: Amphibious, Standing Leap 10ft. No attack."},
+ {id:"cp_lizard",title:"Lizard",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small reptile.",notes:"Familiar. Tiny. AC:10 HP:2. Speed:20ft/climb 20ft. Acts: Bite (1 pierc)."},
+ {id:"cp_octopus",title:"Octopus",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A clever cephalopod.",notes:"Familiar. Tiny. AC:12 HP:3. Speed:5ft/swim 30ft. Traits: Underwater Camouflage (adv Stealth underwater), Hold Breath 30min. Acts: Tentacles (1 bludg grapple DC10), Ink Cloud (recharge 6)."},
+ {id:"cp_quipper",title:"Quipper",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A ferocious piranha-like fish.",notes:"Familiar. Tiny. AC:13 HP:1. Speed:swim 40ft. Traits: Blood Frenzy (adv melee vs damaged creature), Water Breathing. Acts: Bite (1 pierc)."},
+ {id:"cp_sea_horse",title:"Sea Horse",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A tiny aquatic creature.",notes:"Familiar. Tiny. AC:11 HP:1. Speed:swim 20ft. Traits: Water Breathing, Underwater Camouflage. No attack."},
+ {id:"cp_weasel",title:"Weasel",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small mustelid.",notes:"Familiar. Tiny. AC:13 HP:1. Speed:30ft. Skills: Perception+3, Stealth+5. Traits: Keen Hearing and Smell. Acts: Bite (1 pierc)."},
+ {id:"cp_sprite",title:"Sprite",category:"Companion",phb:true,tags:"familiar,tiny,fey,PHB",desc:"A tiny fey (Pact of the Chain).",notes:"Familiar (Pact of the Chain). Tiny. AC:13 HP:2. Speed:10ft/fly 40ft. Skills: Stealth+8. Traits: Magic Resist. Acts: Longsword (1 slash), Shortbow (1 pierc CON DC10 or poisoned/sleep), Heart Sight (know alignment+emotions by touch)."},
+ {id:"cp_tce_homunculus",title:"Homunculus Servant",category:"Companion",phb:false,tags:"companion,artificer,TCE",desc:"Tiny magical construct created by an artificer.",notes:"Artificer Infusion (TCE). Tiny. AC:13 HP:1+INT+level. Speed:20ft/fly 30ft. Immunities: Poison, psychic. Traits: Evasion, Magic Resist. Acts: Force Strike (1d4+PB force 30ft)."},
+ {id:"cp_tce_drake",title:"Drake Companion",category:"Companion",phb:false,tags:"companion,ranger,dragon,TCE",desc:"A loyal drake bonded to a Drake Warden ranger.",notes:"Drake Warden subclass (TCE). Small→Medium at 7th. AC:14+PB HP:5+5xlevel. Speed:40ft. Damage type chosen at bonding. Traits: Warden's Bond (telepathic link, share resists). Acts: Bite (1d6+STR+PB)."},
+ {id:"cp_tce_greater_steed",title:"Greater Steed",category:"Companion",phb:false,tags:"companion,paladin,TCE",desc:"A powerful magical mount (Find Greater Steed, 4th level spell).",notes:"Find Greater Steed (TCE). Forms: Griffon, pegasus, peryton, dire wolf, rhinoceros, saber-toothed tiger. Acts independently with its own turn. Can attack independently."},
+
+ {id:"dt_auril",title:"Auril",category:"Deity",phb:true,tags:"deity,neutral evil,nature,PHB",desc:"The Frostmaiden, goddess of winter.",notes:"Alignment: Neutral Evil. Domain: Nature, Tempest. Symbol: Six-pointed snowflake. Worshippers: Those who fear winter, druids of cold regions."},
+ {id:"dt_azuth",title:"Azuth",category:"Deity",phb:true,tags:"deity,lawful neutral,knowledge,PHB",desc:"The High One, god of wizards.",notes:"Alignment: Lawful Neutral. Domain: Arcana, Knowledge. Symbol: Left hand pointing upward in fire. Worshippers: Wizards, sorcerers."},
+ {id:"dt_beshaba",title:"Beshaba",category:"Deity",phb:true,tags:"deity,chaotic evil,trickery,PHB",desc:"The Maid of Misfortune, goddess of bad luck.",notes:"Alignment: Chaotic Evil. Domain: Trickery. Symbol: Black antlers. Worshippers: Those who fear misfortune, gamblers."},
+ {id:"dt_cyric",title:"Cyric",category:"Deity",phb:true,tags:"deity,chaotic evil,trickery,PHB",desc:"The Prince of Lies, god of murder and strife.",notes:"Alignment: Chaotic Evil. Domain: Trickery. Symbol: White jawless skull on black sunburst. Worshippers: Murderers, the power-hungry."},
+ {id:"dt_deneir",title:"Deneir",category:"Deity",phb:true,tags:"deity,neutral good,knowledge,PHB",desc:"Lord of All Glyphs, god of writing.",notes:"Alignment: Neutral Good. Domain: Arcana, Knowledge. Symbol: Lit candle above open eye. Worshippers: Scribes, scholars, cartographers."},
+ {id:"dt_eldath",title:"Eldath",category:"Deity",phb:true,tags:"deity,neutral good,life,PHB",desc:"The Quiet One, goddess of peace and pools.",notes:"Alignment: Neutral Good. Domain: Life, Nature. Symbol: Waterfall into still pool. Worshippers: Pacifists, druids."},
+ {id:"dt_gond",title:"Gond",category:"Deity",phb:true,tags:"deity,neutral,knowledge,PHB",desc:"The Wonderbringer, god of craft and invention.",notes:"Alignment: True Neutral. Domain: Forge, Knowledge. Symbol: Toothed cog with four spokes. Worshippers: Inventors, smiths, artificers."},
+ {id:"dt_helm",title:"Helm",category:"Deity",phb:true,tags:"deity,lawful neutral,war,PHB",desc:"The Watcher, god of protection.",notes:"Alignment: Lawful Neutral. Domain: Life, Light. Symbol: Staring eye on golden gauntlet. Worshippers: Guards, warriors, paladins."},
+ {id:"dt_ilmater",title:"Ilmater",category:"Deity",phb:true,tags:"deity,lawful good,life,PHB",desc:"The Crying God, god of endurance and martyrdom.",notes:"Alignment: Lawful Good. Domain: Life. Symbol: Hands bound with red cord. Worshippers: The poor, oppressed, monks, healers."},
+ {id:"dt_leira",title:"Leira",category:"Deity",phb:true,tags:"deity,chaotic neutral,trickery,PHB",desc:"The Lady of Mists, goddess of illusion.",notes:"Alignment: Chaotic Neutral. Domain: Trickery. Symbol: Disembodied hand. Worshippers: Illusionists, deceivers."},
+ {id:"dt_lliira",title:"Lliira",category:"Deity",phb:true,tags:"deity,chaotic good,life,PHB",desc:"Our Lady of Joy, goddess of happiness.",notes:"Alignment: Chaotic Good. Domain: Life, Light. Symbol: Triangle of three stars. Worshippers: Revelers, entertainers."},
+ {id:"dt_loviatar",title:"Loviatar",category:"Deity",phb:true,tags:"deity,lawful evil,death,PHB",desc:"The Maiden of Pain, goddess of pain.",notes:"Alignment: Lawful Evil. Domain: Death. Symbol: Nine-tailed barbed scourge. Worshippers: Sadists, torturers."},
+ {id:"dt_malar",title:"Malar",category:"Deity",phb:true,tags:"deity,chaotic evil,nature,PHB",desc:"The Beastlord, god of the hunt.",notes:"Alignment: Chaotic Evil. Domain: Nature. Symbol: Clawed paw. Worshippers: Hunters, lycanthropes."},
+ {id:"dt_milil",title:"Milil",category:"Deity",phb:true,tags:"deity,neutral good,light,PHB",desc:"The Lord of Song, god of poetry.",notes:"Alignment: Neutral Good. Domain: Light. Symbol: Five-stringed harp. Worshippers: Bards, musicians."},
+ {id:"dt_myrkul",title:"Myrkul",category:"Deity",phb:true,tags:"deity,neutral evil,death,PHB",desc:"The Lord of Bones, god of death.",notes:"Alignment: Neutral Evil. Domain: Death. Symbol: White human skull. Worshippers: Necromancers, those who seek undead immortality."},
+ {id:"dt_savras",title:"Savras",category:"Deity",phb:true,tags:"deity,lawful neutral,knowledge,PHB",desc:"The All-Seeing, god of divination.",notes:"Alignment: Lawful Neutral. Domain: Arcana, Knowledge. Symbol: Crystal ball with eye. Worshippers: Diviners, seers."},
+ {id:"dt_sune",title:"Sune",category:"Deity",phb:true,tags:"deity,chaotic good,life,PHB",desc:"Lady Firehair, goddess of love and beauty.",notes:"Alignment: Chaotic Good. Domain: Life, Light. Symbol: Face of a red-haired woman. Worshippers: Lovers, artists."},
+ {id:"dt_talona",title:"Talona",category:"Deity",phb:true,tags:"deity,chaotic evil,death,PHB",desc:"Lady of Poison, goddess of disease.",notes:"Alignment: Chaotic Evil. Domain: Death. Symbol: Three teardrops on a triangle. Worshippers: Assassins, poisoners."},
+ {id:"dt_waukeen",title:"Waukeen",category:"Deity",phb:true,tags:"deity,neutral,knowledge,PHB",desc:"Our Lady of Gold, goddess of trade.",notes:"Alignment: True Neutral. Domain: Knowledge, Trickery. Symbol: Upright coin. Worshippers: Merchants, traders."},
+ {id:"dt_garl",title:"Garl Glittergold",category:"Deity",phb:true,tags:"deity,lawful good,gnome,PHB",desc:"The Joker, deity of gnomes.",notes:"Alignment: Lawful Good. Domain: Trickery. Symbol: Gold nugget. Worshippers: Gnomes, gem cutters."},
+ {id:"dt_gruumsh",title:"Gruumsh",category:"Deity",phb:true,tags:"deity,chaotic evil,orc,PHB",desc:"One-Eye, deity of orcs.",notes:"Alignment: Chaotic Evil. Domain: Tempest, War. Symbol: Unwinking eye. Worshippers: Orcs, half-orcs."},
+ {id:"dt_yondalla",title:"Yondalla",category:"Deity",phb:true,tags:"deity,lawful good,halfling,PHB",desc:"The Blessed One, deity of halflings.",notes:"Alignment: Lawful Good. Domain: Life. Symbol: Cornucopia on a shield. Worshippers: Halflings."},
+ {id:"dt_tce_avandra",title:"Avandra",category:"Deity",phb:false,tags:"deity,chaotic good,trickery,TCE",desc:"The Change Bringer, goddess of change and luck.",notes:"Alignment: Chaotic Good. Domain: Trickery. Symbol: Three wavy lines. Note: Wildemount. Worshippers: Halflings, travelers, rogues."},
+ {id:"dt_tce_bahamut_ex",title:"Bahamut (Exarch)",category:"Deity",phb:false,tags:"deity,lawful good,life,TCE",desc:"The Platinum Dragon, god of justice (Wildemount).",notes:"Alignment: Lawful Good. Domain: Life, War. Symbol: Platinum dragon. Note: Wildemount/Exandria."},
+ {id:"dt_tce_corellon",title:"Corellon (Arch-Heart)",category:"Deity",phb:false,tags:"deity,chaotic good,arcana,TCE",desc:"The Arch-Heart, god of magic and beauty (Wildemount).",notes:"Alignment: Chaotic Good. Domain: Arcana, Light. Symbol: Eight-pointed star. Note: Wildemount."},
+ {id:"dt_tce_ioun",title:"Ioun",category:"Deity",phb:false,tags:"deity,neutral,knowledge,TCE",desc:"The Knowing Mentor, goddess of knowledge.",notes:"Alignment: True Neutral. Domain: Knowledge. Symbol: Stylized eye. Note: Wildemount. Worshippers: Scholars, wizards, seers."},
+ {id:"dt_tce_melora",title:"Melora",category:"Deity",phb:false,tags:"deity,neutral,nature,TCE",desc:"The Wild Mother, goddess of nature and the sea.",notes:"Alignment: True Neutral. Domain: Nature, Tempest. Symbol: Wreath of grass. Note: Wildemount. Worshippers: Druids, sailors, rangers."},
+ {id:"dt_tce_sehanine",title:"Sehanine",category:"Deity",phb:false,tags:"deity,chaotic good,trickery,TCE",desc:"The Moonweaver, goddess of moon and illusion.",notes:"Alignment: Chaotic Good. Domain: Trickery. Symbol: Crescent moon with teardrop. Note: Wildemount. Worshippers: Elves, rogues, illusionists."},
+
+ {id:"fc_bregan",title:"Bregan D'aerthe",category:"Faction",phb:true,tags:"faction,chaotic neutral,PHB",desc:"A mercenary band of drow outcasts led by Jarlaxle.",notes:"Alignment: Chaotic Neutral. Goals: Profit, power, surface survival. Methods: Mercenary work, espionage, illicit trade. Operates in Underdark and surface cities."},
+ {id:"fc_gray_hands",title:"The Gray Hands",category:"Faction",phb:true,tags:"faction,lawful neutral,PHB",desc:"Personal agents of the Open Lord of Waterdeep.",notes:"Alignment: Lawful Neutral. Base: Waterdeep. Goals: Protect Waterdeep from supernatural threats. Methods: Elite operatives, dungeon delving."},
+ {id:"fc_force_grey",title:"Force Grey",category:"Faction",phb:true,tags:"faction,lawful good,PHB",desc:"Elite subset of Gray Hands handling the most dangerous Waterdeep threats.",notes:"Alignment: Lawful Good. Base: Waterdeep. Leader: Vajra Safahr (Blackstaff). Methods: Elite adventurers, powerful magic. Reactivated for major threats."},
+ {id:"fc_tce_cobalt",title:"The Cobalt Soul",category:"Faction",phb:false,tags:"faction,lawful neutral,TCE",desc:"A monastic order dedicated to collecting and sharing all knowledge.",notes:"Alignment: Lawful Neutral. Source: Critical Role/TCE. Base: Libraries across Exandria. Methods: Monks, scholars, intelligence networks. Subclass: Way of the Cobalt Soul."},
+ {id:"fc_tce_myriad",title:"The Myriad",category:"Faction",phb:false,tags:"faction,neutral evil,TCE",desc:"A powerful criminal syndicate with fingers in trade and black markets.",notes:"Alignment: Neutral Evil. Source: Wildemount/TCE. Base: Othe. Goals: Control criminal enterprise. Methods: Smuggling, extortion, blackmail."},
+ {id:"fc_tce_dwendalian",title:"Dwendalian Empire",category:"Faction",phb:false,tags:"faction,lawful neutral,TCE",desc:"The dominant human nation in Wildemount.",notes:"Alignment: Lawful Neutral. Source: Explorer's Guide to Wildemount. Capital: Rexxentrum. Military: Righteous Brand. Secret ops: Volstrucker. Magic regulated by the Cerberus Assembly."},
+ {id:"fc_tce_kryn",title:"Kryn Dynasty",category:"Faction",phb:false,tags:"faction,lawful neutral,TCE",desc:"A nation of drow in eastern Wildemount following the deity Luxon.",notes:"Alignment: Lawful Neutral. Source: Wildemount. Capital: Rosohna. Leader: Bright Queen Leylas Kryn. Military: Aurora Watch. Special: Dunamancy magic."},
+ {id:"fc_tce_mourners",title:"Mourners of Midnight",category:"Faction",phb:false,tags:"faction,neutral,TCE",desc:"Devoted to the Raven Queen, studying death and preserving memory.",notes:"Alignment: True Neutral. Source: TCE/Exandria. Goals: Honor the dead, prevent unnatural undeath. Oppose liches and necromancers."},
+ {id:"fc_tce_sunrise",title:"The Second Sunrise",category:"Faction",phb:false,tags:"faction,neutral good,TCE",desc:"A fact dedicated to hope and healing from magical disasters.",notes:"Alignment: Neutral Good. Source: TCE. Goals: Bring healing to those affected by magical disasters. Example fact type for new campaigns."},
+
+ {id:"wp_club",title:"Club",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A heavy piece of wood.",notes:"Simple Melee. Dmg: 1d4 bludg. Cost: 1 sp. Properties: Light."},
+ {id:"wp_greatclub",title:"Greatclub",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A large heavy club.",notes:"Simple Melee. Dmg: 1d8 bludg. Cost: 2 sp. Properties: Two-handed."},
+ {id:"wp_javelin",title:"Javelin",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A light spear for throwing.",notes:"Simple Melee. Dmg: 1d6 pierc. Cost: 5 sp. Properties: Thrown (30/120)."},
+ {id:"wp_light_hammer",title:"Light Hammer",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A small throwable hammer.",notes:"Simple Melee. Dmg: 1d4 bludg. Cost: 2 gp. Properties: Light, Thrown (20/60)."},
+ {id:"wp_sickle",title:"Sickle",category:"Weapon",phb:true,tags:"simple,melee,PHB",desc:"A short curved blade.",notes:"Simple Melee. Dmg: 1d4 slash. Cost: 1 gp. Properties: Light."},
+ {id:"wp_dart",title:"Dart",category:"Weapon",phb:true,tags:"simple,ranged,finesse,PHB",desc:"A small thrown projectile.",notes:"Simple Ranged. Dmg: 1d4 pierc. Cost: 5 cp. Properties: Finesse, Thrown (20/60)."},
+ {id:"wp_sling",title:"Sling",category:"Weapon",phb:true,tags:"simple,ranged,PHB",desc:"A leather pouch and cord.",notes:"Simple Ranged. Dmg: 1d4 bludg. Cost: 1 sp. Properties: Ammunition (30/120)."},
+ {id:"wp_flail",title:"Flail",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A handle attached to a ball by chain.",notes:"Martial Melee. Dmg: 1d8 bludg. Cost: 10 gp."},
+ {id:"wp_lance",title:"Lance",category:"Weapon",phb:true,tags:"martial,melee,reach,PHB",desc:"A long weapon for mounted combat.",notes:"Martial Melee. Dmg: 1d12 pierc. Cost: 10 gp. Properties: Reach, Special (disadv within 5ft, one-handed when mounted)."},
+ {id:"wp_maul",title:"Maul",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A massive two-handed hammer.",notes:"Martial Melee. Dmg: 2d6 bludg. Cost: 10 gp. Properties: Heavy, Two-handed."},
+ {id:"wp_morningstar",title:"Morningstar",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A spiked mace.",notes:"Martial Melee. Dmg: 1d8 pierc. Cost: 15 gp."},
+ {id:"wp_net",title:"Net",category:"Weapon",phb:true,tags:"martial,ranged,PHB",desc:"A weighted net to restrain enemies.",notes:"Martial Ranged. Dmg: None. Cost: 1 gp. Properties: Special (restrain Large/smaller, STR DC 10 escape), Thrown (5/15)."},
+ {id:"wp_pike",title:"Pike",category:"Weapon",phb:true,tags:"martial,melee,reach,PHB",desc:"A very long thrusting spear.",notes:"Martial Melee. Dmg: 1d10 pierc. Cost: 5 gp. Properties: Heavy, Reach, Two-handed."},
+ {id:"wp_scimitar",title:"Scimitar",category:"Weapon",phb:true,tags:"martial,melee,finesse,PHB",desc:"A curved single-edge sword.",notes:"Martial Melee. Dmg: 1d6 slash. Cost: 25 gp. Properties: Finesse, Light."},
+ {id:"wp_trident",title:"Trident",category:"Weapon",phb:true,tags:"martial,melee,versatile,PHB",desc:"A three-pronged spear.",notes:"Martial Melee. Dmg: 1d6/1d8 pierc. Cost: 5 gp. Properties: Thrown (20/60), Versatile."},
+ {id:"wp_war_pick",title:"War Pick",category:"Weapon",phb:true,tags:"martial,melee,PHB",desc:"A pick with a heavy head.",notes:"Martial Melee. Dmg: 1d8 pierc. Cost: 5 gp."},
+ {id:"wp_whip",title:"Whip",category:"Weapon",phb:true,tags:"martial,melee,finesse,PHB",desc:"A long flexible lash.",notes:"Martial Melee. Dmg: 1d4 slash. Cost: 2 gp. Properties: Finesse, Reach."},
+ {id:"wp_blowgun",title:"Blowgun",category:"Weapon",phb:true,tags:"martial,ranged,PHB",desc:"A tube propelling darts by breath.",notes:"Martial Ranged. Dmg: 1 pierc. Cost: 10 gp. Properties: Ammunition (25/100), Loading."},
+ {id:"wp_unarmed",title:"Unarmed Strike",category:"Weapon",phb:true,tags:"unarmed,PHB",desc:"A punch, kick, or headbutt.",notes:"Unarmed. Dmg: 1+STR bludg. Note: Monk uses Martial Arts die. Can't use Two-Weapon Fighting without a feature granting d4+ unarmed."},
+ {id:"wp_frostbrand",title:"Frost Brand *",category:"Weapon",phb:false,tags:"magic,sword,cold,DMG",desc:"+1d6 cold damage. Fire resist while held.",notes:"Rarity: Very Rare. Attune: Yes. Extinguishes nonmagical flames in 30ft each turn."},
+ {id:"wp_tce_staff_power",title:"Staff of Power",category:"Wand & Rod",phb:false,tags:"magic,staff,TCE",desc:"+2 quarterstaff. 20 charges for various spells.",notes:"Rarity: Very Rare (TCE). Attune: sorcerer/warlock/wizard. +2 atk/dmg, +2 spell atk/save DC. Retributive Strike: destroy for 16d6 force dmg."},
+
+ {id:"tl_brewer",title:"Brewer's Supplies",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Large jug, hops, siphon, small barrel.",notes:"Cost: 20 gp. Weight: 9 lbs. Brew ales and spirits, identify beverages and potions."},
+ {id:"tl_calligrapher",title:"Calligrapher's Supplies",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Ink, parchment, quills.",notes:"Cost: 10 gp. Weight: 5 lbs. Identify magical writing, create forgeries."},
+ {id:"tl_carpenter",title:"Carpenter's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Saw, hammer, nails, handplane, chisel.",notes:"Cost: 8 gp. Weight: 6 lbs. Craft/repair wooden objects, assess structural integrity."},
+ {id:"tl_cartographer",title:"Cartographer's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Quill, ink, parchment, compasses, calipers.",notes:"Cost: 15 gp. Weight: 6 lbs. Read maps, determine location, craft accurate maps."},
+ {id:"tl_cobbler",title:"Cobbler's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Hammer, awl, knife, thread, leather scraps.",notes:"Cost: 5 gp. Weight: 5 lbs. Craft/repairftwear, assess tracks."},
+ {id:"tl_glassblower",title:"Glassblower's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Blowpipe, yoke, clapper, tweezers.",notes:"Cost: 30 gp. Weight: 5 lbs. Craft glass objects, assess glass items."},
+ {id:"tl_jeweler",title:"Jeweler's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Small saw, hammer, mallet, file, magnifying glass.",notes:"Cost: 25 gp. Weight: 2 lbs. Identify gems and jewelry, craft/assess jewelry."},
+ {id:"tl_leatherworker",title:"Leatherworker's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Knife, mallet, awl, thread, leather scraps.",notes:"Cost: 5 gp. Weight: 5 lbs. Craft leather items, assess hides and tracks."},
+ {id:"tl_mason",title:"Mason's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Trowel, hammer, chisel, brushes, square.",notes:"Cost: 10 gp. Weight: 8 lbs. Craft stone objects, assess architecture."},
+ {id:"tl_painter",title:"Painter's Supplies",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Easel, canvas, paints, brushes, charcoal.",notes:"Cost: 10 gp. Weight: 5 lbs. Paint, assess art, create forgeries."},
+ {id:"tl_potter",title:"Potter's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Needles, ribs, scrapers, shaping tools.",notes:"Cost: 10 gp. Weight: 3 lbs. Craft and assess pottery."},
+ {id:"tl_weaver",title:"Weaver's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Thread, needles, small loom.",notes:"Cost: 1 gp. Weight: 5 lbs. Craft cloth items, assess fabrics."},
+ {id:"tl_woodcarver",title:"Woodcarver's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Knife, gouge, small saw.",notes:"Cost: 1 gp. Weight: 5 lbs. Craft wooden objects, craft ammunition."},
+ {id:"tl_bagpipes",title:"Bagpipes",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A wind instrument with bag and pipes.",notes:"Cost: 30 gp. Weight: 6 lbs. Bardic instrument."},
+ {id:"tl_dulcimer",title:"Dulcimer",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"Stringed instrument played with small hammers.",notes:"Cost: 25 gp. Weight: 10 lbs."},
+ {id:"tl_horn",title:"Horn",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A wind instrument from animal horn or metal.",notes:"Cost: 3 gp. Weight: 2 lbs. Signal others, intimidate."},
+ {id:"tl_lyre",title:"Lyre",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A small stringed instrument.",notes:"Cost: 30 gp. Weight: 2 lbs."},
+ {id:"tl_panflute",title:"Pan Flute",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"Graduated pipes of graduated length.",notes:"Cost: 12 gp. Weight: 2 lbs. Charm animals, nature traditions."},
+ {id:"tl_shawm",title:"Shawm",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A loud double-reed woodwind.",notes:"Cost: 2 gp. Weight: 1 lb."},
+ {id:"tl_viol",title:"Viol",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A bowed stringed instrument.",notes:"Cost: 30 gp. Weight: 1 lb."},
+ {id:"tl_dragonchess",title:"Dragonchess Set",category:"Tools & Kits",phb:true,tags:"gaming,tool,PHB",desc:"A three-tiered chess variant popular among nobility.",notes:"Cost: 1 gp. Weight: 0.5 lbs. Gaming set prof."},
+ {id:"tl_3dragon",title:"Three-Dragon Ante Set",category:"Tools & Kits",phb:true,tags:"gaming,tool,PHB",desc:"A popular gambling card game.",notes:"Cost: 1 gp. Gaming set prof."},
+
+ {id:"eq_barrel",title:"Barrel",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A large wooden barrel.",notes:"Cost: 2 gp. Weight: 70 lbs. Capacity: 40 gallons liquid / 4 cu ft solid."},
+ {id:"eq_basket",title:"Basket",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A woven wicker basket.",notes:"Cost: 4 sp. Weight: 2 lbs. Capacity: 2 cu ft / 40 lbs."},
+ {id:"eq_bottle",title:"Bottle, Glass",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A glass bottle.",notes:"Cost: 2 gp. Capacity: 1.5 pints."},
+ {id:"eq_bucket",title:"Bucket",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A wooden or metal bucket.",notes:"Cost: 5 cp. Weight: 2 lbs. Capacity: 3 gallons."},
+ {id:"eq_caltrops",title:"Caltrops (bag of 20)",category:"Equipment",phb:true,tags:"trap,gear,PHB",desc:"Metal spikes scattered to cover a 5-ft square.",notes:"Cost: 1 gp. Weight: 2 lbs. DEX DC 15 or stop + 1 pierc + speed -10 until healed."},
+ {id:"eq_candle",title:"Candle",category:"Equipment",phb:true,tags:"light,gear,PHB",desc:"A wax candle.",notes:"Cost: 1 cp. Light: bright 5ft, dim 5ft. Duration: 1 hour."},
+ {id:"eq_chain",title:"Chain (10 ft)",category:"Equipment",phb:true,tags:"binding,gear,PHB",desc:"10ft of iron chain.",notes:"Cost: 5 gp. Weight: 10 lbs. STR DC 20 to break."},
+ {id:"eq_chalk",title:"Chalk (1 piece)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A piece of chalk.",notes:"Cost: 1 cp."},
+ {id:"eq_chest",title:"Chest",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A wooden chest with lock.",notes:"Cost: 5 gp. Weight: 25 lbs. Capacity: 12 cu ft / 300 lbs."},
+ {id:"eq_climbers_kit",title:"Climber's Kit",category:"Equipment",phb:true,tags:"climbing,gear,PHB",desc:"Pitons, boot tips, gloves, harness.",notes:"Cost: 25 gp. Weight: 12 lbs. Anchor yourself; can't fall more than 25ft while climbing."},
+ {id:"eq_flask",title:"Flask or Tankard",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A glass or metal container.",notes:"Cost: 2 cp. Weight: 1 lb. Capacity: 1 pint."},
+ {id:"eq_hammer",title:"Hammer",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A multipurpose hammer.",notes:"Cost: 1 gp. Weight: 3 lbs. Drive pitons."},
+ {id:"eq_hammer_sledge",title:"Hammer, Sledge",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A large two-handed hammer.",notes:"Cost: 2 gp. Weight: 10 lbs. Break through doors and walls."},
+ {id:"eq_ink",title:"Ink (1 oz bottle)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A small bottle of writing ink.",notes:"Cost: 10 gp."},
+ {id:"eq_jug",title:"Jug or Pitcher",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A ceramic container.",notes:"Cost: 2 cp. Weight: 4 lbs. Capacity: 1 gallon."},
+ {id:"eq_ladder",title:"Ladder (10 ft)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A 10-ft wooden ladder.",notes:"Cost: 1 sp. Weight: 25 lbs."},
+ {id:"eq_lamp",title:"Lamp",category:"Equipment",phb:true,tags:"light,gear,PHB",desc:"A hooded oil lamp.",notes:"Cost: 5 sp. Weight: 1 lb. Light: bright 15ft, dim 30ft. Duration: 6h/pint oil."},
+ {id:"eq_lock",title:"Lock",category:"Equipment",phb:true,tags:"security,gear,PHB",desc:"A padlock with a key.",notes:"Cost: 10 gp. Weight: 1 lb. Picking DC: 15 (good quality: DC 20)."},
+ {id:"eq_magnify_glass",title:"Magnifying Glass",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A lens for examining objects.",notes:"Cost: 100 gp. Adv on appraise checks. Start fire in 1 min in bright sunlight."},
+ {id:"eq_mess_kit",title:"Mess Kit",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"Tin box with cup, utensils, pan.",notes:"Cost: 2 sp. Weight: 1 lb."},
+ {id:"eq_oil",title:"Oil (flask)",category:"Equipment",phb:true,tags:"light,utility,PHB",desc:"A flask of lamp oil.",notes:"Cost: 1 sp. Weight: 1 lb. Fuel lamp 6h. Throw 20ft: 1d4 fire 2 rounds on hit (DEX DC 10 to avoid)."},
+ {id:"eq_parchment",title:"Parchment (1 sheet)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A sheet of parchment.",notes:"Cost: 1 sp."},
+ {id:"eq_piton",title:"Piton",category:"Equipment",phb:true,tags:"climbing,gear,PHB",desc:"A metal spike for anchoring rope.",notes:"Cost: 5 cp. Weight: 0.25 lbs."},
+ {id:"eq_pole",title:"Pole (10 ft)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A 10-foot wooden pole.",notes:"Cost: 5 cp. Weight: 7 lbs. Probe traps, prop doors."},
+ {id:"eq_pot",title:"Pot, Iron",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A large iron cooking pot.",notes:"Cost: 2 gp. Weight: 10 lbs. Capacity: 1 gallon."},
+ {id:"eq_pouch",title:"Pouch",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A small leather belt pouch.",notes:"Cost: 5 sp. Weight: 1 lb. Capacity: 0.2 cu ft / 6 lbs."},
+ {id:"eq_quiver",title:"Quiver",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A container for arrows.",notes:"Cost: 1 gp. Weight: 1 lb. Capacity: 20 arrows."},
+ {id:"eq_ram",title:"Ram, Portable",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A log for breaking down doors.",notes:"Cost: 4 gp. Weight: 35 lbs. +4 STR to break doors. Two people: adv."},
+ {id:"eq_sack",title:"Sack",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A cloth bag.",notes:"Cost: 1 cp. Weight: 0.5 lbs. Capacity: 1 cu ft / 30 lbs."},
+ {id:"eq_scale",title:"Scale, Merchant's",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A balance scale with weights.",notes:"Cost: 5 gp. Weight: 3 lbs."},
+ {id:"eq_sealing_wax",title:"Sealing Wax",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"Wax for sealing documents.",notes:"Cost: 5 sp."},
+ {id:"eq_shovel",title:"Shovel",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A digging tool.",notes:"Cost: 2 gp. Weight: 5 lbs."},
+ {id:"eq_signal_whistle",title:"Signal Whistle",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A small metal whistle.",notes:"Cost: 5 cp."},
+ {id:"eq_signet_ring",title:"Signet Ring",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A ring with a personal seal.",notes:"Cost: 5 gp. Press into wax to create official seal."},
+ {id:"eq_spike_iron",title:"Spikes, Iron (10)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"Ten iron spikes.",notes:"Cost: 1 gp. Weight: 5 lbs. Wedge doors, secure ropes."},
+ {id:"eq_tent",title:"Tent, Two-Person",category:"Equipment",phb:true,tags:"shelter,gear,PHB",desc:"A portable canvas shelter.",notes:"Cost: 2 gp. Weight: 20 lbs."},
+ {id:"eq_vial",title:"Vial",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A small glass bottle.",notes:"Cost: 1 gp. Capacity: 4 oz."},
+ {id:"eq_whetstone",title:"Whetstone",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A flat stone for sharpening blades.",notes:"Cost: 1 cp. Weight: 1 lb."},
+ {id:"eq_tce_burglar",title:"* Burglar's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for dungeon delving and infiltration.",notes:"Cost: 16 gp. Contents: Backpack, 1000 ball bearings, string 10ft, bell, 5 candles, crowbar, hammer, 10 pitons, hooded lantern, 2 oil flasks, 5 rations, tinderbox, waterskin."},
+ {id:"eq_tce_diplomat",title:"* Diplomat's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for diplomats and social adventurers.",notes:"Cost: 39 gp. Contents: Chest, 2 scroll cases, fine clothes, ink, pen, lamp, 2 oil flasks, 5 paper sheets, perfume vial, sealing wax, soap."},
+ {id:"eq_tce_entertainer",title:"* Entertainer's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for bards and entertainers.",notes:"Cost: 40 gp. Contents: Backpack, bedroll, 2 costumes, 5 candles, 5 rations, waterskin, disguise kit."},
+
+ {id:"jw_ring_jumping",title:"Ring of Jumping",category:"Jewelry",phb:false,tags:"ring,movement,DMG",desc:"BA: cast Jump on yourself at will.",notes:"Rarity: Uncommon. Attune: Yes."},
+ {id:"jw_ring_swimming",title:"Ring of Swimming",category:"Jewelry",phb:false,tags:"ring,movement,DMG",desc:"Swim speed of 40 ft.",notes:"Rarity: Uncommon. No attune."},
+ {id:"jw_ring_water_walk",title:"Ring of Water Walking",category:"Jewelry",phb:false,tags:"ring,movement,DMG",desc:"Walk on any liquid surface as solid ground.",notes:"Rarity: Uncommon. No attune."},
+ {id:"jw_ring_xray",title:"Ring of X-ray Vision",category:"Jewelry",phb:false,tags:"ring,divination,DMG",desc:"Act: see through solid matter 30ft. CON DC 15 per minute or gain exhaustion.",notes:"Rarity: Rare. Attune: Yes."},
+ {id:"jw_ring_animal_influence",title:"Ring of Animal Influence",category:"Jewelry",phb:false,tags:"ring,beast,DMG",desc:"3 charges. Regains 1d3 at dawn. Spells (DC 13): Animal Friendship (1 charge), Fear on beasts only (1 charge), Speak with Animals (1 charge).",notes:"Rarity: Rare. Attune: No. DMG p.189."},
+ {id:"jw_ring_elemental_command",title:"Ring of Elemental Command",category:"Jewelry",phb:false,tags:"ring,elemental,DMG",desc:"While attuned, you gain resistance to the associated element, can communicate with elementals of that type, and have advantage on saves against their spells. 5 charges, regains 1d4+1 at dawn. Spells and abilities vary by element type (Air, Earth, Fire, Water).",notes:"Rarity: Legendary. Attune: Yes. Four variants: Air, Earth, Fire, Water. Each grants resistance, spells, and special abilities tied to that element. DMG p.190."},
+ {id:"jw_ring_shooting_stars",title:"Ring of Shooting Stars",category:"Jewelry",phb:false,tags:"ring,lightning,DMG",desc:"6 charges. Regains 1d6 at dawn. Faerie Fire (2 charges, DC 15). Ball Lightning: up to 4 balls of lightning (2 charges each, 20ft radius, 2d8 lightning on entry DC 15 DEX). Shooting Stars: 1-3 stars (1 charge each, +7 ranged spell attack, 4d6 radiant on hit or 2d6 in 5ft radius).",notes:"Rarity: Very Rare. Attune: Yes (outdoors at night). DMG p.192."},
+ {id:"jw_ring_spell_turning",title:"Ring of Spell Turning",category:"Jewelry",phb:false,tags:"ring,defense,DMG",desc:"Advantage on saves against spells that target only you (not an area). If you roll 20 on the save and the spell is 7th level or lower, the spell has no effect and targets the caster instead.",notes:"Rarity: Legendary. Attune: Yes. DMG p.193."},
+ {id:"jw_ring_the_ram",title:"Ring of the Ram",category:"Jewelry",phb:false,tags:"ring,force,DMG",desc:"3 charges. Regains 1d3 at dawn. Action: expend 1-3 charges. Ranged spell attack (+7) within 60ft. Hit: 2d10 force per charge (push 5ft per charge on failed DC 17 STR).",notes:"Rarity: Rare. Attune: Yes. DMG p.193."},
+ {id:"jw_ring_djinni",title:"Ring of Djinni Summoning",category:"Jewelry",phb:false,tags:"ring,summon,DMG",desc:"1/day: summon a djinni for 1 hour.",notes:"Rarity: Legendary. Attune: Yes."},
+ {id:"jw_tce_amulet_vital",title:"Amulet of Vitality",category:"Jewelry",phb:false,tags:"amulet,wondrous,DMG",desc:"Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher.",notes:"Rarity: Rare. Attune: Yes. DMG p.150."},
+
+ {id:"mi_necklace_adapt",title:"Necklace of Adaptation",category:"Jewelry",phb:false,tags:"wondrous,utility,DMG",desc:"Breathe in any environment. Adv on inhaled hazard saves.",notes:"Rarity: Uncommon. Attune: Yes. (Also in Jewelry)"},
+ {id:"mi_circlet_blasting",title:"Circlet of Blasting",category:"Jewelry",phb:false,tags:"wondrous,DMG",desc:"1/day: cast Scorching Ray (atk bonus +5).",notes:"Rarity: Uncommon. No attune. Recharge: dawn."},
+ {id:"mi_portable_hole",title:"Portable Hole",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Unfold to create 6-ft deep extradimensional hole. 10-ft diameter opening.",notes:"Rarity: Rare. No attune. Capacity: 282 cu ft. Placing inside Bag of Holding: 50% chance sucked to Astral Plane."},
+ {id:"mi_rope_entangle",title:"Rope of Entanglement",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Command to entangle one creature within 20ft. STR/DEX DC 15 to escape.",notes:"Rarity: Rare. No attune. Restrained while entangled."},
+ {id:"mi_sending_stones",title:"Sending Stones",category:"Magic Item",phb:false,tags:"wondrous,communication,DMG",desc:"Pair of stones. Touch one to cast Sending to the other holder. 1/day each.",notes:"Rarity: Uncommon. No attune."},
+ {id:"mi_tce_prosthetic",title:"Prosthetic Limb",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Magical prosthetic that functions as a natural limb.",notes:"Rarity: Common (TCE). No attune. Can hold items, wield weapons. Artificer infusion can enhance."},
+ {id:"mi_tce_alchemy_jug",title:"Alchemy Jug",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"Produces specific liquids daily: acid, beer, honey, oil, water, wine, etc.",notes:"Rarity: Uncommon (TCE). No attune. Amounts vary by liquid type."},
+
+ {id:"tl_thieves",title:"Thieves' Tools",category:"Tools & Kits",phb:true,tags:"tool,rogue,PHB",desc:"Lock picks, mirror, scissors, pliers, small file.",notes:"Cost: 25 gp. Weight: 1 lb. Required to pick locks (DEX) and disarm traps."},
+ {id:"tl_herbalism",title:"Herbalism Kit",category:"Tools & Kits",phb:true,tags:"tool,medicine,PHB",desc:"Clippers, mortar/pestle, pouches, vials.",notes:"Cost: 5 gp. Weight: 3 lbs. Identify plants, craft antitoxin and healing potions."},
+ {id:"tl_healer",title:"Healer's Kit",category:"Tools & Kits",phb:true,tags:"tool,medicine,PHB",desc:"Bandages, salves, splints. 10 uses.",notes:"Cost: 5 gp. Weight: 3 lbs. Stabilize creature without Medicine check (act)."},
+ {id:"tl_poisoner",title:"Poisoner's Kit",category:"Tools & Kits",phb:true,tags:"tool,poison,PHB",desc:"Vials, chemicals, equipment for crafting poisons.",notes:"Cost: 50 gp. Weight: 2 lbs. Craft and identify poisons."},
+ {id:"tl_disguise",title:"Disguise Kit",category:"Tools & Kits",phb:true,tags:"tool,deception,PHB",desc:"Cosmetics, hair dye, small props.",notes:"Cost: 25 gp. Weight: 3 lbs. Create or see through disguises."},
+ {id:"tl_forgery",title:"Forgery Kit",category:"Tools & Kits",phb:true,tags:"tool,deception,PHB",desc:"Papers, pens, inks, seals, wax, gold/silver leaf.",notes:"Cost: 15 gp. Weight: 5 lbs. Create or detect forgeries."},
+ {id:"tl_navigator",title:"Navigator's Tools",category:"Tools & Kits",phb:true,tags:"tool,navigation,PHB",desc:"Sextant, compass, calipers, ruler, parchment, ink.",notes:"Cost: 25 gp. Weight: 2 lbs. Navigate by stars or maps."},
+ {id:"tl_smith",title:"Smith's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Hammers, tongs, charcoal, rags, polishing stone.",notes:"Cost: 20 gp. Weight: 8 lbs. Craft and repair metal objects."},
+ {id:"tl_alchemist",title:"Alchemist's Supplies",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Beakers, frame, stirring rod, mortar/pestle, ingredients.",notes:"Cost: 50 gp. Weight: 8 lbs. Craft alchemical items, identify potions."},
+ {id:"tl_tinker",title:"Tinker's Tools",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Metals, glass, small tools, canvas roll.",notes:"Cost: 50 gp. Weight: 10 lbs. Gnome racial prof. Craft small mechanical/magical devices."},
+ {id:"tl_cook",title:"Cook's Utensils",category:"Tools & Kits",phb:true,tags:"artisan,tool,PHB",desc:"Metal pot, knives, ladle, tinder, spit, molds.",notes:"Cost: 1 gp. Weight: 8 lbs. Prepare meals, identify food/poison."},
+ {id:"tl_lute",title:"Lute",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A plucked stringed instrument.",notes:"Cost: 35 gp. Weight: 2 lbs. Bardic instrument."},
+ {id:"tl_flute",title:"Flute",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A woodwind instrument.",notes:"Cost: 2 gp. Weight: 1 lb."},
+ {id:"tl_drum",title:"Drum",category:"Tools & Kits",phb:true,tags:"instrument,tool,PHB",desc:"A percussion instrument.",notes:"Cost: 6 gp. Weight: 3 lbs."},
+ {id:"tl_dice",title:"Dice Set",category:"Tools & Kits",phb:true,tags:"gaming,tool,PHB",desc:"A set of polyhedral dice.",notes:"Cost: 1 sp. Gaming set prof."},
+ {id:"tl_cards",title:"Playing Card Set",category:"Tools & Kits",phb:true,tags:"gaming,tool,PHB",desc:"A standard card deck.",notes:"Cost: 5 sp. Gaming set prof."},
+ {id:"tl_vehicles_land",title:"Vehicles (Land)",category:"Tools & Kits",phb:true,tags:"tool,vehicle,PHB",desc:"Prof with land vehicles: carts, wagons, chariots, coaches.",notes:"Controls in difficult situations, repairs."},
+ {id:"tl_vehicles_water",title:"Vehicles (Water)",category:"Tools & Kits",phb:true,tags:"tool,vehicle,PHB",desc:"Prof with watercraft.",notes:"Navigate, handle sails, repairs."},
+ {id:"dt_tempus",title:"Tempus",category:"Deity",phb:true,tags:"deity,neutral,war,PHB",desc:"The Lord of Battles, god of war.",notes:"Alignment: True Neutral. Domain: War. Symbol: Upright flaming sword. Worshippers: Warriors, soldiers, mercenaries."},
+ {id:"dt_mystra",title:"Mystra",category:"Deity",phb:true,tags:"deity,neutral good,knowledge,PHB",desc:"The Lady of Mysteries, goddess of magic.",notes:"Alignment: Neutral Good. Domain: Arcana, Knowledge. Symbol: Circle of seven stars. Worshippers: Wizards, sorcerers, all who use magic."},
+ {id:"dt_selune",title:"Selune",category:"Deity",phb:true,tags:"deity,chaotic good,knowledge,PHB",desc:"Our Lady of Silver, goddess of the moon.",notes:"Alignment: Chaotic Good. Domain: Knowledge, Life. Symbol: Pair of eyes with seven stars. Worshippers: Navigators, lycanthropes (good), night travelers."},
+ {id:"dt_shar",title:"Shar",category:"Deity",phb:true,tags:"deity,neutral evil,trickery,PHB",desc:"The Mistress of the Night, goddess of darkness.",notes:"Alignment: Neutral Evil. Domain: Death, Trickery. Symbol: Black disk with purple border. Worshippers: Nihilists, shadow magic users."},
+ {id:"dt_tyr",title:"Tyr",category:"Deity",phb:true,tags:"deity,lawful good,war,PHB",desc:"The Even-Handed, god of justice.",notes:"Alignment: Lawful Good. Domain: War. Symbol: Balanced scales on a warhammer. Worshippers: Judges, paladins, those who seek justice."},
+ {id:"dt_torm",title:"Torm",category:"Deity",phb:true,tags:"deity,lawful good,war,PHB",desc:"The True, god of courage and self-sacrifice.",notes:"Alignment: Lawful Good. Domain: War. Symbol: White right gauntlet. Worshippers: Paladins, soldiers of good causes."},
+ {id:"dt_lathander",title:"Lathander",category:"Deity",phb:true,tags:"deity,neutral good,life,PHB",desc:"The Morninglord, god of the dawn.",notes:"Alignment: Neutral Good. Domain: Life, Light. Symbol: Road into sunrise. Worshippers: Artists, merchants, the young."},
+ {id:"dt_chauntea",title:"Chauntea",category:"Deity",phb:true,tags:"deity,neutral good,life,PHB",desc:"The Great Mother, goddess of agriculture.",notes:"Alignment: Neutral Good. Domain: Life. Symbol: Sheaf of grain. Worshippers: Farmers, peasants."},
+ {id:"dt_kelemvor",title:"Kelemvor",category:"Deity",phb:true,tags:"deity,lawful neutral,death,PHB",desc:"The Lord of the Dead.",notes:"Alignment: Lawful Neutral. Domain: Death. Symbol: Skeletal arm with scales. Worshippers: Gravediggers, morticians."},
+ {id:"dt_silvanus",title:"Silvanus",category:"Deity",phb:true,tags:"deity,neutral,nature,PHB",desc:"The Oak Father, god of wild nature.",notes:"Alignment: True Neutral. Domain: Nature. Symbol: Leafy oak face. Worshippers: Druids, rangers."},
+ {id:"dt_mielikki",title:"Mielikki",category:"Deity",phb:true,tags:"deity,neutral good,nature,PHB",desc:"Our Lady of the Forest, goddess of forests.",notes:"Alignment: Neutral Good. Domain: Nature. Symbol: Unicorn head. Worshippers: Rangers, druids, forest protectors."},
+ {id:"dt_oghma",title:"Oghma",category:"Deity",phb:true,tags:"deity,neutral,knowledge,PHB",desc:"The Binder, god of knowledge.",notes:"Alignment: True Neutral. Domain: Knowledge. Symbol: Blank scroll. Worshippers: Bards, scholars, sages."},
+ {id:"dt_bane",title:"Bane",category:"Deity",phb:true,tags:"deity,lawful evil,war,PHB",desc:"The Black Hand, god of tyranny.",notes:"Alignment: Lawful Evil. Domain: War. Symbol: Black right hand. Worshippers: Tyrants, conquerors."},
+ {id:"dt_bhaal",title:"Bhaal",category:"Deity",phb:true,tags:"deity,neutral evil,death,PHB",desc:"The Lord of Murder.",notes:"Alignment: Neutral Evil. Domain: Death. Symbol: Skull with blood droplets. Worshippers: Assassins, murderers."},
+ {id:"dt_talos",title:"Talos",category:"Deity",phb:true,tags:"deity,chaotic evil,tempest,PHB",desc:"The Storm Lord, god of storms.",notes:"Alignment: Chaotic Evil. Domain: Tempest. Symbol: Three lightning bolts. Worshippers: Those who revel in destruction."},
+ {id:"dt_umberlee",title:"Umberlee",category:"Deity",phb:true,tags:"deity,chaotic evil,tempest,PHB",desc:"The Bitch Queen, goddess of the sea.",notes:"Alignment: Chaotic Evil. Domain: Tempest. Symbol: Wave. Worshippers: Sailors (fearful), pirates."},
+ {id:"dt_moradin",title:"Moradin",category:"Deity",phb:true,tags:"deity,lawful good,dwarf,PHB",desc:"The All-Father, deity of dwarves.",notes:"Alignment: Lawful Good. Domain: Forge, Knowledge, War. Symbol: Hammer and anvil. Worshippers: Dwarves, smiths."},
+ {id:"dt_corellon",title:"Corellon Larethian",category:"Deity",phb:true,tags:"deity,chaotic good,elf,PHB",desc:"Deity of elves, magic, and arts.",notes:"Alignment: Chaotic Good. Domain: Arcana, Light. Symbol: Crescent moon. Worshippers: Elves, half-elves, artisans."},
+ {id:"dt_tymora",title:"Tymora",category:"Deity",phb:true,tags:"deity,chaotic good,trickery,PHB",desc:"Lady Luck, goddess of good fortune.",notes:"Alignment: Chaotic Good. Domain: Trickery. Symbol: Face-up coin. Worshippers: Adventurers, gamblers."},
+ {id:"dt_mask",title:"Mask",category:"Deity",phb:true,tags:"deity,chaotic neutral,trickery,PHB",desc:"The Lord of Shadows, god of thieves.",notes:"Alignment: Chaotic Neutral. Domain: Trickery. Symbol: Black mask. Worshippers: Thieves, rogues."},
+ {id:"dt_bahamut",title:"Bahamut",category:"Deity",phb:true,tags:"deity,lawful good,dragon,PHB",desc:"The Platinum Dragon, deity of good dragons.",notes:"Alignment: Lawful Good. Domain: Life, War. Symbol: Dragon head. Worshippers: Good dragonborn, metallic dragons, paladins."},
+ {id:"dt_tiamat",title:"Tiamat",category:"Deity",phb:true,tags:"deity,lawful evil,dragon,PHB",desc:"The Dragon Queen, deity of evil dragons.",notes:"Alignment: Lawful Evil. Domain: Trickery, War. Symbol: Five-headed dragon. Worshippers: Evil dragonborn, chromatic dragons."},
+ {id:"dt_lolth",title:"Lolth",category:"Deity",phb:true,tags:"deity,chaotic evil,drow,PHB",desc:"The Spider Queen, deity of drow.",notes:"Alignment: Chaotic Evil. Domain: Trickery. Symbol: Spider. Worshippers: Drow."},
+ {id:"dt_pelor",title:"Pelor",category:"Deity",phb:false,tags:"deity,neutral good,life,TCE",desc:"The Dawn Father, god of the sun and agriculture.",notes:"Alignment: Neutral Good. Domain: Life, Light. Symbol: Sunburst. Note: Wildemount. Worshippers: Clerics, farmers, healers."},
+ {id:"dt_raven",title:"The Raven Queen",category:"Deity",phb:false,tags:"deity,lawful neutral,death,TCE",desc:"Goddess of death, fate, and winter.",notes:"Alignment: Lawful Neutral. Domain: Death, Life. Symbol: Raven over cracked moon. Note: Wildemount/Exandria."},
+ {id:"fc_harpers",title:"The Harpers",category:"Faction",phb:true,tags:"faction,neutral good,PHB",desc:"A network of spellcasters and spies who advocate equality and oppose abuse of power.",notes:"Alignment: Neutral Good. Goals: Preserve history, promote equality, prevent tyrants. Methods: Covert intelligence, support of common folk. Ranks: Watcher, Harpshadow, Brightcandle, Wise Owl, High Harper."},
+ {id:"fc_zhentarim",title:"The Zhentarim",category:"Faction",phb:true,tags:"faction,neutral evil,PHB",desc:"An ambitious mercenary organization seeking to expand wealth and influence.",notes:"Alignment: Neutral Evil. Goals: Dominate trade, accumulate power. Methods: Mercenaries, assassins, blackmail. Ranks: Fang, Wolf, Viper, Ardragon, Doom."},
+ {id:"fc_lords_alliance",title:"The Lord's Alliance",category:"Faction",phb:true,tags:"faction,lawful neutral,PHB",desc:"A coalition of city rulers working to ensure safety and prosperity of the North.",notes:"Alignment: Lawful Neutral. Goals: Protect member cities, defend against threats. Methods: Diplomacy, military cooperation. Ranks: Cloak, Redknife, Stingblade, Sword, Lioncrown."},
+ {id:"fc_emerald_enclave",title:"The Emerald Enclave",category:"Faction",phb:true,tags:"faction,neutral,PHB",desc:"Wilderness survivalists who preserve the natural order.",notes:"Alignment: True Neutral. Goals: Maintain nature's balance, destroy unnatural threats. Ranks: Springwarden, Summerstrider, Autumnreaver, Winterstalker, Master of the Wild."},
+ {id:"fc_order_gauntlet",title:"The Order of the Gauntlet",category:"Faction",phb:true,tags:"faction,lawful good,PHB",desc:"A military order that seeks to protect others from evil.",notes:"Alignment: Lawful Good. Goals: Seek and destroy evil, protect innocent. Ranks: Chevall, Marcheon, Whitehawk, Vindicator, Righteous Hand."},
+ {id:"fc_red_wizards",title:"Red Wizards of Thay",category:"Faction",phb:true,tags:"faction,lawful evil,PHB",desc:"Powerful mages from Thay seeking to dominate Faerun through magic.",notes:"Alignment: Lawful Evil. Base: Thay. Leader: Szass Tam (lich). Methods: Magic items trade, necromancy, undead armies."},
+ {id:"fc_cult_dragon",title:"Cult of the Dragon",category:"Faction",phb:true,tags:"faction,neutral evil,PHB",desc:"A cult venerating dragons, historically seeking to create dracoliches.",notes:"Alignment: Neutral Evil. Goals: Create dragon paradise, summon Tiamat. Ranks: Dragonclaw, Dragonfang, Wearer of Purple, Wyrmspeaker."},
+ {id:"fc_flaming_fist",title:"The Flaming Fist",category:"Faction",phb:true,tags:"faction,lawful neutral,PHB",desc:"The mercenary militia serving as army and police of Baldur's Gate.",notes:"Alignment: Lawful Neutral. Base: Baldur's Gate. Leader: Grand Duke Ulder Ravengard. Ranks: Foot, Private, Corporal, Sergeant, Marshal, Blaze, Flame."},
+
+ {id:"cl_mystic",title:"Mystic",category:"Class",phb:false,tags:"psionics,mystic,UA", desc:"A master of psionic power who turns their mind inward, mastering the full potential of their psyche.", notes:"Source: UA (Playtest). Hit Die: d8. Primary: INT. Saves: INT, WIS. Armor: Light. Weapons: Simple. Skills: 2 from Arcana/History/Insight/Medicine/Nature/Perception/Religion. Psi Points: 4 at 1st to 71 at 18th. Psi Limit: 2 at 1st, 7 at 7th+. Features: Psionics, Mystic Order, Mystical Recovery, Telepathy, STR of Mind, Potent Psionics (1d8/2d8), Consumptive Power, Psionic Mastery, Psionic Body (20th)."},
+ {id:"pd_crown_despair",title:"Crown of Despair",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Harvest seeds of despair in a creature's psyche.", notes:"Avatar. Focus: Adv Intimidation. Options: Crowned in Sorrow (1-7p: 1d8/p psychic+no rxns), Call to Inact (2p conc10m: incapacitate after 1..."},
+ {id:"pd_crown_disgust",title:"Crown of Disgust",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Flood a creature with emotions of disgust.", notes:"Avatar. Focus: 5ft difficult terrain for enemies. Options: Eye of Horror (1-7p: 1d6/p+can't approach), Wall of Repulsion (3p conc10m: WIS ..."},
+ {id:"pd_crown_rage",title:"Crown of Rage",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Place pure fury in a creature's mind.", notes:"Avatar. Focus: Enemies within 5ft disadv atk vs others. Options: Primal Fury (1-7p: 1d6/p+charge enemy CHA save), Fighting Words (2p conc1..."},
+ {id:"pd_mantle_command",title:"Mantle of Command",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Exert an aura of authority, enhancing ally coordination.", notes:"Avatar. Focus: Rxn to move ally half speed when you don't move. Options: Coordinated Move (2p: 5 allies move half speed), Commander's Sigh..."},
+ {id:"pd_mantle_courage",title:"Mantle of Courage",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Radiate confidence, granting allies adv vs fear.", notes:"Avatar. Focus: Adv vs frightened within 10ft. Options: Incite Courage (2p: remove frightened from 6 creatures), Aura of Victory (1-7p conc..."},
+ {id:"pd_mantle_fear",title:"Mantle of Fear",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Radiate terror to your enemies.", notes:"Avatar. Focus: Adv Intimidation. Options: Incite Fear (2p conc1m: frighten 1 WIS save), Unsettling Aura (3p conc1h: extra move cost toward..."},
+ {id:"pd_mantle_fury",title:"Mantle of Fury",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Unleash primal fury, catching allies in bloodthirst.", notes:"Avatar. Focus: +5ft speed to you+nearby allies each turn. Options: Incite Fury (2p conc1m: 3 allies +d4 melee dmg), Mindless Charge (2p: 3..."},
+ {id:"pd_mantle_joy",title:"Mantle of Joy",category:"Spell",phb:false,tags:"psionic,avatar,mystic,UA", desc:"Radiate joy, bringing hope and comfort to creatures around you.", notes:"Avatar. Focus: Adv Persuasion. Options: Soothing Presence (1-7p: 3 temp HP/p to 3 creatures), Comforting Aura (2p conc1m: d4 on saves for ..."},
+ {id:"pd_mantle_awe",title:"Mantle of Awe",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Manipulate others with psionic charm.", notes:"Awakened. Focus: +half INT mod to CHA checks. Options: Charming Presence (1-7p: 2d8/p HP of creatures charmed 10min), Center of Attention ..."},
+ {id:"pd_aura_sight",title:"Aura Sight",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"See the energy surrounding all creatures.", notes:"Awakened. Focus: Adv Insight. Options: Assess Foe (2p: learn HP+resists), Read Moods (2p: one-word emotion of 6 creatures), View Aura (3p ..."},
+ {id:"pd_intellect_fortress",title:"Intellect Fortress",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Forge a wall of psionic energy around your mind.", notes:"Awakened. Focus: Psychic resist. Options: Psychic Backlash (2p: disadv on atk vs you+2d10 psychic if hits), Psychic Parry (1-7p: +1/p to I..."},
+ {id:"pd_precognition",title:"Precognition",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Weave a string of probabilities for extraordinary insights.", notes:"Awakened. Focus: Adv initiative. Options: Precognitive Hunch (2p conc1m: d4 to all atk/save/check), All-Around Sight (3p: rxn impose disad..."},
+ {id:"pd_psychic_assault",title:"Psychic Assault",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Wield your mind like a weapon, unleashing psionic energy.", notes:"Awakened. Focus: +2 dmg to talents dealing psychic. Options: Psionic Blast (1-7p: 1d8/p psychic 60ft), Ego Whip (3p: 3d8 psychic INT save+..."},
+ {id:"pd_psychic_disruption",title:"Psychic Disruption",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Create psychic static that disrupts clear thinking.", notes:"Awakened. Focus: Adv Deception. Options: Distracting Haze (1-7p conc1m: 1d10/p+vision 10ft INT save), Daze (3p: incapacitate til end of ne..."},
+ {id:"pd_psychic_inquisition",title:"Psychic Inquisition",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Reach into a creature's mind to uncover information.", notes:"Awakened. Focus: Know when telepathic contact is lying. Options: Hammer of Inquisition (1-7p: 1d10/p+disadv next WIS save INT save), Force..."},
+ {id:"pd_psychic_phantoms",title:"Psychic Phantoms",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Cause a creature to perceive false things.", notes:"Awakened. Focus: Adv Deception. Options: Distracting Figment (1-7p: 1d10/p+no rxns+adv melee vs it), Phantom Foe (3p conc1m: adjacent horr..."},
+ {id:"pd_telepathic_contact",title:"Telepathic Contact",category:"Spell",phb:false,tags:"psionic,awakened,mystic,UA", desc:"Control other creatures by substituting your will.", notes:"Awakened. Focus: Telepathy with 6 creatures at once. Options: Exacting Query (2p: truthful answer INT save), Occluded Mind (2p: believe 10..."},
+ {id:"pd_adaptive_body",title:"Adaptive Body",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Alter your body to withstand punishing environments.", notes:"Immortal. Focus: No need to eat/breathe/sleep; light activity = LR. Options: Environmental Adaptation (2p: ignore extreme heat/cold 1h), A..."},
+ {id:"pd_bestial_form",title:"Bestial Form",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Transform your body, gaining traits of different beasts.", notes:"Immortal. Focus: Adv Animal Handling. Bestial Claws (1-7p: 1d10/p slash melee). Bestial Transformation (BA, 1h): Amphibious (2p), Climbing..."},
+ {id:"pd_brute_force",title:"Brute Force",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Augment strength with psionic energy for incredible feats.", notes:"Immortal. Focus: Adv Athletics. Options: Brute Strike (1-7p: +1d6/p dmg on next melee hit), Knock Back (1-7p: STR save or push 10ft/p+1d6/..."},
+ {id:"pd_celerity",title:"Celerity",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Channel psionic power to hone reflexes and agility.", notes:"Immortal. Focus: +10ft speed. Options: Rapid Step (1-7p: +10ft/p speed til end of turn), Agile Defense (2p: Dodge as BA), Blur of Motion (..."},
+ {id:"pd_corrosive_metabolism",title:"Corrosive Metabolism",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Deliver acid or poison attacks through body control.", notes:"Immortal. Focus: Resist acid and poison. Options: Corrosive Touch (1-7p: 1d10/p acid DEX save), Venom Strike (1-7p: 1d6/p poison+poisoned ..."},
+ {id:"pd_diminution",title:"Diminution",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Reduce your size drastically without surrendering might.", notes:"Immortal. Focus: Adv Stealth. Options: Miniature Form (2p conc10m: Tiny++5 Stealth+fit 6in gaps), Toppling Shift (2p: STR save or prone), ..."},
+ {id:"pd_giant_growth",title:"Giant Growth",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Infuse yourself with psionic energy to grow tremendously.", notes:"Immortal. Focus: Reach +5ft. Options: Ogre Form (2p conc1m: 10 temp HP+Large+1d4 bludg+reach+5ft), Giant Form (7p conc1m: 30 temp HP+Huge+..."},
+ {id:"pd_iron_durability",title:"Iron Durability",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Transform your body into living metal.", notes:"Immortal. Focus: +1 AC. Options: Iron Hide (1-7p: rxn +1 AC/p vs triggering atk), Steel Hide (2p: resist B/P/S til end of next turn BA), I..."},
+ {id:"pd_psionic_restoration",title:"Psionic Restoration",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Wield psionic energy to cure wounds and restore health.", notes:"Immortal. Focus: BA to stabilize creature at 0 HP. Options: Mend Wounds (1-7p: 1d8 HP/p on touch), Restore Health (3p: remove blinded/deaf..."},
+ {id:"pd_psionic_weapon",title:"Psionic Weapon",category:"Spell",phb:false,tags:"psionic,immortal,mystic,UA", desc:"Channel psionic energy into attacks, converting damage to psychic.", notes:"Immortal. Focus: Chosen weapon deals psychic+magical. Options: Ethereal Weapon (1p: next atk ignores AC, DEX save for half), Lethal Strike..."},
+ {id:"pd_nomadic_arrow",title:"Nomadic Arrow",category:"Spell",phb:false,tags:"psionic,nomad,mystic,UA", desc:"Imbue a ranged weapon with sentience to find its mark.", notes:"Nomad. Focus: Ignore disadv on ranged atk (no adv either). Options: Speed Dart (1-7p: +1d10/p psychic on next ranged hit BA), Seeking Miss..."},
+ {id:"pd_nomadic_chameleon",title:"Nomadic Chameleon",category:"Spell",phb:false,tags:"psionic,nomad,mystic,UA", desc:"Create a screen of psychic power to blend in or turn invisible.", notes:"Nomad. Focus: Adv Stealth. Options: Chameleon (2p: attempt hide without meeting requirements), Step from Sight (3p conc1m: invisible+1 ext..."},
+ {id:"pd_nomadic_mind",title:"Nomadic Mind",category:"Spell",phb:false,tags:"psionic,nomad,mystic,UA", desc:"Dispatch part of your psyche into the noosphere.", notes:"Nomad. Focus: Choose skill/tool prof or read/write language while focused. Options: Wandering Mind (2-6p conc10m: gain 1 skill/2p for 1h),..."},
+ {id:"pd_nomadic_step",title:"Nomadic Step",category:"Spell",phb:false,tags:"psionic,nomad,mystic,UA", desc:"Twist intraplanar pathways for instantaneous travel.", notes:"Nomad. Focus: +10ft speed after teleporting. Options: Step of Dozen Paces (1-7p: teleport 20ft/p BA), Nomadic Anchor (1p: create teleport ..."},
+ {id:"pd_third_eye",title:"Third Eye",category:"Spell",phb:false,tags:"psionic,nomad,mystic,UA", desc:"Create a third psychic eye channeling knowledge to you.", notes:"Nomad. Focus: Darkvision 60ft (or +10ft). Options: Tremorsense (2p conc1m: tremorsense 30ft), Unwavering Eye (2p: adv WIS checks 1min), Pi..."},
+ {id:"pd_mastery_air",title:"Mastery of Air",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Become one with the power of elemental air.", notes:"Wu Jen. Focus: No fall dmg, ignore difficult terrain. Options: Wind Step (1-7p: fly 20ft/p), Wind Stream (1-7p: 30ft line 1d8/p bludg+pron..."},
+ {id:"pd_mastery_fire",title:"Mastery of Fire",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Align your mind with elemental fire.", notes:"Wu Jen. Focus: Fire resist++2 fire dmg rolls. Options: Combustion (1-7p conc1m: 1d10/p fire+1d6/turn CON save), Rolling Flame (3p conc1m: ..."},
+ {id:"pd_mastery_force",title:"Mastery of Force",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Transform potential energy into actual force.", notes:"Wu Jen. Focus: Adv STR checks. Options: Push (1-7p: 1d8/p force+push 5ft/p STR save), Move (2-7p: telekinetically move up to 1000 lbs), In..."},
+ {id:"pd_mastery_ice",title:"Mastery of Ice",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Master the power of ice.", notes:"Wu Jen. Focus: Cold resist. Options: Ice Spike (1-7p: 1d8/p cold+halve speed DEX save), Ice Sheet (2p: 20ft radius icy terrain 10min), Fro..."},
+ {id:"pd_mastery_light",title:"Mastery of Light and Darkness",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Claim dominion over light and darkness.", notes:"Wu Jen. Focus: Darkness within 30ft has no effect on your vision. Options: Darkness (1-7p: 10ft radius/p magical darkness), Light (2p conc..."},
+ {id:"pd_mastery_water",title:"Mastery of Water",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Become one with elemental water.", notes:"Wu Jen. Focus: Swim speed=walk+breathe underwater. Options: Desiccate (1-7p: 1d10/p necrotic CON save), Watery Grasp (2p: wave 2d6+prone+p..."},
+ {id:"pd_mastery_weather",title:"Mastery of Weather",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Reshape storms to serve your needs.", notes:"Wu Jen. Focus: Lightning+thunder resist. Options: Cloud Steps (1-7p conc10m: cloud staircase 20ft/p), Hungry Lightning (1-7p: 1d8/p lightn..."},
+ {id:"pd_mastery_wood",title:"Mastery of Wood and Earth",category:"Spell",phb:false,tags:"psionic,wujen,mystic,UA", desc:"Attune your mind to seize control of wood and earth.", notes:"Wu Jen. Focus: +1 AC. Options: Animate Weapon (1-7p: one-handed weapon atk+1d10/p force), Warp Weapon (2p: weapon unusable STR save), Warp..."},
+ {id:"pt_energy_beam",title:"Energy Beam (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Target one creature within 90ft: DEX save or 1d8 energy damage (acid/cold/fire/lightning/thunder).", notes:"Talent (no psi cost). Scales: 2d8 at 5th, 3d8 at 11th, 4d8 at 17th."},
+ {id:"pt_mind_thrust",title:"Mind Thrust (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Target one creature within 120ft: INT save or 1d10 psychic damage.", notes:"Talent (no psi cost). Scales: 2d10 at 5th, 3d10 at 11th, 4d10 at 17th."},
+ {id:"pt_mind_slam",title:"Mind Slam (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Target within 60ft: CON save or 1d6 force damage + knocked prone if Large or smaller.", notes:"Talent (no psi cost). Scales: 2d6 at 5th, 3d6 at 11th, 4d6 at 17th."},
+ {id:"pt_mystic_hand",title:"Mystic Hand (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Telekinetically move objects up to 10 lbs within 30ft.", notes:"Talent (no psi cost). Similar to Mage Hand. Object falls at end of turn if suspended."},
+ {id:"pt_psychic_hammer",title:"Psychic Hammer (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Target within 120ft: STR save or 1d6 force. Move up to 10ft on failed save.", notes:"Talent (no psi cost). Scales: 2d6/5th, 3d6/11th, 4d6/17th. Can't lift target off ground."},
+ {id:"pt_beacon",title:"Beacon (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"BA: emit bright light 20ft radius + dim 20ft for 1 hour. Extinguish as BA.", notes:"Talent (no psi cost)."},
+ {id:"pt_blade_meld",title:"Blade Meld (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"BA: a one-handed melee weapon melds with your hand for 1 minute. Can't be dropped or disarmed.", notes:"Talent (no psi cost)."},
+ {id:"pt_blind_spot",title:"Blind Spot (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Act: erase your image from one creature's mind within 120ft. WIS save or invisible to it til end of next turn.", notes:"Talent (no psi cost)."},
+ {id:"pt_delusion",title:"Delusion (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Act: plant a false sound or image in one creature's mind within 60ft. Only that creature perceives it.", notes:"Talent (no psi cost). Sound lasts 1min. Image: 5ft cube, can't move, disappears if touched."},
+ {id:"pt_light_step",title:"Light Step (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"BA: alter density. Until end of turn: +10ft speed + standing from prone costs no move.", notes:"Talent (no psi cost)."},
+ {id:"pt_mind_meld",title:"Mind Meld (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"BA: telepathically communicate with one willing creature within 120ft until end of turn. Access one of their chosen memories.", notes:"Talent (no psi cost). Target must have INT 2+."},
+ {id:"pt_mystic_charm",title:"Mystic Charm (Talent)",category:"Spell",phb:false,tags:"psionic,talent,mystic,UA", desc:"Act: one humanoid within 120ft. CHA save or charmed til end of next turn.", notes:"Talent (no psi cost)."},
+ {id:"cp_cat",title:"Cat",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small domesticated feline.",notes:"Type: Familiar. Size: Tiny. AC: 12. HP: 2. Speed: 40ft/climb 30ft. STR 3 DEX 15 CON 10 INT 3 WIS 12 CHA 7. Skills: Perception+3, Stealth+4. Traits: Keen Smell. Acts: Claws (1 slash)."},
+ {id:"cp_owl",title:"Owl",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A silent nocturnal bird of prey.",notes:"Type: Familiar. Size: Tiny. AC: 11. HP: 1. Speed: 5ft/fly 60ft. STR 3 DEX 13 CON 8 INT 2 WIS 12 CHA 7. Skills: Perception+3, Stealth+3. Traits: Flyby (no OA), Keen Hearing+Sight, Darkvision 120ft. Acts: Talons (1 slash)."},
+ {id:"cp_raven",title:"Raven",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"An intelligent corvid able to mimic speech.",notes:"Type: Familiar. Size: Tiny. AC: 12. HP: 1. Speed: 10ft/fly 50ft. STR 2 DEX 14 CON 8 INT 2 WIS 12 CHA 6. Skills: Perception+3. Traits: Mimicry (DC 10 Insight to detect). Acts: Beak (1 pierc)."},
+ {id:"cp_hawk",title:"Hawk",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A keen-eyed bird of prey.",notes:"Type: Familiar. Size: Tiny. AC: 13. HP: 1. Speed: 10ft/fly 60ft. STR 5 DEX 16 CON 8 INT 2 WIS 14 CHA 6. Skills: Perception+4. Traits: Keen Sight (adv Perception sight). Acts: Talons (1 slash)."},
+ {id:"cp_rat",title:"Rat",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small rodent, excellent at hiding.",notes:"Type: Familiar. Size: Tiny. AC: 10. HP: 1. Speed: 20ft. STR 2 DEX 11 CON 9 INT 2 WIS 10 CHA 4. Traits: Keen Smell. Acts: Bite (1 pierc)."},
+ {id:"cp_spider",title:"Spider",category:"Companion",phb:true,tags:"familiar,tiny,PHB",desc:"A small arachnid that climbs walls.",notes:"Type: Familiar. Size: Tiny. AC: 12. HP: 1. Speed: 20ft/climb 20ft. STR 2 DEX 14 CON 8 INT 1 WIS 10 CHA 2. Skills: Stealth+4. Traits: Spider Climb, Web Sense. Acts: Bite (1 pierc + CON DC 9 or 1d4 poison)."},
+ {id:"cp_imp",title:"Imp",category:"Companion",phb:true,tags:"familiar,tiny,fiend,PHB",desc:"A small fiend available to warlocks (Pact of the Chain).",notes:"Type: Familiar (Pact of the Chain). Size: Tiny. AC: 13. HP: 10. Speed: 20ft/fly 40ft. Immunities: Fire, Poison. Traits: Devil's Sight, Magic Resist, Shapechanger. Acts: Sting (1d4+3 + CON DC 11 or 3d6 poison)."},
+ {id:"cp_pseudodragon",title:"Pseudodragon",category:"Companion",phb:true,tags:"familiar,tiny,dragon,PHB",desc:"A miniature dragon-like familiar beloved by wizards.",notes:"Type: Familiar (special). Size: Tiny. AC: 13. HP: 7. Speed: 15ft/fly 60ft. Skills: Perception+3, Stealth+4. Traits: Keen Senses, Magic Resist, Limited Telepathy 100ft. Acts: Bite (1d4+2), Sting (1d4+2 + CON DC 11 or poisoned/unconscious)."},
+ {id:"cp_quasit",title:"Quasit",category:"Companion",phb:true,tags:"familiar,tiny,fiend,PHB",desc:"A small chaos demon (Pact of the Chain).",notes:"Type: Familiar (Pact of the Chain). Size: Tiny. AC: 13. HP: 7. Speed: 40ft. Traits: Magic Resist, Shapechanger. Acts: Claws (1d4+3 + CON DC 10 or poisoned 1 min)."},
+ {id:"cp_ranger_beast",title:"Ranger's Beast Companion",category:"Companion",phb:true,tags:"companion,ranger,PHB",desc:"A bonded beast companion for Beast Master rangers.",notes:"Type: Ranger Companion (Beast Master). Size: Medium or smaller. CR scales with ranger level (1/4 at 3rd, 1/2 at 5th, 1 at 7th). Uses ranger's PB for attacks and damage."},
+ {id:"cp_paladin_steed",title:"Paladin's Steed",category:"Companion",phb:true,tags:"companion,paladin,PHB",desc:"A magical mount from the Find Steed spell.",notes:"Type: Paladin Mount (Find Steed spell). Forms: Warhorse, pony, camel, elk, mastiff. Telepathic link within 1 mile. Shares spells cast on self."},
+ {id:"cp_tce_steel_defender",title:"Steel Defender",category:"Companion",phb:false,tags:"companion,artificer,TCE",desc:"A mechanical guardian created by a Battle Smith artificer.",notes:"Type: Artificer Companion (Battle Smith, TCE). AC: 15. HP: 2+5x(level). Speed: 40ft. Immunities: Poison, psychic. Acts: Force Rend (1d8+PB force), Deflect Attack (rxn: impose disadv on atk). Repair: 2d8+PB HP (3/day)."},
+ {id:"cp_tce_primal_beast",title:"Primal Beast (Revised Beast Master)",category:"Companion",phb:false,tags:"companion,ranger,TCE",desc:"Enhanced companion for revised Beast Master rangers.",notes:"Type: Ranger Companion (TCE). Variants: Beast of the Land (30ft+60ft darkvision), Beast of the Sea (swim 60ft, blindsight 60ft), Beast of the Sky (fly 60ft). HP: 5+5xlevel. AC: 13+DEX. Uses BA to attack."},
+ {id:"cp_tce_wildfire",title:"Wildfire Spirit",category:"Companion",phb:false,tags:"companion,druid,TCE",desc:"A fiery spirit summoned by Circle of Wildfire druids.",notes:"Type: Druid Companion (Circle of Wildfire, TCE). AC: 13. HP: 5+5xlevel. Speed: 30ft/fly 30ft. Immune: Fire. Acts: Flame Seed (1d6+WIS fire 60ft), Fiery Teleportation (30ft teleport + 1d6+WIS fire AoE)."},
+ {id:"eq_backpack",title:"Backpack",category:"Equipment",phb:true,tags:"container,gear,PHB",desc:"A leather pack with shoulder straps.",notes:"Cost: 2 gp. Weight: 5 lbs. Capacity: 1 cubicft / 30 lbs."},
+ {id:"eq_bedroll",title:"Bedroll",category:"Equipment",phb:true,tags:"rest,gear,PHB",desc:"A portable sleeping mat.",notes:"Cost: 1 gp. Weight: 7 lbs."},
+ {id:"eq_rope_hemp",title:"Rope, Hemp (50 ft)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"50ft of hemp rope.",notes:"Cost: 1 gp. Weight: 10 lbs. STR DC 17 to break."},
+ {id:"eq_rope_silk",title:"Rope, Silk (50 ft)",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"50ft of lightweight silk rope.",notes:"Cost: 10 gp. Weight: 5 lbs. STR DC 17 to break. Adv on DEX checks to tie knots."},
+ {id:"eq_torch",title:"Torch",category:"Equipment",phb:true,tags:"light,gear,PHB",desc:"A wooden stick with combustible tip.",notes:"Cost: 1 cp. Weight: 1 lb. Light: bright 20ft, dim 20ft. Duration: 1 hour. Combat: 1d4 fire."},
+ {id:"eq_lantern_bull",title:"Lantern, Bullseye",category:"Equipment",phb:true,tags:"light,gear,PHB",desc:"A lantern with a focused beam.",notes:"Cost: 10 gp. Weight: 2 lbs. Light: bright 60ft cone, dim 60ft. Duration: 6 hours/pint."},
+ {id:"eq_lantern_hood",title:"Lantern, Hooded",category:"Equipment",phb:true,tags:"light,gear,PHB",desc:"A lantern with a dimmable hood.",notes:"Cost: 5 gp. Weight: 2 lbs. Light: bright 30ft, dim 30ft. Hooded: dim 5ft."},
+ {id:"eq_tinderbox",title:"Tinderbox",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"Flint, steel, and tinder for starting fires.",notes:"Cost: 5 sp. Weight: 1 lb. Start fire in 1 act (1 min in bad conditions)."},
+ {id:"eq_rations",title:"Rations (1 day)",category:"Equipment",phb:true,tags:"survival,gear,PHB",desc:"Trail mix, jerky, and dried food.",notes:"Cost: 5 sp. Weight: 2 lbs."},
+ {id:"eq_waterskin",title:"Waterskin",category:"Equipment",phb:true,tags:"survival,gear,PHB",desc:"A leather pouch for water.",notes:"Cost: 2 sp. Weight: 5 lbs (full). Capacity: 4 pints."},
+ {id:"eq_crowbar",title:"Crowbar",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A steel pry bar.",notes:"Cost: 2 gp. Weight: 5 lbs. Adv on STR checks where leverage helps."},
+ {id:"eq_grappling_hook",title:"Grappling Hook",category:"Equipment",phb:true,tags:"climbing,gear,PHB",desc:"A metal hook for climbing.",notes:"Cost: 2 gp. Weight: 4 lbs."},
+ {id:"eq_holy_water",title:"Holy Water (flask)",category:"Equipment",phb:true,tags:"utility,combat,PHB",desc:"Blessed water that harms undead and fiends.",notes:"Cost: 25 gp. Weight: 1 lb. Throw (20/60ft): 2d6 radiant to undead or fiends on hit."},
+ {id:"eq_hunting_trap",title:"Hunting Trap",category:"Equipment",phb:true,tags:"trap,gear,PHB",desc:"A serrated metal trap.",notes:"Cost: 5 gp. Weight: 25 lbs. Set as act. Creature stepping on it: DEX DC 13 or restrained. STR DC 13 to escape. 1d4 pierc."},
+ {id:"eq_component_pouch",title:"Component Pouch",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"Pouch containing material spell components without a cost.",notes:"Cost: 25 gp. Weight: 2 lbs. Spellcasting focus (no costly components)."},
+ {id:"eq_holy_symbol_amulet",title:"Holy Symbol - Amulet",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A divine focus worn around the neck, used by Clerics and Paladins.",notes:"Cost: 5 gp. Weight: 1 lb. Worn around the neck. Can be used as a spellcasting focus."},
+ {id:"eq_holy_symbol_emblem",title:"Holy Symbol - Emblem",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A divine symbol emblazoned on a shield or worn as a badge, used by Clerics and Paladins.",notes:"Cost: 5 gp. Weight: — . Emblazoned on a shield or worn as a badge. Can be used as a spellcasting focus."},
+ {id:"eq_holy_symbol_reliquary",title:"Holy Symbol - Reliquary",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A small container holding sacred relics, used by Clerics and Paladins.",notes:"Cost: 5 gp. Weight: 2 lbs. Small box or locket containing sacred relics. Can be used as a spellcasting focus."},
+ {id:"eq_spyglass",title:"Spyglass",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A collapsible telescope.",notes:"Cost: 1000 gp. Weight: 1 lb. Objects up to 2 miles appear magnified x2."},
+ {id:"eq_manacles",title:"Manacles",category:"Equipment",phb:true,tags:"binding,gear,PHB",desc:"Iron shackles for a Medium or smaller creature.",notes:"Cost: 2 gp. Weight: 6 lbs. DEX DC 20 (Thieves' Tools) or STR DC 20 to escape/break."},
+ {id:"eq_mirror",title:"Mirror, Steel",category:"Equipment",phb:true,tags:"utility,gear,PHB",desc:"A small polished steel mirror.",notes:"Cost: 5 gp. Weight: 0.5 lbs. See around corners, signal, detect invisible."},
+ {id:"eq_tce_explorer",title:"* Explorer's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Standard wilderness exploration pack.",notes:"Cost: 10 gp. Weight: 59 lbs. Contents: Backpack, bedroll, mess kit, tinderbox, 10 torches, 10 days rations, waterskin, 50ft hemp rope."},
+ {id:"eq_tce_dungeoneer",title:"* Dungeoneer's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for dungeon crawling.",notes:"Cost: 12 gp. Weight: 61.5 lbs. Contents: Backpack, crowbar, hammer, 10 pitons, 10 torches, tinderbox, 10 days rations, waterskin, 50ft hemp rope."},
+ {id:"eq_tce_scholar",title:"* Scholar's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for scholars and wizards.",notes:"Cost: 40 gp. Weight: 10 lbs. Contents: Backpack, book of lore, ink bottle, ink pen, 10 sheets parchment, sand bag, small knife."},
+ {id:"eq_tce_priest",title:"* Priest's Pack",category:"Equipment",phb:true,tags:"gear,pack,PHB",desc:"Pack for clerics.",notes:"Cost: 19 gp. Weight: 24 lbs. Contents: Backpack, blanket, 10 candles, tinderbox, alms box, 2 incense blocks, censer, vestments, 2 days rations, waterskin."},
+ // ── Spell Components ─────────────────────────────────────────────────────
+ {id:"cp_diamond_50",title:"Diamond (50 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 50 gp.",notes:"Cost: 50 gp. Consumed: No. Used for: Chromatic Orb."},
+ {id:"cp_pearl_100",title:"Pearl (100 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A pearl worth at least 100 gp.",notes:"Cost: 100 gp. Consumed: No. Used for: Identify (ritual)."},
+ {id:"cp_incense_herbs",title:"Charcoal, Incense & Herbs",category:"Component",phb:true,tags:"component,PHB",desc:"Charcoal, incense, and herbs for conjuration.",notes:"Cost: 10 gp. Consumed: Yes. Used for: Find Familiar (ritual)."},
+ {id:"cp_lead_ink",title:"Lead-Based Ink",category:"Component",phb:true,tags:"component,PHB",desc:"Ink infused with lead for illusion writing.",notes:"Cost: 10 gp. Consumed: Yes. Used for: Illusory Script (ritual)."},
+ {id:"cp_gold_dust_25",title:"Gold Dust (25 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"Fine gold dust.",notes:"Cost: 25 gp. Consumed: Yes. Used for: Arcane Lock."},
+ {id:"cp_augury_tokens",title:"Divination Tokens (25 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"Sticks, bones, or similar divination tokens.",notes:"Cost: 25 gp. Consumed: No. Used for: Augury (ritual)."},
+ {id:"cp_ruby_50",title:"Ruby (50 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A ruby worth at least 50 gp.",notes:"Cost: 50 gp. Consumed: Yes. Used for: Continual Flame."},
+ {id:"cp_jade_dust",title:"Jade Dust (10 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"Powdered jade.",notes:"Cost: 10 gp. Consumed: Yes. Used for: Magic Mouth."},
+ {id:"cp_platinum_rings",title:"Platinum Rings (pair, 50 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"A pair of platinum rings worth 50 gp total.",notes:"Cost: 50 gp. Consumed: No (must be worn). Used for: Warding Bond."},
+ {id:"cp_glass_eye",title:"Glass Eye or Jeweled Horn (100 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"A glass eye (seeing) or a jeweled horn (hearing).",notes:"Cost: 100 gp. Consumed: No. Used for: Clairvoyance."},
+ {id:"cp_diamond_300",title:"Diamond (300 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 300 gp.",notes:"Cost: 300 gp. Consumed: Yes. Used for: Revivify."},
+ {id:"cp_diamond_500",title:"Diamond (500 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 500 gp.",notes:"Cost: 500 gp. Consumed: Yes. Used for: Raise Dead."},
+ {id:"cp_diamond_dust",title:"Diamond Dust",category:"Component",phb:false,tags:"component,gem,DMG",desc:"Powdered diamond used as a material spell component.",notes:"Cost: 100 gp per pinch. Consumed: Yes. Used for: Greater Restoration (100 gp), Stoneskin (100 gp). DMG p.20."},
+ {id:"cp_diamond_1000",title:"Diamond (1,000 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 1,000 gp.",notes:"Cost: 1000 gp. Consumed: Yes. Used for: Greater Restoration (diamond dust)."},
+ {id:"cp_ruby_dust",title:"Ruby Dust (1,500 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"Fine ruby dust worth 1,500 gp.",notes:"Cost: 1500 gp. Consumed: No. Used for: Forcecage."},
+ {id:"cp_diamond_5000",title:"Diamond (5,000 gp)",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 5,000 gp.",notes:"Cost: 5000 gp. Consumed: Yes. Used for: True Resurrection."},
+ {id:"cp_gate_diamond",title:"Diamond (5,000 gp) — Gate",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 5,000 gp.",notes:"Cost: 5000 gp. Consumed: No. Used for: Gate."},
+ {id:"cp_holy_water_vial",title:"Holy Water & Silver (25 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"Holy water and silver.",notes:"Cost: 25 gp. Consumed: Yes. Used for: Protection from Evil and Good (vial)."},
+ {id:"cp_stoneskin_diamond",title:"Diamond Dust (100 gp) — Stoneskin",category:"Component",phb:true,tags:"component,gem,PHB",desc:"Diamond dust worth 100 gp.",notes:"Cost: 100 gp. Consumed: Yes. Used for: Stoneskin."},
+ {id:"cp_resurrection_diamond",title:"Diamond (1,000 gp) — Resurrection",category:"Component",phb:true,tags:"component,gem,PHB",desc:"A diamond worth at least 1,000 gp.",notes:"Cost: 1000 gp. Consumed: Yes. Used for: Resurrection."},
+ {id:"cp_mordenkainen_sword",title:"Miniature Platinum Sword (250 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"A miniature platinum sword with a grip and pommel of copper and zinc.",notes:"Cost: 250 gp. Consumed: No. Used for: Mordenkainen's Sword."},
+ {id:"cp_imprisonment",title:"Component per HD (500 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"Special component worth 500 gp per Hit Die of the target.",notes:"Cost: 500 gp per HD. Consumed: Yes. Used for: Imprisonment."},
+ {id:"cp_holy_aura",title:"Tiny Reliquary (1,000 gp)",category:"Component",phb:true,tags:"component,PHB",desc:"A tiny reliquary worth at least 1,000 gp.",notes:"Cost: 1000 gp. Consumed: No. Used for: Holy Aura."},
+ {id:"cp_find_path_divination",title:"Divination Tools (100 gp) — Find the Path",category:"Component",phb:true,tags:"component,PHB",desc:"A set of divinatory tools—bones, ivory sticks, cards, teeth, etc.—worth 100 gp.",notes:"Cost: 100 gp. Consumed: No. Used for: Find the Path."},
+ {id:"cp_tce_shadow_blade",title:"Mirrored Glass",category:"Component",phb:false,tags:"component,TCE",desc:"A piece of mirrored glass.",notes:"Cost: Negligible. Consumed: No. Used for: Shadow Blade (TCE)."},
+ {id:"cp_tce_synaptic_static",title:"Egg or Nut Shell",category:"Component",phb:false,tags:"component,TCE",desc:"An egg or nutshell.",notes:"Cost: Negligible. Consumed: No. Used for: Synaptic Static (TCE)."},
+ {id:"cp_tce_skull",title:"Humanoid Skull",category:"Component",phb:false,tags:"component,TCE",desc:"A humanoid skull.",notes:"Cost: Variable. Consumed: No. Used for: Skull Ward, Spirit Shroud (TCE)."},
+ {id:"cp_component_pouch",title:"Component Pouch",category:"Component",phb:true,tags:"component,gear,PHB",desc:"A pouch for storing common spell components.",notes:"Cost: 25 gp. Weight: 2 lbs. Replaces material components that have no cost and aren't consumed."},
+ {id:"cp_arcane_focus",title:"Arcane Focus",category:"Component",phb:true,tags:"component,gear,PHB",desc:"A special item designed to channel arcane magic.",notes:"Types: Crystal (10 gp), Orb (20 gp), Rod (10 gp), Staff (5 gp), Wand (10 gp). Replaces non-costly, non-consumed material components."},
+ {id:"cp_holy_symbol",title:"Holy Symbol",category:"Component",phb:true,tags:"component,gear,PHB",desc:"A focus for divine casters.",notes:"Types: Amulet (5 gp), Emblem (5 gp), Reliquary (5 gp). Used by Clerics and Paladins."},
+ {id:"cp_druidic_focus",title:"Druidic Focus",category:"Component",phb:true,tags:"component,gear,PHB",desc:"A nature-based focus for druids.",notes:"Types: Sprig of mistletoe (1 gp), totem (1 gp), wooden staff (5 gp), yew wand (10 gp)."},
+ {id:"ft_dragonborn_breath",title:"Breath Weapon (Subrace)",category:"Feature",phb:true,tags:"dragonborn,breath,PHB",desc:"You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.",notes:"Action: Exhale in 15ft cone or 5x30ft line (determined by ancestry). All creatures in area make a DEX or CON saving throw (determined by ancestry). DC: 8 + proficiency bonus + CON modifier. Damage: 2d6 at 1st level, 3d6 at 6th, 4d6 at 11th, 5d6 at 16th. On failed save: full damage. On successful save: half damage. After using: must finish a short or long rest before using again. PHB p.34."},
+ {id:"ft_cleric_channel_divinity", title:"Channel Divinity", category:"Feature", phb:true, tags:"cleric,channel,PHB", desc:"You gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two effects: Turn Undead and an effect determined by your domain.", notes:"Parent: Cleric. Uses: 1/SR at 2nd level, 2/SR at 6th, 3/SR at 18th. Turn Undead: Each undead within 30 ft must make a WIS save or be turned for 1 minute (moves away, can't take rxns). Destroy Undead: At 5th level, undead of CR 1/2 or lower are destroyed instead of turned (CR threshold increases with level). Domain Channel Divinity: Each divine domain grants extra Channel Divinity options."},
+ {id:"ft_cleric_divine_domain", title:"Divine Domain", category:"Feature", phb:true, tags:"cleric,domain,PHB", desc:"Choose one domain related to your deity: Knowledge, Life, Light, Nature, Tempest, Trickery, or War. Your choice grants you domain spells and other features at 1st level, extra Channel Divinity uses at 2nd, and further benefits at 6th, 8th, and 17th levels.", notes:"Parent: Cleric. Domain Spells: Each domain has a list of spells you gain at specific cleric levels."},
+ {id:"sc_alchemist", title:"Alchemist (Artificer)", category:"Subclass", phb:false, tags:"artificer,potion,TCE", desc:"An Artificer who specializes in creating magical potions and elixirs.", notes:"Parent Class: Artificer. Features: Tool Prof (alchemist's supplies), Alchemist Spells, Experimental Elixir (free potions each LR), Alchemical Savant, Restorative Reagents, Chemical Mastery."},
+ {id:"sc_armorer", title:"Armorer (Artificer)", category:"Subclass", phb:false, tags:"artificer,armor,TCE", desc:"An Artificer who specializes in magical armor, becoming a walking tank.", notes:"Parent Class: Artificer. Features: Tool Prof (smith's tools), Armorer Spells, Arcane Armor (donning armor as act, ignore Str req), Armor Model (Guardian or Infiltrator), Extra Attack, Armor Modifications, Perfected Armor."},
+ {id:"sc_artillerist", title:"Artillerist (Artificer)", category:"Subclass", phb:false, tags:"artificer,cannon,TCE", desc:"An Artificer who specializes in creating magical cannons.", notes:"Parent Class: Artificer. Features: Tool Prof (woodcarver's tools), Artillerist Spells, Eldritch Cannon (Force Ballista/Flamethrower/Protector), Arcane Firearm (+1d8 to spell damage), Explosive Cannon, Fortified Position."},
+ {id:"sc_battlesmi", title:"Battle Smith (Artificer)", category:"Subclass", phb:false, tags:"artificer,martial,TCE", desc:"Dedicated to protecting others, Battle Smiths are both skilled in combat and excellent healers.", notes:"Parent Class: Artificer. Features: Tool Prof (smith's tools), Battle Smith Spells, Battle Ready (INT for weapon attacks), Steel Defender (construct companion), Extra Attack, Arcane Jolt, Improved Defender."},
+ {id:"sc_ancestral", title:"Path of Ancestral Guardians (Barbarian)",category:"Subclass",phb:false,tags:"barbarian,spirit,XGE",desc:"Barbarians who call on the spirits of their ancestors to protect their allies.", notes:"Parent Class: Barbarian. Features: Ancestral Protectors (enemies have disadv on non-rager attacks), Spirit Shield (reduce damage as rxn), Consult the Spirits, Vengeful Ancestors."},
+ {id:"sc_tce_beastbarb", title:"Path of the Beast (Barbarian)", category:"Subclass", phb:false, tags:"barbarian,beast,shapeshifting,TCE", desc:"Barbarians who follow the Path of the Beast draw their rage from a bestial spark burning within their souls.", notes:"Parent Class: Barbarian. Features: Form of the Beast (3rd — bite, claws, or tail while raging), Bestial Soul (6th — swim, climb, or jump enhancement; natural weapons count as magical), Infectious Fury (10th — frighten or force attack with natural weapon hit, WIS save), Call the Hunt (14th — grant damage bonus to allies, temp HP to self)."},
+ {id:"sc_stormherald",title:"Path of the Storm Herald (Barbarian)",category:"Subclass",phb:false,tags:"barbarian,storm,XGE", desc:"Barbarians who learn to channel the power of the storms.", notes:"Parent Class: Barbarian. Storm Auras: Desert (fire dmg), Sea (lightning dmg), Tundra (temp HP). Features: Storm Aura, Storm Soul, Shielding Storm, Raging Storm."},
+ {id:"sc_zealot", title:"Path of the Zealot (Barbarian)", category:"Subclass", phb:false, tags:"barbarian,divine,XGE", desc:"Warriors who receive blessings from their deity, the Zealots are unstoppable in battle.", notes:"Parent Class: Barbarian. Features: Divine Fury (bonus radiant/necrotic dmg), Warrior of the Gods (revival spells cost no slots), Fanatical Focus (reroll saves 1/rage), Zealous Presence, Rage Beyond Death."},
+ {id:"sc_tce_wildmagicbarb", title:"Path of Wild Magic (Barbarian)", category:"Subclass",phb:false,tags:"barbarian,magic,TCE", desc:"Barbarians of the Path of Wild Magic have been touched by the power of wild magic.", notes:"Parent Class: Barbarian. Features: Magic Awareness, Wild Surge (1d8 random effects while raging), Bolstering Magic, Unstable Backlash, Controlled Surge."},
+ {id:"sc_tce_creation", title:"College of Creation (Bard)", category:"Subclass",phb:false,tags:"bard,creation,TCE", desc:"Bards of the College of Creation believe all existence is a song.", notes:"Parent Class: Bard. Features: Mote of Potential, Performance of Creation (create object), Animating Performance (animate Large object), Creative Crescendo."},
+ {id:"sc_tce_eloquence", title:"College of Eloquence (Bard)", category:"Subclass",phb:false,tags:"bard,persuasion,TCE", desc:"Adherents of the College of Eloquence master the art of oratory.", notes:"Parent Class: Bard. Features: Silver Tongue (min 10 on Deception/Persuasion), Unsettling Words (subtract Bardic die from save), Unfailing Inspiration, Universal Speech, Infectious Inspiration."},
+ {id:"sc_glamour", title:"College of Glamour (Bard)", category:"Subclass", phb:false, tags:"bard,enchantment,XGE", desc:"Bards who learned their craft in the Feywild, weaving magic with irresistible allure.", notes:"Parent Class: Bard. Features: Mantle of Inspiration (temp HP + move), Enthralling Performance (charm), Mantle of Majesty (Command BA), Unbreakable Majesty (frighten attackers)."},
+ {id:"sc_loremaster", title:"College of Lore (Bard)", category:"Subclass", phb:true, tags:"bard,knowledge,PHB", desc:"Bards of the College of Lore know something about most things.", notes:"Parent Class: Bard. Features: Bonus Proficiencies (3 skills), Cutting Words, Extra Magical Secrets, Peerless Skill."},
+ {id:"sc_swords", title:"College of Swords (Bard)", category:"Subclass", phb:false, tags:"bard,martial,XGE", desc:"Bards of the College of Swords are acrobats and swordplay entertainers.", notes:"Parent Class: Bard. Features: Bonus Proficiencies (medium armor, scimitar), Fighting Style, Blade Flourish (Defensive/Slashing/Mobile), Extra Attack, Master's Flourish."},
+ {id:"sc_valor", title:"College of Valor (Bard)", category:"Subclass", phb:true, tags:"bard,combat,PHB", desc:"Bards of the College of Valor are daring skalds whose tales keep great heroes alive.", notes:"Parent Class: Bard. Features: Bonus Proficiencies, Combat Inspiration, Extra Attack, Battle Magic."},
+ {id:"sc_whispers", title:"College of Whispers (Bard)", category:"Subclass", phb:false, tags:"bard,shadow,XGE", desc:"Bards of the College of Whispers use social magic to sow discord and gather secrets.", notes:"Parent Class: Bard. Features: Psychic Blades (bonus psychic dmg), Words of Terror (frighten), Mantle of Whispers (steal identity), Shadow Lore (dominate)."},
+ {id:"sc_forge", title:"Forge Domain (Cleric)", category:"Subclass", phb:false, tags:"cleric,craft,XGE", desc:"Gods of the forge are patrons of artisans who work with metal.", notes:"Parent Class: Cleric. Features: Blessing of the Forge (+1 weapon/armor), Artisan's Blessing (Channel Divinity: create metal items), Soul of the Forge, Divine Strike, Saint of Forge and Fire.. Domain Spells: Identify, Searing Smite (1st). Heat Metal, Magic Weapon (3rd). Elemental Weapon, Protection from Energy (5th). Fabricate, Wall of Fire (7th). Animate Objects, Creation (9th)."},
+ {id:"sc_grave", title:"Grave Domain (Cleric)", category:"Subclass", phb:false, tags:"cleric,undead,XGE", desc:"Gods of the grave watch over the line between life and death.", notes:"Parent Class: Cleric. Features: Circle of Mortality (maximize healing at 0 HP), Eyes of the Grave, Path to the Grave (Channel Divinity: vulnerability), Sentinel at Death's Door, Keeper of Souls.. Domain Spells: Bane, False Life (1st). Gentle Repose, Ray of Enfeeblement (3rd). Revivify, Vampiric Touch (5th). Blight, Death Ward (7th). Antilife Shell, Raise Dead (9th)."},
+ {id:"sc_knowledge", title:"Knowledge Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,knowledge,PHB", desc:"The gods of knowledge prize learning and understanding above all.", notes:"Parent Class: Cleric. Features: Blessings of Knowledge (+2 skills & languages), Knowledge of the Ages (Channel Divinity), Read Thoughts (Channel Divinity), Potent Spellcasting, Visions of the Past.. Domain Spells: Command, Identify (1st). Augury, Suggestion (3rd). Nondetection, Speak with Dead (5th). Arcane Eye, Confusion (7th). Legend Lore, Scrying (9th)."},
+ {id:"sc_lifedom", title:"Life Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,healing,PHB", desc:"The Life domain focuses on vibrant positive energy that sustains all life.", notes:"Parent Class: Cleric. Features: Disciple of Life, Preserve Life (Channel Divinity), Blessed Healer, Divine Strike, Supreme Healing.. Domain Spells: Bless, Cure Wounds (1st). Lesser Restoration, Spiritual Weapon (3rd). Beacon of Hope, Revivify (5th). Death Ward, Guardian of Faith (7th). Mass Cure Wounds, Raise Dead (9th)."},
+ {id:"sc_lightdom", title:"Light Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,radiant,PHB", desc:"Gods of light promote the ideals of rebirth and renewal, truth, vigilance, and beauty.", notes:"Parent Class: Cleric. Features: Warding Flare, Radiance of the Dawn (Channel Divinity), Improved Flare, Potent Spellcasting, Corona of Light.. Domain Spells: Burning Hands, Faerie Fire (1st). Flaming Sphere, Scorching Ray (3rd). Daylight, Fireball (5th). Guardian of Faith, Wall of Fire (7th). Flame Strike, Scrying (9th)."},
+ {id:"sc_nature", title:"Nature Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,nature,PHB", desc:"Gods of nature are as varied as the natural world itself.", notes:"Parent Class: Cleric. Features: Acolyte of Nature (druid cantrip + skill), Charm Animals and Plants (Channel Divinity), Dampen Elements, Divine Strike, Master of Nature.. Domain Spells: Animal Friendship, Speak with Animals (1st). Barkskin, Spike Growth (3rd). Plant Growth, Wind Wall (5th). Dominate Beast, Grasping Vine (7th). Insect Plague, Tree Stride (9th)."},
+ {id:"sc_tce_peace", title:"Peace Domain (Cleric)", category:"Subclass",phb:false,tags:"cleric,peace,TCE", desc:"The balm of peace thrives at the heart of healthy communities, between friendly nations.", notes:"Parent Class: Cleric. Features: Emboldening Bond (add d4 between bonded creatures), Balm of Peace (healing move), Protective Bond (share damage), Expansive Bond, Blessed Strikes."},
+ {id:"sc_tempest", title:"Tempest Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,storm,PHB", desc:"Gods of tempests are gods of storms, sea, and sky.", notes:"Parent Class: Cleric. Features: Wrath of the Storm (rxn lightning), Destructive Wrath (Channel Divinity: max thunder/lightning), Thunderbolt Strike, Divine Strike, Stormborn.. Domain Spells: Fog Cloud, Thunderwave (1st). Gust of Wind, Shatter (3rd). Call Lightning, Sleet Storm (5th). Control Water, Ice Storm (7th). Destructive Wave, Insect Plague (9th)."},
+ {id:"sc_trickdom", title:"Trickery Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,deception,PHB", desc:"Gods of trickery are mischief-makers and instigators who stand as a constant challenge.", notes:"Parent Class: Cleric. Features: Invoke Duplicity (Channel Divinity), Cloak of Shadows, Divine Strike, Improved Duplicity.. Domain Spells: Charm Person, Disguise Self (1st). Mirror Image, Pass without Trace (3rd). Blink, Dispel Magic (5th). Dimension Door, Polymorph (7th). Dominate Person, Modify Memory (9th)."},
+ {id:"sc_tce_twilight", title:"Twilight Domain (Cleric)", category:"Subclass",phb:false,tags:"cleric,twilight,TCE", desc:"The twilight domain governs the transition and boundary between light and darkness.", notes:"Parent Class: Cleric. Features: Twilight Sanctuary (30 ft aura, temp HP or remove charmed/frightened), Steps of Night (fly speed), Divine Strike, Twilight Shroud."},
+ {id:"sc_wardom", title:"War Domain (Cleric)", category:"Subclass", phb:true, tags:"cleric,martial,PHB", desc:"War has many manifestations, exalting those who determine its outcome.", notes:"Parent Class: Cleric. Features: War Priest, Guided Strike (Channel Divinity), War Gods Blessing, Divine Strike, Avatar of Battle.. Domain Spells: Divine Favor, Shield of Faith (1st). Magic Weapon, Spiritual Weapon (3rd). Crusader's Mantle, Spirit Guardians (5th). Freedom of Move, Stoneskin (7th). Flame Strike, Hold Monster (9th)."},
+ {id:"sc_dreams", title:"Circle of Dreams (Druid)", category:"Subclass", phb:false, tags:"druid,fey,XGE", desc:"Druids who are members of the Circle of Dreams hail from regions that have strong ties to the Feywild.", notes:"Parent Class: Druid. Features: Balm of the Summer Court (healing pool = WIS+Druid level), Hearth of Moonlight and Shadow (refuge), Hidden Paths (teleport), Walker in Dreams."},
+ {id:"sc_tce_stars", title:"Circle of Stars (Druid)", category:"Subclass",phb:false,tags:"druid,stars,TCE", desc:"The Circle of Stars allows druids to draw on the power of starlight.", notes:"Parent Class: Druid. Features: Star Map, Starry Form (Archer/Chalice/Dragon), Cosmic Omen, Twinkling Constellations, Full of Stars."},
+ {id:"sc_landdruid", title:"Circle of the Land (Druid)", category:"Subclass", phb:true, tags:"druid,nature,PHB", desc:"The Circle of the Land safeguards ancient knowledge and rites through mystical connection.", notes:"Parent Class: Druid. Features: Bonus Cantrip, Natural Recovery, Land Stride, Natures Ward, Natures Sanctuary."},
+ {id:"sc_moondruid", title:"Circle of the Moon (Druid)", category:"Subclass", phb:true, tags:"druid,wildshape,PHB", desc:"Druids of the Circle of the Moon are fierce guardians of the wilds.", notes:"Parent Class: Druid. Features: Combat Wild Shape, Circle Forms (CR scales by level), Elemental Wild Shape, Thousand Forms."},
+ {id:"sc_shepherd", title:"Circle of the Shepherd (Druid)",category:"Subclass", phb:false, tags:"druid,summoning,XGE", desc:"Druids of the Circle of the Shepherd commune with the spirits of nature.", notes:"Parent Class: Druid. Features: Speech of the Woods (speak with animals), Spirit Totem (Bear/Hawk/Unicorn aura), Mighty Summoner (+2 HP per HD to summoned creatures), Guardian Spirit, Faithful Summons."},
+ {id:"sc_tce_wildfire", title:"Circle of Wildfire (Druid)", category:"Subclass",phb:false,tags:"druid,fire,TCE", desc:"Druids within the Circle of Wildfire understand that destruction is sometimes the precursor of creation.", notes:"Parent Class: Druid. Features: Summon Wildfire Spirit, Enhanced Bond, Cauterizing Flames, Blazing Revival."},
+ {id:"sc_xge_arcanearcher", title:"Arcane Archer (Fighter)", category:"Subclass", phb:false, tags:"fighter,archery,magic,XGE", desc:"An Arcane Archer studies a distinctive elven method of archery that weaves magic into attacks to produce supernatural effects.", notes:"Parent Class: Fighter. Features: Arcane Archer Lore (choose Arcana or Nature prof), Arcane Shot (2/SR, choose from 8 options — Banishing Arrow, Beguiling Arrow, Bursting Arrow, Enfeebling Arrow, Grasping Arrow, Piercing Arrow, Seeking Arrow, Shadow Arrow), Magic Arrow (arrows count as magical), Curving Shot (miss → redirect as BA), Ever-Ready Shot (regain 1 Arcane Shot on initiative if 0). Arcane Shots scale at 7th and 15th level."},
+ {id:"sc_battlemaster",title:"Battle Master (Fighter)", category:"Subclass", phb:true, tags:"fighter,maneuvers,PHB", desc:"Battle Masters employ martial techniques passed down through generations.", notes:"Parent Class: Fighter. Superiority Dice: d8. Features: Combat Superiority, Student of War, Know Your Enemy, Relentless."},
+ {id:"sc_xge_cavalier", title:"Cavalier (Fighter)", category:"Subclass", phb:false, tags:"fighter,mount,protection,XGE", desc:"The archetypal Cavalier excels at mounted combat, protecting allies and controlling the battlefield.", notes:"Parent Class: Fighter. Features: Bonus Proficiency (Animal Handling, History, Insight, Performance, or Persuasion), Born to the Saddle (mount/dismount costs 5 ft, adv vs being dismounted, no falling damage if dismounted), Unwavering Mark (mark enemy on hit — they have disadv on attacks vs others, you can make BA attack if they do), Warding Maneuver (rxn to protect ally or mount, add 1d8 AC + reduce damage), Hold the Line (rxn attack if marked creature moves), Ferocious Charger (knock prone on charge), Vigilant Defender (rxn attack vs any creature near you 1/turn)."},
+ {id:"sc_champion", title:"Champion (Fighter)", category:"Subclass", phb:true, tags:"fighter,simple,PHB", desc:"The Champion focuses on raw physical power honed to deadly perfection.", notes:"Parent Class: Fighter. Features: Improved Critical (19-20), Remarkable Athlete, Extra Fighting Style, Superior Critical (18-20), Survivor."},
+ {id:"sc_eldritchknight",title:"Eldritch Knight (Fighter)", category:"Subclass", phb:true, tags:"fighter,magic,PHB", desc:"The Eldritch Knight combines martial mastery with careful study of magic.", notes:"Parent Class: Fighter. Spellcasting: INT-based wizard spells. Features: Weapon Bond, War Magic, Eldritch Strike, Arcane Charge."},
+ {id:"sc_tce_psywrrior", title:"Psi Warrior (Fighter)", category:"Subclass",phb:false,tags:"fighter,psionics,TCE", desc:"Warriors awakened to the psionic power within.", notes:"Parent Class: Fighter. Features: Psionic Power (Psi dice, Protective Field, Psionic Strike, Telekinetic Move), Telekinetic Adept, Guarded Mind, Bulwark of Force, Telekinetic Master."},
+ {id:"sc_tce_runeknght", title:"Rune Knight (Fighter)", category:"Subclass",phb:false,tags:"fighter,runes,TCE", desc:"Rune Knights enhance their martial prowess using the supernatural power of runes.", notes:"Parent Class: Fighter. Features: Bonus Proficiencies (smith's tools), Rune Carver (2 runes + 1 each level), Giant's Might (Large size, +d6 damage, 1/SR), Runic Shield, Great Stature, Master of Runes, Runic Juggernaut."},
+ {id:"sc_xge_samurai", title:"Samurai (Fighter)", category:"Subclass", phb:false, tags:"fighter,honor,endurance,XGE", desc:"The Samurai is a fighter who draws on an indomitable fighting spirit to overcome enemies.", notes:"Parent Class: Fighter. Features: Bonus Proficiency (choose History, Insight, Performance, or Persuasion, or one language), Fighting Spirit (BA 3/LR — adv on attacks + 5 temp HP this turn), Elegant Courtier (WIS mod to Persuasion, WIS saves), Tireless Spirit (regain one Fighting Spirit use on initiative), Rapid Strike (forgo adv to make one extra attack as part of Attack action), Strength Before Death (rxn to take a full turn when reduced to 0 HP before falling unconscious, 1/LR)."},
+ {id:"sc_tce_merciful", title:"Way of Mercy (Monk)", category:"Subclass",phb:false,tags:"monk,healing,TCE", desc:"Monks of the Way of Mercy learn to manipulate the life force of others.", notes:"Parent Class: Monk. Features: Implements of Mercy (herbalism kit, Insight/Medicine), Hand of Harm, Hand of Healing, Physician's Touch, Flurry of Healing and Harm."},
+ {id:"sc_tce_astralself", title:"Way of the Astral Self (Monk)", category:"Subclass", phb:false, tags:"monk,astral,psionics,TCE", desc:"A monk who follows the Way of the Astral Self believes their body is an illusion and their ki is their true form.", notes:"Parent Class: Monk. Features: Arms of the Astral Self (3rd — summon spectral arms using ki, WIS for attacks/dmg, extra reach), Visage of the Astral Self (6th — spectral face, WIS for Intimidation/Insight, speak all languages, darkvision 60ft), Body of the Astral Self (11th — spectral torso/wings, damage reduction 1d10+WIS, deflect missiles), Awakened Astral Self (17th — full astral form, +2 attacks, armor of ki, flight)."},
+ {id:"sc_xge_drunkenmaster", title:"Way of the Drunken Master (Monk)", category:"Subclass", phb:false, tags:"monk,drunken,mobility,XGE", desc:"The Way of the Drunken Master teaches its students to move with the jerky, unpredictable movements of a drunkard.", notes:"Parent Class: Monk. Features: Bonus Proficiency (Performance, brewer's supplies), Drunken Technique (spend 1 ki for Flurry of Blows + Disengage + +10 ft move), Tipsy Sway (rxn to redirect melee miss to another creature, or stand from prone for 5 ft), Drunkard's Luck (spend 2 ki to cancel disadv on attack/ability/save), Intoxicated Frenzy (Flurry of Blows allows up to 3 extra attacks if each hits different target)."},
+ {id:"sc_fourelements", title:"Way of the Four Elements (Monk)", category:"Subclass", phb:true, tags:"monk,elemental,ki,PHB", desc:"Monks of the Way of the Four Elements harness the power of the elements, using ki to fuel elemental disciplines drawn from earth, air, fire, and water.", notes:"Parent Class: Monk. Key Feature: Disciple of the Elements — learn Elemental Disciplines at 3rd, 6th, 11th, 17th level. Elemental Attunement: minor elemental effects (free). Disciplines (examples): Fangs of the Fire Snake (1 ki, +1d10 fire reach), Fist of Unbroken Air (2 ki, push+damage), Ride the Wind (4 ki, Fly spell), Flames of the Phoenix (4 ki, Fireball), Clench of the North Wind (3 ki, Hold Person), Gong of the Summit (3 ki, Shatter), Mist Stance (4 ki, Gaseous Form), Ride the Wind (4 ki, Fly). Spell save DC = 8 + prof + WIS."},
+ {id:"sc_xge_kensei", title:"Way of the Kensei (Monk)", category:"Subclass", phb:false, tags:"monk,weapon,mastery,XGE", desc:"Monks of the Way of the Kensei train relentlessly with their weapons, to the point where the weapon and the warrior become one.", notes:"Parent Class: Monk. Features: Path of the Kensei (3rd — choose 2+ kensei weapons: ranged weapons deal +1d4 on ranged attack or melee gets +2 AC; use Dex/Str for kensei weapons), One with the Blade (6th — kensei weapons count as magical, Magically Kensei attack for extra unarmed strike dmg), Sharpen the Blade (11th — spend 1-3 ki to add +1-3 attack/dmg to kensei weapon for 1 min), Unerring Accuracy (17th — reroll one missed attack roll per turn)."},
+ {id:"sc_openhand", title:"Way of the Open Hand (Monk)", category:"Subclass", phb:true, tags:"monk,unarmed,PHB", desc:"Monks of the Way of the Open Hand are ultimate masters of martial arts combat.", notes:"Parent Class: Monk. Features: Open Hand Technique, Wholeness of Body, Tranquility, Quivering Palm."},
+ {id:"sc_shadow", title:"Way of the Shadow (Monk)", category:"Subclass", phb:true, tags:"monk,stealth,PHB", desc:"Monks of the Way of Shadow follow a tradition that values stealth and subterfuge.", notes:"Parent Class: Monk. Features: Shadow Arts (Minor Illusion, Darkness, Darkvision, Pass without Trace, Silence for ki), Shadow Step (teleport between shadows), Cloak of Shadows (invisible in dim light), Opportunist."},
+ {id:"sc_xge_sunsoul", title:"Way of the Sun Soul (Monk)", category:"Subclass", phb:false, tags:"monk,radiant,fire,XGE", desc:"Monks of the Way of the Sun Soul learn to channel their life energy into searing bolts of light.", notes:"Parent Class: Monk. Features: Radiant Sun Bolt (3rd — ranged spell attack, 1d4+DEX radiant, counts as unarmed strike; spend 1 ki for extra bolt as BA), Searing Arc Strike (6th — spend 2+ ki to cast Burning Hands after Attack action), Searing Sunburst (11th — 20 ft radius burst of radiant energy, CON save or 2d6 radiant; spend 1-3 ki to increase damage by 2d6 each), Sun Shield (17th — 30 ft bright light aura, rxn for 1d6+WIS radiant to melee attacker)."},
+ {id:"sc_mystic_avatar",title:"Order of the Avatar (Mystic)",category:"Subclass",phb:false,tags:"mystic,emotion,UA", desc:"Avatars master emotion, manipulating the feelings of others.", notes:"Parent: Mystic. Features: +2 Avatar disciplines, medium armor+shields, Avatar of Battle (+2 initiative aura, 3rd), Avatar of Healing (+INT mod healing aura, 6th), Avatar of Speed (allies Dash as BA, 14th). Disciplines: Crown of Despair/Disgust/Rage, all 5 Mantles."},
+ {id:"sc_mystic_awakened",title:"Order of the Awakened (Mystic)",category:"Subclass",phb:false,tags:"mystic,mind,UA", desc:"The Awakened seek to unlock the full potential of the mind.", notes:"Parent: Mystic. Features: +2 Awakened disciplines, Awakened Talent (2 skills), Psionic Investigation (1/SR, 3rd), Psionic Surge (impose disadv on save, 6th), Spectral Form (resist all + pass through objects, 14th)."},
+ {id:"sc_mystic_immortal",title:"Order of the Immortal (Mystic)",category:"Subclass",phb:false,tags:"mystic,body,UA", desc:"Immortals augment their physical form with psionic energy.", notes:"Parent: Mystic. Features: +2 Immortal disciplines, Immortal Durability (+1 HP/level + unarmored AC 10+DEX+CON), Psionic Resilience (temp HP=INT mod/turn, 3rd), Surge of Health (halve dmg as rxn, 6th), Immortal Will (spend 5 psi at 0 HP, 14th)."},
+ {id:"sc_mystic_nomad",title:"Order of the Nomad (Mystic)",category:"Subclass",phb:false,tags:"mystic,travel,UA", desc:"Nomads accumulate knowledge and perceive the living web of the noosphere.", notes:"Parent: Mystic. Features: +2 Nomad disciplines, Breadth of Knowledge (2 tool/skill profs per LR), Memory of 1000 Steps (teleport to previous space as rxn, 3rd), Superior Teleportation (+10ft, 6th), Effortless Journey (forfeit move to teleport, 14th)."},
+ {id:"sc_mystic_soulknife",title:"Order of the Soul Knife (Mystic)",category:"Subclass",phb:false,tags:"mystic,blade,UA", desc:"Soul Knives manifest a blade of pure psychic energy.", notes:"Parent: Mystic. Features: Martial Training (medium armor+martial), Soul Knife (BA: 1d8 psychic finesse blades, +2 AC parry), Hone the Blade (2/5/7 psi for +1/+2/+4 atk+dmg, 3rd), Consumptive Knife (regain 2 psi on kill, 6th), Phantom Knife (treat AC as 10, 14th)."},
+ {id:"sc_mystic_wujen",title:"Order of the Wu Jen (Mystic)",category:"Subclass",phb:false,tags:"mystic,elements,UA", desc:"Wu Jens seize control of elemental forces.", notes:"Parent: Mystic. Features: +2 Wu Jen disciplines, Hermit's Study (2 skills), Elemental Attunement (spend 1 psi to ignore resist, 3rd), Arcane Dabbler (3 wizard spells + psi-to-slot conversion, 6th), Elemental Mastery (spend 2 psi for immune to resisted dmg, 14th)."},
+ {id:"sc_conquest", title:"Oath of Conquest (Paladin)", category:"Subclass", phb:false, tags:"paladin,fear,XGE", desc:"Paladins of the Oath of Conquest seek glory in battle and strive to win everlasting fame.", notes:"Parent Class: Paladin. Features: Conquering Presence/Guided Strike (Channel Divinity), Aura of Conquest (frighten + halve speed), Scornful Rebuke, Invincible Conqueror."},
+ {id:"sc_devout", title:"Oath of Devotion (Paladin)", category:"Subclass", phb:true, tags:"paladin,holy,PHB", desc:"The Oath of Devotion binds a paladin to the loftiest ideals of justice and virtue.", notes:"Parent Class: Paladin. Features: Sacred Weapon/Turn the Unholy (Channel Divinity), Aura of Devotion, Purity of Spirit, Holy Nimbus."},
+ {id:"sc_glory", title:"Oath of Glory (Paladin)", category:"Subclass", phb:false, tags:"paladin,inspire,TCE", desc:"Paladins who take the Oath of Glory believe they and their companions are destined for greatness.", notes:"Parent Class: Paladin. Features: Inspiring Smite/Peerless Athlete (Channel Divinity), Aura of Alacrity (+10 ft speed aura), Glorious Defense, Living Legend."},
+ {id:"sc_redemption", title:"Oath of Redemption (Paladin)", category:"Subclass", phb:false, tags:"paladin,pacifist,XGE", desc:"The Oath of Redemption sets a paladin on a difficult path, seeking to bring the worst to the light.", notes:"Parent Class: Paladin. Features: Emissary of Peace/Rebuke the Violent (Channel Divinity), Aura of the Guardian (take damage for ally), Protective Spirit, Emissary of Redemption."},
+ {id:"sc_ancients", title:"Oath of the Ancients (Paladin)", category:"Subclass", phb:true, tags:"paladin,nature,PHB", desc:"The Oath of the Ancients is as old as the race of elves and the rituals of the druids.", notes:"Parent Class: Paladin. Features: Nature's Wrath/Turn the Faithless (Channel Divinity), Aura of Warding, Undying Sentinel, Elder Champion."},
+ {id:"sc_tce_oathwatchers", title:"Oath of the Watchers (Paladin)", category:"Subclass",phb:false,tags:"paladin,watchers,TCE", desc:"The Oath of the Watchers binds paladins to protect mortal realms from extraplanar threats.", notes:"Parent Class: Paladin. Features: Abjure the Extraplanar/Watcher's Will (Channel Divinity), Aura of the Sentinel (+Initiative aura), Vigilant Rebuke, Mortal Bulwark."},
+ {id:"sc_vengeance", title:"Oath of Vengeance (Paladin)", category:"Subclass", phb:true, tags:"paladin,pursuit,PHB", desc:"The Oath of Vengeance is a solemn commitment to punish those who have committed grievous sin.", notes:"Parent Class: Paladin. Features: Abjure Enemy/Vow of Enmity (Channel Divinity), Relentless Avenger, Avenging Angel."},
+ {id:"sc_beastmaster",title:"Beast Master (Ranger)", category:"Subclass", phb:true, tags:"ranger,animal,PHB", desc:"The Beast Master archetype embodies a friendship between civilized races and wild beasts.", notes:"Parent Class: Ranger. Features: Rangers Companion, Exceptional Training, Bestial Fury, Share Spells."},
+ {id:"sc_tce_feywarrior", title:"Fey Wanderer (Ranger)", category:"Subclass",phb:false,tags:"ranger,fey,TCE", desc:"A fey mystique surrounds you, thanks to the boon of an archfey.", notes:"Parent Class: Ranger. Features: Dreadful Strikes, Fey Wanderer Magic, Otherworldly Glamour (CHA to all CHA checks), Beguiling Twist, Fey Reinforcements, Misty Wanderer."},
+ {id:"sc_gloomstalker",title:"Gloom Stalker (Ranger)", category:"Subclass", phb:false, tags:"ranger,shadow,XGE", desc:"Gloom stalkers are at home in the darkest places: deep under the earth, in gloomy alleyways.", notes:"Parent Class: Ranger. Features: Dread Ambusher (+1 attack on first turn), Umbral Sight (invisible in dim/dark to darkvision), Iron Mind (WIS saves), Stalker's Flurry, Shadowy Dodge."},
+ {id:"sc_horizonwalker",title:"Horizon Walker (Ranger)", category:"Subclass", phb:false, tags:"ranger,planar,XGE", desc:"Horizon walkers guard the world against threats originating from other planes.", notes:"Parent Class: Ranger. Features: Detect Portal, Planar Warrior (force dmg), Ethereal Step (Etherealness 1/SR), Distant Strike (teleport between attacks), Spectral Defense."},
+ {id:"sc_hunter", title:"Hunter (Ranger)", category:"Subclass", phb:true, tags:"ranger,combat,PHB", desc:"The Hunter accepts a place as a bulwark between civilization and the terrors of the wilderness.", notes:"Parent Class: Ranger. Features: Hunters Prey, Defensive Tactics, Multiattack, Superior Hunters Defense."},
+ {id:"sc_monsterslayer",title:"Monster Slayer (Ranger)", category:"Subclass", phb:false, tags:"ranger,hunter,XGE", desc:"You have dedicated yourself to hunting down creatures of the night.", notes:"Parent Class: Ranger. Features: Hunter's Sense (reveal immunities), Slayer's Prey (bonus dmg 1/round), Supernatural Defense (+1d6 saves vs creature), Magic-User's Nemesis, Slayer's Counter."},
+ {id:"sc_tce_swarmkeeper", title:"Swarmkeeper (Ranger)", category:"Subclass",phb:false,tags:"ranger,swarm,TCE", desc:"Ranger who surrounds themselves with a swarm of nature spirits.", notes:"Parent Class: Ranger. Features: Gathered Swarm (swarm attacks with you), Writhing Tide (fly), Mighty Swarm, Swarming Dispersal."},
+ {id:"sc_arcanetrickster", title:"Arcane Trickster (Rogue)", category:"Subclass", phb:true, tags:"rogue,arcane,spells,PHB", desc:"Some rogues enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion.", notes:"Parent Class: Rogue. Spellcasting: INT-based, Enchantment & Illusion spells (plus 3 free from any school). Spell slots as 1/3 caster. Features: Mage Hand Legerdemain (3rd — enhanced invisible mage hand), Magical Ambush (9th — disadv on saves vs spells when hidden), Versatile Trickster (13th — use Mage Hand to distract for Adv on attacks), Spell Thief (17th — steal a spell from a caster). Spells known: 3 at 3rd level, scaling to 8 by 20th."},
+ {id:"sc_assassin", title:"Assassin (Rogue)", category:"Subclass", phb:true, tags:"rogue,combat,PHB", desc:"You focus your training on the grim art of death.", notes:"Parent Class: Rogue. Features: Bonus Proficiencies, Assassinate, Infiltration Expertise, Impostor, Death Strike."},
+ {id:"sc_inquisitive", title:"Inquisitive (Rogue)", category:"Subclass", phb:false, tags:"rogue,insight,XGE", desc:"As an archetypal Inquisitive, you excel at rooting out secrets and unraveling mysteries.", notes:"Parent Class: Rogue. Features: Ear for Deceit (Investigation min 8), Eye for Detail, Insightful Fighting (BA Insight to sneak attack), Steady Eye, Unerring Eye, Eye for Weakness."},
+ {id:"sc_mastermind", title:"Mastermind (Rogue)", category:"Subclass", phb:false, tags:"rogue,social,XGE", desc:"Your focus is on people and on the influence and secrets they have.", notes:"Parent Class: Rogue. Features: Master of Intrigue (disguise/forgery/languages), Master of Tactics (Help as BA from 30 ft), Insightful Manipulator, Misdirection, Soul of Deceit."},
+ {id:"sc_tce_phantom", title:"Phantom (Rogue)", category:"Subclass",phb:false,tags:"rogue,undead,TCE", desc:"Many rogues walk a fine line between life and death, and the Phantom archetype sits right on that line.", notes:"Parent Class: Rogue. Features: Whispers of the Dead (extra skill/tool prof), Wails from the Grave (necrotic damage), Tokens of the Departed, Ghost Walk, Death's Friend."},
+ {id:"sc_scout", title:"Scout (Rogue)", category:"Subclass", phb:false, tags:"rogue,survival,XGE", desc:"You are skilled in stealth and surviving far from the streets of a city.", notes:"Parent Class: Rogue. Features: Skirmisher (rxn move when enemy ends near you), Survivalist (Nature + Survival expertise), Superior Mobility (+10 ft speed), Ambush Master, Sudden Strike."},
+ {id:"sc_tce_soulknife", title:"Soulknife (Rogue)", category:"Subclass",phb:false,tags:"rogue,psionics,TCE", desc:"A Soulknife strikes with the mind, cutting through barriers both physical and psychic.", notes:"Parent Class: Rogue. Features: Psionic Power (Psi dice, Psi-Bolstered Knack, Psychic Whispers), Psychic Blades (BA second blade), Soul Blades, Psychic Veil, Rend Mind."},
+ {id:"sc_swashbuckler",title:"Swashbuckler (Rogue)", category:"Subclass", phb:false, tags:"rogue,charisma,XGE", desc:"You focus your training on the art of the blade, relying on speed and agility.", notes:"Parent Class: Rogue. Features: Fancy Footwork (no OA if attack), Rakish Audacity (Sneak Attack with CHA mod, no ally needed), Panache (CHA to charm or frighten), Elegant Maneuver, Master Duelist."},
+ {id:"sc_thief", title:"Thief (Rogue)", category:"Subclass", phb:true, tags:"rogue,stealth,PHB", desc:"You hone your skills in the larcenous arts.", notes:"Parent Class: Rogue. Features: Fast Hands, Second-Story Work, Supreme Sneak, Use Magic Device, Thiefs Reflexes."},
+ {id:"sc_tce_aberrant", title:"Aberrant Mind (Sorcerer)", category:"Subclass",phb:false,tags:"sorcerer,psionics,TCE", desc:"An alien influence has wrapped its tendrils around your mind.", notes:"Parent Class: Sorcerer. Features: Telepathic Speech, Psionic Spells, Telepathic Speech, Warped Being (resist psychic/poison), Psychic Defenders, Revelation in Flesh, Warp Reality."},
+ {id:"sc_tce_clockwork", title:"Clockwork Soul (Sorcerer)", category:"Subclass",phb:false,tags:"sorcerer,order,TCE", desc:"The cosmic force of order has suffused you with magic. You trace your power to concordant forces.", notes:"Parent Class: Sorcerer. Features: Clockwork Magic, Restore Balance (cancel adv/disadv), Bastion of Law (temp HP), Trance of Order, Clockwork Cavalcade."},
+ {id:"sc_xge_divinesoul", title:"Divine Soul (Sorcerer)", category:"Subclass", phb:false, tags:"sorcerer,divine,healing,XGE", desc:"Sometimes the spark of magic that fuels a sorcerer comes from a divine source that glimmers within the soul.", notes:"Parent Class: Sorcerer. Features: Divine Magic (3rd — access to Cleric spell list; choose affinity: Good/Evil/Law/Chaos/Neutrality for a free bonus spell), Favored by the Gods (3rd — 2d4 to failed save or missed attack 1/SR), Empowered Healing (6th — spend 1 SP to reroll healing dice for ally nearby), Angelic Form (14th — bonus action to manifest wings: fly speed 30 ft, can manifest luminous image), Unearthly Recovery (18th — BA to regain HP equal to half HP max when below half HP, 1/LR)."},
+ {id:"sc_draconic", title:"Draconic Bloodline (Sorcerer)", category:"Subclass", phb:true, tags:"sorcerer,dragon,PHB", desc:"Your innate magic comes from draconic magic mingled with your blood.", notes:"Parent Class: Sorcerer. Features: Dragon Ancestor (choose type), Draconic Resilience (AC 13+DEX unarmored), Elemental Affinity, Dragon Wings, Draconic Presence."},
+ {id:"sc_shadowsorc", title:"Shadow Magic (Sorcerer)", category:"Subclass", phb:false, tags:"sorcerer,shadow,XGE", desc:"You are a creature of shadow, for your innate magic comes from the Shadowfell.", notes:"Parent Class: Sorcerer. Features: Eyes of the Dark (Darkness for 2 SP, see through it), STR of the Grave (save vs dropping to 0 HP), Hound of Ill Omen, Shadow Walk, Umbral Form."},
+ {id:"sc_stormsorc", title:"Storm Sorcery (Sorcerer)", category:"Subclass", phb:false, tags:"sorcerer,storm,XGE", desc:"Your innate magic comes from the power of elemental air.", notes:"Parent Class: Sorcerer. Features: Wind Speaker (Primordial), Tempestuous Magic (fly 10 ft after spell), Heart of the Storm (lightning/thunder resist + dmg aura), Storm Guide, Storm's Fury, Wind Soul."},
+ {id:"sc_wildmagic", title:"Wild Magic (Sorcerer)", category:"Subclass", phb:true, tags:"sorcerer,chaos,PHB", desc:"Your innate magic comes from the wild forces of chaos that underlie creation.", notes:"Parent Class: Sorcerer. Features: Wild Magic Surge, Tides of Chaos, Bend Luck, Controlled Chaos, Spell Bombardment."},
+ {id:"sc_archfey", title:"The Archfey (Warlock)", category:"Subclass", phb:true, tags:"warlock,fey,PHB", desc:"Your patron is a lord or lady of the fey, a creature of legend who holds secrets.", notes:"Parent Class: Warlock. Features: Fey Presence (charm/frighten in 10 ft cube, 1/SR), Misty Escape (Invisibility + teleport as rxn, 1/SR), Beguiling Defenses (immune charm + reflect), Dark Delirium."},
+ {id:"sc_celestial", title:"The Celestial (Warlock)", category:"Subclass", phb:false, tags:"warlock,divine,XGE", desc:"Your patron is a powerful being of the Upper Planes.", notes:"Parent Class: Warlock. Features: Expanded Spell List (healing spells), Healing Light (bonus healing pool = 1d6 per warlock level), Radiant Soul (fire/radiant resist + dmg), Celestial Resilience, Searing Vengeance."},
+ {id:"sc_tce_fathomless", title:"The Fathomless (Warlock)", category:"Subclass", phb:false, tags:"warlock,ocean,tentacle,TCE", desc:"You have plunged into a pact with an entity from the depths of the ocean — an unknowable leviathan of the deep.", notes:"Parent Class: Warlock. Features: Tentacle of the Deeps (3rd — summon spectral tentacle 10 ft, 1d8 cold dmg, slow 10 ft), Gift of the Sea (10 ft swim speed, breathe water), Oceanic Soul (resist cold, speak with sea creatures), Guardian Coil (tentacle blocks damage), Grasping Tentacles, Fathomless Plunge."},
+ {id:"sc_fiend", title:"The Fiend (Warlock)", category:"Subclass", phb:true, tags:"warlock,devil,PHB", desc:"You have made a pact with a fiend from the lower planes of existence.", notes:"Parent Class: Warlock. Features: Dark Ones Blessing (temp HP on kill), Dark Ones Own Luck, Fiendish Resilience, Hurl Through Hell."},
+ {id:"sc_tce_genie", title:"The Genie (Warlock)", category:"Subclass",phb:false,tags:"warlock,genie,TCE", desc:"You have made a pact with one of the rarest kinds of genie, a noble genie.", notes:"Parent Class: Warlock. Genie types: Dao (earth), Djinni (air), Efreeti (fire), Marid (water). Features: Genie's Vessel (extra-dimensional space), Elemental Gift, Sanctuary Vessel, Limited Wish."},
+ {id:"sc_greatoldone",title:"The Great Old One (Warlock)", category:"Subclass", phb:true, tags:"warlock,cosmic,PHB", desc:"Your patron is a mysterious entity whose nature is utterly foreign to reality.", notes:"Parent Class: Warlock. Features: Awakened Mind (telepathy), Entropic Ward, Thought Shield, Create Thrall."},
+ {id:"sc_hexblade", title:"The Hexblade (Warlock)", category:"Subclass", phb:false, tags:"warlock,martial,XGE", desc:"You have made your pact with a mysterious entity from the Shadowfell.", notes:"Parent Class: Warlock. Features: Hexblade's Curse (bonus dmg + crit on 19, recover HP on kill, 1/SR), Hex Warrior (CHA to weapon attacks), Accursed Specter, Armor of Hexes, Master of Hexes."},
+ {id:"sc_tce_bladesinging", title:"Bladesinging (Wizard)", category:"Subclass", phb:false, tags:"wizard,bladesong,melee,TCE", desc:"Bladesingers master a tradition that weaves magic into combat, allowing them to be both a spellcaster and a martial artist.", notes:"Parent Class: Wizard. Restriction: Elf or half-elf (can be waived by DM). Features: Training in War and Song (light armor, one one-handed weapon, Performance prof), Bladesong (BA 1/SR — +INT to AC, +10 ft speed, Concentration adv, +INT to Acrobatics), Extra Attack (can cast cantrip in place of one attack), Song of Defense (spend spell slot to reduce damage), Song of Victory (+INT to melee weapon damage)."},
+ {id:"sc_tce_ordersorc", title:"Order of Scribes (Wizard)", category:"Subclass",phb:false,tags:"wizard,scribes,TCE", desc:"Magic of the book-that is the power of the Order of Scribes.", notes:"Parent Class: Wizard. Features: Wizardly Quill (magic quill), Awakened Spellbook (use spellbook as focus, change damage type), Manifest Mind (tiny spirit provides light/help), Master Scrivener, One with the Word."},
+ {id:"sc_abjuration", title:"School of Abjuration (Wizard)", category:"Subclass", phb:true, tags:"wizard,protection,PHB",desc:"The School of Abjuration emphasizes magic that blocks, banishes, or protects.", notes:"Parent Class: Wizard. Features: Abjuration Savant, Arcane Ward, Projected Ward, Improved Abjuration, Spell Resist."},
+ {id:"sc_conjuration", title:"School of Conjuration (Wizard)",category:"Subclass", phb:true, tags:"wizard,conjuration,PHB",desc:"As a conjurer, you favor spells that produce objects and creatures out of thin air.", notes:"Parent Class: Wizard. Features: Conjuration Savant, Minor Conjuration (summon object), Benign Transposition (teleport self or conjured creature, 1/LR), Focused Conjuration, Durable Summons."},
+ {id:"sc_divination", title:"School of Divination (Wizard)", category:"Subclass", phb:true, tags:"wizard,divination,PHB", desc:"The counsel of a diviner is sought by royalty and commoners alike.", notes:"Parent Class: Wizard. Features: Divination Savant, Portent (replace any roll with d20s rolled at LR), Expert Divination (regain lower slot on divination), The Third Eye (see through walls/invisibility), Greater Portent."},
+ {id:"sc_enchantment", title:"School of Enchantment (Wizard)",category:"Subclass", phb:true, tags:"wizard,enchantment,PHB",desc:"As a member of the School of Enchantment, you have honed your ability to magically entrance others.", notes:"Parent Class: Wizard. Features: Enchantment Savant, Hypnotic Gaze (incapacitate creature, reuse each turn), Instinctive Charm (redirect attack to nearest creature), Split Enchantment (target two creatures), Alter Memories."},
+ {id:"sc_evocation", title:"School of Evocation (Wizard)", category:"Subclass", phb:true, tags:"wizard,evocation,PHB", desc:"You focus your study on magic that creates powerful elemental effects.", notes:"Parent Class: Wizard. Features: Evocation Savant, Sculpt Spells, Potent Cantrip, Empowered Evocation, Overchannel."},
+ {id:"sc_illusion", title:"School of Illusion (Wizard)", category:"Subclass", phb:true, tags:"wizard,illusion,deception,PHB", desc:"You focus your studies on magic that dazzles the senses, befuddles the mind, and tricks even the wisest folk.", notes:"Parent Class: Wizard. Features: Illusion Savant (half cost/time to copy Illusion spells), Improved Minor Illusion (add sound OR image to Minor Illusion, 3rd), Malleable Illusions (change illusion as action, 6th), Illusory Self (reaction to impose disadv on attack 1/SR, 10th), Illusory Reality (make one part of illusion real for 1 min, 14th)."},
+ {id:"sc_necromancy", title:"School of Necromancy (Wizard)", category:"Subclass", phb:true, tags:"wizard,necromancy,PHB", desc:"The School of Necromancy explores the cosmic forces of life, death, and undeath.", notes:"Parent Class: Wizard. Features: Necromancy Savant, Grim Harvest (regain HP when spell kills), Undead Thralls (animate dead + extra undead), Inured to Undeath (necrotic resist, max HP immune), Command Undead."},
+ {id:"sc_transmutation",title:"School of Transmutation (Wizard)",category:"Subclass",phb:true,tags:"wizard,transmutation,PHB",desc:"You are a student of spells that modify energy and matter.", notes:"Parent Class: Wizard. Features: Transmutation Savant, Minor Alchemy (transmute materials), Transmuter's Stone (grant benefit: darkvision/speed/prof/resist), Shapechanger (Polymorph self), Master Transmuter."},
+ {id:"sc_xge_warmagic", title:"War Magic (Wizard)", category:"Subclass", phb:false, tags:"wizard,combat,abjuration,XGE", desc:"A variety of Wizard who combines arcane prowess with fierce combat skill to fight effectively on the front lines.", notes:"Parent Class: Wizard. Features: Arcane Deflection (2nd — rxn to add +2 AC vs attack or +4 to save, but next turn can only cast cantrips), Tactical Wit (2nd — INT mod to initiative), Power Surge (6th — store spell energy when you counter or dispel magic, add 1d6 force dmg 1/turn when you spend a power surge), Durable Magic (10th — +2 AC and all saves while concentrating), Deflecting Shroud (14th — Arcane Deflection releases energy: 1d6 force dmg × INT mod to 3 nearby creatures)."},
+ {id:"sc_berserker", title:"Path of the Berserker (Barbarian)", category:"Subclass", phb:true, tags:"barbarian,rage,PHB", desc:"For some barbarians, rage is a means to an end - that end being violence.", notes:"Parent Class: Barbarian. Features: Frenzy, Mindless Rage, Intimidating Presence, Retaliation."},
+ {id:"sc_spores", title:"Circle of Spores (Druid)", category:"Subclass", phb:false, tags:"druid,undead,TCE", desc:"Druids of the Circle of Spores find beauty in decay.", notes:"Parent Class: Druid. Features: Halo of Spores (necrotic dmg rxn), Symbiotic Entity (Wild Shape for combat buff), Fungal Infestation, Spreading Spores, Fungal Body."},
+ {id:"sc_order", title:"Order Domain (Cleric)", category:"Subclass", phb:false, tags:"cleric,law,TCE", desc:"The Order domain represents discipline, law, and devotion to a society or code.", notes:"Parent Class: Cleric. Features: Voice of Authority (ally attacks when you cast on them), Order's Demand (Channel Divinity: charm), Embodiment of the Law, Divine Strike, Order's Wrath.. Domain Spells: Command, Heroism (1st). Hold Person, Zone of Truth (3rd). Mass Healing Word, Slow (5th). Compulsion, Locate Creature (7th). Commune, Dominate Person (9th)."},
+ {id:"sc_totemwarrior",title:"Path of the Totem Warrior (Barbarian)", category:"Subclass", phb:true, tags:"barbarian,spirit,PHB", desc:"The Totem Warrior is a spiritual journey accepting a spirit animal as guide.", notes:"Parent Class: Barbarian. Spirit Options: Bear, Eagle, Elk, Tiger, Wolf."},
+
+ {id:"sr_duergar", title:"Gray Dwarf (Duergar)", category:"Subrace", phb:false, tags:"dwarf,underdark,psionic,SCAG", desc:"The gray dwarves, or duergar, live deep in the Underdark. They're known for their dour attitudes and their magical abilities.", notes:"Ability Score Increase: +1 STR | Superior Darkvision: 120ft | Extra Language: Undercommon | Duergar Resilience: Advantage on saves vs illusions and vs charmed/paralyzed | Duergar Magic: Enlarge (self, no concentration) 1/LR at 3rd level, Invisibility (self) 1/LR at 5th level. INT is spellcasting ability | Sunlight Sensitivity: Disadvantage on attack rolls and Perception checks in direct sunlight"},
+ {id:"sr_deepgnome", title:"Deep Gnome (Svirfneblin)", category:"Subrace", phb:false, tags:"gnome,underdark,stealth,SCAG", desc:"The deep gnomes, or svirfneblin, live deep in the Underdark with a tight-knit community.", notes:"Ability Score Increase: +1 DEX | Superior Darkvision: 120ft | Stone Camouflage: Advantage on Stealth checks to hide in rocky terrain | Extra Language: Undercommon"},
+ {id:"sc_scag_battlerager", title:"Path of the Battlerager (Barbarian)", category:"Subclass", phb:false, tags:"barbarian,spiked,dwarf,SCAG", desc:"Battleragers are dwarves who follow a path that leads them to don spiked armor and throw themselves into combat, using their armor as a weapon.", notes:"Parent Class: Barbarian. Restriction: Dwarves only. Features: Battlerager Armor (3rd — rage in spiked armor, deal 3 piercing to grappled creatures as BA), Reckless Abandon (6th — gain temp HP equal to CON mod when using Reckless Attack while raging), Battlerager Charge (10th — Dash as BA while raging), Spiked Retribution (14th — 3 piercing dmg to melee attackers while raging in spiked armor)."},
+ {id:"sc_scag_herald", title:"College of the Herald (Bard)", category:"Subclass", phb:false, tags:"bard,lore,history,SCAG", desc:"Bards of the College of the Herald serve as living libraries of history and culture, preserving the stories and traditions of a specific region.", notes:"Parent Class: Bard. Features: Bonus Proficiencies (History, one language, one musical instrument), Herald's Lore (3rd — learn additional spells tied to a culture/region, added to spells known), Speech of the Folk (3rd — cast Comprehend Languages as a ritual for free), Enduring Voice (6th — allies can use Bardic Inspiration die after seeing the roll rather than before), Keeper of the Old Ways (14th — advantage on History checks, once per LR grant ally advantage on any ability check using a skill you are proficient in)."},
+ {id:"sc_scag_arcana", title:"Arcana Domain (Cleric)", category:"Subclass", phb:false, tags:"cleric,arcane,wizard,SCAG", desc:"Magic is an energy that suffuses the multiverse and fuels both destruction and creation. Gods of the Arcana domain know the secrets and potential of magic intimately.", notes:"Parent Class: Cleric. Features: Arcane Initiate (2 Wizard cantrips), Arcane Abjuration (Channel Divinity: turn/banish extraplanar creatures — celestials, elementals, fey, fiends), Spell Breaker (end one spell on healed ally), Potent Spellcasting (+WIS to cantrip dmg), Arcane Mastery (add 4 Wizard spells of 6th-9th level). Domain Spells: Detect Magic, Magic Missile (1st). Magic Weapon, Nystul's Magic Aura (3rd). Dispel Magic, Magic Circle (5th). Arcane Eye, Leomund's Secret Chest (7th). Planar Binding, Teleportation Circle (9th)."},
+ {id:"sc_scag_purpledragon", title:"Purple Dragon Knight (Fighter)", category:"Subclass", phb:false, tags:"fighter,leader,support,SCAG", desc:"Purple Dragon Knights, also known as Bannerets, inspire their companions to fight despite overwhelming odds.", notes:"Parent Class: Fighter. Also known as: Banneret. Features: Rallying Cry (3rd — Second Wind also heals up to 3 allies within 60 ft for same amount), Royal Envoy (3rd — Persuasion proficiency, expertise if already proficient, use CHA for Persuasion), Inspiring Surge (7th — when you Action Surge, one ally within 60 ft can make one attack as rxn), Bulwark (10th — when you use Indomitable to reroll a failed save, allies within 60 ft who failed the same save can reroll too)."},
+ {id:"sc_scag_longdeath", title:"Way of the Long Death (Monk)", category:"Subclass", phb:false, tags:"monk,necrotic,death,SCAG", desc:"Monks of the Way of the Long Death are obsessed with the meaning and mechanics of dying, drawing power from the moment of death itself.", notes:"Parent Class: Monk. Features: Touch of Death (3rd — gain temp HP = Monk level when you kill a creature), Hour of Reaping (6th — spend 1 ki, all creatures within 30 ft must WIS save or be frightened until end of your next turn), Mastery of Death (11th — spend 1 ki as rxn when reduced to 0 HP to instead drop to 1 HP), Touch of the Long Death (17th — spend 1-10 ki points, target CON save or take 2d10 necrotic per ki spent, half on success)."},
+ {id:"sc_scag_crown", title:"Oath of the Crown (Paladin)", category:"Subclass", phb:false, tags:"paladin,protection,crown,SCAG", desc:"The Oath of the Crown is sworn to the ideals of civilization, order, and loyalty to a sovereign.", notes:"Parent Class: Paladin. Features: Champion Challenge (Channel Divinity: WIS save or creatures within 30 ft can't move away), Turn the Tide (Channel Divinity: heal creatures below half HP within 30 ft for 1d6+CHA), Divine Allegiance (rxn to take damage for adjacent ally), Unyielding Saint (adv on saves vs paralyzed/stunned), Exalted Champion (resist B/P/S dmg, allies adv on death saves, enemies disadv on saves vs your spells within 30 ft). Domain Spells: Command, Compelled Duel (1st). Warding Bond, Zone of Truth (3rd). Aura of Vitality, Spirit Guardians (5th). Banishment, Guardian of Faith (7th). Circle of Power, Geas (9th)."},
+ {id:"sc_scag_crown", title:"Oath of the Crown (Paladin)", category:"Subclass", phb:false, tags:"paladin,protection,loyalty,SCAG", desc:"The Oath of the Crown is sworn to the ideals of civilization, order, and loyalty to a sovereign.", notes:"Parent Class: Paladin. Features: Champion Challenge (Channel Divinity — creatures within 30 ft WIS save or can't move away), Turn the Tide (Channel Divinity — heal creatures below half HP within 30 ft for 1d6+CHA mod), Divine Allegiance (6th — rxn to take damage for adjacent ally), Unyielding Saint (7th — adv on saves vs paralyzed/stunned), Exalted Champion (20th — resist non-magical B/P/S dmg, allies adv on death saves, enemies disadv on saves vs your spells). Domain Spells: Command, Compelled Duel (1st). Warding Bond, Zone of Truth (3rd). Aura of Vitality, Spirit Guardians (5th). Banishment, Guardian of Faith (7th). Circle of Power, Geas (9th)."},
+ {id:"sc_scag_undying", title:"The Undying (Warlock)", category:"Subclass", phb:false, tags:"warlock,undeath,survival,SCAG", desc:"Your patron is a deathless being, one who has conquered death and now seeks to share that power with you.", notes:"Parent Class: Warlock. Features: Among the Dead (3rd — learn Spare the Dying cantrip, adv on saves vs disease, undead must WIS save to target you), Defy Death (6th — regain 1d8+CON mod HP when you succeed on a death save or stabilize a creature, 1/LR), Undying Nature (10th — no longer need to breathe/eat/drink/sleep, age at 1/10 rate, immune to magical aging), Indestructible Life (14th — spend 1-5 warlock spell slots as BA to regain 1d8+5 HP per slot, also reattach severed limbs)."},
+ {id:"bg_scag_clancrafter", title:"Clan Crafter", category:"Background", phb:false, tags:"background,dwarf,craft,SCAG", desc:"The Stout Folk are well known for their artisanship and the worth of their handiwork, and you have learned these traditions well.", notes:"Skills: History, Insight. Tools: One type of artisan's tools. Languages: One of your choice. Feature: Respect of the Stout Folk (non-evil dwarves and gnomes regard you with respect, can find lodging and info in dwarven/gnomish communities). Equipment: A set of artisan's tools you are proficient with, a maker's mark chisel, a set of traveler's clothes, a pouch with 5 gp."},
+ {id:"bg_scag_factionagent", title:"Faction Agent", category:"Background", phb:false, tags:"background,faction,organization,SCAG", desc:"You have spent your career in service to one of the many factions of the Forgotten Realms, learning its secrets, advancing its goals, and protecting its interests.", notes:"Skills: Insight, and one Intelligence, Wisdom, or Charisma skill based on faction. Languages: Two of your choice. Feature: Safe Haven (members of your faction will provide aid, safe houses, info, and assistance when possible). Equipment: Badge or emblem of your faction, copy of a seminal faction text, common clothes, belt pouch with 15 gp."},
+ {id:"bg_scag_knightorder", title:"Knight of the Order", category:"Background", phb:false, tags:"background,knight,order,SCAG", desc:"You belong to an order of knights who have sworn oaths to achieve a certain goal. The nature of this goal depends on the order you serve.", notes:"Skills: Persuasion, and one from Arcana, History, Nature, or Religion based on order. Languages: One of your choice. Tools: One gaming set or musical instrument. Feature: Knightly Regard (members of your order and those friendly to it provide shelter, healing, and information; people of high standing treat you with deference). Equipment: A banner or token of your order, a set of traveler's clothes, a pouch with 10 gp."},
+ {id:"bg_scag_urbanbounty", title:"Urban Bounty Hunter", category:"Background", phb:false, tags:"background,bounty,urban,SCAG", desc:"Before you became an adventurer, your life was already full of conflict and excitement, because you made a living tracking down people for pay.", notes:"Skills: Choose two from Deception, Insight, Persuasion, and Stealth. Tools: Choose two from one gaming set, one musical instrument, and thieves' tools. Feature: Ear to the Ground (you have contacts in any city who can provide info on local criminal underworld, missing persons, and wanted individuals). Equipment: A set of clothes appropriate to your duties, a set of tools you are proficient with, a pouch with 20 gp."},
+ {id:"bg_scag_uthgardt", title:"Uthgardt Tribe Member", category:"Background", phb:false, tags:"background,tribal,barbarian,SCAG", desc:"Though you might have only recently come to civilization, you are no stranger to the harsh realities of survival. You grew up in the tribal culture of the Uthgardt barbarians of the Forgotten Realms.", notes:"Skills: Athletics, Survival. Tools: One type of musical instrument or artisan's tools. Languages: One of your choice. Feature: Uthgardt Heritage (you have knowledge of Uthgardt tribal lands and can find food/fresh water in the North, can also find welcome among other Uthgardt tribes unless hostile). Equipment: A hunting trap, a totemic token, a set of traveler's clothes, a pouch with 10 gp."},
+ {id:"bg_scag_waterdhaviannoble", title:"Waterdhavian Noble", category:"Background", phb:false, tags:"background,noble,waterdeep,SCAG", desc:"You are a scion of one of the great noble families of Waterdeep, the most cosmopolitan city in the Forgotten Realms.", notes:"Skills: History, Persuasion. Tools: One type of gaming set or musical instrument. Languages: One of your choice. Feature: Kept in Style (while in Waterdeep or visiting a noble's estate, your expenses are paid for by the family; you are treated as a guest of high standing and can call on your family's contacts for info). Equipment: A set of fine clothes, a signet ring, a scroll of pedigree, a skin of fine wine, a pouch with 20 gp."},
+ {id:"ar_invulnerability", title:"Armor of Invulnerability *", category:"Armor", phb:false, tags:"magic,armor,DMG", desc:"While wearing this armor you have resistance to nonmagical damage. Additionally, you can use an action to make yourself immune to nonmagical damage for 10 minutes.", notes:"Rarity: Legendary. Attune: Yes. Type: Plate armor. Immunity: Use action, immune to nonmagical B/P/S damage for 10 min. Once used, cannot be used again until next dawn."},
+ {id:"ar_resistance", title:"Armor of Resistance *", category:"Armor", phb:false, tags:"magic,armor,DMG", desc:"You have resistance to one type of damage while you wear this armor. The DM chooses the type or determines it randomly.", notes:"Rarity: Rare. Attune: Yes. Damage types: Acid, Cold, Fire, Force, Lightning, Necrotic, Poison, Psychic, Radiant, or Thunder. Resistance applies to that damage type only."},
+ {id:"ar_vulnerability", title:"Armor of Vulnerability *", category:"Armor", phb:false, tags:"magic,armor,cursed,DMG", desc:"While wearing this armor you have resistance to one of three damage types — bludgeoning, piercing, or slashing (determined when found). But you are also cursed: you have vulnerability to the other two types.", notes:"Rarity: Rare. Attune: Yes. Cursed item. Curse: Once attuned, you are unwilling to remove the armor. You have resistance to one damage type (B, P, or S) but vulnerability to the other two. Remove Curse ends the attunement."},
+ {id:"ar_demon_armor", title:"Demon Armor *", category:"Armor", phb:false, tags:"magic,armor,cursed,DMG", desc:"While wearing this armor, you can understand and speak Abyssal. The armor's gauntlets have claws, making your unarmed strikes deal 1d8 slashing damage.", notes:"Rarity: Very Rare. Attune: Yes. Cursed item. Properties: Understand/speak Abyssal, unarmed strikes deal 1d8 slashing + STR mod. Curse: Once attuned you are unwilling to remove it; disadvantage on attack rolls against demons and they have advantage on saves against your spells. Remove Curse ends attunement."},
+ {id:"ar_dwarven_plate", title:"Dwarven Plate *", category:"Armor", phb:false, tags:"magic,armor,DMG", desc:"While wearing this armor you gain a +2 bonus to AC. In addition, if an effect moves you against your will along the ground, you can use your reaction to reduce the distance you are moved by up to 10 feet.", notes:"Rarity: Very Rare. Attune: No. Type: Plate armor. Bonus: +2 AC. Reaction: Reduce forced ground movement by up to 10 ft."},
+ {id:"ar_xge_armor_gleaming",title:"Armor of Gleaming *",category:"Armor",phb:false,tags:"magic,armor,XGE",desc:"This armor never gets dirty. It magically repels grime, mud, and similar substances.",notes:"Rarity: Common. Attune: No. Type: Any armor. Stays perpetually clean regardless of conditions. XGE p.136."},
+ {id:"ar_xge_castoff_armor",title:"Cast-Off Armor *",category:"Armor",phb:false,tags:"magic,armor,XGE",desc:"You can doff this armor as an action.",notes:"Rarity: Common. Attune: No. Type: Any armor. Doff time reduced to 1 action instead of the normal time. XGE p.136."},
+ {id:"ar_xge_smoldering_armor",title:"Smoldering Armor *",category:"Armor",phb:false,tags:"magic,armor,fire,XGE",desc:"Wisps of harmless, odorless smoke rise from this armor while it is worn.",notes:"Rarity: Common. Attune: No. Type: Any armor. Purely cosmetic — emits harmless smoke. XGE p.140."},
+ {id:"ar_efreeti_chain", title:"Efreeti Chain *", category:"Armor", phb:false, tags:"magic,armor,fire,DMG", desc:"While wearing this armor you are immune to fire damage, can speak and understand Primordial, and have advantage on Charisma checks made to interact with fire elementals and efreet.", notes:"Rarity: Legendary. Attune: Yes. Type: Chain mail (+6 AC). Fire immunity. Primordial language. Advantage on CHA checks vs fire elementals and efreet."},
+ {id:"ar_elven_chain", title:"Elven Chain *", category:"Armor", phb:false, tags:"magic,armor,elf,DMG", desc:"You gain a +1 bonus to AC while you wear this armor. You are considered proficient with this armor even if you lack the armor proficiency for it.", notes:"Rarity: Rare. Attune: No. Type: Chain shirt (+1 AC). Proficiency: Granted automatically even without armor proficiency. Lightweight enough to not hinder spellcasting."},
+ {id:"ar_glamoured_studded", title:"Glamoured Studded Leather *", category:"Armor", phb:false, tags:"magic,armor,illusion,DMG", desc:"While wearing this armor you gain a +1 bonus to AC. You can also use a bonus action to speak the armor's command word and cause it to assume the appearance of a normal set of clothing or some other kind of armor.", notes:"Rarity: Rare. Attune: No. Bonus: +1 AC. Glamour: BA to change appearance to any clothing or armor style. The disguise fools visual inspection but not touch. Lasts until you use BA to end it or remove the armor."},
+ {id:"ar_mariners_armor", title:"Mariner's Armor *", category:"Armor", phb:false, tags:"magic,armor,swim,DMG", desc:"While wearing this armor, you have a swimming speed equal to your walking speed. In addition, whenever you start your turn underwater with 0 hit points, the armor causes you to rise 60 feet toward the surface.", notes:"Rarity: Uncommon. Attune: No. Swim speed equals walk speed. Auto-rise 60 ft toward surface when at 0 HP underwater. Can be any light, medium, or heavy armor type."},
+ {id:"ar_plate_etherealness", title:"Plate Armor of Etherealness *", category:"Armor", phb:false, tags:"magic,armor,ethereal,DMG", desc:"While wearing this armor you can speak its command word as an action to gain the effect of the Etherealness spell, which lasts until you remove the armor or use an action to speak the command word again.", notes:"Rarity: Legendary. Attune: Yes. Type: Plate armor. Etherealness: Cast as action, lasts until ended or armor removed. No limit on uses per day."},
+ {id:"sh_missile_attract", title:"Shield of Missile Attraction *", category:"Shield", phb:false, tags:"magic,shield,cursed,DMG", desc:"While holding this shield you have resistance to damage from ranged weapon attacks. Curse: You are cursed — the shield attracts ranged attacks toward you; attackers have advantage on ranged attack rolls against you.", notes:"Rarity: Rare. Attune: Yes. Cursed item. Resistance: ranged weapon damage. Curse: Attackers have advantage on ranged attacks vs you. Remove Curse ends attunement."},
+ {id:"sh_xge_expression",title:"Shield of Expression *",category:"Shield",phb:false,tags:"magic,shield,XGE",desc:"The front of this shield is shaped in the likeness of a face. While bearing the shield, you can use a bonus action to alter the face's expression.",notes:"Rarity: Common. Attune: No. Bonus action: change the face's expression to any emotion (happy, angry, sad, etc.). Purely cosmetic. XGE p.139."},
+ {id:"sh_arrow_catching", title:"Arrow-Catching Shield *", category:"Shield", phb:false, tags:"magic,shield,DMG", desc:"You gain a +2 bonus to AC against ranged attacks while you wield this shield. This bonus is in addition to the shield's normal bonus to AC. In addition, whenever an attacker makes a ranged attack against a target within 5 feet of you, you can use your reaction to become the target of the attack instead.", notes:"Rarity: Rare. Attune: Yes. Bonus: +2 AC vs ranged attacks (total +4 AC vs ranged). Reaction: Redirect ranged attack targeting creature within 5 ft to yourself instead."},
+ {id:"sh_sentinel", title:"Sentinel Shield *", category:"Shield", phb:false, tags:"magic,shield,DMG", desc:"While holding this shield, you have advantage on initiative rolls and Wisdom (Perception) checks. The shield is emblazoned with a symbol of an eye.", notes:"Rarity: Uncommon. Attune: Yes. Benefits: Advantage on initiative rolls. Advantage on WIS (Perception) checks."},
+ {id:"sh_spellguard", title:"Spellguard Shield *", category:"Shield", phb:false, tags:"magic,shield,DMG", desc:"While holding this shield, you have advantage on saving throws against spells and other magical effects, and spell attacks have disadvantage against you.", notes:"Rarity: Very Rare. Attune: Yes. Benefits: Advantage on saves vs spells and magical effects. Spell attacks have disadvantage against you."},
+ {id:"wp_dmg_arrow_slaying", title:"Arrow of Slaying *", category:"Weapon", phb:false, tags:"magic,arrow,ranged,DMG", desc:"An arrow of slaying is a magic weapon meant to kill a particular kind of creature. If a creature belonging to the type, race, or group associated with an arrow of slaying takes damage from the arrow, the creature must make a DC 17 CON saving throw, taking an extra 6d10 piercing damage on a failed save, or half as much on a successful one.", notes:"Rarity: Very Rare. Attune: No. Type: Arrow (ammunition). DC 17 CON save or 6d10 extra piercing damage. One use — after hitting or missing, the arrow loses its magic properties. Many subtypes exist (e.g. Dragon Slaying, Giant Slaying, Undead Slaying)."},
+ {id:"wp_dmg_dancing_sword", title:"Dancing Sword *", category:"Weapon", phb:false, tags:"magic,sword,melee,DMG", desc:"You can use a bonus action to toss this magic sword into the air and speak the command word. When you do, the sword begins to hover, flies up to 30 feet, and attacks one creature of your choice within 5 feet of it.", notes:"Rarity: Very Rare. Attune: Yes. Type: Any sword. Bonus: +1 atk/dmg. Dancing: BA to launch — sword hovers and attacks independently for 4 turns (using your spell attack bonus), then returns to hand. While dancing cannot be used in your own attack action."},
+ {id:"wp_dmg_dragonslayer", title:"Dragon Slayer *", category:"Weapon", phb:false, tags:"magic,sword,melee,dragon,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. When you hit a dragon with this weapon, the dragon takes an extra 3d6 damage of the weapon's type.", notes:"Rarity: Rare. Attune: No. Type: Any sword. Bonus: +1 atk/dmg. vs Dragons: +3d6 extra damage of weapon type. Dragon types include dragon-type creatures as defined in the MM."},
+ {id:"wp_dmg_giantslayer", title:"Giant Slayer *", category:"Weapon", phb:false, tags:"magic,axe,sword,melee,giant,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. When you hit a giant with it, the giant takes an extra 2d6 damage of the weapon's type and must succeed on a DC 15 STR saving throw or fall prone.", notes:"Rarity: Rare. Attune: No. Type: Any axe or sword. Bonus: +1 atk/dmg. vs Giants: +2d6 extra damage + DC 15 STR save or fall prone. Giants include hill, stone, frost, fire, cloud, and storm giants, as well as related creatures such as ogres and trolls."},
+ {id:"wp_dmg_hammer_thunderbolts", title:"Hammer of Thunderbolts *", category:"Weapon", phb:false, tags:"magic,hammer,melee,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. While wearing a belt of giant strength and gauntlets of ogre power, you gain additional benefits.", notes:"Rarity: Legendary. Attune: No (basic). Full power requires Belt of Giant Strength + Gauntlets of Ogre Power attuned simultaneously. Benefits: +1 atk/dmg always. With belt+gauntlets: +4 atk/dmg, STR becomes 25 if lower, +1 to max HP per giant killed. Giant Bane: DC 17 CON save or die on hit (giants only). Thunderous Strike: 5 charges, expend 1 to deal +5d6 thunder and stun target DC 17 CON save."},
+ {id:"wp_dmg_javelin_lightning", title:"Javelin of Lightning *", category:"Weapon", phb:false, tags:"magic,javelin,thrown,DMG", desc:"This javelin is a magic weapon. When you hurl it and speak its command word, it transforms into a bolt of lightning, forming a line 5 feet wide that extends out from you to a target within 120 feet.", notes:"Rarity: Uncommon. Attune: No. Each creature in the line excluding you and the target must DC 13 DEX save or take 4d6 lightning (half on success). Target takes same damage as a normal javelin hit + 4d6 lightning. After the attack, it returns to its normal form. Can be used as a normal javelin if the lightning property is not used."},
+ {id:"wp_dmg_luck_blade", title:"Luck Blade *", category:"Weapon", phb:false, tags:"magic,sword,melee,luck,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.", notes:"Rarity: Legendary. Attune: Yes. Type: Any sword. Bonus: +1 atk/dmg, +1 all saves. Luck: 1-3 charges (rolled secretly by DM), spend 1 to reroll any d20 (keep new roll). Wishing: If 1 charge remains, can cast Wish 1/day — once used this way, no more charges can be gained."},
+ {id:"wp_dmg_mace_disruption", title:"Mace of Disruption *", category:"Weapon", phb:false, tags:"magic,mace,melee,undead,DMG", desc:"When you hit a fiend or an undead with this magic weapon, that creature takes an extra 2d6 radiant damage. If the target has 25 hit points or fewer after taking this damage, it must succeed on a DC 15 WIS saving throw or be destroyed.", notes:"Rarity: Rare. Attune: Yes. Type: Mace. vs Fiends/Undead: +2d6 radiant damage. Destroy threshold: DC 15 WIS save or destroyed if at 25 HP or fewer after damage. On failed save: creature is destroyed. While you hold this weapon, it sheds bright light in a 20-foot radius and dim light for an additional 20 feet."},
+ {id:"wp_dmg_mace_smiting", title:"Mace of Smiting *", category:"Weapon", phb:false, tags:"magic,mace,melee,construct,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. The bonus increases to +3 when you use the mace to attack a construct.", notes:"Rarity: Rare. Attune: No. Type: Mace. Bonus: +1 atk/dmg normally, +3 atk/dmg vs constructs. Construct Destruction: If a construct has 25 HP or fewer after being hit, it must DC 15 CON save or be destroyed instantly."},
+ {id:"wp_dmg_mace_terror", title:"Mace of Terror *", category:"Weapon", phb:false, tags:"magic,mace,melee,fear,DMG", desc:"This magic weapon has 3 charges. While holding it, you can use an action and expend 1 charge to release a wave of terror.", notes:"Rarity: Rare. Attune: Yes. Type: Mace. Charges: 3 (regains 1d3 at dawn). Terror Wave: Each creature of your choice within 30 ft must DC 15 WIS save or be frightened for 1 minute. Frightened creature must spend turns trying to move away, can't take reactions, can repeat save at end of each turn."},
+ {id:"wp_dmg_nine_lives", title:"Nine Lives Stealer *", category:"Weapon", phb:false, tags:"magic,sword,melee,DMG", desc:"You gain a +2 bonus to attack and damage rolls made with this magic weapon. The sword has 1d8+1 charges. If you score a critical hit against a creature that has fewer than 100 hit points, it must succeed on a DC 15 CON saving throw or be slain instantly.", notes:"Rarity: Very Rare. Attune: Yes. Type: Any sword. Bonus: +2 atk/dmg. Instant kill: Critical hit on creature below 100 HP — DC 15 CON save or die instantly. Each kill uses 1 charge. When all charges are expended the sword loses this property. Constructs and undead are immune."},
+ {id:"wp_dmg_oathbow", title:"Oathbow *", category:"Weapon", phb:false, tags:"magic,bow,ranged,DMG", desc:"When you nock an arrow on this bow and speak its command word, the arrow becomes a magical bolt of energy. The target becomes your sworn enemy until it dies or until dawn 7 days later.", notes:"Rarity: Very Rare. Attune: Yes. Type: Longbow. Sworn Enemy: +3d6 piercing vs sworn enemy, no disadv on long range vs sworn enemy, adv on attacks vs sworn enemy. Restrictions: Disadv on attacks vs creatures other than sworn enemy. Only one sworn enemy at a time — cannot designate new one until current dies or 7 days pass."},
+ {id:"wp_dmg_scimitar_speed", title:"Scimitar of Speed *", category:"Weapon", phb:false, tags:"magic,scimitar,melee,DMG", desc:"You gain a +2 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one attack with it as a bonus action on each of your turns.", notes:"Rarity: Very Rare. Attune: Yes. Type: Scimitar. Bonus: +2 atk/dmg. Extra Attack: Make one attack as BA on each of your turns (in addition to your normal Attack action)."},
+ {id:"wp_dmg_sword_answering", title:"Sword of Answering *", category:"Weapon", phb:false, tags:"magic,sword,melee,DMG", desc:"One of nine legendary swords, each associated with a different alignment. You gain a +3 bonus to attack and damage rolls. While you hold the sword, you can use your reaction to make one melee attack with it against any creature that deals damage to you.", notes:"Rarity: Legendary. Attune: Yes (creature of specific alignment). Type: Longsword. Bonus: +3 atk/dmg. Answering: Reaction attack vs any creature that damages you. Nine variants: Answerer (CG), Back Talker (CE), Concluder (LN), Last Quip (CN), Rebutter (NG), Replier (N), Retorter (NE), Scather (LE), Squelcher (LG)."},
+ {id:"wp_dmg_sword_vengeance", title:"Sword of Vengeance *", category:"Weapon", phb:false, tags:"magic,sword,melee,cursed,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. Curse: This sword is cursed and possessed by a vengeful spirit.", notes:"Rarity: Uncommon. Attune: Yes. Type: Any sword. Bonus: +1 atk/dmg. Cursed: Once attuned you are unwilling to part with the sword. You have disadvantage on attack rolls with other weapons. When you are attacked, you must succeed DC 15 WIS save or use your reaction to attack the attacker with the sword if able."},
+ {id:"wp_dmg_sword_wounding", title:"Sword of Wounding *", category:"Weapon", phb:false, tags:"magic,sword,melee,DMG", desc:"Hit points lost to this weapon's damage can be regained only through a short or long rest, rather than by regeneration, magic, or any other means.", notes:"Rarity: Rare. Attune: Yes. Type: Any sword. Wounding: HP lost cannot be regained except by rest (no healing spells, regeneration, etc. work). On each of your turns you can use BA to cause 1d4 necrotic damage to a creature wounded by this sword (no action required on their turn). Effect ends when creature regains HP."},
+ {id:"wp_dmg_trident_fish", title:"Trident of Fish Command *", category:"Weapon", phb:false, tags:"magic,trident,melee,DMG", desc:"This trident is a magic weapon. It has 3 charges. While you carry it, you can use an action and expend 1 charge to cast Dominate Beast on a beast that has an innate swimming speed.", notes:"Rarity: Uncommon. Attune: Yes. Type: Trident. Charges: 3 (regains 1d3 at dawn). Dominate Beast: DC 15 WIS save, affects beasts with swim speed only. Duration: 1 hour."},
+ {id:"wp_dmg_vicious_weapon", title:"Vicious Weapon *", category:"Weapon", phb:false, tags:"magic,weapon,melee,DMG", desc:"When you roll a 20 on your attack roll with this magic weapon, the target takes an extra 7 damage of the weapon's type.", notes:"Rarity: Rare. Attune: No. Type: Any weapon. Savage Critical: Natural 20 deals +7 extra damage of weapon type."},
+ {id:"wp_dmg_weapon_warning", title:"Weapon of Warning *", category:"Weapon", phb:false, tags:"magic,weapon,DMG", desc:"While this weapon is on your person, you have advantage on initiative rolls. In addition, you and any of your companions within 30 feet of you can't be surprised, except when incapacitated.", notes:"Rarity: Uncommon. Attune: Yes. Type: Any weapon. Initiative: Advantage on initiative rolls. Anti-Surprise: You and companions within 30 ft cannot be surprised (except when incapacitated)."},
+ {id:"wp_xge_moon_touched_sword",title:"Moon-Touched Sword *",category:"Weapon",phb:false,tags:"magic,sword,melee,light,XGE",desc:"In darkness, the unsheathed blade of this sword sheds moonlight, creating bright light in a 15-foot radius and dim light for an additional 15 feet.",notes:"Rarity: Common. Attune: No. Type: Any sword. Sheds moonlight when unsheathed: 15ft bright, 15ft dim. Counts as magical for overcoming resistance/immunity. XGE p.138."},
+ {id:"wp_xge_unbreakable_arrow",title:"Unbreakable Arrow *",category:"Weapon",phb:false,tags:"magic,ammunition,ranged,XGE",desc:"This arrow can't be broken, except when it is within an antimagic field.",notes:"Rarity: Common. Attune: No. Type: Arrow. Indestructible except in antimagic field. Can be reused indefinitely. XGE p.140."},
+ {id:"wp_xge_walloping_ammunition",title:"Walloping Ammunition *",category:"Weapon",phb:false,tags:"magic,ammunition,ranged,XGE",desc:"This ammunition packs a wallop. A creature hit by this ammunition must succeed on a DC 10 Strength saving throw or be knocked prone.",notes:"Rarity: Common. Attune: No. Type: Any ammunition. Hit target: DC 10 STR save or knocked prone. XGE p.140."},
+ {id:"wp_tce_moon_sickle",title:"Moon Sickle *",category:"Weapon",phb:false,tags:"magic,druid,ranger,simple,melee,TCE",desc:"You gain a bonus to attack and damage rolls made with this magic weapon, and you gain the same bonus to spell attack rolls and spell save DC of your druid and ranger spells. While holding this weapon, you can use a bonus action to cast Goodberry (1/day).",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (druid or ranger). Type: Sickle. Bonus to atk/dmg and spell attack/save DC. Goodberry 1/day as bonus action. TCE p.133."},
+ {id:"wp_dmg_ammo_plus1", title:"Ammunition +1 *", category:"Weapon", phb:false, tags:"magic,ammunition,ranged,DMG", desc:"+1 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.", notes:"Rarity: Uncommon. Attune: No. Types: Arrows, bolts, sling bullets. Bonus: +1 atk/dmg. Single use — loses magic after hitting."},
+ {id:"wp_dmg_ammo_plus2", title:"Ammunition +2 *", category:"Weapon", phb:false, tags:"magic,ammunition,ranged,DMG", desc:"+2 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.", notes:"Rarity: Rare. Attune: No. Types: Arrows, bolts, sling bullets. Bonus: +2 atk/dmg. Single use — loses magic after hitting."},
+ {id:"wp_dmg_ammo_plus3", title:"Ammunition +3 *", category:"Weapon", phb:false, tags:"magic,ammunition,ranged,DMG", desc:"+3 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.", notes:"Rarity: Very Rare. Attune: No. Types: Arrows, bolts, sling bullets. Bonus: +3 atk/dmg. Single use — loses magic after hitting."},
+ {id:"wp_dmg_berserker_axe", title:"Berserker Axe *", category:"Weapon", phb:false, tags:"magic,axe,melee,cursed,DMG", desc:"You gain a +1 bonus to attack and damage rolls made with this magic weapon. Curse: This axe is cursed, and becoming attuned to it extends the curse to you.", notes:"Rarity: Rare. Attune: Yes. Type: Any axe. Bonus: +1 atk/dmg. Curse: When you take damage in combat, DC 15 WIS save or berserk — must attack nearest creature each turn. Berserk ends when no creatures visible. Unwilling to part with axe while cursed. Remove Curse ends attunement."},
+ {id:"wp_dmg_sword_lifestealing", title:"Sword of Life Stealing *", category:"Weapon", phb:false, tags:"magic,sword,melee,DMG", desc:"When you attack a creature with this magic weapon and roll a 20 on the attack roll, that target takes an extra 10 necrotic damage if it isn't a construct or an undead. You also gain 10 temporary hit points.", notes:"Rarity: Rare. Attune: Yes. Type: Any sword. Critical Hit: +10 necrotic damage to non-construct/undead target + 10 temp HP to you. Constructs and undead are immune to the extra damage and temp HP effect."},
+ {id:"eq_abacus",title:"Abacus",category:"Equipment",phb:true,tags:"gear,tool,PHB",desc:"A counting frame used for arithmetic calculations.",notes:"Cost: 2 gp. Weight: 2 lbs."},
+ {id:"eq_acid_vial",title:"Acid (Vial)",category:"Equipment",phb:true,tags:"gear,throwable,PHB",desc:"As an action, splash the contents of this vial onto a creature within 5 feet or throw it up to 20 feet, shattering on impact.",notes:"Cost: 25 gp. Weight: 1 lb. On hit: 2d6 acid damage. Splash attack uses Dexterity. Range: 20 ft."},
+ {id:"eq_alchemists_fire",title:"Alchemist's Fire (Flask)",category:"Equipment",phb:true,tags:"gear,throwable,fire,PHB",desc:"A sticky, adhesive fluid that ignites when exposed to air. Throw as an action up to 20 feet and it burns on impact.",notes:"Cost: 50 gp. Weight: 1 lb. On hit: 1d4 fire damage per turn until extinguished. Action to extinguish (DEX DC 10). Range: 20 ft."},
+ {id:"eq_antitoxin_vial",title:"Antitoxin (Vial)",category:"Equipment",phb:true,tags:"gear,consumable,PHB",desc:"A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour.",notes:"Cost: 50 gp. Weight: —. Duration: 1 hour. Grants advantage on CON saves vs poison. Does not remove existing poison conditions."},
+ {id:"eq_ammo_arrows",title:"Ammunition - Arrows (20)",category:"Equipment",phb:true,tags:"gear,ammunition,ranged,PHB",desc:"Arrows used with a shortbow or longbow.",notes:"Cost: 1 gp. Weight: 1 lb. Qty: 20. Used with: Shortbow, Longbow. Recovered after combat (half on a miss)."},
+ {id:"eq_ammo_blowgun",title:"Ammunition - Blowgun Needles (50)",category:"Equipment",phb:true,tags:"gear,ammunition,ranged,PHB",desc:"Needles used with a blowgun.",notes:"Cost: 1 gp. Weight: 1 lb. Qty: 50. Used with: Blowgun."},
+ {id:"eq_ammo_bolts",title:"Ammunition - Crossbow Bolts (20)",category:"Equipment",phb:true,tags:"gear,ammunition,ranged,PHB",desc:"Bolts used with a hand crossbow, light crossbow, or heavy crossbow.",notes:"Cost: 1 gp. Weight: 1.5 lbs. Qty: 20. Used with: Hand Crossbow, Light Crossbow, Heavy Crossbow."},
+ {id:"eq_ammo_sling",title:"Ammunition - Sling Bullets (20)",category:"Equipment",phb:true,tags:"gear,ammunition,ranged,PHB",desc:"Bullets used with a sling.",notes:"Cost: 4 cp. Weight: 1.5 lbs. Qty: 20. Used with: Sling."},
+ {id:"eq_arcane_crystal",title:"Arcane Focus - Crystal",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A specially crafted crystal used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 10 gp. Weight: 1 lb. Replaces non-costly material components."},
+ {id:"eq_arcane_orb",title:"Arcane Focus - Orb",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A polished orb used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 20 gp. Weight: 3 lbs. Replaces non-costly material components."},
+ {id:"eq_arcane_rod",title:"Arcane Focus - Rod",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A metal rod used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 10 gp. Weight: 2 lbs. Replaces non-costly material components."},
+ {id:"eq_arcane_staff",title:"Arcane Focus - Staff",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A wooden staff used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 5 gp. Weight: 4 lbs. Replaces non-costly material components. Can also be used as a quarterstaff."},
+ {id:"eq_arcane_wand",title:"Arcane Focus - Wand",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A slender wand used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 10 gp. Weight: 1 lb. Replaces non-costly material components."},
+ {id:"eq_ball_bearings",title:"Ball Bearings (Bag of 1,000)",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"As an action, you can spill these ball bearings from their pouch to cover a 10-foot square area.",notes:"Cost: 1 gp. Weight: 2 lbs. Any creature crossing the area must DC 10 DEX save or fall prone. Large or larger creatures are unaffected."},
+ {id:"eq_bell",title:"Bell",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A small bell used as an alarm or signal device.",notes:"Cost: 1 gp. Weight: —."},
+ {id:"eq_blanket",title:"Blanket",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A thick wool blanket for warmth.",notes:"Cost: 5 sp. Weight: 3 lbs."},
+ {id:"eq_block_tackle",title:"Block and Tackle",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A set of pulleys with a cable threaded through them and a hook to attach to objects, allowing you to hoist up to four times the normal weight.",notes:"Cost: 1 gp. Weight: 5 lbs. Multiplies lifting capacity by 4. Requires 2 anchor points."},
+ {id:"eq_book",title:"Book",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else.",notes:"Cost: 25 gp. Weight: 5 lbs."},
+ {id:"eq_case_bolt",title:"Case - Crossbow Bolt",category:"Equipment",phb:true,tags:"gear,container,PHB",desc:"A wooden case that can hold up to 20 crossbow bolts.",notes:"Cost: 1 gp. Weight: 1 lb. Capacity: 20 bolts."},
+ {id:"eq_case_map",title:"Case - Map or Scroll",category:"Equipment",phb:true,tags:"gear,container,PHB",desc:"A cylindrical leather case that can hold up to 10 rolled-up sheets of paper or 5 rolled-up sheets of parchment.",notes:"Cost: 1 gp. Weight: 1 lb. Capacity: 10 paper sheets or 5 parchment sheets."},
+ {id:"eq_clothes_common",title:"Clothes - Common",category:"Equipment",phb:true,tags:"gear,clothing,PHB",desc:"Everyday clothing worn by common folk.",notes:"Cost: 5 sp. Weight: 3 lbs."},
+ {id:"eq_clothes_costume",title:"Clothes - Costume",category:"Equipment",phb:true,tags:"gear,clothing,PHB",desc:"An outfit designed to portray a specific character or type of person, used by entertainers and performers.",notes:"Cost: 5 gp. Weight: 4 lbs."},
+ {id:"eq_clothes_fine",title:"Clothes - Fine",category:"Equipment",phb:true,tags:"gear,clothing,PHB",desc:"Elegant clothing favored by nobles and wealthy merchants.",notes:"Cost: 15 gp. Weight: 6 lbs."},
+ {id:"eq_clothes_travelers",title:"Clothes - Traveler's",category:"Equipment",phb:true,tags:"gear,clothing,PHB",desc:"Sturdy, practical clothing designed for long journeys.",notes:"Cost: 2 gp. Weight: 4 lbs."},
+ {id:"eq_druidic_mistletoe",title:"Druidic Focus - Sprig of Mistletoe",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A sprig of mistletoe used as a spellcasting focus for druids.",notes:"Cost: 1 gp. Weight: —. Replaces non-costly material components for druid spells."},
+ {id:"eq_druidic_totem",title:"Druidic Focus - Totem",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A small carving of an animal used as a spellcasting focus for druids.",notes:"Cost: 1 gp. Weight: —. Replaces non-costly material components for druid spells."},
+ {id:"eq_druidic_staff",title:"Druidic Focus - Wooden Staff",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A wooden staff carved from a living tree, used as a spellcasting focus for druids.",notes:"Cost: 5 gp. Weight: 4 lbs. Replaces non-costly material components for druid spells. Can also be used as a quarterstaff."},
+ {id:"eq_druidic_wand",title:"Druidic Focus - Yew Wand",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A wand carved from yew wood, used as a spellcasting focus for druids.",notes:"Cost: 10 gp. Weight: 1 lb. Replaces non-costly material components for druid spells."},
+ {id:"eq_fishing_tackle",title:"Fishing Tackle",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A kit that includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.",notes:"Cost: 1 gp. Weight: 4 lbs."},
+ {id:"eq_hourglass",title:"Hourglass",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A glass device used to measure time, typically one hour.",notes:"Cost: 25 gp. Weight: 1 lb. Measures: 1 hour."},
+ {id:"eq_ink_pen",title:"Ink Pen",category:"Equipment",phb:true,tags:"gear,writing,PHB",desc:"A quill or reed pen used for writing.",notes:"Cost: 2 cp. Weight: —."},
+ {id:"eq_paper_sheet",title:"Paper (one Sheet)",category:"Equipment",phb:true,tags:"gear,writing,PHB",desc:"A single sheet of fine paper for writing or drawing.",notes:"Cost: 2 sp. Weight: —."},
+ {id:"eq_perfume_vial",title:"Perfume (Vial)",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A small vial of sweet-smelling perfume.",notes:"Cost: 5 gp. Weight: —."},
+ {id:"eq_robes",title:"Robes",category:"Equipment",phb:true,tags:"gear,clothing,PHB",desc:"Long flowing garments commonly worn by scholars, mages, and clergy.",notes:"Cost: 1 gp. Weight: 4 lbs."},
+ {id:"eq_soap",title:"Soap",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A bar of soap for cleaning.",notes:"Cost: 2 cp. Weight: —."},
+ {id:"eq_spellbook",title:"Spellbook",category:"Equipment",phb:true,tags:"gear,spellcasting,wizard,PHB",desc:"Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages for recording spells.",notes:"Cost: 50 gp. Weight: 3 lbs. Pages: 100. Wizards use this to prepare spells each day. Each spell takes 1 page per spell level (cantrips take 1 page)."},
+ {id:"eq_miners_pick",title:"Pick, Miner's",category:"Equipment",phb:true,tags:"gear,tool,PHB",desc:"A heavy pick used for mining and breaking rock.",notes:"Cost: 2 gp. Weight: 10 lbs. Can be used as an improvised weapon (1d6 piercing)."},
+ {id:"eq_poison_basic",title:"Poison, Basic (Vial)",category:"Equipment",phb:true,tags:"gear,consumable,poison,PHB",desc:"You can use the poison in this vial to coat one slashing or piercing weapon or up to 3 pieces of ammunition. Applying the poison takes an action.",notes:"Cost: 100 gp. Weight: —. Duration: 1 minute or until wiped off. On hit: DC 10 CON save or take 1d4 poison damage and become poisoned for 1 minute."},
+ {id:"mi_amulet_health",title:"Amulet of Health",category:"Jewelry",phb:false,tags:"wondrous,constitution,DMG",desc:"Your CON score is 19 while you wear this amulet. It has no effect if your CON is already 19 or higher.",notes:"Rarity: Rare. Attune: Yes. CON becomes 19 (no effect if already 19+)."},
+ {id:"mi_amulet_proof",title:"Amulet of Proof Against Detection and Location",category:"Jewelry",phb:false,tags:"wondrous,protection,DMG",desc:"While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors.",notes:"Rarity: Uncommon. Attune: Yes. Hidden from all divination magic. Immune to magical scrying sensors."},
+ {id:"mi_amulet_planes",title:"Amulet of the Planes",category:"Jewelry",phb:false,tags:"wondrous,travel,DMG",desc:"While wearing this amulet, you can use an action to name a location that you are familiar with on another plane of existence.",notes:"Rarity: Very Rare. Attune: Yes. Cast Plane Shift as action. On failed DC 15 INT check: random destination instead. 1/day."},
+ {id:"mi_apparatus_kwalish",title:"Apparatus of Kwalish",category:"Magic Item",phb:false,tags:"wondrous,vehicle,DMG",desc:"A Large sealed metal crab-shaped vehicle that holds two creatures. Operated via a series of 10 levers inside the hatch.",notes:"Rarity: Legendary. Attune: No. AC 20, 200 HP, immune to poison/psychic. Speed: 30 ft walk, 30 ft swim. Levers control legs, claws, eyes (darkvision 60 ft), hatch, water intake/outtake, and periscope."},
+ {id:"mi_bag_beans",title:"Bag of Beans",category:"Magic Item",phb:false,tags:"wondrous,chaotic,DMG",desc:"Inside this heavy cloth bag are 3d4 dried beans. If you dump them out, they explode in a 10-foot radius dealing 5d4 fire damage (DC 15 DEX save for half).",notes:"Rarity: Rare. Attune: No. Each bean planted creates a random effect (roll d100). Effects range from mushrooms to gems to monsters to a palace. Dumping all beans: 5d4 fire damage DC 15 DEX save."},
+ {id:"mi_bag_devouring",title:"Bag of Devouring",category:"Magic Item",phb:false,tags:"wondrous,cursed,DMG",desc:"This bag superficially resembles a bag of holding but is a planar monster. It devours any organic matter placed inside.",notes:"Rarity: Very Rare. Attune: No. Cursed. Organic matter: destroyed in 1 round. Creature wholly inside: DC 15 STR check each round or consumed. Reaches inside: DC 15 DEX save or pulled in. When full, it disappears."},
+ {id:"mi_bag_tricks",title:"Bag of Tricks",category:"Magic Item",phb:false,tags:"wondrous,summoning,DMG",desc:"This ordinary bag made from gray, rust, or tan cloth appears empty. Reaching inside the bag, however, reveals the presence of a small, fuzzy object.",notes:"Rarity: Uncommon. Attune: No. Pull out fuzzy ball as action, throw up to 20 ft. It becomes a creature (roll d8 for type based on bag color). Creature obeys commands. Vanishes at dawn or when reduced to 0 HP. 3 uses per dawn."},
+ {id:"mi_bead_force",title:"Bead of Force",category:"Magic Item",phb:false,tags:"wondrous,force,DMG",desc:"This small black sphere measures about 3/4 inch in diameter. You can use an action to throw the bead up to 60 feet.",notes:"Rarity: Rare. Attune: No. On impact: 5d4 force damage in 10-ft radius (DC 15 DEX save for half). Creatures that fail are trapped in sphere of force (AC 20, 30 HP) for 1 minute or until sphere destroyed."},
+ {id:"mi_belt_dwarvenkind",title:"Belt of Dwarvenkind",category:"Magic Item",phb:false,tags:"wondrous,dwarf,DMG",desc:"While wearing this belt, you gain the following benefits: +2 CON, advantage on CHA checks made to interact with dwarves.",notes:"Rarity: Rare. Attune: Yes. Benefits: +2 CON (max 20), adv on CHA checks with dwarves, darkvision 60 ft (if you don't have it), adv on saves vs poison, resistance to poison damage. 50% chance each dawn: grow beard if you can."},
+ {id:"mi_boots_levitation",title:"Boots of Levitation",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"While you wear these boots, you can use an action to cast the Levitate spell on yourself at will.",notes:"Rarity: Rare. Attune: Yes. Cast Levitate on self at will (no spell slot required)."},
+ {id:"mi_boots_striding",title:"Boots of Striding and Springing",category:"Magic Item",phb:false,tags:"wondrous,speed,DMG",desc:"While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed is not reduced if you are encumbered or wearing heavy armor.",notes:"Rarity: Uncommon. Attune: Yes. Speed: 30 ft minimum (not reduced by encumbrance/heavy armor). Jumping: 3x normal jump distance."},
+ {id:"mi_boots_winter",title:"Boots of the Winterlands",category:"Magic Item",phb:false,tags:"wondrous,cold,DMG",desc:"These furred boots are snug and warm. While you wear them, you gain the following benefits.",notes:"Rarity: Uncommon. Attune: Yes. Benefits: Resistance to cold damage. Ignore difficult terrain caused by ice/snow. Tolerate temperatures as low as -50°F without protection."},
+ {id:"mi_bowl_water",title:"Bowl of Commanding Water Elementals",category:"Magic Item",phb:false,tags:"wondrous,water,elemental,DMG",desc:"While this bowl is filled with water, you can use an action to speak the bowl's command word and summon a water elemental.",notes:"Rarity: Rare. Attune: No. Must be filled with water. Summons water elemental (as Conjure Elemental). Elemental serves for 1 hour or until dismissed. 1 use — recharges at dawn."},
+ {id:"mi_bracers_archery",title:"Bracers of Archery",category:"Magic Item",phb:false,tags:"wondrous,archery,ranged,DMG",desc:"While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.",notes:"Rarity: Uncommon. Attune: Yes. Proficiency: Longbow and shortbow. Bonus: +2 damage on ranged attacks with longbow/shortbow."},
+ {id:"mi_brazier_fire",title:"Brazier of Commanding Fire Elementals",category:"Magic Item",phb:false,tags:"wondrous,fire,elemental,DMG",desc:"While a fire burns in this brass brazier, you can use an action to speak the brazier's command word and summon a fire elemental.",notes:"Rarity: Rare. Attune: No. Must have fire burning inside. Summons fire elemental (as Conjure Elemental). Elemental serves for 1 hour or until dismissed. 1 use — recharges at dawn."},
+ {id:"mi_brooch_shielding",title:"Brooch of Shielding",category:"Jewelry",phb:false,tags:"wondrous,protection,DMG",desc:"While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the Magic Missile spell.",notes:"Rarity: Uncommon. Attune: Yes. Resistance: force damage. Immunity: Magic Missile damage."},
+ {id:"mi_broom_flying",title:"Broom of Flying",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"This wooden broom, which weighs 3 pounds, functions like a mundane broom until you stand astride it and speak its command word.",notes:"Rarity: Uncommon. Attune: No. Fly speed: 50 ft. Can carry 400 lbs (over 200 lbs reduces speed to 30 ft). Command to hover, come to you within 300 ft, or return home."},
+ {id:"mi_candle_invocation",title:"Candle of Invocation",category:"Magic Item",phb:false,tags:"wondrous,divine,DMG",desc:"This taper is dedicated to a deity and shares that deity's alignment. The candle's magic is activated when the candle is lit, which requires an action.",notes:"Rarity: Very Rare. Attune: Yes (cleric, druid, or warlock). Burns for 4 hours. While lit: adv on attack rolls, saving throws, and ability checks for creatures within 30 ft that share alignment. Cast Gate 1/day (creatures sharing candle's alignment only)."},
+ {id:"mi_cape_water",title:"Cape of the Mountebank",category:"Magic Item",phb:false,tags:"wondrous,water,DMG",desc:"While wearing this cloak, you can breathe underwater, and you have a swimming speed equal to your walking speed.",notes:"Rarity: Uncommon. Attune: No. Breathe underwater. Swim speed equals walking speed."},
+ {id:"mi_carpet_flying",title:"Carpet of Flying",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"You can speak the carpet's command word as an action to make the carpet hover and fly. It moves according to your spoken directions.",notes:"Rarity: Very Rare. Attune: No. Sizes: 3x5 ft (200 lbs, 90 ft speed), 4x6 ft (400 lbs, 60 ft speed), 5x7 ft (600 lbs, 40 ft speed), 6x9 ft (800 lbs, 30 ft speed). Hovering counts as Fly spell."},
+ {id:"mi_censer_air",title:"Censer of Controlling Air Elementals",category:"Magic Item",phb:false,tags:"wondrous,air,elemental,DMG",desc:"While incense is burning in this censer, you can use an action to speak the censer's command word and summon an air elemental.",notes:"Rarity: Rare. Attune: No. Must have incense burning inside. Summons air elemental (as Conjure Elemental). 1 hour or until dismissed. 1 use — recharges at dawn."},
+ {id:"mi_chime_opening",title:"Chime of Opening",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This hollow metal tube measures about 1 foot long and weighs 1 pound. You can strike it as an action, pointing it at an object within 120 feet that can be opened.",notes:"Rarity: Rare. Attune: No. Charges: 10. Expend 1 charge to open one lock, latch, or door within 120 ft (including magically sealed). Cannot open Wizard Lock or Arcane Lock without expending extra charge."},
+ {id:"mi_cloak_arachnida",title:"Cloak of Arachnida",category:"Magic Item",phb:false,tags:"wondrous,spider,DMG",desc:"This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits.",notes:"Rarity: Very Rare. Attune: Yes. Benefits: Resistance to poison damage. Immunity to being caught in webs. Climb speed equals walk speed. Walk on walls/ceilings. Cast Web 1/day."},
+ {id:"mi_cloak_invisibility",title:"Cloak of Invisibility",category:"Magic Item",phb:false,tags:"wondrous,invisibility,DMG",desc:"While wearing this cloak, you can pull its hood over your head to become invisible. While invisible, anything you are carrying or wearing is invisible with you.",notes:"Rarity: Legendary. Attune: Yes. Invisibility while hood is up. Lasts until hood removed, you attack/cast, or cloak has been worn for cumulative 2 hours (recharges at midnight)."},
+ {id:"mi_cloak_bat",title:"Cloak of the Bat",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"While wearing this cloak, you have advantage on Dexterity (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly.",notes:"Rarity: Rare. Attune: Yes. Adv on Stealth in dim light/darkness. Fly speed 40 ft (must grip edges). Cast Polymorph on self into bat 1/day (concentration, 1 hour)."},
+ {id:"mi_cloak_manta",title:"Cloak of the Manta Ray",category:"Magic Item",phb:false,tags:"wondrous,water,DMG",desc:"While wearing this cloak with its hood up, you can breathe underwater, and you have a swimming speed of 60 feet.",notes:"Rarity: Uncommon. Attune: No. Hood must be up. Breathe underwater. Swim speed: 60 ft."},
+ {id:"mi_crystal_ball",title:"Crystal Ball",category:"Magic Item",phb:false,tags:"wondrous,divination,DMG",desc:"The typical crystal ball is a very rare item that lets you cast the Scrying spell (save DC 17) while touching it.",notes:"Rarity: Very Rare. Attune: Yes. Cast Scrying (DC 17) while touching. Variants: Crystal Ball of Mind Reading (also read thoughts of creature), Crystal Ball of Telepathy (communicate telepathically), Crystal Ball of True Seeing (see as True Seeing)."},
+ {id:"mi_cubic_gate",title:"Cubic Gate",category:"Magic Item",phb:false,tags:"wondrous,planar,DMG",desc:"This cube is 3 inches across and radiates auras of conjuration magic. Each face is keyed to a different plane of existence.",notes:"Rarity: Legendary. Attune: No. 6 charges. Press one face: cast Gate to that plane (expend 1 charge). Press same face twice: transport you and up to 8 willing creatures to that plane. Recharges 1d6+1 charges at dawn."},
+ {id:"mi_daerns_fortress",title:"Daern's Instant Fortress",category:"Magic Item",phb:false,tags:"wondrous,fortress,DMG",desc:"You can use an action to place this 1-inch metal cube on the ground and speak its command word. The cube rapidly grows into a fortress.",notes:"Rarity: Rare. Attune: No. Becomes 20-ft square, 30-ft tall tower. AC 20, 100 HP per 10-ft section, immune to poison/psychic. Door only openable by command word. Returns to cube on command or when destroyed."},
+ {id:"mi_decanter_water",title:"Decanter of Endless Water",category:"Magic Item",phb:false,tags:"wondrous,water,utility,DMG",desc:"This stoppered flask sloshes when shaken, as if it contains water. The decanter weighs 2 pounds.",notes:"Rarity: Uncommon. Attune: No. Speak command word + flow type: Stream (1 gallon/round), Fountain (5 gallons/round, 30-ft stream), Geyser (30 gallons/round, 30-ft geyser — deals 1d4 bludgeoning, DC 13 STR or knocked prone)."},
+ {id:"mi_deck_illusions",title:"Deck of Illusions",category:"Magic Item",phb:false,tags:"wondrous,illusion,DMG",desc:"This set of cards is usually found in a pouch. A full deck has 34 cards. When you draw a card at random and throw it to the ground, it creates an illusion of one or more creatures.",notes:"Rarity: Uncommon. Attune: No. Draw card, throw to ground: creates illusion of creature based on card drawn. Illusion appears real but doesn't move unless you use BA each turn. Lasts until dismissed, attacked, or 1 hour."},
+ {id:"mi_deck_many_things",title:"Deck of Many Things",category:"Magic Item",phb:false,tags:"wondrous,legendary,chaotic,DMG",desc:"Usually found in a box or pouch, this deck contains a number of cards made from ivory or vellum. Each card has a specific major effect on the bearer.",notes:"Rarity: Legendary. Attune: No. Declare how many cards (1-3) before drawing. Each drawn card takes effect immediately. Effects range from gaining a level and 50,000 XP to losing your soul. Undrawn cards crumble if you draw fewer than declared."},
+ {id:"mi_dimensional_shackles",title:"Dimensional Shackles",category:"Magic Item",phb:false,tags:"wondrous,restraint,DMG",desc:"You can use an action to place these shackles on an incapacitated creature. The shackles adjust to fit a creature of Small to Large size.",notes:"Rarity: Rare. Attune: No. Prevents extradimensional movement (teleport, plane shift, etc.) of shackled creature. DC 30 STR check to break. Keyhole opens with command word. Any creature attuned to these shackles can speak command word to remove."},
+ {id:"mi_driftglobe",title:"Driftglobe",category:"Magic Item",phb:false,tags:"wondrous,light,DMG",desc:"This small sphere of thick glass weighs 1 pound. If you are within 60 feet of it, you can speak its command word and cause it to emanate the Light or Daylight spell.",notes:"Rarity: Uncommon. Attune: No. Light: cast at will (20-ft bright, 40-ft dim). Daylight: 1/day. Can float up to 5 ft from you or command to stay in place. If you move more than 60 ft away it follows."},
+ {id:"mi_dust_disappearance",title:"Dust of Disappearance",category:"Magic Item",phb:false,tags:"wondrous,invisibility,DMG",desc:"Found in a small packet, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for 2d4 minutes.",notes:"Rarity: Uncommon. Attune: No. Single use. Invisibility (10-ft radius) for 2d4 minutes. Magic items can detect invisible creatures. Area of effect."},
+ {id:"mi_dust_dryness",title:"Dust of Dryness",category:"Magic Item",phb:false,tags:"wondrous,water,utility,DMG",desc:"This small packet contains 1d6+4 pinches of dust. You can use an action to sprinkle a pinch of it over water. The dust converts up to 15 cubic feet of water into a marble-sized pellet.",notes:"Rarity: Uncommon. Attune: No. 1d6+4 pinches. One pinch: converts 15 cu ft water to pellet. Throw pellet (action): breaks open, releasing all stored water. Undead water elementals: 10d6 necrotic damage (DC 13 CON save for half)."},
+ {id:"mi_dust_sneezing",title:"Dust of Sneezing and Choking",category:"Magic Item",phb:false,tags:"wondrous,poison,DMG",desc:"Found in a small container, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 CON saving throw.",notes:"Rarity: Uncommon. Attune: No. Single use. DC 15 CON save or incapacitated (sneezing/choking) for 1 minute. Repeat save at end of each turn. Appears identical to Dust of Disappearance."},
+ {id:"mi_efreeti_bottle",title:"Efreeti Bottle",category:"Magic Item",phb:false,tags:"wondrous,elemental,fire,DMG",desc:"When you use an action to remove the stopper, a cloud of thick smoke flows out of the bottle. At the end of your turn, the smoke disappears with a thunderous clap, and an efreeti appears in the smoke's former space.",notes:"Rarity: Very Rare. Attune: No. Summons efreeti. Roll d100: 01-10 efreeti attacks for 5 rounds then returns to bottle (sealed for 24 hrs). 11-90 efreeti serves for 1 hour then disappears. 91-100 efreeti grants 3 wishes then disappears, bottle loses magic."},
+ {id:"mi_elemental_gem",title:"Elemental Gem",category:"Magic Item",phb:false,tags:"wondrous,elemental,DMG",desc:"This gem contains a mote of elemental energy. When you use an action to break the gem, an elemental is summoned as if you had cast the Conjure Elemental spell.",notes:"Rarity: Uncommon. Attune: No. Single use. Break gem: summons elemental for 1 hour. Blue sapphire = air, yellow diamond = earth, red corundum = fire, emerald = water. Elemental is friendly and follows your commands."},
+ {id:"mi_eyes_minute",title:"Eyes of Minute Seeing",category:"Magic Item",phb:false,tags:"wondrous,perception,DMG",desc:"These crystal lenses fit over the eyes. While wearing them, you can see much better than normal out to a range of 1 foot.",notes:"Rarity: Uncommon. Attune: No. Within 1 ft: advantage on Investigation checks, can read normally illegible text, find smallest details. Disadvantage on perception checks beyond 1 ft while worn."},
+ {id:"mi_figurine_power",title:"Figurine of Wondrous Power",category:"Magic Item",phb:false,tags:"wondrous,summoning,DMG",desc:"A figurine of wondrous power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw it to the ground, it becomes a living creature.",notes:"Rarity: Varies by type. Attune: No. Types include: Bronze Griffon (Uncommon, 6 hrs/5 days), Ebony Fly (Uncommon, 12 hrs/3 days), Golden Lions (Rare, 1 hr/7 days), Ivory Goats (Rare, varied), Marble Elephant (Rare, 24 hrs/7 days), Onyx Dog (Rare, 6 hrs/7 days), Serpentine Owl (Rare, 8 hrs/2 days), Silver Raven (Uncommon, at will)."},
+ {id:"mi_folding_boat",title:"Folding Boat",category:"Magic Item",phb:false,tags:"wondrous,vehicle,water,DMG",desc:"This object appears as a wooden box that measures 12 inches long, 6 inches wide, and 6 inches deep. It weighs 4 pounds and floats.",notes:"Rarity: Rare. Attune: No. Command word 1: becomes rowboat (10x4 ft, holds 4+gear, oars+mast+sail). Command word 2: becomes keelboat (24x8 ft, holds 15+gear). Command word 3: returns to box. Anyone inside when it folds: unharmed, transported to random plane."},
+ {id:"mi_gem_brightness",title:"Gem of Brightness",category:"Magic Item",phb:false,tags:"wondrous,light,DMG",desc:"This prism has 50 charges. While you are holding it, you can use an action to speak one of three command words to cause one of the following effects.",notes:"Rarity: Uncommon. Attune: No. Charges: 50. 1 charge: shed bright light 30 ft, dim 30 ft (1 min). 5 charges: fire a beam (ranged spell attack, 60 ft, 4d6 radiant, blinded 1 round on hit). 5 charges: 30-ft cone, DC 15 CON or blinded 1 min. When empty: no longer sheds light."},
+ {id:"mi_gloves_missile",title:"Gloves of Missile Snaring",category:"Magic Item",phb:false,tags:"wondrous,protection,DMG",desc:"These gloves seem to almost reach out to catch flying missiles. When a ranged weapon attack hits you while you're wearing them, you can use your reaction to reduce the damage by 1d10 + your Dexterity modifier.",notes:"Rarity: Uncommon. Attune: Yes. Reaction when hit by ranged weapon attack: reduce damage by 1d10+DEX mod. If reduced to 0, you catch the projectile (if small enough to hold in one hand)."},
+ {id:"mi_gloves_swimming",title:"Gloves of Swimming and Climbing",category:"Magic Item",phb:false,tags:"wondrous,movement,DMG",desc:"While wearing these gloves, climbing and swimming don't cost you extra movement, and you gain a +5 bonus to Strength (Athletics) checks made to climb or swim.",notes:"Rarity: Uncommon. Attune: Yes. Climbing/swimming costs no extra movement. +5 to Athletics checks for climbing or swimming."},
+ {id:"mi_goggles_night",title:"Goggles of Night",category:"Magic Item",phb:false,tags:"wondrous,darkvision,DMG",desc:"While wearing these dark lenses, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the goggles increases its range by 60 feet.",notes:"Rarity: Uncommon. Attune: No. Darkvision: 60 ft (or +60 ft if you already have it)."},
+ {id:"mi_helm_brilliance",title:"Helm of Brilliance",category:"Magic Item",phb:false,tags:"wondrous,light,DMG",desc:"This dazzling helm is set with 1d10 diamonds, 2d10 rubies, 3d10 fire opals, and 4d10 opals. Any gem pried from the helm crumbles to dust.",notes:"Rarity: Very Rare. Attune: Yes. Gems power spells. Diamonds: Daylight. Rubies: Fireball (10d6). Fire Opals: Wall of Fire. Opals: Faerie Fire. Blinding flash when damaged. Fiery aura protects against undead. When all gems gone: 50% chance explodes (5d6 fire each creature within 60 ft)."},
+ {id:"mi_helm_languages",title:"Helm of Comprehending Languages",category:"Magic Item",phb:false,tags:"wondrous,language,DMG",desc:"While wearing this helm, you can use an action to cast the Comprehend Languages spell from it at will.",notes:"Rarity: Uncommon. Attune: No. Cast Comprehend Languages at will (no spell slot)."},
+ {id:"mi_helm_telepathy",title:"Helm of Telepathy",category:"Magic Item",phb:false,tags:"wondrous,telepathy,DMG",desc:"While wearing this helm, you can use an action to cast the Detect Thoughts spell (save DC 13) from it.",notes:"Rarity: Uncommon. Attune: Yes. Cast Detect Thoughts (DC 13) at will. While using Detect Thoughts: can also send telepathic message to creature whose thoughts you're reading (one-way)."},
+ {id:"mi_helm_teleport",title:"Helm of Teleportation",category:"Magic Item",phb:false,tags:"wondrous,teleport,DMG",desc:"This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the Teleport spell from it.",notes:"Rarity: Rare. Attune: Yes. Charges: 3 (regains 1d3 at dawn). Cast Teleport (1 charge)."},
+ {id:"mi_haversack",title:"Heward's Handy Haversack",category:"Magic Item",phb:false,tags:"wondrous,storage,DMG",desc:"This backpack has a central pouch and two side pouches, each of which is an extradimensional space. Placing an item requires a free hand.",notes:"Rarity: Rare. Attune: No. Side pouches: 2 cu ft/20 lbs each. Central: 8 cu ft/80 lbs. Always weighs 5 lbs. Retrieving item: action, always on top. If overloaded/pierced/extradimensional conflict: destroys contents."},
+ {id:"mi_horn_blasting",title:"Horn of Blasting",category:"Magic Item",phb:false,tags:"wondrous,thunder,DMG",desc:"You can use an action to speak the horn's command word and then blow the horn, which emits a thunderous blast in a 30-foot cone.",notes:"Rarity: Rare. Attune: No. 30-ft cone: 5d6 thunder damage (DC 15 CON save for half). On failed save: deafened for 1 minute. Each use: 20% chance horn explodes (deal 10d6 fire to wielder, destroyed). One use per day."},
+ {id:"mi_horn_valhalla",title:"Horn of Valhalla",category:"Magic Item",phb:false,tags:"wondrous,summoning,DMG",desc:"You can use an action to blow this horn. In response, warrior spirits from the plane of Ysgard appear within 60 feet of you.",notes:"Rarity: Rare to Legendary. Attune: No. Silver: 2d4+2 berserkers (any class). Brass: 3d4+3 berserkers (barbarian). Bronze: 4d4+4 berserkers (fighter or barbarian). Iron: 5d4+5 berserkers (paladin, fighter, or barbarian). Spirits serve 1 hour. Use only once every 7 days."},
+ {id:"mi_horseshoes_zephyr",title:"Horseshoes of a Zephyr",category:"Magic Item",phb:false,tags:"wondrous,mount,DMG",desc:"These iron horseshoes come in a set of four. While all four are affixed to the hooves of a horse or similar creature, they allow the creature to move normally while floating 4 inches above the ground.",notes:"Rarity: Very Rare. Attune: No. Mount floats 4 inches above ground. No tracks. Can cross water, mud, and other difficult terrain. Does not tire from travel for 12 hours per day."},
+ {id:"mi_horseshoes_speed",title:"Horseshoes of Speed",category:"Magic Item",phb:false,tags:"wondrous,mount,speed,DMG",desc:"These iron horseshoes come in a set of four. While all four are affixed to the hooves of a horse or similar creature, they increase the creature's walking speed by 30 feet.",notes:"Rarity: Rare. Attune: No. +30 ft walking speed to the creature wearing all four."},
+ {id:"mi_keoghtoms_ointment",title:"Keoghtom's Ointment",category:"Magic Item",phb:false,tags:"wondrous,healing,DMG",desc:"This glass jar, 3 inches in diameter, contains 1d4+1 doses of a thick mixture that smells faintly of aloe.",notes:"Rarity: Uncommon. Attune: No. 1d4+1 doses. One dose (action): cure one disease OR neutralize one poison OR restore 2d8+2 HP. Can apply to self or another creature within reach."},
+ {id:"mi_instrument_bards",title:"Instrument of the Bards",category:"Magic Item",phb:false,tags:"wondrous,music,bard,DMG",desc:"An instrument of the bards is an exquisite example of its kind, superior to an ordinary instrument in every way.",notes:"Rarity: Rare to Legendary by type. Attune: Yes (bard). Types: Canaith Mandolin (Rare), Cli Lyre (Rare), Doss Lute (Uncommon), Fochlucan Bandore (Uncommon), Mac-Fuirmidh Cittern (Uncommon), Ollamh Harp (Legendary), Anstruth Harp (Very Rare). Each grants spells, advantage on performance, charm resistance, and unique spell list."},
+ {id:"mi_iron_bands",title:"Iron Bands of Bilarro",category:"Magic Item",phb:false,tags:"wondrous,restraint,DMG",desc:"This rusty iron sphere measures 3 inches in diameter and weighs 1 pound. You can use an action to speak the command word and throw the sphere at a Huge or smaller creature.",notes:"Rarity: Rare. Attune: No. Ranged attack (60 ft). On hit: sphere expands into bands, creature restrained. DC 20 STR check (action) to break free. Can be released with command word. Reusable. One use between dawn rests."},
+ {id:"mi_iron_flask",title:"Iron Flask",category:"Magic Item",phb:false,tags:"wondrous,trapping,DMG",desc:"This iron bottle has a brass stopper. You can use an action to speak the flask's command word, targeting a creature that you can see within 60 feet of you.",notes:"Rarity: Legendary. Attune: No. Target creature: DC 17 WIS save or trapped inside (no time passes). Unstoppered: trapped creature released (friendly to whoever freed it). Can hold one creature at a time. Creature of same type as one already trapped: immune."},
+ {id:"mi_lantern_revealing",title:"Lantern of Revealing",category:"Magic Item",phb:false,tags:"wondrous,light,detection,DMG",desc:"While lit, this hooded lantern burns for 6 hours on 1 pint of oil, shedding bright light in a 30-foot radius and dim light for an additional 30 feet.",notes:"Rarity: Uncommon. Attune: No. Reveals invisible creatures and objects in its bright light radius. Also reveals hidden doors and traps within bright light area."},
+ {id:"mi_mantle_spell",title:"Mantle of Spell Resistance",category:"Magic Item",phb:false,tags:"wondrous,protection,DMG",desc:"You have advantage on saving throws against spells while you wear this cloak.",notes:"Rarity: Rare. Attune: Yes. Advantage on all saving throws against spells."},
+ {id:"mi_medallion_thoughts",title:"Medallion of Thoughts",category:"Magic Item",phb:false,tags:"wondrous,telepathy,DMG",desc:"The medallion has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the Detect Thoughts spell (save DC 13) from it.",notes:"Rarity: Uncommon. Attune: Yes. Charges: 3 (regains 1d3 at dawn). Cast Detect Thoughts (DC 13) per charge."},
+ {id:"mi_mirror_trapping",title:"Mirror of Life Trapping",category:"Magic Item",phb:false,tags:"wondrous,trapping,DMG",desc:"When this 4-foot-tall mirror is activated, any creature other than you that sees its reflection must succeed on a DC 15 CHA saving throw or be trapped inside one of the mirror's twelve extradimensional cells.",notes:"Rarity: Very Rare. Attune: Yes. 12 cells. Activate/deactivate as action. Trapped creature: save DC 15 CHA or trapped. 12 creatures max. Speak creature's name to communicate. Smashing mirror: all creatures released."},
+ {id:"mi_necklace_fireballs",title:"Necklace of Fireballs",category:"Jewelry",phb:false,tags:"wondrous,fire,DMG",desc:"This necklace has 1d6+3 beads hanging from it. You can use an action to detach a bead and throw it up to 60 feet away.",notes:"Rarity: Rare. Attune: No. 1d6+3 beads. Each bead: explodes as Fireball (DC 15 DEX, 3d6+1d6 per additional bead thrown together). Wearing necklace when fireballed: DC 15 DEX save or necklace explodes (all remaining beads trigger)."},
+ {id:"mi_necklace_prayer",title:"Necklace of Prayer Beads",category:"Jewelry",phb:false,tags:"wondrous,divine,DMG",desc:"This necklace has 1d4+2 magic beads made from aquamarines, black pearls, or topazes. It also has many nonmagical beads made from stones such as amber, bloodstone, citrine, coral, jade, pearl, or quartz.",notes:"Rarity: Rare. Attune: Yes (cleric, druid, paladin). Bead types: Bless (aquamarine), Curing (2d4+2 HP, coral/jade/pearl), Favor (cleric uses Channel Divinity again, bloodstone), Smiting (4d6+2 radiant, citrine), Wind Walking (Wind Walk 1/dawn, white pearl), Summons (Planar Ally 1/dawn, topaz). Each bead 1/dawn."},
+ {id:"mi_nolzurs_pigments",title:"Nolzur's Marvelous Pigments",category:"Magic Item",phb:false,tags:"wondrous,creation,DMG",desc:"Typically found in 1d4 pots inside a fine wooden box with a brush. These pigments allow you to create three-dimensional objects by painting them in two dimensions.",notes:"Rarity: Very Rare. Attune: No. Each pot: cover 1000 sq ft (or fill 10,000 cubic ft). Painted objects become real (nonmagical). Can create up to 10-ft cubes of objects. Cannot create magic items or living creatures. Painted flames/pits/water function normally."},
+ {id:"mi_periapt_health",title:"Periapt of Health",category:"Jewelry",phb:false,tags:"wondrous,health,DMG",desc:"You are immune to contracting any disease while you wear this pendant. If you are already infected with a disease, the effects of the disease are suppressed while you wear the pendant.",notes:"Rarity: Uncommon. Attune: No. Immunity to contracting disease. Suppresses active disease symptoms while worn."},
+ {id:"mi_periapt_poison",title:"Periapt of Proof Against Poison",category:"Jewelry",phb:false,tags:"wondrous,poison,DMG",desc:"This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, poisons have no effect on you.",notes:"Rarity: Rare. Attune: No. Immunity to poison damage and the poisoned condition. Neutralizes any poison already in system."},
+ {id:"mi_periapt_wound",title:"Periapt of Wound Closure",category:"Jewelry",phb:false,tags:"wondrous,healing,DMG",desc:"While you wear this pendant, you stabilize whenever you are dying at the start of your turn. In addition, whenever you roll a Hit Die to regain hit points, double the number of hit points it restores.",notes:"Rarity: Uncommon. Attune: Yes. Auto-stabilize at start of turn when dying. Double HP from Hit Dice rolls."},
+ {id:"mi_pipes_haunting",title:"Pipes of Haunting",category:"Magic Item",phb:false,tags:"wondrous,fear,DMG",desc:"You must be proficient with wind instruments to use these pipes. They have 3 charges and regain 1d3 expended charges daily at dawn.",notes:"Rarity: Uncommon. Attune: No. Requires wind instrument proficiency. Charges: 3 (regains 1d3 at dawn). Expend 1 charge: play eerie music, creatures within 30 ft that can hear must DC 15 WIS save or be frightened for 1 minute."},
+ {id:"mi_pipes_sewers",title:"Pipes of the Sewers",category:"Magic Item",phb:false,tags:"wondrous,rats,DMG",desc:"You must be proficient with wind instruments to use these pipes. While you play them, you can use a bonus action to summon swarms of rats.",notes:"Rarity: Uncommon. Attune: Yes. Requires wind instrument proficiency. Summon 1d3 swarms of rats (BA). Swarms obey commands. If you stop playing: swarms wander away. Swarms from non-magical means also follow pipes."},
+ {id:"mi_quaals_token",title:"Quaal's Feather Token",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect.",notes:"Rarity: Rare. Attune: No. Single use. Types: Anchor (secures ship), Bird (giant golden bird flies message), Fan (creates wind for sails), Swan Boat (creates 50-ft swan boat, 24 hrs), Tree (grows oak tree), Whip (floating whip attacks 1d6+6 bludgeoning, 1 hr)."},
+ {id:"mi_quiver_ehlonna",title:"Quiver of Ehlonna",category:"Magic Item",phb:false,tags:"wondrous,storage,DMG",desc:"Each of the quiver's three compartments connects to an extradimensional space that allows the quiver to hold numerous items while never weighing more than 2 pounds.",notes:"Rarity: Uncommon. Attune: No. Compartment 1: holds up to 60 arrows/bolts. Compartment 2: holds up to 18 javelins/similar. Compartment 3: holds up to 6 long items (bows, staffs, etc.). Always weighs 2 lbs. Retrieve item = free action."},
+ {id:"mi_robe_eyes",title:"Robe of Eyes",category:"Magic Item",phb:false,tags:"wondrous,perception,DMG",desc:"This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits.",notes:"Rarity: Rare. Attune: Yes. See in all directions. Darkvision 120 ft. Advantage on Perception. Can't be surprised. See invisible and ethereal creatures. Disadvantage: Light or Daylight spell targets eyes (blinded 1 min, DC 11 DEX save)."},
+ {id:"mi_robe_scintillating",title:"Robe of Scintillating Colors",category:"Magic Item",phb:false,tags:"wondrous,light,DMG",desc:"This robe has 3 charges, and it regains 1d3 expended charges daily at dawn. While you wear it, you can use an action and expend 1 charge to cause the garment to display a shifting pattern of dazzling hues.",notes:"Rarity: Very Rare. Attune: Yes. Charges: 3. Action + 1 charge: dazzling colors for 1 minute. Creatures within 30 ft that can see you: DC 15 WIS save or stunned until end of next turn. While active: you have disadvantage on Stealth."},
+ {id:"mi_robe_stars",title:"Robe of Stars",category:"Magic Item",phb:false,tags:"wondrous,astral,DMG",desc:"This black or dark blue robe is embroidered with small white or silver stars. You gain a +1 bonus to saving throws while you wear it.",notes:"Rarity: Very Rare. Attune: Yes. +1 all saving throws. 6 stars (magic missiles, 4d6+1 each, expend 1-3 stars). Travel to Astral Plane 1/day as action (return same spot when concentration ends or dismissed)."},
+ {id:"mi_robe_archmagi",title:"Robe of the Archmagi",category:"Magic Item",phb:false,tags:"wondrous,arcane,DMG",desc:"This elegant garment is made from exquisite cloth of white, gray, or black and adorned with silvery runes.",notes:"Rarity: Legendary. Attune: Yes (sorcerer, warlock, wizard). +2 AC (no armor). Advantage on saves vs spells/magical effects. Spell save DC +2. Spell attack bonus +2. Color matches alignment: white (good), gray (neutral), black (evil)."},
+ {id:"mi_robe_useful",title:"Robe of Useful Items",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This robe has cloth patches of various shapes and colors covering it. While wearing the robe, you can use an action to detach one of the patches, causing it to become the object or creature it represents.",notes:"Rarity: Uncommon. Attune: No. Patches become real items when detached. Standard patches: dagger, bullseye lantern, steel mirror, pole, hempen rope, sack. Additional 4d4 random patches (roll d100 per patch)."},
+ {id:"mi_rope_climbing",title:"Rope of Climbing",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This 60-foot length of silk rope weighs 3 pounds and can hold up to 3,000 pounds. If you hold one end of the rope and use an action to speak the command word, the rope animates.",notes:"Rarity: Uncommon. Attune: No. 60 ft, 3,000 lb capacity. Command to animate: ties/unties knots, climbs/descends up to 10 ft per round, holds up to 3 creatures. Knot grants advantage on Athletics checks to climb."},
+ {id:"mi_saddle_cavalier",title:"Saddle of the Cavalier",category:"Magic Item",phb:false,tags:"wondrous,mount,DMG",desc:"While in this saddle, you can't be dismounted against your will if you're conscious, and attack rolls against your mount have disadvantage.",notes:"Rarity: Uncommon. Attune: No. Cannot be forcibly dismounted while conscious. Attack rolls against your mount have disadvantage."},
+ {id:"mi_scarab_protection",title:"Scarab of Protection",category:"Magic Item",phb:false,tags:"wondrous,protection,DMG",desc:"If you hold this beetle-shaped medallion in your hand for 1 round, an inscription appears on its surface revealing its magical nature. It provides two benefits while it is on your person.",notes:"Rarity: Legendary. Attune: Yes. 12 charges. +1 all saving throws. When fail save vs spell: expend 1 charge to succeed instead. Immunity to necromancy spells and undead's supernatural abilities. When 0 charges: crumbles to dust."},
+ {id:"mi_slippers_spider",title:"Slippers of Spider Climbing",category:"Magic Item",phb:false,tags:"wondrous,movement,DMG",desc:"While you wear these light shoes, you can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.",notes:"Rarity: Uncommon. Attune: Yes. Climb speed equals walk speed. Hands-free climbing on walls/ceilings. Does not work on slippery surfaces."},
+ {id:"mi_sovereign_glue",title:"Sovereign Glue",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This viscous, milky-white substance can form a permanent adhesive bond between any two objects. It must be stored in a jar or flask that has been coated inside with Oil of Slipperiness.",notes:"Rarity: Legendary. Attune: No. 1d6+1 ounces per flask. One ounce bonds two surfaces together permanently. DC 20 STR check to break (advantage if using Universal Solvent). Sets in 1 minute."},
+ {id:"mi_sphere_annihilation",title:"Sphere of Annihilation",category:"Magic Item",phb:false,tags:"wondrous,void,DMG",desc:"This 2-foot-diameter black sphere is a hole in the multiverse, hovering in space and stabilized by a magical field surrounding it.",notes:"Rarity: Legendary. Attune: No. Destroys nonliving matter it touches. Living creatures take 4d10 force per round while in contact. Move sphere 10 ft/round (DC 25 Arcana check). Two spheres meeting: plane gate to random plane. Contact with Talisman of the Sphere: auto-control."},
+ {id:"mi_stone_earth",title:"Stone of Controlling Earth Elementals",category:"Magic Item",phb:false,tags:"wondrous,elemental,earth,DMG",desc:"If the stone is touching the ground, you can use an action to speak its command word and summon an earth elemental, as if you had cast the Conjure Elemental spell.",notes:"Rarity: Rare. Attune: No. Must touch ground. Summons earth elemental (Conjure Elemental). Serves 1 hour. 1 use — recharges at dawn."},
+ {id:"mi_talisman_good",title:"Talisman of Pure Good",category:"Magic Item",phb:false,tags:"wondrous,holy,DMG",desc:"This talisman is a mighty symbol of goodness. A creature that is neither good nor evil in alignment takes 6d6 radiant damage upon touching the talisman.",notes:"Rarity: Legendary. Attune: Yes (good-aligned cleric or paladin). 7 charges. While wearing: good-aligned creatures within 30 ft can't be charmed/frightened. Expend charges to create 100-ft diameter Holy Aura. Evil creatures touching it: 6d6 radiant. Neutral: 3d6 radiant."},
+ {id:"mi_talisman_sphere",title:"Talisman of the Sphere",category:"Magic Item",phb:false,tags:"wondrous,void,DMG",desc:"When you make an Intelligence (Arcana) check to control a Sphere of Annihilation while you are holding this talisman, you can add double your proficiency bonus to the check.",notes:"Rarity: Legendary. Attune: Yes. Double proficiency on Arcana checks to control Sphere of Annihilation. Once per turn, while holding talisman and controlling sphere: move sphere 10 extra ft."},
+ {id:"mi_talisman_evil",title:"Talisman of Ultimate Evil",category:"Magic Item",phb:false,tags:"wondrous,unholy,DMG",desc:"This item symbolizes unrepentant evil. A creature that is neither good nor evil in alignment takes 6d6 necrotic damage upon touching the talisman.",notes:"Rarity: Legendary. Attune: Yes (evil-aligned cleric or paladin). 6 charges. While wearing: evil-aligned creatures within 30 ft can't be charmed/frightened. Expend charges for Unholy Aura. Good creatures: 6d6 necrotic. Neutral: 3d6 necrotic."},
+ {id:"mi_universal_solvent",title:"Universal Solvent",category:"Magic Item",phb:false,tags:"wondrous,utility,DMG",desc:"This tube holds a milky liquid with a strong chemical smell. You can use an action to pour the contents of the tube onto a surface within reach. The liquid instantly dissolves up to 1 square foot of adhesive it touches.",notes:"Rarity: Legendary. Attune: No. Single use. Dissolves any adhesive including Sovereign Glue. No effect on a Sphere of Annihilation."},
+ {id:"mi_well_worlds",title:"Well of Many Worlds",category:"Magic Item",phb:false,tags:"wondrous,planar,DMG",desc:"This fine black cloth, soft as silk, is folded up to the dimensions of a handkerchief. It unfolds into a circular sheet 6 feet in diameter.",notes:"Rarity: Legendary. Attune: No. Unfold and lay on ground: two-way portal to random plane. Remains open for 1 minute. Fold it up: portal closes. Once used, can't be used again for 1d8 hours."},
+ {id:"mi_wind_fan",title:"Wind Fan",category:"Magic Item",phb:false,tags:"wondrous,wind,DMG",desc:"While holding this fan, you can use an action to cast the Gust of Wind spell (save DC 13) from it.",notes:"Rarity: Uncommon. Attune: No. Cast Gust of Wind (DC 13) as action. Each use: cumulative 20% chance fan doesn't work and is destroyed. Reset each dawn."},
+ {id:"mi_winged_boots",title:"Winged Boots",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"While you wear these boots, you have a flying speed equal to your walking speed. You can use the boots to fly for up to 4 hours, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration.",notes:"Rarity: Uncommon. Attune: Yes. Fly speed equals walk speed. 4 hours total flight time. Recharges 2 hours for each hour not flying. If flying when time runs out: descend 30 ft/round until landing."},
+ {id:"mi_wings_flying",title:"Wings of Flying",category:"Magic Item",phb:false,tags:"wondrous,flight,DMG",desc:"While wearing this cloak, you can use an action to speak its command word. This causes feathered wings to spread out from your back, giving you a flying speed of 60 feet.",notes:"Rarity: Rare. Attune: Yes. Fly speed: 60 ft. Duration: 1 hour. After 1 hour: cloak can't be used again until next dawn."},
+ {id:"sc_manual_body",title:"Manual of Bodily Health",category:"Scroll",phb:false,tags:"tome,constitution,DMG",desc:"This book contains health and diet tips, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your CON score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 CON (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"sc_manual_exercise",title:"Manual of Gainful Exercise",category:"Scroll",phb:false,tags:"tome,strength,DMG",desc:"This book describes fitness regimens, diet suggestions, and starting tips. If you spend 48 hours over a period of 6 days or fewer studying the book's contents, your STR score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 STR (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"sc_manual_golems",title:"Manual of Golems",category:"Scroll",phb:false,tags:"tome,construct,DMG",desc:"This tome contains information and incantations necessary to make a particular type of golem. The DM chooses the type or determines it randomly.",notes:"Rarity: Very Rare. Attune: No. Types: Clay (Uncommon, 65,000 gp, 30 days), Flesh (Rare, 50,000 gp, 60 days), Iron (Very Rare, 100,000 gp, 120 days), Stone (Rare, 80,000 gp, 90 days). Non-wizard/artificer reading: 10d10 psychic damage. After use: loses magic."},
+ {id:"sc_manual_quickness",title:"Manual of Quickness of Action",category:"Scroll",phb:false,tags:"tome,dexterity,DMG",desc:"This book contains coordination and balance exercises, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents, your DEX score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 DEX (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"sc_tome_clear_thought",title:"Tome of Clear Thought",category:"Scroll",phb:false,tags:"tome,intelligence,DMG",desc:"This book contains memory and logic puzzles, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents, your INT score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 INT (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"sc_tome_leadership",title:"Tome of Leadership and Influence",category:"Scroll",phb:false,tags:"tome,charisma,DMG",desc:"This book contains tips for influencing and charming others, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents, your CHA score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 CHA (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"sc_tome_stilled",title:"Tome of the Stilled Tongue",category:"Scroll",phb:false,tags:"tome,wizard,DMG",desc:"This thick book has a tongue pinned to the cover. Five of these tomes exist, and it is unknown if more were made. The wizard Iggwilv is said to have created them.",notes:"Rarity: Legendary. Attune: Yes (wizard). +1 spell save DC and spell attack bonus. Can use tome as spellbook. 3 charges (regains 1d3 at dawn): cast any spell in tome without expending spell slot (1 charge per spell level)."},
+ {id:"sc_tome_understanding",title:"Tome of Understanding",category:"Scroll",phb:false,tags:"tome,wisdom,DMG",desc:"This book contains intuition and insight exercises, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents, your WIS score increases by 2, as does your maximum.",notes:"Rarity: Very Rare. Attune: No. +2 WIS (max 30 after reading). After use: loses magic for 100 years."},
+ {id:"mi_ioun_absorption",title:"Ioun Stone - Absorption",category:"Magic Item",phb:false,tags:"wondrous,ioun,spell,DMG",desc:"While this pale lavender ellipsoid orbits your head, you can use your reaction to cancel a spell of 4th level or lower cast by a creature you can see and targeting only you.",notes:"Rarity: Very Rare. Attune: Yes. Absorbs spells of 4th level or lower targeting only you. Absorbs up to 20 total spell levels then turns dull gray (loses magic)."},
+ {id:"mi_ioun_agility",title:"Ioun Stone - Agility",category:"Magic Item",phb:false,tags:"wondrous,ioun,dexterity,DMG",desc:"Your DEX score increases by 2, to a maximum of 20, while this deep red sphere orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 DEX (max 20)."},
+ {id:"mi_ioun_awareness",title:"Ioun Stone - Awareness",category:"Magic Item",phb:false,tags:"wondrous,ioun,perception,DMG",desc:"You can't be surprised while this dark blue rhomboid orbits your head.",notes:"Rarity: Rare. Attune: Yes. Immunity to being surprised."},
+ {id:"mi_ioun_fortitude",title:"Ioun Stone - Fortitude",category:"Magic Item",phb:false,tags:"wondrous,ioun,constitution,DMG",desc:"Your CON score increases by 2, to a maximum of 20, while this pink rhomboid orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 CON (max 20)."},
+ {id:"mi_ioun_greater_absorb",title:"Ioun Stone - Greater Absorption",category:"Magic Item",phb:false,tags:"wondrous,ioun,spell,DMG",desc:"While this marbled lavender and green ellipsoid orbits your head, you can use your reaction to cancel a spell of 8th level or lower cast by a creature you can see and targeting only you.",notes:"Rarity: Legendary. Attune: Yes. Absorbs spells 8th level or lower targeting only you. Absorbs up to 50 total spell levels then turns dull gray."},
+ {id:"mi_ioun_insight",title:"Ioun Stone - Insight",category:"Magic Item",phb:false,tags:"wondrous,ioun,wisdom,DMG",desc:"Your WIS score increases by 2, to a maximum of 20, while this incandescent blue sphere orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 WIS (max 20)."},
+ {id:"mi_ioun_intellect",title:"Ioun Stone - Intellect",category:"Magic Item",phb:false,tags:"wondrous,ioun,intelligence,DMG",desc:"Your INT score increases by 2, to a maximum of 20, while this marbled scarlet and blue sphere orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 INT (max 20)."},
+ {id:"mi_ioun_leadership",title:"Ioun Stone - Leadership",category:"Magic Item",phb:false,tags:"wondrous,ioun,charisma,DMG",desc:"Your CHA score increases by 2, to a maximum of 20, while this marbled pink and green sphere orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 CHA (max 20)."},
+ {id:"mi_ioun_mastery",title:"Ioun Stone - Mastery",category:"Magic Item",phb:false,tags:"wondrous,ioun,proficiency,DMG",desc:"Your proficiency bonus increases by 1 while this pale green prism orbits your head.",notes:"Rarity: Legendary. Attune: Yes. +1 proficiency bonus."},
+ {id:"mi_ioun_regeneration",title:"Ioun Stone - Regeneration",category:"Magic Item",phb:false,tags:"wondrous,ioun,healing,DMG",desc:"You regain 15 hit points at the end of each hour this pearly white spindle orbits your head, provided that you have at least 1 hit point.",notes:"Rarity: Legendary. Attune: Yes. Regenerate 15 HP per hour (if above 0 HP)."},
+ {id:"mi_ioun_reserve",title:"Ioun Stone - Reserve",category:"Magic Item",phb:false,tags:"wondrous,ioun,spell,DMG",desc:"This vibrant purple prism stores spells cast into it, holding them until you use them. The stone can store up to 3 levels worth of spells cast into it.",notes:"Rarity: Rare. Attune: Yes. Stores up to 3 spell levels. Cast spell into it (touch, action). Release stored spell as bonus action. You must have the spell on your list to cast it from stone."},
+ {id:"mi_ioun_strength",title:"Ioun Stone - Strength",category:"Magic Item",phb:false,tags:"wondrous,ioun,strength,DMG",desc:"Your STR score increases by 2, to a maximum of 20, while this pale blue rhomboid orbits your head.",notes:"Rarity: Very Rare. Attune: Yes. +2 STR (max 20)."},
+ {id:"mi_xge_hat_vermin",title:"Hat of Vermin",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This hat has 3 charges. While holding the hat, you can use an action and expend 1 charge to speak a command word that summons your choice of a bat, a frog, or a rat. The summoned creature magically appears in the hat and tries to get away from you as quickly as possible. The creature is neither friendly nor hostile, and it isn't under your control.",notes:"Rarity: Common. Attune: No. 3 charges, no recharge. Summons bat, frog, or rat. Creature is uncontrolled. XGE p.137."},
+ {id:"mi_xge_hat_wizardry",title:"Hat of Wizardry",category:"Magic Item",phb:false,tags:"wondrous,wizard,XGE",desc:"This antiquated, cone-shaped hat is adorned with gold crescent moons and stars. While you are wearing it, you gain the following benefits: You can use the hat as a spellcasting focus for your wizard spells. You can try to cast a cantrip that you don't know. The cantrip must be on the wizard spell list, and you must make a DC 10 Intelligence (Arcana) check. On a failure, the cantrip doesn't activate.",notes:"Rarity: Common. Attune: Yes (wizard). Spellcasting focus. Cast unknown wizard cantrip: DC 10 INT (Arcana). XGE p.137."},
+ {id:"mi_xge_hewards_spice_pouch",title:"Heward's Handy Spice Pouch",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This belt pouch appears empty and has 10 charges. While holding the pouch, you can use an action and expend 1 charge to produce a pinch of a specific spice. The spice appears in your hand.",notes:"Rarity: Common. Attune: No. 10 charges, recharges 1d6+4 at dawn. Produces any common spice (salt, pepper, saffron, etc.). XGE p.137."},
+ {id:"mi_xge_horn_silent_alarm",title:"Horn of Silent Alarm",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This horn has 4 charges. When you use an action to blow it, one creature of your choice can hear the horn's blare, provided the creature is within 600 feet of the horn and not deafened.",notes:"Rarity: Common. Attune: No. 4 charges, recharges 1d4 at dawn. Silent to all except chosen creature within 600ft. XGE p.138."},
+ {id:"mi_xge_instrument_illusions",title:"Instrument of Illusions",category:"Magic Item",phb:false,tags:"wondrous,bard,illusion,XGE",desc:"While you are playing this musical instrument, you can create harmless, illusory visual effects within a 5-foot-radius sphere centered on the instrument. Sample effects: swirling color, harmless scaled-down weather, musical notes, a simple shape.",notes:"Rarity: Common. Attune: Yes (a bard). Visual illusions only within 5ft radius while playing. Purely cosmetic. XGE p.138."},
+ {id:"mi_xge_instrument_scribing",title:"Instrument of Scribing",category:"Magic Item",phb:false,tags:"wondrous,bard,utility,XGE",desc:"This musical instrument has 3 charges. While you are playing it, you can use an action and expend 1 charge to write a magical message on a nonmagical object or surface that you can see within 30 feet of you.",notes:"Rarity: Common. Attune: Yes (a bard). 3 charges, recharges 1d3 at dawn. Write messages on surfaces within 30ft. Message is visible only to you until you dismiss it or use another charge. XGE p.138."},
+ {id:"mi_xge_lock_trickery",title:"Lock of Trickery",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This lock appears to be an ordinary padlock. While touching the lock, you can use an action to speak its command word and cause the lock to become impossible to pick. The lock also can't be opened by any key other than the one that came with it.",notes:"Rarity: Common. Attune: No. Action: lock becomes unpickable. Only opens with its own key. XGE p.138."},
+ {id:"mi_xge_mystery_key",title:"Mystery Key",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"A question mark is worked into the head of this key. The key has a 5 percent chance of unlocking any lock into which it's inserted.",notes:"Rarity: Common. Attune: No. 5% chance to open any lock. XGE p.138."},
+ {id:"mi_xge_orb_direction",title:"Orb of Direction",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While holding this orb, you can use an action to determine which way is north. This property functions only on the Material Plane.",notes:"Rarity: Common. Attune: No. Action: know which way is north (Material Plane only). XGE p.138."},
+ {id:"mi_xge_orb_time",title:"Orb of Time",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While holding this orb, you can use an action to determine the current time of day.",notes:"Rarity: Common. Attune: No. Action: know the current time of day. XGE p.138."},
+ {id:"mi_xge_perfume_bewitching",title:"Perfume of Bewitching",category:"Magic Item",phb:false,tags:"wondrous,charm,XGE",desc:"This tiny vial contains magic perfume, enough for one use. You can use an action to apply the perfume to yourself, and its effect lasts 1 hour. For the duration, you have advantage on all Charisma checks directed at humanoids of challenge rating 1 or lower.",notes:"Rarity: Common. Attune: No. Single use. 1 hour: advantage on CHA checks vs CR 1 or lower humanoids. XGE p.138."},
+ {id:"mi_xge_pipe_smoke_monsters",title:"Pipe of Smoke Monsters",category:"Magic Item",phb:false,tags:"wondrous,cosmetic,XGE",desc:"While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth. The form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds, becoming an ordinary puff of smoke.",notes:"Rarity: Common. Attune: No. Exhale smoke in shape of any creature (fits 1ft cube). Lasts a few seconds. XGE p.138."},
+ {id:"mi_xge_pole_angling",title:"Pole of Angling",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While holding this 10-foot pole, you can speak a command word and transform it into a fishing pole with a hook, a line, and a reel. Speaking the command word again or letting go causes it to revert to its original form.",notes:"Rarity: Common. Attune: No. Transforms between 10ft pole and fishing rod on command. XGE p.138."},
+ {id:"mi_xge_pole_collapsing",title:"Pole of Collapsing",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While holding this 10-foot pole, you can use an action to speak a command word and cause it to collapse into a 1-foot-long rod, for ease of storage. Speaking the command word again causes the rod to revert to a pole.",notes:"Rarity: Common. Attune: No. Action: collapse to 1ft rod or extend to 10ft pole. XGE p.139."},
+ {id:"mi_xge_pot_awakening",title:"Pot of Awakening",category:"Magic Item",phb:false,tags:"wondrous,nature,XGE",desc:"If you plant an ordinary shrub in this 10-pound clay pot and let it grow for 30 days, the shrub magically transforms into an awakened shrub at the end of that time. When the shrub awakens, the pot cracks and becomes nonmagical.",notes:"Rarity: Common. Attune: No. Grow shrub for 30 days → Awakened Shrub. One use, pot destroyed. XGE p.139."},
+ {id:"mi_xge_rope_mending",title:"Rope of Mending",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"You can cut this 50-foot coil of hempen rope into any number of smaller pieces, and then use an action to speak a command word and cause the pieces to knit back together. The rope is whole again when the spell ends.",notes:"Rarity: Common. Attune: No. Cut and mend as needed. Action to restore to whole. XGE p.139."},
+ {id:"mi_xge_ruby_war_mage",title:"Ruby of the War Mage *",category:"Magic Item",phb:false,tags:"wondrous,spellcaster,XGE",desc:"Etched with eldritch runes, this 1-inch diameter ruby allows you to use a simple or martial weapon as a spellcasting focus. To use this property, you must attach the ruby to the weapon by pressing the ruby against it for at least 10 minutes.",notes:"Rarity: Common. Attune: Yes (spellcaster). Attach to any simple or martial weapon. Use that weapon as spellcasting focus. XGE p.139."},
+ {id:"mi_xge_talking_doll",title:"Talking Doll",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While this stuffed doll is within 5 feet of you, you can spend a short rest telling the doll to say up to six phrases, none of which can be more than six words long, and set a condition under which the doll speaks each phrase.",notes:"Rarity: Common. Attune: Yes. Program up to 6 phrases (6 words each) with trigger conditions. Doll repeats them when conditions are met. XGE p.139."},
+ {id:"mi_xge_tankard_sobriety",title:"Tankard of Sobriety",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This tankard has a stern face sculpted into one side. You can drink ale, wine, or any other nonmagical alcoholic beverage poured into it without becoming inebriated. The tankard has no effect on magical beverages or harmful substances such as poison.",notes:"Rarity: Common. Attune: No. Drink alcohol without becoming drunk. Doesn't affect potions or poison. XGE p.139."},
+ {id:"mi_xge_veterans_cane",title:"Veteran's Cane",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"When you grasp this walking cane and use a bonus action to speak the command word, it transforms into an ordinary longsword and ceases to be magical.",notes:"Rarity: Common. Attune: No. Bonus action: transforms into a nonmagical longsword permanently. Single use. XGE p.140."},
+ {id:"mi_xge_bead_nourishment",title:"Bead of Nourishment",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This spongy, flavorless, gelatinous bead dissolves on your tongue and provides as much nourishment as 1 day of rations.",notes:"Rarity: Common. Attune: No. Single use. Provides 1 day of nourishment when consumed. XGE p.136."},
+ {id:"mi_xge_bead_refreshment",title:"Bead of Refreshment",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This spongy, flavorless, gelatinous bead dissolves in liquid, transforming up to a pint of the liquid into fresh, cold drinking water. Potions are unaffected.",notes:"Rarity: Common. Attune: No. Single use. Transforms up to 1 pint of liquid into fresh water. Doesn't affect potions. XGE p.136."},
+ {id:"mi_xge_boots_false_tracks",title:"Boots of False Tracks",category:"Magic Item",phb:false,tags:"wondrous,stealth,XGE",desc:"Only humanoids can wear these boots. While wearing the boots, you can choose to have them leave tracks like those of a different kind of humanoid of a similar size.",notes:"Rarity: Common. Attune: No. Leave false humanoid tracks of your choice. XGE p.136."},
+ {id:"mi_xge_candle_deep",title:"Candle of the Deep",category:"Magic Item",phb:false,tags:"wondrous,light,XGE",desc:"The flame of this candle is not extinguished when immersed in water. It gives off light and heat like a normal candle.",notes:"Rarity: Common. Attune: No. Burns normally underwater. 1 hour burn time like a normal candle. XGE p.136."},
+ {id:"mi_xge_charlatans_die",title:"Charlatan's Die",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"Whenever you roll this six-sided die, you can control which number it rolls.",notes:"Rarity: Common. Attune: Yes. Control result of any roll of this d6. XGE p.136."},
+ {id:"mi_xge_cloak_billowing",title:"Cloak of Billowing",category:"Magic Item",phb:false,tags:"wondrous,cosmetic,XGE",desc:"While wearing this cloak, you can use a bonus action to make it billow dramatically.",notes:"Rarity: Common. Attune: No. Bonus action: cloak billows dramatically. Purely cosmetic. XGE p.136."},
+ {id:"mi_xge_cloak_many_fashions",title:"Cloak of Many Fashions",category:"Magic Item",phb:false,tags:"wondrous,cosmetic,XGE",desc:"While wearing this cloak, you can use a bonus action to change the style, color, and apparent quality of the garment. The cloak's weight doesn't change.",notes:"Rarity: Common. Attune: No. Bonus action: change appearance of cloak. Cannot replicate magic items or specific garments. XGE p.136."},
+ {id:"mi_xge_clockwork_amulet",title:"Clockwork Amulet",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This copper amulet contains tiny interlocking gears and is powered by magic from Mechanus. A creature that puts an ear to the amulet can hear faint ticking and whirring noises. When you make an attack roll while wearing the amulet, you can forgo rolling the d20 to get a 10 on the die.",notes:"Rarity: Common. Attune: No. 1/day: treat attack roll d20 as a 10 (no roll needed). Recharges at dawn. XGE p.137."},
+ {id:"mi_xge_clothes_mending",title:"Clothes of Mending",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This outfit of traveling clothes magically mends itself to its pre-damage condition at the next dawn after being damaged.",notes:"Rarity: Common. Attune: No. Self-repairs tears, stains, and damage each dawn. XGE p.137."},
+ {id:"mi_xge_dark_shard_amulet",title:"Dark Shard Amulet",category:"Magic Item",phb:false,tags:"wondrous,warlock,XGE",desc:"This amulet is fashioned from a single shard of resilient extraplanar material originating from the realm of your warlock patron. While you are wearing it, you gain the following benefits: You can use the amulet as a spellcasting focus for your warlock spells. You can try to cast a cantrip that you don't know. The cantrip must be on the warlock spell list, and you must make a DC 10 Intelligence (Arcana) check. On a failure, the cantrip doesn't activate (spell slot not expended).",notes:"Rarity: Common. Attune: Yes (warlock). Spellcasting focus. Cast unknown warlock cantrip: DC 10 INT (Arcana) check. XGE p.137."},
+ {id:"mi_xge_dread_helm",title:"Dread Helm",category:"Magic Item",phb:false,tags:"wondrous,cosmetic,XGE",desc:"This fearsome steel helm makes your eyes glow red while you wear it.",notes:"Rarity: Common. Attune: No. Eyes glow red while worn. Purely cosmetic. XGE p.137."},
+ {id:"mi_xge_ear_horn",title:"Ear Horn of Hearing",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"While held up to your ear, this horn suppresses the effects of the deafened condition on you, and you can hear clearly even in areas with strong background noise.",notes:"Rarity: Common. Attune: No. Suppresses deafened condition while held to ear. Hear clearly in noisy environments. XGE p.137."},
+ {id:"mi_xge_enduring_spellbook",title:"Enduring Spellbook",category:"Magic Item",phb:false,tags:"wondrous,wizard,XGE",desc:"This spellbook, along with everything written in it, can't be damaged by fire or immersion in water. In addition, the spellbook doesn't deteriorate with age.",notes:"Rarity: Common. Attune: No. Immune to fire and water damage. Doesn't age or deteriorate. XGE p.137."},
+ {id:"mi_xge_ersatz_eye",title:"Ersatz Eye",category:"Magic Item",phb:false,tags:"wondrous,utility,XGE",desc:"This artificial eye replaces a real eye that was lost or removed. While the ersatz eye is embedded in your eye socket, it can't be removed by anyone other than you, and you can see through the tiny orb as though it were a normal eye.",notes:"Rarity: Common. Attune: Yes. Functions as a normal eye. Cannot be removed by others. XGE p.137."},
+ {id:"mi_tce_bell_branch",title:"Bell Branch",category:"Magic Item",phb:false,tags:"wondrous,druid,TCE",desc:"This silver branch is shaped like a bell and is adorned with small silver bells. While holding it, you can use it as a spellcasting focus for your druid spells. The branch has 3 charges and regains 1d3 expended charges daily at dawn.",notes:"Rarity: Rare. Attune: Yes (druid). +1 spell attack and save DC. 3 charges: cast Detect Evil and Good, Detect Magic, Detect Poison and Disease, Protection from Evil and Good, or Shillelagh (1 charge each). TCE p.122."},
+ {id:"mi_tce_shadowfell_shard",title:"Shadowfell Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"This dull crystal is suffused with the gloom of the Shadowfell. As a spellcasting focus, when you use a Metamagic option you can force a creature you can see within 30ft to make a CHA save (DC = spell save DC) or be frightened of you until end of your next turn and take 2d8 psychic damage.",notes:"Rarity: Rare. Attune: Yes (sorcerer). Psychic damage and frightened on Metamagic use. 1/turn. TCE p.133."},
+ {id:"mi_tce_masquerade_tattoo",title:"Masquerade Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"While this tattoo is on your skin, you can use a bonus action to change your appearance as if using the Disguise Self spell. The tattoo can't duplicate specific individuals.",notes:"Rarity: Common. Attune: Yes. Disguise Self as bonus action, at will. Duration: until dismissed or changed. TCE p.130."},
+ {id:"mi_tce_mighty_servant",title:"Mighty Servant of Leuk-o",category:"Magic Item",phb:false,tags:"wondrous,artifact,legendary,TCE",desc:"This Huge construct was built to serve as a powerful war machine. It requires attunement from inside the construct. While attuned, you can operate the construct as a vehicle.",notes:"Rarity: Artifact. Attune: Yes (fighter or wizard). Huge construct: AC 22, HP 500, Speed 60ft. STR 30, DEX 11. Immunity: poison, psychic, all conditions. Attacks: 2 fists (+15, 3d8+10 bludgeoning). Sentinel: while dormant, alerts attuned creature to threats. TCE p.131."},
+ {id:"mi_tce_natures_mantle",title:"Nature's Mantle",category:"Magic Item",phb:false,tags:"wondrous,druid,ranger,TCE",desc:"This cloak shifts and recolors itself to blend in with the terrain. While wearing it, you can use it as a spellcasting focus for your druid and ranger spells. While in natural terrain, you can attempt to hide even when only lightly obscured.",notes:"Rarity: Uncommon. Attune: Yes (druid or ranger). Hide in lightly obscured natural terrain. Use as spellcasting focus. TCE p.131."},
+ {id:"mi_tce_outer_essence_shard",title:"Outer Essence Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"This flickering crystal contains the essence of an Outer Plane. As a spellcasting focus, when you use a Metamagic option you can trigger an additional effect based on the shard's plane.",notes:"Rarity: Rare. Attune: Yes (sorcerer). Lawful: cast Order's Wrath 1/day. Chaotic: cast Arms of Hadar 1/day. Good: cast Guiding Bolt 1/day. Evil: cast Inflict Wounds 1/day. TCE p.131."},
+ {id:"mi_tce_planecallers_codex",title:"Planecaller's Codex",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"The pages of this book contain an assortment of spells concerning travel to and from other planes of existence. While holding it, use as spellcasting focus. 3 charges: cast Banishment, Detect Evil and Good, Plane Shift, or Summon Elemental.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.132."},
+ {id:"mi_tce_protective_verses",title:"Protective Verses",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"This thick book contains psalm-like verses written by a long-forgotten mage. While holding it, use as spellcasting focus. 3 charges: cast Arcane Lock, Counterspell, Dispel Magic, Globe of Invulnerability, or Magic Circle.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.132."},
+ {id:"mi_tce_revelers_concertina",title:"Reveler's Concertina",category:"Magic Item",phb:false,tags:"wondrous,bard,TCE",desc:"While holding this concertina, you gain a +2 bonus to the saving throw DC of your bard spells. As an action, you can play the concertina to cast Otto's Irresistible Dance (1/day).",notes:"Rarity: Rare. Attune: Yes (bard). +2 spell save DC. Otto's Irresistible Dance 1/day. TCE p.132."},
+ {id:"mi_tce_rhythm_makers_drum",title:"Rhythm-Maker's Drum",category:"Magic Item",phb:false,tags:"wondrous,bard,TCE",desc:"While holding this drum, you gain a bonus to spell attack rolls and spell save DC of your bard spells. As an action, you can play the drum and expend one use of your Bardic Inspiration to regain one expended spell slot of 3rd level or lower.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (bard). Bonus to spell attack and save DC. Regain spell slot 1/day. TCE p.132."},
+ {id:"mi_tce_shadowfell_brand_tattoo",title:"Shadowfell Brand Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"This tattoo is dark and shadowy, and it flickers in dim light. You gain darkvision out to 60ft (or +30ft if you already have darkvision). As a bonus action, you can become invisible until the start of your next turn.",notes:"Rarity: Rare. Attune: Yes. Darkvision 60ft. Invisible as bonus action: 1/day. TCE p.133."},
+ {id:"mi_tce_spellwrought_tattoo",title:"Spellwrought Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"This tattoo contains a single spell of up to 5th level, wrought on your skin by a magic needle. To use the tattoo, you must hold the needle against your skin and speak the command word.",notes:"Rarity: Common (cantrip) to Very Rare (5th level). Attune: No. Cast stored spell once then tattoo vanishes. Spell uses its normal casting time. Spell save DC 15. TCE p.134."},
+ {id:"mi_tce_teeth_dahlver_nar",title:"Teeth of Dahlver-Nar",category:"Magic Item",phb:false,tags:"wondrous,artifact,legendary,TCE",desc:"These ivory teeth belong to Dahlver-Nar, a long-dead wizard who collected monster parts. Whoever holds a tooth can swallow it as an action. Each tooth grants a different monster trait when swallowed.",notes:"Rarity: Artifact. Attune: No. Each of 17 teeth grants a different trait (e.g. yuan-ti poison immunity, werewolf lycanthropy, beholder eye rays). Teeth can be extracted and used again. TCE p.134."},
+ {id:"mi_tce_demonomicon",title:"Demonomicon of Iggwilv",category:"Magic Item",phb:false,tags:"wondrous,artifact,legendary,TCE",desc:"This tome details the nature of demons and contains spells. While attuned, you can use the book as a spellcasting focus. Spells: Tasha's Hideous Laughter, Magic Circle, Planar Binding, Planar Ally, Plane Shift, Summon Aberration, Summon Fiend.",notes:"Rarity: Artifact. Attune: Yes. +1 spell attack and save DC. Spells from book don't count against spells known/prepared. Demonic Boon: fiends summoned via book have +1d6 force dmg. Fiend Summoning: 1/day summon CR 5 or lower demon. TCE p.125."},
+ {id:"mi_tce_duplicitous_manuscript",title:"Duplicitous Manuscript",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"To any creature other than you, this book appears to be a mundane book or a spellbook. While holding it, you can use it as a spellcasting focus. 3 charges: cast Blur, Confusion, Mind Spike, Mislead, or Phantasmal Force.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.125."},
+ {id:"mi_tce_eldritch_claw_tattoo",title:"Eldritch Claw Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"Your unarmed strikes count as magical. +1 to attack and damage rolls with unarmed strikes. Eldritch Maul: bonus action, for 1 minute unarmed strikes reach 15ft and deal 1d6 + STR force damage.",notes:"Rarity: Uncommon. Attune: Yes. Eldritch Maul: 1/day. TCE p.126."},
+ {id:"mi_tce_elemental_essence_shard",title:"Elemental Essence Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"This crackling crystal contains the essence of an elemental plane. As a spellcasting focus, when you use a Metamagic option you can cast the associated spell based on the shard's element.",notes:"Rarity: Rare. Attune: Yes (sorcerer). Air: Gust of Wind. Earth: Meld into Stone. Fire: Fireball. Water: Wall of Water. Each 1/day. TCE p.127."},
+ {id:"mi_tce_far_realm_shard",title:"Far Realm Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"This writhing crystal is suffused with the chaos of the Far Realm. As a spellcasting focus, when you use a Metamagic option you can force a creature you can see within 30ft to make a CHA save (DC = spell save DC) or be frightened of you until end of your next turn.",notes:"Rarity: Rare. Attune: Yes (sorcerer). Frightened effect triggers when using Metamagic. 1/turn. TCE p.127."},
+ {id:"mi_tce_feywild_shard",title:"Feywild Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"This warm crystal glows with a faint golden light. As a spellcasting focus, when you use a Metamagic option you can roll on the Wild Magic Surge table. If you roll a spell, it doesn't require concentration and lasts full duration.",notes:"Rarity: Uncommon. Attune: Yes (sorcerer). Wild Magic Surge on Metamagic use. TCE p.127."},
+ {id:"mi_tce_fulminating_treatise",title:"Fulminating Treatise",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"Lightning crackles along the spine of this tome. While holding it, use it as a spellcasting focus. 3 charges: cast Burning Hands, Melf's Minute Meteors, Shatter, or Thunderwave.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.128."},
+ {id:"mi_tce_ghost_step_tattoo",title:"Ghost Step Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"This tattoo shifts and wavers on your skin. As a bonus action, you can become incorporeal until the end of your turn, moving through creatures and objects as if they were difficult terrain.",notes:"Rarity: Very Rare. Attune: Yes. Incorporeal: 1/turn. Can't end turn inside an object. TCE p.128."},
+ {id:"mi_tce_guardian_emblem",title:"Guardian Emblem",category:"Magic Item",phb:false,tags:"wondrous,cleric,paladin,TCE",desc:"This emblem is a holy symbol. When the creature bearing this emblem fails a saving throw, you can use your reaction to cause them to reroll, taking the higher result.",notes:"Rarity: Uncommon. Attune: Yes (cleric or paladin). 3 charges. Recharges 1d3 at dawn. TCE p.128."},
+ {id:"mi_tce_heart_weavers_primer",title:"Heart Weaver's Primer",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"This book is bound in red leather and decorated with gold filigree hearts. While holding it, use as spellcasting focus. 3 charges: cast Antipathy/Sympathy, Charm Person, Dominate Person, Hypnotic Pattern, or Modify Memory.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.128."},
+ {id:"mi_tce_illuminators_tattoo",title:"Illuminator's Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"This tattoo depicts writing implements and uses the following rules. While this tattoo is on your skin, you can write with your fingertip as if it were an ink pen that never runs dry.",notes:"Rarity: Common. Attune: Yes. Mending as bonus action. Read any writing. Write messages on creatures' skin (seen only by you and the target). TCE p.129."},
+ {id:"mi_tce_libram_souls",title:"Libram of Souls and Flesh",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"This thick tome is bound in bone-white leather, and its pages are made from pressed bone. While holding it, use as spellcasting focus. 3 charges: cast Animate Dead, Blight, Finger of Death, or Speak with Dead.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.129."},
+ {id:"mi_tce_lifewell_tattoo",title:"Lifewell Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"This tattoo depicts symbols of life and uses the following rules. You have resistance to necrotic damage. When you would be reduced to 0 HP, you drop to 1 HP instead.",notes:"Rarity: Very Rare. Attune: Yes. Drop to 1 HP instead of 0: 1/day. TCE p.129."},
+ {id:"mi_tce_lubas_tarokka",title:"Luba's Tarokka of Souls",category:"Magic Item",phb:false,tags:"wondrous,legendary,TCE",desc:"Luba's worn tarokka deck contains 54 illustrated cards. You can use the deck as a spellcasting focus. Shuffle and draw a card to cast its associated spell without expending a spell slot (1/day).",notes:"Rarity: Legendary. Attune: Yes (bard, sorcerer, warlock, or wizard). +2 spell attack and save DC. Various spells depending on card drawn. TCE p.129."},
+ {id:"mi_tce_lyre_of_building",title:"Lyre of Building",category:"Magic Item",phb:false,tags:"wondrous,bard,TCE",desc:"While holding this lyre, you can cast Mending at will. You can also use an action to play the lyre and protect structures or create structures.",notes:"Rarity: Rare. Attune: Yes (bard). Mending at will. Protection: 1 minute playing, all structures within 300ft gain immunity to damage for 1 hour (1/day). Construction: 1 hour playing, build structures as if 100 workers labored for 30 days (1/week). TCE p.130."},
+ {id:"mi_tce_absorbing_tattoo",title:"Absorbing Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"While this tattoo is on your skin, you have resistance to a type of damage. When you take damage of that type, you can use your reaction to gain immunity to that damage type until the start of your next turn.",notes:"Rarity: Very Rare. Attune: Yes. Resistance to one damage type. Reaction: gain immunity to that type until start of next turn including trigger. TCE p.119."},
+ {id:"mi_tce_alchemical_compendium",title:"Alchemical Compendium",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"While holding this worn leather book, you can use it as a spellcasting focus. 3 charges: cast Enlarge/Reduce, Feather Fall, Fly, Gaseous Form, or Jump.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.119."},
+ {id:"mi_tce_all_purpose_tool",title:"All-Purpose Tool",category:"Magic Item",phb:false,tags:"wondrous,artificer,TCE",desc:"Transforms into any artisan's tool. Use as spellcasting focus for artificer spells. Bonus to spell attack rolls and spell save DC equal to tool's bonus.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (artificer). TCE p.119."},
+ {id:"mi_tce_amulet_devout",title:"Amulet of the Devout",category:"Magic Item",phb:false,tags:"wondrous,cleric,paladin,TCE",desc:"Acts as a holy symbol. Bonus to spell attack rolls and spell save DC. 3 charges: Channel Divinity 1 extra time per day.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (cleric or paladin). Recharges at dawn. TCE p.119."},
+ {id:"mi_tce_arcane_grimoire",title:"Arcane Grimoire",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"Use as spellcasting focus for wizard spells. Gain a bonus to spell attack rolls and spell save DC. Spell slots not expended when casting spells copied from this grimoire.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (wizard). TCE p.21."},
+ {id:"mi_tce_astral_shard",title:"Astral Shard",category:"Magic Item",phb:false,tags:"wondrous,sorcerer,TCE",desc:"Solidified shard of the Astral Plane. Use as spellcasting focus. When you cast a spell using a sorcery point, you can teleport to an unoccupied space within 30 feet.",notes:"Rarity: Uncommon/Rare/Very Rare (+1/+2/+3). Attune: Yes (sorcerer). Bonus to spell attack and save DC. TCE p.120."},
+ {id:"mi_tce_astromancy_archive",title:"Astromancy Archive",category:"Magic Item",phb:false,tags:"wondrous,wizard,book,TCE",desc:"Brass disc of interlocking rings referencing star charts. Use as spellcasting focus. 3 charges: cast Augury, Clairvoyance, or Divination.",notes:"Rarity: Rare. Attune: Yes (wizard). +1 spell attack and save DC. Recharges 1d3 at dawn. TCE p.120."},
+ {id:"mi_tce_baba_yaga",title:"Baba Yaga's Mortar and Pestle",category:"Magic Item",phb:false,tags:"wondrous,legendary,TCE",desc:"Legendary mortar large enough to hold a Medium creature. Fly speed 60ft. Pestle casts Blight, Create Food and Water, Dispel Magic, Fabricate, Stone Shape, Wall of Stone 1/day each.",notes:"Rarity: Artifact. Attune: Yes (hag or spellcaster). +3 spell attack and save DC. TCE p.120."},
+ {id:"mi_tce_barrier_tattoo",title:"Barrier Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"Magic tattoo depicting protective imagery. Uncommon: +1 AC (no armor). Rare: 12+DEX AC. Very Rare: 15+DEX AC.",notes:"Rarity: Uncommon/Rare/Very Rare. Attune: Yes. No armor required for AC benefit. TCE p.120."},
+ {id:"mi_tce_blood_fury_tattoo",title:"Blood Fury Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"10 charges. When you hit: expend 1 charge for +4d6 necrotic and heal that amount. When damaged: reaction, expend 1 charge, make one melee attack with advantage.",notes:"Rarity: Legendary. Attune: Yes. Recharges 1d6+4 at dawn. TCE p.120."},
+ {id:"mi_tce_coiling_grasp_tattoo",title:"Coiling Grasp Tattoo",category:"Magic Item",phb:false,tags:"wondrous,tattoo,TCE",desc:"Magic hand extends 15ft (bonus action). Spell attack: 6d6 force damage and target is restrained until start of your next turn.",notes:"Rarity: Uncommon. Attune: Yes. TCE p.121."},
+ {id:"mi_tce_crook_of_rao",title:"Crook of Rao",category:"Magic Item",phb:false,tags:"wondrous,artifact,legendary,TCE",desc:"4-foot staff topped with symbol of Rao. Holy symbol. +3 spell attack and save DC. 3 charges: Banishment (DC 22), Holy Aura, or Plane Shift to Elysium.",notes:"Rarity: Artifact. Attune: Yes (cleric or paladin). Planar Seal: 1/month cast enhanced Forbiddance. TCE p.121."},
+ {id:"mi_tce_crystalline_chronicle",title:"Crystalline Chronicle",category:"Magic Item",phb:false,tags:"wondrous,wizard,TCE",desc:"Etched crystal sphere. Use as spellcasting focus. +2 spell attack and save DC. 3 charges: Detect Thoughts, Scrying, or Telepathy.",notes:"Rarity: Very Rare. Attune: Yes (wizard). Recharges 1d3 at dawn. TCE p.124."},
+ {id:"mi_ioun_sustenance",title:"Ioun Stone - Sustenance",category:"Magic Item",phb:false,tags:"wondrous,ioun,survival,DMG",desc:"You don't need to eat or drink while this clear spindle orbits your head.",notes:"Rarity: Rare. Attune: Yes. No need to eat or drink while orbiting."},
+]
+};
+
+// ===== END LIBRARY DATA =====
+
+const useState = window.useState || React.useState;
+const useCallback = window.useCallback || React.useCallback;
+const useRef = window.useRef || React.useRef;
+
+// COMPENDIUM - sourced from Library (dnd-library-backup-2026-05-24)
+// Races from RACE_COMPENDIUM
+const SPECIES = {
+  Aasimar: { traits:[{name:"Celestial Resistance",desc:"Resistance to radiant & necrotic damage."},{name:"Darkvision",desc:"60 ft darkvision."},{name:"Healing Hands",desc:"Heal HP = your level as Magic action (1/Long Rest)."},{name:"Light Bearer",desc:"Know Light cantrip."}], abilityBonus:{CHA:2}, size:"Medium", speed:30 },
+  Dragonborn: { traits:[{name:"Draconic Ancestry",desc:"Choose a dragon type - sets Breath Weapon damage type and Resistance."}], abilityBonus:{STR:2,CHA:1}, size:"Medium", speed:30 },
+  Dwarf: { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Dwarven Resilience",desc:"Advantage vs. poison saves; resistance to poison damage."},{name:"Stonecunning",desc:"Double prof on History checks related to stonework."},{name:"Tool Proficiency",desc:"Proficiency with one artisan's tool set."}], abilityBonus:{CON:2}, size:"Medium", speed:25 },
+  Elf: { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Keen Senses",desc:"Proficiency in Perception."},{name:"Fey Ancestry",desc:"Advantage on saves vs. Charmed; immune to magical sleep."},{name:"Trance",desc:"Long Rest in 4 hours of trance."}], abilityBonus:{DEX:2}, size:"Medium", speed:30 },
+  Gnome: { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Gnome Cunning",desc:"Advantage on all INT/WIS/CHA saving throws against magic."}], abilityBonus:{INT:2}, size:"Small", speed:25 },
+  "Half-Elf": { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Fey Ancestry",desc:"Advantage vs. Charmed; immune to magical sleep."},{name:"Skill Versatility",desc:"Proficiency in two skills of your choice."}], abilityBonus:{CHA:2}, size:"Medium", speed:30 },
+  "Half-Orc": { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Menacing",desc:"Proficiency in Intimidation."},{name:"Relentless Endurance",desc:"Drop to 1 HP instead of 0 once per Long Rest."},{name:"Savage Attacks",desc:"Extra damage die on melee crit."}], abilityBonus:{STR:2,CON:1}, size:"Medium", speed:30 },
+  Halfling: { traits:[{name:"Lucky",desc:"Reroll 1s on attack rolls, ability checks, or saving throws."},{name:"Brave",desc:"Advantage on saves vs. Frightened."},{name:"Halfling Nimbleness",desc:"Move through space of any larger creature."}], abilityBonus:{DEX:2}, size:"Small", speed:25 },
+  Human: { traits:[{name:"Extra Language",desc:"Speak one extra language."},{name:"Extra Skill",desc:"Proficiency in one skill of your choice."}], abilityBonus:{STR:1,DEX:1,CON:1,INT:1,WIS:1,CHA:1}, size:"Medium", speed:30 },
+  Tiefling: { traits:[{name:"Darkvision",desc:"60 ft darkvision."},{name:"Hellish Resistance",desc:"Resistance to fire damage."},{name:"Infernal Legacy",desc:"Thaumaturgy cantrip; Hellish Rebuke 1/day at 3rd; Darkness 1/day at 5th."}], abilityBonus:{CHA:2,INT:1}, size:"Medium", speed:30 },
+};
+
+// Subraces from SUBRACE_COMPENDIUM - keyed by parent race
+const SUBRACES = {
+  Dwarf: ["Hill Dwarf","Mountain Dwarf"],
+  Elf: ["High Elf","Wood Elf","Dark Elf (Drow)"],
+  Gnome: ["Forest Gnome","Rock Gnome"],
+  "Half-Elf": [],
+  "Half-Orc": [],
+  Halfling: ["Lightfoot Halfling","Stout Halfling"],
+  Human: ["Human (Variant)"],
+  Tiefling: ["Tiefling (Infernal)"],
+  Dragonborn: [
+    "Dragonborn - Black","Dragonborn - Blue","Dragonborn - Brass",
+    "Dragonborn - Bronze","Dragonborn - Copper","Dragonborn - Gold",
+    "Dragonborn - Green","Dragonborn - Red","Dragonborn - Silver","Dragonborn - White",
+  ],
+  Aasimar: [],
+};
+
+// Subrace trait details from SUBRACE_COMPENDIUM
+const SUBRACE_TRAITS = {
+  "Hill Dwarf": [{name:"Dwarven Toughness",desc:"HP max +1, and +1 again each level. Ability Score Increase: +1 WIS."}],
+  "Mountain Dwarf": [{name:"Dwarven Armor Training",desc:"Proficiency with light and medium armor. Ability Score Increase: +2 STR."}],
+  "High Elf": [{name:"Cantrip",desc:"Know one wizard cantrip (INT-based). Extra Language. Ability Score Increase: +1 INT."}],
+  "Wood Elf": [{name:"Fleet of Foot",desc:"Speed 35 ft. Mask of the Wild: hide in natural obscurement. Ability Score Increase: +1 WIS."}],
+  "Dark Elf (Drow)": [{name:"Drow Magic",desc:"Superior Darkvision 120 ft. Sunlight Sensitivity. Dancing Lights, Faerie Fire, Darkness (1/day each). Ability Score Increase: +1 CHA."}],
+  "Lightfoot Halfling": [{name:"Naturally Stealthy",desc:"Can hide behind creatures one size larger. Ability Score Increase: +1 CHA."}],
+  "Stout Halfling": [{name:"Stout Resilience",desc:"Advantage vs. poison; resistance to poison damage. Ability Score Increase: +1 CON."}],
+  "Forest Gnome": [{name:"Natural Illusionist",desc:"Know Minor Illusion cantrip. Speak with Small Beasts. Ability Score Increase: +1 DEX."}],
+  "Rock Gnome": [{name:"Tinker",desc:"Construct clockwork devices. Double prof on magic item History checks. Ability Score Increase: +1 CON."}],
+  "Human (Variant)": [{name:"Variant Traits",desc:"Ability Score Increase: +1 to two scores. One skill. One feat. Requires DM approval."}],
+  "Tiefling (Infernal)": [{name:"Infernal Legacy",desc:"Thaumaturgy cantrip, Hellish Rebuke 1/day, Darkness 1/day. Ability Score Increase: +2 CHA, +1 INT."}],
+  "Dragonborn - Black": [{name:"Draconic Ancestry",desc:"Acid. Breath: 5x30 ft line, DEX save."}],
+  "Dragonborn - Blue": [{name:"Draconic Ancestry",desc:"Lightning. Breath: 5x30 ft line, DEX save."}],
+  "Dragonborn - Brass": [{name:"Draconic Ancestry",desc:"Fire. Breath: 5x30 ft line, DEX save."}],
+  "Dragonborn - Bronze": [{name:"Draconic Ancestry",desc:"Lightning. Breath: 5x30 ft line, DEX save."}],
+  "Dragonborn - Copper": [{name:"Draconic Ancestry",desc:"Acid. Breath: 5x30 ft line, DEX save."}],
+  "Dragonborn - Gold": [{name:"Draconic Ancestry",desc:"Fire. Breath: 15 ft cone, DEX save."}],
+  "Dragonborn - Green": [{name:"Draconic Ancestry",desc:"Poison. Breath: 15 ft cone, CON save."}],
+  "Dragonborn - Red": [{name:"Draconic Ancestry",desc:"Fire. Breath: 15 ft cone, DEX save."}],
+  "Dragonborn - Silver": [{name:"Draconic Ancestry",desc:"Cold. Breath: 15 ft cone, CON save."}],
+  "Dragonborn - White": [{name:"Draconic Ancestry",desc:"Cold. Breath: 15 ft cone, CON save."}],
+};
+
+const CLASSES = {
+  Artificer: { hitDie:8, primaryAbility:"INT", savingThrows:["CON","INT"], armorProf:["Light","Medium","Shields"], weaponProf:["Simple"], toolProf:["Thieves' tools","Tinker's tools","One artisan's tools"], skillChoices:["Arcana","History","Investigation","Medicine","Nature","Perception","Sleight of Hand"], skillCount:2, multiclassReq:{INT:13}, features:{1:["Magical Tinkering","Spellcasting (INT, half-caster)"],2:["Infuse Item (4 infusions)"],3:["Artificer Specialist (Subclass)","The Right Tool for the Job"],4:["Ability Score Increase"],5:["Arcane Armament"],6:["Tool Expertise","Subclass Feature"],7:["Flash of Genius"],8:["Ability Score Increase"],9:["Infuse Item (6 infusions)"],10:["Subclass Feature","Magic Item Adept"]}, startingEquipment:"Two daggers; Any two simple weapons; Thieves' tools or Artisan's tools; Leather armor; Scholar's Pack; Spellcasting focus (arcane focus)", spellcastingAbility:"INT", halfCaster:true, spells:{cantrips:["Fire Bolt","Guidance","Light","Mage Hand","Mending","Message","Prestidigitation","Ray of Frost","Resistance","Spare the Dying","Thunderclap"],1:["Absorb Elements","Alarm","Catapult","Cure Wounds","Detect Magic","Disguise Self","Expeditious Retreat","Faerie Fire","False Life","Feather Fall","Grease","Identify","Jump","Longstrider","Purify Food and Drink","Sanctuary","Snare","Tasha's Caustic Brew"],2:["Aid","Alter Self","Arcane Lock","Blur","Continual Flame","Darkvision","Enhance Ability","Enlarge/Reduce","Heat Metal","Invisibility","Lesser Restoration","Levitate","Magic Mouth","Magic Weapon","Protection from Poison","Rope Trick","See Invisibility","Skywrite","Spider Climb","Web"],3:["Blink","Catnap","Create Food and Water","Dispel Magic","Elemental Weapon","Fly","Glyph of Warding","Haste","Intellect Fortress","Protection from Energy","Revivify","Tiny Servant","Water Breathing","Water Walk"],4:["Arcane Eye","Elemental Bane","Fabricate","Freedom of Movement","Mordenkainen's Faithful Hound","Otiluke's Resilient Sphere","Stone Shape","Stoneskin","Summon Construct"],5:["Animate Objects","Bigby's Hand","Creation","Greater Restoration","Skill Empowerment","Transmute Rock","Wall of Stone"]} },
+  Barbarian:{ hitDie:12, primaryAbility:"STR", savingThrows:["STR","CON"], armorProf:["Light","Medium","Shields"], weaponProf:["Simple","Martial"], skillChoices:["Animal Handling","Athletics","Intimidation","Nature","Perception","Survival"], skillCount:2, features:{1:["Rage (2/LR, +2 dmg)","Unarmored Defense (10+DEX+CON)","Weapon Mastery"],2:["Reckless Attack","Danger Sense"],3:["Primal Path (Subclass)"],4:["Ability Score Increase"],5:["Extra Attack","Fast Movement +10 ft"],6:["Rage 3/LR","Primal Path Feature"],7:["Feral Instinct","Instinctive Pounce"],8:["Ability Score Increase"],9:["Brutal Strike"],10:["Primal Path Feature"]}, startingEquipment:"Greataxe or any martial melee weapon; 4 handaxes or any simple weapon; Explorer's Pack; 15 gp", spellcastingAbility:null, spells:{} },
+  Bard: { hitDie:8, primaryAbility:"CHA", savingThrows:["DEX","CHA"], armorProf:["Light"], weaponProf:["Simple","Hand Crossbow","Longsword","Rapier","Shortsword"], skillChoices:["Acrobatics","Animal Handling","Arcana","Athletics","Deception","History","Insight","Intimidation","Investigation","Medicine","Nature","Perception","Performance","Persuasion","Religion","Sleight of Hand","Stealth","Survival"], skillCount:3, features:{1:["Bardic Inspiration d6","Spellcasting (CHA)","Weapon Mastery"],2:["Expertise (2 skills)","Jack of All Trades"],3:["Bard Subclass","Expertise (2 more)"],4:["Ability Score Increase"],5:["Font of Inspiration","Bardic Inspiration d8"],6:["Subclass Feature"],7:["Countercharm"],8:["Ability Score Increase"],9:["Expertise (2 more)"],10:["Bardic Inspiration d10","Magical Secrets"]}, startingEquipment:"Rapier or longsword or any simple weapon; Diplomat's Pack or Entertainer's Pack; Lute or other musical instrument; Leather armor; Dagger", spellcastingAbility:"CHA", spells:{cantrips:["Blade Ward","Dancing Lights","Friends","Light","Mage Hand","Minor Illusion","Prestidigitation","Starry Wisp","True Strike","Vicious Mockery"],1:["Bane","Charm Person","Cure Wounds","Detect Magic","Dissonant Whispers","Faerie Fire","Healing Word","Heroism","Identify","Silent Image","Sleep","Thunderwave"],2:["Aid","Calm Emotions","Enhance Ability","Heat Metal","Hold Person","Invisibility","Knock","Lesser Restoration","See Invisibility","Shatter","Silence","Suggestion"],3:["Bestow Curse","Clairvoyance","Dispel Magic","Fear","Hypnotic Pattern","Major Image","Mass Healing Word","Tongues"],4:["Charm Monster","Confusion","Dimension Door","Greater Invisibility","Polymorph"],5:["Dominate Person","Dream","Greater Restoration","Hold Monster","Modify Memory","Raise Dead","Scrying"]} },
+  Cleric: { hitDie:8, primaryAbility:"WIS", savingThrows:["WIS","CHA"], armorProf:["Light","Medium","Shields"], weaponProf:["Simple"], skillChoices:["History","Insight","Medicine","Persuasion","Religion"], skillCount:2, features:{1:["Spellcasting (WIS)","Divine Domain (choose your domain, gain domain spells)"],2:["Channel Divinity (1/rest)","Divine Domain feature"],3:[],4:["Ability Score Improvement"],5:["Destroy Undead (CR 1/2)"],6:["Channel Divinity (2/rest)","Divine Domain feature"],7:[],8:["Ability Score Improvement","Destroy Undead (CR 1)","Divine Domain feature"],9:[],10:["Divine Intervention"],11:["Destroy Undead (CR 2)"],12:["Ability Score Improvement"],13:[],14:["Destroy Undead (CR 3)"],15:[],16:["Ability Score Improvement"],17:["Destroy Undead (CR 4)","Divine Domain feature"],18:["Channel Divinity (3/rest)"],19:["Ability Score Improvement"],20:["Divine Intervention improvement"]}, startingEquipment:"Mace or warhammer (if proficient); Scale mail or Leather armor or Chain mail; Light crossbow + 20 bolts or any simple weapon; Priest's Pack or Explorer's Pack; Shield; Holy symbol", spellcastingAbility:"WIS", spells:{cantrips:["Guidance","Light","Mending","Resistance","Sacred Flame","Spare the Dying","Thaumaturgy","Toll the Dead","Word of Radiance"],1:["Bane","Bless","Command","Cure Wounds","Detect Evil and Good","Detect Magic","Guiding Bolt","Healing Word","Inflict Wounds","Protection from Evil and Good","Sanctuary","Shield of Faith"],2:["Aid","Augury","Blindness/Deafness","Calm Emotions","Hold Person","Lesser Restoration","Prayer of Healing","Silence","Spiritual Weapon","Zone of Truth"],3:["Animate Dead","Beacon of Hope","Daylight","Dispel Magic","Mass Healing Word","Revivify","Sending","Speak with Dead","Spirit Guardians"],4:["Banishment","Control Water","Death Ward","Divination","Freedom of Movement","Guardian of Faith"],5:["Commune","Contagion","Dispel Evil and Good","Flame Strike","Greater Restoration","Hallow","Mass Cure Wounds","Raise Dead","Scrying"]} },
+  Druid: { hitDie:8, primaryAbility:"WIS", savingThrows:["INT","WIS"], armorProf:["Light","Medium","Shields (non-metal)"], weaponProf:["Simple"], skillChoices:["Arcana","Animal Handling","Insight","Medicine","Nature","Perception","Religion","Survival"], skillCount:2, features:{1:["Druidic","Primal Order","Spellcasting (WIS)","Wild Shape CR 1/4"],2:["Wild Shape CR 1/2 (swim)","Wild Companion"],3:["Druid Circle (Subclass)","Wild Resurgence"],4:["Ability Score Increase","Wild Shape improvement"],5:["Wild Shape CR 1 (fly)","Commune with Nature"],6:["Subclass Feature"],7:["Elemental Fury"],8:["Ability Score Increase","Wild Shape CR 2"],9:["Commune improvement"],10:["Subclass Feature","Wild Shape CR 3"]}, startingEquipment:"Wooden shield or any simple weapon; Scimitar or simple melee weapon; Leather armor; Explorer's Pack; Druidic focus", spellcastingAbility:"WIS", spells:{cantrips:["Druidcraft","Guidance","Mending","Produce Flame","Resistance","Shillelagh","Spare the Dying","Thorn Whip","Thunderclap"],1:["Animal Friendship","Charm Person","Cure Wounds","Detect Magic","Entangle","Faerie Fire","Fog Cloud","Goodberry","Healing Word","Longstrider","Speak with Animals","Thunderwave"],2:["Animal Messenger","Barkskin","Enhance Ability","Flame Blade","Gust of Wind","Heat Metal","Hold Person","Moonbeam","Pass without Trace","Spike Growth","Summon Beast"],3:["Call Lightning","Conjure Animals","Daylight","Dispel Magic","Plant Growth","Revivify","Sleet Storm","Speak with Plants","Wind Wall"],4:["Blight","Control Water","Dominate Beast","Freedom of Movement","Ice Storm","Polymorph","Stoneskin","Wall of Fire"],5:["Antilife Shell","Awaken","Commune with Nature","Conjure Elemental","Greater Restoration","Insect Plague","Mass Cure Wounds","Reincarnate","Scrying"]} },
+  Fighter: { hitDie:10, primaryAbility:"STR", savingThrows:["STR","CON"], armorProf:["Light","Medium","Heavy","Shields"], weaponProf:["Simple","Martial"], skillChoices:["Acrobatics","Animal Handling","Athletics","History","Insight","Intimidation","Perception","Survival"], skillCount:2, features:{1:["Fighting Style","Second Wind (1d10+level)","Weapon Mastery (3)"],2:["Action Surge 1/SR","Tactical Mind"],3:["Martial Archetype (Subclass)"],4:["Ability Score Increase","Weapon Mastery (4)"],5:["Extra Attack","Tactical Shift"],6:["Ability Score Increase"],7:["Subclass Feature"],8:["Ability Score Increase"],9:["Indomitable 1/LR","Master of Armaments"],10:["Subclass Feature","Weapon Mastery (5)"]}, startingEquipment:"Chain mail or leather armor + longbow + 20 arrows; Martial weapon + shield or two martial weapons; Light crossbow + 20 bolts or hand crossbow; Dungeoneer's Pack or Explorer's Pack", spellcastingAbility:null, spells:{} },
+  Monk: { hitDie:8, primaryAbility:"DEX/WIS", savingThrows:["STR","DEX"], armorProf:[], weaponProf:["Simple","Martial (Monk Weapons)"], skillChoices:["Acrobatics","Athletics","History","Insight","Religion","Stealth"], skillCount:2, features:{1:["Martial Arts d6","Unarmored Defense (10+DEX+WIS)","Weapon Mastery"],2:["Monk's Focus (PBx/LR)","Unarmored Movement +10","Uncanny Metabolism"],3:["Deflect Attacks","Monastic Tradition (Subclass)"],4:["Ability Score Increase","Slow Fall"],5:["Extra Attack","Stunning Strike"],6:["Subclass Feature","Empowered Strikes"],7:["Evasion"],8:["Ability Score Increase"],9:["Acrobatic Movement"],10:["Heightened Focus","Self-Restoration"]}, startingEquipment:"Shortsword or any simple weapon; Dungeoneer's Pack or Explorer's Pack; 10 darts", spellcastingAbility:null, spells:{} },
+  Paladin: { hitDie:10, primaryAbility:"STR/CHA", savingThrows:["WIS","CHA"], armorProf:["Light","Medium","Heavy","Shields"], weaponProf:["Simple","Martial"], skillChoices:["Athletics","Insight","Intimidation","Medicine","Persuasion","Religion"], skillCount:2, features:{1:["Divine Smite","Lay on Hands (5xlevel)","Spellcasting (CHA)","Weapon Mastery"],2:["Fighting Style","Paladin's Smite"],3:["Channel Divinity 1/SR","Sacred Oath (Subclass)"],4:["Ability Score Increase"],5:["Extra Attack","Faithful Steed"],6:["Aura of Protection (CHA mod to saves, 10 ft)"],7:["Subclass Feature"],8:["Ability Score Increase"],9:["Abjure Foes"],10:["Aura of Courage (10 ft)"]}, startingEquipment:"Martial weapon + shield or two martial weapons; 5 javelins or any simple melee weapon; Priest's Pack or Explorer's Pack; Chain mail; Holy symbol", spellcastingAbility:"CHA", spells:{1:["Bless","Command","Compelled Duel","Cure Wounds","Detect Evil and Good","Divine Favor","Heroism","Searing Smite","Shield of Faith","Thunderous Smite","Wrathful Smite"],2:["Aid","Branding Smite","Find Steed","Lesser Restoration","Magic Weapon","Prayer of Healing","Warding Bond","Zone of Truth"],3:["Aura of Vitality","Blinding Smite","Daylight","Dispel Magic","Magic Circle","Remove Curse","Revivify"],4:["Aura of Life","Banishment","Death Ward","Staggering Smite"],5:["Banishing Smite","Circle of Power","Destructive Wave","Dispel Evil and Good","Holy Weapon","Raise Dead"]} },
+  Ranger: { hitDie:10, primaryAbility:"DEX/WIS", savingThrows:["STR","DEX"], armorProf:["Light","Medium","Shields"], weaponProf:["Simple","Martial"], skillChoices:["Animal Handling","Athletics","Insight","Investigation","Nature","Perception","Stealth","Survival"], skillCount:3, features:{1:["Deft Explorer","Favored Enemy (+2 dmg)","Spellcasting (WIS)","Weapon Mastery"],2:["Fighting Style","Favored Enemy improvement"],3:["Ranger Archetype (Subclass)","Roving (+5 ft, climb & swim)"],4:["Ability Score Increase"],5:["Extra Attack","Tireless"],6:["Subclass Feature","Favored Enemy improvement"],7:["Blindsight 10 ft"],8:["Ability Score Increase"],9:["Conjure Barrage"],10:["Subclass Feature"]}, startingEquipment:"Scale mail or leather armor; Two shortswords or two simple melee weapons; Dungeoneer's Pack or Explorer's Pack; Longbow + 20 arrows", spellcastingAbility:"WIS", spells:{1:["Alarm","Animal Friendship","Cure Wounds","Detect Magic","Entangle","Fog Cloud","Goodberry","Hunter's Mark","Jump","Longstrider","Speak with Animals"],2:["Animal Messenger","Barkskin","Cordon of Arrows","Darkvision","Pass without Trace","Protection from Poison","Silence","Spike Growth","Summon Beast"],3:["Conjure Animals","Conjure Barrage","Daylight","Lightning Arrow","Plant Growth","Speak with Plants","Wind Wall"],4:["Conjure Woodland Beings","Freedom of Movement","Grasping Vine","Stoneskin"],5:["Conjure Volley","Steel Wind Strike","Swift Quiver","Tree Stride"]} },
+  Rogue: { hitDie:8, primaryAbility:"DEX", savingThrows:["DEX","INT"], armorProf:["Light"], weaponProf:["Simple","Hand Crossbow","Longsword","Rapier","Shortsword"], skillChoices:["Acrobatics","Athletics","Deception","Insight","Intimidation","Investigation","Perception","Persuasion","Sleight of Hand","Stealth"], skillCount:4, features:{1:["Expertise (2 skills)","Sneak Attack 1d6","Thieves' Cant","Weapon Mastery"],2:["Cunning Action (Dash/Disengage/Hide)"],3:["Roguish Archetype (Subclass)","Steady Aim"],4:["Ability Score Increase"],5:["Cunning Strike","Sneak Attack 3d6","Uncanny Dodge"],6:["Expertise (2 more)"],7:["Evasion","Reliable Talent"],8:["Ability Score Increase"],9:["Subclass Feature"],10:["Ability Score Increase"]}, startingEquipment:"Rapier or shortsword; Shortbow + 20 arrows or shortsword; Burglar's Pack or Dungeoneer's Pack or Explorer's Pack; Leather armor; Two daggers; Thieves' tools", spellcastingAbility:null, spells:{} },
+  Sorcerer: { hitDie:6, primaryAbility:"CHA", savingThrows:["CON","CHA"], armorProf:[], weaponProf:["Simple"], skillChoices:["Arcana","Deception","Insight","Intimidation","Persuasion","Religion"], skillCount:2, features:{1:["Innate Sorcery (Adv spell attacks, +1 DC)","Spellcasting (CHA)","Weapon Mastery"],2:["Font of Magic (SP = level)","Metamagic (2)"],3:["Sorcerous Origin (Subclass)"],4:["Ability Score Increase"],5:["Sorcerous Restoration"],6:["Subclass Feature"],7:["Sorcery Incarnate"],8:["Ability Score Increase"],9:["Metamagic (3)"],10:["Subclass Feature","Metamagic (4)"]}, startingEquipment:"Light crossbow + 20 bolts or any simple weapon; Component pouch or arcane focus; Dungeoneer's Pack or Explorer's Pack; Two daggers", spellcastingAbility:"CHA", spells:{cantrips:["Blade Ward","Chill Touch","Fire Bolt","Light","Mage Hand","Minor Illusion","Poison Spray","Prestidigitation","Ray of Frost","Shocking Grasp","True Strike"],1:["Burning Hands","Charm Person","Chromatic Orb","Detect Magic","Expeditious Retreat","False Life","Feather Fall","Fog Cloud","Mage Armor","Magic Missile","Ray of Sickness","Shield","Sleep","Thunderwave","Witch Bolt"],2:["Alter Self","Blindness/Deafness","Blur","Darkness","Darkvision","Enhance Ability","Enlarge/Reduce","Hold Person","Invisibility","Knock","Mirror Image","Misty Step","Scorching Ray","Shatter","Spider Climb","Suggestion","Web"],3:["Blink","Counterspell","Daylight","Dispel Magic","Fear","Fireball","Fly","Haste","Hypnotic Pattern","Lightning Bolt","Slow","Stinking Cloud","Tongues"],4:["Banishment","Blight","Confusion","Dimension Door","Fire Shield","Greater Invisibility","Ice Storm","Polymorph","Stoneskin","Wall of Fire"],5:["Animate Objects","Cloudkill","Cone of Cold","Creation","Dominate Person","Hold Monster","Insect Plague","Seeming","Telekinesis","Teleportation Circle","Wall of Stone"]} },
+  Warlock: { hitDie:8, primaryAbility:"CHA", savingThrows:["WIS","CHA"], armorProf:["Light"], weaponProf:["Simple"], skillChoices:["Arcana","Deception","History","Intimidation","Investigation","Nature","Religion"], skillCount:2, features:{1:["Eldritch Invocations (1)","Pact Magic (CHA, SR recharge)","Weapon Mastery"],2:["Eldritch Invocations (2 total)"],3:["Pact Boon (Blade/Chain/Talisman/Tome)","Otherworldly Patron (Subclass)"],4:["Ability Score Increase"],5:["Eldritch Invocations (3 total)","Pact Magic 3rd-level"],6:["Subclass Feature"],7:["Eldritch Invocations (4 total)"],8:["Ability Score Increase"],9:["Contact Patron","Pact Magic 5th-level"],10:["Subclass Feature","Eldritch Invocations (5 total)"]}, startingEquipment:"Light crossbow + 20 bolts or any simple weapon; Component pouch or arcane focus; Scholar's Pack or Dungeoneer's Pack; Leather armor; Any simple weapon; Two daggers", spellcastingAbility:"CHA", spells:{cantrips:["Blade Ward","Chill Touch","Eldritch Blast","Mage Hand","Minor Illusion","Poison Spray","Prestidigitation","True Strike"],1:["Armor of Agathys","Arms of Hadar","Bane","Charm Person","Hex","Hellish Rebuke","Protection from Evil and Good","Witch Bolt"],2:["Cloud of Daggers","Darkness","Enthrall","Hold Person","Invisibility","Mirror Image","Misty Step","Shatter","Spider Climb","Suggestion"],3:["Counterspell","Dispel Magic","Fear","Fly","Hunger of Hadar","Hypnotic Pattern","Vampiric Touch"],4:["Banishment","Blight","Charm Monster","Dimension Door","Shadow of Moil"],5:["Contact Other Plane","Dream","Hold Monster","Scrying","Synaptic Static","Teleportation Circle"]} },
+  Wizard: { hitDie:6, primaryAbility:"INT", savingThrows:["INT","WIS"], armorProf:[], weaponProf:["Simple"], skillChoices:["Arcana","History","Insight","Investigation","Medicine","Religion"], skillCount:3, features:{1:["Arcane Recovery (½ level slots/SR)","Memorize Spell","Spellcasting (INT)","Weapon Mastery"],2:["Scholar (Expertise: Arcana or History)"],3:["Arcane Tradition (Subclass)","Cantrip Formulas"],4:["Ability Score Increase"],5:["Memorize Spell improvement"],6:["Subclass Feature"],7:["Spell Mastery (cantrip)"],8:["Ability Score Increase"],9:["Spell Mastery (1st-level)"],10:["Subclass Feature"]}, startingEquipment:"Quarterstaff or dagger; Component pouch or arcane focus; Scholar's Pack or Explorer's Pack; Spellbook", spellcastingAbility:"INT", spells:{cantrips:["Acid Splash","Blade Ward","Chill Touch","Dancing Lights","Fire Bolt","Light","Mage Hand","Mending","Minor Illusion","Poison Spray","Prestidigitation","Ray of Frost","Shocking Grasp","True Strike"],1:["Alarm","Burning Hands","Charm Person","Chromatic Orb","Comprehend Languages","Detect Magic","Expeditious Retreat","False Life","Feather Fall","Find Familiar","Fog Cloud","Grease","Identify","Mage Armor","Magic Missile","Protection from Evil and Good","Ray of Sickness","Shield","Silent Image","Sleep","Tasha's Hideous Laughter","Thunderwave","Unseen Servant","Witch Bolt"],2:["Alter Self","Arcane Lock","Blindness/Deafness","Blur","Cloud of Daggers","Crown of Madness","Darkness","Darkvision","Detect Thoughts","Enlarge/Reduce","Flaming Sphere","Hold Person","Invisibility","Knock","Levitate","Mirror Image","Misty Step","Phantasmal Force","Scorching Ray","See Invisibility","Shatter","Spider Climb","Suggestion","Web"],3:["Animate Dead","Bestow Curse","Blink","Clairvoyance","Counterspell","Dispel Magic","Fear","Fireball","Fly","Gaseous Form","Haste","Hypnotic Pattern","Lightning Bolt","Major Image","Protection from Energy","Remove Curse","Sending","Slow","Stinking Cloud","Tongues","Vampiric Touch","Water Breathing"],4:["Arcane Eye","Banishment","Blight","Confusion","Control Water","Dimension Door","Evard's Black Tentacles","Fire Shield","Greater Invisibility","Ice Storm","Locate Creature","Polymorph","Stone Shape","Stoneskin","Wall of Fire"],5:["Animate Objects","Bigby's Hand","Cloudkill","Cone of Cold","Conjure Elemental","Contact Other Plane","Creation","Dominate Person","Dream","Geas","Hold Monster","Legend Lore","Mislead","Modify Memory","Passwall","Scrying","Seeming","Telekinesis","Teleportation Circle","Wall of Force","Wall of Stone"]} },
+};
+
+const SKILLS_BY_ABILITY = {
+  STR:[{name:"Athletics",ability:"STR"}],
+  DEX:[{name:"Acrobatics",ability:"DEX"},{name:"Sleight of Hand",ability:"DEX"},{name:"Stealth",ability:"DEX"}],
+  CON:[],
+  INT:[{name:"Arcana",ability:"INT"},{name:"History",ability:"INT"},{name:"Investigation",ability:"INT"},{name:"Nature",ability:"INT"},{name:"Religion",ability:"INT"}],
+  WIS:[{name:"Animal Handling",ability:"WIS"},{name:"Insight",ability:"WIS"},{name:"Medicine",ability:"WIS"},{name:"Perception",ability:"WIS"},{name:"Survival",ability:"WIS"}],
+  CHA:[{name:"Deception",ability:"CHA"},{name:"Intimidation",ability:"CHA"},{name:"Performance",ability:"CHA"},{name:"Persuasion",ability:"CHA"}],
+};
+
+const SPELL_SLOTS = {
+  1:[2],2:[3],3:[4,2],4:[4,3],5:[4,3,2],6:[4,3,3],7:[4,3,3,1],8:[4,3,3,2],9:[4,3,3,3,1],
+  10:[4,3,3,3,2],11:[4,3,3,3,2,1],12:[4,3,3,3,2,1],13:[4,3,3,3,2,1,1],14:[4,3,3,3,2,1,1],
+  15:[4,3,3,3,2,1,1,1],16:[4,3,3,3,2,1,1,1],17:[4,3,3,3,2,1,1,1,1],18:[4,3,3,3,3,1,1,1,1],
+  19:[4,3,3,3,3,2,1,1,1],20:[4,3,3,3,3,2,2,1,1],
+};
+
+const ABILITY_KEYS  = ["STR","DEX","CON","INT","WIS","CHA"];
+const ABILITY_NAMES = {STR:"Strength",DEX:"Dexterity",CON:"Constitution",INT:"Intelligence",WIS:"Wisdom",CHA:"Charisma"};
+const CURRENCY = ["PP","GP","EP","SP","CP"];
+const CURRENCY_RATES = {CP:"x100=1GP",SP:"x10=1GP",EP:"x2=1GP",GP:"base",PP:"=10GP"};
+
+const abilityMod = s => Math.floor((s-10)/2);
+const profBonus  = l => Math.ceil(l/4)+1;
+const fmt        = n => n>=0 ? `+${n}` : `${n}`;
+
+const BLANK = {
+ name:"", player:"", charClass:"", level:1, background:"", species:"", subrace:"", alignment:"",
+ abilities:{STR:10,DEX:10,CON:10,INT:10,WIS:10,CHA:10},
+ hp:{max:0,current:1,temp:0},
+  wearing_head:[],wearing_neck:[],wearing_shoulders:[],wearing_body:[],wearing_skin:[],wearing_arms:[],wearing_hands:[],wearing_hips:[],wearing_feet:[],
+ ac:10, speed:30,
+ saveProficiencies:[], skillProficiencies:[], skillExpertise:[],
+ inspiration:false, deathSaves:{successes:0,failures:0},
+  // Attack tab
+ weapons:[{name:"",atk:"",dmg:""},{name:"",atk:"",dmg:""},{name:"",atk:"",dmg:""},{name:"",atk:"",dmg:""},{name:"",atk:"",dmg:""}],
+ attackSpells:[{name:"",atk:"",lvl:"",dmg:""},{name:"",atk:"",lvl:"",dmg:""},{name:"",atk:"",lvl:"",dmg:""}],
+  // Spells tab
+ spellSlotsUsed:Array(9).fill(0), spellsKnown:[], preparedSpells:[],
+  // Gear tab
+ armor:"", armorItems:[], shield:false, shieldItems:[], weaponItems:[],
+ starterPack:"", toolsEquip:"", chosenStartEquip:[], toolItems:[], gemItems:[], gems:"", jewelryItems:[], jewelry:"", componentItems:[], components:"", potionItems:[], potions:"", spellbooks:[], scrollItems:[], scrolls:"", wandItems:[], wands:"", rods:"", magicItemItems:[], magicItems:"",
+ currency:{CP:0,SP:0,EP:0,GP:0,PP:0},
+  // Notes tab
+ notes:"", personalityTraits:"", ideals:"", bonds:"", flaws:"",
+  // Photos tab
+ photos:[],
+  // Rounds tab
+ conditions:[], concentrating:"", actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, actionItems:[], bonusActionItems:[], reactionItems:[], rageActive:false, rageRounds:0,
+ bonusActions:"", reactions:"", legendaryActions:"",
+  // Companion tab
+ companionName:"", companionType:"", companionAC:"", companionHP:"", companionSpeed:"",
+ companionSTR:10,companionDEX:10,companionCON:10,companionINT:10,companionWIS:10,companionCHA:10,
+ companionAttacks:[{name:"",atk:"",dmg:""}],
+ companionNotes:"", avatarPhoto:"", multiClass:"",
+ classLevel:1, multiClassLevel:0,
+ resistances:[], immunities:[], vulnerabilities:[],
+ advantage:false, disadvantage:false,
+ inspirationActive:false, actionDiceCount:0,
+ classSkills:[],
+ languages:[],
+ divineDomain:"",
+ racialCantrip:"", racialToolProf:"", charHeight:"", charWeight:"", charAge:"", charSkin:"", charHair:"", charEyes:"",
+};
+
+const CHAR_KEY = "dnd5e_character_v1";
+const TABS = ["core","features","gear","spells","rounds","notes","photos","companion"];
+
+// Skill proficiencies granted by each background (PHB)
+const BG_SKILLS = {
+  Acolyte: ["Insight","Religion"],
+  Charlatan: ["Deception","Sleight of Hand"],
+  Criminal: ["Deception","Stealth"],
+  Entertainer: ["Acrobatics","Performance"],
+  "Folk Hero": ["Animal Handling","Survival"],
+  "Guild Artisan":["Insight","Persuasion"],
+  Hermit: ["Medicine","Religion"],
+  Noble: ["History","Persuasion"],
+  Outlander: ["Athletics","Survival"],
+  Sage: ["Arcana","History"],
+  Sailor: ["Athletics","Perception"],
+  Soldier: ["Athletics","Intimidation"],
+  Urchin: ["Sleight of Hand","Stealth"],
+};
+
+// Ability score bonuses granted by each subrace
+const SUBRACE_BONUS = {
+  "Hill Dwarf": {WIS:1},
+  "Mountain Dwarf": {STR:2},
+  "High Elf": {INT:1},
+  "Wood Elf": {WIS:1},
+  "Dark Elf (Drow)": {CHA:1},
+  "Lightfoot Halfling":{CHA:1},
+  "Stout Halfling": {CON:1},
+  "Forest Gnome": {DEX:1},
+  "Rock Gnome": {CON:1},
+  "Draconic Bloodline":{},
+  "Feather": {},
+};
+
+// Languages granted by race
+const RACE_LANGUAGES = {
+  Human: ["Common"],
+  Elf: ["Common","Elvish"],
+  Dwarf: ["Common","Dwarvish"],
+  Halfling: ["Common","Halfling"],
+  Gnome: ["Common","Gnomish"],
+  "Half-Elf": ["Common","Elvish"],
+  "Half-Orc": ["Common","Orc"],
+  Tiefling: ["Common","Infernal"],
+  Dragonborn: ["Common","Draconic"],
+  Aasimar: ["Common","Celestial"],
+};
+
+// Languages granted by background
+const BG_LANGUAGES = {
+  Acolyte: [],
+  Charlatan: [],
+  Criminal: [],
+  Entertainer: [],
+  "Folk Hero": [],
+  "Guild Artisan":[],
+  Hermit: [],
+  Noble: [],
+  Outlander: [],
+  Sage: [],
+  Sailor: [],
+  Soldier: [],
+  Urchin: [],
+};
+
+// Cantrip choices granted by subrace
+const RACE_WEAPON_PROFS = {
+  "Dwarf":      ["Battleaxe","Handaxe","Light Hammer","Warhammer"],
+  "High Elf":   ["Longsword","Shortsword","Shortbow","Longbow"],
+  "Wood Elf":   ["Longsword","Shortsword","Shortbow","Longbow"],
+  "Dark Elf (Drow)": ["Rapier","Shortsword","Hand Crossbow"],
+};
+
+const RACE_TOOL_CHOICES = {
+  "Dwarf": {label:"Tool Proficiency", options:["Smith's tools","Brewer's supplies","Mason's tools"]},
+  "Rock Gnome": {label:"Tool Proficiency", options:["Tinker's tools"]},  // auto, no choice needed
+};
+
+const SUBRACE_CANTRIPS = {
+  "High Elf": {source:"Wizard", list:["Acid Splash","Blade Ward","Chill Touch","Dancing Lights","Fire Bolt","Friends","Frostbite","Light","Mage Hand","Mending","Message","Minor Illusion","Poison Spray","Prestidigitation","Ray of Frost","Shocking Grasp","True Strike"]},
+  "Forest Gnome":{source:"Illusion", list:["Minor Illusion"]},
+};
+
+// Standard languages available for choice
+const ALL_LANGUAGES = ["Abyssal","Celestial","Common","Deep Speech","Draconic","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Infernal","Orc","Primordial","Sylvan","Thieves' Cant","Undercommon"];
+
+// Extra language choices granted by subrace (number of languages to pick)
+const SUBRACE_LANGUAGES = {
+  "High Elf": 1,
+  "Half-Elf": 1,
+  "Hill Dwarf": 0,
+};
+
+// Skill proficiencies granted by racial traits
+const RACE_SKILLS = {
+  Elf: ["Perception"], // Keen Senses
+  "Half-Elf":["Perception"], // Keen Senses via elf heritage
+  Aasimar: [],
+  Dwarf: [],
+  Gnome: [],
+  Halfling: [],
+  "Half-Orc":["Intimidation"], // Menacing
+  Human: [],
+  Tiefling: [],
+  Dragonborn:[],
+};
+
+function charLoad() {
+ try {
+ const raw = localStorage.getItem(CHAR_KEY);
+ if (raw) {
+ const saved = JSON.parse(raw);
+      // Merge with BLANK so new fields added in updates are always present
+ return { ...BLANK, ...saved,
+ abilities: { ...BLANK.abilities, ...(saved.abilities||{}) },
+ hp: { ...BLANK.hp, ...(saved.hp||{}) },
+ deathSaves: { ...BLANK.deathSaves, ...(saved.deathSaves||{}) },
+ currency: { ...BLANK.currency, ...(saved.currency||{}) },
+ resistances: Array.isArray(saved.resistances)      ? saved.resistances      : [],
+ immunities: Array.isArray(saved.immunities)       ? saved.immunities       : [],
+ vulnerabilities: Array.isArray(saved.vulnerabilities)  ? saved.vulnerabilities  : [],
+ weapons: Array.isArray(saved.weapons)          ? saved.weapons          : BLANK.weapons,
+ attackSpells: Array.isArray(saved.attackSpells)     ? saved.attackSpells     : BLANK.attackSpells,
+ spellSlotsUsed: Array.isArray(saved.spellSlotsUsed)   ? saved.spellSlotsUsed   : BLANK.spellSlotsUsed,
+ spellsKnown: Array.isArray(saved.spellsKnown)      ? saved.spellsKnown      : [],
+ preparedSpells: Array.isArray(saved.preparedSpells)   ? saved.preparedSpells   : [],
+ photos: Array.isArray(saved.photos)           ? saved.photos           : [],
+ conditions: Array.isArray(saved.conditions)       ? saved.conditions       : [],
+ saveProficiencies: Array.isArray(saved.saveProficiencies)    ? saved.saveProficiencies    : [],
+ skillProficiencies: Array.isArray(saved.skillProficiencies)   ? saved.skillProficiencies   : [],
+ skillExpertise: Array.isArray(saved.skillExpertise)       ? saved.skillExpertise       : [],
+ classSkills: Array.isArray(saved.classSkills)         ? saved.classSkills         : [],
+ languages: Array.isArray(saved.languages)           ? saved.languages            : [],
+        // Migration: clear multiClass if multiClassLevel is 0 (not actually multiclassed)
+ multiClass: (saved.multiClassLevel > 0) ? (saved.multiClass || "") : "",
+      };
+    }
+  } catch(_) {}
+ return BLANK;
+}
+
+function charSave(c) {
+ try { localStorage.setItem(CHAR_KEY, JSON.stringify(c)); } catch(_) {}
+}
+
+const CONDITIONS = ["Blinded","Charmed","Deafened","Exhaustion","Frightened","Grappled","Incapacitated","Invisible","Paralyzed","Petrified","Poisoned","Prone","Restrained","Stunned","Unconscious"];
+
+// MULTICLASS RULES (enforced on sheet, not stored in library)
+// Prereqs: [ability, minScore] - all must be met
+const MC_PREREQS = {
+  Barbarian: [["STR",13]],
+  Bard: [["CHA",13]],
+  Cleric: [["WIS",13]],
+  Druid: [["WIS",13]],
+  Fighter: [["STR",13]], // OR DEX 13 - handled as union below
+  Monk: [["DEX",13],["WIS",13]],
+  Paladin: [["STR",13],["CHA",13]],
+  Ranger: [["DEX",13],["WIS",13]],
+  Rogue: [["DEX",13]],
+  Sorcerer: [["CHA",13]],
+  Warlock: [["CHA",13]],
+  Wizard: [["INT",13]],
+};
+// Fighter/Ranger have OR conditions - we handle them separately
+const MC_PREREQS_OR = {
+  Fighter: [["STR",13],["DEX",13]], // need STR 13 OR DEX 13
+  Ranger: null, // Ranger needs both DEX+WIS (covered above)
+};
+
+function mcPrereqMet(className, abilities) {
+ if (MC_PREREQS_OR[className]) {
+    // OR logic: at least one must be met
+ return MC_PREREQS_OR[className].some(([ab,score]) => (abilities[ab]||10) >= score);
+  }
+ const prereqs = MC_PREREQS[className];
+ if (!prereqs) return true;
+ return prereqs.every(([ab,score]) => (abilities[ab]||10) >= score);
+}
+
+function mcFailedPrereqs(className, abilities) {
+ if (MC_PREREQS_OR[className]) {
+ const orPrereqs = MC_PREREQS_OR[className];
+ const anyMet = orPrereqs.some(([ab,score]) => (abilities[ab]||10) >= score);
+ return anyMet ? [] : orPrereqs; // show all OR options if none met
+  }
+ return (MC_PREREQS[className]||[]).filter(([ab,score]) => (abilities[ab]||10) < score);
+}
+
+const MC_PROFS_GAINED = {
+  Barbarian: "Light & medium armor, shields, simple & martial weapons",
+  Bard: "Light armor, simple weapons, hand crossbows, longswords, rapiers, shortswords, Bardic Inspiration",
+  Cleric: "Light & medium armor, shields, simple weapons",
+  Druid: "Light & medium armor (non-metal), shields (non-metal)",
+  Fighter: "Light & medium armor, shields, simple & martial weapons",
+  Monk: "Simple weapons, shortswords",
+  Paladin: "Light & medium armor, shields, simple & martial weapons",
+  Ranger: "Light & medium armor, shields, simple & martial weapons",
+  Rogue: "Light armor, thieves' tools",
+  Sorcerer: "-",
+  Warlock: "Light armor, simple weapons",
+  Wizard: "-",
+};
+
+// Info popover shown next to the MULTICLASS label
+function MulticlassInfo({ primaryClass, abilities }) {
+ const [show, setShow] = useState(false);
+ return (
+    <span style={{position:"relative",display:"inline-flex"}}>
+      <button className="mc-info-btn" onClick={()=>setShow(s=>!s)} title="Multiclass rules">ℹ</button>
+      {show && (
+        <>
+          <div className="mc-info-backdrop" onClick={()=>setShow(false)}/>
+          <div className="mc-info-panel">
+            <div className="mc-info-title">Multiclassing Rules</div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">Prerequisites</div>
+              <div className="mc-info-body">You must meet the ability score prerequisite for your current class <em>and</em> the new class before taking a level in it.</div>
+            </div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">Proficiency Bonus</div>
+              <div className="mc-info-body">Based on your <em>total</em> character level across all classes.</div>
+            </div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">Proficiencies Gained</div>
+              <div className="mc-info-body">You only gain the multiclass proficiencies for the new class - not full starting proficiencies.</div>
+            </div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">Spell Slots</div>
+              <div className="mc-info-body">Full casters (Bard, Cleric, Druid, Sorcerer, Wizard) count full levels. Half casters (Paladin, Ranger) count half levels (round down). Slots are shared across all classes.</div>
+            </div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">Extra Attack</div>
+              <div className="mc-info-body">Extra Attack does not stack between classes unless a feature specifically says so.</div>
+            </div>
+            <div className="mc-info-section">
+              <div className="mc-info-head">All Prerequisites</div>
+              <div className="mc-info-body" style={{fontFamily:"'DM Mono',monospace",fontSize:10,lineHeight:1.7}}>
+                {Object.entries(MC_PREREQS).map(([cls, prereqs]) => {
+ const orCond = MC_PREREQS_OR[cls];
+ const condText = orCond
+                    ? orCond.map(([ab,s])=>`${ab} ${s}`).join(" or ")
+                    : prereqs.map(([ab,s])=>`${ab} ${s}`).join(" & ");
+ const met = mcPrereqMet(cls, abilities);
+ return (
+                    <div key={cls} style={{display:"flex",justifyContent:"space-between",gap:8,color:met?"var(--green)":"var(--text)"}}>
+                      <span>{cls}</span><span>{condText} {met?"✓":""}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {primaryClass && MC_PROFS_GAINED[primaryClass] && (
+              <div className="mc-info-section">
+                <div className="mc-info-head">If multiclassing into {primaryClass}</div>
+                <div className="mc-info-body">{MC_PROFS_GAINED[primaryClass]}</div>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+    </span>
+  );
+}
+
+// XP required to reach each level (index = level, value = total XP needed)
+const XP_THRESHOLDS = [0,0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000];
+
+// ALIGNMENT SELECT
+// Shows abbreviated (LG, CN...) when closed, full name in the open dropdown list.
+
+const ALIGNMENTS = [
+  {abbr:"LG", full:"Lawful Good"},
+  {abbr:"NG", full:"Neutral Good"},
+  {abbr:"CG", full:"Chaotic Good"},
+  {abbr:"LN", full:"Lawful Neutral"},
+  {abbr:"TN", full:"True Neutral"},
+  {abbr:"CN", full:"Chaotic Neutral"},
+  {abbr:"LE", full:"Lawful Evil"},
+  {abbr:"NE", full:"Neutral Evil"},
+  {abbr:"CE", full:"Chaotic Evil"},
+];
+const ALIGN_ABBR = Object.fromEntries(ALIGNMENTS.map(a=>[a.full, a.abbr]));
+
+function AlignmentSelect({ value, onChange }) {
+ const [open, setOpen] = useState(false);
+ const abbr = value ? (ALIGN_ABBR[value] || value) : "";
+ return (
+    <div className="align-wrap">
+      {/* Closed state - shows abbreviation */}
+      {!open && (
+        <button className="align-closed hdr-field-in" onClick={()=>setOpen(true)}>
+          {abbr || <span style={{color:"var(--subtle)"}}>-</span>}
+          <span className="align-caret">▾</span>
+        </button>
+      )}
+      {/* Open state - full select with full names */}
+      {open && (
+        <select
+ autoFocus
+ className="hdr-field-in hdr-field-sel align-open"
+ value={value}
+ onChange={e=>{ onChange(e.target.value); setOpen(false); }}
+ onBlur={()=>setOpen(false)}
+        >
+          <option value="">- Select -</option>
+          {ALIGNMENTS.map(a=>(
+            <option key={a.full} value={a.full}>{a.full}</option>
+          ))}
+        </select>
+      )}
+    </div>
+  );
+}
+
+function SmartPopup({desc}) {
+ const ref = React.useRef(null);
+  React.useEffect(()=>{
+ if(!ref.current) return;
+ const popup = ref.current;
+ const parent = popup.parentElement;
+ if(!parent) return;
+ const anchor = parent.getBoundingClientRect();
+ const vw = window.innerWidth;
+ const ph = popup.offsetHeight;
+ const pw = Math.min(260, vw - 16);
+ popup.style.width = pw+"px";
+ var top = anchor.top - ph - 6;
+ if(top < 8) top = anchor.bottom + 6;
+ var left = anchor.left + anchor.width/2 - pw/2;
+ if(left < 8) left = 8;
+ if(left + pw > vw - 8) left = vw - pw - 8;
+ popup.style.top = top+"px";
+ popup.style.left = left+"px";
+ popup.style.transform = "none";
+  },[]);
+  return (
+    <div ref={ref} className="ft-info-popup">
+      <div className="ft-info-popup-body">{desc}</div>
+    </div>
+  );
+}
+
+function App() {
+ const [char, setChar] = useState(() => charLoad());
+
+  // Auto-save on every change
+ const setCharSaving = useCallback((updater) => {
+ setChar(prev => {
+ const next = typeof updater === "function" ? updater(prev) : updater;
+ charSave(next);
+ return next;
+    });
+  }, []);
+ const [tab, setTab] = useState(()=>localStorage.getItem("dnd5e_tab")||"core");
+ const [hdrOpen, setHdrOpen] = useState(false);
+ const [skillRoll, setSkillRoll] = useState(null);
+ const [hpAmount, setHpAmount]   = useState("");
+ const [dsLastRoll, setDsLastRoll] = useState(null);
+ const [rivOpen, setRivOpen]    = useState(false);
+ const [rivType, setRivType]    = useState("");
+ const [rivDmg, setRivDmg]     = useState("");
+ const [actionDiceRoll, setActionDiceRoll] = useState(null);
+ const [advRolls, setAdvRolls]   = useState(null); // {label, roll, bonus, total}
+ const [openFeat, setOpenFeat] = useState(null);
+ const [darkMode, setDarkMode] = useState(false);
+ const [openActionSections, setOpenActionSections] = useState({actionUsed:false,bonusActionUsed:false,reactionUsed:false});
+  const [wearingInfo, setWearingInfo] = useState(null);
+ const [openCurrency, setOpenCurrency] = useState(false);
+ const [curBuf, setCurBuf] = React.useState({PP:"",GP:"",EP:"",SP:"",CP:""});
+ const [openArmor, setOpenArmor] = useState(false);
+ const [openShield, setOpenShield] = useState(false);
+  const [openDefensesSection, setOpenDefensesSection] = useState(false);
+  const [openWearingSection, setOpenWearingSection] = useState(false);
+  const [openWearing_wearing_head, setOpenWearing_wearing_head] = useState(false);
+  const [openWearing_wearing_neck, setOpenWearing_wearing_neck] = useState(false);
+  const [openWearing_wearing_shoulders, setOpenWearing_wearing_shoulders] = useState(false);
+  const [openWearing_wearing_body, setOpenWearing_wearing_body] = useState(false);
+  const [openWearing_wearing_skin, setOpenWearing_wearing_skin] = useState(false);
+  const [openWearing_wearing_arms, setOpenWearing_wearing_arms] = useState(false);
+  const [openWearing_wearing_hands, setOpenWearing_wearing_hands] = useState(false);
+  const [openWearing_wearing_hips, setOpenWearing_wearing_hips] = useState(false);
+  const [openWearing_wearing_feet, setOpenWearing_wearing_feet] = useState(false);
+ const [openGearWeapons, setOpenGearWeapons] = useState(false);
+ const [openTrait, setOpenTrait] = useState(null);
+ const [spellView, setSpellView] = useState("cantrips");
+ const [avatarLightbox, setAvatarLightbox] = useState(false);
+ const [showLibrary, setShowLibrary] = useState(false);
+ const [showDice, setShowDice]    = useState(false);
+ const [diceColor, setDiceColor]   = useState("blue");
+ const [libEntries, setLibEntries] = useState(() => libLoad());
+ const [xpAdd, setXpAdd] = useState("");
+ const [levelUpMsg, setLevelUpMsg] = useState("");
+ const [levelUpPending, setLevelUpPending] = useState(null); // {newLvl, primaryClass, multiClass}
+
+  // Auto-clear multiClass when multiClassLevel drops to 0
+ const { useEffect } = React;
+ useEffect(() => {
+ if (char.multiClass && char.multiClassLevel === 0) {
+ setCharSaving(p => ({...p, multiClass: "", classLevel: p.level}));
+    }
+  }, [char.multiClassLevel, char.multiClass]);
+
+ const applyLevelUp = useCallback((chosenClass) => {
+ setCharSaving(p => {
+ const nc = CLASSES[chosenClass] || null;
+ const u = {...p};
+ const isSplit = levelUpPending?.isSplit;
+ if (isSplit) {
+        // Retroactive split: chosen class keeps current level, other gets level-1
+ if (chosenClass === p.charClass) {
+ u.classLevel = p.level - 1;
+ u.multiClassLevel = 1;
+        } else {
+ u.classLevel = p.level - 1;
+ u.multiClassLevel = 1;
+        }
+ setLevelUpMsg(`✓ Level split set: ${p.charClass} ${u.classLevel} / ${p.multiClass} ${u.multiClassLevel}`);
+ setTimeout(() => setLevelUpMsg(""), 5000);
+ return u;
+      }
+      // Normal level up: increment chosen class
+ if (chosenClass === p.charClass) {
+ u.classLevel = (p.classLevel || 1) + 1;
+ u.multiClassLevel = p.multiClassLevel || 0;
+      } else {
+ u.classLevel = p.classLevel || 1;
+ u.multiClassLevel = (p.multiClassLevel || 0) + 1;
+      }
+ if (nc) {
+ const conMod = abilityMod(p.abilities.CON + (SPECIES[p.species]?.abilityBonus?.CON||0));
+ const roll = Math.floor(Math.random() * nc.hitDie) + 1;
+ const hpGain = Math.max(1, roll + conMod);
+ u.hp = {...p.hp, max: (p.hp.max || 0) + hpGain};
+ const clsLvl = chosenClass === p.charClass ? u.classLevel : u.multiClassLevel;
+ setLevelUpMsg(`🎉 Level ${p.level}! ${chosenClass} → ${clsLvl}. +${hpGain} HP (rolled ${roll}${conMod>=0?"+":""}${conMod} CON on d${nc.hitDie}). Max now ${u.hp.max}.`);
+      } else {
+ setLevelUpMsg(`🎉 Level ${p.level}!`);
+      }
+ setTimeout(() => setLevelUpMsg(""), 7000);
+ return u;
+    });
+ setLevelUpPending(null);
+  }, [levelUpPending]);
+
+ const handleAddXp = useCallback(() => {
+ const gain = Math.max(0, Number(xpAdd) || 0);
+ if (!gain) return;
+ setCharSaving(p => {
+ const newXp  = (p.xp || 0) + gain;
+ const newLvl = Math.min(20, XP_THRESHOLDS.reduce((best, thresh, i) => newXp >= thresh ? i : best, 1));
+ const u = {...p, xp: newXp};
+ if (newLvl > p.level) {
+ u.level = newLvl;
+        // If multiclass exists (in CLASSES or library), show picker; otherwise auto-apply primary class
+ const mcValid = p.multiClass && p.multiClass !== p.charClass &&
+          !!(CLASSES[p.multiClass]);
+ if (mcValid) {
+          // At level 2: auto-split 1/1. Above level 2: show picker.
+ if (newLvl === 2) {
+ u.classLevel = 1;
+ u.multiClassLevel = 1;
+ const nc2 = CLASSES[p.charClass] || null;
+ if (nc2) {
+ const conMod2 = abilityMod(p.abilities.CON + (SPECIES[p.species]?.abilityBonus?.CON||0));
+ const roll2 = Math.floor(Math.random() * nc2.hitDie) + 1;
+ const hpGain2 = Math.max(1, roll2 + conMod2);
+ u.hp = {...p.hp, max: (p.hp.max || 0) + hpGain2};
+ setLevelUpMsg(`🎉 Level 2! ${p.charClass} 1 / ${p.multiClass} 1. +${hpGain2} HP from ${p.charClass} d${nc2.hitDie}. Max now ${u.hp.max}.`);
+            } else {
+ setLevelUpMsg(`🎉 Level 2! ${p.charClass} 1 / ${p.multiClass} 1.`);
+            }
+ setTimeout(() => setLevelUpMsg(""), 7000);
+          } else {
+ setLevelUpPending({newLvl, primaryClass: p.charClass, multiClass: p.multiClass});
+          }
+        } else {
+ const nc = CLASSES[p.charClass] || null;
+ u.classLevel = (p.classLevel || 1) + 1;
+ if (nc) {
+ const conMod = abilityMod(p.abilities.CON + (SPECIES[p.species]?.abilityBonus?.CON||0));
+ const roll = Math.floor(Math.random() * nc.hitDie) + 1;
+ const hpGain = Math.max(1, roll + conMod);
+ u.hp = {...p.hp, max: (p.hp.max || 0) + hpGain};
+ setLevelUpMsg(`🎉 Level ${newLvl}! ${p.charClass} → ${u.classLevel}. +${hpGain} HP (rolled ${roll}${conMod>=0?"+":""}${conMod} CON on d${nc.hitDie}). Max now ${u.hp.max}.`);
+          } else {
+ setLevelUpMsg(`🎉 Level ${newLvl}!`);
+          }
+ setTimeout(() => setLevelUpMsg(""), 7000);
+        }
+      }
+ return u;
+    });
+ setXpAdd("");
+  }, [xpAdd]);
+ const photoRef = useRef();
+
+  // Re-read library from localStorage whenever the panel opens or closes
+ const toggleLibrary = open => {
+ if (!open) setLibEntries(libLoad()); // refresh sheet when library closes
+ setShowLibrary(open);
+  };
+
+  // Live race/subrace/background/class lists derived from the library
+ const libRaces       = [...new Set(libEntries.filter(e=>e.category==="Race").map(e=>e.title))].sort();
+ const libSubraces    = title => [...new Set(libEntries.filter(e=>e.category==="Subrace" && (e.tags||"").toLowerCase().includes(title.toLowerCase())).map(e=>e.title))].sort();
+ const libBackgrounds = [...new Set(libEntries.filter(e=>e.category==="Background").map(e=>e.title))].sort();
+ const libClasses     = [...new Set(libEntries.filter(e=>e.category==="Class").map(e=>e.title))].sort();
+ const libSubclasses  = cls => [...new Set(libEntries.filter(e=>e.category==="Subclass"&&(e.tags||"").toLowerCase().includes((cls||"").toLowerCase())).map(e=>e.title))].sort();
+
+  // spc: mechanical data from SPECIES hardcoded, but augmented by library if available
+ const spc = (() => {
+ const hardcoded = SPECIES[char.species];
+ const libRaceEntry = libEntries.find(e=>e.category==="Race" && e.title===char.species);
+ if (hardcoded) return hardcoded; // use hardcoded for mechanics; library used directly in features tab
+ if (libRaceEntry) return { traits:[{name:libRaceEntry.title, desc:(libRaceEntry.desc||"")+(libRaceEntry.notes?"\n\n"+libRaceEntry.notes:"")}], abilityBonus:{}, size:"Medium", speed:30 };
+ return null;
+  })();
+ const cls = CLASSES[char.charClass] || null;
+ const pb  = profBonus(char.level);
+
+ const eff = {};
+ const subBonus = SUBRACE_BONUS[char.subrace] || {};
+  ABILITY_KEYS.forEach(k => {
+ eff[k] = char.abilities[k] + (spc?.abilityBonus?.[k]||0) + (subBonus[k]||0);
+  });
+
+  // Effective skill proficiencies = manual selections + background-granted + race-granted
+ const bgSkills      = BG_SKILLS[char.background] || [];
+ const raceSkills    = RACE_SKILLS[char.species] || RACE_SKILLS[Object.keys(RACE_SKILLS).find(k=>char.species&&char.species.toLowerCase().includes(k.toLowerCase()))] || [];
+ const effSkillProfs = [...new Set([...(char.skillProficiencies||[]), ...bgSkills, ...raceSkills, ...(char.classSkills||[])])];
+
+ const skBonus = s => {
+ const b = abilityMod(eff[s.ability]);
+ if ((char.skillExpertise||[]).includes(s.name)) return b + pb*2;
+ if (effSkillProfs.includes(s.name)) return b + pb;
+ return b;
+  };
+ const svBonus = k => abilityMod(eff[k]) + (cls?.savingThrows?.includes(k) ? pb : 0);
+
+ const spellMod = cls?.spellcastingAbility ? abilityMod(eff[cls.spellcastingAbility])+pb : null;
+ const spellDC  = spellMod!=null ? 8+spellMod : null;
+ const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
+  // Build available spells, merging in domain spells if cleric with a domain chosen
+ const availSpells = (() => {
+ const base = cls?.spells ? JSON.parse(JSON.stringify(cls.spells)) : {};
+ if (char.charClass === "Cleric" && char.divineDomain) {
+ const domEntry = libEntries.find(e => e.title === char.divineDomain);
+ if (domEntry?.notes) {
+ const spellLvlToClsLvl = {"1st":1,"2nd":2,"3rd":3,"4th":4,"5th":5,"6th":6,"7th":7,"8th":8,"9th":9};
+ const clsLvlNow = char.multiClassLevel > 0 && char.classLevel > 1 ? char.classLevel : char.level;
+ const spellMatch = domEntry.notes.match(/Domain Spells: (.+)/);
+ if (spellMatch) {
+ const groups = spellMatch[1].split(/\(\d+[a-z]+\)\.?/).map(g=>g.trim()).filter(Boolean);
+ const lvls = [...spellMatch[1].matchAll(/\((\d+[a-z]+)\)/g)].map(m=>m[1]);
+ groups.forEach((group, i) => {
+ const spellLvl = lvls[i];
+ const minClsLvl = spellLvlToClsLvl[spellLvl] || 1;
+ if (clsLvlNow < minClsLvl) return;
+ const spellNum = {"1st":1,"3rd":2,"5th":3,"7th":4,"9th":5}[spellLvl] || 1;
+ if (!base[spellNum]) base[spellNum] = [];
+ group.split(",").map(s=>s.trim()).filter(Boolean).forEach(spell => {
+ if (!base[spellNum].includes(spell)) base[spellNum].push(spell);
+            });
+          });
+        }
+      }
+    }
+ return base;
+  })();
+ const spellLvls = Object.keys(availSpells).filter(k=>k!=="cantrips").map(Number).sort((a,b)=>a-b);
+ const domainSpellSet = (() => {
+ if (char.charClass !== "Cleric" || !char.divineDomain) return new Set();
+ const domEntry = libEntries.find(e => e.title === char.divineDomain);
+ if (!domEntry?.notes) return new Set();
+ const spells = new Set();
+ const spellMatch = domEntry.notes.match(/Domain Spells: (.+)/);
+ if (spellMatch) {
+ const spellLvlToClsLvl = {"1st":1,"2nd":2,"3rd":3,"4th":4,"5th":5,"6th":6,"7th":7,"8th":8,"9th":9};
+ const clsLvlNow = char.multiClassLevel > 0 ? char.classLevel : char.level;
+ const groups = spellMatch[1].split(/\(\d+[a-z]+\)\.?/).map(g=>g.trim()).filter(Boolean);
+ const lvls = [...spellMatch[1].matchAll(/\((\d+[a-z]+)\)/g)].map(m=>m[1]);
+ groups.forEach((group, i) => {
+ const minClsLvl = spellLvlToClsLvl[lvls[i]] || 1;
+ if (clsLvlNow < minClsLvl) return;
+ group.split(",").map(s=>s.trim()).filter(Boolean).forEach(s=>spells.add(s));
+      });
+    }
+ return spells;
+  })();
+ const maxSlot   = Math.min(9, Math.ceil((char.multiClassLevel > 0 && char.classLevel > 1 ? char.classLevel : char.level)/2));
+ const slots     = SPELL_SLOTS[char.level] || [];
+
+  // Compute AC from equipped armor items
+ const computeArmorAC = React.useCallback((armorItems, abilities, libEntries) => {
+ const equipped = (armorItems||[]).filter(i=>(typeof i==="object"?i.equipped&&i.name:false));
+ if(!equipped.length) return null; // no equipped armor = use existing char.ac
+ const dex = abilityMod(abilities?.DEX||10);
+ let best = 0;
+ equipped.forEach(item=>{
+ const name = item.name;
+ const entry = libEntries.find(e=>e.title===name&&e.category==="Armor");
+ if(!entry) return;
+ const acStr = entry.notes?.match(/AC:\s*([^.]+)/)?.[1]?.trim()||"";
+ let ac = 10;
+ if(acStr.includes("DEX(max2)")) ac = (parseInt(acStr)||10) + Math.min(dex,2);
+ else if(acStr.includes("+DEX")) ac = (parseInt(acStr)||10) + dex;
+ else if(/^\d+$/.test(acStr)) ac = parseInt(acStr);
+ else ac = parseInt(acStr)||10;
+ if(ac > best) best = ac;
+    });
+ return best > 0 ? best : null;
+  }, []);
+
+  // Check if any equipped armor imposes stealth disadvantage
+ const hasStealthDisadv = React.useMemo(() => {
+ return (char.armorItems||[]).some(i => {
+ if(typeof i !== "object" || !i.equipped || !i.name) return false;
+ const entry = libEntries.find(e => e.title === i.name && e.category === "Armor");
+ return entry?.notes?.toLowerCase().includes("stealth: disadv");
+    });
+  }, [char.armorItems, libEntries]);
+
+ const setF = useCallback((path, val) => setCharSaving(p => {
+ if (!path.includes(".")) return {...p,[path]:val};
+ const [a,b] = path.split(".");
+ return {...p,[a]:{...p[a],[b]:val}};
+  }), [setCharSaving]);
+
+ const setNested = useCallback((field, idx, key, val) => setCharSaving(p => {
+ const arr = [...(p[field]||[])];
+ arr[idx] = {...arr[idx],[key]:val};
+ return {...p,[field]:arr};
+  }), [setCharSaving]);
+
+ const tog = useCallback((field, val) => setCharSaving(p => {
+ const a = p[field]||[];
+ return {...p,[field]:a.includes(val)?a.filter(x=>x!==val):[...a,val]};
+  }), [setCharSaving]);
+
+ const setCurrency = (k,v) => setCharSaving(p=>({...p,currency:{...p.currency,[k]:Number(v)||0}}));
+ const setSlotUsed = (i,v) => setCharSaving(p=>{const a=[...p.spellSlotsUsed];a[i]=Math.max(0,Math.min(slots[i]||0,Number(v)||0));return {...p,spellSlotsUsed:a};});
+
+ const rollCheck = (label, bonus, sides=20) => {
+ const armorStealthDis = hasStealthDisadv && label==="Stealth";
+ const isAdv = char.advantage && !char.disadvantage && !armorStealthDis;
+ const isDis = (char.disadvantage && !char.advantage) || armorStealthDis;
+ const r1 = Math.floor(Math.random()*sides)+1;
+ const r2 = (isAdv||isDis) ? Math.floor(Math.random()*sides)+1 : null;
+ const roll = isAdv ? Math.max(r1,r2) : isDis ? Math.min(r1,r2) : r1;
+ const total = roll + bonus;
+ const isCrit = roll===sides;
+ const isFail = roll===1;
+ setSkillRoll({label, roll, bonus, total, isCrit, isFail, sides, r1, r2, isAdv, isDis});
+  };
+
+ const changeClass = nv => {
+ const nc = CLASSES[nv] || null;
+ const u = {charClass: nv, classSkills: []};
+ const effDex = char.abilities.DEX + (spc?.abilityBonus?.DEX||0) + (subBonus.DEX||0);
+ const effCon = char.abilities.CON + (spc?.abilityBonus?.CON||0) + (subBonus.CON||0);
+ if (nc) {
+ const pl = Math.floor(nc.hitDie / 2) + 1;
+ u.hp = {...char.hp, max: Math.max(1, nc.hitDie + abilityMod(effCon) + (char.level - 1) * (pl + abilityMod(effCon)))};
+    }
+ u.ac = 10 + abilityMod(effDex);
+ setCharSaving(p => ({...p, ...u}));
+  };
+
+ const changeSpecies = nv => {
+ const ns = SPECIES[nv] || null;
+ const u = {species: nv, subrace: ""};
+ if (ns) {
+ u.speed = ns.speed;
+      // Recalculate AC with new racial DEX bonus
+ const newEffDex = char.abilities.DEX + (ns.abilityBonus?.DEX||0);
+ u.ac = 10 + abilityMod(newEffDex);
+      // Recalculate HP with new racial CON bonus if class set
+ if (cls) {
+ const pl = Math.floor(cls.hitDie / 2) + 1;
+ const newEffCon = char.abilities.CON + (ns.abilityBonus?.CON||0);
+ u.hp = {...char.hp, max: Math.max(1, cls.hitDie + abilityMod(newEffCon) + (char.level - 1) * (pl + abilityMod(newEffCon)))};
+      }
+    } else {
+ u.speed = 30;
+ u.ac = 10 + abilityMod(char.abilities.DEX);
+    }
+ setCharSaving(p => ({...p, ...u}));
+  };
+ const changeAbility = (k, v) => {
+ const nv = Number(v)||10;
+ const u = {abilities:{...char.abilities,[k]:nv}};
+ const racialB = (spc?.abilityBonus?.[k]||0) + (subBonus[k]||0);
+ const effNv = nv + racialB;
+ if(k==="CON"&&cls){const pl=Math.floor(cls.hitDie/2)+1;u.hp={...char.hp,max:Math.max(1,cls.hitDie+abilityMod(effNv)+(char.level-1)*(pl+abilityMod(effNv)))};}
+ if(k==="DEX")u.ac=10+abilityMod(effNv);
+ setCharSaving(p=>({...p,...u}));
+  };
+  // Atoms
+ const Lbl = ({children}) => <div className="flbl">{children}</div>;
+ const Card = ({children,style={}}) => <div className="card-wrap" style={style}>{children}</div>;
+ const SecHead = ({icon,title}) => (
+    <div className="sec-head"><span className="sec-rune">{icon||"◈"}</span><span className="sec-title">{title}</span><div className="sec-rule"/></div>
+  );
+ const PipRow = ({label,count,used,color,onSet}) => (
+    <div className="pip-row">
+      <span className="pip-lbl">{label}</span>
+      <div className="pips">{Array.from({length:count},(_,i)=>(
+        <div key={i} className={`pip ${i<used?`pip-${color}`:""}`} onClick={()=>onSet(i<used?used-1:i+1)}/>
+      ))}</div>
+    </div>
+  );
+ const Empty = ({icon,msg}) => <div className="empty-state"><div style={{fontSize:32,marginBottom:8}}>{icon}</div>{msg}</div>;
+
+  // RENDER
+ return (
+    <div className="sheet">
+      <style>{CSS}</style>
+      {darkMode&&<style>{"body,html{background:#0f1117}.sheet{--bg:#0f1117;--surface:#16191f;--card:#1e2128;--input:#1e2128;--border:#2e3340;--border-focus:#818cf8;--text:#e2e8f0;--muted:#94a3b8;--subtle:#64748b;--divider:#2e3340;}"}</style>}
+
+      {/* HEADER (matches screenshot layout) */}
+      <input ref={photoRef} type="file" accept="image/*" style={{display:"none"}}
+ onChange={e=>{
+ const file=e.target.files[0]; if(!file) return;
+ const r=new FileReader();
+ r.onload=ev=>setCharSaving(p=>({...p,avatarPhoto:ev.target.result}));
+ r.readAsDataURL(file);
+ e.target.value="";
+        }}/>
+
+      {/* ROW 1: Photo . Level . Name + chips . Dice */}
+      <div className="hdr-row1">
+        {/* Photo */}
+        <div className="hdr-photo" onClick={()=>char.avatarPhoto?setAvatarLightbox(true):photoRef.current?.click()}
+ title={char.avatarPhoto?"View full photo":"Upload character photo"}>
+          {char.avatarPhoto
+            ? <img src={char.avatarPhoto} alt="Character" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+            : <div className="hdr-photo-empty"><span style={{fontSize:24}}>📷</span><span className="hdr-photo-lbl">Photo</span></div>
+          }
+          {char.avatarPhoto && (
+            <button className="hdr-photo-del" onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,avatarPhoto:""}));}}>x</button>
+          )}
+        </div>
+
+        {/* Level - read-only, driven by XP */}
+        <div className="hdr-level-box">
+          <div className="hdr-level-lbl">LEVEL</div>
+          <div className="hdr-level-num">{char.level}</div>
+        </div>
+
+        {/* Name + chips */}
+        <div className="hdr-identity">
+          <div className="hdr-charname">{char.name||<span className="hdr-name-empty">Unnamed Hero</span>}</div>
+          <div className="hdr-chips">
+            {char.species  && <span className="hdr-chip">{char.species}</span>}
+            {char.charClass && <span className="hdr-chip hdr-chip-accent">{char.charClass} {char.multiClassLevel > 0 ? char.classLevel : char.level}</span>}
+            {char.multiClass && char.multiClassLevel > 0 && char.multiClass !== char.charClass && (CLASSES[char.multiClass] || libEntries.find(e=>e.category==="Class"&&e.title===char.multiClass)) && <span className="hdr-chip" style={{background:"rgba(168,85,247,0.1)",borderColor:"rgba(168,85,247,0.3)",color:"#7c3aed",cursor:"default",display:"inline-flex",alignItems:"center",gap:"4px"}}>/ {char.multiClass} {char.multiClassLevel}</span>}
+            {char.alignment && <span className="hdr-chip">{{"Lawful Good":"LG","Neutral Good":"NG","Chaotic Good":"CG","Lawful Neutral":"LN","True Neutral":"TN","Chaotic Neutral":"CN","Lawful Evil":"LE","Neutral Evil":"NE","Chaotic Evil":"CE"}[char.alignment]||char.alignment}</span>}
+          </div>
+          {/* Languages row */}
+          {(()=>{
+ const autoLangs = [...new Set([
+              ...(RACE_LANGUAGES[char.species]||[]),
+              ...(BG_LANGUAGES[char.background]||[]),
+            ])];
+ const racialChosenLang = (char.languages||[])[0]||"";
+ const manualLangs = (char.languages||[]).slice(1); // skip [0] which is the racial choice
+ return (
+              <div className="hdr-chips hdr-lang-row">
+                <span className="hdr-chip hdr-chip-lang-lbl">&#x1F5E3;</span>
+                {autoLangs.map((lang,i)=>(
+                  <span key={`a${i}`} className="hdr-chip hdr-chip-lang-auto" title="Granted by race or background">{lang}</span>
+                ))}
+                {racialChosenLang&&(
+                  <span className="hdr-chip hdr-chip-lang-racial" title="Racial language choice">{racialChosenLang}</span>
+                )}
+                {manualLangs.map((lang,i)=>(
+                  <span key={`m${i}`} className="hdr-chip hdr-chip-lang"
+ onClick={()=>setCharSaving(p=>({...p,languages:[p.languages[0],...p.languages.slice(1).filter((_,j)=>j!==i)]}))}>
+                    {lang} <span style={{opacity:0.5,fontSize:9}}>x</span>
+                  </span>
+                ))}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Dice button */}
+        <button className="hdr-dice-btn" onClick={()=>setShowDice(d=>!d)}>
+          <svg viewBox="0 0 64 64" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
+            <polygon points="32,4 58,18 58,46 32,60 6,46 6,18"/>
+            <polygon points="32,4 58,18 6,18"/>
+            <polygon points="32,22 48,44 16,44"/>
+            <line x1="32" y1="4" x2="32" y2="22"/>
+            <line x1="58" y1="18" x2="48" y2="44"/>
+            <line x1="6" y1="18" x2="16" y2="44"/>
+            <line x1="32" y1="60" x2="32" y2="44"/>
+            <line x1="58" y1="46" x2="48" y2="44"/>
+            <line x1="6" y1="46" x2="16" y2="44"/>
+          </svg>
+        </button>
+
+        <button className="hdr-lib-btn" onClick={()=>toggleLibrary(!showLibrary)}>
+          <span style={{fontSize:18,lineHeight:1}}>📚</span>
+        </button>
+
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3,flexShrink:0}}>
+          <button
+            title={darkMode?"Light mode":"Dark mode"}
+            onClick={()=>setDarkMode(d=>!d)}
+            style={{width:28,height:16,borderRadius:8,border:"1px solid var(--border)",background:darkMode?"rgba(129,140,248,0.35)":"var(--input)",cursor:"pointer",display:"flex",alignItems:"center",padding:"0 2px",transition:"all .2s",position:"relative",flexShrink:0}}>
+            <div style={{width:11,height:11,borderRadius:"50%",background:darkMode?"#818cf8":"var(--muted)",transform:darkMode?"translateX(11px)":"translateX(0)",transition:"transform .2s",flexShrink:0}}/>
+          </button>
+          <button className="hdr-collapse-btn" onClick={()=>setHdrOpen(o=>!o)}
+ title={hdrOpen ? "Collapse header" : "Expand header"}>
+          <span style={{fontSize:16,display:"inline-block",transition:"transform .2s",transform:hdrOpen?"rotate(0)":"rotate(180deg)"}}>⌃</span>
+          </button>
+        </div>
+
+      </div>
+
+      {/* ROW 3: Editable identity fields */}
+      {hdrOpen && <div className="hdr-row3">
+        {/* Row 1: Name + Background + Alignment (abbreviated) */}
+        <div className="hdr-field-group hdr-field-name">
+          <label className="hdr-field-lbl">CHARACTER NAME</label>
+          <input className="hdr-field-in" value={char.name} onChange={e=>setF("name",e.target.value)} placeholder="Name..."/>
+        </div>
+        <div className="hdr-field-group hdr-field-background">
+          <label className="hdr-field-lbl">BACKGROUND</label>
+          <select className="hdr-field-in hdr-field-sel" value={char.background} onChange={e=>setF("background",e.target.value)}>
+            <option value="">- Select -</option>
+            {libBackgrounds.map(b=><option key={b} value={b}>{b}</option>)}
+          </select>
+        </div>
+        <div className="hdr-field-group hdr-field-group-xs">
+          <label className="hdr-field-lbl">ALIGNMENT</label>
+          <AlignmentSelect value={char.alignment} onChange={v=>setF("alignment",v)}/>
+        </div>
+        {/* Row 2: Race + Subrace */}
+        <div className="hdr-row3-break"/>
+        <div className="hdr-field-group hdr-field-name">
+          <label className="hdr-field-lbl">RACE / SPECIES</label>
+          <select className="hdr-field-in hdr-field-sel" value={char.species} onChange={e=>changeSpecies(e.target.value)}>
+            <option value="">-</option>
+            {libRaces.map(s=><option key={s} value={s}>{s}</option>)}
+          </select>
+        </div>
+        <div className="hdr-field-group hdr-field-background">
+          <label className="hdr-field-lbl">SUBRACE</label>
+          {(() => {
+ const subs = char.species
+              ? [...(SUBRACES[char.species]||[]), ...libSubraces(char.species)]
+                  .filter((v,i,a)=>a.indexOf(v)===i).sort()
+              : [];
+ return subs.length > 0
+              ? <select className="hdr-field-in hdr-field-sel" value={char.subrace||""} onChange={e=>setF("subrace",e.target.value)}>
+                  <option value="">- Select subrace -</option>
+                  {subs.map(sr=><option key={sr} value={sr}>{sr}</option>)}
+                </select>
+              : <input className="hdr-field-in" value={char.subrace||""} onChange={e=>setF("subrace",e.target.value)}
+ placeholder={char.species?"No subraces":"Select race first..."}
+ disabled={!char.species}
+ style={{opacity:char.species?1:0.5}}/>;
+          })()}
+        </div>
+        {/* Row 3: Class + Multiclass (level 2+) */}
+        <div className="hdr-row3-break"/>
+        <div className="hdr-field-group hdr-field-name">
+          <label className="hdr-field-lbl">CLASS</label>
+          <select className="hdr-field-in hdr-field-sel" value={char.charClass} onChange={e=>changeClass(e.target.value)}>
+            <option value="">-</option>
+            {libClasses.length > 0
+              ? libClasses.map(c=><option key={c} value={c}>{c}</option>)
+              : Object.keys(CLASSES).map(c=><option key={c} value={c}>{c}</option>)
+            }
+          </select>
+        </div>
+        <div className="hdr-field-group hdr-field-background" style={{position:"relative"}}>
+          <label className="hdr-field-lbl" style={{display:"flex",alignItems:"center",gap:5}}>
+            MULTICLASS
+            {char.level < 2 && <span className="mc-lock-badge">Lvl 2+</span>}
+            {char.level >= 2 && <MulticlassInfo primaryClass={char.charClass} abilities={eff}/>}
+          </label>
+          {char.level >= 2 ? (
+            <>
+              <select className="hdr-field-in hdr-field-sel" value={char.multiClass||""} onChange={e=>{
+ const mc = e.target.value || "";
+ if (!mc) {
+                    // Clearing multiclass: reset everything in one call
+ setCharSaving(p => ({...p, multiClass: "", multiClassLevel: 0, classLevel: p.level}));
+                  } else {
+                    // Setting multiclass: one call handles all
+ setCharSaving(p => {
+ const u = {...p, multiClass: mc, multiClassLevel: 0};
+ if (mc !== p.charClass && CLASSES[mc] && p.level >= 2) {
+ u.classLevel = p.level - 1;
+ u.multiClassLevel = 1;
+                      }
+ return u;
+                    });
+                  }
+                }}>
+                <option value="">- None -</option>
+                {(libClasses.length > 0 ? libClasses : Object.keys(CLASSES))
+                  .filter(c => c !== char.charClass)
+                  .map(c => {
+ const met = mcPrereqMet(c, eff);
+ return <option key={c} value={c}>{c}{!met?" ⚠":""}</option>;
+                  })
+                }
+              </select>
+              {char.multiClass && (() => {
+ const failed = mcFailedPrereqs(char.multiClass, eff);
+ if (!failed.length) return null;
+ const isOr = !!MC_PREREQS_OR[char.multiClass];
+ return (
+                  <div className="mc-warn">
+                    ⚠ Needs {failed.map(([ab,score])=>`${ab} ${score}`).join(isOr?" or ":" & ")} to multiclass into {char.multiClass}
+                  </div>
+                );
+              })()}
+
+            </>
+          ) : (
+            <div className="mc-locked">
+              <span className="mc-lock-icon">🔒</span>
+              <span>Available at level 2</span>
+            </div>
+          )}
+        </div>
+      </div>}
+
+      {/* ROW 4: XP - always visible */}
+      <div className="hdr-row4">
+        {/* Level-up toast - shown above bar when triggered */}
+        {levelUpMsg && (
+          <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
+        )}
+        {levelUpPending && (
+          <div className="levelup-modal-backdrop">
+            <div className="levelup-modal">
+              <div className="levelup-modal-title">{levelUpPending.isSplit ? "⚔️ Multiclass Added" : `🎉 Level ${levelUpPending.newLvl}!`}</div>
+              <div className="levelup-modal-sub">{levelUpPending.isSplit ? `Set first multiclass level — which class has ${levelUpPending.newLvl - 1} levels?` : "Which class gains this level?"}</div>
+              <div className="levelup-modal-btns">
+                <button className="levelup-class-btn" onClick={()=>applyLevelUp(levelUpPending.primaryClass)}>
+                  <span className="levelup-class-name">{levelUpPending.primaryClass}</span>
+                  <span className="levelup-class-die">d{CLASSES[levelUpPending.primaryClass]?.hitDie}</span>
+                </button>
+                <button className="levelup-class-btn levelup-class-btn-multi" onClick={()=>applyLevelUp(levelUpPending.multiClass)}>
+                  <span className="levelup-class-name">{levelUpPending.multiClass}</span>
+                  <span className="levelup-class-die">d{CLASSES[levelUpPending.multiClass]?.hitDie}</span>
+                </button>
+              </div>
+              <div className="levelup-modal-hint">Tap to choose which class this level goes to</div>
+            </div>
+          </div>
+        )}
+        {/* Progress bar */}
+        {(() => {
+ const xp        = char.xp || 0;
+ const lvl       = char.level;
+ const thisFloor = XP_THRESHOLDS[lvl]     || 0;
+ const nextCeil  = XP_THRESHOLDS[lvl + 1] || XP_THRESHOLDS[20];
+ const segSize   = Math.max(1, nextCeil - thisFloor);
+ const segDone   = Math.min(segSize, Math.max(0, xp - thisFloor));
+ const pct       = Math.min(100, (segDone / segSize) * 100);
+ const toNext    = Math.max(0, nextCeil - xp);
+ return (
+            <div className="hdr-xp-bar-row">
+              <div className="hdr-xp-bar">
+                <div className="hdr-xp-fill" style={{width:`${pct}%`}}/>
+              </div>
+              <div className="hdr-xp-bar-labels">
+                <span className="hdr-xp-seg-lbl">{segDone.toLocaleString()} / {segSize.toLocaleString()} XP</span>
+                <span className="hdr-xp-next">
+                  {lvl < 20 ? `${toNext.toLocaleString()} to level ${lvl + 1}` : "Max Level"}
+                </span>
+              </div>
+            </div>
+          );
+        })()}
+        {/* Single-line: XP [total] + [add] button */}
+        <div className="hdr-xp-inline">
+          <span className="hdr-xp-lbl">XP</span>
+          <input className="hdr-xp-in" type="number" value={char.xp||0}
+ onChange={e=>{
+ const newXp = Math.max(0, Number(e.target.value)||0);
+ const newLvl = Math.min(20, XP_THRESHOLDS.reduce((best,thresh,i) => newXp >= thresh ? i : best, 1));
+ setCharSaving(p => {
+ const u = {...p, xp: newXp};
+ if (newLvl !== p.level) {
+ u.level = newLvl;
+ const nc = CLASSES[p.charClass]||null;
+ if (nc) { const pl=Math.floor(nc.hitDie/2)+1; u.hp={...p.hp,max:Math.max(1,nc.hitDie+abilityMod(p.abilities.CON)+(u.level-1)*(pl+abilityMod(p.abilities.CON)))}; }
+                }
+                // Always reset splits when at level 1
+ if (newLvl === 1) {
+ u.classLevel = 1;
+ u.multiClassLevel = 0;
+ u.multiClass = "";
+                }
+ return u;
+              });
+            }} placeholder="0"/>
+          <span className="hdr-xp-plus">+</span>
+          <input className="hdr-xp-in" type="number" value={xpAdd}
+ onChange={e=>setXpAdd(e.target.value)} placeholder="Add XP"
+ onKeyDown={e=>{ if(e.key==="Enter"&&xpAdd) handleAddXp(); }}/>
+          <button className="hdr-xp-add-btn" onClick={handleAddXp} disabled={!xpAdd}>Add</button>
+        </div>
+      </div>
+
+      {/* TAB STRIP */}
+      <div className="tabs">
+        {TABS.map(t=>(
+          <button key={t} className={`tab ${tab===t?"tab-on":""}`} onClick={()=>{setTab(t);localStorage.setItem("dnd5e_tab",t);if(t==="features")setLibEntries(libLoad());}}>
+            {t.charAt(0).toUpperCase()+t.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* TAB CONTENT */}
+      <div className={`tab-body ${tab==="core"?"tab-body-core":""}`}>
+
+        {/* CORE */}
+        {tab==="core" && (
+          <div className="panel panel-core">
+
+            {/* LEFT: ability stat cards running down the page */}
+            <div className="core-left">
+              {ABILITY_KEYS.map(k=>{
+ const bonus = (spc?.abilityBonus?.[k]||0) + (subBonus[k]||0);
+ const isPri    = cls?.primaryAbility?.includes(k);
+ const skills   = SKILLS_BY_ABILITY[k];
+ return (
+                  <div key={k} className={`ab-stat-card ${isPri?"ab-stat-primary":""}`}>
+
+                    {/* Full ability name centered at top */}
+                    <div className="ab-stat-title">{ABILITY_NAMES[k]}</div>
+
+                    {/* Body: pill on left, skills on right */}
+                    <div className="ab-stat-body">
+                      {/* Left pill: abbrev + modifier + base score + racial bonus */}
+                      <div className={`ab-stat-pill ${isPri?"ab-stat-pill-primary":""}`}>
+                        <div className="ab-stat-abbr">{k}</div>
+                        <div className="ab-stat-mod-big">{fmt(abilityMod(eff[k]))}</div>
+                        <input className="ab-stat-score-in" type="number" value={char.abilities[k]} min={1} max={20}
+ onChange={e=>changeAbility(k,e.target.value)}/>
+                        {bonus!==0&&(
+                          <div className="ab-racial-bonus">+{bonus} racial</div>
+                        )}
+                      </div>
+
+                      {/* Right: skill rows */}
+                      {skills.length>0&&(
+                        <div className="ab-stat-skills">
+                          {skills.map(sk=>{
+ const ip    = effSkillProfs.includes(sk.name);
+ const ie    = (char.skillExpertise||[]).includes(sk.name);
+ const isBg    = bgSkills.includes(sk.name) && !(char.skillProficiencies||[]).includes(sk.name);
+ const isRace  = raceSkills.includes(sk.name) && !isBg && !(char.skillProficiencies||[]).includes(sk.name);
+ const isClass = (char.classSkills||[]).includes(sk.name) && !isBg && !isRace && !(char.skillProficiencies||[]).includes(sk.name);
+ return (
+                              <div key={sk.name} className={`ab-sk-row ${ip||ie||isRace||isBg?"ab-sk-on":""}`}
+ onClick={()=>rollCheck(sk.name, skBonus(sk))} title={hasStealthDisadv&&sk.name==="Stealth"?"⚠ Armor imposes disadvantage on Stealth":undefined}>
+                                <div className={`ab-sk-dot ${ie?"ab-sk-dot-ex":isRace?"ab-sk-dot-race":isBg?"ab-sk-dot-bg":isClass?"ab-sk-dot-cls":ip?"ab-sk-dot-p":"ab-sk-dot-empty"}`}/>
+                                <span className="ab-sk-name" style={isRace?{color:"var(--green)",fontWeight:700}:isBg?{color:"var(--mana)",fontWeight:700}:isClass?{color:"var(--accent)",fontWeight:700}:{}}>{sk.name}{hasStealthDisadv&&sk.name==="Stealth"&&<span style={{fontSize:9,color:"var(--red)",marginLeft:3}}>⚠</span>}</span>
+                                {isRace&&<span className="ab-sk-race-tag">racial</span>}
+                                {isBg&&<span className="ab-sk-bg-tag">bg</span>}
+                                {isClass&&<span className="ab-sk-cls-tag">class</span>}
+                                <span className="ab-sk-bonus">{fmt(skBonus(sk))}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                      {skills.length===0&&<div className="ab-stat-noskills"/>}
+                    </div>
+
+                    {k==="CON" && cls && (
+                      <div className="ab-hit-die-row">
+                        <span className="ab-hit-die-label">Hit Die</span>
+                        <span className="ab-hit-die-val">d{cls.hitDie}</span>
+                      </div>
+                    )}
+                    {/* Saving throw at bottom - set by class only, click to roll */}
+                    {(() => {
+ const isClassSave = !!(cls?.savingThrows?.includes(k));
+ return (
+                        <div className={`ab-save-row ${isClassSave?"ab-save-prof":""}`}
+ onClick={()=>rollCheck(`${ABILITY_NAMES[k]} Save`, svBonus(k))}
+ title={isClassSave?"Class saving throw - click to roll":"No proficiency"}>
+                          <div className={`ab-sk-dot ${isClassSave?"ab-sk-dot-p":"ab-sk-dot-empty"}`}/>
+                          <span className="ab-save-label">Saving Throw</span>
+                          {isClassSave && <span className="ab-save-class-tag">class</span>}
+                          <span className="sv-bonus">{fmt(svBonus(k))}</span>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                );
+              })}
+
+              {/* Class skill picker - bottom of left column */}
+              {cls&&cls.skillChoices&&(
+                <div className="cls-skill-card">
+                  <div className="cls-skill-hdr">
+                    <span className="cls-skill-title">CLASS SKILLS</span>
+                    <span className="cls-skill-count">{(char.classSkills||[]).length}/{cls.skillCount} chosen</span>
+                  </div>
+                  <div className="cls-skill-grid">
+                    {cls.skillChoices.map(sk=>{
+ const chosen  = (char.classSkills||[]).includes(sk);
+ const full    = (char.classSkills||[]).length >= cls.skillCount;
+ const fromBg  = bgSkills.includes(sk);
+ const fromRace= raceSkills.includes(sk);
+ const covered = fromBg || fromRace;
+ return (
+                        <button key={sk}
+ className={"cls-skill-opt"+(chosen?" cls-skill-opt-on":fromBg?" cls-skill-opt-bg":fromRace?" cls-skill-opt-race":full&&!chosen?" cls-skill-opt-dim":"")}
+ title={fromBg?`Already granted by ${char.background} background`:fromRace?`Already granted by ${char.species} racial trait`:""}
+ onClick={()=>{
+ if(covered) return;
+ if(chosen) setCharSaving(p=>({...p,classSkills:(p.classSkills||[]).filter(x=>x!==sk)}));
+ else if(!full) setCharSaving(p=>({...p,classSkills:[...(p.classSkills||[]),sk]}));
+                          }}>
+                          {sk}
+                          {fromBg&&<span className="cls-skill-src-tag">bg</span>}
+                          {fromRace&&<span className="cls-skill-src-tag cls-skill-src-race">racial</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* RIGHT: combat stats */}
+            <div className="core-right">
+
+              {/* Combat Stats grid */}
+              <div className="core-stats-grid">
+                {/* AC - editable */}
+                <div className="cstat-card">
+                  <div className="cstat-label">AC</div>
+                  {(()=>{const arAC=computeArmorAC(char.armorItems,char.abilities,libEntries);const shieldBonus=char.shield?2:0;const displayAC=arAC!=null?(arAC+shieldBonus):char.ac;return <input className="cstat-val cstat-input" type="number" value={displayAC}
+ readOnly={arAC!=null}
+ style={arAC!=null?{color:"var(--accent)",cursor:"default"}:{}}
+ title={arAC!=null?"AC calculated from equipped armor":""}
+ onChange={e=>{if(arAC==null)setCharSaving(p=>({...p,ac:Number(e.target.value)||10}));}}/>;})()}
+                </div>
+                {/* Initiative - click to roll d20 + DEX mod */}
+                <div className="cstat-card cstat-card-btn" onClick={()=>{
+ const mod = abilityMod(eff.DEX);
+ const roll = Math.floor(Math.random()*20)+1;
+ const total = roll + mod;
+ const isCrit = roll===20;
+ const isFail = roll===1;
+ setSkillRoll({label:"Initiative",roll,bonus:mod,total,isCrit,isFail,sides:20,r1:roll,r2:null,isAdv:false,isDis:false});
+                }}>
+                  <div className="cstat-label">INITIATIVE</div>
+                  <div className="cstat-val" style={{color:"var(--accent)"}}>{fmt(abilityMod(eff.DEX))}</div>
+                </div>
+                {/* Speed - editable */}
+                <div className="cstat-card">
+                  <div className="cstat-label">SPEED</div>
+                  <div style={{display:"flex",alignItems:"baseline",gap:0}}>
+                    <input className="cstat-val cstat-input" type="number" value={char.speed}
+ onChange={e=>setCharSaving(p=>({...p,speed:Number(e.target.value)||30}))}
+ style={{width:52}}/>
+                    <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:700,color:"var(--muted)",marginLeft:-2}}>ft</span>
+                  </div>
+                </div>
+                {/* Proficiency Bonus - auto from level */}
+                <div className="cstat-card">
+                  <div className="cstat-label">PROF BONUS <span className="cstat-auto">AUTO</span></div>
+                  <div className="cstat-val">{fmt(pb)}</div>
+                </div>
+              </div>
+              {/* Passive Perception - full width */}
+              <div className="cstat-card cstat-wide">
+                <div className="cstat-label">PASSIVE PERCEPTION <span className="cstat-auto">AUTO</span></div>
+                <div className="cstat-val cstat-val-lg">{passPerc}</div>
+              </div>
+
+              {/* Hit Points card - death saves overlay at 0 HP */}
+              <div style={{position:"relative"}}>
+                <div className={"hp-card"+(char.hp.current===0?" hp-card-dimmed":"")}>
+                <div className="hp-card-title">HIT POINTS</div>
+                <div className="hp-card-bar">
+                  {(()=>{
+ const pct=char.hp.max>0?Math.max(0,Math.min(100,(char.hp.current/char.hp.max)*100)):100;
+ let color;
+ if(pct>=50){const t=(pct-50)/50;color=`rgb(${Math.round(34+(245-34)*(1-t))},${Math.round(197+(158-197)*(1-t))},${Math.round(94+(11-94)*(1-t))})`;}
+ else{const t=Math.max(0,(pct-10)/40);color=`rgb(${Math.round(245+(239-245)*(1-t))},${Math.round(158+(68-158)*(1-t))},${Math.round(11+(68-11)*(1-t))})`;}
+ return <div className="hp-card-fill" style={{width:`${pct}%`,background:color}}/>;
+                  })()}
+                </div>
+                <div className="hp-card-meta">
+                  <span>. {char.hp.current} / {char.hp.max} hp</span>
+                  {(()=>{
+ const pct=char.hp.max>0?Math.max(0,Math.min(100,(char.hp.current/char.hp.max)*100)):100;
+ let color;
+ if(pct>=50){const t=(pct-50)/50;color=`rgb(${Math.round(34+(245-34)*(1-t))},${Math.round(197+(158-197)*(1-t))},${Math.round(94+(11-94)*(1-t))})`;}
+ else{const t=Math.max(0,(pct-10)/40);color=`rgb(${Math.round(245+(239-245)*(1-t))},${Math.round(158+(68-158)*(1-t))},${Math.round(11+(68-11)*(1-t))})`;}
+ return <span style={{color,fontWeight:700}}>{char.hp.max>0?`${Math.round(pct)}%`:"-"}</span>;
+                  })()}
+                </div>
+                <div className="hp-card-fields">
+                  <div className="hp-card-field">
+                    <div className="hp-card-field-lbl">Current</div>
+                    <input className="hp-card-in" inputMode="numeric" pattern="[0-9]*"
+ value={char.hp.current===0?"":char.hp.current}
+ onChange={e=>{const v=e.target.value.replace(/^0+(?=\d)/,"");setF("hp.current",Math.max(0,Number(v)||0));}}
+ onBlur={e=>{if(e.target.value==="")setF("hp.current",0);}}
+ placeholder="0"/>
+                  </div>
+                  <div className="hp-card-field">
+                    <div className="hp-card-field-lbl">Max</div>
+                    <input className="hp-card-in" inputMode="numeric" pattern="[0-9]*"
+ value={char.hp.max===0?"":char.hp.max}
+ onChange={e=>{const v=e.target.value.replace(/^0+(?=\d)/,"");setF("hp.max",Math.max(0,Number(v)||0));}}
+ onBlur={e=>{if(e.target.value==="")setF("hp.max",0);}}
+ placeholder="0"/>
+                  </div>
+                  <div className="hp-card-field">
+                    <div className="hp-card-field-lbl">Temp</div>
+                    <input className="hp-card-in" inputMode="numeric" pattern="[0-9]*"
+ value={char.hp.temp||""}
+ onChange={e=>{const v=e.target.value.replace(/^0+(?=\d)/,"");setF("hp.temp",Number(v)||0);}}
+ placeholder="0"/>
+                  </div>
+                </div>
+                <div className="hp-card-action-row">
+                  <input className="hp-card-amount" type="number" value={hpAmount}
+ onChange={e=>setHpAmount(e.target.value)} placeholder="Amount"
+ onKeyDown={e=>{if(e.key==="Enter"&&hpAmount){setF("hp.current",Math.min(char.hp.max,Math.max(0,(char.hp.current||0)+Math.abs(Number(hpAmount)||0))));setHpAmount("");}}}/>
+                  <button className="hp-card-heal" onClick={()=>{
+ if(!hpAmount)return;
+ setF("hp.current",Math.min(char.hp.max,Math.max(0,(char.hp.current||0)+Math.abs(Number(hpAmount)||0))));
+ setHpAmount("");
+                  }}>
+                    <span className="hp-btn-plus">+</span>
+                    <span className="hp-btn-lbl">Heal</span>
+                  </button>
+                  <button className="hp-card-dmg" onClick={()=>{
+ if(!hpAmount)return;
+ setF("hp.current",Math.max(0,(char.hp.current||0)-Math.abs(Number(hpAmount)||0)));
+ setHpAmount("");
+                  }}>
+                    <span className="hp-btn-minus">-</span>
+                    <span className="hp-btn-lbl">Dmg</span>
+                  </button>
+                </div>
+                </div>
+
+                {char.hp.current===0 && (
+                  <div className="ds-overlay">
+                    <div className="ds-overlay-hdr">
+                      <span>&#x1F480;</span>
+                      <span className="ds-overlay-title">DEATH SAVES</span>
+                      <button className="ds-overlay-reset"
+ onClick={()=>{
+ setF("hp.current",1);
+ setF("deathSaves.successes",0);
+ setF("deathSaves.failures",0);
+ setDsLastRoll(null);
+                        }}>
+                        &#x21BA;
+                      </button>
+                    </div>
+                    <div className="ds-overlay-body">
+                      <div className="ds-overlay-rows">
+                        <div className="ds-overlay-row">
+                          <span className="ds-overlay-lbl">Successes</span>
+                          <div className="ds-overlay-pips">
+                            {[0,1,2].map(i=>(
+                              <div key={i}
+ className={"ds-pip"+(i<char.deathSaves.successes?" ds-pip-succ":"")}
+ onClick={()=>{
+ const next = i<char.deathSaves.successes ? i : i+1;
+ if(next>=3){
+ setF("hp.current",1);
+ setF("deathSaves.successes",0);
+ setF("deathSaves.failures",0);
+ setDsLastRoll(null);
+                                  } else {
+ setF("deathSaves.successes",next);
+                                  }
+                                }}/>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="ds-overlay-row">
+                          <span className="ds-overlay-lbl">Failures</span>
+                          <div className="ds-overlay-pips">
+                            {[0,1,2].map(i=>(
+                              <div key={i}
+ className={"ds-pip"+(i<char.deathSaves.failures?" ds-pip-fail":"")}
+ onClick={()=>setF("deathSaves.failures",i<char.deathSaves.failures?i:i+1)}/>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ds-overlay-d20"
+ onClick={()=>{
+ if(dsLastRoll!=null){setDsLastRoll(null);return;}
+ const roll = Math.floor(Math.random()*20)+1;
+ setDsLastRoll(roll);
+ if(roll===20){
+ setTimeout(()=>{setF("hp.current",1);setF("deathSaves.successes",0);setF("deathSaves.failures",0);setDsLastRoll(null);},800);
+                          } else if(roll>=10){
+ const next = Math.min(3, char.deathSaves.successes+1);
+ if(next>=3){
+ setF("hp.current",1);
+ setF("deathSaves.successes",0);
+ setF("deathSaves.failures",0);
+ setDsLastRoll(null);
+                            } else {
+ setF("deathSaves.successes",next);
+                            }
+                          } else if(roll===1){
+ setF("deathSaves.failures",Math.min(3,char.deathSaves.failures+2));
+                          } else {
+ setF("deathSaves.failures",Math.min(3,char.deathSaves.failures+1));
+                          }
+                        }}>
+                        <span className="ds-overlay-d20-lbl">D20</span>
+                        {dsLastRoll!=null ? (
+                          <>
+                            <div className="adv-result-box"
+ style={{
+ borderColor: dsLastRoll===20?"var(--green)":dsLastRoll===1?"var(--red)":dsLastRoll>=10?"var(--green)":"var(--red)",
+ color: dsLastRoll===20?"var(--green)":dsLastRoll===1?"var(--red)":dsLastRoll>=10?"var(--green)":"var(--red)",
+                              }}>
+                              {dsLastRoll}
+                            </div>
+                            <button className="adv-reroll"
+ onClick={e=>{
+ e.stopPropagation();
+ const roll = Math.floor(Math.random()*20)+1;
+ setDsLastRoll(roll);
+ if(roll===20){
+ setTimeout(()=>{setF("hp.current",1);setF("deathSaves.successes",0);setF("deathSaves.failures",0);setDsLastRoll(null);},800);
+                                } else if(roll>=10){
+ const next = Math.min(3, char.deathSaves.successes+1);
+ if(next>=3){setF("hp.current",1);setF("deathSaves.successes",0);setF("deathSaves.failures",0);setDsLastRoll(null);}
+ else{setF("deathSaves.successes",next);}
+                                } else if(roll===1){
+ setF("deathSaves.failures",Math.min(3,char.deathSaves.failures+2));
+                                } else {
+ setF("deathSaves.failures",Math.min(3,char.deathSaves.failures+1));
+                                }
+                              }}>
+                              &#x21BA; Reroll
+                            </button>
+                          </>
+                        ) : (
+                          <svg viewBox="0 0 64 64" width="32" height="32" fill="none"
+ stroke="rgba(239,68,68,0.55)" strokeWidth="1.8" strokeLinejoin="round">
+                            <polygon points="32,4 58,18 58,46 32,60 6,46 6,18"/>
+                            <polygon points="32,4 58,18 6,18"/>
+                            <polygon points="32,22 48,44 16,44"/>
+                            <line x1="32" y1="4" x2="32" y2="22"/>
+                            <line x1="58" y1="18" x2="48" y2="44"/>
+                            <line x1="6" y1="18" x2="16" y2="44"/>
+                            <line x1="32" y1="60" x2="32" y2="44"/>
+                            <line x1="58" y1="46" x2="48" y2="44"/>
+                            <line x1="6" y1="46" x2="16" y2="44"/>
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    {char.deathSaves.failures>=3 && (
+                      <div className="ds-death-notice">
+                        &#x2620; Your character has died.
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              {/* Resistances, Immunities & Vulnerabilities */}
+              {(()=>{
+ const DMG_TYPES = ["Acid","Bludgeoning","Cold","Fire","Force","Lightning","Necrotic","Piercing","Poison","Psychic","Radiant","Slashing","Thunder","Non-magical B/P/S"];
+ const RIV_TYPES = ["Resistance","Immunity","Vulnerability"];
+ const TYPE_COLORS = {
+                  Resistance: {bg:"rgba(34,197,94,0.1)", border:"rgba(34,197,94,0.3)", text:"#15803d"},
+                  Immunity: {bg:"rgba(99,102,241,0.1)", border:"rgba(99,102,241,0.3)", text:"var(--accent)"},
+                  Vulnerability:{bg:"rgba(239,68,68,0.1)", border:"rgba(239,68,68,0.3)", text:"var(--red)"},
+                };
+ // Auto-detect racial resistances from subrace/race library entries
+ const racialResistances = (()=>{
+ const results = [];
+ const subEntry = char.subrace?libEntries.find(e=>e.title===char.subrace&&e.category==="Subrace"):null;
+ const raceEntry = char.species?libEntries.find(e=>e.title===char.species&&e.category==="Race"):null;
+ [subEntry,raceEntry].forEach(entry=>{
+ if(!entry?.notes) return;
+ const m = entry.notes.match(/Damage Resistance[s]?:\s*([^|]+)/i);
+ if(m) m[1].split(/[,&]/).map(s=>s.trim()).filter(Boolean).forEach(dmg=>{
+ if(!results.find(r=>r.toLowerCase()===dmg.toLowerCase())) results.push(dmg);
+                    });
+                  });
+ return results;
+                })();
+ const allEntries = [
+                  ...(char.resistances||[]).map(d=>({type:"Resistance",damage:d,racial:false})),
+                  ...(char.immunities||[]).map(d=>({type:"Immunity",damage:d,racial:false})),
+                  ...(char.vulnerabilities||[]).map(d=>({type:"Vulnerability",damage:d,racial:false})),
+                  ...racialResistances.filter(d=>!(char.resistances||[]).find(r=>r.toLowerCase()===d.toLowerCase())).map(d=>({type:"Resistance",damage:d,racial:true})),
+                ];
+ const removeEntry = (type, damage) => {
+ const field = type==="Resistance"?"resistances":type==="Immunity"?"immunities":"vulnerabilities";
+ setCharSaving(p=>({...p,[field]:(p[field]||[]).filter(x=>x!==damage)}));
+                };
+ const addEntry = () => {
+ if(!rivType||!rivDmg) return;
+ const field = rivType==="Resistance"?"resistances":rivType==="Immunity"?"immunities":"vulnerabilities";
+ setCharSaving(p=>({...p,[field]:[...(p[field]||[]),rivDmg]}));
+ setRivDmg(""); // reset damage only - keep type and form open
+                };
+ return (
+                  <div className="ri-card">
+                    <div className="ri-card-hdr">
+                      <span className="ri-card-title">RESISTANCES &amp; IMMUNITIES</span>
+                      <button className="ri-add-btn" onClick={()=>setRivOpen(o=>!o)}>
+                        {rivOpen ? "Close" : "+ Add"}
+                      </button>
+                    </div>
+
+                    {rivOpen && (
+                      <div className="ri-add-form">
+                        <select className="ri-sel" value={rivType}
+ onChange={e=>{setRivType(e.target.value);setRivDmg("");}}>
+                          <option value="">Type...</option>
+                          {RIV_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
+                        </select>
+                        <select className="ri-sel" value={rivDmg}
+ onChange={e=>setRivDmg(e.target.value)}
+ disabled={!rivType}>
+                          <option value="">Damage type...</option>
+                          {DMG_TYPES.filter(t=>{
+ const field = rivType==="Resistance"?"resistances":rivType==="Immunity"?"immunities":"vulnerabilities";
+ return !(char[field]||[]).includes(t);
+                          }).map(t=><option key={t} value={t}>{t}</option>)}
+                        </select>
+                        <button className="ri-confirm-btn"
+ disabled={!rivType||!rivDmg}
+ onClick={addEntry}>
+                          + Add
+                        </button>
+                      </div>
+                    )}
+
+                    {allEntries.length===0 ? (
+                      <div className="ri-empty">No resistances added.</div>
+                    ) : (
+                      <div className="ri-entries">
+                        {allEntries.map(({type,damage,racial})=>{
+ const col = TYPE_COLORS[type];
+ const racialStyle = racial?{background:"rgba(34,197,94,0.08)",border:"1px solid rgba(34,197,94,0.35)",color:"var(--green)"}:{background:col.bg,border:"1px solid "+col.border,color:col.text};
+ return (
+                            <span key={type+damage} className="ri-tag" style={racialStyle}>
+                              <span className="ri-tag-type">{type.slice(0,3).toUpperCase()}</span>
+                              {damage}
+                              {racial?<span className="ri-tag-type" style={{marginLeft:2,opacity:0.7}}>RACE</span>:<button className="ri-tag-x" onClick={()=>removeEntry(type,damage)}>x</button>}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+
+              {/* Advantage / Disadvantage */}
+              {(()=>{
+ const rollAdv = () => {
+ const r1 = Math.floor(Math.random()*20)+1;
+ const r2 = Math.floor(Math.random()*20)+1;
+ setAdvRolls([r1,r2]);
+                };
+ const isAdv = char.advantage && !char.disadvantage;
+ const isDis = char.disadvantage && !char.advantage;
+ return (
+                  <div className="adv-card">
+                    <div className="adv-checks">
+                      <button className={"adv-row"+(char.advantage?" adv-on-adv":"")}
+ onClick={()=>{setF("advantage",!char.advantage);setAdvRolls(null);}}>
+                        <div className={"adv-chk"+(char.advantage?" adv-chk-on-adv":"")}/>
+                        <span className="adv-lbl" style={char.advantage?{color:"var(--green)",fontWeight:700}:{}}>Advantage</span>
+                      </button>
+                      <button className={"adv-row"+(char.disadvantage?" adv-on-dis":"")}
+ onClick={()=>{setF("disadvantage",!char.disadvantage);setAdvRolls(null);}}>
+                        <div className={"adv-chk"+(char.disadvantage?" adv-chk-on-dis":"")}/>
+                        <span className="adv-lbl" style={char.disadvantage?{color:"var(--red)",fontWeight:700}:{}}>Disadvantage</span>
+                      </button>
+                    </div>
+                    <div className="adv-dice-box" onClick={advRolls ? ()=>setAdvRolls(null) : rollAdv}>
+                      {advRolls ? (
+                        <div className="adv-results">
+                          {advRolls.map((r,i)=>{
+ const isWinner = isAdv ? r===Math.max(...advRolls) : isDis ? r===Math.min(...advRolls) : false;
+ const isTie = advRolls[0]===advRolls[1];
+ return (
+                              <div key={i} className={"adv-result-box"+(isWinner&&!isTie?" adv-result-win":"")}
+ style={{
+ borderColor: isWinner&&!isTie?(isAdv?"var(--green)":"var(--red)"):"var(--border)",
+ color: isWinner&&!isTie?(isAdv?"var(--green)":"var(--red)"):"var(--muted)"
+                                }}>
+                                {r}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <>
+                          <span className="adv-dice-lbl" style={{
+ color: isAdv?"var(--green)":isDis?"var(--red)":"var(--muted)"
+                          }}>
+                            {isAdv?"2D20 ADV":isDis?"2D20 DIS":"2D20"}
+                          </span>
+                          <svg viewBox="0 0 64 64" width="28" height="28" fill="none"
+ stroke={isAdv?"rgba(34,197,94,0.6)":isDis?"rgba(239,68,68,0.6)":"rgba(100,116,139,0.4)"}
+ strokeWidth="1.8" strokeLinejoin="round">
+                            <polygon points="32,4 58,18 58,46 32,60 6,46 6,18"/>
+                            <polygon points="32,4 58,18 6,18"/>
+                            <polygon points="32,22 48,44 16,44"/>
+                            <line x1="32" y1="4" x2="32" y2="22"/>
+                            <line x1="58" y1="18" x2="48" y2="44"/>
+                            <line x1="6" y1="18" x2="16" y2="44"/>
+                            <line x1="32" y1="60" x2="32" y2="44"/>
+                            <line x1="58" y1="46" x2="48" y2="44"/>
+                            <line x1="6" y1="46" x2="16" y2="44"/>
+                          </svg>
+                        </>
+                      )}
+                      {advRolls && (
+                        <button className="adv-reroll" onClick={e=>{e.stopPropagation();rollAdv();}}>
+                          &#x21BA; Reroll
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Inspiration / Action Dice */}
+              <div className="iad-card">
+                <div className="iad-title">INSPIRATION / ACTION DICE</div>
+                <div className="iad-row">
+                  {/* Inspiration toggle */}
+                  <button className={"iad-insp"+(char.inspirationActive?" iad-insp-on":"")}
+ onClick={()=>setF("inspirationActive",!char.inspirationActive)}>
+                    <div className={"iad-chk"+(char.inspirationActive?" iad-chk-on":"")}/>
+                    <span className="iad-insp-lbl">{char.inspirationActive?"Active":"Inactive"}</span>
+                  </button>
+                  {/* Action dice counter + roll */}
+                  <div className="iad-counter">
+                    <button className="iad-counter-sub"
+ onClick={()=>setF("actionDiceCount",Math.max(0,(char.actionDiceCount||0)-1))}>
+                      -
+                    </button>
+                    <button className="iad-counter-num"
+ onClick={()=>{
+ if((char.actionDiceCount||0)===0) return;
+ const roll = Math.floor(Math.random()*4)+1;
+ setSkillRoll({label:"Action Dice (d4)", roll, bonus:0, total:roll, isCrit:roll===4, isFail:roll===1, sides:4});
+ setF("actionDiceCount", (char.actionDiceCount||0)-1);
+                      }}
+ title="Tap to roll d4">
+                      <span style={{color:"var(--amber)",fontWeight:800,fontSize:13}}>{char.actionDiceCount||0}</span>
+                    </button>
+                    <button className="iad-counter-add"
+ onClick={()=>{setF("actionDiceCount",Math.min(20,(char.actionDiceCount||0)+1));setActionDiceRoll(null);}}>
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="iad-hint">Tap number to roll d4 . counter 0-20</div>
+              </div>
+
+              {/* Rest */}
+              <div className="rest-card">
+                <div className="rest-title">REST</div>
+                <div className="rest-row">
+                  <button className="rest-btn rest-short"
+ onClick={()=>{
+ if(!cls) return;
+ const roll = Math.floor(Math.random()*cls.hitDie)+1;
+ const conMod = abilityMod(eff.CON);
+ setF("hp.current", Math.min(char.hp.max, (char.hp.current||0) + Math.max(1, roll + conMod)));
+ setF("breathWeaponUsed", false); setF("actionUsed",false); setF("bonusActionUsed",false); setF("reactionUsed",false);
+                    }}>
+                    <div>
+                      <div className="rest-btn-title" style={{color:"var(--amber)"}}>⚡ Short Rest</div>
+                      <div className="rest-btn-sub">Roll 1 hit die</div>
+                    </div>
+                  </button>
+                  <button className="rest-btn rest-long"
+ onClick={()=>{
+ setF("hp.current", char.hp.max);
+ setF("deathSaves.successes", 0);
+ setF("deathSaves.failures", 0);
+ setCharSaving(p=>({...p, spellSlotsUsed: Array(9).fill(0), inspirationActive: false, breathWeaponUsed: false, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0}));
+                    }}>
+                    <div>
+                      <div className="rest-btn-title" style={{color:"var(--accent)"}}>🌙 Long Rest</div>
+                      <div className="rest-btn-sub">Full restore</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <div className="core-sheet-footer">Character Sheet . D&amp;D 2024 . 5th Edition</div>
+            </div>
+
+          </div>
+        )}
+
+        {/* FEATURES */}
+        {tab==="features" && (() => {
+ const NoteTags = ({notes, traits, extra, exclude=[], hideAllTags=false}) => {
+ if (!notes) return null;
+ const items = notes.includes(' | ') ? notes.split(' | ').map(s=>s.trim()).filter(Boolean) : notes.split(/\.\s+/).map(s=>s.replace(/\.$/,'')).filter(Boolean);
+ const plain = items.filter(item=>
+              !item.toLowerCase().startsWith("subraces:") &&
+              !item.toLowerCase().startsWith("parent:") &&
+              !(extra && item.toLowerCase().startsWith("cantrip")) &&
+              !(extra && item.toLowerCase().startsWith("extra language")) &&
+              !exclude.some(ex=>item.toLowerCase().startsWith(ex.toLowerCase())) &&
+              !(traits||[]).find(t=>
+ item.toLowerCase().startsWith(t.name.toLowerCase())||
+ t.name.toLowerCase()===item.split(":")[0].trim().toLowerCase()||
+ t.name.toLowerCase()===item.split("(")[0].trim().toLowerCase()
+              )
+            );
+ const detailed = items.map(item=>{
+ const t=(traits||[]).find(t=>
+ item.toLowerCase().startsWith(t.name.toLowerCase())||
+ t.name.toLowerCase()===item.split(":")[0].trim().toLowerCase()||
+ t.name.toLowerCase()===item.split("(")[0].trim().toLowerCase()
+              );
+ return t?{item,trait:t}:null;
+            }).filter(Boolean);
+ const subracesTag = items.find(i=>i.toLowerCase().startsWith("subraces:"));
+ const parentTag   = items.find(i=>i.toLowerCase().startsWith("parent:"));
+ return (
+              <div style={{position:"relative"}}>
+                {detailed.length>0&&(
+                  <div className="ft-detail-row">
+                    {detailed.map(({item,trait},i)=>{
+ const afterColon = item.includes(":")?item.slice(item.indexOf(":")+1).trim():null;
+ const popupDesc = afterColon||trait.desc||"";
+ return (
+                      <div key={i} className="ft-detail-wrap">
+                        <span className="ft-note-tag ft-note-tag-clickable"
+ onClick={()=>setOpenFeat(openFeat==="nt"+i?null:"nt"+i)}>
+                          {trait.name}<span className="ft-info-icon">i</span>
+                        </span>
+                        {openFeat==="nt"+i&&(
+                          <>
+                            <div className="ft-info-backdrop" onClick={()=>setOpenFeat(null)}/>
+                            <SmartPopup desc={popupDesc}/>
+                          </>
+                        )}
+                      </div>
+                    );
+                    })}
+                  </div>
+                )}
+                {plain.length>0&&!hideAllTags&&(
+                  <div className="ft-note-tags" style={{marginTop:detailed.length>0?12:6}}>
+                    {plain.map((item,i)=>{
+ const asiMatch=item.match(/Ability Score Increase:\s*([+\-]\d+)\s+([A-Z]{3})/i);
+ const isApplied=asiMatch&&char.abilities[asiMatch[2].toUpperCase()]>10;
+ return <span key={i} className={"ft-note-tag"+(isApplied?" ft-note-tag-asi-on":"")}>{item}</span>;
+                    })}
+                  </div>
+                )}
+                {extra&&<div style={{marginTop:8}}>{extra}</div>}
+                {(subracesTag||parentTag)&&(
+                  <div className="ft-subraces-tag">
+                    {parentTag&&<span>{parentTag}</span>}
+                    {subracesTag&&<span>{subracesTag}</span>}
+                  </div>
+                )}
+              </div>
+            );
+          };
+ const RaceEntry = ({title, entry, traits, titleHidden, cantripExtra}) => {
+ const desc = entry?.desc||"";
+ return (
+              <div className="ft-lib-entry">
+                {!titleHidden&&<div className="ft-lib-entry-hdr"><div className="ft-lib-entry-title">{title}</div></div>}
+                {desc&&<div className="ft-lib-desc">{desc}</div>}
+                {entry?.notes&&<NoteTags notes={entry.notes} traits={traits||spc?.traits} extra={cantripExtra} exclude={["Languages","Tool Proficiency","Size"]}/>}
+                {!entry&&traits&&traits.map((t,i)=>(
+                  <div key={i} className="ft-lib-trait-row">
+                    <span className="ft-lib-trait-name">{t.name}</span>
+                    {t.desc&&<span className="ft-lib-trait-desc"> - {t.desc}</span>}
+                  </div>
+                ))}
+              </div>
+            );
+          };
+ return (
+          <div className="panel">
+            {!char.species&&!char.charClass&&!char.background
+              ? <Empty icon="📜" msg="Choose a class and species in the header to see features."/>
+              : (<div className="feat-list">
+
+                  {/* Appearance row */}
+                  {char.species&&(()=>{
+ const autoSize = spc?.size||(libEntries.find(e=>e.category==="Race"&&e.title===char.species)?.notes?.match(/Size:\s*(\w+)/i)?.[1])||"Medium";
+ const fields = [
+ {key:"size",   label:"Size",   value:autoSize, auto:true},
+ {key:"charHeight", label:"Height", value:char.charHeight||"", auto:false},
+ {key:"charWeight", label:"Weight", value:char.charWeight||"", auto:false},
+ {key:"charAge",    label:"Age",    value:char.charAge||"",    auto:false},
+ {key:"charSkin",   label:"Skin",   value:char.charSkin||"",   auto:false},
+ {key:"charHair",   label:"Hair",   value:char.charHair||"",   auto:false},
+ {key:"charEyes",   label:"Eyes",   value:char.charEyes||"",   auto:false},
+ ];
+ return (
+                      <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:4}}>
+                        {fields.map(({key,label,value,auto})=>(
+                          <div key={key} style={{display:"flex",flexDirection:"column",gap:2,flex:"1 1 70px",minWidth:60}}>
+                            <div style={{fontSize:8,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",textAlign:"center"}}>{label}</div>
+                            {auto
+                              ? <div style={{background:"rgba(34,197,94,0.07)",border:"1px solid rgba(34,197,94,0.25)",borderRadius:7,padding:"4px 8px",fontSize:12,fontWeight:600,color:"var(--green)",textAlign:"center"}}>{value}</div>
+                              : <input className="gi gi-sm" value={value} placeholder="—"
+ onChange={e=>setF(key,e.target.value)}
+ style={{textAlign:"center",padding:"4px 6px",fontSize:12}}/>
+                            }
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+
+                  {/* Racial traits card - library style with desc + notes + tags */}
+                  {spc&&spc.traits&&(()=>{
+ const libRace = libEntries.find(e=>e.category==="Race"&&e.title===char.species);
+ const libSub  = char.subrace ? libEntries.find(e=>e.category==="Subrace"&&e.title===char.subrace) : null;
+
+ return (
+                      <>
+                        <div className="ft-card ft-card-race">
+                          <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(openTrait==="race"?null:"race")}>
+                            <span>Racial Traits - {char.species}</span>
+                            <span className="ft-hdr-chev">{openTrait==="race"?"▲":"▼"}</span>
+                          </div>
+                          {openTrait==="race"&&<RaceEntry title={char.species} entry={libRace} traits={spc.traits} titleHidden/>}
+                        </div>
+                        {(libSub || (char.subrace && (SUBRACE_TRAITS[char.subrace]||[]).length>0)) && (
+                          <div style={{marginLeft:16,borderLeft:"3px solid var(--border)",borderRadius:"0 14px 14px 0"}}>
+                            <div className="ft-card ft-card-race" style={{borderRadius:"0 14px 14px 0"}}>
+                              <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(openTrait==="subrace"?null:"subrace")}>
+                                <span>Subrace - {char.subrace}</span>
+                                <span className="ft-hdr-chev">{openTrait==="subrace"?"▲":"▼"}</span>
+                              </div>
+                              {openTrait==="subrace"&&(()=>{
+ const subraceCantrip = SUBRACE_CANTRIPS[char.subrace];
+ const subraceLangCount = SUBRACE_LANGUAGES[char.subrace]||0;
+ const autoLangs = [...(RACE_LANGUAGES[char.species]||[]),...(BG_LANGUAGES[char.background]||[])];
+ const raceToolChoice = RACE_TOOL_CHOICES[char.species];
+ const toolChoiceOptions = raceToolChoice&&raceToolChoice.options.length>1?raceToolChoice.options:null;
+ const cantripExtra = (subraceCantrip||subraceLangCount>0||toolChoiceOptions) ? (
+                                  <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
+                                    {toolChoiceOptions&&(
+                                      <div style={{flex:1,minWidth:140}}>
+                                        <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:4}}>
+                                          {raceToolChoice.label}
+                                        </div>
+                                        <select className="ri-sel"
+ value={char.racialToolProf||""}
+ onChange={e=>setF("racialToolProf",e.target.value)}
+ style={{borderColor:"var(--green)",color:char.racialToolProf?"var(--green)":"var(--muted)",width:"100%"}}>
+                                          <option value="">-- Choose a tool --</option>
+                                          {toolChoiceOptions.map(t=>(
+                                            <option key={t} value={t}>{t}</option>
+                                          ))}
+                                        </select>
+                                      </div>
+                                    )}
+                                    {subraceCantrip&&(
+                                      <div style={{flex:1,minWidth:140}}>
+                                        <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:4}}>
+                                          Cantrip ({subraceCantrip?.source||"Racial"})
+                                        </div>
+                                        <select className="ri-sel"
+ value={char.racialCantrip||""}
+ onChange={e=>setF("racialCantrip",e.target.value)}
+ style={{borderColor:"var(--green)",color:char.racialCantrip?"var(--green)":"var(--muted)",width:"100%"}}>
+                                          <option value="">-- Choose a cantrip --</option>
+                                          {(subraceCantrip?.list||[]).map(c=>(
+                                            <option key={c} value={c}>{c}</option>
+                                          ))}
+                                        </select>
+                                      </div>
+                                    )}
+                                    {subraceLangCount>0&&(
+                                      <div style={{flex:1,minWidth:140}}>
+                                        <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:4}}>
+                                          Extra Language
+                                        </div>
+                                        <select className="ri-sel"
+ value={(char.languages||[])[0]||""}
+ onChange={e=>{
+ const val=e.target.value;
+ setCharSaving(p=>({...p,languages:val?[val,...(p.languages||[]).slice(1)]:(p.languages||[]).slice(1)}));
+                                          }}
+ style={{borderColor:"rgba(59,130,246,0.4)",color:(char.languages||[])[0]?"var(--mana)":"var(--muted)",width:"100%"}}>
+                                          <option value="">-- Choose a language --</option>
+                                          {ALL_LANGUAGES.filter(l=>!autoLangs.includes(l)).map(l=>(
+                                            <option key={l} value={l}>{l}</option>
+                                          ))}
+                                        </select>
+                                      </div>
+                                    )}
+                                  </div>
+                                ) : null;
+ const isDbSubrace = char.subrace&&char.subrace.toLowerCase().startsWith("dragonborn");
+ const dbEntry = isDbSubrace?libEntries.find(e=>e.title===char.subrace&&e.category==="Subrace"):null;
+ // Breath weapon shape by dragon type
+ const DB_BREATH = {Black:{shape:"5x30ft line",save:"DEX"},Blue:{shape:"5x30ft line",save:"DEX"},Brass:{shape:"5x30ft line",save:"DEX"},Bronze:{shape:"5x30ft line",save:"DEX"},Copper:{shape:"5x30ft line",save:"DEX"},Gold:{shape:"15ft cone",save:"DEX"},Green:{shape:"15ft cone",save:"CON"},Red:{shape:"15ft cone",save:"DEX"},Silver:{shape:"15ft cone",save:"CON"},White:{shape:"15ft cone",save:"CON"}};
+ const dbTypeMatch = dbEntry?.notes?.match(/Dragon Type:\s*(\w+)/);
+ const dbDmgMatch = dbEntry?.notes?.match(/Damage Type:\s*(\w+)/);
+ const dbDragonType = dbTypeMatch?dbTypeMatch[1]:null;
+ const dbBreathInfo = dbDragonType?DB_BREATH[dbDragonType]:null;
+ const breathExtra = isDbSubrace&&dbBreathInfo&&dbDmgMatch?(()=>{
+ const bwDetail = dbBreathInfo.shape+", "+dbBreathInfo.save+" save DC 8+prof+CON, "+dbDmgMatch[1]+" damage. Scales: 2d6→3d6 at 6th→4d6 at 11th→5d6 at 16th. Recharges on short or long rest.";
+ const dmgDice = (()=>{const lvl=char.level||1;return lvl>=16?"5d6":lvl>=11?"4d6":lvl>=6?"3d6":"2d6";})();
+ const conMod = Math.floor(((char.abilities?.CON||10)-10)/2);
+ const prof = Math.ceil((char.level||1)/4)+1;
+ const dc = 8+prof+conMod;
+ const infoKey = "bw_info";
+ return (
+                                    <div style={{marginTop:10,display:"flex",flexDirection:"column",gap:8}}>
+                                      <div style={{fontSize:14,fontWeight:700,color:"var(--text)",display:"flex",alignItems:"center",gap:8}}>
+                                        <button title={char.breathWeaponUsed?"Used — rest to recover":"Available"} style={{width:20,height:20,borderRadius:"50%",border:"2px solid",flexShrink:0,cursor:"pointer",background:char.breathWeaponUsed?"var(--input)":"rgba(34,197,94,0.2)",borderColor:char.breathWeaponUsed?"var(--border)":"var(--green)",padding:0}} onClick={()=>setF("breathWeaponUsed",!char.breathWeaponUsed)}/>
+                                        Breath Weapon
+                                        <div style={{position:"relative",flexShrink:0}}>
+                                          <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                                          {wearingInfo===infoKey&&(
+                                            <>
+                                              <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                              <SmartPopup desc={bwDetail}/>
+                                            </>
+                                          )}
+                                        </div>
+                                      </div>
+                                      <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                                        <div style={{display:"flex",flexDirection:"column",gap:3,flex:"0 0 80px"}}>
+                                          <div style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Save DC</div>
+                                          <div style={{fontFamily:"'DM Mono',monospace",fontSize:20,fontWeight:900,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.2)",borderRadius:8,padding:"4px 10px",textAlign:"center",height:38,display:"flex",alignItems:"center",justifyContent:"center"}}>{dc}</div>
+                                        </div>
+                                        <div style={{display:"flex",flexDirection:"column",gap:3,flex:"0 0 80px"}}>
+                                          <div style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Damage</div>
+                                          <button style={{fontFamily:"'DM Mono',monospace",fontSize:16,fontWeight:800,color:"var(--red)",background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.25)",borderRadius:8,padding:"4px 10px",cursor:"pointer",height:38,width:"100%"}}
+ onClick={()=>{
+ const [num,die]=dmgDice.split("d").map(Number);
+ const rolls=Array.from({length:num},()=>Math.floor(Math.random()*die)+1);
+ const total=rolls.reduce((a,b)=>a+b,0);
+ setSkillRoll({label:"Breath Weapon ("+dmgDice+")",roll:total,bonus:0,total,isCrit:false,isFail:false,sides:die,r1:rolls[0],r2:null,allRolls:[...rolls],isAdv:false,isDis:false});
+                                            }}>{(()=>{const [num]=dmgDice.split("d");return(<span style={{display:"flex",alignItems:"center",justifyContent:"center",gap:4,fontFamily:"'DM Mono',monospace"}}>{dmgDice} ▶</span>);})()}</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })():null;
+ const combinedExtra = (cantripExtra||breathExtra)?(
+                                  <>{cantripExtra}{breathExtra}</>
+                                ):null;
+ return libSub
+                                  ? <RaceEntry title={char.subrace} entry={libSub} traits={null} titleHidden cantripExtra={combinedExtra}/>
+                                  : <RaceEntry title={char.subrace} entry={null} traits={SUBRACE_TRAITS[char.subrace]} titleHidden cantripExtra={combinedExtra}/>;
+                              })()}
+                              {/* cantrip picker is now inside RaceEntry via cantripExtra */}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+
+                  {/* Class features card */}
+                  {cls&&cls.features&&(()=>{
+ const isOpen = openTrait==="class";
+ const libCls = libEntries.find(e=>e.category==="Class"&&e.title===char.charClass);
+ return (
+                      <div className="ft-card ft-card-race">
+                        <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(isOpen?null:"class")}>
+                          <span>Class Features - {char.charClass} {char.multiClassLevel > 0 ? char.classLevel : char.level}</span>
+                          <span className="ft-hdr-chev">{isOpen?"▲":"▼"}</span>
+                        </div>
+                        {isOpen&&(
+                          <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                            {libCls?.desc&&<div className="ft-lib-desc">{libCls.desc}</div>}
+                            {/* Single row of purple stat tags below description */}
+                            <div className="ft-cls-stat-row">
+                              {cls.hitDie&&<span className="ft-cls-stat-tag">Hit Die: d{cls.hitDie}</span>}
+                              {cls.savingThrows?.length>0&&<span className="ft-cls-stat-tag">Saves: {cls.savingThrows.join(", ")}</span>}
+                              {cls.spellcastingAbility&&<span className="ft-cls-stat-tag">Spell Ability: {cls.spellcastingAbility}</span>}
+                            </div>
+                            {libCls?.notes&&<NoteTags notes={libCls.notes} traits={[]} exclude={["Hit Die","Primary","Saves","Multiclass Prereq","Multiclass Gains","Spellcasting","Armor","Weapons","Weapon","Tools","Key Features"]}/>}
+                            <div className="ft-feature-list">
+                              {/* Weapons and armor on one row */}
+                              {(cls.weaponProf?.length>0||cls.armorProf?.length>0)&&<div className="ft-feature-row ft-feature-row-info">
+                                {cls.weaponProf?.length>0&&<><span className="feat-badge feat-badge-info">Weapons</span><span className="ft-feature-name">{cls.weaponProf.join(", ")}</span></>}
+                                {cls.armorProf?.length>0&&<><span className="feat-badge feat-badge-info" style={{marginLeft:8}}>Armor</span><span className="ft-feature-name">{cls.armorProf.join(", ")}</span></>}
+                              </div>}
+                              {cls.startingEquipment&&(()=>{
+ const groups = cls.startingEquipment.split(";").map(g=>g.trim()).filter(Boolean);
+ return (
+                                  <div style={{marginTop:6,display:"flex",flexDirection:"column",gap:4}}>
+                                    <span style={{fontSize:10,fontWeight:700,letterSpacing:".05em",textTransform:"uppercase",color:"var(--muted)"}}>Starting Equipment</span>
+                                    <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+                                      {groups.map((group,gi)=>{
+ const parts = group.split(/ or /i).map(p=>p.trim()).filter(Boolean);
+ return (
+                                          <div key={gi} style={{display:"flex",alignItems:"center",gap:3,flexWrap:"wrap"}}>
+                                            {parts.map((part,pi)=>(
+                                              <span key={pi} style={{display:"flex",alignItems:"center",gap:2}}>
+                                                {(()=>{
+                                                  const chosen=(char.chosenStartEquip||[]).includes(part);
+                                                  return <span
+                                                    onClick={()=>setCharSaving(p=>{
+                                                      const arr=[...(p.chosenStartEquip||[])];
+                                                      const i=arr.indexOf(part);
+                                                      const nowChosen=i<0;
+                                                      if(i>=0) arr.splice(i,1); else arr.push(part);
+
+                                                      const PACK_CONTENTS = {
+  "Explorer's Pack": "Explorer's Pack\nBackpack, bedroll, mess kit, tinderbox, 10 torches, 10 days rations, waterskin, 50ft hemp rope",
+  "Dungeoneer's Pack": "Dungeoneer's Pack\nBackpack, crowbar, hammer, 10 pitons, 10 torches, tinderbox, 10 days rations, waterskin, 50ft hemp rope",
+  "Burglar's Pack": "Burglar's Pack\nBackpack, 1000 ball bearings, string 10ft, bell, 5 candles, crowbar, hammer, 10 pitons, hooded lantern, 2 oil flasks, 5 rations, tinderbox, waterskin",
+  "Scholar's Pack": "Scholar's Pack\nBackpack, book of lore, ink bottle, ink pen, 10 sheets parchment, sand bag, small knife",
+  "Priest's Pack": "Priest's Pack\nBackpack, blanket, 10 candles, tinderbox, alms box, 2 incense blocks, censer, vestments, 2 days rations, waterskin",
+  "Diplomat's Pack": "Diplomat's Pack\nChest, 2 scroll cases, fine clothes, ink, pen, lamp, 2 oil flasks, 5 paper sheets, perfume vial, sealing wax, soap",
+  "Entertainer's Pack": "Entertainer's Pack\nBackpack, bedroll, 2 costumes, 5 candles, 5 rations, waterskin, disguise kit",
+};
+                                                      const ARMOR_MAP={"Leather armor":"Leather Armor","Scale mail":"Scale Mail","Chain mail":"Chain Mail","Half plate":"Half Plate","Plate armor":"Plate Armor","Splint armor":"Splint Armor","Hide armor":"Hide Armor","Studded leather":"Studded Leather","Ring mail":"Ring Mail","Chain shirt":"Chain Shirt","Breastplate":"Breastplate","Padded armor":"Padded Armor"};
+                                                      const SHIELD_MAP={"Shield":"Shield","Wooden shield":"Shield"};
+                                                      const WEAPON_MAP={"Mace":"Mace","Warhammer":"Warhammer","Greataxe":"Greataxe","Longsword":"Longsword","Rapier":"Rapier","Shortsword":"Shortsword","Scimitar":"Scimitar","Quarterstaff":"Quarterstaff","Dagger":"Dagger","Shortbow":"Shortbow","Longbow":"Longbow","Light crossbow":"Crossbow, Light","Hand crossbow":"Crossbow, Hand","Handaxe":"Handaxe","Javelin":"Javelin","Two daggers":"Dagger","10 darts":"Dart","Lute":"Lute"};
+
+                                                      const armorTitle=ARMOR_MAP[part];
+                                                      const shieldTitle=SHIELD_MAP[part];
+                                                      const weaponTitle=WEAPON_MAP[part]||Object.entries(WEAPON_MAP).find(([k])=>part.toLowerCase().startsWith(k.toLowerCase()))?.[1];
+                                                      const isAnySimple = /any simple weapon/i.test(part);
+                                                      const isAnyMartial = /any martial weapon/i.test(part);
+
+                                                      let newArmorItems=[...(p.armorItems||[])];
+                                                      let newShieldItems=[...(p.shieldItems||[])];
+                                                      let newWeaponItems=[...(p.weaponItems||[])];
+
+                                                      if(armorTitle){
+                                                        if(nowChosen){if(!newArmorItems.some(a=>typeof a==="object"&&a.name===armorTitle&&a.source==="class")) newArmorItems.push({name:armorTitle,equipped:false,source:"class"});}
+                                                        else{newArmorItems=newArmorItems.filter(a=>!(typeof a==="object"&&a.name===armorTitle&&a.source==="class"));}
+                                                      }
+                                                      if(shieldTitle){
+                                                        if(nowChosen){if(!newShieldItems.some(a=>typeof a==="object"&&a.name===shieldTitle&&a.source==="class")) newShieldItems.push({name:shieldTitle,equipped:false,source:"class"});}
+                                                        else{newShieldItems=newShieldItems.filter(a=>!(typeof a==="object"&&a.name===shieldTitle&&a.source==="class"));}
+                                                      }
+                                                      if(weaponTitle){
+                                                        if(nowChosen){if(!newWeaponItems.some(a=>typeof a==="object"&&a.name===weaponTitle&&a.source==="class")) newWeaponItems.push({name:weaponTitle,equipped:false,hand:"",source:"class"});}
+                                                        else{newWeaponItems=newWeaponItems.filter(a=>!(typeof a==="object"&&a.name===weaponTitle&&a.source==="class"));}
+                                                      }
+                                                      if(isAnySimple){
+                                                        if(nowChosen){if(!newWeaponItems.some(a=>typeof a==="object"&&a.filter==="simple"&&a.source==="class")) newWeaponItems.push({name:"",equipped:false,hand:"",source:"class",filter:"simple"});}
+                                                        else{newWeaponItems=newWeaponItems.filter(a=>!(typeof a==="object"&&a.filter==="simple"&&a.source==="class"));}
+                                                      }
+                                                      if(isAnyMartial){
+                                                        if(nowChosen){if(!newWeaponItems.some(a=>typeof a==="object"&&a.filter==="martial"&&a.source==="class")) newWeaponItems.push({name:"",equipped:false,hand:"",source:"class",filter:"martial"});}
+                                                        else{newWeaponItems=newWeaponItems.filter(a=>!(typeof a==="object"&&a.filter==="martial"&&a.source==="class"));}
+                                                      }
+
+                                                      // Pack detection
+                                                      const packKey = Object.keys(PACK_CONTENTS).find(k=>part.includes(k));
+                                                      let newStarterPack = p.starterPack||"";
+                                                      if(packKey){
+                                                        if(nowChosen){ newStarterPack = PACK_CONTENTS[packKey]; }
+                                                        else { newStarterPack = ""; }
+                                                      }
+                                                      // Misc items appended to starter pack
+                                                      const MISC_ITEMS=["Holy symbol","Component pouch","Arcane focus","Druidic focus","Musical instrument","Lute","Holy symbol or druidic focus"];
+                                                      const miscMatch = MISC_ITEMS.find(m=>part.toLowerCase().includes(m.toLowerCase()));
+                                                      if(miscMatch){
+                                                        if(nowChosen){
+                                                          newStarterPack = newStarterPack ? newStarterPack+"\n"+part : part;
+                                                        } else {
+                                                          newStarterPack = newStarterPack.split("\n").filter(l=>!l.toLowerCase().includes(miscMatch.toLowerCase())).join("\n");
+                                                        }
+                                                      }
+                                                      return {...p,chosenStartEquip:arr,armorItems:newArmorItems,shieldItems:newShieldItems,weaponItems:newWeaponItems,starterPack:newStarterPack};
+                                                    })}
+                                                    style={{fontSize:10,fontWeight:600,padding:"2px 7px",borderRadius:5,cursor:"pointer",
+                                                      background:chosen?"rgba(99,102,241,0.18)":"rgba(99,102,241,0.07)",
+                                                      border:chosen?"1px solid rgba(99,102,241,0.6)":"1px solid rgba(99,102,241,0.2)",
+                                                      color:chosen?"var(--accent)":"var(--text)",
+                                                      whiteSpace:"nowrap",transition:"all .15s"}}>{part}</span>;
+                                                })()}
+                                                {/any simple weapon/i.test(part)&&(
+                                                  <span style={{position:"relative",flexShrink:0}}>
+                                                    <span className="ft-info-icon" style={{cursor:"pointer",marginLeft:2}}
+                                                      onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo==="sw-"+gi+"-"+pi?null:"sw-"+gi+"-"+pi);}}>i</span>
+                                                    {wearingInfo==="sw-"+gi+"-"+pi&&(
+                                                      <>
+                                                        <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                                        <SmartPopup desc={"Simple Weapons: Club, Dagger, Greatclub, Handaxe, Javelin, Light Hammer, Mace, Quarterstaff, Sickle, Spear, Dart, Light Crossbow, Shortbow, Sling"}/>
+                                                      </>
+                                                    )}
+                                                  </span>
+                                                )}
+                                                {/any martial weapon/i.test(part)&&(
+                                                  <span style={{position:"relative",flexShrink:0}}>
+                                                    <span className="ft-info-icon" style={{cursor:"pointer",marginLeft:2}}
+                                                      onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo==="mw-"+gi+"-"+pi?null:"mw-"+gi+"-"+pi);}}>i</span>
+                                                    {wearingInfo==="mw-"+gi+"-"+pi&&(
+                                                      <>
+                                                        <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                                        <SmartPopup desc={"Martial Weapons: Battleaxe, Flail, Glaive, Greataxe, Greatsword, Halberd, Lance, Longsword, Maul, Morningstar, Pike, Rapier, Scimitar, Shortsword, Trident, War Pick, Warhammer, Whip, Blowgun, Hand Crossbow, Heavy Crossbow, Longbow, Net"}/>
+                                                      </>
+                                                    )}
+                                                  </span>
+                                                )}
+                                                {pi<parts.length-1&&<span style={{fontSize:9,color:"var(--muted)",fontStyle:"italic"}}>or</span>}
+                                              </span>
+                                            ))}
+                                            {gi<groups.length-1&&<span style={{fontSize:9,color:"var(--subtle)"}}>·</span>}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                );
+                              })()}
+
+                              {(()=>{
+ const clsLvlNow = char.multiClassLevel > 0 && char.classLevel > 1 ? char.classLevel : char.level;
+ const nextLvl = Object.keys(cls.features).map(Number).filter(l=>l>clsLvlNow).sort((a,b)=>a-b)[0];
+ if(!nextLvl) return null;
+ const nextFeats = cls.features[nextLvl]||[];
+ const suffix = nextLvl===1?"1st":nextLvl===2?"2nd":nextLvl===3?"3rd":`${nextLvl}th`;
+ return (
+                                  <>
+                                    <div className="ft-lib-section-hdr" style={{margin:"4px -14px 0",borderTop:"1px solid var(--divider)",fontWeight:800,color:"#f97316"}}>
+                                      At Next Level — {suffix} Level
+                                    </div>
+                                    {nextFeats.map((f,i)=>(
+                                      <div key={`n${i}`} className="ft-feature-row" style={{opacity:0.55}}>
+                                        <span className="feat-badge feat-badge-dim">{nextLvl}</span>
+                                        <span className="ft-feature-name">{f.split("(")[0].trim()}</span>
+                                      </div>
+                                    ))}
+                                  </>
+                                );
+                              })()}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* Key feature sub-cards - one per unlocked feature, indented like subraces */}
+                  {cls&&(()=>{
+ const clsLvlNow = char.multiClassLevel > 0 && char.classLevel > 1 ? char.classLevel : char.level;
+ const unlockedFeatures = Object.entries(cls.features)
+                      .filter(([l])=>Number(l)<=clsLvlNow)
+                      .flatMap(([,feats])=>feats)
+                      .map(f=>f.split("(")[0].trim());
+                    // Show cards for features with detail text or library entries
+ const allFeatStrings = Object.entries(cls.features)
+                      .filter(([l])=>Number(l)<=clsLvlNow)
+                      .flatMap(([,feats])=>feats);
+ const NON_NOTABLE = ["Spellcasting","Ability Score Increase","Expertise","Proficiencies","Weapon Mastery"];
+ const ALWAYS_NOTABLE = ["Channel Divinity","Rage","Sneak Attack","Bardic Inspiration","Wild Shape","Lay on Hands","Divine Smite","Eldritch Invocations","Ki","Pact Magic","Arcane Recovery","Action Surge","Second Wind","Extra Attack","Unarmored Defense","Martial Arts","Metamagic","Sorcery Points"];
+ const seenFeats = new Set();
+ const keyFeats = allFeatStrings.filter(f=>{
+ const name = f.split("(")[0].trim();
+ if(seenFeats.has(name)) return false;
+ seenFeats.add(name);
+ if(NON_NOTABLE.some(n=>name.toLowerCase().startsWith(n.toLowerCase()))) return false;
+ if(ALWAYS_NOTABLE.some(n=>name.toLowerCase().startsWith(n.toLowerCase()))) return true;
+ const det = f.match(/\((.+)\)/)?.[1];
+ const libFeat = libEntries.find(e=>
+ e.title.toLowerCase()===name.toLowerCase() &&
+                        (e.tags||"").toLowerCase().includes((char.charClass||"").toLowerCase())
+                      );
+ return !!(det || libFeat);
+                    });
+ if(!keyFeats.length) return null;
+ return (
+                      <div style={{marginLeft:16,borderLeft:"3px solid var(--border)",borderRadius:"0 14px 14px 0"}}>
+                        {keyFeats.map((featStr,idx)=>{
+ const feat = featStr.split("(")[0].trim();
+ const det = featStr.match(/\((.+)\)/)?.[1];
+ const libFeat = libEntries.find(e=>
+                            (e.title.toLowerCase()===feat.toLowerCase() ||
+ feat.toLowerCase().startsWith(e.title.toLowerCase())) &&
+                            (e.category==="Feat" || (e.tags||"").toLowerCase().includes((char.charClass||"").toLowerCase()))
+                          ) || libEntries.find(e=>
+                            e.title.toLowerCase()===feat.toLowerCase() &&
+                            (e.category==="Feature"||e.category==="Feat"||e.category==="Class")
+                          );
+ const isAlwaysNotable = ALWAYS_NOTABLE.some(n=>feat.toLowerCase().startsWith(n.toLowerCase()));
+ const hasContent = libFeat || det || isAlwaysNotable;
+ if(!hasContent) return null;
+ const key = `clf-${idx}`;
+ const isOpen = openTrait===key;
+ return (
+                            <div key={key} className="ft-card ft-card-race" style={{borderRadius:"0 14px 14px 0"}}>
+                              <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(isOpen?null:key)}>
+                                <span>{feat}{feat==="Divine Domain"&&char.divineDomain?" — "+char.divineDomain:""}</span>
+                                <span className="ft-hdr-chev">{isOpen?"▲":"▼"}</span>
+                              </div>
+                              {isOpen&&(
+                                <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                                  {libFeat?.desc&&<div className="ft-lib-desc">{libFeat.desc}</div>}
+                                  {/* Domain picker for Cleric Divine Domain feature */}
+                                  {feat==="Divine Domain"&&char.charClass==="Cleric"&&(()=>{
+ const domains = libEntries
+                                      .filter(e=>e.category==="Subclass"&&(e.tags||"").toLowerCase().includes("cleric")&&e.title.toLowerCase().includes("domain")&&e.title!=="Divine Domain")
+                                      .map(e=>e.title)
+                                      .sort();
+ return (
+                                      <div style={{marginTop:8}}>
+                                        <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:4}}>Choose Domain</div>
+                                        <select className="ri-sel"
+ value={char.divineDomain||""}
+ onChange={e=>setF("divineDomain",e.target.value)}
+ style={{borderColor:"rgba(99,102,241,0.4)",color:char.divineDomain?"var(--accent)":"var(--muted)",width:"100%"}}>
+                                          <option value="">-- Choose a domain --</option>
+                                          {domains.map(d=><option key={d} value={d}>{d}</option>)}
+                                        </select>
+                                        {char.divineDomain&&(()=>{
+ const domEntry = libEntries.find(e=>e.title===char.divineDomain);
+ return domEntry&&(
+                                            <div style={{marginTop:8}}>
+                                              {domEntry.desc&&<div className="ft-lib-desc">{domEntry.desc}</div>}
+                                              {(()=>{
+ if(!domEntry.notes) return null;
+                                                // Extract domain spells sentence and render as purple tags
+ const spellMatch = domEntry.notes.match(/Domain Spells: (.+)/);
+ if(!spellMatch) return null;
+                                                // Parse "Spell A, Spell B (1st). Spell C, Spell D (3rd)." into tags
+ const spellGroups = spellMatch[1].split(/\(\d+[a-z]+\)\.?/).map(g=>g.trim()).filter(Boolean);
+ const levelMatches = [...spellMatch[1].matchAll(/\((\d+[a-z]+)\)/g)].map(m=>m[1]);
+                                                // Map spell level ordinal to min cleric level required
+ const spellLvlToClsLvl = {"1st":1,"2nd":2,"3rd":3,"4th":4,"5th":5,"6th":6,"7th":7,"8th":8,"9th":9};
+ const clsLvlNow = char.multiClassLevel > 0 && char.classLevel > 1 ? char.classLevel : char.level;
+ return (
+                                                  <><div style={{fontSize:10,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginTop:10,marginBottom:2}}>Spells Available</div>
+                                                  <div className="ft-cls-stat-row" style={{marginTop:0}}>
+                                                    {spellGroups.map((group,i)=>{
+ const spellLvl = levelMatches[i];
+ const minLvl = spellLvlToClsLvl[spellLvl] || 1;
+ if(clsLvlNow < minLvl) return null;
+ return group.split(",").map(s=>s.trim()).filter(Boolean).map((spell,j)=>(
+                                                        <span key={`${i}-${j}`} className="ft-cls-stat-tag">
+                                                          {spell}{spellLvl?` (${spellLvl})`:""}</span>
+                                                      ));
+                                                    })}
+                                                  </div></>
+                                                );
+                                              })()}
+                                              {domEntry.notes&&<NoteTags notes={domEntry.notes} traits={[]} hideAllTags/>}
+                                            </div>
+                                          );
+                                        })()}
+                                      </div>
+                                    );
+                                  })()}
+                                  {libFeat?.notes&&<NoteTags notes={libFeat.notes} traits={[]} exclude={["Domain Spells","Domains"]}/>}
+                                  {!libFeat&&det&&<div className="ft-lib-desc">{det}</div>}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()}
+
+                  {/* Multiclass card */}
+                  {char.multiClass&&char.multiClassLevel>0&&CLASSES[char.multiClass]&&(()=>{
+ const isOpen = openTrait==="mc";
+ const libMc = libEntries.find(e=>e.category==="Class"&&e.title===char.multiClass);
+ return (
+                      <div className="ft-card ft-card-race">
+                        <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(isOpen?null:"mc")}>
+                          <span>Multiclass - {char.multiClass} {char.multiClassLevel}</span>
+                          <span className="ft-hdr-chev">{isOpen?"▲":"▼"}</span>
+                        </div>
+                        {isOpen&&(
+                          <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                            {libMc?.desc&&<div className="ft-lib-desc">{libMc.desc}</div>}
+                            {libMc?.notes&&<NoteTags notes={libMc.notes} traits={[]} exclude={["Hit Die","Primary","Saves","Multiclass Prereq","Multiclass Gains","Spellcasting","Armor","Weapons","Weapon","Tools","Key Features"]}/>}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* Background card */}
+                  {char.background&&(()=>{
+ const bg = libEntries.find(e=>e.category==="Background"&&e.title===char.background);
+ const isOpen = openTrait==="bg";
+ return (
+                      <div className="ft-card ft-card-race">
+                        <div className="ft-lib-section-hdr ft-lib-section-hdr-btn"
+ onClick={()=>setOpenTrait(isOpen?null:"bg")}>
+                          <span>Background - {char.background}</span>
+                          <span className="ft-hdr-chev">{isOpen?"▲":"▼"}</span>
+                        </div>
+                        {isOpen&&bg&&(
+                          <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                            {bg.desc&&<div className="ft-lib-desc">{bg.desc}</div>}
+                            {bg.notes&&<NoteTags notes={bg.notes} traits={[]}/>}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                </div>)
+            }
+          </div>
+        );})()}
+
+        {/* ATTACKS */}
+        {tab==="spells" && (
+          <div className="panel">
+            {!cls?.spellcastingAbility
+              ? <Empty icon="✨" msg={char.charClass?`${char.charClass}s don't use a spell list.`:"Select a spellcasting class in the header."}/>
+              : (<>
+                  {/* Stats bar */}
+                  <Card>
+                    <div className="spell-stats">
+                      <div className="ss-cell"><div className="ss-val">{cls.spellcastingAbility}</div><div className="ss-lbl">Ability</div></div>
+                      <div className="ss-divider"/>
+                      <div className="ss-cell"><div className="ss-val">{fmt(spellMod)}</div><div className="ss-lbl">Atk Bonus</div></div>
+                      <div className="ss-divider"/>
+                      <div className="ss-cell"><div className="ss-val">{spellDC}</div><div className="ss-lbl">Save DC</div></div>
+                      <div className="ss-divider"/>
+                      <div className="ss-cell"><div className="ss-val">{(char.spellsKnown||[]).length}</div><div className="ss-lbl">Known</div></div>
+                    </div>
+                  </Card>
+
+                  {/* Spell slots */}
+                  {slots.length>0&&(
+                    <Card>
+                      <SecHead icon="◉" title="Spell Slots"/>
+                      <div className="slot-levels">
+                        {slots.map((total,i)=>(
+                          <div key={i} className="slot-row">
+                            <span className="slot-lvl">{i+1}</span>
+                            <div className="slot-pips">
+                              {Array.from({length:total},(_,j)=>(
+                                <div key={j}
+ className={`slot-pip ${j<((char.spellSlotsUsed||[])[i]||0)?"slot-used":""}`}
+ onClick={()=>setSlotUsed(i,j<((char.spellSlotsUsed||[])[i]||0)?((char.spellSlotsUsed||[])[i]||0)-1:j+1)}/>
+                              ))}
+                            </div>
+                            <span className="slot-rem">{total-((char.spellSlotsUsed||[])[i]||0)} left</span>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
+
+                  {/* Spell list tabs */}
+                  <div className="spell-tabs">
+                    {["cantrips",...spellLvls.filter(l=>l<=maxSlot).map(l=>`level${l}`)].map(sv=>{
+ const lbl = sv==="cantrips"?"Cantrips":`Level ${sv.replace("level","")}`;
+ return <button key={sv} className={`sp-tab ${spellView===sv?"sp-tab-on":""}`} onClick={()=>setSpellView(sv)}>{lbl}</button>;
+                    })}
+                  </div>
+
+                  {spellView==="cantrips"&&availSpells.cantrips&&(
+                    <div className="sp-grid">
+                      {availSpells.cantrips.map(s=>{
+ const isRacial = char.racialCantrip===s;
+ const isKnown  = (char.spellsKnown||[]).includes(s);
+ return (
+                          <div key={s}
+ className={`sp-item ${isKnown?"sp-on":""} ${isRacial?"sp-item-racial":""}`}
+ onClick={()=>tog("spellsKnown",s)}>
+                            <div className={`sp-dot ${isRacial?"sp-dot-racial":""}`}/>
+                            {s}
+                            {isRacial&&<span className="sp-racial-tag">racial</span>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {spellView!=="cantrips"&&(()=>{
+ const lvl = Number(spellView.replace("level",""));
+ const spells = availSpells[lvl]||[];
+ return (
+                      <div className="sp-grid">
+                        {spells.map(s=>{
+ const isDomain = domainSpellSet.has(s);
+ const isKnown = (char.spellsKnown||[]).includes(s);
+ return (
+                            <div key={s}
+ className={`sp-item ${isKnown?"sp-on":""} ${isDomain?"sp-item-domain":""}`}
+ onClick={()=>tog("spellsKnown",s)}>
+                              <div className={`sp-dot ${isDomain?"sp-dot-domain":""}`}/>{s}
+                              {isDomain&&<span className="sp-domain-tag">domain</span>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()}
+                </>)
+            }
+          </div>
+        )}
+
+        {/* GEAR */}
+        {tab==="gear" && (
+          <div className="panel">
+            <div className="card-wrap" style={{marginBottom:12,padding:0,overflow:"hidden"}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 14px",cursor:"pointer",background:"var(--surface)",borderBottom:openCurrency?"1px solid var(--divider)":"none"}}
+ onClick={()=>setOpenCurrency(o=>!o)}>
+                <div style={{display:"flex",alignItems:"center",gap:7}}>
+                  <span style={{fontSize:13}}>💰</span>
+                  <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Currency</span>
+                </div>
+                <span style={{fontSize:10,color:"var(--muted)"}}>{openCurrency?"▲":"▼"}</span>
+              </div>
+              {openCurrency&&<div style={{padding:"12px 14px"}}>
+              {(()=>{
+ const pp=Number(char.currency.PP)||0, gp=Number(char.currency.GP)||0;
+ const ep=Number(char.currency.EP)||0, sp=Number(char.currency.SP)||0;
+ const cp=Number(char.currency.CP)||0;
+ const totalCP = pp*1000 + gp*100 + ep*50 + sp*10 + cp;
+ const totals = {PP:Math.floor(totalCP/1000).toLocaleString(), GP:Math.floor(totalCP/100).toLocaleString(), EP:Math.floor(totalCP/50).toLocaleString(), SP:Math.floor(totalCP/10).toLocaleString(), CP:totalCP.toLocaleString()};
+ const colors = {PP:"#a78bfa", GP:"#f59e0b", EP:"#34d399", SP:"#94a3b8", CP:"#cd7f32"};
+ return (
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <div style={{flex:"1 1 0",minWidth:0}}>
+                      <div className="currency-grid">
+                        {CURRENCY.map(cur=>(
+                          <div key={cur} className="cur-cell">
+                            <input className="cur-in" type="text" inputMode="numeric"
+ value={curBuf[cur]!==undefined&&curBuf[cur]!==""?curBuf[cur]:(char.currency[cur]||0)}
+ onChange={e=>{
+ const v=e.target.value.replace(/[^0-9]/g,"");
+ setCurBuf(b=>({...b,[cur]:v}));
+ setCurrency(cur,Number(v)||0);
+                              }}
+ onFocus={e=>{setCurBuf(b=>({...b,[cur]:String(char.currency[cur]||0)}));e.target.select();}}
+ onBlur={e=>{setCurBuf(b=>({...b,[cur]:""}));setCurrency(cur,Number(e.target.value.replace(/[^0-9]/g,""))||0);}}/>
+                            <div className="cur-lbl" style={{color:colors[cur]}}>{cur}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="currency-grid" style={{marginTop:6}}>
+                        {CURRENCY.map(cur=>(
+                          <div key={cur} className="cur-cell" style={{padding:"3px 2px"}}>
+                            <div className="cur-in" style={{fontSize:11,fontWeight:600,color:colors[cur]}}>{totals[cur]}</div>
+                            <div className="cur-lbl" style={{color:"var(--muted)"}}>total</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Conversion calculator */}
+                    <div style={{borderLeft:"1px solid var(--divider)",paddingLeft:10,flexShrink:0,minWidth:150,display:"flex",flexDirection:"column",alignItems:"center"}}>
+                      <div className="conv-title" style={{marginBottom:5}}>Convert</div>
+                      {(()=>{
+ const amt = Number(char._convAmt)||0;
+ const from = char._convFrom||"GP";
+ const to   = char._convTo||"CP";
+ const rates = {PP:1000,GP:100,EP:50,SP:10,CP:1};
+ const result = Math.floor(amt * rates[from] / rates[to]);
+ return (
+                          <>
+                            <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:1}}>
+                              <div style={{display:"flex",gap:4,alignItems:"center",flex:1}}>
+                                <input type="number" min={0}
+ style={{width:60,fontSize:12,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 4px",textAlign:"center",outline:"none",color:"var(--text)"}}
+ value={char._convAmt||""} placeholder="0"
+ onChange={e=>setF("_convAmt",e.target.value)}/>
+                                <select className="hdr-field-in hdr-field-sel" style={{width:46,flexShrink:0,fontSize:10,padding:"2px 2px"}}
+ value={from} onChange={e=>setF("_convFrom",e.target.value)}>
+                                  {CURRENCY.map(cur=><option key={cur} value={cur}>{cur}</option>)}
+                                </select>
+                              </div>
+                              <span style={{fontSize:12,color:"var(--muted)",fontWeight:700,flexShrink:0}}>→</span>
+                            </div>
+                            <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:2}}>
+                              <div style={{display:"flex",gap:4,alignItems:"center",flex:1}}>
+                                <div style={{width:60,fontSize:12,fontFamily:"'DM Mono',monospace",fontWeight:800,background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 4px",textAlign:"center",color:colors[to]}}>
+                                  {amt>0?result.toLocaleString():"—"}
+                                </div>
+                                <select className="hdr-field-in hdr-field-sel" style={{width:46,flexShrink:0,fontSize:10,padding:"2px 2px"}}
+ value={to} onChange={e=>setF("_convTo",e.target.value)}>
+                                  {CURRENCY.map(cur=><option key={cur} value={cur}>{cur}</option>)}
+                                </select>
+                              </div>
+                              <span style={{fontSize:12,fontWeight:700,flexShrink:0,visibility:"hidden"}}>→</span>
+                            </div>
+                            <button
+ disabled={!amt||result<=0||from===to||(Number(char.currency[from])||0)<=0}
+ style={{width:"100%",padding:"4px 0",borderRadius:6,fontSize:11,fontWeight:700,background:(!amt||result<=0||from===to)?"var(--input)":"rgba(99,102,241,0.1)",border:"1px solid "+( (!amt||result<=0||from===to)?"var(--border)":"rgba(99,102,241,0.35)"),color:(!amt||result<=0||from===to)?"var(--muted)":"var(--accent)",cursor:(!amt||result<=0||from===to)?"default":"pointer",transition:"all .15s"}}
+ onClick={()=>{
+ if(!amt||result<=0||from===to||(Number(char.currency[from])||0)<=0) return;
+ setCharSaving(p=>{
+ const cur = {...(p.currency||{})};
+ cur[from] = Math.max(0,(Number(cur[from])||0) - amt);
+ cur[to]   = (Number(cur[to])||0) + result;
+ return {...p, currency:cur, _convAmt:""};
+                                });
+                              }}>
+                              Convert
+                            </button>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                );
+              })()}
+              </div>}
+            </div>
+            <div style={{marginBottom:4}}>
+              <div style={{display:"flex",alignItems:"center",gap:7,margin:"12px 0 8px",cursor:"pointer"}} onClick={()=>setOpenDefensesSection(o=>!o)}>
+                <span style={{fontSize:13,color:"var(--accent)"}}>🛡</span>
+                <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Defenses</span>
+                <div style={{flex:1,height:1,background:"var(--divider)"}}/>
+                <span style={{fontSize:10,color:"var(--muted)"}}>{openDefensesSection?"▲":"▼"}</span>
+              </div>
+              {openDefensesSection&&<div>
+                {/* Armor */}
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",padding:"6px 10px",gap:8,background:"var(--surface)",borderBottom:openArmor?"1px solid var(--divider)":"none",borderRadius:openArmor?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:5,cursor:"pointer",flex:1,minWidth:0}} onClick={()=>setOpenArmor(o=>!o)}>
+                      <span style={{fontSize:12,flexShrink:0}}>🥋</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flexShrink:0}}>Armor</span>
+                      {(()=>{const arAC=computeArmorAC(char.armorItems,char.abilities,libEntries);const shieldBonus=char.shield?2:0;const totalAC=arAC!=null?(arAC+shieldBonus):char.ac;return <span style={{fontSize:10,fontWeight:800,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.2)",borderRadius:4,padding:"0 5px",flexShrink:0}}>AC {totalAC}</span>;})()}
+                    </div>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer",flexShrink:0}}
+ onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,armorItems:[...(p.armorItems||[]),""],openArmor:true}));setOpenArmor(true);}}>+ Add</button>
+                    <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer",flexShrink:0}} onClick={()=>setOpenArmor(o=>!o)}>{openArmor?"▲":"▼"}</span>
+                  </div>
+                  {openArmor&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {(char.armorItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No armor added. Tap + Add to add armor.</div>}
+                    {(char.armorItems||[]).map((item,idx)=>{
+ const name = typeof item==="object"?item.name:item;
+ const equipped = typeof item==="object"?item.equipped:false;
+ const updateItem = (patch) => setCharSaving(p=>{
+ const a=[...(p.armorItems||[])];
+ a[idx]={name,equipped,...(typeof a[idx]==="object"?a[idx]:{}), ...patch};
+ const anyEquipped = a.some(i=>typeof i==="object"?i.equipped&&i.name:false);
+ const newAC = anyEquipped ? p.ac : (10 + abilityMod((p.abilities?.DEX||10) + (SPECIES[p.species]?.abilityBonus?.DEX||0)));
+ return {...p,armorItems:a,armor:a.filter(i=>(typeof i==="object"?i.equipped&&i.name:i)).map(i=>typeof i==="object"?i.name:i).join(", "),ac:anyEquipped?p.ac:newAC};
+                      });
+ return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button
+ title={equipped?"Equipped":"Not equipped"}
+ style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+ background:equipped?"rgba(34,197,94,0.12)":"var(--input)",
+ borderColor:equipped?"rgba(34,197,94,0.4)":"var(--border)",
+ color:equipped?"var(--green)":"var(--muted)"}}
+ onClick={()=>updateItem({equipped:!equipped})}>EQ</button>
+                              {(()=>{
+                            const arEntryAT = name ? libEntries.find(e=>e.title===name&&e.category==="Armor") : null;
+                            const needsAttune = arEntryAT && (arEntryAT.notes||"").toLowerCase().includes("attune: yes");
+                            if(!needsAttune) return null;
+                            const attuned = typeof item==="object" ? item.attuned : false;
+                            return <button
+                              title={attuned?"Attuned":"Not attuned"}
+                              style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                                background:attuned?"rgba(220,38,38,0.12)":"var(--input)",
+                                borderColor:attuned?"rgba(220,38,38,0.4)":"var(--border)",
+                                color:attuned?"#dc2626":"var(--muted)"}}
+                              onClick={()=>updateItem({attuned:!attuned})}>AT</button>;
+                          })()}
+                              {(()=>{
+                            // Proficiency warning
+ const arEntry = name ? libEntries.find(e=>e.title===name&&e.category==="Armor") : null;
+ const arType = arEntry?.notes?.match(/Type: (\w+)/)?.[1]?.toLowerCase()||"";
+ const profList = (cls?.armorProf||[]).map(p=>p.toLowerCase());
+ const isProficient = !name || !arType ||
+ profList.some(p=>p.includes(arType)||p.includes("all")||
+                                (arType==="light"&&(p.includes("light")||p.includes("medium")||p.includes("heavy")||p.includes("all")))||
+                                (arType==="medium"&&(p.includes("medium")||p.includes("heavy")||p.includes("all")))||
+                                (arType==="heavy"&&(p.includes("heavy")||p.includes("all"))));
+ return (
+                              <>
+                                <select className="gi gi-sm" style={{flex:1,color:name?"var(--text)":"var(--subtle)",borderColor:name&&!isProficient?"var(--red)":"",outline:"none"}}
+ value={name||""}
+ onChange={e=>updateItem({name:e.target.value})}>
+                                  <option value="">— Pick armor —</option>
+                                  {libEntries.filter(e=>e.category==="Armor").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                                    <option key={e.id} value={e.title}>{e.title}{e.notes?.match(/AC: ([^.]+)/)?` (${e.notes.match(/AC: ([^.]+)/)[1]})`:"" }</option>
+                                  ))}
+                                </select>
+                                {name&&(typeof item==="object"&&item.source==="class")&&<span style={{fontSize:9,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",borderRadius:4,padding:"1px 4px",flexShrink:0}}>class</span>}
+                          {name&&!isProficient&&<span style={{fontSize:9,color:"var(--red)",fontWeight:700,flexShrink:0,whiteSpace:"nowrap"}}>⚠ Not proficient</span>}
+                              </>
+                            );
+                          })()}
+                          {name&&(()=>{
+ const infoEntry = libEntries.find(e=>e.title===name&&e.category==="Armor");
+ if(!infoEntry) return null;
+ const infoKey = "_ai_"+idx;
+ return (
+                              <div style={{position:"relative",flexShrink:0}}>
+                                <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                                {wearingInfo===infoKey&&(
+                                  <>
+                                    <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                    <SmartPopup desc={[infoEntry.desc,infoEntry.notes].filter(Boolean).join(" | ")}/>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })()}
+                          <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.armorItems||[])];a.splice(idx,1);return {...p,armorItems:a,armor:a.filter(i=>(typeof i==="object"?i.equipped&&i.name:i)).map(i=>typeof i==="object"?i.name:i).join(", ")};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+                {/* Shield */}
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:openShield?"1px solid var(--divider)":"none",borderRadius:openShield?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenShield(o=>!o)}>
+                      <span style={{fontSize:12}}>🛡</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Shield</span>
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,shieldItems:[...(p.shieldItems||[]),{name:"",equipped:false}]}));setOpenShield(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenShield(o=>!o)}>{openShield?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {openShield&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {(char.shieldItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No shield added. Tap + Add to add a shield.</div>}
+                    {(char.shieldItems||[]).map((item,idx)=>{
+ const name = typeof item==="object"?item.name:item;
+ const equipped = typeof item==="object"?item.equipped:false;
+ const updateShield = (patch) => setCharSaving(p=>{
+ const a=[...(p.shieldItems||[])];
+ a[idx]={name,equipped,...(typeof a[idx]==="object"?a[idx]:{}), ...patch};
+ const hasEquipped = a.some(i=>typeof i==="object"?i.equipped:false);
+ return {...p,shieldItems:a,shield:hasEquipped};
+                      });
+ const isProficient = (cls?.armorProf||[]).some(p=>p.toLowerCase().includes("shield"));
+ return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={equipped?"Equipped":"Not equipped"}
+ style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+ background:equipped?"rgba(34,197,94,0.12)":"var(--input)",
+ borderColor:equipped?"rgba(34,197,94,0.4)":"var(--border)",
+ color:equipped?"var(--green)":"var(--muted)"}}
+ onClick={()=>updateShield({equipped:!equipped})}>EQ</button>
+                          {(()=>{
+                            const shEntryAT = name ? libEntries.find(e=>e.title===name&&(e.category==="Shield"||e.category==="Armor")) : null;
+                            const needsAttune = shEntryAT && (shEntryAT.notes||"").toLowerCase().includes("attune: yes");
+                            if(!needsAttune) return null;
+                            const attuned = typeof item==="object" ? item.attuned : false;
+                            return <button
+                              title={attuned?"Attuned":"Not attuned"}
+                              style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                                background:attuned?"rgba(220,38,38,0.12)":"var(--input)",
+                                borderColor:attuned?"rgba(220,38,38,0.4)":"var(--border)",
+                                color:attuned?"#dc2626":"var(--muted)"}}
+                              onClick={()=>updateShield({attuned:!attuned})}>AT</button>;
+                          })()}
+                          <select className="gi gi-sm" style={{flex:1,color:name?"var(--text)":"var(--subtle)",borderColor:name&&!isProficient?"var(--red)":""}}
+ value={name||""}
+ onChange={e=>updateShield({name:e.target.value})}>
+                            <option value="">— Pick shield —</option>
+                            {libEntries.filter(e=>e.category==="Shield").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                              <option key={e.id} value={e.title}>{e.title}</option>
+                            ))}
+                            <option value="Shield">Shield (+2 AC)</option>
+                            <option value="Shield +1">Shield +1 (+3 AC)</option>
+                            <option value="Shield +2">Shield +2 (+4 AC)</option>
+                            <option value="Shield +3">Shield +3 (+5 AC)</option>
+                          </select>
+                          {name&&(typeof item==="object"&&item.source==="class")&&<span style={{fontSize:9,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",borderRadius:4,padding:"1px 4px",flexShrink:0}}>class</span>}
+                          {name&&!isProficient&&<span style={{fontSize:9,color:"var(--red)",fontWeight:700,flexShrink:0,whiteSpace:"nowrap"}}>⚠ Not proficient</span>}
+                          {name&&(()=>{
+ const infoEntry = libEntries.find(e=>e.title===name&&(e.category==="Shield"||e.category==="Armor"));
+ if(!infoEntry) return null;
+ const infoKey = "_si_"+idx;
+ return (
+                              <div style={{position:"relative",flexShrink:0}}>
+                                <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                                {wearingInfo===infoKey&&(
+                                  <>
+                                    <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                    <SmartPopup desc={[infoEntry.desc,infoEntry.notes].filter(Boolean).join(" | ")}/>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })()}
+                          <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.shieldItems||[])];a.splice(idx,1);return {...p,shieldItems:a,shield:a.some(i=>typeof i==="object"?i.equipped:false)};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+                {/* Weapons */}
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",padding:"6px 10px",gap:8,background:"var(--surface)",borderBottom:openGearWeapons?"1px solid var(--divider)":"none",borderRadius:openGearWeapons?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:5,cursor:"pointer",flex:1,minWidth:0}} onClick={()=>setOpenGearWeapons(o=>!o)}>
+                      <span style={{fontSize:12,flexShrink:0}}>⚔️</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flexShrink:0}}>Weapons</span>
+                    </div>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer",flexShrink:0}}
+ onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,weaponItems:[...(p.weaponItems||[]),{name:"",equipped:false}]}));setOpenGearWeapons(true);}}>+ Add</button>
+                    <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer",flexShrink:0}} onClick={()=>setOpenGearWeapons(o=>!o)}>{openGearWeapons?"▲":"▼"}</span>
+                  </div>
+                  {openGearWeapons&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {(char.weaponItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No weapons added. Tap + Add to add a weapon.</div>}
+                    {(char.weaponItems||[]).map((item,idx)=>{
+ const name = typeof item==="object"?item.name:item;
+ const equipped = typeof item==="object"?item.equipped:false;
+ const ammoCount = typeof item==="object"?(item.ammoCount??null):null;
+ const updateWeapon = (patch) => setCharSaving(p=>{
+ const a=[...(p.weaponItems||[])];
+ a[idx]={name,equipped,...(typeof a[idx]==="object"?a[idx]:{}), ...patch};
+ return {...p,weaponItems:a};
+                      });
+ const wLibEntry = name?libEntries.find(e=>e.title===name&&e.category==="Equipment"):null;
+ const isAmmo = wLibEntry&&(wLibEntry.tags||"").toLowerCase().includes("ammunition");
+ const defaultCount = isAmmo?(()=>{ const m=name.match(/\((\d+)\)/); return m?parseInt(m[1]):20; })():null;
+ const racialWpnProfs = [
+ ...(RACE_WEAPON_PROFS[char.species]||[]),
+ ...(RACE_WEAPON_PROFS[char.subrace]||[]),
+].map(w=>w.toLowerCase());
+ const isProficient = !name || (cls?.weaponProf||[]).some(p=>{
+ const pl=p.toLowerCase();
+ const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");
+ const wTags=(entry?.tags||"").toLowerCase();
+ return pl.includes("simple")&&wTags.includes("simple")||pl.includes("martial")&&wTags.includes("martial")||pl.includes(name.toLowerCase());
+                      }) || racialWpnProfs.some(rp=>rp===name.toLowerCase()||name.toLowerCase().includes(rp)||rp.includes(name.toLowerCase()));
+ return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          {!isAmmo&&<button title={equipped?"Equipped":"Not equipped"}
+ style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+ background:equipped?"rgba(34,197,94,0.12)":"var(--input)",
+ borderColor:equipped?"rgba(34,197,94,0.4)":"var(--border)",
+ color:equipped?"var(--green)":"var(--muted)"}}
+ onClick={()=>updateWeapon({equipped:!equipped})}>EQ</button>}
+                          {!isAmmo&&(()=>{
+ const hand = typeof item==="object"?(item.hand||""):"";
+ const nextHand = hand===""?"RH":hand==="RH"?"LH":hand==="LH"?"BH":"";
+ const handColor = hand==="RH"?"var(--accent)":hand==="LH"?"#a855f7":hand==="BH"?"var(--amber)":"var(--muted)";
+ return (
+                              <button title={hand?"Hand: "+hand+" — tap to cycle":"No hand set — tap to cycle"}
+ style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+ background:hand?"rgba(99,102,241,0.07)":"var(--input)",
+ borderColor:hand?"rgba(99,102,241,0.3)":"var(--border)",
+ color:handColor,minWidth:24,textAlign:"center"}}
+ onClick={()=>updateWeapon({hand:nextHand})}>{hand||"—"}</button>
+                            );
+                          })()}
+                          {(()=>{
+                            const wFilter = typeof item==="object"?item.filter:"";
+                            const ammoOpts = libEntries.filter(e=>e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition")).sort((a,b)=>a.title.localeCompare(b.title));
+                            const weaponOpts = libEntries.filter(e=>e.category==="Weapon"&&(
+                              !wFilter ||
+                              (wFilter==="simple"&&(e.tags||"").toLowerCase().includes("simple")) ||
+                              (wFilter==="martial"&&(e.tags||"").toLowerCase().includes("martial"))
+                            )).sort((a,b)=>a.title.localeCompare(b.title));
+                            const placeholder = wFilter==="simple"?"— Pick simple weapon —":wFilter==="martial"?"— Pick martial weapon —":"— Pick weapon —";
+                            return <select className="gi gi-sm" style={{flex:"2 1 0",minWidth:0,color:name?"var(--text)":"var(--subtle)",borderColor:name&&!isProficient?"var(--red)":""}}
+ value={name||""}
+ onChange={e=>{
+ const wEntry = libEntries.find(en=>en.title===e.target.value&&(en.category==="Weapon"||en.category==="Equipment"));
+ const dmg = wEntry?.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
+ const wType = (wEntry?.tags||"").toLowerCase().includes("finesse")?"DEX/STR":(wEntry?.tags||"").toLowerCase().includes("ranged")?"DEX":"STR";
+ const isTwoHanded = (wEntry?.notes||"").toLowerCase().includes("two-handed");
+ updateWeapon({name:e.target.value, damage:dmg, abilityMod:wType, weaponType:wEntry?.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||"", ...(isTwoHanded?{hand:"BH"}:{})});
+                            }}>
+                              <option value="">{placeholder}</option>
+                              <optgroup label="Weapons">
+                              {weaponOpts.map(e=>(
+                                <option key={e.id} value={e.title}>{e.title}</option>
+                              ))}
+                              </optgroup>
+                              {ammoOpts.length>0&&<optgroup label="Ammunition">
+                              {ammoOpts.map(e=>(
+                                <option key={e.id} value={e.title}>{e.title}</option>
+                              ))}
+                              </optgroup>}
+                            </select>;
+                          })()}
+                          {name&&isAmmo&&(()=>{
+                            const cnt = ammoCount!==null?ammoCount:defaultCount;
+                            return (
+                              <div style={{display:"flex",alignItems:"center",gap:3,flexShrink:0}}>
+                                <button style={{width:22,height:22,borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",fontSize:14,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1}}
+                                  onClick={()=>updateWeapon({ammoCount:Math.max(0,(cnt||0)-1)})}>−</button>
+                                <span style={{fontFamily:"'DM Mono',monospace",fontSize:13,fontWeight:800,color:"var(--text)",minWidth:28,textAlign:"center"}}>{cnt!==null?cnt:defaultCount}</span>
+                                <button style={{width:22,height:22,borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",fontSize:14,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1}}
+                                  onClick={()=>updateWeapon({ammoCount:(cnt||0)+1})}>+</button>
+                              </div>
+                            );
+                          })()}
+                          {name&&!isAmmo&&<>
+                            {(()=>{
+ const wAbil = (typeof item==="object"?item.abilityMod:"")||"STR";
+ const wEntry2 = name?libEntries.find(e=>e.title===name&&e.category==="Weapon"):null;
+ const tags2 = (wEntry2?.tags||"").toLowerCase();
+ const isFinesse = tags2.includes("finesse");
+ const isRanged = tags2.includes("ranged");
+ const opts = isFinesse
+                                ? [{v:"STR",l:"STR"},{v:"DEX",l:"DEX"}]
+                                : isRanged
+                                  ? [{v:"DEX",l:"DEX"}]
+                                  : [{v:"STR",l:"STR"}];
+ const bonus = wAbil==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[wAbil]||10);
+ return (
+                                <div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
+                                  <select className="gi gi-sm" style={{width:44,flexShrink:0,fontSize:10,padding:"2px 2px",color:"var(--accent)"}}
+ value={wAbil}
+ onChange={e=>updateWeapon({abilityMod:e.target.value})}>
+                                    {opts.map(o=><option key={o.v} value={o.v}>{o.l}</option>)}
+                                  </select>
+                                  <span style={{fontSize:10,fontWeight:700,color:"var(--accent)",fontFamily:"'DM Mono',monospace",flexShrink:0}}>{bonus+pb>=0?"+":""}{bonus+pb}</span>
+                                </div>
+                              );
+                            })()}
+                            {(()=>{
+ const wEntry = name?libEntries.find(e=>e.title===name&&e.category==="Weapon"):null;
+ const dmgRaw = (wEntry?.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"");
+ const dmgParts = dmgRaw.match(/^(\S+)\s+(.+)$/);
+ const dmgDice = dmgParts?dmgParts[1]:dmgRaw;
+ const dmgTypeRaw = dmgParts?dmgParts[2]:"";
+ const dmgType = dmgTypeRaw
+                                .replace(/\bslash\b/i,"slashing").replace(/\bslas\b/i,"slashing")
+                                .replace(/\bpierc\b/i,"piercing").replace(/\bpier\b/i,"piercing")
+                                .replace(/\bbludg\b/i,"bludgeoning").replace(/\bblud\b/i,"bludgeoning")
+                                .replace(/\bthund\b/i,"thunder").replace(/\bnecr\b/i,"necrotic")
+                                .replace(/\bpois\b/i,"poison").replace(/\bpsych\b/i,"psychic")
+                                .replace(/\bradiant\b/i,"radiant").replace(/\bacid\b/i,"acid");
+ const rawType = wEntry?.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||"";
+ const typeVal = rawType.toLowerCase().includes("ranged")?"Ranged":rawType?"Melee":"";
+ return (
+                                <>
+                                  <span style={{flexShrink:0,fontSize:10,fontWeight:700,color:"var(--text)",background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 5px",whiteSpace:"nowrap",fontFamily:"'DM Mono',monospace"}}>{dmgDice||"—"}</span>
+                                  <span style={{flex:"0 0 72px",fontSize:10,color:"var(--muted)",background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 3px",whiteSpace:"nowrap",textAlign:"center",overflow:"hidden",textOverflow:"clip"}}>{dmgType||"—"}</span>
+                                  <span style={{flexShrink:0,fontSize:10,color:"var(--amber)",background:"rgba(245,158,11,0.08)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:6,padding:"2px 5px",whiteSpace:"nowrap"}}>{typeVal||"—"}</span>
+                                </>
+                              );
+                            })()}
+                          </>}
+                          {name&&(typeof item==="object"&&item.source==="class")&&<span style={{fontSize:9,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",borderRadius:4,padding:"1px 4px",flexShrink:0}}>class</span>}
+                          {name&&!isAmmo&&!isProficient&&<span style={{fontSize:9,color:"var(--red)",fontWeight:700,flexShrink:0,whiteSpace:"nowrap"}}>⚠ Not proficient</span>}
+                          {name&&(()=>{
+ const infoEntry = libEntries.find(e=>e.title===name&&(e.category==="Weapon"||e.category==="Equipment"));
+ if(!infoEntry) return null;
+ const infoKey = "_wi_"+idx;
+ return (
+                              <div style={{position:"relative",flexShrink:0}}>
+                                <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                                {wearingInfo===infoKey&&(
+                                  <>
+                                    <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                    <SmartPopup desc={[infoEntry.desc,infoEntry.notes].filter(Boolean).join(" | ")}/>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })()}
+                          <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.weaponItems||[])];a.splice(idx,1);return {...p,weaponItems:a};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              </div>}
+            </div>
+            <div style={{marginBottom:4}}>
+              <div style={{display:"flex",alignItems:"center",gap:7,margin:"12px 0 8px",cursor:"pointer"}} onClick={()=>setOpenWearingSection(o=>!o)}>
+                <span style={{fontSize:13,color:"var(--accent)"}}>👘</span>
+                <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Wearing</span>
+                <div style={{flex:1,height:1,background:"var(--divider)"}}/>
+                <span style={{fontSize:10,color:"var(--muted)"}}>{openWearingSection?"▲":"▼"}</span>
+              </div>
+              {openWearingSection&&<div>
+            {(()=>{
+              const open_wearing_head = openWearing_wearing_head;
+              const items_wearing_head = Array.isArray(char["wearing_head"]) ? char["wearing_head"] : [];
+              const opts_wearing_head = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("helm")||e.title.toLowerCase().includes("hat")||e.title.toLowerCase().includes("head")||e.title.toLowerCase().includes("crown")||e.title.toLowerCase().includes("circlet")||e.title.toLowerCase().includes("hood")||(e.title.toLowerCase().includes("eye")&&!e.title.toLowerCase().includes("robe"))||e.title.toLowerCase().includes("goggle"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_head?"1px solid var(--divider)":"none",borderRadius:open_wearing_head?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_head(o=>!o)}>
+                      <span style={{fontSize:12}}>🧑</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Head</span>
+                      {items_wearing_head.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_head.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_head",[...items_wearing_head,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_head(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_head(o=>!o)}>{open_wearing_head?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_head&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_head.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_head.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_head"])?p["wearing_head"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_head":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_head"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_head.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_head"])?p["wearing_head"]: [])];arr.splice(idx,1);return {...p,"wearing_head":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_neck = openWearing_wearing_neck;
+              const items_wearing_neck = Array.isArray(char["wearing_neck"]) ? char["wearing_neck"] : [];
+              const opts_wearing_neck = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("necklace")||e.title.toLowerCase().includes("amulet")||e.title.toLowerCase().includes("neck")||e.title.toLowerCase().includes("pendant")||e.title.toLowerCase().includes("medallion")||e.title.toLowerCase().includes("periapt")||e.title.toLowerCase().includes("scarab"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_neck?"1px solid var(--divider)":"none",borderRadius:open_wearing_neck?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_neck(o=>!o)}>
+                      <span style={{fontSize:12}}>📿</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Neck</span>
+                      {items_wearing_neck.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_neck.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_neck",[...items_wearing_neck,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_neck(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_neck(o=>!o)}>{open_wearing_neck?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_neck&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_neck.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_neck.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_neck"])?p["wearing_neck"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_neck":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_neck"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_neck.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_neck"])?p["wearing_neck"]: [])];arr.splice(idx,1);return {...p,"wearing_neck":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_shoulders = openWearing_wearing_shoulders;
+              const items_wearing_shoulders = Array.isArray(char["wearing_shoulders"]) ? char["wearing_shoulders"] : [];
+              const opts_wearing_shoulders = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("shoulder")||e.title.toLowerCase().includes("mantle")||e.title.toLowerCase().includes("pauldron")||e.title.toLowerCase().includes("cloak")||e.title.toLowerCase().includes("cape"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_shoulders?"1px solid var(--divider)":"none",borderRadius:open_wearing_shoulders?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_shoulders(o=>!o)}>
+                      <span style={{fontSize:12}}>🧥</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Shoulders</span>
+                      {items_wearing_shoulders.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_shoulders.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_shoulders",[...items_wearing_shoulders,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_shoulders(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_shoulders(o=>!o)}>{open_wearing_shoulders?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_shoulders&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_shoulders.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_shoulders.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_shoulders"])?p["wearing_shoulders"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_shoulders":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_shoulders"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_shoulders.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_shoulders"])?p["wearing_shoulders"]: [])];arr.splice(idx,1);return {...p,"wearing_shoulders":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_body = openWearing_wearing_body;
+              const items_wearing_body = Array.isArray(char["wearing_body"]) ? char["wearing_body"] : [];
+              const opts_wearing_body = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("robe"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_body?"1px solid var(--divider)":"none",borderRadius:open_wearing_body?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_body(o=>!o)}>
+                      <span style={{fontSize:12}}>👘</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Body</span>
+                      {items_wearing_body.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_body.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_body",[...items_wearing_body,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_body(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_body(o=>!o)}>{open_wearing_body?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_body&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_body.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_body.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_body"])?p["wearing_body"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_body":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_body"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_body.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_body"])?p["wearing_body"]: [])];arr.splice(idx,1);return {...p,"wearing_body":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_skin = openWearing_wearing_skin;
+              const items_wearing_skin = Array.isArray(char["wearing_skin"]) ? char["wearing_skin"] : [];
+              const opts_wearing_skin = libEntries.filter(e=>e.category==="Magic Item"&&e.tags&&e.tags.toLowerCase().includes("tattoo")).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_skin?"1px solid var(--divider)":"none",borderRadius:open_wearing_skin?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_skin(o=>!o)}>
+                      <span style={{fontSize:12}}>🩹</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Skin</span>
+                      {items_wearing_skin.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_skin.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_skin",[...items_wearing_skin,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_skin(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_skin(o=>!o)}>{open_wearing_skin?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_skin&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_skin.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No tattoos. Tap + Add.</div>}
+                    {items_wearing_skin.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_skin"])?p["wearing_skin"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,...patch};
+                        return {...p,"wearing_skin":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_skin"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Active":"Inactive"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_skin.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          <input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_skin"])?p["wearing_skin"]: [])];arr.splice(idx,1);return {...p,"wearing_skin":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_arms = openWearing_wearing_arms;
+              const items_wearing_arms = Array.isArray(char["wearing_arms"]) ? char["wearing_arms"] : [];
+              const opts_wearing_arms = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&((/\barm\b/i.test(e.title))||e.title.toLowerCase().includes("bracer")||e.title.toLowerCase().includes("sleeve")||e.title.toLowerCase().includes("vambrace"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_arms?"1px solid var(--divider)":"none",borderRadius:open_wearing_arms?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_arms(o=>!o)}>
+                      <span style={{fontSize:12}}>💪</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Arms</span>
+                      {items_wearing_arms.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_arms.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_arms",[...items_wearing_arms,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_arms(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_arms(o=>!o)}>{open_wearing_arms?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_arms&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_arms.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_arms.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_arms"])?p["wearing_arms"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_arms":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_arms"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                            {(()=>{
+                              const handKey = "wearing_arms_hand";
+                              const handVal = char[handKey]||"";
+                              const hands = ["","RH","LH","BH"];
+                              const handColors = {RH:"var(--accent)",LH:"#a855f7",BH:"var(--amber)"};
+                              return <button title={handVal||"No hand"}
+                                style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",minWidth:28,
+                                  background:handVal?"rgba(99,102,241,0.08)":"var(--input)",
+                                  borderColor:handVal?"rgba(99,102,241,0.3)":"var(--border)",
+                                  color:handVal?handColors[handVal]:"var(--muted)"}}
+                                onClick={()=>setF(handKey,hands[(hands.indexOf(handVal)+1)%hands.length])}>{handVal||"—"}</button>;
+                            })()}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_arms.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_arms"])?p["wearing_arms"]: [])];arr.splice(idx,1);return {...p,"wearing_arms":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_hands = openWearing_wearing_hands;
+              const items_wearing_hands = Array.isArray(char["wearing_hands"]) ? char["wearing_hands"] : [];
+              const opts_wearing_hands = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("glove")||e.title.toLowerCase().includes("gauntlet")||(/\bhand\b/i.test(e.title))||(/\bring\b/i.test(e.title))||e.title.toLowerCase().includes("mitten"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_hands?"1px solid var(--divider)":"none",borderRadius:open_wearing_hands?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_hands(o=>!o)}>
+                      <span style={{fontSize:12}}>🖐</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Hands</span>
+                      {items_wearing_hands.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_hands.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_hands",[...items_wearing_hands,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_hands(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_hands(o=>!o)}>{open_wearing_hands?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_hands&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_hands.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_hands.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_hands"])?p["wearing_hands"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_hands":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_hands"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                            {(()=>{
+                              const handKey = "wearing_hands_hand";
+                              const handVal = char[handKey]||"";
+                              const hands = ["","RH","LH","BH"];
+                              const handColors = {RH:"var(--accent)",LH:"#a855f7",BH:"var(--amber)"};
+                              return <button title={handVal||"No hand"}
+                                style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",minWidth:28,
+                                  background:handVal?"rgba(99,102,241,0.08)":"var(--input)",
+                                  borderColor:handVal?"rgba(99,102,241,0.3)":"var(--border)",
+                                  color:handVal?handColors[handVal]:"var(--muted)"}}
+                                onClick={()=>setF(handKey,hands[(hands.indexOf(handVal)+1)%hands.length])}>{handVal||"—"}</button>;
+                            })()}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_hands.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_hands"])?p["wearing_hands"]: [])];arr.splice(idx,1);return {...p,"wearing_hands":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_hips = openWearing_wearing_hips;
+              const items_wearing_hips = Array.isArray(char["wearing_hips"]) ? char["wearing_hips"] : [];
+              const opts_wearing_hips = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("belt")||e.title.toLowerCase().includes("girdle")||(/\bhip\b/i.test(e.title)))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_hips?"1px solid var(--divider)":"none",borderRadius:open_wearing_hips?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_hips(o=>!o)}>
+                      <span style={{fontSize:12}}>👖</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Hips</span>
+                      {items_wearing_hips.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_hips.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_hips",[...items_wearing_hips,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_hips(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_hips(o=>!o)}>{open_wearing_hips?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_hips&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_hips.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_hips.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_hips"])?p["wearing_hips"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_hips":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_hips"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_hips.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_hips"])?p["wearing_hips"]: [])];arr.splice(idx,1);return {...p,"wearing_hips":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+            {(()=>{
+              const open_wearing_feet = openWearing_wearing_feet;
+              const items_wearing_feet = Array.isArray(char["wearing_feet"]) ? char["wearing_feet"] : [];
+              const opts_wearing_feet = libEntries.filter(e=>(e.category==="Magic Item"||e.category==="Jewelry")&&(e.title.toLowerCase().includes("boot")||e.title.toLowerCase().includes("slipper")||(/\bshoe\b/i.test(e.title))||e.title.toLowerCase().includes("sandal"))).sort((a,b)=>a.title.localeCompare(b.title));
+              return (
+                <div className="card-wrap" style={{marginBottom:8,padding:0,overflow:"hidden"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",background:"var(--surface)",borderBottom:open_wearing_feet?"1px solid var(--divider)":"none",borderRadius:open_wearing_feet?"8px 8px 0 0":"8px"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",flex:1}} onClick={()=>setOpenWearing_wearing_feet(o=>!o)}>
+                      <span style={{fontSize:12}}>🦶</span>
+                      <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Feet</span>
+                      {items_wearing_feet.length>0&&<span style={{fontSize:9,color:"var(--accent)",background:"rgba(99,102,241,0.1)",borderRadius:10,padding:"0 5px"}}>{items_wearing_feet.length}</span>}
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:6}}>
+                      <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+                        onClick={e=>{e.stopPropagation();setF("wearing_feet",[...items_wearing_feet,{name:"",eq:false,at:false,hand:""}]);setOpenWearing_wearing_feet(true);}}>+ Add</button>
+                      <span style={{fontSize:10,color:"var(--muted)",cursor:"pointer"}} onClick={()=>setOpenWearing_wearing_feet(o=>!o)}>{open_wearing_feet?"▲":"▼"}</span>
+                    </div>
+                  </div>
+                  {open_wearing_feet&&<div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:5}}>
+                    {items_wearing_feet.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Nothing worn. Tap + Add.</div>}
+                    {items_wearing_feet.map((item,idx)=>{
+                      const itemName = typeof item==="object"?item.name:item;
+                      const itemEq = typeof item==="object"?item.eq:false;
+                      const itemAt = typeof item==="object"?item.at:false;
+                      const itemHand = typeof item==="object"?item.hand:"";
+                      const updateItem = (patch)=>setCharSaving(p=>{
+                        const arr=[...(Array.isArray(p["wearing_feet"])?p["wearing_feet"]: [])];
+                        arr[idx]={name:itemName,eq:itemEq,at:itemAt,hand:itemHand,...patch};
+                        return {...p,"wearing_feet":arr};
+                      });
+                      const entry = itemName?libEntries.find(e=>e.title===itemName&&(e.category==="Magic Item"||e.category==="Jewelry")):null;
+                      const needsAttune = entry&&(entry.notes||"").toLowerCase().includes("attune: yes");
+                      const infoKey = "wearing_feet"+"-"+idx;
+                      return (
+                        <div key={idx} style={{display:"flex",gap:4,alignItems:"center"}}>
+                          <button title={itemEq?"Equipped":"Not equipped"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemEq?"rgba(34,197,94,0.12)":"var(--input)",
+                              borderColor:itemEq?"rgba(34,197,94,0.4)":"var(--border)",
+                              color:itemEq?"var(--green)":"var(--muted)"}}
+                            onClick={()=>updateItem({eq:!itemEq})}>EQ</button>
+                          {needsAttune&&<button title={itemAt?"Attuned":"Not attuned"}
+                            style={{fontSize:9,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+                              background:itemAt?"rgba(220,38,38,0.12)":"var(--input)",
+                              borderColor:itemAt?"rgba(220,38,38,0.4)":"var(--border)",
+                              color:itemAt?"#dc2626":"var(--muted)"}}
+                            onClick={()=>updateItem({at:!itemAt})}>AT</button>}
+                          <select className="gi gi-sm" style={{flex:"0 0 45%",minWidth:0,color:itemName?"var(--text)":"var(--subtle)"}}
+                            value={itemName||""} onChange={e=>updateItem({name:e.target.value})}>
+                            <option value="">— None —</option>
+                            {opts_wearing_feet.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                          </select>
+                          {itemName&&<input
+                            className="gi gi-sm"
+                            style={{flex:1,fontSize:11,minWidth:40}}
+                            placeholder="Notes..."
+                            value={item.notes||""}
+                            onChange={e=>updateItem({notes:e.target.value})}
+                          />}
+                          {itemName&&entry&&(
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                onClick={()=>setWearingInfo(wearingInfo===infoKey?null:infoKey)}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[entry.desc,entry.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          )}
+                          <button style={{fontSize:9,padding:"2px 6px",borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",flexShrink:0}}
+                            onClick={()=>setCharSaving(p=>{const arr=[...(Array.isArray(p["wearing_feet"])?p["wearing_feet"]: [])];arr.splice(idx,1);return {...p,"wearing_feet":arr};})}>✕</button>
+                        </div>
+                      );
+                    })}
+                  </div>}
+                </div>
+              );
+            })()}
+
+              </div>}
+            </div>
+            <SecHead icon="🎒" title="Inventory"/>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+              {/* Left column */}
+              <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                {(()=>{
+                  const packText = char.starterPack||"";
+                  const packLines = packText.split("\n").map(l=>l.trim()).filter(Boolean);
+                  const packTitle = packLines[0]||"";
+                  const itemStr = packLines.slice(1).join(",");
+                  const packItems = itemStr ? itemStr.split(",").map(s=>s.trim().replace(/\.$/,"")).filter(Boolean) : [];
+                  return (
+                    <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+                        <div style={{display:"flex",alignItems:"center",gap:5}}>
+                          <span style={{fontSize:11}}>🎒</span>
+                          <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Starter Pack</span>
+                        </div>
+                        {packTitle&&<button style={{fontSize:9,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}} onClick={()=>setF("starterPack","")}>✕ Clear</button>}
+                      </div>
+                      {!packText&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Select a pack from Starting Equipment above.</div>}
+                      {packTitle&&<div style={{fontSize:11,fontWeight:700,color:"var(--text)",marginBottom:5}}>{packTitle}</div>}
+                      {packItems.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+                        {packItems.map((item,i)=>{
+                          const isChosen = (char.chosenStartEquip||[]).some(s=>s.includes(packTitle));
+                          return <span key={i} style={{display:"inline-flex",alignItems:"center",gap:3,fontSize:10,fontWeight:isChosen?700:500,padding:"2px 6px 2px 8px",borderRadius:5,
+                            background:isChosen?"rgba(99,102,241,0.12)":"var(--input)",
+                            border:isChosen?"1px solid rgba(99,102,241,0.4)":"1px solid var(--border)",
+                            color:isChosen?"var(--accent)":"var(--text)",
+                            whiteSpace:"nowrap"}}>
+                            {item}
+                            <button style={{background:"none",border:"none",cursor:"pointer",color:"var(--muted)",fontSize:9,padding:0,lineHeight:1,fontFamily:"inherit",marginLeft:2}}
+                              onClick={()=>{
+                                const newItems = packItems.filter((_,j)=>j!==i);
+                                const newText = packTitle+(newItems.length?","+newItems.join(","):"");
+                                setF("starterPack",newText.trim());
+                              }}>✕</button>
+                          </span>;
+                        })}
+                      </div>}
+                    </div>
+                  );
+                })()}
+                {/* Gems card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>💎</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Gems</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,gemItems:[...(p.gemItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.gemItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No gems added.</div>}
+                  {(char.gemItems||[]).map((item,idx)=>{
+ const gemName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const gemEntry = gemName?libEntries.find(e=>e.title===gemName&&e.category==="Gem"):null;
+ const updateGem = (patch) => setCharSaving(p=>{
+ const a=[...(p.gemItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,gemItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateGem({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:gemName?"var(--text)":"var(--subtle)",fontSize:gemName&&gemName.length>18?9:gemName&&gemName.length>14?10:12}}
+ value={gemName||""}
+ onChange={e=>{
+ const entry=libEntries.find(en=>en.title===e.target.value&&en.category==="Gem");
+ const gpMatch=entry?.notes?.match(/Value:\s*([\d,]+)\s*gp/);
+ const gpVal=gpMatch?gpMatch[1].replace(/,/g,""):"";
+ updateGem({name:e.target.value, gp:gpVal});
+                          }}>
+                          <option value="">— Pick gem —</option>
+                          {libEntries.filter(e=>e.category==="Gem").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {gemName&&<div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
+                          <input type="number" min={0}
+ style={{width:46,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:600,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 3px",textAlign:"center",outline:"none",color:"var(--amber)"}}
+ value={(()=>{
+ const stored = typeof item==="object"?item.gp:"";
+ if(stored) return stored;
+ const gpMatch = gemEntry?.notes?.match(/Value:\s*([\d,]+)\s*gp/);
+ return gpMatch?gpMatch[1].replace(/,/g,""):"";
+                            })()}
+ onChange={e=>updateGem({gp:e.target.value})}/>
+                          <span style={{fontSize:9,fontWeight:700,color:"var(--amber)",flexShrink:0}}>gp</span>
+                        </div>}
+                        {gemName&&gemEntry&&(()=>{
+ const infoKey = "_gi_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[gemEntry?.desc,gemEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.gemItems||[])];a.splice(idx,1);return {...p,gemItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Magic Items card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>✨</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Magic Items</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,magicItemItems:[...(p.magicItemItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.magicItemItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No magic items added.</div>}
+                  {(char.magicItemItems||[]).map((item,idx)=>{
+ const miName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const miEntry = miName?libEntries.find(e=>e.title===miName&&e.category==="Magic Item"):null;
+ const updateMi = (patch) => setCharSaving(p=>{
+ const a=[...(p.magicItemItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,magicItemItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateMi({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:miName?"var(--text)":"var(--subtle)",fontSize:miName&&miName.length>18?9:miName&&miName.length>14?10:12}}
+ value={miName||""}
+ onChange={e=>updateMi({name:e.target.value})}>
+                          <option value="">— Pick magic item —</option>
+                          {(()=>{
+                            const wornNames = new Set([
+                              ...(char.wearing_head||[]), ...(char.wearing_neck||[]),
+                              ...(char.wearing_shoulders||[]), ...(char.wearing_body||[]),
+                              ...(char.wearing_skin||[]), ...(char.wearing_arms||[]),
+                              ...(char.wearing_hands||[]), ...(char.wearing_hips||[]),
+                              ...(char.wearing_feet||[]),
+                            ].map(i=>typeof i==="object"?i.name:i).filter(Boolean));
+                            const wornNamesLower = new Set([...wornNames].map(n=>n.toLowerCase()));
+                            return libEntries.filter(e=>{
+                              const t=e.title.toLowerCase();
+                              const inWearingSlot=
+                                t.includes("helm")||t.includes("hat")||t.includes("crown")||t.includes("circlet")||t.includes("hood")||(t.includes("eye")&&!t.includes("robe"))||t.includes("goggle")||
+                                t.includes("necklace")||t.includes("amulet")||t.includes("pendant")||t.includes("medallion")||t.includes("periapt")||t.includes("scarab")||
+                                t.includes("cloak")||t.includes("cape")||t.includes("mantle")||
+                                t.includes("robe")||
+                                t.includes("tattoo")||
+                                t.includes("bracer")||t.includes("armband")||
+                                t.includes("gauntlet")||t.includes("glove")||
+                                t.includes("belt")||t.includes("girdle")||
+                                t.includes("boot")||t.includes("slipper")||t.includes("sandal");
+                              return e.category==="Magic Item"&&!inWearingSlot&&(!wornNamesLower.has(t)||e.title===miName);
+                            }).sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                              <option key={e.id} value={e.title}>{e.title}</option>
+                            ));
+                          })()}
+                        </select>
+                        {miName&&miEntry&&(()=>{
+ const infoKey = "_mii_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[miEntry?.desc,miEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.magicItemItems||[])];a.splice(idx,1);return {...p,magicItemItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Components card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>🧪</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Components</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,componentItems:[...(p.componentItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.componentItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No components added.</div>}
+                  {(char.componentItems||[]).map((item,idx)=>{
+ const cpName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const cpEntry = cpName?libEntries.find(e=>e.title===cpName&&e.category==="Component"):null;
+ const updateCp = (patch) => setCharSaving(p=>{
+ const a=[...(p.componentItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,componentItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateCp({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:cpName?"var(--text)":"var(--subtle)",fontSize:cpName&&cpName.length>18?9:cpName&&cpName.length>14?10:12}}
+ value={cpName||""}
+ onChange={e=>updateCp({name:e.target.value})}>
+                          <option value="">— Pick component —</option>
+                          {libEntries.filter(e=>e.category==="Component").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {cpName&&cpEntry&&(()=>{
+ const infoKey = "_cpi_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[cpEntry?.desc,cpEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.componentItems||[])];a.splice(idx,1);return {...p,componentItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {(()=>{
+                  const sbBooks = Array.isArray(char.spellbooks)?char.spellbooks:(char.spellbooks?(char.spellbooks||"").split("\n").map(s=>s.trim()).filter(Boolean).map(n=>({name:n,spells:[]})):[]);
+                  const spellOpts = libEntries.filter(e=>e.category==="Spell").sort((a,b)=>a.title.localeCompare(b.title));
+                  const updateBooks = (books) => setF("spellbooks", books);
+                  return (
+                    <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+                        <div style={{display:"flex",alignItems:"center",gap:5}}>
+                          <span style={{fontSize:11}}>📖</span>
+                          <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Spell Books</span>
+                        </div>
+                        <button className="ri-add-btn" style={{padding:"2px 8px",fontSize:10}}
+                          onClick={()=>{
+                            const name = prompt("Spellbook name:");
+                            if(name&&name.trim()) updateBooks([...sbBooks,{name:name.trim(),spells:[]}]);
+                          }}>+ Add</button>
+                      </div>
+                      {sbBooks.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No spellbooks.</div>}
+                      {sbBooks.map((book,bi)=>(
+                        <div key={bi} style={{marginBottom:8,borderLeft:"2px solid rgba(99,102,241,0.25)",paddingLeft:8}}>
+                          <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:4}}>
+                            <span style={{fontSize:11,fontWeight:700,color:"var(--text)",flex:1}}>{book.name}</span>
+                            <button className="ri-add-btn" style={{padding:"1px 6px",fontSize:9}}
+                              onClick={()=>{
+                                const updated=[...sbBooks];
+                                updated[bi]={...book,spells:[...book.spells,""]};
+                                updateBooks(updated);
+                              }}>+ Spell</button>
+                            <button style={{background:"none",border:"none",cursor:"pointer",color:"var(--red)",fontSize:11,padding:0,lineHeight:1}} onClick={()=>updateBooks(sbBooks.filter((_,j)=>j!==bi))}>✕</button>
+                          </div>
+                          {book.spells&&book.spells.map((sp,si)=>(
+                            <div key={si} style={{display:"flex",gap:4,alignItems:"center",marginBottom:3,marginLeft:4}}>
+                              <select className="gi gi-sm" style={{flex:1,color:sp?"var(--text)":"var(--subtle)",fontSize:sp&&sp.length>20?9:11}}
+                                value={sp||""} onChange={e=>{
+                                  const updated=[...sbBooks];
+                                  const newSpells=[...book.spells];
+                                  newSpells[si]=e.target.value;
+                                  updated[bi]={...book,spells:newSpells};
+                                  updateBooks(updated);
+                                }}>
+                                <option value="">— Pick spell —</option>
+                                {spellOpts.map(e=><option key={e.id} value={e.title}>{e.title}</option>)}
+                              </select>
+                              {sp&&(()=>{
+                                const spEntry=libEntries.find(e=>e.title===sp&&e.category==="Spell");
+                                const infoKey="sb_"+bi+"_"+si;
+                                return spEntry?(
+                                  <div style={{position:"relative",flexShrink:0}}>
+                                    <span className="ft-info-icon" style={{cursor:"pointer"}}
+                                      onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                                    {wearingInfo===infoKey&&(
+                                      <>
+                                        <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                        <SmartPopup desc={[spEntry.desc,spEntry.notes].filter(Boolean).join(" | ")}/>
+                                      </>
+                                    )}
+                                  </div>
+                                ):null;
+                              })()}
+                              <button style={{background:"none",border:"none",cursor:"pointer",color:"var(--muted)",fontSize:11,padding:0,lineHeight:1}} onClick={()=>{
+                                const updated=[...sbBooks];
+                                updated[bi]={...book,spells:book.spells.filter((_,j)=>j!==si)};
+                                updateBooks(updated);
+                              }}>✕</button>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+              {/* Right column */}
+              <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                {/* Tools & Equipment card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>🔧</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Tools & Equipment</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,toolItems:[...(p.toolItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.toolItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No tools or equipment added.</div>}
+                  {(char.toolItems||[]).map((item,idx)=>{
+ const tlName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const isPackItem = typeof item==="object"&&item.isPackItem;
+ const tlEntry = tlName?libEntries.find(e=>e.title===tlName&&(e.category==="Tool"||e.category==="Equipment")):null;
+ const updateTl = (patch) => setCharSaving(p=>{
+ const a=[...(p.toolItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,toolItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4,marginLeft:isPackItem?16:0,borderLeft:isPackItem?"2px solid rgba(99,102,241,0.2)":"none",paddingLeft:isPackItem?6:0}}>
+                        {!isPackItem&&<input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateTl({qty:Math.max(1,Number(e.target.value)||1)})}/>}
+                        {isPackItem?(<>
+                          <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateTl({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                          <span style={{flex:1,fontSize:11,color:"var(--muted)",padding:"2px 4px"}}>{tlName}</span>
+                        </>):
+                        <select className="gi gi-sm" style={{flex:1,color:tlName?"var(--text)":"var(--subtle)",fontSize:tlName&&tlName.length>18?9:tlName&&tlName.length>14?10:12}}
+ value={tlName||""}
+ onChange={e=>{
+ const PACK_MAP = {
+   "* Explorer's Pack":    ["Backpack","Bedroll","Mess kit","Tinderbox","Torch (10)","Rations (10 days)","Waterskin","Hemp Rope (50ft)"],
+   "* Dungeoneer's Pack":  ["Backpack","Crowbar","Hammer","Piton (10)","Torch (10)","Tinderbox","Rations (10 days)","Waterskin","Hemp Rope (50ft)"],
+   "* Burglar's Pack":     ["Backpack","Ball bearings (1000)","String (10ft)","Bell","Candle (5)","Crowbar","Hammer","Piton (10)","Hooded Lantern","Oil flask (2)","Rations (5)","Tinderbox","Waterskin"],
+   "* Scholar's Pack":     ["Backpack","Book of lore","Ink bottle","Ink pen","Parchment (10 sheets)","Sand bag","Small knife"],
+   "* Priest's Pack":      ["Backpack","Blanket","Candle (10)","Tinderbox","Alms box","Incense block (2)","Censer","Vestments","Rations (2 days)","Waterskin"],
+   "* Diplomat's Pack":    ["Chest","Scroll case (2)","Fine clothes","Ink","Pen","Lamp","Oil flask (2)","Paper (5 sheets)","Perfume vial","Sealing wax","Soap"],
+   "* Entertainer's Pack": ["Backpack","Bedroll","Costume (2)","Candle (5)","Rations (5)","Waterskin","Disguise kit"],
+ };
+ const chosen = e.target.value;
+ setCharSaving(p=>{
+   const a=[...(p.toolItems||[])];
+   // Remove old pack children that belonged to this slot
+   const filtered = a.filter(it=>!(typeof it==="object"&&it.parentIdx===idx));
+   filtered[idx]={...(typeof filtered[idx]==="object"?filtered[idx]:{name:"",qty:1}),name:chosen};
+   // If a pack was chosen, insert children after this index
+   if(PACK_MAP[chosen]){
+     const children = PACK_MAP[chosen].map(pi=>({name:pi,qty:1,parentIdx:idx,isPackItem:true}));
+     filtered.splice(idx+1,0,...children);
+   }
+   return {...p,toolItems:filtered};
+ });
+}}>
+                          <option value="">— Pick tool or equipment —</option>
+                          <optgroup label="Tools">
+                            {libEntries.filter(e=>e.category==="Tool").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                              <option key={e.id} value={e.title}>{e.title}</option>
+                            ))}
+                          </optgroup>
+                          <optgroup label="Equipment">
+                            {libEntries.filter(e=>e.category==="Equipment"&&!(e.tags||"").toLowerCase().includes("ammunition")).sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                              <option key={e.id} value={e.title}>{e.title}</option>
+                            ))}
+                          </optgroup>
+                        </select>}
+                        {tlName&&tlEntry&&(()=>{
+ const infoKey = "_tli_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[tlEntry?.desc,tlEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{
+ const a=[...(p.toolItems||[])];
+ // If this is a pack, also remove its children; otherwise just remove this item
+ const filtered = isPackItem
+   ? a.filter((_,i)=>i!==idx)
+   : a.filter((it,i)=>i!==idx&&!(typeof it==="object"&&it.parentIdx===idx));
+ return {...p,toolItems:filtered};
+})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Jewelry card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>💍</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Jewelry</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,jewelryItems:[...(p.jewelryItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.jewelryItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No jewelry added.</div>}
+                  {(char.jewelryItems||[]).map((item,idx)=>{
+ const jwlName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const jwlEntry = jwlName?libEntries.find(e=>e.title===jwlName&&e.category==="Jewelry"):null;
+ const updateJwl = (patch) => setCharSaving(p=>{
+ const a=[...(p.jewelryItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,jewelryItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateJwl({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:jwlName?"var(--text)":"var(--subtle)",fontSize:jwlName&&jwlName.length>18?9:jwlName&&jwlName.length>14?10:12}}
+ value={jwlName||""}
+ onChange={e=>updateJwl({name:e.target.value})}>
+                          <option value="">— Pick jewelry —</option>
+                          {libEntries.filter(e=>e.category==="Jewelry").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {jwlName&&jwlEntry&&(()=>{
+ const infoKey = "_jwi_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[jwlEntry?.desc,jwlEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.jewelryItems||[])];a.splice(idx,1);return {...p,jewelryItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Wands & Rods card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>🪄</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Wands & Rods</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,wandItems:[...(p.wandItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.wandItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No wands or rods added.</div>}
+                  {(char.wandItems||[]).map((item,idx)=>{
+ const wdName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const wdEntry = wdName?libEntries.find(e=>e.title===wdName&&e.category==="Wand & Rod"):null;
+ const updateWd = (patch) => setCharSaving(p=>{
+ const a=[...(p.wandItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,wandItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateWd({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:wdName?"var(--text)":"var(--subtle)",fontSize:wdName&&wdName.length>18?9:wdName&&wdName.length>14?10:12}}
+ value={wdName||""}
+ onChange={e=>updateWd({name:e.target.value})}>
+                          <option value="">— Pick wand or rod —</option>
+                          {libEntries.filter(e=>e.category==="Wand & Rod").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {wdName&&wdEntry&&(()=>{
+ const infoKey = "_wdi_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[wdEntry?.desc,wdEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.wandItems||[])];a.splice(idx,1);return {...p,wandItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Potions card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>⚗️</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Potions</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,potionItems:[...(p.potionItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.potionItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No potions added.</div>}
+                  {(char.potionItems||[]).map((item,idx)=>{
+ const potName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const potEntry = potName?libEntries.find(e=>e.title===potName&&e.category==="Potion"):null;
+ const updatePot = (patch) => setCharSaving(p=>{
+ const a=[...(p.potionItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,potionItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updatePot({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:potName?"var(--text)":"var(--subtle)",fontSize:potName&&potName.length>18?9:potName&&potName.length>14?10:12}}
+ value={potName||""}
+ onChange={e=>{
+ const entry=libEntries.find(en=>en.title===e.target.value&&en.category==="Potion");
+ updatePot({name:e.target.value});
+                          }}>
+                          <option value="">— Pick potion —</option>
+                          {libEntries.filter(e=>e.category==="Potion").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {potName&&potEntry&&(()=>{
+ const infoKey = "_pi_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[potEntry?.desc,potEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.potionItems||[])];a.splice(idx,1);return {...p,potionItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Scrolls card */}
+                <div className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                    <span style={{fontSize:11}}>📜</span>
+                    <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)",flex:1}}>Scrolls</span>
+                    <button style={{fontSize:11,fontWeight:700,color:"var(--accent)",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
+ onClick={()=>setCharSaving(p=>({...p,scrollItems:[...(p.scrollItems||[]),{name:"",qty:1}]}))}>+ Add</button>
+                  </div>
+                  {(char.scrollItems||[]).length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No scrolls added.</div>}
+                  {(char.scrollItems||[]).map((item,idx)=>{
+ const scName = typeof item==="object"?item.name:item;
+ const qty = typeof item==="object"?(item.qty||1):1;
+ const scEntry = scName?libEntries.find(e=>e.title===scName&&e.category==="Scroll"):null;
+ const updateSc = (patch) => setCharSaving(p=>{
+ const a=[...(p.scrollItems||[])];
+ a[idx]={...(typeof a[idx]==="object"?a[idx]:{name:"",qty:1}), ...patch};
+ return {...p,scrollItems:a};
+                    });
+ return (
+                      <div key={idx} style={{display:"flex",gap:4,alignItems:"center",marginBottom:4}}>
+                        <input type="number" min={1}
+ style={{width:28,flexShrink:0,fontSize:11,fontFamily:"'DM Mono',monospace",fontWeight:700,background:"var(--input)",border:"1px solid var(--border)",borderRadius:6,padding:"2px 2px",textAlign:"center",outline:"none",color:"var(--accent)"}}
+ value={qty} onChange={e=>updateSc({qty:Math.max(1,Number(e.target.value)||1)})}/>
+                        <select className="gi gi-sm" style={{flex:1,color:scName?"var(--text)":"var(--subtle)",fontSize:scName&&scName.length>18?9:scName&&scName.length>14?10:12}}
+ value={scName||""}
+ onChange={e=>updateSc({name:e.target.value})}>
+                          <option value="">— Pick scroll —</option>
+                          {libEntries.filter(e=>e.category==="Scroll").sort((a,b)=>a.title.localeCompare(b.title)).map(e=>(
+                            <option key={e.id} value={e.title}>{e.title}</option>
+                          ))}
+                        </select>
+                        {scName&&scEntry&&(()=>{
+ const infoKey = "_sci_"+idx;
+ return (
+                            <div style={{position:"relative",flexShrink:0}}>
+                              <span className="ft-info-icon" style={{cursor:"pointer"}}
+ onClick={e=>{e.stopPropagation();setWearingInfo(wearingInfo===infoKey?null:infoKey);}}>i</span>
+                              {wearingInfo===infoKey&&(
+                                <>
+                                  <div className="ft-info-backdrop" onClick={()=>setWearingInfo(null)}/>
+                                  <SmartPopup desc={[scEntry?.desc,scEntry?.notes].filter(Boolean).join(" | ")}/>
+                                </>
+                              )}
+                            </div>
+                          );
+                        })()}
+                        <button style={{fontSize:13,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
+ onClick={()=>setCharSaving(p=>{const a=[...(p.scrollItems||[])];a.splice(idx,1);return {...p,scrollItems:a};})}>✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {[
+
+                ].map(({lbl,f,ph,icon})=>(
+                  <div key={f} className="card-wrap" style={{padding:"10px 12px",marginBottom:0}}>
+                    <div style={{display:"flex",alignItems:"center",gap:5,marginBottom:6}}>
+                      <span style={{fontSize:11}}>{icon}</span>
+                      <span style={{fontSize:9,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>{lbl}</span>
+                    </div>
+                    <textarea className="gi gi-area" style={{minHeight:48}} value={char[f]||""} onChange={e=>setF(f,e.target.value)} placeholder={ph} rows={2}/>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* NOTES */}
+        {tab==="notes" && (
+          <div className="panel">
+            <div className="two-col">
+              <div>
+                <SecHead icon="✒" title="Session Notes"/>
+                <Card>
+                  <textarea className="gi gi-area" style={{minHeight:160}} value={char.notes} onChange={e=>setF("notes",e.target.value)} placeholder="Quest progress, NPCs met, items found, plot threads..."/>
+                </Card>
+              </div>
+              <div>
+                <SecHead icon="⚜" title="Character Background"/>
+                <Card>
+                  {[
+                    {lbl:"Personality Traits",f:"personalityTraits",ph:"How does your character act?"},
+                    {lbl:"Ideals", f:"ideals", ph:"What principles drive them?"},
+                    {lbl:"Bonds", f:"bonds", ph:"Who or what do they care about?"},
+                    {lbl:"Flaws", f:"flaws", ph:"What are their weaknesses?"},
+                  ].map(({lbl,f,ph})=>(
+                    <div key={f} style={{marginBottom:10}}>
+                      <Lbl>{lbl}</Lbl>
+                      <textarea className="gi gi-area" value={char[f]} onChange={e=>setF(f,e.target.value)} placeholder={ph} rows={2}/>
+                    </div>
+                  ))}
+                </Card>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* PHOTOS */}
+        {tab==="photos" && (
+          <div className="panel">
+            <SecHead icon="🖼" title="Character Photos"/>
+            <input ref={photoRef} type="file" accept="image/*" multiple style={{display:"none"}}
+ onChange={e=>{
+ const files=Array.from(e.target.files);
+ files.forEach(file=>{
+ const r=new FileReader();
+ r.onload=ev=>setCharSaving(p=>({...p,photos:[...(p.photos||[]),ev.target.result]}));
+ r.readAsDataURL(file);
+                });
+              }}/>
+            <div className="photo-grid">
+              {(char.photos||[]).map((src,i)=>(
+                <div key={i} className="photo-item">
+                  <img src={src} alt={`Character ${i+1}`} style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:10}}/>
+                  <button className="photo-del" onClick={()=>setCharSaving(p=>({...p,photos:p.photos.filter((_,j)=>j!==i)}))}>x</button>
+                </div>
+              ))}
+              <div className="photo-add" onClick={()=>photoRef.current?.click()}>
+                <div style={{fontSize:32,color:"var(--subtle)"}}>+</div>
+                <div style={{fontSize:12,color:"var(--subtle)",marginTop:4}}>Add Photo</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ROUNDS */}
+        {tab==="rounds" && (
+          <div className="panel">
+            {/* Action toggles - vertical stack, toggle + card side by side, hints below both */}
+            <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:8}}>
+              {/* Turn reset button top-right */}
+              <div style={{display:"flex",justifyContent:"flex-end",marginBottom:-4}}>
+                <button
+                  title="Reset turn (actions, movement)"
+                  onClick={()=>setCharSaving(p=>({...p,actionUsed:false,bonusActionUsed:false,reactionUsed:false,moveUsed:0,actionItems:[],bonusActionItems:[],reactionItems:[]}))}
+                  style={{display:"flex",alignItems:"center",gap:5,padding:"4px 10px",borderRadius:8,background:"rgba(239,68,68,0.07)",border:"1px solid rgba(239,68,68,0.25)",color:"var(--red)",cursor:"pointer",fontSize:11,fontWeight:700,fontFamily:"inherit"}}>
+                  ↺ Reset Turn
+                </button>
+              </div>
+              {[
+                {key:"actionUsed",     label:"Action",       emoji:"🎯", color:"var(--accent)",  bg:"rgba(99,102,241,0.1)",  border:"rgba(99,102,241,0.35)",  hints:"Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object, Grapple, Shove, Improvise"},
+                {key:"bonusActionUsed",label:"Bonus Action", emoji:"➕", color:"var(--amber)",   bg:"rgba(245,158,11,0.1)",  border:"rgba(245,158,11,0.35)", hints:""},
+                {key:"reactionUsed",   label:"Reaction",     emoji:"⚡", color:"var(--green)",   bg:"rgba(34,197,94,0.1)",   border:"rgba(34,197,94,0.35)",  hints:""},
+              ].map(({key,label,emoji,color,bg,border,hints})=>{
+                const used = char[key];
+                const itemKey = key.replace("Used","Items");
+                const items = char[itemKey]||[];
+                const open = openActionSections[key];
+                const setOpen = (v)=>setOpenActionSections(p=>({...p,[key]:v}));
+                return (
+                  <div key={key} style={{display:"flex",flexDirection:"column",gap:3}}>
+                    {/* Toggle + card side by side */}
+                    <div style={{display:"flex",gap:8,alignItems:"stretch"}}>
+                      {/* Toggle button */}
+                      <button
+                        onClick={()=>setF(key,!used)}
+                        style={{
+                          width:110, flexShrink:0,
+                          display:"flex", flexDirection:"column", alignItems:"center",
+                          justifyContent:"center", gap:5, padding:"10px 8px", borderRadius:12,
+                          border:"2px solid "+(used?"var(--border)":border),
+                          background:used?"var(--input)":bg,
+                          cursor:"pointer", transition:"all .18s", fontFamily:"inherit",
+                          opacity:used?0.45:1,
+                        }}>
+                        <div style={{fontSize:22,lineHeight:1,opacity:used?0.3:1,transition:"opacity .18s"}}>{emoji}</div>
+                        <div style={{fontSize:12,fontWeight:800,color:used?"var(--muted)":color}}>{label}</div>
+                        <div style={{fontSize:9,color:"var(--subtle)",fontWeight:500}}>{used?"Used":"Available"}</div>
+                      </button>
+                      {/* Expandable card */}
+                      <div style={{flex:1,background:"var(--card)",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden",minHeight:66}}>
+                        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 12px",cursor:"pointer",borderBottom:open&&items.length>0?"1px solid var(--divider)":"none"}}
+                          onClick={()=>setOpen(!open)}>
+                          <span style={{fontSize:11,fontWeight:600,color:"var(--muted)",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                            {items.length>0?items.map(i=>i.name).join(", "):"—"}
+                          </span>
+                          <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
+                            <button style={{fontSize:11,fontWeight:700,color:color,background:"rgba(0,0,0,0.04)",border:"1px solid "+border,borderRadius:7,padding:"2px 9px",cursor:"pointer",fontFamily:"inherit"}}
+                              onClick={e=>{e.stopPropagation();
+                                const name=prompt("Add to "+label+":");
+                                if(name&&name.trim()){setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:name.trim()}]}));}
+                              }}>+ Add</button>
+                            <span style={{fontSize:10,color:"var(--muted)"}}>{open?"▲":"▼"}</span>
+                          </div>
+                        </div>
+                        {open&&(
+                          <div style={{padding:"6px 10px",display:"flex",flexDirection:"column",gap:4}}>
+                            {items.length===0&&<span style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>No items added.</span>}
+                            {items.map(item=>(
+                              <div key={item.id} style={{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"var(--text)"}}>
+                                <span style={{flex:1}}>{item.name}</span>
+                                <button style={{fontSize:11,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 2px",fontFamily:"inherit"}}
+                                  onClick={()=>setCharSaving(p=>({...p,[itemKey]:(p[itemKey]||[]).filter(i=>i.id!==item.id)}))}>✕</button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {/* Hints below both */}
+                    <div style={{fontSize:9,color:"var(--subtle)",lineHeight:1.6,paddingLeft:2}}>{hints}</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Movement row */}
+            {(()=>{
+ const totalSpeed = char.speed||30;
+ const increments = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120];
+ const moveUsed = char.moveUsed||0;
+ return (
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12,background:"var(--card)",border:"1px solid var(--border)",borderRadius:14,padding:"10px 14px"}}>
+                  {/* Total */}
+                  <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,flexShrink:0}}>
+                    <div style={{fontSize:8,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Speed</div>
+                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:22,fontWeight:900,color:"var(--accent)",lineHeight:1}}>{totalSpeed}ft</div>
+                    <div style={{fontSize:9,color:"var(--subtle)"}}>{Math.max(0,totalSpeed-moveUsed)}ft left</div>
+                  </div>
+                  {/* Divider */}
+                  <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
+                  {/* Increment toggles */}
+                  <div style={{flex:1,display:"flex",flexWrap:"wrap",gap:4}}>
+                    {increments.map(inc=>{
+ const isUsed = moveUsed>=inc;
+ const isOver = false;
+ return (
+                        <button key={inc}
+ onClick={()=>setF("moveUsed", moveUsed===inc?0:inc)}
+ style={{
+ width:34,height:32,borderRadius:8,fontSize:10,fontWeight:700,
+ border:"1px solid "+(isUsed?"rgba(99,102,241,0.4)":"var(--border)"),
+ background:isUsed?"rgba(99,102,241,0.12)":"var(--input)",
+ color:isUsed?"var(--accent)":"var(--muted)",
+ cursor:"pointer",fontFamily:"'DM Mono',monospace",
+ transition:"all .15s",
+ }}>{inc}</button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+
+            <div className="two-col">
+              <div>
+                <SecHead icon="⚡" title="Conditions"/>
+                <Card>
+                  <div className="condition-grid">
+                    {CONDITIONS.map(c=>{
+ const on = (char.conditions||[]).includes(c);
+ return (
+                        <div key={c} className={`condition-chip ${on?"condition-on":""}`}
+ onClick={()=>tog("conditions",c)}>{c}</div>
+                      );
+                    })}
+                  </div>
+                </Card>
+
+                <SecHead icon="🎯" title="Concentration"/>
+                <Card>
+                  <Lbl>Concentrating On</Lbl>
+                  <input className="gi" value={char.concentrating} onChange={e=>setF("concentrating",e.target.value)} placeholder="Spell name..."/>
+                </Card>
+
+                <SecHead icon="🔥" title="Rage / Resources"/>
+                <Card>
+                  <div className="shield-row" onClick={()=>setF("rageActive",!char.rageActive)} style={{marginBottom:12}}>
+                    <div className={`shield-chk ${char.rageActive?"shield-on":""}`} style={{borderColor:"var(--red)"}}>{char.rageActive?"✓":""}</div>
+                    <span style={{color:char.rageActive?"var(--red)":"var(--text)",fontWeight:char.rageActive?700:400}}>Rage Active</span>
+                  </div>
+                  <Lbl>Rounds Raged</Lbl>
+                  <input className="gi" type="number" value={char.rageRounds} onChange={e=>setF("rageRounds",Number(e.target.value)||0)} style={{width:80}}/>
+                </Card>
+              </div>
+
+              <div>
+                <SecHead icon="🃏" title="Actions This Turn"/>
+                <Card>
+                  {[
+                    {lbl:"Bonus Action Used",f:"bonusActions",ph:"e.g. Healing Word, Bardic Inspiration..."},
+                    {lbl:"Reaction Used", f:"reactions", ph:"e.g. Shield, Opportunity Attack..."},
+                    {lbl:"Legendary Actions",f:"legendaryActions",ph:"(if applicable)"},
+                  ].map(({lbl,f,ph})=>(
+                    <div key={f} style={{marginBottom:10}}>
+                      <Lbl>{lbl}</Lbl>
+                      <textarea className="gi gi-area" value={char[f]} onChange={e=>setF(f,e.target.value)} placeholder={ph} rows={2}/>
+                    </div>
+                  ))}
+                </Card>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* COMPANION */}
+        {tab==="companion" && (
+          <div className="panel">
+            <div className="two-col">
+              <div>
+                <SecHead icon="🐾" title="Companion Info"/>
+                <Card>
+                  {[
+                    {lbl:"Name",f:"companionName",ph:"Familiar, pet, steed..."},
+                    {lbl:"Type / CR",f:"companionType",ph:"Wolf, Owl, Raven..."},
+                  ].map(({lbl,f,ph})=>(
+                    <div key={f} style={{marginBottom:8}}>
+                      <Lbl>{lbl}</Lbl>
+                      <input className="gi" value={char[f]} onChange={e=>setF(f,e.target.value)} placeholder={ph}/>
+                    </div>
+                  ))}
+                  <div className="three-col" style={{marginTop:8}}>
+                    <div><Lbl>AC</Lbl><input className="gi gi-center" type="number" value={char.companionAC} onChange={e=>setF("companionAC",e.target.value)}/></div>
+                    <div><Lbl>HP</Lbl><input className="gi gi-center" type="number" value={char.companionHP} onChange={e=>setF("companionHP",e.target.value)}/></div>
+                    <div><Lbl>Speed</Lbl><input className="gi gi-center" type="number" value={char.companionSpeed} onChange={e=>setF("companionSpeed",e.target.value)}/></div>
+                  </div>
+                </Card>
+
+                <SecHead icon="◈" title="Companion Ability Scores"/>
+                <Card>
+                  <div className="ab-row" style={{gridTemplateColumns:"repeat(6,1fr)"}}>
+                    {ABILITY_KEYS.map(k=>(
+                      <div key={k} className="ab-box">
+                        <div className="ab-name">{k}</div>
+                        <div className="ab-mod">{fmt(abilityMod(char[`companion${k}`]||10))}</div>
+                        <input className="ab-score" type="number" value={char[`companion${k}`]||10} min={1} max={30}
+ onChange={e=>setF(`companion${k}`,Number(e.target.value)||10)}/>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+
+              <div>
+                <SecHead icon="⚔" title="Companion Attacks"/>
+                <Card>
+                  <div className="atk-tbl-head"><span>Name</span><span>Atk</span><span>Damage</span></div>
+                  {(char.companionAttacks||[]).map((a,i)=>(
+                    <div key={i} className="atk-tbl-row">
+                      <input className="gi gi-sm" value={a.name} onChange={e=>setNested("companionAttacks",i,"name",e.target.value)} placeholder="Bite"/>
+                      <input className="gi gi-sm gi-center" value={a.atk} onChange={e=>setNested("companionAttacks",i,"atk",e.target.value)} placeholder="+4"/>
+                      <input className="gi gi-sm" value={a.dmg} onChange={e=>setNested("companionAttacks",i,"dmg",e.target.value)} placeholder="1d6+2"/>
+                    </div>
+                  ))}
+                  <button className="add-row-btn" onClick={()=>setCharSaving(p=>({...p,companionAttacks:[...p.companionAttacks,{name:"",atk:"",dmg:""}]}))}>+ Add Attack</button>
+                </Card>
+
+                <SecHead icon="✒" title="Companion Notes"/>
+                <Card>
+                  <textarea className="gi gi-area" style={{minHeight:120}} value={char.companionNotes} onChange={e=>setF("companionNotes",e.target.value)} placeholder="Special abilities, traits, backstory..."/>
+                </Card>
+              </div>
+            </div>
+          </div>
+        )}
+
+      </div>{/* end tab-body */}
+
+      {/* SKILL ROLL POPOVER */}
+      {skillRoll && (
+        <>
+          <div className="dt-popover-backdrop" onClick={()=>{if(skillRoll.label==="Initiative")setTab("rounds");if(skillRoll.label&&skillRoll.label.startsWith("Breath Weapon"))setF("breathWeaponUsed",true);setSkillRoll(null);}}/>
+          <div className="dt-popover dt-popover-slim">
+            <div className="dt-wrap">
+              <div className="dt-hdr">
+                <div className="dt-title">🎲 {skillRoll.label}</div>
+                <button className="lp-close" onClick={()=>{if(skillRoll.label==="Initiative")setTab("rounds");if(skillRoll.label&&skillRoll.label.startsWith("Breath Weapon"))setF("breathWeaponUsed",true);setSkillRoll(null);}}>✕</button>
+              </div>
+              <div className="dt-body" style={{alignItems:"center",textAlign:"center",gap:14}}>
+                {/* Adv/Dis badge */}
+                {skillRoll.isAdv && <div className="skill-roll-tag roll-crit-tag" style={{background:"rgba(34,197,94,0.1)",borderColor:"rgba(34,197,94,0.3)",color:"var(--green)"}}>Advantage</div>}
+                {skillRoll.isDis && <div className="skill-roll-tag roll-fail-tag" style={{background:"rgba(239,68,68,0.1)",borderColor:"rgba(239,68,68,0.3)",color:"var(--red)"}}>Disadvantage</div>}
+
+                {/* Dice display */}
+                {skillRoll.allRolls ? (
+                  <div style={{display:"flex",gap:8,alignItems:"center",justifyContent:"center",flexWrap:"wrap"}}>
+                    {skillRoll.allRolls.map((r,i)=>(
+                      <div key={i}>
+                        <DieSVG sides={skillRoll.sides||6} roll={r} size={72} color={diceColor}/>
+                      </div>
+                    ))}
+                  </div>
+                ) : skillRoll.r2!=null ? (
+                  <div style={{display:"flex",gap:8,alignItems:"center",justifyContent:"center"}}>
+                    {[skillRoll.r1, skillRoll.r2].map((r,i)=>{
+ const isChosen = r===skillRoll.roll && !(skillRoll.r1===skillRoll.r2);
+ return (
+                        <div key={i} style={{opacity: isChosen||skillRoll.r1===skillRoll.r2 ? 1 : 0.35}}>
+                          <DieSVG sides={skillRoll.sides||20} roll={r} size={isChosen ? 80 : 64}
+ color={skillRoll.isCrit&&isChosen?"green":skillRoll.isFail&&isChosen?"red":isChosen?diceColor:"black"}/>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div>
+                    <DieSVG sides={skillRoll.sides||20} roll={skillRoll.roll} size={96}
+ color={skillRoll.isCrit?"green":skillRoll.isFail?"red":diceColor}/>
+                  </div>
+                )}
+
+                {/* Breakdown */}
+                <div className="dt-results-breakdown" style={{fontSize:13}}>
+                  {skillRoll.allRolls&&skillRoll.allRolls.length>0
+                    ? skillRoll.allRolls.join(" + ")+" = "+skillRoll.allRolls.reduce((a,b)=>a+b,0)
+                    : skillRoll.roll+" "+(skillRoll.bonus>=0?"+ "+skillRoll.bonus:"- "+Math.abs(skillRoll.bonus))+" = "+skillRoll.total}
+                </div>
+                {/* Total */}
+                <div className="dt-results-total"
+ style={{color:skillRoll.isCrit?"var(--green)":skillRoll.isFail?"var(--red)":"var(--text)"}}>
+                  {skillRoll.total}
+                </div>
+                {skillRoll.isCrit&&<div className="skill-roll-tag roll-crit-tag">{skillRoll.sides===4?"MAX ROLL!":"NATURAL 20 - CRITICAL!"}</div>}
+                {skillRoll.isFail&&<div className="skill-roll-tag roll-fail-tag">{skillRoll.sides===4?"MIN ROLL":"NATURAL 1"}</div>}
+                {/* Reroll */}
+                <button className="dt-reroll-btn" onClick={()=>{
+ const sides = skillRoll.sides||20;
+ if(skillRoll.allRolls) {
+ const rolls=Array.from({length:skillRoll.allRolls.length},()=>Math.floor(Math.random()*sides)+1);
+ const total=rolls.reduce((a,b)=>a+b,0);
+ setSkillRoll({...skillRoll,roll:total,total,r1:rolls[0],r2:null,allRolls:[...rolls],isCrit:false,isFail:false});
+ } else {
+ const isAdv=skillRoll.isAdv; const isDis=skillRoll.isDis;
+ const r1=Math.floor(Math.random()*sides)+1;
+ const r2=(isAdv||isDis)?Math.floor(Math.random()*sides)+1:null;
+ const roll=isAdv?Math.max(r1,r2??r1):isDis?Math.min(r1,r2??r1):r1;
+ const total=roll+skillRoll.bonus;
+ setSkillRoll({...skillRoll,roll,total,r1,r2,isCrit:roll===sides,isFail:roll===1});
+ }
+                }}>↺ Reroll</button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* DICE TRAY POPOVER */}
+      {showDice && (
+        <>
+          <div className="dt-popover-backdrop" onClick={()=>setShowDice(false)}/>
+          <div className="dt-popover">
+            <DiceTrayPanel onClose={()=>setShowDice(false)} diceColor={diceColor} setDiceColor={setDiceColor}/>
+          </div>
+        </>
+      )}
+
+      {/* LIBRARY PANEL */}
+      {showLibrary && (
+        <>
+          <div className="lib-backdrop" onClick={()=>toggleLibrary(false)}/>
+          <div className="lib-panel">
+            <LibraryPanel onClose={()=>toggleLibrary(false)}/>
+          </div>
+        </>
+      )}
+
+      {/* AVATAR LIGHTBOX */}
+      {avatarLightbox && char.avatarPhoto && (
+        <div className="lightbox-backdrop" onClick={()=>setAvatarLightbox(false)}>
+          <div className="lightbox-panel" onClick={e=>e.stopPropagation()}>
+            <img src={char.avatarPhoto} alt={char.name||"Character"} className="lightbox-img"/>
+            <div className="lightbox-overlay">
+              {(char.name||char.charClass||char.species)&&(
+                <div className="lightbox-overlay-info">
+                  {char.name&&<div className="lightbox-name">{char.name}</div>}
+                  {(char.charClass||char.species)&&(
+                    <div className="lightbox-sub">{[char.charClass&&`${char.charClass} ${char.level}`,char.species].filter(Boolean).join(" . ")}</div>
+                  )}
+                </div>
+              )}
+              <div className="lightbox-actions">
+                <button className="lightbox-btn lightbox-btn-ghost" onClick={()=>{photoRef.current?.click();setAvatarLightbox(false);}}>🔄 Change</button>
+                <button className="lightbox-btn lightbox-btn-danger" onClick={()=>{setCharSaving(p=>({...p,avatarPhoto:""}));setAvatarLightbox(false);}}>🗑</button>
+                <button className="lightbox-btn lightbox-btn-primary" onClick={()=>setAvatarLightbox(false)}>✕</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+// DICE TRAY
+const PALETTES = {
+ blue: {t:"#bfdbfe",m:"#60a5fa",s:"#3b82f6",d:"#2563eb",k:"#1e3a8a",g:"rgba(59,130,246,0.45)"},
+ purple:{t:"#e9d5ff",m:"#c084fc",s:"#a855f7",d:"#7c3aed",k:"#4c1d95",g:"rgba(168,85,247,0.45)"},
+ red: {t:"#fecaca",m:"#f87171",s:"#ef4444",d:"#dc2626",k:"#7f1d1d",g:"rgba(239,68,68,0.45)"},
+ green: {t:"#bbf7d0",m:"#4ade80",s:"#22c55e",d:"#16a34a",k:"#14532d",g:"rgba(34,197,94,0.45)"},
+ black: {t:"#d1d5db",m:"#6b7280",s:"#374151",d:"#1f2937",k:"#111827",g:"rgba(55,65,81,0.5)"},
+ gold: {t:"#fef08a",m:"#facc15",s:"#eab308",d:"#ca8a04",k:"#713f12",g:"rgba(234,179,8,0.5)"},
+ white: {t:"#ffffff",m:"#e2e8f0",s:"#cbd5e1",d:"#94a3b8",k:"#475569",g:"rgba(148,163,184,0.4)"},
+ pink: {t:"#fbcfe8",m:"#f472b6",s:"#ec4899",d:"#db2777",k:"#831843",g:"rgba(236,72,153,0.45)"},
+ teal:   {t:"#a5f3fc",m:"#22d3ee",s:"#0891b2",d:"#0e7490",k:"#164e63",g:"rgba(34,211,238,0.45)"},
+ orange: {t:"#fed7aa",m:"#fb923c",s:"#f97316",d:"#ea580c",k:"#7c2d12",g:"rgba(249,115,22,0.45)"},
+};
+
+const DICE_TYPES = [
+  {sides:20,label:"D20"},{sides:12,label:"D12"},{sides:100,label:"D100"},
+  {sides:10,label:"D10"},{sides:8,label:"D8"},{sides:6,label:"D6"},
+  {sides:4,label:"D4"},{sides:2,label:"D2"},
+];
+
+const DieSVG = ({sides, roll, color, size=56}) => {
+ const pal = PALETTES[color]||PALETTES.blue;
+ const {t:faceTop,m:faceMid,s:faceShade,d:faceDark,k:stroke,g:glow} = pal;
+ const W=size,H=size,cx=32,cy=32;
+ if (sides===20) {
+ const R=28,Rm=16;
+ const hex=Array.from({length:6},(_,i)=>{const a=(i*60+30)*Math.PI/180;return[+(cx+R*Math.cos(a)).toFixed(1),+(cy+R*Math.sin(a)).toFixed(1)];});
+ const c=[cx,cy];
+ const inner=Array.from({length:3},(_,i)=>{const a=(i*120+90)*Math.PI/180;return[+(cx+Rm*Math.cos(a)).toFixed(1),+(cy+Rm*Math.sin(a)).toFixed(1)];});
+ const outerTris=[[hex[0],hex[1],inner[0]],[hex[1],hex[2],inner[0]],[hex[2],hex[3],inner[1]],[hex[3],hex[4],inner[1]],[hex[4],hex[5],inner[2]],[hex[5],hex[0],inner[2]]];
+ const centerTris=[[inner[0],inner[1],c],[inner[1],inner[2],c],[inner[2],inner[0],c]];
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ const outerFills=[faceTop,faceMid,faceShade,faceDark,faceShade,faceMid];
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      <g transform={`scale(-1,-1) translate(-64,-64)`}>
+        {outerTris.map((f,i)=><polygon key={`o${i}`} points={pf(f)} fill={outerFills[i]} stroke={stroke} strokeWidth="1" strokeLinejoin="round"/>)}
+        {centerTris.map((f,i)=><polygon key={`c${i}`} points={pf(f)} fill={[faceTop,faceMid,faceShade][i]} stroke={stroke} strokeWidth="1" strokeLinejoin="round"/>)}
+        <polygon points={pf([inner[0],inner[1],inner[2]])} fill={faceTop} stroke={stroke} strokeWidth="1" strokeLinejoin="round"/>
+        <polygon points={hex.map(p=>p.join(",")).join(" ")} fill="none" stroke={stroke} strokeWidth="1.5" strokeLinejoin="round"/>
+      </g>
+      {roll!=null&&<text x={cx} y={cy+1} textAnchor="middle" dominantBaseline="middle" fontSize="16" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+ if (sides===12) {
+ const Rout=28,Rpen=16;
+ const dec=Array.from({length:10},(_,i)=>{const a=(i*36-90)*Math.PI/180;return[+(cx+Rout*Math.cos(a)).toFixed(1),+(cy+Rout*Math.sin(a)).toFixed(1)];});
+ const pen=Array.from({length:5},(_,i)=>{const a=(i*72-90)*Math.PI/180;return[+(cx+Rpen*Math.cos(a)).toFixed(1),+(cy+Rpen*Math.sin(a)).toFixed(1)];});
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ const faces=Array.from({length:5},(_,i)=>{const p0=pen[i],p1=pen[(i+1)%5],d0=dec[(i*2)%10],d1=dec[(i*2+1)%10],d2=dec[(i*2+2)%10];return[p0,d0,d1,d2,p1];});
+ const fc=[faceTop,faceMid,faceShade,faceDark,faceShade];
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      {faces.map((f,i)=><polygon key={i} points={pf(f)} fill={fc[i]} stroke={stroke} strokeWidth="1.1" strokeLinejoin="round"/>)}
+      <polygon points={pf(pen)} fill={faceTop} stroke={stroke} strokeWidth="1.2" strokeLinejoin="round"/>
+      <polygon points={dec.map(p=>p.join(",")).join(" ")} fill="none" stroke={stroke} strokeWidth="2" strokeLinejoin="round"/>
+      {roll!=null&&<text x={cx} y={cy+1} textAnchor="middle" dominantBaseline="middle" fontSize="16" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+ if (sides===10||sides===100) {
+ const apex=[cx,cy-24],nadir=[cx,cy+30],wOL=[cx-26,cy+1],wOR=[cx+26,cy+1],wCL=[cx-14,cy+8],wCR=[cx+14,cy+8],wBot=[cx,cy+13];
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      <polygon points={pf([apex,wOL,wCL])} fill={faceMid} stroke={stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+      <polygon points={pf([apex,wCL,wBot,wCR])} fill={faceTop} stroke={stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+      <polygon points={pf([apex,wCR,wOR])} fill={faceMid} stroke={stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+      <polygon points={pf([wOL,wCL,wBot,nadir])} fill={faceShade} stroke={stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+      <polygon points={pf([wBot,wCR,wOR,nadir])} fill={faceDark} stroke={stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+      <polygon points={pf([apex,wOR,nadir,wOL])} fill="none" stroke={stroke} strokeWidth="2.4" strokeLinejoin="round"/>
+      {roll!=null&&<text x={cx} y={cy+1} textAnchor="middle" dominantBaseline="middle" fontSize={sides===100?11:16} fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+ if (sides===8) {
+ const R=28;
+ const hex=Array.from({length:6},(_,i)=>{const a=(i*60+90)*Math.PI/180;return[+(cx+R*Math.cos(a)).toFixed(1),+(cy-R*Math.sin(a)).toFixed(1)];});
+ const [triA,triB,triC]=[hex[0],hex[2],hex[4]];
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      <polygon points={pf([triA,triB,triC])} fill={faceTop} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([triA,hex[1],triB])} fill={faceMid} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([triB,hex[3],triC])} fill={faceShade} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([triC,hex[5],triA])} fill={faceDark} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={hex.map(p=>p.join(",")).join(" ")} fill="none" stroke={stroke} strokeWidth="2.4" strokeLinejoin="round"/>
+      {roll!=null&&<text x={(triA[0]+triB[0]+triC[0])/3} y={(triA[1]+triB[1]+triC[1])/3} textAnchor="middle" dominantBaseline="middle" fontSize="16" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+ if (sides===6) {
+ const s=4,fTL=[cx-18,cy-18+s],fTR=[cx+18,cy-18+s],fBR=[cx+18,cy+18+s],fBL=[cx-18,cy+18+s];
+ const tTL=[cx-10,cy-28+s],tTR=[cx+24,cy-28+s],rBR=[cx+24,cy+10+s];
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      <polygon points={pf([fTL,fTR,fBR,fBL])} fill={faceTop} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([tTL,tTR,fTR,fTL])} fill={faceMid} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([fTR,tTR,rBR,fBR])} fill={faceDark} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([tTL,tTR,rBR,fBR,fBL,fTL])} fill="none" stroke={stroke} strokeWidth="2.6" strokeLinejoin="round"/>
+      {roll!=null&&<text x={(fTL[0]+fTR[0]+fBR[0]+fBL[0])/4} y={(fTL[1]+fTR[1]+fBR[1]+fBL[1])/4} textAnchor="middle" dominantBaseline="middle" fontSize="20" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+ if (sides===4) {
+ const apex=[cx,cy-20],bL=[cx-26,cy+24],bR=[cx+26,cy+24],ridge=[cx+14,cy+24];
+ const pf=arr=>arr.map(p=>p.join(",")).join(" ");
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+      <polygon points={pf([apex,ridge,bR])} fill={faceShade} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([apex,bL,ridge])} fill={faceTop} stroke={stroke} strokeWidth="1.4" strokeLinejoin="round"/>
+      <polygon points={pf([apex,bR,bL])} fill="none" stroke={stroke} strokeWidth="2.8" strokeLinejoin="round"/>
+      <line x1={apex[0]} y1={apex[1]} x2={ridge[0]} y2={ridge[1]} stroke={stroke} strokeWidth="1.6" strokeLinecap="round"/>
+      {roll!=null&&<text x={(apex[0]+bL[0]+ridge[0])/3} y={(apex[1]+bL[1]+ridge[1])/3+3} textAnchor="middle" dominantBaseline="middle" fontSize="15" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+    </svg>);
+  }
+  // D2: coin
+ const ry=27,faceRx=24,faceOx=cx-3,rimRx=27,rimOx=cx+2;
+ return(<svg viewBox="0 0 64 64" width={W} height={H} style={{filter:`drop-shadow(0 2px 6px ${glow})`}}>
+    <defs>
+      <radialGradient id="d2face" cx="33%" cy="30%" r="68%"><stop offset="0%" stopColor={faceTop}/><stop offset="55%" stopColor={faceMid}/><stop offset="100%" stopColor={faceShade}/></radialGradient>
+      <linearGradient id="d2rim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor={faceMid}/><stop offset="100%" stopColor={faceDark}/></linearGradient>
+    </defs>
+    <ellipse cx={rimOx} cy={cy} rx={rimRx} ry={ry} fill="url(#d2rim)" stroke={stroke} strokeWidth="2"/>
+    <ellipse cx={faceOx} cy={cy} rx={faceRx} ry={ry} fill="url(#d2face)" stroke={stroke} strokeWidth="2"/>
+    <ellipse cx={faceOx} cy={cy} rx={faceRx-5} ry={ry-5} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.2"/>
+    {roll!=null&&<text x={faceOx} y={cy+1} textAnchor="middle" dominantBaseline="middle" fontSize="18" fontWeight="900" fill="white" stroke={stroke} strokeWidth="1.5" style={{paintOrder:"stroke fill"}} fontFamily="DM Sans,system-ui">{roll}</text>}
+  </svg>);
+};
+
+function DiceTrayPanel({ onClose, diceColor, setDiceColor }) {
+ const [trayQueue, setTrayQueue]   = useState([]);
+ const [rollResults, setRollResults] = useState(null);
+
+ const doRoll = () => {
+ const results = trayQueue.map(d => ({sides:d.sides, roll:Math.floor(Math.random()*d.sides)+1}));
+ setRollResults(results);
+  };
+
+ return (
+    <div className="dt-wrap">
+      {/* Header */}
+      <div className="dt-hdr">
+        <div className="dt-title">🎲 Dice Tray</div>
+        <button className="lp-close" onClick={onClose}>✕</button>
+      </div>
+
+      <div className="dt-body">
+        {/* Color picker */}
+        <div className="dt-colors">
+          {[{id:"blue",hex:"#3b82f6"},{id:"purple",hex:"#a855f7"},{id:"red",hex:"#ef4444"},
+            {id:"green",hex:"#22c55e"},{id:"black",hex:"#374151"},{id:"gold",hex:"#eab308"},
+            {id:"white",hex:"#e2e8f0"},{id:"pink",hex:"#ec4899"},{id:"teal",hex:"#22d3ee"},{id:"orange",hex:"#f97316"}]
+            .map(({id,hex})=>(
+              <button key={id} onClick={()=>setDiceColor(id)}
+ className="dt-swatch"
+ style={{background:hex,
+ border:diceColor===id?"3px solid #1e293b":"2px solid rgba(0,0,0,0.12)",
+ transform:diceColor===id?"scale(1.25)":"scale(1)"}}>
+              </button>
+            ))}
+        </div>
+
+        {/* Dice buttons - names only */}
+        <div className="dt-grid">
+          {DICE_TYPES.map(d=>{
+ const inQueue = trayQueue.some(x=>x.sides===d.sides);
+ return (
+              <button key={d.sides} className={"dt-die-btn"+(inQueue?" dt-die-active":"")}
+ onClick={()=>{setTrayQueue(q=>[...q,{id:Date.now()+Math.random(),sides:d.sides}]);setRollResults(null);}}>
+                <span className="dt-die-lbl">{d.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Tray queue */}
+        <div className="dt-tray">
+          {trayQueue.length===0
+            ? <span className="dt-tray-empty">Tap dice to add to roll...</span>
+            : trayQueue.map((d,i)=>(
+              <div key={d.id} className="dt-tray-die"
+ onClick={()=>{setTrayQueue(q=>q.filter((_,j)=>j!==i));setRollResults(null);}}>
+                <DieSVG sides={d.sides} roll={rollResults?rollResults[i]?.roll:null} color={diceColor}/>
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Roll controls */}
+        {trayQueue.length>0&&(
+          <div className="dt-actions">
+            <button className="dt-roll-btn" onClick={doRoll}>
+              Roll {trayQueue.length} {trayQueue.length===1?"die":"dice"}
+            </button>
+            <button className="dt-clear-btn" onClick={()=>{setTrayQueue([]);setRollResults(null);}}>
+              Clear
+            </button>
+          </div>
+        )}
+
+        {/* Results */}
+        {rollResults&&(
+          <div className="dt-results">
+            <div className="dt-results-breakdown">
+              {rollResults.map(r=>r.roll).join(" + ")} =
+            </div>
+            <div className="dt-results-total">
+              {rollResults.reduce((s,r)=>s+r.roll,0)}
+            </div>
+            <button className="dt-reroll-btn" onClick={doRoll}>↺ Reroll</button>
+          </div>
+        )}
+      </div>
+
+      <div className="lp-foot">Click a die in the tray to remove it</div>
+    </div>
+  );
+}
+
+// --- D&D LIBRARY (data lives in dnd-library.js)
+// To use: load dnd-library.js via a <script> tag before this file,
+// OR host dnd-library.js and it will be fetched automatically below.
+// LIB_KEY, LIB_CATS and LIB_SEED are loaded from dnd-library.js via window.DND_LIBRARY
+const LIB_KEY  = window.DND_LIBRARY?.LIB_KEY  || "dnd5e_library_v20";
+const LIB_CATS = window.DND_LIBRARY?.LIB_CATS || ["Race","Subrace","Class","Subclass","Feature","Background","Armor","Shield","Weapon","Equipment","Tools & Kits","Magic Item","Spell","Scroll","Potion","Wand & Rod","Jewelry","Gem","Component","Deity","Faction","Companion","Feat","Other"];
+const LIB_SEED = window.DND_LIBRARY?.LIB_SEED || [];
+function libLoad() {
+ try {
+ const raw = localStorage.getItem(LIB_KEY);
+ if (raw) {
+ const parsed = JSON.parse(raw);
+ const ids = new Set(parsed.map(e => e.id));
+      // Add missing seed entries
+ const missing = LIB_SEED.filter(e => !ids.has(e.id));
+      // Also refresh any seed entries that have been updated (by id match)
+ const seedById = Object.fromEntries(LIB_SEED.map(e => [e.id, e]));
+ const refreshed = parsed.map(e => seedById[e.id] && (e.phb || (e.tags||"").includes("TCE")) ? seedById[e.id] : e);
+ return [...refreshed, ...missing];
+    }
+  } catch(_) {}
+ return LIB_SEED;
+}
+function libSave(entries) {
+ try { localStorage.setItem(LIB_KEY, JSON.stringify(entries)); } catch(_) {}
+}
+
+function LibraryPanel({ onClose }) {
+ const [entries, setEntries]  = useState(libLoad);
+ const [cat, setCat]      = useState("All");
+ const [q, setQ]        = useState("");
+ const [editing, setEditing]  = useState(null);
+ const [openCat, setOpenCat]  = useState(null);   // only one book open at a time
+ const [expanded, setExpanded] = useState({});
+
+ const commit = updated => { setEntries(updated); libSave(updated); };
+ const addNew = () => {
+ const id = "c_" + Date.now();
+ commit([...entries, {id, title:"New Entry", category:"Other", desc:"", notes:"", tags:""}]);
+ setEditing(id);
+  };
+ const upd = (id, k, v) => commit(entries.map(e => e.id===id ? {...e,[k]:v} : e));
+ const del = id => { commit(entries.filter(e => e.id!==id)); if(editing===id) setEditing(null); };
+
+ const pickBook = c => setOpenCat(prev => prev===c ? null : c);
+
+ const lower = q.toLowerCase();
+ const visible = entries.filter(e =>
+    (cat==="All" || e.category===cat) &&
+    (!lower || (e.title||"").toLowerCase().includes(lower)
+            || (e.desc||"").toLowerCase().includes(lower)
+            || (e.tags||"").toLowerCase().includes(lower))
+  );
+
+ const colors = [
+    {spine:"#818cf8",top:"#a5b4fc"},{spine:"#fbbf24",top:"#fde68a"},
+    {spine:"#34d399",top:"#6ee7b7"},{spine:"#f472b6",top:"#fbcfe8"},
+    {spine:"#60a5fa",top:"#93c5fd"},{spine:"#c084fc",top:"#e9d5ff"},
+    {spine:"#fb923c",top:"#fed7aa"},{spine:"#2dd4bf",top:"#99f6e4"},
+    {spine:"#38bdf8",top:"#bae6fd"},{spine:"#fb7185",top:"#fecdd3"},
+    {spine:"#a3a3a3",top:"#d4d4d4"},
+  ];
+
+ const visibleCats = LIB_CATS.filter(c => cat==="All" || c===cat)
+    .filter(c => visible.filter(e=>e.category===c).length > 0);
+
+ return (
+    <div className="lp-wrap">
+      {/* Header */}
+      <div className="lp-hdr">
+        <div>
+          <div className="lp-title">📚 D&amp;D Library</div>
+          <div className="lp-sub">{entries.length} entries . PHB entries are read-only</div>
+        </div>
+        <div style={{display:"flex",gap:8,alignItems:"center"}}>
+          <button className="lp-add" onClick={addNew}>+ New</button>
+          <button className="lp-close" onClick={onClose}>✕</button>
+        </div>
+      </div>
+
+      {/* Toolbar */}
+      <div className="lp-toolbar">
+        <input className="lp-search" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search entries..."/>
+        <select className="lp-filter" value={cat} onChange={e=>{setCat(e.target.value);setOpenCat(null);}}>
+          <option value="All">All Categories</option>
+          {LIB_CATS.map(c=><option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+
+      {/* Bookshelf + entries */}
+      <div className="lp-list">
+        {visible.length===0 && (
+          <div className="lp-empty">
+            <div style={{fontSize:30,opacity:.2,marginBottom:8}}>📚</div>
+            {q||cat!=="All" ? "No matching entries." : "Library is empty - add your first entry."}
+          </div>
+        )}
+
+        {visible.length > 0 && (<>
+          {/* The shelf row */}
+          <div style={{position:"relative"}}>
+            <div className="lp-shelf">
+              {visibleCats.map((c, idx) => {
+ const group = visible.filter(e=>e.category===c);
+ const isOpen = openCat===c;
+ const col = colors[idx % colors.length];
+ return (
+                  <button key={c} className={"lp-book"+(isOpen?" lp-book-open":"")}
+ style={{"--spine":col.spine,"--top":col.top}}
+ onClick={()=>pickBook(c)}
+ title={c}>
+                    <div className="lp-book-head"/>
+                    <div className="lp-book-spine">
+                      <span className="lp-book-title">{c}</span>
+                      <span className="lp-book-count">{group.length}</span>
+                    </div>
+                  </button>
+                );
+              })}
+              <div className="lp-shelf-end"/>
+            </div>
+            <div className="lp-shelf-board"/>
+          </div>
+
+          {/* Entries for the open book */}
+          {openCat && (()=>{
+ const group = visible.filter(e=>e.category===openCat).sort((a,b)=>a.title.localeCompare(b.title));
+ return (
+              <div className="lp-book-contents">
+                <div className="lp-book-contents-hdr">
+                  <span className="lp-book-contents-cat">{openCat}</span>
+                  <span className="lp-book-contents-count">{group.length} entries</span>
+                  <button className="lp-contents-close" onClick={()=>setOpenCat(null)}>✕</button>
+                </div>
+                <div className="lp-book-contents-entries">
+                {group.map(entry => {
+ const isEditing  = editing===entry.id && !entry.phb && !(entry.tags||"").includes("TCE") && !(entry.tags||"").includes("XGE") && !(entry.tags||"").includes("SCAG") && !(entry.tags||"").includes("DMG");
+ const isExpanded = expanded[entry.id];
+ return (
+                    <div key={entry.id} className="lp-entry"
+ style={{borderLeft:entry.phb?"3px solid rgba(212,163,83,0.55)":(entry.tags||"").includes("XGE")?"3px solid rgba(124,58,237,0.55)":(entry.tags||"").includes("TCE")?"3px solid rgba(8,145,178,0.55)":(entry.tags||"").includes("SCAG")?"3px solid rgba(37,99,235,0.55)":(entry.tags||"").includes("DMG")?"3px solid rgba(220,38,38,0.55)":"3px solid var(--border-focus)"}}>
+                      {isEditing ? (
+                        <div className="lp-form">
+                          <input className="lp-in lp-in-title" value={entry.title||""} placeholder="Title"
+ onChange={e=>upd(entry.id,"title",e.target.value)}/>
+                          <select className="lp-in" value={entry.category}
+ onChange={e=>upd(entry.id,"category",e.target.value)}>
+                            {LIB_CATS.map(c=><option key={c} value={c}>{c}</option>)}
+                          </select>
+                          <textarea className="lp-in lp-ta" rows={3} placeholder="Description..."
+ value={entry.desc||""} onChange={e=>upd(entry.id,"desc",e.target.value)}/>
+                          <textarea className="lp-in lp-ta" rows={3} placeholder="Notes / stats / rules..."
+ value={entry.notes||""} onChange={e=>upd(entry.id,"notes",e.target.value)}/>
+                          <input className="lp-in" placeholder="Tags (comma separated)"
+ value={entry.tags||""} onChange={e=>upd(entry.id,"tags",e.target.value)}/>
+                          <div className="lp-form-btns">
+                            <button className="lp-btn lp-done" onClick={()=>setEditing(null)}>✓ Done</button>
+                            <button className="lp-btn lp-del" onClick={()=>del(entry.id)}>🗑</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="lp-entry-row"
+ onClick={()=>setExpanded(p=>({...p,[entry.id]:!p[entry.id]}))}>
+                            <span className="lp-chev" style={{transform:isExpanded?"rotate(0)":"rotate(-90deg)",color:entry.phb?"var(--accent)":(entry.tags||"").includes("XGE")?"#7c3aed":(entry.tags||"").includes("TCE")?"#0891b2":(entry.tags||"").includes("SCAG")?"#2563eb":(entry.tags||"").includes("DMG")?"#dc2626":"var(--muted)"}}>▾</span>
+                            <span className="lp-entry-title">{entry.title||"Untitled"}</span>
+                            {entry.phb && <span className="lp-phb-badge">PHB</span>}{!entry.phb && (entry.tags||"").includes("XGE") && <span className="lp-phb-badge" style={{color:"#7c3aed"}}>XGE</span>}{!entry.phb && (entry.tags||"").includes("SCAG") && <span className="lp-phb-badge" style={{color:"#2563eb"}}>SCAG</span>}{!entry.phb && (entry.tags||"").includes("DMG") && <span className="lp-phb-badge" style={{color:"#dc2626"}}>DMG</span>}
+                            {!entry.phb && (entry.tags||"").includes("TCE") && <span className="lp-tce-badge">TCE</span>}
+                          </div>
+                          {isExpanded && (
+                            <div className="lp-entry-body">
+                              {entry.desc  && <div className="lp-desc">{entry.desc}</div>}
+                              {entry.notes && <div className="lp-notes">{entry.notes}</div>}
+                              {entry.tags  && (
+                                <div className="lp-tags">
+                                  {entry.tags.split(",").map(t=>t.trim()).filter(Boolean).map(t=>(
+                                    <span key={t} className="lp-tag">{t}</span>
+                                  ))}
+                                </div>
+                              )}
+                              <div className="lp-entry-foot">
+                                {entry.phb
+                                  ? <span className="lp-phb-lbl">📖 Player's Handbook</span>
+                                  : (entry.tags||"").includes("DMG") ? <span className="lp-tce-lbl" style={{color:"#dc2626"}}>📖 Dungeon Master's Guide</span>
+                                  : (entry.tags||"").includes("SCAG") ? <span className="lp-tce-lbl" style={{color:"#2563eb"}}>📖 Sword Coast Adventurer's Guide</span>
+                                  : (entry.tags||"").includes("XGE") ? <span className="lp-tce-lbl" style={{color:"#7c3aed"}}>📖 Xanathar's Guide to Everything</span>
+                                  : (entry.tags||"").includes("TCE") ? <span className="lp-tce-lbl">📖 Tasha's Cauldron of Everything</span>
+                                  : <button className="lp-edit-link" onClick={()=>setEditing(entry.id)}>✏ Edit</button>
+                                }
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+                </div>{/* end lp-book-contents-entries */}
+              </div>
+            );
+          })()}
+        </>)}
+      </div>
+
+      <div className="lp-foot">Changes auto-save . PHB entries are read-only</div>
+    </div>
+  );
+}
+
+const CSS = `
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}:root{--bg:#dde3ec;--surface:#f8fafc;--card:#ffffff;--input:#f8fafc;--border:#c8d0dc;--border-focus:#6366f1;--text:#1e293b;--muted:#64748b;--subtle:#94a3b8;--accent:#6366f1;--accent-dark:#4338ca;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blood:#dc2626;--mana:#3b82f6;--divider:#c8d0dc;}html,body{overflow:hidden;height:100%;background:var(--bg);}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#b0bccb;border-radius:3px}.sheet{font-family:'DM Sans',system-ui,sans-serif;font-size:14px;color:var(--text);background:var(--bg);height:100dvh;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;}input,textarea,select{font-family:'DM Sans',system-ui,sans-serif;}input:focus,textarea:focus,select:focus{border-color:var(--border-focus)!important;outline:none;}button{font-family:inherit;cursor:pointer;border:none;background:none;}textarea{resize:vertical;}.hdr-row1{display:flex;align-items:center;gap:12px;background:var(--surface);border-bottom:1px solid var(--divider);padding:6px 12px;position:sticky;top:0;z-index:100;}.hdr-photo{width:76px;height:76px;border-radius:12px;background:var(--input);border:1.5px solid var(--border);overflow:hidden;flex-shrink:0;cursor:pointer;position:relative;transition:border-color .2s;display:flex;align-items:center;justify-content:center;}.hdr-photo:hover{border-color:var(--accent);}.hdr-photo-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}.hdr-photo-lbl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--subtle);}.hdr-photo-del{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.85);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;border:none;cursor:pointer;}.hdr-photo:hover .hdr-photo-del{opacity:1;}.hdr-level-box{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.07);width:48px;height:48px;flex-shrink:0;}.hdr-level-lbl{font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1px;}.hdr-level-num{font-family:'DM Mono',monospace;font-size:20px;font-weight:900;color:var(--accent);line-height:1;margin-top:1px;}.hdr-lvl-on{background:rgba(99,102,241,0.12)!important;border-color:var(--accent)!important;color:var(--accent)!important;font-weight:800;}.hdr-identity{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0;}.hdr-charname{font-size:22px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15;}.hdr-name-empty{color:var(--subtle);font-weight:400;font-style:italic;}.hdr-chips{display:flex;gap:6px;flex-wrap:wrap;}.hdr-lang-row{margin-top:3px;}.hdr-chip-lang-lbl{cursor:default;padding:2px 5px;}.hdr-chip-lang{cursor:pointer;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);color:var(--mana);}.hdr-chip-lang:hover{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);color:var(--red);}.hdr-chip-lang-auto{background:var(--input);border-color:var(--border);color:var(--muted);cursor:default;}.hdr-chip-lang-racial{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.35);color:var(--green);cursor:default;}.hdr-lang-input{font-size:10px;font-weight:500;color:var(--muted);background:transparent;border:1px dashed var(--border);border-radius:6px;padding:2px 7px;outline:none;width:90px;font-family:inherit;}.hdr-lang-input:focus{border-color:var(--accent);color:var(--text);}.hdr-chip{font-size:10px;font-weight:600;color:var(--muted);background:var(--input);border:1px solid var(--border);border-radius:6px;padding:2px 7px;white-space:nowrap;}.hdr-chip-accent{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3);color:var(--accent);}.hdr-dice-btn{display:flex;align-items:center;justify-content:center;background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:12px;color:var(--accent);width:40px;height:40px;flex-shrink:0;transition:all .15s;cursor:pointer;}.hdr-dice-btn:hover{background:rgba(99,102,241,0.14);border-color:var(--accent);}.hdr-dice-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--accent);}.hdr-row3{display:flex;flex-wrap:wrap;gap:5px;padding:6px 12px;background:var(--surface);border-bottom:1px solid var(--divider);}.hdr-row3-break{width:100%;height:0;flex-basis:100%;margin:-2px 0;}.hdr-field-group{display:flex;flex-direction:column;gap:2px;min-width:120px;flex:1;}.hdr-field-name{flex:1.6;min-width:160px;}.hdr-field-background{flex:1.4;min-width:150px;}.hdr-field-group-sm{min-width:110px;flex:0.7;}.hdr-field-group-xs{min-width:62px;flex:0 0 62px;}.mc-lock-badge{font-size:8px;font-weight:700;letter-spacing:.06em;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:var(--amber);border-radius:4px;padding:1px 5px;text-transform:uppercase;}.mc-locked{display:flex;align-items:center;gap:6px;background:var(--input);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:12px;color:var(--subtle);opacity:0.6;}.mc-lock-icon{font-size:13px;}.mc-warn{font-size:10px;color:var(--red);margin-top:3px;font-weight:500;}.mc-info-btn{font-size:10px;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;font-family:inherit;}.mc-info-btn:hover{background:rgba(99,102,241,0.2);}.mc-info-backdrop{position:fixed;inset:0;z-index:200;}.mc-info-panel{position:absolute;top:20px;right:0;left:auto;z-index:201;width:300px;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:14px;display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;}.mc-info-title{font-size:13px;font-weight:700;color:var(--text);border-bottom:1px solid var(--divider);padding-bottom:8px;}.mc-info-section{display:flex;flex-direction:column;gap:3px;}.mc-info-head{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);}.mc-info-body{font-size:11px;color:var(--muted);line-height:1.55;}.align-wrap{position:relative;width:100%;}.align-closed{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;cursor:pointer;font-family:'DM Sans',system-ui;font-size:13px;font-weight:600;color:var(--text);}.align-closed:hover{border-color:var(--border-focus);}.align-caret{font-size:10px;color:var(--muted);margin-left:4px;}.align-open{width:100%;}.hdr-field-lbl{font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}.hdr-field-in{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:12px;color:var(--text);outline:none;width:100%;transition:border-color .15s;}.hdr-field-in:focus{border-color:var(--border-focus);}.hdr-field-in::placeholder{color:var(--subtle);}.hdr-field-sel{cursor:pointer;}.hdr-field-sel option{background:#fff;}.hdr-row4{display:flex;flex-direction:column;gap:3px;padding:4px 12px 5px;background:var(--surface);border-bottom:1px solid var(--border);}.hdr-xp-bar-row{display:flex;flex-direction:column;gap:4px;}.hdr-xp-bar-labels{display:flex;justify-content:space-between;align-items:baseline;}.hdr-xp-seg-lbl{font-size:10px;font-weight:600;color:var(--muted);}.hdr-xp-fields{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;}.hdr-xp-field-group{display:flex;flex-direction:column;gap:3px;}.hdr-xp-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}.hdr-xp-in{width:72px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:3px 6px;font-size:12px;font-family:'DM Mono',monospace;font-weight:600;color:var(--text);text-align:center;outline:none;}.hdr-xp-in:focus{border-color:var(--border-focus);}.hdr-xp-add-row{display:flex;gap:5px;align-items:center;}.hdr-xp-add-in{width:90px;}.hdr-xp-add-btn{padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:var(--accent);cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;}.hdr-xp-add-btn:hover:not(:disabled){background:rgba(99,102,241,0.18);}.hdr-xp-add-btn:disabled{opacity:0.35;cursor:default;}.hdr-xp-inline{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;}.hdr-xp-plus{font-size:14px;font-weight:700;color:var(--muted);line-height:1;}.levelup-toast{background:linear-gradient(90deg,rgba(99,102,241,0.15),rgba(34,197,94,0.12));border-top:1px solid rgba(99,102,241,0.25);border-bottom:1px solid rgba(99,102,241,0.25);padding:8px 16px;text-align:center;font-size:13px;font-weight:700;color:var(--accent);cursor:pointer;animation:toastIn .3s ease;letter-spacing:.02em;}.levelup-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease;}.levelup-modal{background:var(--surface);border:1px solid rgba(99,102,241,0.35);border-radius:16px;padding:24px 20px;width:min(320px,92vw);box-shadow:0 8px 32px rgba(0,0,0,0.4);display:flex;flex-direction:column;align-items:center;gap:12px;}.levelup-modal-title{font-size:22px;font-weight:800;color:var(--accent);letter-spacing:.01em;}.levelup-modal-sub{font-size:13px;color:var(--muted);font-weight:500;}.levelup-modal-btns{display:flex;gap:12px;width:100%;}.levelup-class-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 8px;border-radius:12px;border:2px solid rgba(99,102,241,0.3);background:rgba(99,102,241,0.07);cursor:pointer;transition:all .15s ease;}.levelup-class-btn:hover{background:rgba(99,102,241,0.18);border-color:rgba(99,102,241,0.6);transform:translateY(-1px);}.levelup-class-btn:active{transform:translateY(0);}.levelup-class-btn-multi{border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.07);}.levelup-class-btn-multi:hover{background:rgba(168,85,247,0.18);border-color:rgba(168,85,247,0.6);}.levelup-class-name{font-size:15px;font-weight:700;color:var(--text);}.levelup-class-die{font-family:'DM Mono',monospace;font-size:18px;font-weight:800;color:var(--accent);}.levelup-class-btn-multi .levelup-class-die{color:#9333ea;}.levelup-modal-hint{font-size:10px;color:var(--muted);opacity:.7;}@keyframes toastIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}.hdr-xp-bar{height:6px;background:var(--divider);border-radius:3px;overflow:hidden;}.hdr-xp-fill{height:100%;background:linear-gradient(90deg,var(--accent),#818cf8);border-radius:3px;transition:width .4s ease;}.hdr-xp-next{font-size:10px;color:var(--accent);font-weight:600;text-align:right;}.hdr-insp-btn{font-size:20px;color:var(--amber);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:4px 10px;transition:all .15s;flex-shrink:0;cursor:pointer;}.hdr-insp-btn:hover{border-color:var(--amber);}.hdr-insp-on{background:rgba(245,158,11,0.1)!important;border-color:var(--amber)!important;}.core-vitals{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;}.core-hp{flex:1;}.core-ds{min-width:160px;padding-left:16px;border-left:1px solid var(--divider);}.hp-label{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}.hp-row{display:flex;align-items:center;gap:8px;}.hp-cur{font-family:'DM Mono',monospace;font-size:28px;font-weight:800;color:var(--red);background:transparent;border:none;outline:none;width:64px;text-align:center;}.hp-slash{color:var(--subtle);font-size:22px;}.hp-max{font-family:'DM Mono',monospace;font-size:18px;color:var(--muted);background:transparent;border:none;outline:none;width:50px;text-align:center;}.hp-temp-wrap{display:flex;align-items:center;gap:4px;margin-left:10px;}.hp-temp-lbl{font-size:9px;font-weight:700;letter-spacing:.07em;color:var(--mana);text-transform:uppercase;}.hp-temp{font-family:'DM Mono',monospace;font-size:16px;color:var(--mana);background:var(--input);border:1px solid var(--border);border-radius:6px;outline:none;width:44px;text-align:center;padding:2px 4px;}.hp-bar{height:4px;background:var(--divider);border-radius:2px;margin-top:8px;overflow:hidden;}.hp-fill{height:100%;background:linear-gradient(90deg,var(--blood),var(--red));border-radius:2px;transition:width .3s;}.ds-title{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}.pip-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}.pip-lbl{font-size:11px;color:var(--text);min-width:48px;}.pips{display:flex;gap:4px;}.pip{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);cursor:pointer;transition:all .15s;}.pip:hover{border-color:var(--muted);}.pip-succ{background:var(--green);border-color:var(--green)!important;}.pip-fail{background:var(--red);border-color:var(--red)!important;}.insp-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.07);padding:8px 12px;cursor:pointer;transition:all .2s;}.insp-btn:hover{border-color:var(--amber);}.insp-on{border-color:var(--amber)!important;background:rgba(245,158,11,0.08)!important;}.insp-star{font-size:22px;color:var(--amber);}.insp-lbl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.4;}.tabs{flex-shrink:0;display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--border);padding:0 10px;min-height:0;}.tab{padding:10px 14px;font-size:12px;font-weight:600;white-space:nowrap;color:var(--muted);border-bottom:2px solid transparent;text-transform:capitalize;background:none;transition:color .15s;}.tab:hover{color:var(--text);}.tab-on{color:var(--accent)!important;border-bottom-color:var(--accent)!important;}.panel-core{display:grid;grid-template-columns:240px minmax(0,1fr);gap:10px;align-items:start;}.cls-skill-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:8px;}.cls-skill-hdr{display:flex;align-items:center;justify-content:space-between;}.cls-skill-title{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}.cls-skill-count{font-size:11px;font-weight:600;color:var(--accent);}.cls-skill-grid{display:flex;flex-wrap:wrap;gap:5px;}.cls-skill-opt{font-size:11px;font-weight:500;padding:4px 10px;border-radius:7px;background:var(--input);border:1px solid var(--border);color:var(--text);cursor:pointer;font-family:inherit;transition:all .15s;}.cls-skill-opt:hover{border-color:var(--accent);color:var(--accent);}.cls-skill-opt-on{background:rgba(99,102,241,0.1)!important;border-color:var(--accent)!important;color:var(--accent)!important;font-weight:700;}.cls-skill-opt-dim{opacity:0.4;cursor:default;}.cls-skill-opt-bg{background:rgba(59,130,246,0.08)!important;border-color:var(--mana)!important;color:var(--mana)!important;cursor:default;}.cls-skill-opt-race{background:rgba(34,197,94,0.08)!important;border-color:var(--green)!important;color:var(--green)!important;cursor:default;}.cls-skill-src-tag{font-size:8px;font-weight:700;margin-left:4px;background:rgba(59,130,246,0.15);border-radius:3px;padding:0 3px;}.cls-skill-src-race{background:rgba(34,197,94,0.15)!important;}.ab-sk-dot-cls{background:rgba(99,102,241,0.5);border-color:var(--accent);}.ab-sk-cls-tag{font-size:8px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:4px;padding:1px 4px;letter-spacing:.04em;flex-shrink:0;}.core-left{display:flex;flex-direction:column;gap:6px;}.core-right{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}.ab-stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.07);}.ab-stat-primary{border-color:rgba(99,102,241,0.35)!important;}.ab-stat-title{text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:7px 10px 5px;border-bottom:1px solid var(--divider);}.ab-stat-body{display:flex;align-items:center;justify-content:center;gap:0;padding:8px 10px 6px;}.ab-stat-pill{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:6px 10px;min-width:52px;flex-shrink:0;margin-right:10px;gap:1px;cursor:default;}.ab-stat-pill-primary{background:rgba(99,102,241,0.08)!important;border-color:rgba(99,102,241,0.3)!important;}.ab-stat-abbr{font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--accent);}.ab-stat-mod-big{font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--text);line-height:1.05;}.ab-stat-score-in{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;color:var(--muted);background:transparent;border:none;outline:none;width:32px;text-align:center;cursor:pointer;}.ab-stat-score-in:focus{color:var(--accent);}.ab-racial-bonus{font-size:9px;font-weight:700;color:var(--green);letter-spacing:.04em;margin-top:1px;}.ab-stat-noskills{flex:1;}.ab-stat-skills{flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;}.ab-sk-row{display:flex;align-items:center;gap:7px;padding:4px 2px;cursor:pointer;border-radius:6px;transition:background .1s;}.ab-sk-row:hover{background:rgba(99,102,241,0.05);}.ab-sk-on{background:transparent;}.ab-sk-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;border:1.5px solid #cbd5e1;transition:all .15s;}.ab-sk-dot-empty{background:transparent;border-color:#cbd5e1;}.ab-sk-dot-p{background:var(--accent);border-color:var(--accent);}.ab-sk-dot-bg{background:rgba(59,130,246,0.5);border-color:var(--mana);}.ab-sk-dot-race{background:rgba(34,197,94,0.5);border-color:var(--green);}.ab-sk-race-tag{font-size:8px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:4px;padding:1px 4px;letter-spacing:.04em;flex-shrink:0;}.ab-sk-bg-tag{font-size:8px;font-weight:700;color:var(--mana);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:4px;padding:1px 4px;letter-spacing:.04em;flex-shrink:0;}.ab-sk-dot-ex{background:var(--accent-dark);border-color:var(--accent-dark);}.ab-sk-name{flex:1;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.ab-sk-bonus{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--accent);min-width:28px;text-align:right;}.ab-save-row{display:flex;align-items:center;gap:7px;padding:6px 10px 7px;cursor:pointer;border-top:1px solid var(--divider);background:var(--surface);transition:background .1s;}.ab-save-row:hover{background:rgba(99,102,241,0.04);}.ab-save-prof{background:rgba(99,102,241,0.14)!important;}.ab-save-label{flex:1;font-size:11px;color:var(--muted);}.ab-hit-die-row{display:flex;align-items:center;justify-content:flex-end;gap:4px;padding:3px 8px 3px 8px;margin-top:1px;}.ab-hit-die-label{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}.ab-hit-die-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:4px;padding:1px 5px;}.ab-save-class-tag{font-size:8px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:4px;padding:1px 4px;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;margin-right:3px;}.hp-card-dimmed{opacity:0.2;pointer-events:none;user-select:none;}.ds-overlay{position:absolute;inset:0;background:rgba(220,38,38,0.12);border:1.5px solid rgba(239,68,68,0.45);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;animation:fadeUp .2s ease;backdrop-filter:blur(2px);}.ds-overlay-hdr{display:flex;align-items:center;gap:6px;}.ds-overlay-title{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(239,68,68,0.85);flex:1;}.ds-overlay-reset{width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:rgba(239,68,68,0.8);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;}.ds-overlay-reset:hover{background:rgba(239,68,68,0.2);}.ds-overlay-body{display:flex;align-items:center;gap:8px;flex:1;}.ds-overlay-rows{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center;}.ds-overlay-row{display:flex;align-items:center;gap:8px;}.ds-overlay-lbl{font-size:13px;font-weight:600;color:rgba(100,116,139,0.9);min-width:70px;}.ds-overlay-pips{display:flex;gap:8px;}.ds-pip{width:22px;height:22px;border-radius:50%;border:2px solid rgba(203,213,225,0.8);background:rgba(255,255,255,0.9);cursor:pointer;transition:all .15s;}.ds-pip:hover{border-color:rgba(239,68,68,0.4);transform:scale(1.1);}.ds-pip-succ{background:rgba(34,197,94,0.3)!important;border-color:rgba(34,197,94,0.6)!important;}.ds-pip-fail{background:rgba(239,68,68,0.3)!important;border-color:rgba(239,68,68,0.6)!important;}.ds-overlay-d20{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,0.9);border:1px solid rgba(203,213,225,0.6);border-radius:10px;padding:8px 10px;min-width:56px;cursor:pointer;}.ds-overlay-d20-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:rgba(100,116,139,0.8);}.ds-overlay-d20-result{font-family:'DM Mono',monospace;font-size:30px;font-weight:900;line-height:1;}.ds-death-notice{text-align:center;font-size:11px;font-weight:700;color:rgba(239,68,68,0.9);background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:7px;padding:6px 10px;letter-spacing:.03em;}.hp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.07);padding:8px 10px;display:flex;flex-direction:column;gap:5px;}.hp-card-title{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}.hp-card-bar{height:8px;background:var(--divider);border-radius:4px;overflow:hidden;}.hp-card-fill{height:100%;border-radius:4px;transition:width .3s ease,background .3s ease;}.hp-card-meta{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:-1px;}.hp-card-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}.hp-card-field{display:flex;flex-direction:column;align-items:center;gap:3px;}.hp-card-field-lbl{font-size:8px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:3px;flex-wrap:wrap;justify-content:center;}.hp-card-base{font-size:9px;font-weight:600;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:4px;padding:1px 5px;}.hp-card-in{width:100%;background:var(--input);border:1px solid var(--border);border-radius:7px;padding:5px 2px;font-size:14px;font-weight:800;font-family:'DM Mono',monospace;color:var(--text);text-align:center;outline:none;transition:border-color .15s;}.hp-card-in:focus{border-color:var(--border-focus);}.hp-card-in::placeholder{color:var(--subtle);font-size:20px;}.hp-card-action-row{display:flex;gap:8px;align-items:center;}.hp-card-amount{flex:1;min-width:0;background:var(--input);border:1px solid var(--border);border-radius:7px;padding:5px 6px;font-size:12px;font-family:'DM Mono',monospace;font-weight:600;color:var(--text);outline:none;transition:border-color .15s;}.hp-card-amount::placeholder{color:var(--subtle);font-size:11px;font-family:'DM Sans',system-ui;font-weight:400;}.hp-card-amount:focus{border-color:var(--border-focus);}.hp-card-heal{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 8px;border-radius:9px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);cursor:pointer;transition:all .15s;gap:0;font-family:inherit;}.hp-card-heal:hover{background:rgba(34,197,94,0.18);}.hp-card-dmg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 8px;border-radius:9px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);cursor:pointer;transition:all .15s;gap:0;font-family:inherit;}.hp-card-dmg:hover{background:rgba(239,68,68,0.15);}.hp-btn-plus{font-size:11px;font-weight:800;color:var(--green);line-height:1;}.hp-btn-minus{font-size:11px;font-weight:800;color:var(--red);line-height:1;}.hp-btn-lbl{font-size:10px;font-weight:700;color:var(--text);}.core-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}.cstat-card-btn{cursor:pointer;transition:border-color .15s,box-shadow .15s;}.cstat-card-btn:hover{border-color:var(--accent);box-shadow:0 0 0 2px rgba(99,102,241,0.15);}.cstat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,0.06);padding:4px 6px;display:flex;flex-direction:column;align-items:center;gap:1px;}.cstat-wide{grid-column:1/-1;}.cstat-label{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:4px;}.cstat-auto{font-size:8px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:4px;padding:1px 5px;letter-spacing:.05em;}.cstat-val{font-family:'DM Mono',monospace;font-size:15px;font-weight:900;color:var(--text);line-height:1.1;text-align:center;}.cstat-val-lg{font-size:18px;}.cstat-input{background:transparent;border:none;outline:none;width:44px;cursor:text;font-family:'DM Mono',monospace;font-size:15px;font-weight:900;color:var(--text);text-align:center;}.cstat-input:focus{color:var(--accent);}.tab-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:14px;}.tab-body-core{padding:10px;}.ri-card{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.06);padding:10px 12px;display:flex;flex-direction:column;gap:8px;}.ri-card-hdr{display:flex;align-items:center;justify-content:space-between;}.ri-card-title{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}.ri-add-btn{font-size:11px;font-weight:600;color:var(--accent);background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:7px;padding:4px 10px;cursor:pointer;font-family:inherit;transition:all .15s;}.ri-add-btn:hover{background:rgba(99,102,241,0.15);}.ri-add-form{display:flex;gap:5px;flex-wrap:wrap;}.ri-sel{flex:1;min-width:0;background:var(--input);border:1px solid var(--border);border-radius:6px;padding:4px 6px;font-size:11px;color:var(--text);outline:none;font-family:inherit;}.ri-sel:focus{border-color:var(--border-focus);}.ri-confirm-btn{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:var(--accent);cursor:pointer;font-family:inherit;flex-shrink:0;}.ri-confirm-btn:disabled{opacity:0.35;cursor:default;}.ri-preview{display:flex;align-items:center;gap:8px;}.ri-preview-hint{font-size:10px;color:var(--subtle);font-style:italic;}.ri-empty{font-size:11px;color:var(--subtle);font-style:italic;padding:2px 0;}.ri-entries{display:flex;flex-wrap:wrap;gap:4px;}.ri-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;border-radius:5px;padding:3px 7px;}.ri-tag-type{font-size:8px;font-weight:800;letter-spacing:.06em;opacity:0.7;}.ri-tag-x{background:none;border:none;cursor:pointer;font-size:10px;color:inherit;padding:0;opacity:0.6;font-family:inherit;line-height:1;}.ri-tag-x:hover{opacity:1;}.adv-card{display:flex;gap:8px;align-items:stretch;}.adv-checks{flex:1;display:flex;flex-direction:column;gap:5px;}.adv-row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:8px 10px;cursor:pointer;transition:all .15s;text-align:left;font-family:inherit;width:100%;}.adv-row:hover{border-color:var(--accent);}.adv-on-adv{background:rgba(34,197,94,0.08)!important;border-color:rgba(34,197,94,0.35)!important;}.adv-on-dis{background:rgba(239,68,68,0.08)!important;border-color:rgba(239,68,68,0.35)!important;}.adv-chk{width:16px;height:16px;border-radius:3px;border:2px solid var(--border);flex-shrink:0;transition:all .15s;}.adv-chk-on-adv{background:var(--green);border-color:var(--green);}.adv-chk-on-dis{background:var(--red);border-color:var(--red);}.adv-lbl{font-size:12px;font-weight:500;color:var(--text);}.adv-dice-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:8px;min-width:56px;flex-shrink:0;transition:border-color .15s;cursor:pointer;}.adv-dice-box:hover{border-color:var(--accent);}.adv-dice-lbl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.05em;text-align:center;}.adv-results{display:flex;gap:5px;align-items:center;}.adv-result-box{width:34px;height:34px;border-radius:7px;border:2px solid var(--border);background:var(--input);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:16px;font-weight:900;transition:all .15s;}.adv-result-win{background:rgba(0,0,0,0.03);font-size:20px!important;}.adv-reroll{font-size:9px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:5px;padding:2px 7px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;}.adv-reroll:hover{background:rgba(99,102,241,0.15);}.iad-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}.iad-title{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}.iad-row{display:flex;gap:8px;align-items:center;}.iad-insp{flex:1;display:flex;align-items:center;gap:8px;background:var(--input);border:1px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;transition:all .15s;font-family:inherit;}.iad-insp:hover{border-color:var(--accent);}.iad-insp-on{background:rgba(99,102,241,0.07)!important;border-color:rgba(99,102,241,0.3)!important;}.iad-chk{width:16px;height:16px;border-radius:3px;border:2px solid var(--border);flex-shrink:0;transition:all .15s;}.iad-chk-on{background:var(--accent);border-color:var(--accent);}.iad-insp-lbl{font-size:12px;font-weight:500;color:var(--text);}.iad-counter{display:flex;align-items:center;gap:4px;}.iad-counter-sub,.iad-counter-add{width:28px;height:34px;border-radius:7px;background:var(--input);border:1px solid var(--border);font-size:16px;font-weight:700;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all .15s;}.iad-counter-sub:hover,.iad-counter-add:hover{border-color:var(--accent);color:var(--accent);}.iad-counter-num{width:34px;height:34px;border-radius:7px;background:var(--input);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;}.iad-counter-num:hover{border-color:var(--amber);}.iad-hint{font-size:9px;color:var(--subtle);font-style:italic;}.rest-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}.rest-title{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}.rest-row{display:flex;gap:8px;}.rest-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .15s;font-family:inherit;text-align:center;}.rest-short{background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);}.rest-short:hover{background:rgba(245,158,11,0.13);}.rest-long{background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.25);}.rest-long:hover{background:rgba(99,102,241,0.13);}.rest-accent{width:3px;height:36px;border-radius:2px;flex-shrink:0;}.rest-btn-title{font-size:13px;font-weight:800;}.rest-btn-sub{font-size:10px;color:var(--muted);margin-top:1px;}.core-sheet-footer{text-align:center;font-size:10px;color:var(--subtle);letter-spacing:.06em;margin-top:24px;padding:8px 0 4px;border-top:1px solid var(--divider);}.panel{animation:fadeUp .18s ease;}@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}.card-wrap{background:var(--card);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.07);padding:12px 14px;margin-bottom:12px;}.flbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;display:block;}.gi{width:100%;background:var(--input);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;padding:7px 10px;outline:none;transition:border-color .15s;}.gi::placeholder{color:var(--subtle);}.gi-sm{padding:4px 7px;font-size:12px;}.gi-center{text-align:center;}.gi-narrow{max-width:44px;}.gi-area{min-height:60px;line-height:1.6;}.muted-text{font-size:12px;color:var(--subtle);}.sec-head{display:flex;align-items:center;gap:7px;margin:12px 0 8px;}.sec-rune{font-size:13px;color:var(--accent);}.sec-title{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}.sec-rule{flex:1;height:1px;background:var(--divider);}.ab-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:8px;}.ab-box{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.07);padding:8px 4px 6px;text-align:center;}.ab-primary{border-color:var(--accent)!important;background:rgba(99,102,241,0.05);}.ab-name{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}.ab-mod{font-family:'DM Mono',monospace;font-size:20px;font-weight:800;color:var(--text);line-height:1.1;}.ab-score{font-family:'DM Mono',monospace;font-size:12px;color:var(--text);background:var(--input);border:1px solid var(--border);border-radius:6px;outline:none;width:36px;text-align:center;margin:3px 0 1px;padding:2px;}.ab-bonus{font-size:9px;color:var(--green);font-weight:600;margin-top:1px;}.species-bonus-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}.sb-tag{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}.sb-from{font-size:11px;color:var(--subtle);}.sv-row{display:flex;align-items:center;gap:6px;padding:4px 2px;cursor:pointer;border-bottom:1px solid var(--divider);transition:background .1s;}.sv-row:hover{background:rgba(99,102,241,0.04);}.sv-prof{background:rgba(99,102,241,0.05)!important;}.sv-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;}.sv-dot-on{background:var(--accent);border-color:var(--accent)!important;}.sv-key{font-size:9px;font-weight:700;color:var(--accent);min-width:26px;letter-spacing:.04em;}.sv-label{font-size:11px;color:var(--text);flex:1;}.sv-bonus{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--text);}.sk-group{margin-bottom:2px;}.sk-row{display:flex;align-items:center;gap:6px;padding:4px 2px 4px 14px;cursor:pointer;border-bottom:1px solid var(--divider);transition:background .1s;}.sk-row:hover{background:rgba(99,102,241,0.04);}.sk-on{background:rgba(99,102,241,0.04);}.sk-chk{width:10px;height:10px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;transition:all .15s;}.sk-p{background:var(--accent)!important;border-color:var(--accent)!important;}.sk-ex{background:var(--accent-dark)!important;border-color:var(--accent-dark)!important;}.sk-ab{font-size:9px;color:var(--subtle);min-width:26px;font-weight:600;}.sk-name{flex:1;font-size:11px;color:var(--text);}.sk-bonus{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--text);min-width:26px;text-align:right;}.prof-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;margin:2px 2px 2px 0;border-radius:5px;}.tag-blue{background:rgba(59,130,246,0.08);color:var(--mana);border:1px solid rgba(59,130,246,0.2);}.tag-red{background:rgba(239,68,68,0.08);color:var(--red);border:1px solid rgba(239,68,68,0.2);}.feat-list{display:flex;flex-direction:column;gap:10px;}.ft-card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,0.06);cursor:pointer;overflow:visible;}.ft-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;}.ft-card-title{font-size:18px;font-weight:800;color:var(--text);}.ft-card-sub{font-size:12px;color:var(--muted);margin-top:2px;}.ft-chev{font-size:14px;color:var(--muted);font-weight:300;}.ft-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 14px;}.ft-chip{font-size:13px;font-weight:500;color:var(--accent);background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:5px 12px;}.ft-expand{border-top:1px solid var(--divider);}.ft-expand-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:10px 16px;border-bottom:1px solid var(--divider);cursor:pointer;}.ft-expand-row:last-child{border-bottom:none;}.ft-expand-name{flex:1;font-size:13px;font-weight:600;color:var(--text);}.ft-expand-chev{font-size:12px;color:var(--muted);}.ft-card-race{cursor:default!important;}.ft-lib-section-hdr{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 14px;background:var(--surface);border-bottom:1px solid var(--divider);border-radius:14px 14px 0 0;}.ft-lib-section-hdr-btn{cursor:pointer;display:flex;align-items:center;justify-content:space-between;}.ft-lib-section-hdr-btn:hover{background:var(--input);}.ft-hdr-chev{font-size:10px;color:var(--muted);}.ft-feature-list{margin-top:8px;display:flex;flex-direction:column;border-top:1px solid var(--divider);}.ft-cls-stat-row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;}.ft-cls-stat-tag{font-size:10px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:5px;padding:2px 8px;white-space:nowrap;}.ft-feature-row-info{background:rgba(99,102,241,0.04)!important;}.feat-badge-info{background:rgba(99,102,241,0.12);color:var(--accent);border:1px solid rgba(99,102,241,0.2);}.ft-feature-divider{height:1px;background:var(--divider);margin:4px 0;}.ft-feature-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:7px 0;border-bottom:1px solid var(--divider);}.ft-feature-row:last-child{border-bottom:none;}.ft-feature-row-click{cursor:pointer;}.ft-feature-row-click:hover .ft-feature-name{color:var(--accent);}.ft-feature-name{flex:1;font-size:12px;font-weight:600;color:var(--text);}.ft-feature-chev{font-size:10px;color:var(--muted);}.ft-feature-detail{width:100%;font-size:11px;color:var(--muted);font-style:italic;padding-top:3px;}.ft-lib-entry{padding:12px 14px;border-bottom:1px solid var(--divider);border-radius:0 0 14px 14px;}.ft-lib-entry:last-child{border-bottom:none;}.ft-lib-entry-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}.ft-lib-entry-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;}.ft-lib-chev{font-size:9px;color:var(--muted);}.ft-lib-phb{font-size:10px;font-weight:700;color:#b45309;}.ft-lib-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:6px;}.ft-lib-notes{font-size:12px;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:8px;}.ft-subraces-tag{display:flex;flex-direction:column;align-items:flex-end;gap:1px;font-size:9px;color:var(--subtle);font-style:italic;margin-top:6px;padding-top:4px;border-top:1px solid var(--divider);}.ft-note-list{display:flex;flex-direction:column;gap:4px;margin:6px 0;}.ft-note-list-row{display:flex;align-items:center;}.ft-note-tags{display:flex;flex-wrap:wrap;gap:5px;}.ft-detail-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;position:relative;}.ft-detail-wrap{position:relative;}.ft-note-tag{font-size:11px;color:var(--text);background:var(--input);border:1px solid var(--border);border-radius:6px;padding:3px 9px;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;}.ft-note-tag-clickable{cursor:pointer;border-color:var(--accent);color:var(--accent);background:rgba(99,102,241,0.06);}.ft-note-tag-asi-on{border-color:var(--green)!important;color:var(--green)!important;background:rgba(34,197,94,0.08)!important;}.ft-note-tag-clickable:hover{background:rgba(99,102,241,0.12);}.ft-info-icon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--accent);color:#fff;font-size:9px;font-weight:800;font-style:normal;flex-shrink:0;}.ft-info-backdrop{position:fixed;inset:0;z-index:200;}.ft-info-popup{position:fixed;top:0;left:0;z-index:500;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;box-shadow:0 6px 20px rgba(0,0,0,0.14);max-width:280px;}.ft-info-popup-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}.ft-info-popup-body{font-size:11px;color:var(--muted);line-height:1.55;}.ft-lib-trait-row{display:flex;gap:6px;margin-bottom:4px;font-size:12px;}.ft-lib-trait-name{font-weight:700;color:var(--text);flex-shrink:0;}.ft-lib-trait-desc{color:var(--muted);}.ft-lib-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}.ft-lib-tag{font-size:11px;color:var(--muted);background:var(--input);border:1px solid var(--border);border-radius:5px;padding:2px 8px;}.ft-expand-body{width:100%;font-size:12px;color:var(--muted);line-height:1.55;padding:4px 0 2px;white-space:pre-wrap;}.feat-unified-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.07);}.feat-section{display:flex;flex-direction:column;}.feat-section+.feat-section{border-top:2px solid var(--divider);}.feat-section-hdr{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 14px;background:var(--surface);border-bottom:1px solid var(--divider);}.feat-card-flat{border:none!important;border-left:none!important;border-right:none!important;border-top:none!important;border-radius:0!important;box-shadow:none!important;margin:0!important;background:transparent!important;border-bottom:1px solid var(--divider)!important;}.feat-card-flat:last-child{border-bottom:none!important;}.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05);margin-bottom:6px;overflow:hidden;}.feat-card:hover{box-shadow:0 2px 6px rgba(0,0,0,0.1);}.feat-hdr{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;}.feat-badge{font-size:9px;font-weight:700;color:var(--accent);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:5px;padding:1px 6px;flex-shrink:0;}.feat-badge-species{font-size:9px;font-weight:700;color:var(--amber);background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:5px;padding:1px 6px;flex-shrink:0;}.feat-badge-dim{opacity:.4;}.feat-name{font-size:12px;font-weight:500;color:var(--text);flex:1;}.feat-gold{color:var(--amber)!important;font-weight:600;}.feat-chev{font-size:11px;color:var(--subtle);}.feat-body{padding:4px 12px 10px;font-size:12px;color:var(--muted);line-height:1.5;border-top:1px solid var(--divider);}.upcoming-label{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--subtle);margin:16px 0 8px;}.feat-upcoming{display:flex;align-items:center;gap:8px;padding:6px 8px;opacity:.4;font-size:12px;color:var(--text);}.spell-stats{display:flex;align-items:center;gap:12px;}.ss-cell{text-align:center;flex:1;}.ss-divider{width:1px;background:var(--divider);align-self:stretch;}.ss-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:800;color:var(--accent);}.ss-lbl{font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:2px;}.slot-levels{display:flex;flex-direction:column;gap:5px;margin-top:8px;}.slot-row{display:flex;align-items:center;gap:7px;}.slot-lvl{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);min-width:14px;}.slot-pips{display:flex;gap:5px;flex-wrap:wrap;}.slot-pip{width:16px;height:16px;border:2px solid var(--border);border-radius:4px;cursor:pointer;transition:all .15s;position:relative;background:var(--card);}.slot-pip::before{content:'';position:absolute;inset:2px;background:transparent;transition:background .15s;border-radius:2px;}.slot-pip:hover{border-color:var(--accent);}.slot-used{border-color:var(--accent)!important;}.slot-used::before{background:var(--accent)!important;}.slot-rem{font-size:10px;color:var(--subtle);margin-left:4px;}.spell-tabs{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0 10px;}.sp-tab{font-size:11px;font-weight:600;padding:5px 12px;background:var(--card);border:1px solid var(--border);border-radius:7px;color:var(--muted);cursor:pointer;transition:all .15s;}.sp-tab:hover{border-color:var(--accent);color:var(--text);}.sp-tab-on{border-color:var(--accent)!important;background:rgba(99,102,241,0.08)!important;color:var(--accent)!important;font-weight:700;}.sp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}.sp-item{display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:11px;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:all .12s;box-shadow:0 1px 2px rgba(0,0,0,0.04);}.sp-item:hover{border-color:var(--accent);}.sp-item-racial{border-color:rgba(34,197,94,0.4)!important;background:rgba(34,197,94,0.05)!important;}.sp-dot-racial{background:var(--green)!important;}.sp-item-domain{background:rgba(168,85,247,0.08)!important;border-color:rgba(168,85,247,0.35)!important;}.sp-dot-domain{background:rgba(168,85,247,0.8)!important;border-color:rgba(168,85,247,0.9)!important;}.sp-domain-tag{font-size:8px;font-weight:700;color:#9333ea;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:3px;padding:1px 4px;margin-left:auto;flex-shrink:0;}.sp-racial-tag{font-size:8px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:4px;padding:1px 4px;margin-left:auto;flex-shrink:0;}.sp-on{border-color:var(--accent)!important;background:rgba(99,102,241,0.08)!important;color:var(--accent)!important;}.sp-dot{width:6px;height:6px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;}.sp-on .sp-dot{background:var(--accent);border-color:var(--accent)!important;}.currency-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}.cur-cell{text-align:center;background:var(--input);border:1px solid var(--border);border-radius:6px;padding:4px 2px;}.cur-in{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--text);background:transparent;border:none;outline:none;width:100%;text-align:center;}.cur-lbl{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-top:3px;}.conv-title{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}.conv-row{display:flex;justify-content:space-between;font-size:10px;color:var(--subtle);padding:3px 0;border-bottom:1px solid var(--divider);}.conv-row:last-child{border-bottom:none;}.conv-row span:first-child{color:var(--text);font-weight:500;}.shield-row{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;color:var(--text);}.shield-chk{width:14px;height:14px;border:2px solid var(--border);border-radius:4px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--accent);transition:all .15s;}.shield-on{background:rgba(99,102,241,0.1)!important;border-color:var(--accent)!important;}.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}.photo-item{position:relative;height:140px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}.photo-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.55);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;line-height:1;}.photo-del:hover{background:rgba(239,68,68,0.8);}.photo-add{height:140px;border:2px dashed var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;}.photo-add:hover{border-color:var(--accent);}.condition-grid{display:flex;flex-wrap:wrap;gap:5px;}.condition-chip{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--input);color:var(--text);cursor:pointer;transition:all .15s;}.condition-chip:hover{border-color:var(--accent);}.condition-on{background:rgba(239,68,68,0.1)!important;border-color:var(--red)!important;color:var(--red)!important;font-weight:700;}.empty-state{text-align:center;padding:48px 20px;color:var(--subtle);font-size:13px;}.skill-roll-tag{font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:6px;text-transform:uppercase;}.roll-crit-tag{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.3);}.roll-fail-tag{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.3);}.dt-popover-backdrop{position:fixed;inset:0;z-index:400;background:rgba(15,20,35,0.3);backdrop-filter:blur(2px);}.dt-popover{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(340px,92vw);max-height:calc(100dvh - 60px);z-index:401;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,0.22),0 4px 12px rgba(0,0,0,0.1);overflow:hidden;animation:dtPop .18s ease;}@keyframes dtPop{from{opacity:0;transform:translate(-50%,-52%) scale(0.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}.dt-popover-slim{width:min(280px,88vw)!important;}.dt-wrap{display:flex;flex-direction:column;height:100%;overflow:hidden;}.dt-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;}.dt-title{font-size:15px;font-weight:700;color:var(--text);}.dt-body{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;}.dt-colors{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}.dt-swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;padding:0;transition:transform .1s;}.dt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}.dt-die-btn{border-radius:10px;background:var(--input);border:1px solid var(--border);padding:10px 4px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-family:inherit;}.dt-die-btn:hover{border-color:var(--accent);background:rgba(99,102,241,0.05);}.dt-die-active{background:rgba(99,102,241,0.1)!important;border-color:rgba(99,102,241,0.3)!important;}.dt-die-lbl{font-size:13px;font-weight:800;color:var(--text);font-family:'DM Mono',monospace;}.dt-die-active .dt-die-lbl{color:var(--accent);}.dt-tray{min-height:54px;background:var(--input);border-radius:9px;padding:7px 9px;border:1px solid var(--border);display:flex;align-items:center;flex-wrap:wrap;gap:5px;}.dt-tray-empty{font-size:11px;color:var(--subtle);font-style:italic;}.dt-tray-die{cursor:pointer;border-radius:7px;background:var(--card);border:1px solid rgba(99,102,241,0.2);padding:3px;transition:all .15s;}.dt-tray-die:hover{border-color:var(--red);background:rgba(239,68,68,0.05);}.dt-actions{display:flex;gap:7px;}.dt-roll-btn{flex:1;padding:8px;border-radius:9px;font-size:13px;font-weight:700;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:var(--accent-dark);cursor:pointer;transition:all .15s;font-family:inherit;}.dt-roll-btn:hover{background:rgba(99,102,241,0.18);}.dt-clear-btn{padding:8px 12px;border-radius:9px;font-size:12px;background:var(--input);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-family:inherit;}.dt-results{text-align:center;border-top:1px solid var(--border);padding-top:10px;}.dt-results-breakdown{font-size:11px;color:var(--subtle);margin-bottom:3px;}.dt-results-total{font-size:44px;font-weight:900;color:var(--text);font-family:'DM Mono',monospace;line-height:1;}.dt-reroll-btn{margin-top:7px;font-size:11px;color:var(--accent);font-weight:600;padding:4px 12px;border-radius:6px;background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);cursor:pointer;font-family:inherit;}.dt-reroll-btn:hover{background:rgba(99,102,241,0.12);}.hdr-lib-btn{display:flex;align-items:center;justify-content:center;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.25);border-radius:12px;color:var(--green);width:40px;height:40px;flex-shrink:0;transition:all .15s;cursor:pointer;}.hdr-lib-btn:hover{background:rgba(34,197,94,0.14);border-color:var(--green);}.hdr-collapse-btn{display:flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--input);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer;transition:all .15s;flex-shrink:0;}.hdr-collapse-btn:hover{border-color:var(--accent);color:var(--accent);}.lib-backdrop{position:fixed;inset:0;background:rgba(15,20,35,0.45);backdrop-filter:blur(3px);z-index:400;}.lib-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);z-index:401;display:flex;flex-direction:column;background:var(--bg);box-shadow:-6px 0 32px rgba(0,0,0,0.18);animation:lpSlide .22s ease;}@keyframes lpSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}.lp-wrap{display:flex;flex-direction:column;height:100%;overflow:hidden;}.lp-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;}.lp-title{font-size:17px;font-weight:700;color:var(--text);}.lp-sub{font-size:11px;color:var(--subtle);margin-top:1px;}.lp-add{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:var(--accent);cursor:pointer;transition:all .15s;font-family:inherit;}.lp-add:hover{background:rgba(99,102,241,0.18);}.lp-close{width:30px;height:30px;border-radius:7px;font-size:15px;color:var(--muted);background:var(--input);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}.lp-close:hover{color:var(--red);border-color:rgba(239,68,68,0.35);}.lp-toolbar{display:flex;gap:6px;padding:9px 12px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;}.lp-search{flex:1;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-size:13px;color:var(--text);outline:none;font-family:inherit;}.lp-search:focus{border-color:var(--border-focus);}.lp-filter{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:7px 8px;font-size:13px;color:var(--text);cursor:pointer;outline:none;font-family:inherit;}.lp-list{flex:1;overflow:hidden;padding:12px 10px;display:flex;flex-direction:column;gap:10px;min-height:0;}.lp-empty{text-align:center;padding:40px;color:var(--subtle);font-size:13px;}.lp-shelf{position:relative;display:flex;align-items:flex-end;gap:3px;padding:10px 10px 0;background:linear-gradient(180deg,#f5ede0 0%,#ede0cc 100%);border-radius:10px 10px 0 0;min-height:130px;border:1px solid #c9b89a;border-bottom:none;flex-wrap:nowrap;overflow-x:auto;overflow-y:visible;scrollbar-width:thin;scrollbar-color:#c9b89a transparent;}.lp-shelf-board{position:absolute;bottom:-8px;left:-1px;right:-1px;height:12px;background:linear-gradient(180deg,#8b6914 0%,#6b4f10 100%);border-radius:0 0 6px 6px;box-shadow:0 4px 8px rgba(0,0,0,0.25);z-index:2;}.lp-shelf-end{width:10px;align-self:stretch;flex-shrink:0;background:linear-gradient(90deg,#8b6914,#6b4f10);border-radius:0 4px 4px 0;margin-bottom:0;}.lp-book{display:flex;flex-direction:column;align-items:stretch;width:44px;flex-shrink:0;cursor:pointer;border:none;padding:0;position:relative;transition:transform .2s ease,filter .2s ease;transform-origin:bottom center;}.lp-book:hover{transform:translateY(-8px) scale(1.04);filter:brightness(1.08);}.lp-book-open{transform:translateY(-14px) scale(1.06)!important;filter:brightness(1.12);}.lp-book-open .lp-book-spine::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;background:rgba(255,255,255,0.6);border-radius:0 0 3px 3px;}.lp-book-head{height:8px;width:100%;background:var(--top);border-radius:3px 3px 0 0;box-shadow:inset 0 -2px 4px rgba(0,0,0,0.2);}.lp-book-spine{flex:1;min-height:90px;background:var(--spine);display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;box-shadow:inset -3px 0 6px rgba(0,0,0,0.2),inset 2px 0 4px rgba(255,255,255,0.08);gap:6px;padding:8px 2px;}.lp-book-spine::before{content:'';position:absolute;left:4px;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.12);border-radius:1px;}.lp-book-title{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);font-size:10px;font-weight:700;color:rgba(30,41,59,0.85);letter-spacing:.06em;text-transform:uppercase;opacity:.95;max-height:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.4);}.lp-book-count{font-size:9px;font-weight:700;color:rgba(30,41,59,0.85);opacity:.7;background:rgba(0,0,0,0.2);border-radius:10px;padding:1px 5px;min-width:18px;text-align:center;}.lp-book-contents{background:var(--card);border:1px solid var(--border);border-radius:0 0 10px 10px;padding:0;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-top:8px;flex:1;display:flex;flex-direction:column;min-height:0;}.lp-book-contents-hdr{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--surface);border-bottom:1px solid var(--divider);flex-shrink:0;position:sticky;top:0;z-index:2;}.lp-book-contents-entries{overflow-y:auto;flex:1;min-height:0;}.lp-book-contents-cat{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text);}.lp-book-contents-count{font-size:11px;color:var(--subtle);}.lp-contents-close{width:24px;height:24px;border-radius:6px;font-size:14px;color:var(--muted);background:var(--input);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:auto;transition:all .15s;font-family:inherit;}.lp-contents-close:hover{color:var(--red);border-color:rgba(239,68,68,0.35);}.lp-folder{border-radius:9px;overflow:hidden;}.lp-folder-hdr{display:flex;align-items:center;gap:7px;padding:8px 12px;cursor:pointer;user-select:none;background:var(--card);border:1px solid var(--border);border-radius:9px;transition:all .15s;}.lp-folder-open{background:rgba(99,102,241,0.06)!important;border-color:rgba(99,102,241,0.22)!important;border-radius:9px 9px 0 0!important;}.lp-folder-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;flex:1;}.lp-folder-count{font-size:11px;color:var(--subtle);}.lp-chev{font-size:13px;color:var(--muted);flex-shrink:0;display:inline-block;transition:transform .18s;}.lp-folder-body{border:1px solid rgba(99,102,241,0.2);border-top:none;border-radius:0 0 9px 9px;padding:5px;display:flex;flex-direction:column;gap:4px;}.lp-entry{background:var(--card);border-radius:0;padding:8px 14px;box-shadow:none;border-bottom:1px solid var(--divider);}.lp-entry:last-child{border-bottom:none;}.lp-entry-row{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;}.lp-entry-title{font-size:13px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.lp-phb-badge{font-size:9px;color:#b45309;font-weight:700;flex-shrink:0;}.lp-tce-badge{font-size:9px;color:var(--accent);font-weight:700;flex-shrink:0;}.lp-tce-lbl{font-size:9px;color:var(--accent);font-weight:600;}.lp-entry-body{margin-top:8px;padding-top:8px;border-top:1px solid var(--divider);}.lp-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:5px;}.lp-notes{font-size:11px;color:var(--subtle);font-style:italic;margin-bottom:5px;white-space:pre-wrap;}.lp-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px;}.lp-tag{font-size:9px;color:var(--subtle);background:var(--input);border:1px solid var(--border);border-radius:4px;padding:1px 5px;}.lp-entry-foot{display:flex;justify-content:flex-end;margin-top:4px;gap:8px;}.lp-phb-lbl{font-size:9px;color:#b45309;font-weight:600;}.lp-edit-link{font-size:11px;font-weight:600;color:var(--accent);cursor:pointer;background:none;border:none;padding:0;font-family:inherit;}.lp-edit-link:hover{text-decoration:underline;}.lp-form{display:flex;flex-direction:column;gap:7px;}.lp-in{background:var(--input);border:1px solid var(--border);border-radius:7px;padding:6px 9px;font-size:12px;color:var(--text);outline:none;width:100%;font-family:inherit;}.lp-in:focus{border-color:var(--border-focus);}.lp-in-title{font-size:13px;font-weight:600;}.lp-ta{resize:vertical;min-height:60px;}.lp-form-btns{display:flex;gap:6px;}.lp-btn{flex:1;padding:7px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;}.lp-done{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25)!important;color:var(--accent);}.lp-done:hover{background:rgba(99,102,241,0.16);}.lp-del{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25)!important;color:var(--red);flex:0;padding:7px 14px;}.lp-del:hover{background:rgba(239,68,68,0.16);}.lp-foot{padding:9px 14px;font-size:10px;color:var(--subtle);text-align:center;border-top:1px solid var(--border);flex-shrink:0;background:var(--surface);}.lightbox-backdrop{position:fixed;inset:0;background:rgba(15,15,25,0.85);backdrop-filter:blur(6px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:lbFadeIn .2s ease;}@keyframes lbFadeIn{from{opacity:0}to{opacity:1}}.lightbox-panel{position:relative;border-radius:16px;overflow:hidden;max-width:480px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.5);animation:lbSlideUp .22s ease;line-height:0;}@keyframes lbSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.lightbox-img{width:100%;max-height:80vh;object-fit:cover;display:block;}.lightbox-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:14px;background:linear-gradient(180deg,rgba(0,0,0,0.45) 0%,transparent 35%,transparent 60%,rgba(0,0,0,0.6) 100%);}.lightbox-overlay-info{display:flex;flex-direction:column;gap:2px;}.lightbox-name{font-size:18px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.6);}.lightbox-sub{font-size:12px;color:rgba(255,255,255,0.8);text-shadow:0 1px 3px rgba(0,0,0,0.5);}.lightbox-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}.lightbox-btn{font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;border:none;transition:all .15s;backdrop-filter:blur(4px);}.lightbox-btn-primary{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3)!important;}.lightbox-btn-primary:hover{background:rgba(255,255,255,0.3);}.lightbox-btn-ghost{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25)!important;}.lightbox-btn-ghost:hover{background:rgba(255,255,255,0.25);}.lightbox-btn-danger{background:rgba(239,68,68,0.4);color:#fff;border:1px solid rgba(239,68,68,0.5)!important;}.lightbox-btn-danger:hover{background:rgba(239,68,68,0.6);}input[type=number]{-moz-appearance:textfield;}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;}@media(max-width:700px){.hdr-stats{display:none;}.hdr-top-row{flex-wrap:wrap;}.ab-row{grid-template-columns:repeat(3,1fr);}.two-col{grid-template-columns:1fr;}.sp-grid{grid-template-columns:1fr 1fr;}}`;
+
+
+if (typeof ReactDOM !== "undefined" && ReactDOM.createRoot) {
+  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+}
