@@ -22,45 +22,40 @@
     <p>Loading...</p>
   </div>
   <div id="root"></div>
-
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.2/babel.min.js"></script>
-
   <script>
     window.useState    = React.useState;
     window.useCallback = React.useCallback;
     window.useRef      = React.useRef;
     window.useEffect   = React.useEffect;
     window.useMemo     = React.useMemo;
+    window.useState    = React.useState;
 
     function showError(msg) {
       var el = document.getElementById('loading');
       el.style.display = 'flex';
       el.innerHTML =
-        '<div style="max-width:90vw;padding:24px;font-family:sans-serif;text-align:center">' +
-        '<div style="font-size:40px;margin-bottom:16px">&#9888;&#65039;</div>' +
-        '<h2 style="color:#f87171;margin-bottom:12px;font-size:18px">Failed to load</h2>' +
-        '<pre style="background:#1e1e2e;color:#e0e0e0;padding:12px;border-radius:8px;' +
-        'font-size:11px;white-space:pre-wrap;word-break:break-all;text-align:left;' +
-        'max-height:50vh;overflow:auto">' + String(msg).replace(/</g,'&lt;') + '</pre></div>';
+        '<div style="max-width:90vw;padding:20px;font-family:monospace">' +
+        '<h2 style="color:#f87171;margin-bottom:10px">Error</h2>' +
+        '<pre style="background:#1e1e2e;color:#e0e0e0;padding:10px;border-radius:6px;' +
+        'font-size:11px;white-space:pre-wrap;word-break:break-all;max-height:60vh;overflow:auto">' +
+        String(msg).replace(/</g,'&lt;') + '</pre></div>';
     }
 
     fetch('dnd-sheet-all-in-one.jsx')
-      .then(function(r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.text();
-      })
+      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(function(src) {
-        var result = Babel.transform(src, { presets: ['react'], sourceType: 'script' });
-        var tag = document.createElement('script');
-        tag.textContent = result.code;
-        document.body.appendChild(tag);
-        document.getElementById('loading').style.display = 'none';
+        try {
+          var result = Babel.transform(src, { presets: ['react'], sourceType: 'unambiguous' });
+          new Function('React','ReactDOM','window', result.code)(React, ReactDOM, window);
+          document.getElementById('loading').style.display = 'none';
+        } catch(e) {
+          showError(e.message + '\n\n' + (e.stack||''));
+        }
       })
-      .catch(function(e) {
-        showError(e.stack || e.message || String(e));
-      });
+      .catch(function(e) { showError(e.stack || e.message || String(e)); });
   </script>
 </body>
 </html>
