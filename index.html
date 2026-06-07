@@ -18,8 +18,8 @@
 <body>
   <div id="loading">
     <div class="spinner"></div>
-    <h1>⚔️ D&D 5e Character Sheet</h1>
-    <p id="loading-msg">Loading...</p>
+    <h1>&#9876;&#65039; D&amp;D 5e Character Sheet</h1>
+    <p>Loading...</p>
   </div>
   <div id="root"></div>
 
@@ -34,88 +34,33 @@
     window.useEffect   = React.useEffect;
     window.useMemo     = React.useMemo;
 
-    var CACHE_KEY = 'dnd_compiled_v2';
-
-    function setMsg(t) {
-      var el = document.getElementById('loading-msg');
-      if (el) el.textContent = t;
-    }
-
     function showError(msg) {
       var el = document.getElementById('loading');
+      el.style.display = 'flex';
       el.innerHTML =
         '<div style="max-width:90vw;padding:24px;font-family:sans-serif;text-align:center">' +
-        '<div style="font-size:40px;margin-bottom:16px">⚠️</div>' +
+        '<div style="font-size:40px;margin-bottom:16px">&#9888;&#65039;</div>' +
         '<h2 style="color:#f87171;margin-bottom:12px;font-size:18px">Failed to load</h2>' +
         '<pre style="background:#1e1e2e;color:#e0e0e0;padding:12px;border-radius:8px;' +
         'font-size:11px;white-space:pre-wrap;word-break:break-all;text-align:left;' +
         'max-height:50vh;overflow:auto">' + String(msg).replace(/</g,'&lt;') + '</pre></div>';
     }
 
-    function runCode(code) {
-      var tag = document.createElement('script');
-      tag.textContent = code;
-      document.body.appendChild(tag);
-      document.getElementById('loading').style.display = 'none';
-    }
-
-    // Try to use cached compiled code first
-    function tryCache(src, srcLen) {
-      try {
-        var cached = sessionStorage.getItem(CACHE_KEY);
-        if (cached) {
-          var obj = JSON.parse(cached);
-          if (obj.len === srcLen) {
-            setMsg('Restoring...');
-            runCode(obj.code);
-            return true;
-          }
-        }
-      } catch(e) {}
-      return false;
-    }
-
-    function saveCache(code, srcLen) {
-      try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify({ len: srcLen, code: code }));
-      } catch(e) {
-        // sessionStorage full — clear and try once
-        try { sessionStorage.clear(); sessionStorage.setItem(CACHE_KEY, JSON.stringify({ len: srcLen, code: code })); } catch(e2) {}
-      }
-    }
-
-    setMsg('Loading sheet...');
     fetch('dnd-sheet-all-in-one.jsx')
       .then(function(r) {
-        if (!r.ok) throw new Error('Could not load sheet (HTTP ' + r.status + ')');
+        if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.text();
       })
       .then(function(src) {
-        var srcLen = src.length;
-        // Check cache before compiling
-        if (tryCache(src, srcLen)) return;
-        // Cache miss — compile
-        setMsg('Compiling (first load only)...');
-        var result;
-        try {
-          result = Babel.transform(src, { presets: ['react'], sourceType: 'script' });
-        } catch(e) {
-          throw new Error('Babel error:\n' + e.message);
-        }
-        saveCache(result.code, srcLen);
-        setMsg('Starting...');
-        runCode(result.code);
+        var result = Babel.transform(src, { presets: ['react'], sourceType: 'script' });
+        var tag = document.createElement('script');
+        tag.textContent = result.code;
+        document.body.appendChild(tag);
+        document.getElementById('loading').style.display = 'none';
       })
       .catch(function(e) {
         showError(e.stack || e.message || String(e));
       });
-
-    window.addEventListener('error', function(e) {
-      showError((e.error && e.error.stack) || e.message);
-    });
-    window.addEventListener('unhandledrejection', function(e) {
-      showError(e.reason && e.reason.stack ? e.reason.stack : String(e.reason));
-    });
   </script>
 </body>
 </html>
