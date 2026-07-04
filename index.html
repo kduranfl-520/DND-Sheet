@@ -31,7 +31,6 @@
     window.useRef      = React.useRef;
     window.useEffect   = React.useEffect;
     window.useMemo     = React.useMemo;
-    window.useState    = React.useState;
 
     function showError(msg) {
       var el = document.getElementById('loading');
@@ -44,18 +43,46 @@
         String(msg).replace(/</g,'&lt;') + '</pre></div>';
     }
 
-    fetch('dnd-sheet-all-in-one.jsx')
-      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(function(src) {
-        try {
-          var result = Babel.transform(src, { presets: ['react'], sourceType: 'unambiguous' });
-          new Function('React','ReactDOM','window', result.code)(React, ReactDOM, window);
-          document.getElementById('loading').style.display = 'none';
-        } catch(e) {
-          showError(e.message + '\n\n' + (e.stack||''));
+    function loadSheet(filename) {
+      document.querySelector('#loading p').textContent = 'Loading ' + filename + '...';
+      fetch(filename)
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+        .then(function(src) {
+          try {
+            var result = Babel.transform(src, { presets: ['react'], sourceType: 'unambiguous' });
+            new Function('React','ReactDOM','window', result.code)(React, ReactDOM, window);
+            document.getElementById('loading').style.display = 'none';
+          } catch(e) {
+            showError(e.message + '\n\n' + (e.stack||''));
+          }
+        })
+        .catch(function(e) { showError(e.stack || e.message || String(e)); });
+    }
+
+    // Try GitHub API to find the versioned file, fall back to fixed name
+    fetch('https://api.github.com/repos/kduranfl-520/DND-Sheet/contents/')
+      .then(function(r) { return r.json(); })
+      .then(function(files) {
+        // Find file matching pattern: (v\d+-)?dnd-sheet-all-in-one.jsx
+        var match = files.filter(function(f) {
+          return /dnd-sheet-all-in-one\.jsx$/i.test(f.name);
+        }).sort(function(a, b) {
+          // Sort by version number descending, pick highest
+          var va = parseInt((a.name.match(/v(\d+)/) || [0,0])[1]);
+          var vb = parseInt((b.name.match(/v(\d+)/) || [0,0])[1]);
+          return vb - va;
+        })[0];
+        if (match) {
+          loadSheet(match.name);
+        } else {
+          // Fallback to unversioned name
+          loadSheet('dnd-sheet-all-in-one.jsx');
         }
       })
-      .catch(function(e) { showError(e.stack || e.message || String(e)); });
+      .catch(function() {
+        // API unavailable (offline, rate limit, private repo) — fall back to fixed name
+        loadSheet('dnd-sheet-all-in-one.jsx');
+      });
   </script>
 </body>
 </html>
