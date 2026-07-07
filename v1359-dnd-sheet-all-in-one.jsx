@@ -9373,8 +9373,8 @@ function App() {
                                         );
                                       } else {
                                         return(
-                                          <React.Fragment key={ei}>
-                                            <span style={{fontSize:10,color:"var(--muted)",fontStyle:"italic"}}>{entry.label}</span>
+                                          <div key={ei} style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:4}}>
+                                            <span style={{fontSize:10,color:"var(--muted)",fontStyle:"italic",whiteSpace:"nowrap"}}>{entry.label}</span>
                                             {entry.options.map((opt,oi)=>{
                                               const key="choice_"+ei+"_"+oi;
                                               const isChosen=chosen.includes(key);
@@ -9395,7 +9395,7 @@ function App() {
                                                     transition:"all .15s"}}>{opt}</span>
                                               );
                                             })}
-                                          </React.Fragment>
+                                          </div>
                                         );
                                       }
                                     })}
