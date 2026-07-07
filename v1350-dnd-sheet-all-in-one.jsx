@@ -3087,7 +3087,7 @@ const BG_LANG_COUNT = {
 // Starting equipment granted by background (array of strings)
 const BG_EQUIPMENT = {
   Acolyte:         ["Holy symbol","Prayer book or prayer wheel","5 sticks of incense","Vestments","Common clothes","Belt pouch (15 gp)"],
-  Charlatan:       ["Fine clothes","Disguise kit","Con tools (choose one: 10 stoppered bottles of colored liquid, weighted dice, deck of marked cards, or signet ring of an imaginary duke)","Belt pouch (15 gp)"],
+  Charlatan:       ["Fine clothes","Belt pouch (15 gp)"],
   Criminal:        ["Crowbar","Dark common clothes with hood","Belt pouch (15 gp)"],
   Entertainer:     ["Musical instrument (one of your choice)","Favor of an admirer (love letter, lock of hair, or trinket)","Costume clothes","Belt pouch (15 gp)"],
   "Folk Hero":     ["Artisan's tools (one of your choice)","Shovel","Iron pot","Common clothes","Belt pouch (10 gp)"],
@@ -11747,8 +11747,9 @@ onClick={()=>{const _cp=CLASSES[char.charClass]?.cantripKnown,_m=_cp?(_cp[Math.m
                         autoRows.push({key:"bgeq__"+item, name:item, badge:"BG", badgeColor:"var(--mana)", badgeBg:"rgba(59,130,246,0.1)", badgeBorder:"rgba(59,130,246,0.3)", rowBg:"rgba(59,130,246,0.07)", rowBorder:"rgba(59,130,246,0.25)", desc:""});
                       });
                       // Charlatan con tools choice
-                      if(char.background==="Charlatan"&&char.bgConChoice){
-                        autoRows.push({key:"bgeq__contools__"+char.bgConChoice, name:char.bgConChoice, badge:"BG", badgeColor:"var(--mana)", badgeBg:"rgba(59,130,246,0.1)", badgeBorder:"rgba(59,130,246,0.3)", rowBg:"rgba(59,130,246,0.07)", rowBorder:"rgba(59,130,246,0.25)", desc:""});
+                      if(char.background==="Charlatan"){
+                        const conName = char.bgConChoice||"Tools of the Con (choose in Features tab)";
+                        autoRows.push({key:"bgeq__contools__"+(char.bgConChoice||"placeholder"), name:conName, badge:"BG", badgeColor:"var(--mana)", badgeBg:"rgba(59,130,246,0.1)", badgeBorder:"rgba(59,130,246,0.3)", rowBg:"rgba(59,130,246,0.07)", rowBorder:"rgba(59,130,246,0.25)", desc:""});
                       }
                     }
 
