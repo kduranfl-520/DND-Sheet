@@ -9373,7 +9373,7 @@ function App() {
                                         );
                                       } else {
                                         return(
-                                          <div key={ei} style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:4}}>
+                                          <div key={ei} style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:4,width:"100%",marginTop:2}}>
                                             <span style={{fontSize:10,color:"var(--muted)",fontStyle:"italic",whiteSpace:"nowrap"}}>{entry.label}</span>
                                             {entry.options.map((opt,oi)=>{
                                               const key="choice_"+ei+"_"+oi;
