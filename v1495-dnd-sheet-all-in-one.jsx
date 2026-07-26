@@ -8494,50 +8494,294 @@ function App() {
                                           const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
                                           const pb=Math.ceil(1+lvl/4);
                                           const wisMod=Math.floor(((char.abilities?.WIS||10)-10)/2);
+                                          const strMod=Math.floor(((char.abilities?.STR||10)-10)/2);
                                           const saveDC=8+pb+wisMod;
                                           const cdUsed=char.clericCDUsed||0;
                                           const cdMax=lvl>=18?3:lvl>=6?2:1;
-                                          // Parse domain features from notes
-                                          const rawNotes=domainEntry2.notes||"";
-                                          // Extract non-spell features
-                                          const featureParts=rawNotes.replace(/Domain Spells:.*/s,"").replace(/Parent Class:[^|]+\|?/,"").split("|").map(s=>s.trim()).filter(Boolean);
-                                          // Extract Channel Divinity option name
-                                          const cdMatch=rawNotes.match(/Channel Divinity[^|)]+\(([^)]+)\)/i)||rawNotes.match(/Channel Divinity[:\s]+([^|.]+)/i);
-                                          const cdOption=cdMatch?cdMatch[1].trim():"";
+                                          const cdLeft=cdMax-cdUsed;
+                                          const dom=char.divineDomain||"";
+                                          // Shared helpers
+                                          const FC=({label,minLvl,children})=>{
+                                            if(lvl<minLvl) return null;
+                                            return(
+                                              <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
+                                                <div style={{fontSize:10,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>{label}</div>
+                                                {children}
+                                              </div>
+                                            );
+                                          };
+                                          const Body=({children})=><div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{children}</div>;
+                                          const CDBtn=()=>(
+                                            <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                              <button style={{fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(cdLeft>0?"rgba(99,102,241,0.3)":"var(--border)"),background:cdLeft>0?"rgba(99,102,241,0.08)":"var(--input)",color:cdLeft>0?"var(--accent)":"var(--muted)",cursor:cdLeft>0?"pointer":"default",fontFamily:"inherit",opacity:cdLeft>0?1:0.4}}
+                                                onClick={e=>{e.stopPropagation();if(!cdLeft)return;setF("clericCDUsed",cdUsed+1);}}>
+                                                ✨ Use CD ({cdLeft}/{cdMax} left)
+                                              </button>
+                                            </div>
+                                          );
+                                          const DivStrike=({minLvl,dmg})=>(<FC label={"Divine Strike ("+minLvl+"th)"} minLvl={minLvl}><Body>Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra {lvl>=14?dmg.replace(/^1d/,"2d"):dmg} {lvl>=14?"(2× at L14)":""}.</Body></FC>);
+                                          const PotentCast=({minLvl})=>(<FC label={"Potent Spellcasting ("+minLvl+"th)"} minLvl={minLvl}><Body>You add your Wisdom modifier (+{wisMod}) to the damage you deal with any cleric cantrip.</Body></FC>);
+
+                                          // ===== LIFE DOMAIN =====
+                                          if(dom==="Life Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Disciple of Life (1st)" minLvl={1}><Body>Whenever you use a spell of 1st level or higher to restore hit points, the creature regains additional HP equal to 2 + the spell's level.</Body></FC>
+                                              <FC label="Preserve Life (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol and evoke healing energy to restore up to {5*lvl} HP, divided among any creatures within 30 ft. Can't restore a creature above half its hit point maximum.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>Pool: {5*lvl} HP to distribute</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <FC label="Blessed Healer (6th)" minLvl={6}><Body>When you cast a healing spell of 1st level or higher that restores HP to another creature, you regain HP equal to 2 + the spell's level.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 radiant"/>
+                                              <FC label="Supreme Healing (17th)" minLvl={17}><Body>When you would normally roll dice to restore hit points, instead use the highest number possible for each die. (Maximum healing on all healing spells.)</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== LIGHT DOMAIN =====
+                                          if(dom==="Light Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Warding Flare (1st)" minLvl={1}>
+                                                <Body>When a creature attacks you and you can see it, use your reaction to impose disadvantage on the attack roll. Usable {wisMod} times per long rest.</Body>
+                                                <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{wisMod}/LR uses (WIS mod)</span>
+                                                </div>
+                                              </FC>
+                                              <FC label="Radiance of the Dawn (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol and banish magical darkness within 30 ft. Each hostile creature within 30 ft must make a CON save (DC {saveDC}) or take {lvl>=14?"2d10":"1d10"}+{wisMod} radiant damage (half on success). Creatures in magical darkness automatically fail.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>CON save DC {saveDC} · {lvl>=14?"2d10":"1d10"}+{wisMod} radiant</span>
+                                                  <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                                                    <button style={{fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(239,68,68,0.3)",background:"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      onClick={e=>{e.stopPropagation();const dice=lvl>=14?2:1;const rolls=Array.from({length:dice},()=>Math.floor(Math.random()*10)+1);const total=rolls.reduce((a,b)=>a+b,0)+wisMod;setSkillRoll({label:"Radiance of the Dawn ("+(dice)+"d10+"+wisMod+")",roll:rolls[0],bonus:wisMod,total,isCrit:false,isFail:false,sides:10});}}>
+                                                      🌟 Roll {lvl>=14?"2d10":"1d10"}+{wisMod}
+                                                    </button>
+                                                    <CDBtn/>
+                                                  </div>
+                                                </div>
+                                              </FC>
+                                              <FC label="Improved Flare (6th)" minLvl={6}><Body>You can use Warding Flare when a creature attacks a creature other than you that you can see within 30 ft.</Body></FC>
+                                              <PotentCast minLvl={8}/>
+                                              <FC label="Corona of Light (17th)" minLvl={17}><Body>As an action, you cause yourself to emit sunlight in a 60 ft radius and dim light 30 ft beyond that. Enemies in the sunlight have disadvantage on saving throws against any spell that deals fire or radiant damage.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== KNOWLEDGE DOMAIN =====
+                                          if(dom==="Knowledge Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Blessings of Knowledge (1st)" minLvl={1}><Body>You learn two languages and gain proficiency in your choice of two skills from History, Arcana, Nature, and Religion. Your proficiency bonus is doubled for checks with those skills.</Body></FC>
+                                              <FC label="Knowledge of the Ages (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, choose one skill or tool. For 10 minutes, you have proficiency with that skill or tool.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Read Thoughts (6th) — Channel Divinity" minLvl={6}>
+                                                <Body>As an action, choose a creature within 60 ft. The creature must make a WIS save (DC {saveDC}) or you read its surface thoughts for 1 min. You can use an action to end this and cast Suggestion on the creature (no save) if it remains in range.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>WIS save DC {saveDC}</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <PotentCast minLvl={8}/>
+                                              <FC label="Visions of the Past (17th)" minLvl={17}><Body>You can call up visions of the past that relate to an object or your immediate surroundings. You spend at least 1 minute in meditation; you can gather impressions from up to a number of days equal to your WIS score ({char.abilities?.WIS||10}).</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== NATURE DOMAIN =====
+                                          if(dom==="Nature Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Acolyte of Nature (1st)" minLvl={1}><Body>You learn one druid cantrip of your choice and gain proficiency in one skill: Animal Handling, Nature, or Survival.</Body></FC>
+                                              <FC label="Charm Animals and Plants (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol and invoke the name of your deity. Each beast or plant creature within 30 ft that can see you must make a WIS save (DC {saveDC}) or be charmed until the end of your next turn.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>WIS save DC {saveDC}</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <FC label="Dampen Elements (6th)" minLvl={6}><Body>When you or a creature within 30 ft takes acid, cold, fire, lightning, or thunder damage, use your reaction to grant resistance to that instance of damage.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 cold, fire, or lightning"/>
+                                              <FC label="Master of Nature (17th)" minLvl={17}><Body>You gain the ability to command animals and plant creatures. Charmed animals and plants obey your verbal commands (no action required) as long as they remain charmed.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== TEMPEST DOMAIN =====
+                                          if(dom==="Tempest Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Wrath of the Storm (1st)" minLvl={1}>
+                                                <Body>When a creature within 5 ft hits you with an attack, use your reaction to cause it to make a DEX save (DC {saveDC}) or take {lvl>=14?"4d8":"2d8"} lightning or thunder damage (half on success). Usable {wisMod} times per long rest.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>DEX save DC {saveDC} · {lvl>=14?"4d8":"2d8"} dmg · {wisMod}/LR</span>
+                                                  <button style={{fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(99,102,241,0.3)",background:"rgba(99,102,241,0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    onClick={e=>{e.stopPropagation();const dice=lvl>=14?4:2;const rolls=Array.from({length:dice},()=>Math.floor(Math.random()*8)+1);const total=rolls.reduce((a,b)=>a+b,0);setSkillRoll({label:"Wrath of the Storm ("+dice+"d8)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:8});}}>
+                                                    ⚡ Roll {lvl>=14?"4d8":"2d8"}
+                                                  </button>
+                                                </div>
+                                              </FC>
+                                              <FC label="Destructive Wrath (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>When you roll lightning or thunder damage, use your Channel Divinity to deal maximum damage instead of rolling.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Thunderbolt Strike (6th)" minLvl={6}><Body>When you deal lightning damage to a Large or smaller creature, it is pushed up to 10 ft away from you.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 thunder"/>
+                                              <FC label="Stormborn (17th)" minLvl={17}><Body>You have a flying speed equal to your walking speed ({char.speed||30} ft) whenever you are not underground or indoors.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== TRICKERY DOMAIN =====
+                                          if(dom==="Trickery Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Invoke Duplicity (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, create a perfect illusion of yourself that lasts 1 min (concentration). As a bonus action you can move the illusion up to 30 ft. Creatures that can see the illusion have disadvantage on attack rolls against you if you and the illusion are within 5 ft of a target. You can cast spells as though you were in the illusion's space.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Cloak of Shadows (6th) — Channel Divinity" minLvl={6}>
+                                                <Body>As an action, become invisible until the end of your next turn. You become visible if you attack or cast a spell.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <DivStrike minLvl={8} dmg="1d8 psychic"/>
+                                              <FC label="Improved Duplicity (17th)" minLvl={17}><Body>You can create up to four duplicates of yourself instead of one when you use Invoke Duplicity. As a bonus action, you can move any number of duplicates up to 30 ft.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== WAR DOMAIN =====
+                                          if(dom==="War Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="War Priest (1st)" minLvl={1}>
+                                                <Body>When you use the Attack action, you can make one weapon attack as a bonus action. You can use this feature {wisMod} times per long rest.</Body>
+                                                <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{wisMod}/LR (WIS mod)</span>
+                                                </div>
+                                              </FC>
+                                              <FC label="Guided Strike (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>When you make an attack roll, use your Channel Divinity to gain a +10 bonus to the roll. You make this choice after you see the roll but before the DM says whether it hits or misses.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="War God's Blessing (6th) — Channel Divinity" minLvl={6}>
+                                                <Body>When a creature within 30 ft makes an attack roll, use your reaction to grant that creature a +10 bonus using your Channel Divinity.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <DivStrike minLvl={8} dmg="1d8 (weapon type)"/>
+                                              <FC label="Avatar of Battle (17th)" minLvl={17}><Body>You gain resistance to bludgeoning, piercing, and slashing damage from nonmagical weapons.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== FORGE DOMAIN =====
+                                          if(dom==="Forge Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Blessing of the Forge (1st)" minLvl={1}><Body>At the end of a long rest, touch one nonmagical object to give it a +1 bonus to attack and damage rolls (weapon) or a +1 bonus to AC (armor or shield) until your next long rest.</Body></FC>
+                                              <FC label="Artisan's Blessing (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>Conduct a 1-hour ceremony creating a simple or martial weapon, set of armor, a shield, or 20 pieces of ammunition. The item can contain up to 100 gp of metal. You must supply the required raw materials during the ceremony.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Soul of the Forge (6th)" minLvl={6}><Body>You gain resistance to fire damage. While wearing heavy armor, you gain a +1 bonus to AC.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 fire"/>
+                                              <FC label="Saint of Forge and Fire (17th)" minLvl={17}><Body>You gain immunity to fire damage. While wearing heavy armor, you have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== GRAVE DOMAIN =====
+                                          if(dom==="Grave Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Circle of Mortality (1st)" minLvl={1}><Body>When you cast a healing spell on a creature at 0 HP, maximize the dice (no rolling). You also learn the Spare the Dying cantrip, which you can cast as a bonus action.</Body></FC>
+                                              <FC label="Eyes of the Grave (1st)" minLvl={1}>
+                                                <Body>As an action, detect the location of any undead within 60 ft that aren't behind total cover. Usable {wisMod} times per long rest.</Body>
+                                                <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{wisMod}/LR (WIS mod)</span>
+                                                </div>
+                                              </FC>
+                                              <FC label="Path to the Grave (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, curse a creature within 30 ft until the end of your next turn. The next time you or an ally hits that creature with an attack, it has vulnerability to all of that attack's damage.</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Sentinel at Death's Door (6th)" minLvl={6}>
+                                                <Body>As a reaction when you or a creature you can see within 30 ft suffers a critical hit, turn it into a normal hit. Usable {wisMod} times per long rest.</Body>
+                                                <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{wisMod}/LR (WIS mod)</span>
+                                                </div>
+                                              </FC>
+                                              <PotentCast minLvl={8}/>
+                                              <FC label="Keeper of Souls (17th)" minLvl={17}><Body>When an enemy dies within 60 ft, you or a creature you choose within 60 ft regains HP equal to the enemy's number of Hit Dice. You can use this feature only if you aren't incapacitated. Once per turn.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== ARCANA DOMAIN (SCAG) =====
+                                          if(dom==="Arcana Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Arcane Initiate (1st)" minLvl={1}><Body>You gain two cantrips of your choice from the wizard spell list. For you, these wizard cantrips count as cleric cantrips.</Body></FC>
+                                              <FC label="Arcane Abjuration (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol to turn or banish extraplanar creatures (celestials, elementals, fey, or fiends). The creature makes a WIS save (DC {saveDC}); if it fails it is turned for 1 min. If the creature's CR is {lvl>=8?Math.floor(lvl/4):"1/4"} or lower and fails, it is banished.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>WIS save DC {saveDC}</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <FC label="Spell Breaker (6th)" minLvl={6}><Body>When you restore HP to an ally with a healing spell of 1st level or higher, you can also end one spell of your choice on that creature. The spell ended must be of a level equal to or lower than the slot used.</Body></FC>
+                                              <PotentCast minLvl={8}/>
+                                              <FC label="Arcane Mastery (17th)" minLvl={17}><Body>You choose four spells from the wizard spell list (one of 6th, one of 7th, one of 8th, and one of 9th level). They are added to your list of domain spells and you always have them prepared.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== ORDER DOMAIN (TCE) =====
+                                          if(dom==="Order Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Voice of Authority (1st)" minLvl={1}><Body>When you cast a spell using a slot on a friendly creature, that creature can use its reaction to make one weapon attack against a target of your choice visible to it.</Body></FC>
+                                              <FC label="Order's Demand (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol and each creature of your choice within 30 ft that can see or hear you must succeed on a WIS save (DC {saveDC}) or be charmed until the end of your next turn or until it takes damage. Charmed creatures drop whatever they are holding.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>WIS save DC {saveDC}</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <FC label="Embodiment of the Law (6th)" minLvl={6}><Body>If you cast an enchantment spell of 1st level or higher using a spell slot, you can change its casting time to 1 bonus action (must normally be 1 action). Usable {wisMod} times per long rest.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 psychic"/>
+                                              <FC label="Order's Wrath (17th)" minLvl={17}><Body>Enemies you designate are assailed by divine vengeance. When you deal your Divine Strike damage to a creature, the creature is cursed until the start of your next turn — the next time it is hit, the attacker deals an extra 2d8 psychic damage.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== PEACE DOMAIN (TCE) =====
+                                          if(dom==="Peace Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Implement of Peace (1st)" minLvl={1}><Body>You gain proficiency in Insight, Performance, or Persuasion (your choice).</Body></FC>
+                                              <FC label="Emboldening Bond (1st)" minLvl={1}>
+                                                <Body>Bond up to {pb+1} willing creatures (including yourself) for 10 minutes. Bonded creatures within 30 ft of each other can add 1d4 to one attack roll, ability check, or saving throw per turn.</Body>
+                                                <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{pb+1} creatures max (PB+1)</span>
+                                                </div>
+                                              </FC>
+                                              <FC label="Balm of Peace (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, move up to your speed without provoking OA. When you move within 5 ft of a creature, you can restore {2+wisMod} HP to that creature (once per creature per use).</Body>
+                                                <CDBtn/>
+                                              </FC>
+                                              <FC label="Protective Bond (6th)" minLvl={6}><Body>Bonded creatures protect each other. When a bonded creature is about to take damage, another bonded creature within 60 ft can use its reaction to teleport to an unoccupied space within 5 ft of the first creature, taking the damage instead.</Body></FC>
+                                              <PotentCast minLvl={8}/>
+                                              <FC label="Expansive Bond (17th)" minLvl={17}><Body>Protective Bond works when creatures are within 60 ft (up from 30 ft). Emboldening Bond also works when the bonded creatures are up to 60 ft of each other.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // ===== TWILIGHT DOMAIN (TCE) =====
+                                          if(dom==="Twilight Domain (Cleric)") return(
+                                            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              <FC label="Eyes of Night (1st)" minLvl={1}><Body>You can see through magical and nonmagical darkness up to 300 ft. As an action, share this sight with up to {wisMod} willing creatures within 10 ft for 1 hour. Usable once per long rest (or a spell slot).</Body></FC>
+                                              <FC label="Vigilant Blessing (1st)" minLvl={1}><Body>When you finish a long rest, grant a creature you touch (or yourself) advantage on the next initiative roll.</Body></FC>
+                                              <FC label="Twilight Sanctuary (2nd) — Channel Divinity" minLvl={2}>
+                                                <Body>As an action, present your holy symbol to emit a 30 ft aura for 1 min (concentration). At the start of each creature's turn in the aura, grant one of: {lvl>=14?lvl+5:Math.floor(lvl/2)+5} temporary HP, or remove one effect causing charmed or frightened.</Body>
+                                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:4}}>
+                                                  <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{lvl>=14?lvl+5:Math.floor(lvl/2)+5} Temp HP or remove charmed/frightened</span>
+                                                  <CDBtn/>
+                                                </div>
+                                              </FC>
+                                              <FC label="Steps of Night (6th)" minLvl={6}><Body>As a bonus action in darkness, grant yourself a flying speed equal to your walking speed ({char.speed||30} ft) for 1 min. Usable {wisMod} times per long rest.</Body></FC>
+                                              <DivStrike minLvl={8} dmg="1d8 radiant"/>
+                                              <FC label="Twilight Shroud (17th)" minLvl={17}><Body>The shadows that fill your Twilight Sanctuary aura become deeper. Any creature in the aura has half cover.</Body></FC>
+                                            </div>
+                                          );
+
+                                          // Fallback for unknown domains
                                           return(
                                             <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
-                                              {/* Domain spells shown separately via existing block */}
-                                              {featureParts.length>0&&featureParts.map((part,i)=>{
-                                                // Parse "Feature Name (Xth) -- desc" format
-                                                const match=part.match(/^(.+?)(?:\s*\((\d+[a-z]+)\))?\s*(?:--|—|:)\s*(.+)$/);
-                                                if(!match) return null;
-                                                const featName=match[1].trim();
-                                                const levelStr=match[2]||"";
-                                                const desc=match[3].trim();
-                                                const minLvl=levelStr?{
-                                                  "1st":1,"2nd":2,"3rd":3,"4th":4,"5th":5,
-                                                  "6th":6,"7th":7,"8th":8,"10th":10,"17th":17
-                                                }[levelStr]||1:1;
-                                                if(lvl<minLvl) return null;
-                                                const isCDFeature=featName.toLowerCase().includes("channel divinity");
-                                                return(
-                                                  <div key={i} style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
-                                                    <div style={{fontSize:10,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>
-                                                      {featName}{levelStr?` (${levelStr})`:""}
-                                                    </div>
-                                                    <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{desc}</div>
-                                                    {isCDFeature&&(
-                                                      <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
-                                                        <button className="ft-note-tag"
-                                                          style={{background:cdUsed<cdMax?"rgba(99,102,241,0.12)":"var(--input)",borderColor:cdUsed<cdMax?"rgba(99,102,241,0.4)":"var(--border)",color:cdUsed<cdMax?"var(--accent)":"var(--muted)",fontWeight:700,fontSize:10,cursor:cdUsed<cdMax?"pointer":"default",opacity:cdUsed<cdMax?1:0.4}}
-                                                          onClick={e=>{e.stopPropagation();if(cdUsed>=cdMax)return;setF("clericCDUsed",cdUsed+1);}}>
-                                                          ✨ Use CD ({cdMax-cdUsed}/{cdMax} left)
-                                                        </button>
-                                                      </div>
-                                                    )}
-                                                  </div>
-                                                );
-                                              })}
+                                              <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
+                                                <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>Domain features for {dom.replace(/\s*\(Cleric\)\s*$/,"")} will appear here as you gain levels.</div>
+                                              </div>
                                             </div>
                                           );
                                         })()}
