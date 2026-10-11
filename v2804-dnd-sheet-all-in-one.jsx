@@ -20275,7 +20275,7 @@ function App() {
                                             };
                                             return wrapCol(
                                               <FC key="pp" label="Psionic Power (3rd)" minLvl={3}>
-                                                <Body>You harbor a wellspring of psionic energy represented by Psionic Energy dice, which are d{dSides}s. You have a number of them equal to twice your proficiency bonus. A power that uses a die can't be used if you have none left. You regain all your expended dice when you finish a long rest. In addition, as a bonus action, you can regain one expended die, but you can't do so again until you finish a short or long rest.</Body>
+                                                <Body>You harbor a wellspring of psionic energy represented by Psionic Energy dice, which are d{dSides}s. You have a number of them equal to twice your proficiency bonus. As a bonus action, you can regain one expended die, but you can't do so again until you finish a short or long rest.</Body>
                                                 {pipRow("rogueSoulDiceUsed",dMax)}
                                                 {flexEnd(
                                                   <span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>,
