@@ -20162,6 +20162,7 @@ function App() {
                                             const TOOLS_ALL=["Alchemist's supplies","Brewer's supplies","Calligrapher's supplies","Carpenter's tools","Cartographer's tools","Cobbler's tools","Cook's utensils","Disguise kit","Dice set","Dragonchess set","Forgery kit","Glassblower's tools","Herbalism kit","Jeweler's tools","Leatherworker's tools","Mason's tools","Navigator's tools","Painter's supplies","Playing card set","Poisoner's kit","Potter's tools","Smith's tools","Three-Dragon Ante set","Tinker's tools","Vehicles (land)","Vehicles (water)","Weaver's tools","Woodcarver's tools"];
                                             const curProf=char.roguePhantomProf||"";
                                             const otherSkillProfs=effSkillProfs.filter(x=>x!==curProf);
+                                            const knownToolsWD=[...(BG_TOOLS[char.background]||[]),...(char.bgToolChoice?[char.bgToolChoice]:[]),...(char.bgUBHTools||[]),...(char.racialToolProf?[char.racialToolProf]:[]),...(char.bgVariantTool?[char.bgVariantTool]:[]),...(CLASSES[char.charClass]?.toolProf||[])].filter(Boolean).map(t=>String(t).toLowerCase());
                                             const setTrink=n=>setF("roguePhantomTrinkets",Math.max(0,Math.min(pb,n)));
                                             return wrapCol(
                                               <FC key="wotd" label="Whispers of the Dead (3rd)" minLvl={3}>
@@ -20170,10 +20171,10 @@ function App() {
                                                   style={{width:"100%",marginTop:6,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(curProf?"rgba(99,102,241,0.4)":"var(--border)"),color:curProf?"var(--accent)":"var(--subtle)",fontSize:12,cursor:"pointer",fontFamily:"inherit",outline:"none"}}>
                                                   <option value="">— Choose a skill or tool —</option>
                                                   <optgroup label="Skills">
-                                                    {SKILL_ALL.map(x=><option key={x} value={x}>{x}{otherSkillProfs.includes(x)?" ✓":""}</option>)}
+                                                    {SKILL_ALL.filter(x=>!otherSkillProfs.includes(x)).map(x=><option key={x} value={x}>{x}</option>)}
                                                   </optgroup>
                                                   <optgroup label="Tools">
-                                                    {TOOLS_ALL.map(x=><option key={x} value={x}>{x}</option>)}
+                                                    {TOOLS_ALL.filter(x=>!knownToolsWD.includes(x.toLowerCase())).map(x=><option key={x} value={x}>{x}</option>)}
                                                   </optgroup>
                                                 </select>
                                               </FC>,
