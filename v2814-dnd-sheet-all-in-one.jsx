@@ -20303,7 +20303,7 @@ function App() {
                                                 )}
                                               </FC>,
                                               <FC key="pb" label="Psychic Blades (3rd)" minLvl={3}>
-                                                <Body>When you take the Attack action, you can manifest a psychic blade from your free hand and make the attack with that weapon. It deals 1d6 psychic damage on a hit. After you attack with the blade, it vanishes. If you take the Attack action and attack with a blade, you can use a bonus action to make a second attack with a second blade if your other hand is free. That blade's damage die is a d4 instead.</Body>
+                                                <Body>When you take the Attack action, you can manifest a psychic blade from your free hand and make the attack with that weapon. It deals 1d6 psychic damage on a hit, and it vanishes right after it hits or misses its target. After you attack with the blade, you can use a bonus action to make a second attack with a second blade if your other hand is free. That blade's damage die is a d4 instead.</Body>
          {note("This magic blade is a simple melee weapon with the finesse and thrown properties, with a normal range of 60 feet and no long range.")}
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,flexWrap:"wrap",marginTop:6}}>
                                                   <span style={{fontSize:11,color:"var(--muted)"}}><b style={{color:"var(--text)",fontFamily:"'DM Mono',monospace"}}>TO HIT</b>{" "}<span style={{fontFamily:"'DM Mono',monospace",fontWeight:700,color:"var(--accent)"}}>{atkB>=0?"+":""}{atkB}</span></span>
