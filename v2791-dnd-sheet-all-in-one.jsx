@@ -20308,7 +20308,6 @@ function App() {
                                               </FC>,
                                               <FC key="vt" label="Versatile Trickster (13th)" minLvl={13}>
                                                 <Body>You can use a bonus action to designate a creature within 5 feet of the spectral hand created by your mage hand spell. Doing so gives you advantage on attack rolls against that creature until the end of the turn.</Body>
-                                                {toggleRow("rogueVersatileOn","Advantage on attacks against the designated creature this turn","No creature designated","Designate")}
                                               </FC>,
                                               <FC key="st" label="Spell Thief (17th)" minLvl={17}>
                                                 <Body>Immediately after a creature casts a spell that targets you or includes you in its area of effect, you can use your reaction to force the creature to make a saving throw with its spellcasting ability modifier against your spell save DC. On a failed save, you negate the spell's effect against you, and you steal the knowledge of the spell if it is at least 1st level and of a level you can cast. For the next 8 hours, you know the spell and can cast it using your spell slots, and the creature can't cast it. Once you use this feature, you can't use it again until you finish a long rest.</Body>
@@ -28267,7 +28266,6 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         };
                                         const dieBtn=(label,text)=><button style={btnSt} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*dSides)+1;setSkillRoll({label,roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:dSides,r1:r,r2:null,isAdv:false,isDis:false});}}>{text}</button>;
                                         if(nm.startsWith("Mage Hand Legerdemain")) return wrapX(flexEnd(<>{skBtn("Sleight of Hand")}<button style={{...btnSt,...ttOffSt}} {...ttOff} onClick={e=>{e.stopPropagation();rollCheck("Thieves' Tools",ttB);}}>🎲 Thieves' Tools {ttB>=0?"+":""}{ttB}</button></>));
-                                        if(nm.startsWith("Versatile Trickster")) return wrapX(toggleRowX("rogueVersatileOn","Advantage on attacks against the designated creature this turn","No creature designated","","Designate"));
                                         if(nm.startsWith("Spell Thief")) return wrapX(<>{saveRowX("rogueSpellThief","Spellcaster's",spDCAT,"The spell is unaffected.","The spell is negated against you, and you steal it for 8 hours.")}{onceRow("rogueSpellThiefUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}</>);
                                         if(nm.startsWith("Fast Hands")){
                                           const fhOpts=["Make a Sleight of Hand check","Disarm a trap or open a lock","Take the Use an Object action"];
