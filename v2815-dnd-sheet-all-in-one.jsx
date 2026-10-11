@@ -20315,12 +20315,24 @@ function App() {
                                                 )}
                                               </FC>,
                                               <FC key="sb" label="Soul Blades (9th)" minLvl={9}>
-                                                <Body>Your psychic blades are now an outlet for your mind's power. <b style={{color:"var(--accent)"}}>Homing Strikes:</b> if you make an attack roll with a psychic blade and miss, you can roll a Psionic Energy die and add the number rolled to the attack roll; if this causes the attack to hit, the die is expended. <b style={{color:"var(--accent)"}}>Psychic Teleportation:</b> you can use a bonus action to expend one Psionic Energy die and roll it, manifest a psychic blade, and throw it at an unoccupied space you can see within a number of feet of you equal to 10 times the number rolled, then teleport to that space and the blade vanishes.</Body>
-                                                {flexEnd(
-                                                  dieBtn("Homing Strikes — add to the attack roll (d"+dSides+")",dSides,"🎲 Homing Strikes d"+dSides),
-                                                  <button key="hs" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();spendDie(1);}}>Spend 1 die</button>,
-                                                  <button key="pt" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();teleport();}}>Teleport (spends 1 die)</button>
-                                                )}
+         <Body>Your psychic blades are now an outlet for your mind's power.</Body>
+         {pipRow("rogueSoulDiceUsed",dMax)}
+         {flexEnd(
+           <span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>
+         )}
+         <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
+           <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Homing Strikes</b> <span style={{color:"var(--muted)"}}>— if you make an attack roll with a psychic blade and miss, you can roll a Psionic Energy die and add the number rolled to the attack roll. If this causes the attack to hit, the die is expended.</span></span></div>
+         </div>
+         {flexEnd(
+           dieBtn("Homing Strikes — add to the attack roll (d"+dSides+")",dSides,"🎲 Homing Strikes d"+dSides),
+           <button key="hs" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();spendDie(1);}}>Spend 1 die</button>
+         )}
+         <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
+           <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Teleportation</b> <span style={{color:"var(--muted)"}}>— as a bonus action, expend one Psionic Energy die and roll it. Manifest a psychic blade and throw it at an unoccupied space you can see within 10 × the number rolled feet of you, then teleport to that space and the blade vanishes.</span></span></div>
+         </div>
+         {flexEnd(
+           <button key="pt" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();teleport();}}>Teleport (spends 1 die)</button>
+         )}
                                               </FC>,
                                               <FC key="pv" label="Psychic Veil (13th)" minLvl={13} headerBadge={<DurationBadge id="rogue-psychic-veil-duration" short="1 hr" full="Duration: 1 hour, or until you dismiss it. Ends early if you deal damage to a creature or force one to make a saving throw." total={60} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can use your action to magically become invisible, along with anything you are wearing or carrying, for 1 hour or until you dismiss the effect (no action required). The invisibility ends early immediately after you deal damage to a creature or force a creature to make a saving throw. Once you use this feature, you can't use it again until you finish a long rest, unless you expend a Psionic Energy die to use it again.</Body>
