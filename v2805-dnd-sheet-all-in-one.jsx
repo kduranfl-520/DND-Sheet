@@ -4371,7 +4371,7 @@ const PipRow = ({label,count,used,color,onSet}) => (
     <span className="pip-lbl">{label}</span>
     <div className="pips">{Array.from({length:count},(_,i)=>(
       <div key={i} className={`pip ${i<used?`pip-${color}`:""}`} onClick={()=>onSet(i<used?used-1:i+1)}/>
-    ))}</div>
+    )).reverse()}</div>
   </div>
 );
 const Empty = ({icon,msg}) => <div className="empty-state"><div style={{fontSize:33,marginBottom:8}}>{icon}</div>{msg}</div>;
@@ -8953,7 +8953,7 @@ function App() {
                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                   onClick={e=>{e.stopPropagation();setF("monkKiUsed",spent?pi:pi+1);}}/>
                                               );
-                                            })}
+                                            }).reverse()}
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Ki ({kiLeft}/{kiMax})</span>
                                           {kiUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -9493,7 +9493,7 @@ function App() {
                                               {Array.from({length:max},(_,i)=>{
                                                 const spent=i<used;
                                                 return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                              })}
+                                              }).reverse()}
                                             </div>
                                             <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{max})</span>
                                           </div>
@@ -9522,7 +9522,7 @@ function App() {
                                               {Array.from({length:max},(_,i)=>{
                                                 const spent=i<used;
                                                 return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                              })}
+                                              }).reverse()}
                                             </div>
                                             <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{max})</span>
                                           </div>
@@ -9789,7 +9789,7 @@ function App() {
                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                   onClick={e=>{e.stopPropagation();setF("clericCDUsed",spent?pi:pi+1);}}/>
                                               );
-                                            })}
+                                            }).reverse()}
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                           {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -9928,7 +9928,7 @@ function App() {
                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                   onClick={e=>{e.stopPropagation();setF("paladinCleansingTouchUsed",spent?pi:pi+1);}}/>
                                               );
-                                            })}
+                                            }).reverse()}
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{maxUses})</span>
                                           {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -9962,7 +9962,7 @@ function App() {
                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                   onClick={e=>{e.stopPropagation();setF("paladinDivineSenseUsed",spent?pi:pi+1);}}/>
                                               );
-                                            })}
+                                            }).reverse()}
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{maxUses})</span>
                                           {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -10443,7 +10443,7 @@ function App() {
                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                   onClick={e=>{e.stopPropagation();setF("bardInspirationUsed",spent?pi:pi+1);}}/>
                                               );
-                                            })}
+                                            }).reverse()}
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                           <button className="ft-note-tag" title={"Roll "+die+" inspiration die"}
@@ -10933,7 +10933,7 @@ function App() {
                                                         borderColor:spent?"var(--border)":"var(--accent)"}}
                                                       onClick={e=>{e.stopPropagation();setF("druidWildShapeUsed",spent?pi:pi+1);}}/>
                                                   );
-                                                })}
+                                                }).reverse()}
                                               </div>
                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                               {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -11947,7 +11947,7 @@ function App() {
                                                                 background:i<ifUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                                 borderColor:i<ifUsed?"var(--border)":"var(--green)",padding:0}}
                                                               onClick={()=>setF("infectiousFuryUsed",i<ifUsed?i:i+1)}/>
-                                                          ))}
+                                                          )).reverse()}
                                                         </div>
                                                         {ifUsed>0&&<button style={{fontSize:10,padding:"2px 6px",borderRadius:4,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setF("infectiousFuryUsed",0)}>↺ Reset</button>}
@@ -11999,7 +11999,7 @@ function App() {
                                                                 background:i<huntUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                                 borderColor:i<huntUsed?"var(--border)":"var(--green)",padding:0}}
                                                               onClick={()=>setF("huntUsed",i<huntUsed?i:i+1)}/>
-                                                          ))}
+                                                          )).reverse()}
                                                         </div>
                                                         {huntUsed>0&&<button style={{fontSize:10,padding:"2px 6px",borderRadius:4,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setF("huntUsed",0)}>↺ Reset</button>}
@@ -12278,7 +12278,7 @@ function App() {
                                                           background:i<maUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                           borderColor:i<maUsed?"var(--border)":"var(--green)",padding:0}}
                                                           onClick={()=>setF("magicAwarenessUsed",i<maUsed?i:i+1)}/>
-                                                      ))}
+                                                      )).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,color:"var(--muted)"}}>{pb-maUsed} remaining</span>
                                                     {maUsed>0&&<button style={{fontSize:10,padding:"2px 6px",borderRadius:4,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
@@ -12325,7 +12325,7 @@ function App() {
                                                               background:i<bmUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                               borderColor:i<bmUsed?"var(--border)":"var(--green)",padding:0}}
                                                               onClick={()=>setF("bolsteringMagicUsed",i<bmUsed?i:i+1)}/>
-                                                          ))}
+                                                          )).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,color:"var(--muted)"}}>{pb-bmUsed} remaining</span>
                                                         {bmUsed>0&&<button style={{fontSize:10,padding:"2px 6px",borderRadius:4,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
@@ -12362,7 +12362,7 @@ function App() {
                                                                     background:i<bmUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                                     borderColor:i<bmUsed?"var(--border)":"var(--green)",padding:0}}
                                                                     onClick={()=>setF("bolsteringMagicUsed",i<bmUsed?i:i+1)}/>
-                                                                ))}
+                                                                )).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,color:"var(--muted)"}}>{pb-bmUsed} remaining</span>
                                                             </div>
@@ -12385,7 +12385,7 @@ function App() {
                                                                   background:i<bmUsed?"var(--input)":"rgba(34,197,94,0.2)",
                                                                   borderColor:i<bmUsed?"var(--border)":"var(--green)",padding:0}}
                                                                   onClick={()=>setF("bolsteringMagicUsed",i<bmUsed?i:i+1)}/>
-                                                              ))}
+                                                              )).reverse()}
                                                             </div>
                                                             <span style={{fontSize:11,color:"var(--muted)"}}>{pb-bmUsed} remaining</span>
                                                           </div>
@@ -12597,7 +12597,7 @@ function App() {
                                                       {Array.from({length:diceMax},(_,i)=>{
                                                         const spent=i<diceUsed;
                                                         return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({diceLeft}/{diceMax})</span>
                                                   </div>
@@ -12904,7 +12904,7 @@ function App() {
                                                       {Array.from({length:max},(_,i)=>{
                                                         const spent=i<used;
                                                         return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{max})</span>
                                                   </div>
@@ -13105,7 +13105,7 @@ function App() {
                                                     {Array.from({length:max},(_,i)=>{
                                                       const spent=i<used;
                                                       return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                    })}
+                                                    }).reverse()}
                                                   </div>
                                                   <button disabled={left<=0} onClick={()=>setCharSaving(p=>({...p,arcaneArcherShotUsed:(p.arcaneArcherShotUsed||0)+1}))}
                                                     style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(34,197,94,0.3)",background:left>0?"rgba(34,197,94,0.08)":"var(--input)",color:left>0?"var(--green)":"var(--muted)",cursor:left>0?"pointer":"not-allowed",fontFamily:"inherit"}}>
@@ -13583,7 +13583,7 @@ function App() {
                                                       {Array.from({length:umMax},(_,i)=>{
                                                         const spent=i<umUsed;
                                                         return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({umLeft}/{umMax})</span>
                                                   </div>
@@ -13640,7 +13640,7 @@ function App() {
                                                       {Array.from({length:max},(_,i)=>{
                                                         const spent=i<used;
                                                         return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{max})</span>
                                                   </div>
@@ -13713,7 +13713,7 @@ function App() {
                                                         {Array.from({length:diceMax},(_,i)=>{
                                                           const spent=i<used;
                                                           return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{diceMax})</span>
                                                     </div>
@@ -13988,7 +13988,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14015,7 +14015,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14043,7 +14043,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14086,7 +14086,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14114,7 +14114,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14144,7 +14144,7 @@ function App() {
                                                                 {Array.from({length:invMax},(_,ii)=>{
                                                                   const spent=ii<invUsed;
                                                                   return <div key={ii} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                                })}
+                                                                }).reverse()}
                                                               </div>
                                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({invLeft}/{invMax})</span>
                                                             </div>
@@ -14199,7 +14199,7 @@ function App() {
                                                           {Array.from({length:giMax},(_,i)=>{
                                                             const spent=i<giUsed;
                                                             return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({giLeft}/{giMax})</span>
                                                       </div>
@@ -14230,7 +14230,7 @@ function App() {
                                                           {Array.from({length:rsMax},(_,i)=>{
                                                             const spent=i<rsUsed;
                                                             return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({rsLeft}/{rsMax})</span>
                                                       </div>
@@ -14386,7 +14386,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericWardingFlareUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -14702,7 +14702,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericWrathStormUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -14759,7 +14759,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericWarPriestUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -14916,7 +14916,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericEyesOfGraveUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -14946,7 +14946,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericSentinelDeathUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -15149,7 +15149,7 @@ function App() {
                                                                   borderColor:spent?"var(--border)":"var(--accent)"}}
                                                                 onClick={e=>{e.stopPropagation();setF("clericEmbodimentUsed",spent?pi:pi+1);}}/>
                                                             );
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                         {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -15247,7 +15247,7 @@ function App() {
                                                                   borderColor:spent?"var(--border)":"var(--accent)"}}
                                                                 onClick={e=>{e.stopPropagation();setF("clericEmboldeningUsed",spent?pi:pi+1);}}/>
                                                             );
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                         {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -15370,7 +15370,7 @@ function App() {
                                                                 borderColor:spent?"var(--border)":"var(--accent)"}}
                                                               onClick={e=>{e.stopPropagation();setF("clericStepsOfNightUsed",spent?pi:pi+1);}}/>
                                                           );
-                                                        })}
+                                                        }).reverse()}
                                                       </div>
                                                       <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                       {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -15958,7 +15958,7 @@ function App() {
                                                               borderColor:spent?"var(--border)":"var(--accent)"}}
                                                             onClick={e=>{e.stopPropagation();setF("bardIIUsed",spent?pi:pi+1);}}/>
                                                         );
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({iiLeft}/{iiMax})</span>
                                                     {iiUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -18032,7 +18032,7 @@ function App() {
                                                                     borderColor:spent?"var(--border)":"var(--accent)"}}
                                                                   onClick={e=>{e.stopPropagation();setF("druidWildShapeUsed",spent?pi:pi+1);}}/>
                                                               );
-                                                            })}
+                                                            }).reverse()}
                                                           </div>
                                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                                           {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -18169,7 +18169,7 @@ function App() {
                                                                   borderColor:spent?"var(--border)":"var(--accent)"}}
                                                                 onClick={e=>{e.stopPropagation();setF("druidWildShapeUsed",spent?pi:pi+1);}}/>
                                                             );
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Wild Shape Uses ({wsMax-wsUsed}/{wsMax})</span>
                                                         {wsUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -18235,7 +18235,7 @@ function App() {
                                                                   }
                                                                 }}/>
                                                             );
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Zombies ({fiMax-fiUsed}/{fiMax})</span>
                                                         {fiUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -18347,7 +18347,7 @@ function App() {
                                                                   borderColor:spent?"var(--border)":"var(--accent)"}}
                                                                 onClick={e=>{e.stopPropagation();setF("druidWildShapeUsed",spent?pi:pi+1);}}/>
                                                             );
-                                                          })}
+                                                          }).reverse()}
                                                         </div>
                                                         <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Wild Shape Uses ({wsMax2-wsUsed2}/{wsMax2})</span>
                                                         {wsUsed2>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -18452,7 +18452,7 @@ function App() {
                                                                     borderColor:spent?"var(--border)":(omenRolled==="Weal"?"var(--green)":"var(--red)")}}
                                                                   onClick={()=>setF("druidCosmicOmenUsed",spent?pi:pi+1)}/>
                                                               );
-                                                            })}
+                                                            }).reverse()}
                                                           </div>
                                                         </div>
                                                       </div>
@@ -18665,7 +18665,7 @@ function App() {
                                                               borderColor:spent?"var(--border)":"var(--accent)"}}
                                                             onClick={e=>{e.stopPropagation();setF("druidHiddenPathsUsed",spent?pi:pi+1);}}/>
                                                         );
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({hiddenPathsLeft}/{hiddenPathsMax})</span>
                                                     {hiddenPathsUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -19257,7 +19257,7 @@ function App() {
                                                             borderColor:spent?"var(--border)":"var(--accent)"}}
                                                           onClick={e=>{e.stopPropagation();setF("rangerMistyWandererUsed",spent?pi:pi+1);}}/>
                                                       );
-                                                    })}
+                                                    }).reverse()}
                                                   </div>
                                                   <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({usesMax-mwUsed}/{usesMax})</span>
                                                   {mwUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -19372,7 +19372,7 @@ function App() {
                                                             borderColor:spent?"var(--border)":"var(--accent)"}}
                                                           onClick={e=>{e.stopPropagation();setF("rangerHuntersSenseUsed",spent?pi:pi+1);}}/>
                                                       );
-                                                    })}
+                                                    }).reverse()}
                                                   </div>
                                                   <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({hsMax-hsUsed}/{hsMax})</span>
                                                   {hsUsed>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -19771,7 +19771,7 @@ function App() {
                                                         borderColor:spent?"var(--border)":"var(--accent)"}}
                                                       onClick={e=>{e.stopPropagation();setF(usedKey,spent?pi:pi+1);}}/>
                                                   );
-                                                })}
+                                                }).reverse()}
                                               </div>
                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({pb-used}/{pb})</span>
                                               {used>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -19923,7 +19923,7 @@ function App() {
                                                         style={{width:18,height:18,borderRadius:"50%",border:"2px solid",flexShrink:0,cursor:"pointer",padding:0,background:spent?"var(--input)":"rgba(99,102,241,0.2)",borderColor:spent?"var(--border)":"var(--accent)"}}
                                                         onClick={e=>{e.stopPropagation();setF(usedKey,spent?pi:pi+1);}}/>
                                                     );
-                                                  })}
+                                                  }).reverse()}
                                                 </div>
                                                 <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({max-used}/{max})</span>
                                                 {used>0&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF(usedKey,0);}}>↺ Reset</button>}
@@ -20736,7 +20736,7 @@ function App() {
                                                               borderColor:spent?"var(--border)":"var(--accent)"}}
                                                             onClick={e=>{e.stopPropagation();setF("paladinGloriousDefenseUsed",spent?pi:pi+1);}}/>
                                                         );
-                                                      })}
+                                                      }).reverse()}
                                                     </div>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({Math.max(0,Math.max(1,chaMod)-(char.paladinGloriousDefenseUsed||0))}/{Math.max(1,chaMod)})</span>
                                                     {(char.paladinGloriousDefenseUsed||0)>0&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
@@ -28261,7 +28261,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                                   return <button key={pi} title={spent?"Spent — click to restore":"Available — click to spend"}
                                                     style={{width:18,height:18,borderRadius:"50%",border:"2px solid",flexShrink:0,cursor:"pointer",padding:0,background:spent?"var(--input)":"rgba(99,102,241,0.2)",borderColor:spent?"var(--border)":"var(--accent)"}}
                                                     onClick={e=>{e.stopPropagation();setF(key,spent?pi:pi+1);}}/>;
-                                                })}
+                                                }).reverse()}
                                               </div>
                                               <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({left}/{max})</span>
                                             </div>
@@ -29151,7 +29151,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                                   {Array.from({length:diceMaxM},(_,i)=>{
                                                     const spent=i<diceUsedM;
                                                     return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                  })}
+                                                  }).reverse()}
                                                   <span style={{fontSize:11,color:"var(--muted)",marginLeft:4}}>{diceLeftM}/{diceMaxM} left</span>
                                                 </div>
                                                 <button disabled={diceLeftM<=0} onClick={()=>{
@@ -29252,7 +29252,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                                   {Array.from({length:shotMax},(_,i)=>{
                                                     const spent=i<shotUsed;
                                                     return <div key={i} style={{width:18,height:18,borderRadius:"50%",border:"2px solid "+(spent?"var(--border)":"var(--accent)"),background:spent?"var(--input)":"rgba(99,102,241,0.15)"}}/>;
-                                                  })}
+                                                  }).reverse()}
                                                   <span style={{fontSize:11,color:"var(--muted)",marginLeft:4}}>{shotLeft}/{shotMax} left</span>
                                                 </div>
                                                 {!(shotData?.requiresAttack&&chosenWepAA)&&shotDiceCount>0&&<button disabled={shotLeft<=0} onClick={()=>{
