@@ -20273,7 +20273,7 @@ function App() {
                                             const teleport=()=>{
                                               if(dLeft<=0) return;
                                               const r=Math.floor(Math.random()*dSides)+1;
-                                              spendDie(1);
+                                              setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.min(dMax,(p.rogueSoulDiceUsed||0)+1),rogueSoulTeleportFt:r*10}));
                                               setSkillRoll({label:"Psychic Teleportation — teleport up to "+(r*10)+" ft",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:dSides,r1:r,r2:null,isAdv:false,isDis:false});
                                             };
                                             return wrapCol(
@@ -20327,7 +20327,7 @@ function App() {
            <button key="hs" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();spendDie(1);}}>Spend 1 die</button>
          )}
          <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
-           <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Teleportation</b> <span style={{color:"var(--muted)"}}>— as a bonus action, expend one Psionic Energy die and roll it. Manifest a psychic blade and throw it at an unoccupied space you can see within 10 × the number rolled feet of you, then teleport to that space and the blade vanishes.</span></span></div>
+           <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Teleportation</b> {char.rogueSoulTeleportFt?<span style={{fontSize:10,fontWeight:700,color:"#a78bfa",background:"rgba(167,139,250,0.12)",border:"1px solid rgba(167,139,250,0.35)",borderRadius:10,padding:"1px 7px",whiteSpace:"nowrap"}}>📏 {char.rogueSoulTeleportFt} ft</span>:null} <span style={{color:"var(--muted)"}}>— as a bonus action, expend one Psionic Energy die and roll it. Manifest a psychic blade and throw it at an unoccupied space you can see within 10 × the number rolled feet of you, then teleport to that space and the blade vanishes.</span></span></div>
          </div>
          {flexEnd(
            <button key="pt" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();teleport();}}>Teleport (spends 1 die)</button>
@@ -28386,7 +28386,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           {dieReadout}
                                         </>));
                                         if(nm.startsWith("Psychic Teleportation")) return wrapX(flexEnd(<>
-                                          <button style={dLeft>0?btnSt:offBtnSt} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();if(dLeft<=0)return;const r=Math.floor(Math.random()*dSides)+1;setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.min(dMax,(p.rogueSoulDiceUsed||0)+1)}));setSkillRoll({label:"Psychic Teleportation — teleport up to "+(r*10)+" ft",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:dSides,r1:r,r2:null,isAdv:false,isDis:false});}}>Use — spend 1 die</button>
+                                          <button style={dLeft>0?btnSt:offBtnSt} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();if(dLeft<=0)return;const r=Math.floor(Math.random()*dSides)+1;setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.min(dMax,(p.rogueSoulDiceUsed||0)+1),rogueSoulTeleportFt:r*10}));setSkillRoll({label:"Psychic Teleportation — teleport up to "+(r*10)+" ft",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:dSides,r1:r,r2:null,isAdv:false,isDis:false});}}>Use — spend 1 die</button>
                                           {dieReadout}
                                         </>));
                                         if(nm.startsWith("Psychic Whispers")){
