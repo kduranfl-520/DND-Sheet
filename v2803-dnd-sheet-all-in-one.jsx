@@ -20234,6 +20234,7 @@ function App() {
                                                         :<span style={{fontSize:10,color:"var(--subtle)"}}>No trinket to destroy</span>}
                                                   {gwUsed&&!gwOn&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("roguePhantomGhostWalkUsed",false);}}>↺ Reset</button>}
                                                 </div>
+                                                {flexEnd(rollBtn("Ghost Walk","force",10,1,0,"🎲 Roll 1d10 force"))}
                                               </FC>,
                                               <FC key="df" label="Death's Friend (17th)" minLvl={17}>
                                                 <Body>Your bond with the dead grants you these benefits:</Body>
