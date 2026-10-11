@@ -4450,6 +4450,21 @@ const DurationBadge = ({id,short,full,total,unit,openFeat,setOpenFeat,char,setF}
 // Boxed spell-summary card with an integrated save-vs-DC row (convention #4 + #19).
 // name: display label (spell's actual name). sd: SPELL_DATA entry. dc: computed save DC number.
 // saveKey: unique string for char.saveResults tracking. char/setCharSaving/setSkillRoll: passed through from the caller.
+const TRINKET_TXT=[];
+const TrinketRow = ({idx,value,onFlush,onWails,onAsk,wailsLabel,btnStyle,wStyle}) => {
+  const [txt,setTxt]=React.useState(TRINKET_TXT[idx]!==undefined?TRINKET_TXT[idx]:(value||""));
+  const skip=React.useRef(false);
+  return(
+    <div style={{display:"flex",alignItems:"center",gap:6,marginTop:6}}>
+      <input type="text" value={txt} placeholder={"Trinket "+(idx+1)+" — describe it…"} autoComplete="off" spellCheck={false}
+        onChange={e=>{TRINKET_TXT[idx]=e.target.value;setTxt(e.target.value);}} onClick={e=>e.stopPropagation()}
+        onBlur={()=>{setTimeout(()=>{const ae=document.activeElement;if(!skip.current&&!(ae&&ae.tagName==="INPUT")) onFlush();},200);}}
+        style={{flex:"1 1 0",minWidth:0,padding:"4px 8px",fontSize:12,borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)"}}/>
+      <button style={wStyle} onPointerDown={()=>{skip.current=true;}} onClick={e=>{e.stopPropagation();onWails(idx);}}>{wailsLabel}</button>
+      <button style={btnStyle} onPointerDown={()=>{skip.current=true;}} onClick={e=>{e.stopPropagation();onAsk(idx);}}>Ask</button>
+    </div>
+  );
+};
 const SpellSearchPick = ({maxL,onPick}) => {
   const [q,setQ]=React.useState("");
   const SCH={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
@@ -20163,7 +20178,12 @@ function App() {
                                             const curProf=char.roguePhantomProf||"";
                                             const otherSkillProfs=effSkillProfs.filter(x=>x!==curProf);
                                             const knownToolsWD=[...(BG_TOOLS[char.background]||[]),...(char.bgToolChoice?[char.bgToolChoice]:[]),...(char.bgUBHTools||[]),...(char.racialToolProf?[char.racialToolProf]:[]),...(char.bgVariantTool?[char.bgVariantTool]:[]),...(CLASSES[char.charClass]?.toolProf||[])].filter(Boolean).map(t=>String(t).toLowerCase());
-                                            const setTrink=n=>setF("roguePhantomTrinkets",Math.max(0,Math.min(pb,n)));
+                                            const trinketNames=char.roguePhantomTrinketNames||[];
+            const mergeNames=(p)=>{const a=(p.roguePhantomTrinketNames||[]).slice();for(let k=0;k<TRINKET_TXT.length;k++){if(TRINKET_TXT[k]!==undefined){while(a.length<=k)a.push("");a[k]=TRINKET_TXT[k];}}return a;};
+            const setTrink=n=>{const c=Math.max(0,Math.min(pb,n));setCharSaving(p=>{const a=mergeNames(p).slice(0,c);TRINKET_TXT.length=0;return{...p,roguePhantomTrinkets:c,roguePhantomTrinketNames:a};});};
+            const flushTrinketNames=()=>setCharSaving(p=>({...p,roguePhantomTrinketNames:mergeNames(p)}));
+            const destroyTrinket=(i)=>setCharSaving(p=>{const a=mergeNames(p);a.splice(i,1);const c=Math.max(0,Math.min(pb,p.roguePhantomTrinkets||0)-1);TRINKET_TXT.length=0;return{...p,roguePhantomTrinketNames:a.slice(0,c),roguePhantomTrinkets:c};});
+            const freeWails=(i)=>{const rolls=Array.from({length:wDice},()=>Math.floor(Math.random()*6)+1);const total=Math.max(1,rolls.reduce((a,r)=>a+r,0));setSkillRoll({label:"Wails from the Grave (free) ("+wDice+"d6 necrotic)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:6,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"necrotic",dmgDice:wDice+"d6",diceSides:6,baseDiceCount:wDice});destroyTrinket(i);};
                                             return wrapCol(
                                               <FC key="wotd" label="Whispers of the Dead (3rd)" minLvl={3}>
                                                 <Body>Whenever you finish a short or long rest, you can gain one skill proficiency or one tool proficiency of your choice, as a whispered lesson from the spirits. You keep it until you finish your next short or long rest, and choosing a new one replaces the old one.</Body>
@@ -20184,19 +20204,21 @@ function App() {
                                                 {flexEnd(rollBtn("Wails from the Grave","necrotic",6,wDice,0,"🎲 Roll "+wDice+"d6 necrotic"))}
                                               </FC>,
                                               <FC key="totd" label="Tokens of the Departed (9th)" minLvl={9}>
-                                                <Body>When a creature you can see dies within 30 feet of you, you can use your reaction to create a Tiny soul trinket in your free hand. You can hold a number of soul trinkets up to your proficiency bonus, and you can't create more while at your maximum. While you have at least one on your person, you have advantage on death saving throws and Constitution saving throws. When you deal Sneak Attack damage on your turn, you can destroy a trinket to use Wails from the Grave without spending a use. You can also use your action to destroy a trinket wherever it is, and its spirit appears to answer one question you ask it.</Body>
-                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap",marginTop:6}}>
+                                                <Body>When a creature you can see dies within 30 feet of you, you can use your reaction to create a Tiny soul trinket in your free hand. You can hold a number of soul trinkets up to your proficiency bonus. While you hold at least one, you gain these benefits:</Body>
+                                                <ul style={{margin:"6px 0 0",padding:0,listStyle:"none",display:"flex",flexDirection:"column",gap:4,paddingLeft:11}}>
+                                                  <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Advantage</b> <span style={{color:"var(--muted)"}}>— on death saving throws and Constitution saving throws.</span></span></li>
+                                                  <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Free Wails</b> <span style={{color:"var(--muted)"}}>— when you deal Sneak Attack damage on your turn, destroy a trinket to use Wails from the Grave without spending a use.</span></span></li>
+                                                  <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Ask a question</b> <span style={{color:"var(--muted)"}}>— use your action to destroy a trinket wherever it is; its spirit answers one question you ask it.</span></span></li>
+                                                </ul>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"nowrap",marginTop:6}}>
                                                   <div style={{display:"flex",alignItems:"center",gap:6}}>
                                                     <button style={neutralBtn} disabled={trinkets<=0} onClick={e=>{e.stopPropagation();setTrink(trinkets-1);}}>−</button>
                                                     <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Soul trinkets ({trinkets}/{pb})</span>
                                                     <button style={neutralBtn} disabled={trinkets>=pb} onClick={e=>{e.stopPropagation();setTrink(trinkets+1);}}>+</button>
                                                   </div>
-                                                  {trinkets>0&&<span style={{fontSize:11,fontWeight:700,color:"var(--green)"}}>Advantage on death and CON saves</span>}
+                                                  {trinkets>0&&<span style={{fontSize:11,fontWeight:700,color:"var(--green)",whiteSpace:"nowrap"}}>Advantage on death and CON saves</span>}
                                                 </div>
-                                                {flexEnd(
-                                                  <button style={trinkets>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={trinkets<=0} onClick={e=>{e.stopPropagation();setTrink(trinkets-1);}}>Destroy — ask a question</button>,
-                                                  <span key="fw">{rollBtn("Wails from the Grave (free)","necrotic",6,wDice,0,"Destroy — free Wails "+wDice+"d6")}</span>
-                                                )}
+                                                {Array.from({length:trinkets},(_,i)=>(<TrinketRow key={"tr"+i} idx={i} value={trinketNames[i]||""} onFlush={flushTrinketNames} onWails={freeWails} onAsk={destroyTrinket} wailsLabel={"Wails "+wDice+"d6"} btnStyle={neutralBtn} wStyle={{...neutralBtn,border:"1px solid "+dmgTypeColor("necrotic").border,background:dmgTypeColor("necrotic").bg,color:dmgTypeColor("necrotic").fg}}/>))}
                                               </FC>,
                                               <FC key="gw" label="Ghost Walk (13th)" minLvl={13} headerBadge={<DurationBadge id="rogue-ghost-walk-duration" short="10 min" full="Duration: 10 minutes, or until you end it as a bonus action." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can use a bonus action to assume a spectral form for 10 minutes or until you end it with a bonus action. You gain a flying speed of 10 feet, you can hover, and attack rolls against you have disadvantage. You can move through creatures and objects as if they were difficult terrain, but you take 1d10 force damage if you end your turn inside a creature or an object. Once you use this feature, you can't use it again until you finish a long rest or destroy a soul trinket as part of the same bonus action.</Body>
