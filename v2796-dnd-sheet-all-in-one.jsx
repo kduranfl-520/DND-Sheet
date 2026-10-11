@@ -20176,7 +20176,6 @@ function App() {
                                                     {TOOLS_ALL.map(x=><option key={x} value={x}>{x}</option>)}
                                                   </optgroup>
                                                 </select>
-                                                {note("A skill you pick shows with a subclass badge on the Core tab; a tool joins your tools list above. Pick again after each rest.")}
                                               </FC>,
                                               <FC key="wftg" label="Wails from the Grave (3rd)" minLvl={3}>
                                                 <Body>Immediately after you deal Sneak Attack damage to a creature on your turn, you can target a second creature that you can see within 30 feet of the first. The second creature takes necrotic damage equal to a roll of half your Sneak Attack dice (rounded up).{lvl>=17?" Thanks to Death's Friend, the first creature takes the same necrotic damage too.":""} You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</Body>
