@@ -20316,7 +20316,6 @@ function App() {
                                               </FC>,
                                               <FC key="sb" label="Soul Blades (9th)" minLvl={9}>
          <Body>Your psychic blades are now an outlet for your mind's power.</Body>
-         {pipRow("rogueSoulDiceUsed",dMax)}
          {flexEnd(
            <span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>
          )}
