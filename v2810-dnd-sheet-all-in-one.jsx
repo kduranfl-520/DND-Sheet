@@ -20269,6 +20269,7 @@ function App() {
                                               const total=rolls.reduce((a,r)=>a+r,0)+dexMod;
                                               setSkillRoll({label:label+" — Psychic Blade (1d"+dieSides+" psychic)",roll:d20,bonus:atkB,total:d20+atkB,hitRoll:d20,atkBonus:atkB,hitTotal:d20+atkB,isCrit,isFail:d20===1,sides:20,r1:d20,r2:null,isAdv:false,isDis:false,isWeaponRoll:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:dexMod,dmgType:"psychic",dmgDice:"1d"+dieSides,diceSides:dieSides,baseDiceCount:1,riderOffer:{label:"Sneak Attack",icon:"🗡",sides:6,count:sn,type:"psychic",note:"Add this only if the Sneak Attack conditions are met. Once per turn."}});
                                             };
+                                            const rollWhispers=(sides)=>{const r=Math.floor(Math.random()*sides)+1;setCharSaving(p=>{const t={...(p.durationTimers||{})};delete t["rogue-whispers-duration"];return {...p,rogueSoulWhisperHours:r,durationCounters:{...(p.durationCounters||{}),"rogue-whispers-duration":r},durationTimers:t};});setSkillRoll({label:"Psychic Whispers — "+r+" hr of telepathy (d"+sides+")",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides,r1:r,r2:null,isAdv:false,isDis:false});};
                                             const teleport=()=>{
                                               if(dLeft<=0) return;
                                               const r=Math.floor(Math.random()*dSides)+1;
@@ -20291,10 +20292,10 @@ function App() {
                                                   dieBtn("Psi-Bolstered Knack (d"+dSides+")",dSides,"🎲 Knack d"+dSides)
          )}
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
-                                                  <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Whispers</b> <span style={{color:"var(--muted)"}}>— you can use your action to choose a number of creatures you can see, up to your proficiency bonus, and roll a Psionic Energy die. For a number of hours equal to the number rolled, you can speak telepathically to them and they to you while within 1 mile. The first use after a long rest doesn't expend the die.</span></span></div>
+                                                  <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Whispers</b> {char.rogueSoulWhisperHours?<DurationBadge id="rogue-whispers-duration" short={char.rogueSoulWhisperHours+" hr"} full={"Telepathy duration: "+char.rogueSoulWhisperHours+" hour(s) (your Psionic Energy die roll)."} total={char.rogueSoulWhisperHours} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null} <span style={{color:"var(--muted)"}}>— you can use your action to choose up to {pb} creature{pb===1?"":"s"} you can see, and roll a Psionic Energy die. For a number of hours equal to the number rolled, you can speak telepathically to them and they to you while within 1 mile. The first use after a long rest doesn't expend the die.</span></span></div>
          </div>
          {flexEnd(
-                                                  dieBtn("Psychic Whispers — hours of telepathy (d"+dSides+")",dSides,"🎲 Whispers d"+dSides)
+                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollWhispers(dSides);}}>{"🎲 Whispers d"+dSides}</button>
          )}
                                                 {flexEnd(
                                                   <span key="wu" style={{fontSize:11,color:whisperUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{whisperUsed?"Free Whispers used":"First Whispers use is free"}</span>,
@@ -27934,7 +27935,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  "Misdirection":"When an attack targets you while a creature within 5 feet gives you cover from it, make the attack target that creature instead.",
  "Unerring Eye":"Sense illusions, shapechangers not in their original form, and other magic meant to deceive the senses within 30 feet, as long as you aren't blinded or deafened.",
  "Panache":"Make a Charisma (Persuasion) check contested by a creature's Insight. A hostile creature you beat has disadvantage attacking anyone but you and can't make opportunity attacks against others; a non-hostile one is charmed by you. Lasts 1 minute.",
- "Psychic Whispers":"Choose up to your proficiency bonus in creatures you can see and roll a Psionic Energy die. You can speak telepathically with them for that many hours. The first use after a long rest costs no die.",
+ "Psychic Whispers":"Choose up to "+pb+" creature"+(pb===1?"":"s")+" you can see and roll a Psionic Energy die. You can speak telepathically with them for that many hours. The first use after a long rest costs no die.",
  "Psychic Veil":"Become invisible for 1 hour. It ends early if you deal damage or force a saving throw. Once per long rest, or spend a Psionic Energy die to use it again.",
  "Tokens of the Departed":"React when a creature you can see dies within 30 feet to create a soul trinket (up to your proficiency bonus), or use your action to destroy one and ask its spirit a question.",
  "Sudden Strike":"After taking the Attack action, make one additional attack as a bonus action. It can use Sneak Attack even if you already used it this turn, but not against the same creature twice in a turn.",
@@ -28328,6 +28329,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           const total=rolls.reduce((a,r)=>a+r,0)+dexModX;
                                           setSkillRoll({label:label+" — Psychic Blade (1d"+dieSides+" psychic)",roll:d20,bonus:atkB,total:d20+atkB,hitRoll:d20,atkBonus:atkB,hitTotal:d20+atkB,isCrit,isFail:d20===1,sides:20,r1:d20,r2:null,isAdv:false,isDis:false,isWeaponRoll:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:dexModX,dmgType:"psychic",dmgDice:"1d"+dieSides,diceSides:dieSides,baseDiceCount:1,riderOffer:{label:"Sneak Attack",icon:"🗡",sides:6,count:sn,type:"psychic",note:"Add this only if the Sneak Attack conditions are met. Once per turn."}});
                                         };
+                                        const rollWhispers=(sides)=>{const r=Math.floor(Math.random()*sides)+1;setCharSaving(p=>{const t={...(p.durationTimers||{})};delete t["rogue-whispers-duration"];return {...p,rogueSoulWhisperHours:r,durationCounters:{...(p.durationCounters||{}),"rogue-whispers-duration":r},durationTimers:t};});setSkillRoll({label:"Psychic Whispers — "+r+" hr of telepathy (d"+sides+")",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides,r1:r,r2:null,isAdv:false,isDis:false});};
                                         const dieBtn=(label,text)=><button style={btnSt} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*dSides)+1;setSkillRoll({label,roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:dSides,r1:r,r2:null,isAdv:false,isDis:false});}}>{text}</button>;
                                         if(nm.startsWith("Mage Hand Legerdemain")) return wrapX(flexEnd(<>{skBtn("Sleight of Hand")}<button style={{...btnSt,...ttOffSt}} {...ttOff} onClick={e=>{e.stopPropagation();rollCheck("Thieves' Tools",ttB);}}>🎲 Thieves' Tools {ttB>=0?"+":""}{ttB}</button></>));
                                         if(nm.startsWith("Spell Thief")) return wrapX(<>{saveRowX("rogueSpellThief","Spellcaster's",spDCAT,"The spell is unaffected.","The spell is negated against you, and you steal it for 8 hours.")}{onceRow("rogueSpellThiefUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}</>);
@@ -28378,7 +28380,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         if(nm.startsWith("Psychic Whispers")){
                                           const wu=!!char.rogueSoulWhisperUsed;
                                           return wrapX(<>
-                                            {flexEnd(<>{dieBtn("Psychic Whispers — hours of telepathy (d"+dSides+")","🎲 Roll d"+dSides+" for hours")}{dieReadout}</>)}
+                                            {flexEnd(<><button style={btnSt} onClick={e=>{e.stopPropagation();rollWhispers(dSides);}}>{"🎲 Roll d"+dSides+" for hours"}</button>{dieReadout}</>)}
                                             {onceRow("rogueSoulWhisperUsed","First use after a long rest is free","Free use spent")}
                                           </>);
                                         }
