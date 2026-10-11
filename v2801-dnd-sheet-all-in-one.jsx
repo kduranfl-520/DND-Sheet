@@ -20235,7 +20235,11 @@ function App() {
                                                 </div>
                                               </FC>,
                                               <FC key="df" label="Death's Friend (17th)" minLvl={17}>
-                                                <Body>Your Wails from the Grave now damages both the first and the second creature. In addition, when you finish a long rest and have no soul trinkets, one appears in your free hand.</Body>
+                                                <Body>Your bond with the dead grants you these benefits:</Body>
+                                                <ul style={{margin:"6px 0 0",padding:0,listStyle:"none",display:"flex",flexDirection:"column",gap:4,paddingLeft:11}}>
+                                                  <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Both creatures</b> <span style={{color:"var(--muted)"}}>— your Wails from the Grave now damages both the first and the second creature.</span></span></li>
+                                                  <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Free trinket</b> <span style={{color:"var(--muted)"}}>— when you finish a long rest and have no soul trinkets, one appears in your free hand.</span></span></li>
+                                                </ul>
                                               </FC>
                                             );
                                           }
