@@ -4479,6 +4479,8 @@ const SpellSearchPick = ({maxL,onPick}) => {
     </div>)}
   </>);
 };
+const SCHOOL_COLORS={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
+const schoolColor=(spell)=>{const sc=typeof spell==="string"?SPELL_DATA[spell]?.school:spell;return SCHOOL_COLORS[sc]||"var(--border)";};
 const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
   if(!sd) return null;
   const isHeal = sd.dmgType==="healing";
@@ -4495,7 +4497,7 @@ const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
   const setRes = (val) => setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[saveKey]:val}}));
   const clearRes = () => setCharSaving(p=>{const n={...(p.saveResults||{})}; delete n[saveKey]; return {...p,saveResults:n};});
   return (
-    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",marginTop:4}}>
+    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor(sd.school),borderRadius:6,padding:"6px 8px",marginTop:4}}>
       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:2}}>{name}</div>
       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5}}>
         {sd.desc}
@@ -15477,7 +15479,7 @@ function App() {
                                                   {cmdSD&&(()=>{
                                                     const isHeal=cmdSD.dmgType==="healing";
                                                     return (
-                                                      <div style={{background:"rgba(99,102,241,0.05)",border:"1px solid rgba(99,102,241,0.15)",borderRadius:6,padding:"6px 8px",marginBottom:8}}>
+                                                      <div style={{background:"rgba(99,102,241,0.05)",border:"1px solid rgba(99,102,241,0.15)",borderLeft:"4px solid "+schoolColor("Command"),borderRadius:6,padding:"6px 8px",marginBottom:8}}>
                                                         <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Command</div>
                                                         <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,paddingTop:4,borderTop:"1px solid var(--divider)"}}>
                                                           {cmdSD.desc}
@@ -16623,7 +16625,7 @@ function App() {
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Tranquility (11th)</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>When you finish a long rest, you gain the effect of the Sanctuary spell on yourself (DC {kiDC}), lasting until you start another long rest.</div>
                                                     <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>The effect ends early as normal if you attack or cast a spell.</span></div>
-                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",marginBottom:6}}>
+                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Sanctuary"),borderRadius:6,padding:"6px 8px",marginBottom:6}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:2}}>Sanctuary</div>
                                                       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,marginBottom:5}}>Any creature that targets you with an attack or harmful spell must first succeed on a WIS save or choose a new target — doesn't protect against area effects. Ends early if you attack, cast a spell that affects an enemy, or deal damage to another creature.</div>
                                                       {(()=>{const sancResult=char.saveResults?.tranquilitySanctuary;return(
@@ -18075,7 +18077,7 @@ function App() {
                                                     const asd=SPELL_DATA["Alter Self"];
                                                     const isHeal=asd.dmgType==="healing";
                                                     return (
-                                                      <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                      <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Alter Self"),borderRadius:6,padding:"6px 8px"}}>
                                                         <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:2}}>Alter Self</div>
                                                         <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5}}>
                                                           {asd.desc}
@@ -20512,7 +20514,7 @@ function App() {
                                               </FC>
                                               <FC label="Purity of Spirit (15th)" minLvl={15}>
                                                 <Body>You are always under the effect of a Protection from Evil and Good spell.</Body>
-                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",marginTop:6}}>
+                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Protection from Evil and Good"),borderRadius:6,padding:"6px 8px",marginTop:6}}>
                                                   <div style={{fontSize:10,fontWeight:700,color:"var(--accent)",marginBottom:2}}>Protection from Evil and Good</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>Until the spell ends, one willing creature you touch is protected against aberrations, celestials, elementals, fey, fiends, and undead.</div>
                                                 </div>
@@ -21282,7 +21284,7 @@ function App() {
                                                 <span>{b}</span>
                                                 <span style={{fontSize:11,color:"var(--accent)",fontWeight:600}}>Spellcasting ability: {spellAbil}</span>
                                                 {/* Invisibility — fixed spell */}
-                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Invisibility"),borderRadius:6,padding:"6px 8px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Invisibility</div>
                                                   {invisData&&(()=>{
                                                     const isHeal=invisData.dmgType==="healing";
@@ -21340,7 +21342,7 @@ function App() {
                                                 <span>{b}</span>
                                                 <span style={{fontSize:11,color:"var(--accent)",fontWeight:600}}>Spellcasting ability: {spellAbil}</span>
                                                 {/* Misty Step */}
-                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Misty Step"),borderRadius:6,padding:"6px 8px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Misty Step</div>
                                                   {msData&&(()=>{
                                                     const isHeal=msData.dmgType==="healing";
@@ -21396,7 +21398,7 @@ function App() {
                                                 {dtData&&(()=>{
                                                   const isHeal=dtData.dmgType==="healing";
                                                   return (
-                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Detect Thoughts"),borderRadius:6,padding:"6px 8px"}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Detect Thoughts</div>
                                                       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,paddingTop:4,borderTop:"1px solid var(--divider)"}}>
                                                         {dtData.desc}
@@ -21459,7 +21461,7 @@ function App() {
                                                 {dmData&&(()=>{
                                                   const isHeal=dmData.dmgType==="healing";
                                                   return (
-                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Detect Magic"),borderRadius:6,padding:"6px 8px"}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Detect Magic</div>
                                                       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,paddingTop:4,borderTop:"1px solid var(--divider)"}}>
                                                         {dmData.desc}
@@ -21487,7 +21489,7 @@ function App() {
                                                   const sd2=SPELL_DATA[name];
                                                   const isUsed=!!char[key];
                                                   return(
-                                                    <div key={name} style={{display:"flex",flexDirection:"column",gap:4,background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                    <div key={name} style={{display:"flex",flexDirection:"column",gap:4,background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor(name),borderRadius:6,padding:"6px 8px"}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)"}}>{name}</div>
                                                       {sd2&&(()=>{
                                                         const isHeal=sd2.dmgType==="healing";
@@ -21608,7 +21610,7 @@ function App() {
                                                   const sd2=SPELL_DATA[name];
                                                   const isUsed=!!char[key];
                                                   return(
-                                                    <div key={name} style={{display:"flex",flexDirection:"column",gap:4,background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                    <div key={name} style={{display:"flex",flexDirection:"column",gap:4,background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor(name),borderRadius:6,padding:"6px 8px"}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)"}}>{name}</div>
                                                       {sd2&&(()=>{
                                                         const isHeal=sd2.dmgType==="healing";
@@ -22349,7 +22351,7 @@ function App() {
                                                 {msData&&(()=>{
                                                   const isHeal=msData.dmgType==="healing";
                                                   return (
-                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+                                                    <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Misty Step"),borderRadius:6,padding:"6px 8px"}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:4}}>Misty Step</div>
                                                       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,paddingTop:4,borderTop:"1px solid var(--divider)"}}>
                                                         {msData.desc}
@@ -27848,7 +27850,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                 libDmg={...libDmg,dice:hasAnyOtherWeaponOrShieldR?"1d6":"1d8",type:"bludgeoning"};
                               }
                               return(
-                                <div key={item.id} style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"10px 12px",fontSize:13}}>
+                                <div key={item.id} style={{background:"var(--surface)",border:"1px solid var(--border)",...(sd&&sd.school?{borderLeft:"4px solid "+schoolColor(sd.school)}:{}),borderRadius:10,padding:"10px 12px",fontSize:13}}>
                                   {/* Header row */}
                                   {(()=>{
                                     // Feature notes lookup for class features
