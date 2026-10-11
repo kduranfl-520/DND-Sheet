@@ -20285,13 +20285,17 @@ function App() {
                                                   regainUsed?<button key="rr" style={linkBtn} onClick={e=>{e.stopPropagation();setF("rogueSoulRegainUsed",false);}}>↺ Reset</button>:null
                                                 )}
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
-                                                  <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psi-Bolstered Knack</b> <span style={{color:"var(--muted)"}}>— when you fail an ability check using a skill or tool you are proficient with, you can roll a Psionic Energy die and add it to the check, possibly turning the failure into a success. The die is expended only if the roll succeeds.</span></span></div>
+                                                  <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psi-Bolstered Knack</b> <span style={{color:"var(--muted)"}}>— when you fail an ability check using a skill or tool you are proficient with, you can roll a Psionic Energy die and add it to the check. The die is expended only if the roll succeeds.</span></span></div>
+         </div>
+         {flexEnd(
+                                                  dieBtn("Psi-Bolstered Knack (d"+dSides+")",dSides,"🎲 Knack d"+dSides)
+         )}
+                                                <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
                                                   <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Whispers</b> <span style={{color:"var(--muted)"}}>— you can use your action to choose a number of creatures you can see, up to your proficiency bonus, and roll a Psionic Energy die. For a number of hours equal to the number rolled, you can speak telepathically to them and they to you while within 1 mile. The first use after a long rest doesn't expend the die.</span></span></div>
-                                                </div>
-                                                {flexEnd(
-                                                  dieBtn("Psi-Bolstered Knack (d"+dSides+")",dSides,"🎲 Knack d"+dSides),
+         </div>
+         {flexEnd(
                                                   dieBtn("Psychic Whispers — hours of telepathy (d"+dSides+")",dSides,"🎲 Whispers d"+dSides)
-                                                )}
+         )}
                                                 {flexEnd(
                                                   <span key="wu" style={{fontSize:11,color:whisperUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{whisperUsed?"Free Whispers used":"First Whispers use is free"}</span>,
                                                   <button key="wb" style={whisperUsed?linkBtn:neutralBtn} onClick={e=>{e.stopPropagation();setF("rogueSoulWhisperUsed",!whisperUsed);}}>{whisperUsed?"↺ Reset":"Mark Used"}</button>
