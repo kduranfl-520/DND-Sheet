@@ -4449,6 +4449,20 @@ const DurationBadge = ({id,short,full,total,unit,openFeat,setOpenFeat,char,setF}
 // Boxed spell-summary card with an integrated save-vs-DC row (convention #4 + #19).
 // name: display label (spell's actual name). sd: SPELL_DATA entry. dc: computed save DC number.
 // saveKey: unique string for char.saveResults tracking. char/setCharSaving/setSkillRoll: passed through from the caller.
+const SpellSearchPick = ({maxL,onPick}) => {
+  const [q,setQ]=React.useState("");
+  const SCH={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
+  const ql=q.trim().toLowerCase();
+  const hits=ql?Object.keys(SPELL_DATA).filter(n=>{const d=SPELL_DATA[n];return d&&d.level>=1&&d.level<=maxL&&n.toLowerCase().includes(ql);}).sort((a,b)=>SPELL_DATA[a].level-SPELL_DATA[b].level||a.localeCompare(b)):[];
+  return(<>
+    <input type="text" value={q} placeholder="Search spells…" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} onChange={e=>setQ(e.target.value)} onClick={e=>e.stopPropagation()} style={{width:"100%",padding:"5px 8px",fontSize:12,borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)"}}/>
+    {ql&&(<div style={{display:"flex",flexDirection:"column",gap:3,marginTop:4}}>
+      {hits.slice(0,8).map(n=>(<button key={n} onClick={e=>{e.stopPropagation();onPick(n);}} style={{display:"flex",alignItems:"center",gap:6,padding:"4px 8px",fontSize:12,textAlign:"left",cursor:"pointer",background:"var(--surface)",color:"var(--text)",border:"1px solid var(--border)",borderLeft:"4px solid "+(SCH[SPELL_DATA[n].school]||"var(--border)"),borderRadius:6}}><span style={{fontSize:10,fontWeight:800,color:"var(--accent)"}}>{SPELL_DATA[n].level}</span><span>{n}</span></button>))}
+      {hits.length===0&&<div style={{fontSize:11,color:"var(--muted)"}}>No spells of level {maxL} or lower match.</div>}
+      {hits.length>8&&<div style={{fontSize:10,color:"var(--muted)"}}>+{hits.length-8} more — keep typing to narrow the list.</div>}
+    </div>)}
+  </>);
+};
 const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
   if(!sd) return null;
   const isHeal = sd.dmgType==="healing";
@@ -20315,19 +20329,9 @@ function App() {
                                                 {(()=>{
                                                   const maxL=(SPELL_SLOTS_THIRD[lvl]||[]).length;
                                                   const picked=char.rogueSpellThiefSpell||"";
-                                                  const q=(char.rogueSpellThiefQ||"").trim().toLowerCase();
-                                                  const SCH={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
-                                                  const hits=q?Object.keys(SPELL_DATA).filter(n=>{const d=SPELL_DATA[n];return d&&d.level>=1&&d.level<=maxL&&n.toLowerCase().includes(q);}).sort((a,b)=>SPELL_DATA[a].level-SPELL_DATA[b].level||a.localeCompare(b)):[];
                                                   return(<div style={{marginTop:8}}>
                                                     <div style={{fontSize:10,fontWeight:700,color:"var(--muted)",marginBottom:3}}>STOLEN SPELL (up to level {maxL})</div>
-                                                    {!picked?(<>
-                                                      <input type="text" value={char.rogueSpellThiefQ||""} placeholder="Search spells…" onChange={e=>setF("rogueSpellThiefQ",e.target.value)} onClick={e=>e.stopPropagation()} style={{width:"100%",padding:"5px 8px",fontSize:12,borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)"}}/>
-                                                      {q&&(<div style={{display:"flex",flexDirection:"column",gap:3,marginTop:4}}>
-                                                        {hits.slice(0,8).map(n=>(<button key={n} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSpellThiefSpell:n,rogueSpellThiefQ:""}));}} style={{display:"flex",alignItems:"center",gap:6,padding:"4px 8px",fontSize:12,textAlign:"left",cursor:"pointer",background:"var(--surface)",color:"var(--text)",border:"1px solid var(--border)",borderLeft:"4px solid "+(SCH[SPELL_DATA[n].school]||"var(--border)"),borderRadius:6}}><span style={{fontSize:10,fontWeight:800,color:"var(--accent)"}}>{SPELL_DATA[n].level}</span><span>{n}</span></button>))}
-                                                        {hits.length===0&&<div style={{fontSize:11,color:"var(--muted)"}}>No spells of level {maxL} or lower match.</div>}
-                                                        {hits.length>8&&<div style={{fontSize:10,color:"var(--muted)"}}>+{hits.length-8} more — keep typing to narrow the list.</div>}
-                                                      </div>)}
-                                                    </>):(<>
+                                                    {!picked?(<SpellSearchPick maxL={maxL} onPick={n=>setCharSaving(p=>({...p,rogueSpellThiefSpell:n}))}/>):(<>
                                                       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
                                                         <span style={{fontSize:12,fontWeight:700,color:"var(--accent)"}}>{picked}</span>
                                                         <button onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSpellThiefSpell:""}));}} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,cursor:"pointer",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.3)",color:"var(--red)"}}>Clear</button>
