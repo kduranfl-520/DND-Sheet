@@ -19932,12 +19932,13 @@ function App() {
                                               </div>
                                             );
                                           };
-                                          const onceRow=(key,readyTxt,usedTxt)=>{
+                                          const onceRow=(key,readyTxt,usedTxt,extra)=>{
                                             const u=!!char[key];
                                             return(
                                               <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,marginTop:6}}>
                                                 <span style={{fontSize:11,color:u?"var(--muted)":"var(--accent)",fontWeight:700}}>{u?(usedTxt||"Used — recharges on a Short or Long Rest"):(readyTxt||"Ready — 1 use per rest")}</span>
                                                 <button style={u?linkBtn:neutralBtn} onClick={e=>{e.stopPropagation();setF(key,!u);}}>{u?"↺ Reset":"Mark Used"}</button>
+         {extra||null}
                                               </div>
                                             );
                                           };
@@ -20281,9 +20282,9 @@ function App() {
                                                 <Body>You harbor a wellspring of psionic energy represented by Psionic Energy dice, which are d{dSides}s. You have a number of them equal to twice your proficiency bonus. As a bonus action, you can regain one expended die, but you can't do so again until you finish a short or long rest.</Body>
                                                 {pipRow("rogueSoulDiceUsed",dMax)}
                                                 {flexEnd(
-                                                  <span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>,
                                                   <button key="rg" style={regainUsed||dUsed<=0?{...neutralBtn,opacity:0.4,cursor:"not-allowed"}:neutralBtn} disabled={regainUsed||dUsed<=0} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.max(0,(p.rogueSoulDiceUsed||0)-1),rogueSoulRegainUsed:true}));}}>{regainUsed?"Regain used":"Regain 1 die"}</button>,
-                                                  regainUsed?<button key="rr" style={linkBtn} onClick={e=>{e.stopPropagation();setF("rogueSoulRegainUsed",false);}}>↺ Reset</button>:null
+                                                  regainUsed?<button key="rr" style={linkBtn} onClick={e=>{e.stopPropagation();setF("rogueSoulRegainUsed",false);}}>↺ Reset</button>:null,
+           <span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>
                                                 )}
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
                                                   <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psi-Bolstered Knack</b> <span style={{color:"var(--muted)"}}>— when you fail an ability check using a skill or tool you are proficient with, you can roll a Psionic Energy die and add it to the check. The die is expended only if the roll succeeds.</span></span></div>
@@ -20295,7 +20296,8 @@ function App() {
                                                   <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Whispers</b> {char.rogueSoulWhisperHours?<DurationBadge id="rogue-whispers-duration" short={char.rogueSoulWhisperHours+" hr"} full={"Telepathy duration: "+char.rogueSoulWhisperHours+" hour(s) (your Psionic Energy die roll)."} total={char.rogueSoulWhisperHours} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null} <span style={{color:"var(--muted)"}}>— you can use your action to choose up to {pb} creature{pb===1?"":"s"} you can see, and roll a Psionic Energy die. For a number of hours equal to the number rolled, you can speak telepathically to them and they to you while within 1 mile. The first use after a long rest doesn't expend the die.</span></span></div>
          </div>
          {flexEnd(
-                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollWhispers(dSides);}}>{"🎲 Whispers d"+dSides}</button>
+                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollWhispers(dSides);}}>{"🎲 Whispers d"+dSides}</button>,
+           <span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>
          )}
                                                 {flexEnd(
                                                   <span key="wu" style={{fontSize:11,color:whisperUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{whisperUsed?"Free Whispers used":"First Whispers use is free"}</span>,
@@ -20316,34 +20318,31 @@ function App() {
                                               </FC>,
                                               <FC key="sb" label="Soul Blades (9th)" minLvl={9}>
          <Body>Your psychic blades are now an outlet for your mind's power.</Body>
-         {flexEnd(
-           <span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>
-         )}
          <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
            <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Homing Strikes</b> <span style={{color:"var(--muted)"}}>— if you make an attack roll with a psychic blade and miss, you can roll a Psionic Energy die and add the number rolled to the attack roll. If this causes the attack to hit, the die is expended.</span></span></div>
          </div>
          {flexEnd(
            dieBtn("Homing Strikes — add to the attack roll (d"+dSides+")",dSides,"🎲 Homing Strikes d"+dSides),
-           <button key="hs" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();spendDie(1);}}>Spend 1 die</button>
+           <button key="hs" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();spendDie(1);}}>Spend 1 die</button>,
+           <span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>
          )}
          <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8,paddingLeft:11}}>
            <div style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Psychic Teleportation</b> <span style={{color:"var(--muted)"}}>— as a bonus action, expend one Psionic Energy die and roll it. Manifest a psychic blade and throw it at an unoccupied space you can see within {char.rogueSoulTeleportFt?<b style={{color:"var(--accent)"}}>{char.rogueSoulTeleportFt} feet</b>:"10 × the number rolled feet"} of you, then teleport to that space and the blade vanishes.</span></span></div>
          </div>
          {flexEnd(
-           <button key="pt" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();teleport();}}>Teleport (spends 1 die)</button>
+           <button key="pt" style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();teleport();}}>Teleport (spends 1 die)</button>,
+           <span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>
          )}
                                               </FC>,
                                               <FC key="pv" label="Psychic Veil (13th)" minLvl={13} headerBadge={<DurationBadge id="rogue-psychic-veil-duration" short="1 hr" full="Duration: 1 hour, or until you dismiss it. Ends early if you deal damage to a creature or force one to make a saving throw." total={60} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can use your action to magically become invisible, along with anything you are wearing or carrying, for 1 hour or until you dismiss the effect (no action required). The invisibility ends early immediately after you deal damage to a creature or force a creature to make a saving throw.</Body>
-                                                {flexEnd(<span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>)}
-                                                {onceRow("rogueSoulVeilUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
+                                                {onceRow("rogueSoulVeilUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest",<span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>)}
                                                 {veilUsed&&flexEnd(<button style={dLeft>0?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<=0} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.min(dMax,(p.rogueSoulDiceUsed||0)+1),rogueSoulVeilUsed:false}));}}>Spend 1 die to use again</button>)}
                                               </FC>,
                                               <FC key="rm" label="Rend Mind (17th)" minLvl={17} headerBadge={<DurationBadge id="rogue-rend-mind-duration" short="1 min" full="Duration: 1 minute on a failed save. The stunned target repeats the save at the end of each of its turns, ending the effect on a success." total={60} unit="sec" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>When you deal Sneak Attack damage to a creature with your psychic blades, you can force that target to make a Wisdom saving throw. Once you use this feature, you can't use it again until you finish a long rest, unless you expend three Psionic Energy dice to use it again.</Body>
                                                 {saveRow("rogueRendMind","WIS",rendDC,"The target resists — it isn't stunned.","The target is stunned for 1 minute and repeats the save at the end of each of its turns.")}
-                                                {flexEnd(<span key="rd" style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>DICE ({dLeft}/{dMax}) · d{dSides}</span>)}
-                                                {onceRow("rogueSoulRendUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
+                                                {onceRow("rogueSoulRendUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest",<span key="dt" style={{fontSize:11,color:"var(--muted)",fontWeight:600,whiteSpace:"nowrap"}}>DICE ({dLeft}/{dMax})</span>)}
                                                 {rendUsed&&flexEnd(<button style={dLeft>=3?neutralBtn:{...neutralBtn,opacity:0.4,cursor:"not-allowed"}} disabled={dLeft<3} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSoulDiceUsed:Math.min(dMax,(p.rogueSoulDiceUsed||0)+3),rogueSoulRendUsed:false}));}}>Spend 3 dice to use again</button>)}
                                               </FC>
                                             );
