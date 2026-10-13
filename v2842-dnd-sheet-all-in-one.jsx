@@ -5404,7 +5404,7 @@ function App() {
                                     };
                                     return(
                                       <div style={{marginTop:2,display:"flex",flexDirection:"column",gap:8}}>
-                                        {lvl>=11&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Includes the +1d8 from Improved Divine Smite, which is always active on this melee hit.</span></div>}
+                                        {lvl>=11&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Includes the +1d8 from Improved Divine Smite, which is always active on this melee hit.</span></div>}
                                         <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                           <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                           <select value={smiteWeapon} onChange={e=>setF("paladinSmiteWeapon",e.target.value)}
@@ -7846,13 +7846,13 @@ function App() {
                         const isBrutalCriticalNote = char.charClass==="Barbarian" && item.toLowerCase().startsWith("notes:") && item.toLowerCase().includes("must be raging");
                         if(isBrutalCriticalNote){
                           const bcNote=item.slice(item.indexOf(":")+1).trim();
-                          return <div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{bcNote}</span></div>;
+                          return <div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{bcNote}</span></div>;
                         }
                         // Persistent Rage — Benefit pill suppressed; its specific detail is now folded into the card's own summary text
                         const isPersistentRagePill = char.charClass==="Barbarian" && item.toLowerCase().startsWith("benefit:") && item.toLowerCase().includes("rage no longer ends");
                         if(isPersistentRagePill){
                           const prBenefit=item.slice(item.indexOf(":")+1).trim();
-                          return <div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{prBenefit}.</span></div>;
+                          return <div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{prBenefit}.</span></div>;
                         }
                         // Persistent Rage — suppress the separate "Ideal for longer encounters" Notes pill; not mechanically useful on its own
                         if(char.charClass==="Barbarian" && item.toLowerCase().startsWith("notes:") && item.toLowerCase().includes("ideal for longer encounters")) return null;
@@ -7860,7 +7860,7 @@ function App() {
                         const isPrimalChampionPill = char.charClass==="Barbarian" && item.toLowerCase().startsWith("notes:") && item.toLowerCase().includes("str checks never roll below");
                         if(isPrimalChampionPill){
                           const strScorePC = eff?.STR||char.abilities?.STR||10;
-                          return <div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>Combined with Indomitable Might, a STR of {strScorePC} means STR checks never roll below {strScorePC}.</span></div>;
+                          return <div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>Combined with Indomitable Might, a STR of {strScorePC} means STR checks never roll below {strScorePC}.</span></div>;
                         }
                         // Danger Sense — Notes pill suppressed; its detail is now folded into the small note above the DEX save roller
                         const isDangerSensePill = char.charClass==="Barbarian" && item.toLowerCase().startsWith("notes:") && item.toLowerCase().includes("evasion");
@@ -7869,7 +7869,7 @@ function App() {
                         const isPrimalPathNote = char.charClass==="Barbarian" && item.toLowerCase().startsWith("notes:") && item.toLowerCase().includes("levels 6, 10, and 14");
                         if(isPrimalPathNote){
                           const ppNote=item.slice(item.indexOf(":")+1).trim();
-                          return <div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{ppNote}</span></div>;
+                          return <div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{ppNote}</span></div>;
                         }
                         const parenMatch = !isRageActivation&&!isRecklessActivation&&!isFastMovementBonus&&item.match(/^([^:]+):\s*([^(]+)\s*\((.+)\)\s*$/);
                         if(parenMatch){
@@ -7985,7 +7985,7 @@ function App() {
                         if(isFastMovementBonus){
                           const fmNoteItem=plain.find(p=>p.toLowerCase().startsWith("notes:")&&p.toLowerCase().includes("climbing"));
                           const fmNote=fmNoteItem?fmNoteItem.slice(fmNoteItem.indexOf(":")+1).trim():"";
-                          return fmNote?<div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{fmNote}</span></div>:null;
+                          return fmNote?<div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{fmNote}</span></div>:null;
                         }
                         // Fast Movement — suppress the separate Notes pill; its text now lives in the small note above
                         if(item.toLowerCase().startsWith("notes:") && char.charClass==="Barbarian" && item.toLowerCase().includes("climbing")) return null;
@@ -7995,7 +7995,7 @@ function App() {
                           const drawbackDetail = drawbackItem ? drawbackItem.slice(drawbackItem.indexOf(":")+1).trim() : "";
                           return (
                             <div key={i} style={{display:"flex",flexDirection:"column",gap:4,width:"100%"}}>
-                              {drawbackDetail&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{drawbackDetail}.</span></div>}
+                              {drawbackDetail&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{drawbackDetail}.</span></div>}
                               <div style={{display:"flex",justifyContent:"flex-end"}}>
                                 <button
                                   onClick={()=>setF("recklessActive",!recklessOn)}
@@ -8011,7 +8011,7 @@ function App() {
                         // Extra Attack — small note instead of a pill
                         if(item.toLowerCase().startsWith("note:") && item.toLowerCase().includes("bonus action attacks")){
                           const eaNote=item.slice(item.indexOf(":")+1).trim();
-                          return <div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{eaNote}</span></div>;
+                          return <div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{eaNote}</span></div>;
                         }
                         // DEX save advantage benefit (no parens case, e.g. Danger Sense)
                         const isPlainDexSaveAdv = item.toLowerCase().startsWith("benefit:") && item.toLowerCase().includes("dex save") && item.toLowerCase().includes("advantage");
@@ -8024,7 +8024,7 @@ function App() {
                           const dsNote=dsNoteItem?dsNoteItem.slice(dsNoteItem.indexOf(":")+1).trim():"";
                           return (
                             <div key={i} style={{display:"flex",flexDirection:"column",gap:4,width:"100%"}}>
-                              {dsNote&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{dsNote}</span></div>}
+                              {dsNote&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{dsNote}</span></div>}
                               <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:10}}>
                                 <span style={{fontSize:11,color:"var(--muted)"}}><b style={{color:"var(--text)",fontFamily:"'DM Mono',monospace"}}>DEX SAVE (ADV)</b>{" "}<span style={{fontFamily:"'DM Mono',monospace",fontWeight:700,color:"var(--accent)"}}>{bonusDS>=0?"+":""}{bonusDS}</span></span>
                                 <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(99,102,241,0.3)",background:"rgba(99,102,241,0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
@@ -8053,7 +8053,7 @@ function App() {
                         if(item.toLowerCase().startsWith("benefit 1:") && char.charClass==="Barbarian" && item.toLowerCase().includes("initiative")){
                           const fiNoteItem=plain.find(p=>p.toLowerCase().startsWith("notes:")&&p.toLowerCase().includes("stacks naturally"));
                           const fiNote=fiNoteItem?fiNoteItem.slice(fiNoteItem.indexOf(":")+1).trim():"";
-                          return fiNote?<div key={i} style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{fiNote}</span></div>:null;
+                          return fiNote?<div key={i} style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,width:"100%"}}><span>✨</span><span>{fiNote}</span></div>:null;
                         }
                         // Feral Instinct — suppress the separate Notes pill; its detail now lives in the small note above
                         if(item.toLowerCase().startsWith("notes:") && char.charClass==="Barbarian" && item.toLowerCase().includes("stacks naturally")) return null;
@@ -8962,7 +8962,7 @@ function App() {
                                     return (
                                       <div className="ft-lib-desc">
                                         Spend ki points to fuel Flurry of Blows, Patient Defense, Step of the Wind, and Stunning Strike.
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Ki points = monk level. Recharges on a short or long rest.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Ki points = monk level. Recharges on a short or long rest.</span></div>
                                         <div style={{display:"flex",alignItems:"center",gap:8,marginTop:6,flexWrap:"wrap"}}>
                                           <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
                                             {Array.from({length:kiMax},(_,pi)=>{
@@ -9039,7 +9039,7 @@ function App() {
                                     return (
                                       <div className="ft-lib-desc">
                                         When hit by a ranged weapon attack, use your reaction to reduce the damage. If you reduce it to 0, you catch the missile — spend 1 ki to hurl it back as a ranged attack (range 20/60).
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack.</span></div>
                                         <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",marginTop:6,flexWrap:"wrap",gap:6}}>
                                           <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("reduction").border,background:dmgTypeColor("reduction").bg,color:dmgTypeColor("reduction").fg,cursor:"pointer",fontFamily:"inherit"}}
                                             onClick={e=>{e.stopPropagation();const roll=Math.floor(Math.random()*10)+1;const total=Math.max(0,roll+bonus);setSkillRoll({label:"Deflect Missiles reduction (1d10+"+bonus+")",roll,bonus,total,isCrit:false,isFail:false,sides:10});}}>
@@ -9096,7 +9096,7 @@ function App() {
                                           <option value="">-- Choose a weapon --</option>
                                           {dedicatedWeaponNames.map(n=><option key={n} value={n}>{n}</option>)}
                                         </select>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Re-focus during any short or long rest to change your dedicated weapon.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Re-focus during any short or long rest to change your dedicated weapon.</span></div>
                                         <span style={{position:"absolute",bottom:0,right:0,fontSize:8,fontWeight:700,padding:"1px 5px",borderRadius:4,background:"rgba(8,145,178,0.12)",border:"1px solid rgba(8,145,178,0.35)",color:"#0891b2",letterSpacing:".03em"}}>TCE</span>
                                       </div>
                                     );
@@ -9133,7 +9133,7 @@ function App() {
                                     const kfaDmgType=isUnarmedKFA?"bludgeoning":(kfaDmgTypeRaw.startsWith("bludg")?"bludgeoning":kfaDmgTypeRaw.startsWith("pierc")?"piercing":kfaDmgTypeRaw.startsWith("slash")?"slashing":(kfaDmgTypeRaw||"bludgeoning"));
                                     return (
                                       <div className="ft-detail-wrap" style={{marginTop:6,display:"block",width:"100%",position:"relative",paddingBottom:14}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>No additional ki cost — triggers whenever you spend 1+ ki as part of your action this turn.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>No additional ki cost — triggers whenever you spend 1+ ki as part of your action this turn.</span></div>
                                         <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:6}}>
                                           <span style={{fontSize:10,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                           <select value={kfaWeapon} onChange={e=>setF("monkKiFueledWeapon",e.target.value)}
@@ -9177,7 +9177,7 @@ function App() {
                                     const kiSpendFA=Math.min(char.monkFocusedAimKi||1,3,kiLeftFA)||1;
                                     return (
                                       <div className="ft-detail-wrap" style={{marginTop:6,display:"block",width:"100%",position:"relative",paddingBottom:14}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>Only usable on a weapon attack that has already missed.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>Only usable on a weapon attack that has already missed.</span></div>
                                         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
                                           <span style={{fontSize:11,color:"var(--muted)",fontWeight:600}}>Ki to spend:</span>
                                           <button style={{width:20,height:20,borderRadius:5,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:"pointer",fontFamily:"inherit",fontSize:13,lineHeight:1}}
@@ -9307,7 +9307,7 @@ function App() {
                                   {feat==="Timeless Body"&&char.charClass==="Monk"&&(
                                     <div className="ft-lib-desc">
                                       At 15th level, your ki sustains you so that you suffer none of the frailty of old age, and you can't be aged magically.
-                                      <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>You no longer need food or water.</span></div>
+                                      <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>You no longer need food or water.</span></div>
                                     </div>
                                   )}
                                   {feat==="Perfect Self"&&char.charClass==="Monk"&&(
@@ -9486,7 +9486,7 @@ function App() {
                                     };
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:6}}>
-                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=3&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Rallying Cry: up to 3 allies within 60 ft who can see/hear you also regain HP equal to your fighter level ({lvl}).</span></div>}
+                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=3&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Rallying Cry: up to 3 allies within 60 ft who can see/hear you also regain HP equal to your fighter level ({lvl}).</span></div>}
                                         <div style={{display:"flex",justifyContent:"flex-end"}}>
                                           <button disabled={used} onClick={doRoll}
                                             style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("healing").border,background:used?"var(--input)":dmgTypeColor("healing").bg,color:used?"var(--muted)":dmgTypeColor("healing").fg,cursor:used?"not-allowed":"pointer",fontFamily:"inherit"}}>
@@ -9507,7 +9507,7 @@ function App() {
                                     const left=Math.max(0,max-used);
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:6}}>
-                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=10&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Inspiring Surge: one ally within 60 ft who can see/hear you can use its reaction to make one weapon attack.</span></div>}
+                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=10&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Inspiring Surge: one ally within 60 ft who can see/hear you can use its reaction to make one weapon attack.</span></div>}
                                         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                                           <div style={{display:"flex",alignItems:"center",gap:8}}>
                                             <div style={{display:"flex",gap:4}}>
@@ -9536,7 +9536,7 @@ function App() {
                                     const left=Math.max(0,max-used);
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:6}}>
-                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=15&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Bulwark: if this is an INT, WIS, or CHA save, one ally within 60 ft who also failed it can reroll too, using your roll.</span></div>}
+                                        {char.charClass==="Fighter"&&char.martialArchetype==="Purple Dragon Knight (Fighter)"&&lvl>=15&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Bulwark: if this is an INT, WIS, or CHA save, one ally within 60 ft who also failed it can reroll too, using your roll.</span></div>}
                                         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                                           <div style={{display:"flex",alignItems:"center",gap:8}}>
                                             <div style={{display:"flex",gap:4}}>
@@ -9583,7 +9583,7 @@ function App() {
                                           <option value="">-- Choose an archetype --</option>
                                           {archetypes.map(a=><option key={a.id} value={a.title}>{a.title}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Additional features from your chosen archetype at levels 7, 10, 15, and 18.</span>
                                         </div>
                                       </div>
@@ -9711,7 +9711,7 @@ function App() {
                                           <option value="">-- Choose a domain --</option>
                                           {domains.map(d=><option key={d} value={d}>{d}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Your choice grants you domain spells and other features at 1st level, extra Channel Divinity uses at 2nd, and further benefits at 6th, 8th, and 17th levels.</span>
                                         </div>
                                         {char.divineDomain&&(()=>{
@@ -9798,7 +9798,7 @@ function App() {
                                     const saveDC=8+pb+wisMod;
                                     return(
                                       <div style={{marginTop:2,display:"flex",flexDirection:"column",gap:8}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Your domain also grants its own Channel Divinity option, shown on its own feature card below — both draw from this same pool of uses.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Your domain also grants its own Channel Divinity option, shown on its own feature card below — both draw from this same pool of uses.</span></div>
                                         <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
                                           <div style={{display:"flex",gap:4}}>
                                             {Array.from({length:maxUses},(_,pi)=>{
@@ -9852,7 +9852,7 @@ function App() {
                                         <div style={{display:"flex",justifyContent:"flex-end"}}>
                                           <span className="ft-note-tag" style={{background:"rgba(239,68,68,0.1)",borderColor:"rgba(239,68,68,0.3)",color:"var(--red)",fontWeight:700,fontSize:14}}>Destroys Challenge Rating (CR) {cr} or lower</span>
                                         </div>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>The CR threshold increases as you gain cleric levels: CR 1 at 8th, CR 2 at 11th, CR 3 at 14th, CR 4 at 17th.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>The CR threshold increases as you gain cleric levels: CR 1 at 8th, CR 2 at 11th, CR 3 at 14th, CR 4 at 17th.</span></div>
                                       </div>
                                     );
                                   })()}
@@ -10044,7 +10044,7 @@ function App() {
                                     const chosenSlot=Math.min(char.paladinHarnessSlot||1,capLevel)||1;
                                     return (
                                       <div className="ft-detail-wrap" style={{marginTop:6,display:"block",width:"100%",position:"relative",paddingBottom:14}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>A separate pool from your Sacred Oath's Channel Divinity uses — only refreshes on a Long Rest.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>A separate pool from your Sacred Oath's Channel Divinity uses — only refreshes on a Long Rest.</span></div>
                                         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                                           <select value={chosenSlot} onChange={e=>setF("paladinHarnessSlot",Number(e.target.value))}
                                             style={{padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,cursor:"pointer",fontFamily:"inherit",maxWidth:120}}>
@@ -10326,7 +10326,7 @@ function App() {
                                           <option value="">-- Choose an archetype --</option>
                                           {archetypes.map(a=><option key={a} value={a}>{a}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Your archetype grants features at 3rd level and again at 7th, 11th, and 15th level.</span>
                                         </div>
                                       </div>
@@ -10348,7 +10348,7 @@ function App() {
                                           <option value="">-- Choose an archetype --</option>
                                           {archetypes.map(a=><option key={a} value={a}>{a}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Your archetype grants features at 3rd level and again at 9th, 13th, and 17th level.</span>
                                         </div>
                                       </div>
@@ -10369,7 +10369,7 @@ function App() {
                                     const ttBonus=abilityMod(eff.DEX)+pb*(hasTT?2:1);
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:8}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>You must already be proficient in the chosen skill or tool. The doubled bonus shows on the Core tab.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>You must already be proficient in the chosen skill or tool. The doubled bonus shows on the Core tab.</span></div>
                                         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:4}}>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Expertise ({chosen}/{maxChoices})</span>
                                           <span style={{fontSize:11,color:remaining>0?"var(--accent)":"var(--green)"}}>{phaseLabel}</span>
@@ -10449,7 +10449,7 @@ function App() {
                                           You can inspire others through stirring words or music. As a bonus action, choose one creature other than yourself within 60 feet who can hear you. That creature gains a Bardic Inspiration die ({die}), to add to an attack roll, ability check, or save for the next 10 minutes.
                                         </div>
                                         {char.bardCollege==="College of Valor (Bard)"&&lvl>=3&&(
-                                          <div style={{fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,display:"flex",gap:5}}>
+                                          <div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,display:"flex",gap:5}}>
                                             <span>✨</span><span>Combat Inspiration: also usable on a weapon damage roll, or as a reaction to boost AC.</span>
                                           </div>
                                         )}
@@ -10512,7 +10512,7 @@ function App() {
                                     const expNote="You must already be proficient in the chosen skill.";
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:8}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{expNote}</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{expNote}</span></div>
                                         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:4}}>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Expertise skills ({chosen}/{maxChoices})</span>
                                           <span style={{fontSize:11,color:remaining>0?"var(--accent)":"var(--green)"}}>{phaseLabel}</span>
@@ -10573,7 +10573,7 @@ function App() {
                                           <option value="">-- Choose a college --</option>
                                           {colleges.map(function(c){return <option key={c.id} value={c.title}>{c.title}</option>;})}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Additional features from your chosen college at levels 6 and 14.</span>
                                         </div>
                                       </div>
@@ -10582,7 +10582,7 @@ function App() {
                                   {/* Jack of All Trades */}
                                   {feat==="Jack of All Trades"&&char.charClass==="Bard"&&(()=>{
                                     return(
-                                      <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                      <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                         <span>✨</span><span>Automatically applied to all non-proficient skills on the Core tab.</span>
                                       </div>
                                     );
@@ -10609,7 +10609,7 @@ function App() {
                                     return(
                                       <div style={{marginTop:2,display:"flex",flexDirection:"column",gap:6}}>
                                         <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>Use your action to begin a musical performance or words of power. Until the end of your next turn, you and friendly creatures within 30 ft have advantage on saving throws against being frightened or charmed.</div>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>No concentration required, but the performance must be maintained each turn to keep the effect going.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>No concentration required, but the performance must be maintained each turn to keep the effect going.</span></div>
                                       </div>
                                     );
                                   })()}
@@ -10667,7 +10667,7 @@ function App() {
                                   {/* Superior Inspiration */}
                                   {feat==="Superior Inspiration"&&char.charClass==="Bard"&&(()=>{
                                     return(
-                                      <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                      <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                         <span>✨</span><span>Level 20 capstone — ensures you always enter combat with at least one Bardic Inspiration die.</span>
                                       </div>
                                     );
@@ -10678,7 +10678,7 @@ function App() {
                                     const rr = char.relentlessRageResult||null;
                                     return (
                                       <div className="ft-detail-wrap" style={{marginTop:8,display:"block",width:"100%",position:"relative",paddingBottom:18}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>DC starts at 10 and increases by 5 each time this triggers (success or failure). Resets to DC 10 after a short or long rest.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>DC starts at 10 and increases by 5 each time this triggers (success or failure). Resets to DC 10 after a short or long rest.</span></div>
                                         {rr&&(
                                           <div style={{fontSize:12,fontWeight:700,color:rr.success?"var(--green)":"var(--red)",marginTop:4}}>
                                             {rr.success?"Succeeded":"Failed"} — rolled {rr.total} vs DC {rr.dc}
@@ -10805,7 +10805,7 @@ function App() {
                                           </span>
                                           {lvl>=20?"Archdruid — unlimited uses.":"Uses the same "+maxUsesWC+" uses as Wild Shape; regain one on a short rest, all on a long rest."}
                                         </div>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>The familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your druid level.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>The familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your druid level.</span></div>
                                         {fsFam&&<SpellSaveBox name="Find Familiar" sd={fsFam} dc={0} saveKey={null} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>}
                                         <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
                                           <button disabled={lvl<20&&usedWC>=maxUsesWC} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+((lvl>=20||usedWC<maxUsesWC)?"rgba(99,102,241,0.4)":"var(--border)"),background:(lvl>=20||usedWC<maxUsesWC)?"rgba(99,102,241,0.12)":"var(--input)",color:(lvl>=20||usedWC<maxUsesWC)?"var(--accent)":"var(--muted)",cursor:(lvl>=20||usedWC<maxUsesWC)?"pointer":"not-allowed",fontFamily:"inherit"}}
@@ -10863,7 +10863,7 @@ function App() {
                                     };
                                     return (
                                       <div style={{marginTop:2,display:"flex",flexDirection:"column",gap:6}}>
-                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Applies to STR checks only, not STR saving throws or attack rolls.</span></div>
+                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Applies to STR checks only, not STR saving throws or attack rolls.</span></div>
                                         <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:28,flexWrap:"wrap"}}>
                                           <div style={{display:"flex",alignItems:"center",gap:6}}>
                                             <span style={{fontSize:11,color:"var(--muted)"}}><b style={{color:"var(--text)",fontFamily:"'DM Mono',monospace"}}>STR CHECK</b>{" "}<span style={{fontFamily:"'DM Mono',monospace",fontWeight:700,color:"var(--accent)"}}>{strModIM>=0?"+":""}{strModIM}</span></span>
@@ -11034,7 +11034,7 @@ function App() {
                                           <option value="">-- Choose an oath --</option>
                                           {oaths.map(o=><option key={o} value={o}>{o}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Your oath grants oath spells and a Channel Divinity option at 3rd level, and further benefits at 7th, 15th, and 20th.</span>
                                         </div>
                                         {(()=>{
@@ -11112,7 +11112,7 @@ function App() {
                                           <option value="">-- Choose a circle --</option>
                                           {circles.map(c=><option key={c} value={c}>{c}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Additional features from your chosen circle at levels 6, 10, and 14.</span>
                                         </div>
                                       </div>
@@ -11165,7 +11165,7 @@ function App() {
                                           <option value="">-- Choose a tradition --</option>
                                           {traditions.map(t=><option key={t} value={t}>{t}</option>)}
                                         </select>
-                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
+                                        <div style={{marginTop:8,display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}>
                                           <span>✨</span><span>Additional features from your chosen tradition at levels 6, 11, and 17.</span>
                                         </div>
                                       </div>
@@ -11454,7 +11454,7 @@ function App() {
                                                   <div key={f.key} style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>{f.label}</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>{f.desc}</div>
-                                                    {f.note&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>{f.note}</span></div>}
+                                                    {f.note&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>{f.note}</span></div>}
                                                     {f.roller&&(
                                                       <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
                                                         <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(99,102,241,0.3)",background:"rgba(99,102,241,0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
@@ -11520,7 +11520,7 @@ function App() {
                                                   return(
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,padding:"5px 6px",background:"rgba(99,102,241,0.05)",borderRadius:5,border:"1px solid rgba(99,102,241,0.15)",display:"flex",flexDirection:"column",gap:6}}>
                                                       <span><b style={{color:"var(--accent)"}}>{val}:</b> {mainPart}</span>
-                                                      {noteIdx>=0&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{noteText}</span></div>}
+                                                      {noteIdx>=0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{noteText}</span></div>}
                                                     </div>
                                                   );
                                                 })()}
@@ -11603,7 +11603,7 @@ function App() {
                                                           </div>
                                                         </div>
                                                       )}
-                                                      <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>On a hit, you can knock a Large or smaller creature prone.</span></div>
+                                                      <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>On a hit, you can knock a Large or smaller creature prone.</span></div>
                                                     </div>
                                                   );
                                                 })()}
@@ -11773,7 +11773,7 @@ function App() {
                                                         <div style={{fontSize:12,color:"var(--text)",padding:"5px 6px",background:"rgba(99,102,241,0.05)",borderRadius:5,border:"1px solid rgba(99,102,241,0.15)",display:"flex",flexDirection:"column",gap:6}}>
                                                           <span><b style={{color:"var(--accent)"}}>{env}:</b> {firstPart}</span>
                                                           {secondPart&&<span>{secondPart}</span>}
-                                                          {notePart&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{notePart}</span></div>}
+                                                          {notePart&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>{notePart}</span></div>}
                                                         </div>
                                                       );
                                                     })()}
@@ -11785,9 +11785,9 @@ function App() {
                                                 <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Shielding Storm (10th)</div>
                                                   <div style={{fontSize:12,color:"var(--text)"}}>Creatures you choose within your aura gain the resistance from your Storm Soul.</div>
-                                                  {env==="Desert"&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Desert — fire resistance</span></div>}
-                                                  {env==="Sea"&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Sea — lightning resistance</span></div>}
-                                                  {env==="Tundra"&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Tundra — cold resistance</span></div>}
+                                                  {env==="Desert"&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Desert — fire resistance</span></div>}
+                                                  {env==="Sea"&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Sea — lightning resistance</span></div>}
+                                                  {env==="Tundra"&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Tundra — cold resistance</span></div>}
                                                 </div>
                                               )}
                                               {/* 5. Raging Storm (14th) */}
@@ -12190,7 +12190,7 @@ function App() {
                                                 return(
                                                   <div style={{padding:"4px 6px",background:"rgba(99,102,241,0.05)",borderRadius:5,border:"1px solid rgba(99,102,241,0.15)",display:"flex",flexDirection:"column",gap:6}}>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.4}}><b style={{color:"var(--accent)"}}>8. Blinding Bolt:</b> A bolt of light shoots from your chest at one creature of your choice within 30 ft.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Until your rage ends, you can use this as a bonus action on each of your turns.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Until your rage ends, you can use this as a bonus action on each of your turns.</span></div>
                                                     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:6}}>
                                                       <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                         <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>CON save DC {dc}</span>
@@ -12217,7 +12217,7 @@ function App() {
                                                 return(
                                                   <div style={{padding:"4px 6px",background:"rgba(99,102,241,0.05)",borderRadius:5,border:"1px solid rgba(99,102,241,0.15)",display:"flex",flexDirection:"column",gap:6}}>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.4}}><b style={{color:"var(--accent)"}}>3. Intangible Spirit:</b> An intangible spirit (resembling a flumph or pixie) appears within 5 ft of a creature of your choice you can see within 30 ft. At the end of your turn, it explodes.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Until your rage ends, you can summon a new spirit as a bonus action on each of your turns.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Until your rage ends, you can summon a new spirit as a bonus action on each of your turns.</span></div>
                                                     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:6}}>
                                                       <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                         <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>DEX save DC {dc}</span>
@@ -15016,7 +15016,7 @@ function App() {
                                               </FC>
                                               <FC label="Arcane Abjuration (2nd) — Channel Divinity" minLvl={2} headerBadge={<DurationBadge id="arcaneabjuration-duration" short="1 min" total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can present your holy symbol as an action to turn or banish extraplanar creatures. The creature makes a WIS save (DC {saveDC}); if it fails it is turned for 1 min or until it takes damage. A turned creature must spend its turns trying to move as far away from you as it can, can't willingly end its move within 30 ft of you, and can't take reactions — on its turn it can only Dash or try to escape a restraint, or Dodge if it has nowhere to move.</Body>
-                                                <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Extraplanar creatures means celestials, elementals, fey, or fiends. If the creature's CR is {lvl>=8?Math.floor(lvl/4):"1/4"} or lower and fails, it is banished instead.</span></div>
+                                                <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>Extraplanar creatures means celestials, elementals, fey, or fiends. If the creature's CR is {lvl>=8?Math.floor(lvl/4):"1/4"} or lower and fails, it is banished instead.</span></div>
                                                 {(()=>{
                                                   const aaRes=char.saveResults?.arcaneAbjuration;
                                                   return (
@@ -16187,7 +16187,7 @@ function App() {
                                               return(
                                                 <div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>You can use your action to channel the Song of Creation to create one nonmagical item of your choice in an unoccupied space within 10 ft. The item lasts a number of hours equal to your proficiency bonus ({pb} hours).</div>
-                                                  <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>Once per long rest, or expend a spell slot of 2nd level or higher for additional uses.</span></div>
+                                                  <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>Once per long rest, or expend a spell slot of 2nd level or higher for additional uses.</span></div>
                                                   <div style={{display:"flex",alignItems:"center",gap:6}}>
                                                     <select value={pocItem}
                                                       onChange={e=>{e.stopPropagation();setF("bardPoCItem",e.target.value);}}
@@ -16643,7 +16643,7 @@ function App() {
                                                   <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Tranquility (11th)</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>When you finish a long rest, you gain the effect of the Sanctuary spell on yourself (DC {kiDC}), lasting until you start another long rest.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>The effect ends early as normal if you attack or cast a spell.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>The effect ends early as normal if you attack or cast a spell.</span></div>
                                                     <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderLeft:"4px solid "+schoolColor("Sanctuary"),borderRadius:6,padding:"6px 8px",marginBottom:6}}>
                                                       <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",marginBottom:2}}>Sanctuary</div>
                                                       <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5,marginBottom:5}}>Any creature that targets you with an attack or harmful spell must first succeed on a WIS save or choose a new target — doesn't protect against area effects. Ends early if you attack, cast a spell that affects an enemy, or deal damage to another creature.</div>
@@ -16685,7 +16685,7 @@ function App() {
                                                   <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Quivering Palm (17th)</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>When you hit a creature with an unarmed strike, you can spend 3 ki points to start imperceptible vibrations. Within {lvl} days, you can use an action to end them — the target makes a CON save (DC {kiDC}) or drops to 0 hit points, or takes 10d10 necrotic damage on a success.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You can have only one creature under the effect of this feature at a time.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You can have only one creature under the effect of this feature at a time.</span></div>
                                                     {!active?(
                                                       <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",gap:8}}>
                                                         <button disabled={kiLeft<3} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(kiLeft>=3?"rgba(99,102,241,0.4)":"var(--border)"),background:kiLeft>=3?"rgba(99,102,241,0.12)":"var(--input)",color:kiLeft>=3?"var(--accent)":"var(--muted)",cursor:kiLeft>=3?"pointer":"not-allowed",fontFamily:"inherit"}}
@@ -16787,7 +16787,7 @@ function App() {
                                                   <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Cloak of Shadows (11th)</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>When you are in an area of dim light or darkness, you can use your action to become invisible.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You remain invisible until you make an attack, cast a spell, or are in an area of bright light.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You remain invisible until you make an attack, cast a spell, or are in an area of bright light.</span></div>
                                                     {!active?(
                                                       <div style={{display:"flex",justifyContent:"flex-end"}}>
                                                         <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(99,102,241,0.4)",background:"rgba(99,102,241,0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
@@ -16916,7 +16916,7 @@ function App() {
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>{d.name}</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:canUpcast?4:6}}>Spend {d.ki} ki to cast {d.spell}, without a spell slot or material components.</div>
                                                   {canUpcast&&(
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}>
                                                       <span>✨</span><span>At 5th level, spend 1 additional ki per extra spell level (up to your ki available).</span>
                                                     </div>
                                                   )}
@@ -16949,7 +16949,7 @@ function App() {
                                                 <div key={d.name} style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>{d.name}</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>When you use the Attack action, you can spend 1 ki point to cause tendrils of flame to stretch from your fists and feet. Your reach with unarmed strikes increases by 10 feet for that action and the rest of the turn, and a hit deals fire damage instead of bludgeoning.</div>
-                                                  <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>After you see whether the attack hits, the roll popup lets you spend 1 ki for +1d10 fire damage.</span></div>
+                                                  <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>After you see whether the attack hits, the roll popup lets you spend 1 ki for +1d10 fire damage.</span></div>
                                                   <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",marginBottom:6}}>
                                                     <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor(fangsDmgType).border,background:dmgTypeColor(fangsDmgType).bg,color:dmgTypeColor(fangsDmgType).fg,cursor:"pointer",fontFamily:"inherit"}}
                                                       onClick={()=>{
@@ -17090,7 +17090,7 @@ function App() {
                                               <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                 <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Disciple of the Elements (3rd)</div>
                                                 <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:4}}>You learn magical disciplines that harness the power of the four elements. You know the Elemental Attunement discipline and one other elemental discipline of your choice.</div>
-                                                <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You learn one additional elemental discipline of your choice at 6th, 11th, and 17th level.</span></div>
+                                                <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>You learn one additional elemental discipline of your choice at 6th, 11th, and 17th level.</span></div>
                                                 <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",textTransform:"uppercase",letterSpacing:".04em",marginTop:8,marginBottom:4,paddingTop:8,borderTop:"1px solid var(--border)"}}>Elemental Attunement</div>
                                                 <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>As an action, you can briefly control elemental forces nearby, causing one of the following effects of your choice.</div>
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,paddingLeft:10}}>
@@ -17201,7 +17201,7 @@ function App() {
                                                   <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Hand of Ultimate Mercy (17th)</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:4}}>As an action, you can touch the corpse of a creature that died within the past 24 hours and expend 5 ki points. The creature returns to life, regaining hit points equal to 4d10 + your Wisdom modifier.</div>
-                                                    <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>If the creature died while blinded, deafened, paralyzed, poisoned, or stunned, it revives with those conditions removed.</span></div>
+                                                    <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>If the creature died while blinded, deafened, paralyzed, poisoned, or stunned, it revives with those conditions removed.</span></div>
                                                     {!umUsed?(
                                                       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                                                         <button disabled={kiLeft<5} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(kiLeft>=5?"rgba(99,102,241,0.4)":"var(--border)"),background:kiLeft>=5?"rgba(99,102,241,0.12)":"var(--input)",color:kiLeft>=5?"var(--accent)":"var(--muted)",cursor:kiLeft>=5?"pointer":"not-allowed",fontFamily:"inherit"}}
@@ -17655,7 +17655,7 @@ function App() {
                                               <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                 <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Radiant Sun Bolt (3rd)</div>
                                                 <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:4}}>You can hurl searing bolts of magical radiance. As part of your action, make a ranged spell attack against a target within 30 feet, dealing radiant damage equal to your Martial Arts die + DEX modifier on a hit.</div>
-                                                <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>This attack counts as an unarmed strike for you, and doesn't count against your normal weapon attacks.</span></div>
+                                                <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>This attack counts as an unarmed strike for you, and doesn't count against your normal weapon attacks.</span></div>
                                                 <div style={{display:"flex",justifyContent:"flex-end",marginBottom:6}}>
                                                   <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("radiant").border,background:dmgTypeColor("radiant").bg,color:dmgTypeColor("radiant").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                     onClick={()=>{const r1=Math.floor(Math.random()*20)+1;const base=Math.floor(Math.random()*maDie)+1;const toHit=dexMod+pb;const total=Math.max(0,base+dexMod);setSkillRoll({label:"Radiant Sun Bolt",roll:r1,bonus:toHit,total:r1+toHit,hitRoll:r1,atkBonus:toHit,hitTotal:r1+toHit,isCrit:r1>=critThreshold(char),isFail:r1===1,sides:20,r1,r2:null,isAdv:false,isDis:false,isWeaponRoll:true,dmgDice:"1d"+maDie,dmgBonus:dexMod,dmgType:"radiant",baseDiceCount:1,diceSides:maDie,allDmgRolls:[base],dmgRolls:[base],dmgTotal:total});}}>
@@ -17696,7 +17696,7 @@ function App() {
                                                 <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Searing Sunburst (11th)</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:4}}>As an action, you magically create an orb and hurl it at a point you choose within 150 feet, where it erupts into a sphere of radiant light. Each creature in that 20-foot-radius sphere must succeed on a Constitution saving throw or take 2d6 radiant damage. You can increase the sphere's damage by spending ki points — each point you spend, to a maximum of 3, increases the damage by 2d6.</div>
-                                                  <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>A creature doesn't need to make the save if it's behind total cover that is opaque.</span></div>
+                                                  <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginBottom:6}}><span>✨</span><span>A creature doesn't need to make the save if it's behind total cover that is opaque.</span></div>
                                                   <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
                                                     <span style={{fontSize:11,color:"var(--muted)",fontWeight:600}}>Extra ki:</span>
                                                     <button style={{width:20,height:20,borderRadius:5,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:"pointer",fontFamily:"inherit",fontSize:13,lineHeight:1}}
@@ -18230,7 +18230,7 @@ function App() {
                                                         <DurationBadge id="fungalinfestation-duration" short="1 hr" total={60} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>
                                                       </div>
                                                       <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>When a Small or Medium beast or humanoid dies within 10 ft of you, you can use your reaction to animate it as a zombie (1 HP, zombie stat block). You can control up to {fiMax} spore zombies at a time.</div>
-                                                      <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>The zombie is friendly to you and acts on its own initiative — right after your turn — following your verbal orders to the best of its ability.</span></div>
+                                                      <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:4}}><span>✨</span><span>The zombie is friendly to you and acts on its own initiative — right after your turn — following your verbal orders to the best of its ability.</span></div>
                                                       <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                         <div style={{display:"flex",gap:4}}>
                                                           {Array.from({length:fiMax},(_,pi)=>{
@@ -18298,7 +18298,7 @@ function App() {
                                                         )}
                                                         </>
                                                       ):(
-                                                        <div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Requires Symbiotic Entity to be active.</span></div>
+                                                        <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Requires Symbiotic Entity to be active.</span></div>
                                                       )}
                                                       {ssRes==="success"&&<div style={{fontSize:11,color:"var(--green)",marginTop:6}}>Creature succeeded — it takes no damage.</div>}
                                                       {ssRes==="fail"&&<div style={{fontSize:11,color:"var(--red)",marginTop:6}}>Creature failed — it takes your Halo of Spores damage.</div>}
@@ -26303,7 +26303,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           <span style={{fontSize:12}}>📖</span>
                           <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Spell Books</span>
                         </div>
-                        <button className="ri-add-btn" style={{padding:"2px 8px",fontSize:11}}
+                        <button className="ri-add-btn"
                           onClick={()=>{
                             const name = prompt("Spellbook name:");
                             if(name&&name.trim()) updateBooks([...sbBooks,{name:name.trim(),spells:[]}]);
@@ -29825,7 +29825,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           const swUsed=char.fighterSecondWindUsed||false;
                                           return (
                                             <div style={{marginTop:6,display:"flex",flexDirection:"column",gap:6}}>
-                                              {char.martialArchetype==="Purple Dragon Knight (Fighter)"&&swLvl>=3&&<div style={{display:"flex",gap:5,fontSize:11,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Rallying Cry: up to 3 allies within 60 ft who can see/hear you also regain HP equal to your fighter level ({swLvl}).</span></div>}
+                                              {char.martialArchetype==="Purple Dragon Knight (Fighter)"&&swLvl>=3&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>Rallying Cry: up to 3 allies within 60 ft who can see/hear you also regain HP equal to your fighter level ({swLvl}).</span></div>}
                                               <div style={{display:"flex",justifyContent:"flex-end"}}>
                                                 <button disabled={swUsed} onClick={()=>{
                                                   const roll=Math.floor(Math.random()*10)+1;
