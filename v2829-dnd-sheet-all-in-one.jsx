@@ -20066,7 +20066,7 @@ function App() {
                                                 {toggleRow("rogueSteadyEyeOn","Moved no more than half your speed — advantage on Perception and Investigation","Moved more than half your speed","Moved ≤ half speed","Moved ≤ half speed")}
                                               </FC>,
                                               <FC key="ue" label="Unerring Eye (13th)" minLvl={13}>
-                                                <Body>You can use your action to sense the presence of illusions, shapechangers not in their original form, and other magic designed to deceive the senses within 30 feet of you, provided you aren't blinded or deafened. You sense that an effect is attempting to trick you, but not what is being hidden or what the original form is.</Body>
+                                                <Body>As an action, sense illusions, shapechangers in true form, and other deceptive magic within 30 feet, as long as you can see and hear. You know something is trying to fool you, but not what is hidden or the true form.</Body>
                                                 {pipRow("rogueUnerringEyeUsed",ueMax)}
                                               </FC>,
                                               <FC key="efw" label="Eye for Weakness (17th)" minLvl={17}>
