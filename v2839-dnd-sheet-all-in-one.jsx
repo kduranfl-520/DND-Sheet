@@ -20192,7 +20192,6 @@ function App() {
                                                   <li style={{display:"flex",gap:6,fontSize:11}}><span>•</span><span><b style={{color:"var(--accent)"}}>Non-hostile creature</b> <span style={{color:"var(--muted)"}}>— if you win, it is charmed by you for 1 minute. It regards you as a friendly acquaintance, and the charm ends if you or your allies do anything harmful to it.</span></span></li>
                                                 </ul>
                                                 {flexEnd(skillRollBtn("Persuasion"))}
-                                                {toggleRow("rogueSwashPanacheOn","Panache active on a creature","No creature affected","Mark Active")}
                                               </FC>,
                                               <FC key="em" label="Elegant Maneuver (13th)" minLvl={13}>
                                                 <Body>You can use a bonus action on your turn to gain advantage on the next Dexterity (Acrobatics) or Strength (Athletics) check you make during the same turn.</Body>
