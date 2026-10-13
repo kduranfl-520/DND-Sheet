@@ -20121,7 +20121,7 @@ function App() {
                                                 </div>
                                               </FC>,
                                               <FC key="mot" label="Master of Tactics (3rd)" minLvl={3}>
-                                                <Body>You can use the Help action as a bonus action. In addition, when you use the Help action to aid an ally in attacking a creature, the target of that attack can be up to 30 feet away from you, rather than within 5 feet, as long as the target can see or hear you.</Body>
+                                                <Body>Take the Help action as a bonus action. When helping an ally attack, the target can be up to 30 feet from you instead of 5, provided it can see or hear you.</Body>
                                               </FC>,
                                               <FC key="im" label="Insightful Manipulator (9th)" minLvl={9}>
                                                 <Body>If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice: Intelligence score, Wisdom score, Charisma score, and class levels (if any). At the DM's option, you might also learn a piece of the creature's history or one of its personality traits, if it has any.</Body>
