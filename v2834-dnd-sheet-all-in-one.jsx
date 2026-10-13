@@ -20124,7 +20124,25 @@ function App() {
                                                 <Body>Take the Help action as a bonus action. When helping an ally attack, the target can be up to 30 feet from you instead of 5, provided it can see or hear you.</Body>
                                               </FC>,
                                               <FC key="im" label="Insightful Manipulator (9th)" minLvl={9}>
-                                                <Body>If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice: Intelligence score, Wisdom score, Charisma score, and class levels (if any). At the DM's option, you might also learn a piece of the creature's history or one of its personality traits, if it has any.</Body>
+                                                <Body>After observing or interacting with a creature for at least 1 minute outside combat, learn whether it's your equal, superior, or inferior in two traits of your choice. At the DM's option, you may also learn a bit of its history or a personality trait.</Body>
+                                                <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:6}}>
+                                                  {[1,2].map(n=>{
+                                                    const ck="rogueIMChar"+n, rk="rogueIMRes"+n, other=char["rogueIMChar"+(n===1?2:1)]||"";
+                                                    const cur=char[ck]||"", res=char[rk]||"";
+                                                    const OPTS=["Intelligence score","Wisdom score","Charisma score","Class levels"];
+                                                    const rb=(val,col)=>{const on=res===val;return <button key={val} style={{fontSize:11,fontWeight:700,padding:"3px 9px",borderRadius:6,border:"1px solid "+col+(on?"":"55"),background:on?col+"33":"transparent",color:on?col:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setF(rk,on?"":val);}}>{val}</button>;};
+                                                    return(
+                                                      <div key={n} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                                                        <select className="ri-sel" value={cur} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF(ck,e.target.value);}}
+                                                          style={{flex:"1 1 140px",minWidth:130,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(cur?"rgba(99,102,241,0.4)":"var(--border)"),color:cur?"var(--accent)":"var(--subtle)",fontSize:12,cursor:"pointer",fontFamily:"inherit",outline:"none"}}>
+                                                          <option value="">— Trait {n} —</option>
+                                                          {OPTS.map(o=><option key={o} value={o} disabled={o===other}>{o}</option>)}
+                                                        </select>
+                                                        {rb("Equal","#3b82f6")}{rb("Superior","#ef4444")}{rb("Inferior","#22c55e")}
+                                                      </div>
+                                                    );
+                                                  })}
+                                                </div>
                                               </FC>,
                                               <FC key="md" label="Misdirection (13th)" minLvl={13}>
                                                 <Body>When you are targeted by an attack while a creature within 5 feet of you is granting you cover against that attack, you can use your reaction to have the attack target that creature instead of you.</Body>
