@@ -20096,7 +20096,7 @@ function App() {
                                             const knownLangsMM=[...(char.languages||[]),...(RACE_LANGUAGES[char.species]||[]),...(char.bgLangChoices||[]),...(char.linguistLangs||[]),...(char.clericKnowledgeLangs||[]),"Common","Thieves' Cant"].filter(Boolean);
                                             const GAMING=["Dice set","Dragonchess set","Playing card set","Three-Dragon Ante set"];
                                             return wrapCol(
-                                              <FC key="moi" label="Master of Intrigue (3rd)" minLvl={3}>
+                                              <FC key="moi" label="Master of Intrigue (3rd)" minLvl={3} headerBadge={<DurationBadge id="rogue-master-intrigue-listen" short="1 min listening" full="Mimicry requires listening to a creature speak for at least 1 minute." openFeat={openFeat} setOpenFeat={setOpenFeat}/>}>
                                                 <Body>You gain proficiency with the disguise kit, forgery kit, and a gaming set of your choice, plus two languages. You can also perfectly imitate the speech and accent of anyone you've listened to for at least a minute, passing as a local of that region.</Body>
                                                 <div style={{display:"flex",flexDirection:"column",gap:5,marginTop:6}}>
                                                   <select className="ri-sel" value={char.rogueMastermindGameSet||""} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("rogueMastermindGameSet",e.target.value);}}
