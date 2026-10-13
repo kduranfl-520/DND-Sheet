@@ -20042,7 +20042,7 @@ function App() {
                                               const bn=skBonus(o);
                                               const r=Math.floor(Math.random()*20)+1;
                                               const roll=r<=7?8:r;
-                                              setSkillRoll({label:(r<=7?"👂 ":"")+"Insight — Ear for Deceit",roll,bonus:bn,total:roll+bn,isCrit:r===20,isFail:false,sides:20,r1:r,r2:null,isAdv:false,isDis:false});
+                                              setSkillRoll({label:"👂 Insight — Ear for Deceit"+(r<=7?" (rolled "+r+", treated as 8)":""),floor:{max:7,to:8,labelBase:"👂 Insight — Ear for Deceit"},roll,bonus:bn,total:roll+bn,isCrit:r===20,isFail:false,sides:20,r1:r,r2:null,isAdv:false,isDis:false});
                                             };
                                             const insBn=(()=>{const o=skObjR("Insight");return o?skBonus(o):0;})();
                                             return wrapCol(
@@ -33151,9 +33151,11 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const isAdv=skillRoll.isAdv; const isDis=skillRoll.isDis;
  const r1=Math.floor(Math.random()*sides)+1;
  const r2=(isAdv||isDis)?Math.floor(Math.random()*sides)+1:null;
- const roll=isAdv?Math.max(r1,r2??r1):isDis?Math.min(r1,r2??r1):r1;
+ let roll=isAdv?Math.max(r1,r2??r1):isDis?Math.min(r1,r2??r1):r1;
+ const rawRoll=roll; const fl=skillRoll.floor;
+ if(fl&&roll<=fl.max) roll=fl.to;
  const total=roll+skillRoll.bonus;
- setSkillRoll({...skillRoll,roll,total,r1,r2,isCrit:roll===sides,isFail:roll===1});
+ setSkillRoll({...skillRoll,...(fl?{label:fl.labelBase+(rawRoll<=fl.max?" (rolled "+rawRoll+", treated as "+fl.to+")":"")}:{}),roll,total,r1,r2,isCrit:rawRoll===sides,isFail:roll===1});
  }
                     }}>↺ Reroll</button>
                   </>
