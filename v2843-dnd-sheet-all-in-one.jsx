@@ -27964,6 +27964,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  "Giant Killer":"When a Large or larger creature within 5 ft hits or misses you, you can use your reaction to attack it right after, as long as you can see it.",
  "Stand Against the Tide":"When a hostile creature misses you with a melee attack, you can use your reaction to force it to repeat that attack against another creature of your choice.",
  "Uncanny Dodge":"When an attacker you can see hits you, you can use your reaction to halve the damage.",
+ "Sneak Attack":"Once per turn, deal extra damage to a creature you hit with a finesse or ranged weapon if you have advantage on the attack, or if another enemy of the target is within 5 feet of it and you don't have disadvantage.",
+ "Tokens of the Departed — Create a Soul Trinket":"When a creature you can see dies within 30 feet of you, create a soul trinket. You can hold a number of trinkets up to your proficiency bonus.",
+ "Tokens of the Departed — Destroy a Trinket and Ask a Question":"Destroy one of your soul trinkets to ask its spirit a question, which it answers as if from speak with dead.",
  "Magic-User's Nemesis":"When you see a creature within 60 ft cast a spell or teleport, you can use your reaction to force a Wisdom save. On a failure the spell or teleport is wasted. Once per short or long rest.",
  "Steady Aim":"As a bonus action, give yourself advantage on your next attack roll this turn. You can't have moved this turn, and your speed is 0 until the end of the turn.",
  "Mage Hand Legerdemain":"Control your invisible Mage Hand with the bonus action from Cunning Action: stow or retrieve an object in another creature's container, or use thieves' tools to pick a lock or disarm a trap at range.",
@@ -28266,6 +28269,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           {isAutoSuggested&&<span title="Auto-suggested — available based on your current build/turn state" style={{flexShrink:0,fontSize:12}}>⚡</span>}
                                           <span style={{flex:1,fontWeight:700,color:"var(--text)",fontSize:14}}>{itemTitle}</span>
                                           {libEntry&&<span className="ft-info-icon" style={{flexShrink:0,fontSize:10}} onClick={e=>{e.stopPropagation();setRoundsSpellPopup(roundsSpellPopup===item.id?null:item.id);}}>i</span>}
+                                          {char.charClass==="Rogue"&&(()=>{const RD={"Insightful Fighting":["rogue-insightful-fighting-duration","1 min","Duration: 1 minute, or until you use this feature successfully against a different target.",60,"sec"],"Panache":["rogue-panache-duration","1 min","Duration: 1 minute, or until the effect ends early.",60,"sec"],"Ghost Walk":["rogue-ghost-walk-duration","10 min","Duration: 10 minutes, or until you end it as a bonus action.",10,"min"],"Psychic Veil":["rogue-psychic-veil-duration","1 hr","Duration: 1 hour, or until you dismiss it. Ends early if you deal damage to a creature or force one to make a saving throw.",60,"min"]};if(itemTitle==="Psychic Whispers"&&char.rogueSoulWhisperHours){const h=char.rogueSoulWhisperHours;return <DurationBadge id="rogue-whispers-duration" short={h+" hr"} full={"Telepathy duration: "+h+" hour(s) (your Psionic Energy die roll)."} total={h} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>;}const d=RD[itemTitle];return d?<DurationBadge id={d[0]} short={d[1]} full={d[2]} total={d[3]} unit={d[4]} openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null;})()}
                                           <button style={{fontSize:12,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 2px",fontFamily:"inherit"}}
                                             onClick={()=>{
                                               if(isAutoSuggested){
@@ -28393,11 +28397,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                             {fh===fhOpts[2]&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>No roll needed. Your Cunning Action bonus action covers the Use an Object action.</span></div>}
                                           </>);
                                         }
+                                        if(nm==="Sneak Attack") return wrapX(buildWeaponRoller("rogueSneakWeapon","Sneak Attack","sneak",{label:"Sneak Attack",icon:"🗡",sides:6,count:sn,type:"weapon",note:"Add this only if you have advantage, or another enemy of the target is within 5 feet of it (not incapacitated) and you don't have disadvantage. Once per turn."}));
+                                        if(nm==="Cunning Action") return wrapX(flexEnd(skBtn("Stealth","Hide — Stealth")));
                                         if(nm.startsWith("Eye for Detail")) return wrapX(flexEnd(<>{skBtn("Perception")}{skBtn("Investigation")}</>));
                                         if(nm.startsWith("Insightful Fighting")) return wrapX(<>{flexEnd(skBtn("Insight"))}{saveRowX("rogueInsightfulContest","WIS",0,"You win the contest — you can use Sneak Attack against this target without advantage (not with disadvantage).","You lose the contest — the target is not affected.","Insight vs Deception (contested)")}</>);
                                         if(nm.startsWith("Elegant Maneuver")) return wrapX(flexEnd(<>{skBtn("Acrobatics",null,true)}{skBtn("Athletics",null,true)}</>));
                                         if(nm.startsWith("Unerring Eye")) return wrapX(pipRowX("rogueUnerringEyeUsed",Math.max(1,wisModX)));
-                                        if(nm.startsWith("Panache")) return wrapX(<>{flexEnd(skBtn("Persuasion"))}{toggleRowX("rogueSwashPanacheOn","Panache active on a creature","No creature affected","","Mark Active")}</>);
+                                        if(nm.startsWith("Panache")) return wrapX(flexEnd(skBtn("Persuasion")));
                                         if(nm.startsWith("Ghost Walk")){
                                           const on=!!char.roguePhantomGhostOn, used=!!char.roguePhantomGhostWalkUsed;
                                           return wrapX(flexEnd(<>
@@ -31040,7 +31046,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               ];
               const actFeatures=[];
               const cls=CLASSES[char.charClass];
-              if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if((fl.includes("action")||fl.includes("attack"))&&!fl.includes("spellcast")&&!fl.includes("cast a spell"))actFeatures.push(f);});}
+              if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(f==="Cunning Action") return;if((fl.includes("action")||fl.includes("attack"))&&!fl.includes("spellcast")&&!fl.includes("cast a spell"))actFeatures.push(f);});}
               // Two-Weapon Fighting — manual action option, always available, pulls up both weapon slots at once
               actFeatures.push("Two-Weapon Fighting");
               // Battle Master maneuvers — "on a hit" / attached-to-attack maneuvers go in Action
