@@ -20168,7 +20168,6 @@ function App() {
                                               </FC>,
                                               <FC key="am" label="Ambush Master (13th)" minLvl={13}>
                                                 <Body>You have advantage on initiative rolls. In addition, the first creature you hit during the first round of a combat becomes easier for you and your allies to hit. Attack rolls against that target have advantage until the start of your next turn.</Body>
-                                                {note("Your initiative roll on the Core tab already rolls with advantage.")}
                                               </FC>,
                                               <FC key="ss" label="Sudden Strike (17th)" minLvl={17}>
                                                 <Body>When you take the Attack action on your turn, you can use your bonus action to make one additional attack. That attack can benefit from your Sneak Attack even if you have already used it this turn, but you can't use Sneak Attack against the same creature more than once in a turn.</Body>
