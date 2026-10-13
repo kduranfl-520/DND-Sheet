@@ -20184,7 +20184,6 @@ function App() {
                                               </FC>,
                                               <FC key="ra" label="Rakish Audacity (3rd)" minLvl={3}>
                                                 <Body>You add your Charisma modifier ({chaMod>=0?"+":""}{chaMod}) to your initiative rolls. You also gain an additional way to use Sneak Attack: you don't need advantage on the attack roll if you are within 5 feet of the target, no other creatures are within 5 feet of you, and you don't have disadvantage on the attack roll. All the other rules for Sneak Attack still apply to you.</Body>
-                                                {note("The initiative bonus is already added to your Initiative on the Core tab.")}
                                               </FC>,
                                               <FC key="pa" label="Panache (9th)" minLvl={9} headerBadge={<DurationBadge id="rogue-panache-duration" short="1 min" full="Duration: 1 minute, or until the effect ends early." total={60} unit="sec" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can use your action to make a Charisma (Persuasion) check contested by a creature's Wisdom (Insight) check. The creature must be able to hear you, and the two of you must share a language.</Body>
