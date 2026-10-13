@@ -5643,6 +5643,23 @@ function App() {
  const rogueLvlC = char.charClass==="Rogue" ? (char.multiClassLevel>0?char.classLevel:char.level||1) : 0;
  const rogueSubSkills = (rogueLvlC>=3&&char.rogueArchetype==="Scout (Rogue)") ? ["Nature","Survival"] : [];
  const roguePhantomSkill = (rogueLvlC>=3&&char.rogueArchetype==="Phantom (Rogue)"&&char.roguePhantomProf&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(sk=>sk.name)).includes(char.roguePhantomProf)) ? [char.roguePhantomProf] : [];
+ const subclassGrantedProf = (()=>{
+   const w=[],a=[],t=[]; const L=char.level||1;
+   if(char.charClass==="Cleric"&&L>=1){
+     const d=char.divineDomain;
+     if(["Life Domain (Cleric)","Nature Domain (Cleric)","Tempest Domain (Cleric)","War Domain (Cleric)","Forge Domain (Cleric)","Order Domain (Cleric)","Twilight Domain (Cleric)"].includes(d)) a.push("Heavy");
+     if(["Tempest Domain (Cleric)","War Domain (Cleric)","Twilight Domain (Cleric)"].includes(d)) w.push("Martial");
+     if(d==="Forge Domain (Cleric)") t.push("Smith's tools");
+   }
+   if(char.charClass==="Fighter"&&L>=3&&char.martialArchetype==="Rune Knight (Fighter)") t.push("Smith's tools");
+   if(char.charClass==="Monk"&&L>=3){
+     const m=char.monasticTradition;
+     if(m==="Way of Mercy (Monk)") t.push("Herbalism kit");
+     if(m==="Way of the Drunken Master (Monk)") t.push("Brewer's supplies");
+     if(m==="Way of the Kensei (Monk)") w.push("Kensei weapons");
+   }
+   return {w,a,t};
+ })();
  const rogueSubTools = rogueLvlC>=3 ? (char.rogueArchetype==="Assassin (Rogue)" ? ["Disguise kit","Poisoner's kit"] : char.rogueArchetype==="Mastermind (Rogue)" ? ["Disguise kit","Forgery kit",char.rogueMastermindGameSet||"One gaming set"] : (char.rogueArchetype==="Phantom (Rogue)"&&char.roguePhantomProf&&!roguePhantomSkill.length) ? [char.roguePhantomProf] : []) : [];
  const preREEffSkillProfs = [...(char.skillProficiencies||[]), ...bgSkills, ...raceSkills, ...(char.classSkills||[]), ...varHumanSkill, ...halfElfSkillProfs, ...tigerSkills, ...arcanaDomainSkill, ...rogueSubSkills, ...roguePhantomSkill, ...mercySkills, ...drunkenSkills, ...feyGlamourSkills, ...(char.skilledChoices||[]).filter(c=>c&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(c)), ...(char.seSkill?[char.seSkill]:[]),...(char.prodigySkill?[char.prodigySkill]:[]),...(char.squatSkill?[char.squatSkill]:[]),...(char.samuraiBonusProf&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(char.samuraiBonusProf)?[char.samuraiBonusProf]:[]),...(char.arcaneArcherSkill?[char.arcaneArcherSkill]:[]), ...(char.cavalierSkill?[char.cavalierSkill]:[])].filter(Boolean);
  const pdkAlreadyPersuasion = pdkLvl>=7 && preREEffSkillProfs.includes("Persuasion");
@@ -8431,15 +8448,15 @@ function App() {
                                 <div style={{marginTop:4,display:"flex",flexDirection:"column",gap:3}}>
                                   <div className="ft-feature-row ft-feature-row-info">
                                     <span className="feat-badge feat-badge-info">Weapons</span>
-                                    <span className="ft-feature-name">{[...(cls.weaponProf||[]),...(char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=3?["Martial"]:[]),...(char.bardCollege==="College of Swords (Bard)"&&(char.level||1)>=3?["Scimitar"]:[])].join(", ")||"None"}</span>
+                                    <span className="ft-feature-name">{[...(cls.weaponProf||[]),...(char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=3?["Martial"]:[]),...(char.bardCollege==="College of Swords (Bard)"&&(char.level||1)>=3?["Scimitar"]:[]),...subclassGrantedProf.w].join(", ")||"None"}</span>
                                   </div>
                                   <div className="ft-feature-row ft-feature-row-info">
                                     <span className="feat-badge feat-badge-info">Armor</span>
-                                    <span className="ft-feature-name">{[...(cls.armorProf||[]),...(char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=3?["Medium","Shields"]:[]),...(char.bardCollege==="College of Swords (Bard)"&&(char.level||1)>=3?["Medium"]:[])].join(", ")||"None"}</span>
+                                    <span className="ft-feature-name">{[...(cls.armorProf||[]),...(char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=3?["Medium","Shields"]:[]),...(char.bardCollege==="College of Swords (Bard)"&&(char.level||1)>=3?["Medium"]:[]),...subclassGrantedProf.a].filter((x,i,arr)=>arr.indexOf(x)===i).join(", ")||"None"}</span>
                                   </div>
                                   <div className="ft-feature-row ft-feature-row-info">
                                     <span className="feat-badge feat-badge-info">Tools</span>
-                                    <span className="ft-feature-name">{([...(cls.toolProf||[]),...rogueSubTools].join(", "))||"None"}</span>
+                                    <span className="ft-feature-name">{([...(cls.toolProf||[]),...rogueSubTools,...subclassGrantedProf.t].join(", "))||"None"}</span>
                                   </div>
                                 </div>
                               </div>
