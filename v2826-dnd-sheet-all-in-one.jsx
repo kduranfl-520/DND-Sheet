@@ -19952,12 +19952,12 @@ function App() {
                                             );
                                           };
                                           // Target's saving throw vs. your DC: Succeeded / Failed / Clear, then the outcome line
-                                          const saveRow=(saveKey,abil,dc,okTxt,failTxt)=>{
+                                          const saveRow=(saveKey,abil,dc,okTxt,failTxt,lbl)=>{
                                             const res=char.saveResults?.[saveKey];
                                             return(
                                               <>
                                                 <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6}}>
-                                                  <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{abil} save DC {dc}</span>
+                                                  <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{lbl||(abil+" save DC "+dc)}</span>
                                                   <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:res==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                     onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[saveKey]:"success"}}));}}>✓ Succeeded</button>
                                                   <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:res==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
@@ -20057,6 +20057,7 @@ function App() {
                                               <FC key="if" label="Insightful Fighting (3rd)" minLvl={3} headerBadge={<DurationBadge id="rogue-insightful-fighting-duration" short="1 min" full="Duration: 1 minute, or until you use this feature successfully against a different target." total={60} unit="sec" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
                                                 <Body>You can use a bonus action to make a Wisdom (Insight) check against a creature you can see that isn't incapacitated, contested by the target's Charisma (Deception) check. If you succeed, you can use Sneak Attack against that target even if you don't have advantage on the attack roll, but not if you have disadvantage on it. This benefit lasts for 1 minute or until you successfully use this feature against a different target.</Body>
                                                 {flexEnd(skillRollBtn("Insight"))}
+                                                {saveRow("rogueInsightfulContest","WIS",0,"You win the contest — you can use Sneak Attack against this target without advantage (not with disadvantage).","You lose the contest — the target is not affected.","Insight vs Deception (contested)")}
                                                 {toggleRow("rogueInsightfulOn","Insightful Fighting active — Sneak Attack without advantage","Not active","Mark Active")}
                                               </FC>,
                                               <FC key="se" label="Steady Eye (9th)" minLvl={9}>
