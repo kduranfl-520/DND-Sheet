@@ -10387,7 +10387,7 @@ function App() {
                                   {feat==="Sneak Attack"&&char.charClass==="Rogue"&&(()=>{
                                     const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
                                     const n=Math.ceil(lvl/2);
-                                    const eyeWeak=lvl>=17&&char.rogueArchetype==="Inquisitive (Rogue)"&&!!char.rogueInsightfulOn;
+                                    const eyeWeak=lvl>=17&&char.rogueArchetype==="Inquisitive (Rogue)"&&(char.saveResults||{}).rogueInsightfulContest==="success";
                                     const total=n+(eyeWeak?3:0);
                                     return(
                                       <div style={{marginTop:8,display:"flex",flexDirection:"column",gap:6}}>
@@ -20036,7 +20036,7 @@ function App() {
                                           }
                                           if(arch==="Inquisitive (Rogue)"){
                                             const ueMax=Math.max(1,wisMod);
-                                            const ifOn=!!char.rogueInsightfulOn;
+                                            const ifOn=(char.saveResults||{}).rogueInsightfulContest==="success";
                                             const earRoll=()=>{
                                               const o=skObjR("Insight"); if(!o) return;
                                               const bn=skBonus(o);
@@ -20058,7 +20058,6 @@ function App() {
                                                 <Body>You can use a bonus action to make a Wisdom (Insight) check against a creature you can see that isn't incapacitated, contested by the target's Charisma (Deception) check. If you succeed, you can use Sneak Attack against that target even if you don't have advantage on the attack roll, but not if you have disadvantage on it. This benefit lasts for 1 minute or until you successfully use this feature against a different target.</Body>
                                                 {flexEnd(skillRollBtn("Insight"))}
                                                 {saveRow("rogueInsightfulContest","WIS",0,"You win the contest — you can use Sneak Attack against this target without advantage (not with disadvantage).","You lose the contest — the target is not affected.","Insight vs Deception (contested)")}
-                                                {toggleRow("rogueInsightfulOn","Insightful Fighting active — Sneak Attack without advantage","Not active","Mark Active")}
                                               </FC>,
                                               <FC key="se" label="Steady Eye (9th)" minLvl={9}>
                                                 <Body>You have advantage on a Wisdom (Perception) or Intelligence (Investigation) check if you move no more than half your speed on the same turn.</Body>
@@ -20069,7 +20068,7 @@ function App() {
                                               </FC>,
                                               <FC key="efw" label="Eye for Weakness (17th)" minLvl={17}>
                                                 <Body>While your Insightful Fighting feature applies to a creature, your Sneak Attack deals an extra 3d6 damage to it.</Body>
-                                                <div style={{fontSize:11,fontWeight:700,color:ifOn?"var(--accent)":"var(--muted)",marginTop:4}}>{ifOn?"Insightful Fighting is active — the extra 3d6 is included in your Sneak Attack roller":"Mark Insightful Fighting active to include the extra 3d6"}</div>
+                                                <div style={{fontSize:11,fontWeight:700,color:ifOn?"var(--accent)":"var(--muted)",marginTop:4}}>{ifOn?"Insightful Fighting contest won — the extra 3d6 is included in your Sneak Attack roller":"Win the Insightful Fighting contest to include the extra 3d6"}</div>
                                               </FC>
                                             );
                                           }
@@ -28292,12 +28291,12 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         </div>);
                                       };
                                       // save-vs-DC row with Succeeded / Failed / Clear and a result line
-                                      const saveRowX=(saveKey,abil,dc,okTxt,failTxt)=>{
+                                      const saveRowX=(saveKey,abil,dc,okTxt,failTxt,lbl)=>{
                                         const r=(char.saveResults||{})[saveKey];
                                         const setR=v=>setCharSaving(p=>{const n={...(p.saveResults||{})};if(v)n[saveKey]=v;else delete n[saveKey];return {...p,saveResults:n};});
                                         return (<div>
                                           <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
-                                            <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{abil} save DC {dc}</span>
+                                            <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{lbl||(abil+" save DC "+dc)}</span>
                                             <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:r==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("success");}}>✓ Succeeded</button>
                                             <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:r==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("fail");}}>✗ Failed</button>
                                             {r&&<button style={linkSt} onClick={e=>{e.stopPropagation();setR(null);}}>↺ Clear</button>}
@@ -28362,7 +28361,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           </>);
                                         }
                                         if(nm.startsWith("Eye for Detail")) return wrapX(flexEnd(<>{skBtn("Perception")}{skBtn("Investigation")}</>));
-                                        if(nm.startsWith("Insightful Fighting")) return wrapX(<>{flexEnd(skBtn("Insight"))}{toggleRowX("rogueInsightfulOn","Insightful Fighting active — Sneak Attack without advantage","Not active","","Mark Active")}</>);
+                                        if(nm.startsWith("Insightful Fighting")) return wrapX(<>{flexEnd(skBtn("Insight"))}{saveRowX("rogueInsightfulContest","WIS",0,"You win the contest — you can use Sneak Attack against this target without advantage (not with disadvantage).","You lose the contest — the target is not affected.","Insight vs Deception (contested)")}</>);
                                         if(nm.startsWith("Elegant Maneuver")) return wrapX(flexEnd(<>{skBtn("Acrobatics")}{skBtn("Athletics")}</>));
                                         if(nm.startsWith("Unerring Eye")) return wrapX(pipRowX("rogueUnerringEyeUsed",Math.max(1,wisModX)));
                                         if(nm.startsWith("Panache")) return wrapX(<>{flexEnd(skBtn("Persuasion"))}{toggleRowX("rogueSwashPanacheOn","Panache active on a creature","No creature affected","","Mark Active")}</>);
