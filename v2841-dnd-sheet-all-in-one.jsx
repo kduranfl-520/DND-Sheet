@@ -6145,7 +6145,7 @@ function App() {
  const setCurrency = (k,v) => setCharSaving(p=>({...p,currency:{...p.currency,[k]:Number(v)||0}}));
  const setSlotUsed = (i,v) => setCharSaving(p=>{const a=[...p.spellSlotsUsed];a[i]=Math.max(0,Math.min(slots[i]||0,Number(v)||0));return {...p,spellSlotsUsed:a};});
 
- const rollCheck = (label, bonus, sides=20) => {
+ const rollCheck = (label, bonus, sides=20, forceAdv=false) => {
  const armorStealthDis = hasStealthDisadv && label==="Stealth";
  const isStrCheck = ["Athletics","STR","Strength"].some(s=>label.startsWith(s));
  const rageAdv = char.rageActive && isStrCheck;
@@ -6186,7 +6186,7 @@ function App() {
  const steadyEyeAdv = char.charClass==="Rogue" && (char.multiClassLevel>0?char.classLevel:char.level||1)>=9 && char.rogueArchetype==="Inquisitive (Rogue)" && !!char.rogueSteadyEyeOn && (label==="Perception"||label==="Investigation");
  const impostorAdv = char.charClass==="Rogue" && (char.multiClassLevel>0?char.classLevel:char.level||1)>=13 && char.rogueArchetype==="Assassin (Rogue)" && !!char.rogueImpostorOn && label==="Deception";
  const visageAdv = char.charClass==="Monk" && char.monasticTradition==="Way of the Astral Self (Monk)" && char.monkAstralVisageActive && (label==="Insight"||label==="Intimidation");
- const isAdv = (char.advantage || rageAdv || actorAdv || cloudRuneAdv || frostRuneAdv || stoneRuneAdv || stormRuneAdv || giantsMightAdv || visageAdv || supremeSneakAdv || impostorAdv || steadyEyeAdv) && !char.disadvantage && !armorStealthDis;
+ const isAdv = (char.advantage || rageAdv || actorAdv || cloudRuneAdv || frostRuneAdv || stoneRuneAdv || stormRuneAdv || giantsMightAdv || visageAdv || supremeSneakAdv || impostorAdv || steadyEyeAdv || forceAdv) && !char.disadvantage && !armorStealthDis;
  const isDis = (char.disadvantage && !char.advantage && !rageAdv) || armorStealthDis;
  const r1 = Math.floor(Math.random()*sides)+1;
  const r2 = (isAdv||isDis) ? Math.floor(Math.random()*sides)+1 : null;
@@ -6197,7 +6197,7 @@ function App() {
  const total = roll + bonus + frostRuneBonus;
  const isCrit = roll0===sides;
  const isFail = roll===1;
- setSkillRoll({label:(rtApplied?"🎯 ":"")+(supremeSneakAdv?"🥷 ":"")+(steadyEyeAdv?"👁 ":"")+(impostorAdv?"🎭 ":"")+(rageAdv?"🔥 ":actorAdv?"🎭 ":giantsMightAdv?"🗿 ":visageAdv?"👻 ":(cloudRuneAdv||frostRuneBonus>0||stoneRuneAdv||stormRuneAdv)?"🔯 ":"")+label, roll, bonus:bonus+frostRuneBonus, total, isCrit, isFail, sides, r1, r2, isAdv, isDis});
+ setSkillRoll({label:(rtApplied?"🎯 ":"")+(supremeSneakAdv?"🥷 ":"")+(steadyEyeAdv?"👁 ":"")+(forceAdv?"🤸 ":"")+(impostorAdv?"🎭 ":"")+(rageAdv?"🔥 ":actorAdv?"🎭 ":giantsMightAdv?"🗿 ":visageAdv?"👻 ":(cloudRuneAdv||frostRuneBonus>0||stoneRuneAdv||stormRuneAdv)?"🔯 ":"")+label, roll, bonus:bonus+frostRuneBonus, total, isCrit, isFail, sides, r1, r2, isAdv, isDis});
   };
 
  const changeClass = nv => {
@@ -19924,10 +19924,10 @@ function App() {
                                           const linkBtn={fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
                                           const skObjR=n=>Object.values(SKILLS_BY_ABILITY||{}).flat().find(x=>x.name===n);
                                           // Skill check row: shows the live bonus and rolls through the shared check roller
-                                          const skillRollBtn=(n,txt)=>{
+                                          const skillRollBtn=(n,txt,adv)=>{
                                             const o=skObjR(n); if(!o) return null;
                                             const bn=skBonus(o);
-                                            return <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollCheck(n,bn);}}>🎲 {txt||n} {bn>=0?"+":""}{bn}</button>;
+                                            return <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollCheck(n,bn,20,!!adv);}}>🎲 {txt||n} {bn>=0?"+":""}{bn}</button>;
                                           };
                                           const toolBonusR=abilityMod(eff.DEX||10)+pb*((char.rogueExpertise||[]).includes("Thieves' Tools")?2:1);
                                           const thievesToolsBtn=()=><button style={{...neutralBtn,...ttOffSt}} {...ttOff} onClick={e=>{e.stopPropagation();rollCheck("Thieves' Tools",toolBonusR);}}>🎲 Thieves' Tools {toolBonusR>=0?"+":""}{toolBonusR}</button>;
@@ -20195,7 +20195,7 @@ function App() {
                                               </FC>,
                                               <FC key="em" label="Elegant Maneuver (13th)" minLvl={13}>
                                                 <Body>You can use a bonus action on your turn to gain advantage on the next Dexterity (Acrobatics) or Strength (Athletics) check you make during the same turn.</Body>
-                                                {flexEnd(skillRollBtn("Acrobatics"),skillRollBtn("Athletics"))}
+                                                {flexEnd(skillRollBtn("Acrobatics",null,true),skillRollBtn("Athletics",null,true))}
                                               </FC>,
                                               <FC key="md" label="Master Duelist (17th)" minLvl={17}>
                                                 <Body>If you miss with an attack roll, you can roll it again with advantage. Once you do so, you can't use this feature again until you finish a short or long rest.</Body>
@@ -28358,7 +28358,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         const dexModX=abilityMod(eff.DEX||10);
                                         const spDCAT=8+pb+abilityMod(eff.INT||10);
                                         const skO=n=>Object.values(SKILLS_BY_ABILITY||{}).flat().find(x=>x.name===n);
-                                        const skBtn=(n,txt)=>{const o=skO(n);if(!o)return null;const bn=skBonus(o);return <button key={n} style={btnSt} onClick={e=>{e.stopPropagation();rollCheck(n,bn);}}>🎲 {txt||n} {bn>=0?"+":""}{bn}</button>;};
+                                        const skBtn=(n,txt,adv)=>{const o=skO(n);if(!o)return null;const bn=skBonus(o);return <button key={n} style={btnSt} onClick={e=>{e.stopPropagation();rollCheck(n,bn,20,!!adv);}}>🎲 {txt||n} {bn>=0?"+":""}{bn}</button>;};
                                         const ttB=dexModX+pb*((char.rogueExpertise||[]).includes("Thieves' Tools")?2:1);
                                         const sn=Math.ceil(rLvl/2);
                                         const dSides=rLvl>=17?12:rLvl>=11?10:rLvl>=5?8:6;
@@ -28395,7 +28395,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         }
                                         if(nm.startsWith("Eye for Detail")) return wrapX(flexEnd(<>{skBtn("Perception")}{skBtn("Investigation")}</>));
                                         if(nm.startsWith("Insightful Fighting")) return wrapX(<>{flexEnd(skBtn("Insight"))}{saveRowX("rogueInsightfulContest","WIS",0,"You win the contest — you can use Sneak Attack against this target without advantage (not with disadvantage).","You lose the contest — the target is not affected.","Insight vs Deception (contested)")}</>);
-                                        if(nm.startsWith("Elegant Maneuver")) return wrapX(flexEnd(<>{skBtn("Acrobatics")}{skBtn("Athletics")}</>));
+                                        if(nm.startsWith("Elegant Maneuver")) return wrapX(flexEnd(<>{skBtn("Acrobatics",null,true)}{skBtn("Athletics",null,true)}</>));
                                         if(nm.startsWith("Unerring Eye")) return wrapX(pipRowX("rogueUnerringEyeUsed",Math.max(1,wisModX)));
                                         if(nm.startsWith("Panache")) return wrapX(<>{flexEnd(skBtn("Persuasion"))}{toggleRowX("rogueSwashPanacheOn","Panache active on a creature","No creature affected","","Mark Active")}</>);
                                         if(nm.startsWith("Ghost Walk")){
