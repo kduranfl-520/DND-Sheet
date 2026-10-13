@@ -20168,7 +20168,6 @@ function App() {
                                               </FC>,
                                               <FC key="am" label="Ambush Master (13th)" minLvl={13}>
                                                 <Body>You have advantage on initiative rolls. In addition, the first creature you hit during the first round of a combat becomes easier for you and your allies to hit. Attack rolls against that target have advantage until the start of your next turn.</Body>
-                                                {toggleRow("rogueAmbushMarked","Ambush target marked — attacks against it have advantage until your next turn","No ambush target marked","Mark Target")}
                                                 {note("Your initiative roll on the Core tab already rolls with advantage.")}
                                               </FC>,
                                               <FC key="ss" label="Sudden Strike (17th)" minLvl={17}>
