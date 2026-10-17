@@ -21202,6 +21202,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another abjuration or transmutation spell from the sorcerer, warlock or wizard list.</Body>
                                                 {sorcSpellRows(cs,lvl)}
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8}}>
+                                                  <div style={{fontSize:11,color:"var(--muted)"}}>When you cast a sorcerer spell, choose or roll how your tie to order shows itself.</div>
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
                                                     <span style={sorcLbl}>Manifestations of Order</span>
                                                     <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
@@ -21212,7 +21213,6 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                       <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setF("sorcManif",r);}}>🎲 Roll d6</button>
                                                     </span>
                                                   </div>
-                                                  <div style={{fontSize:11,color:"var(--muted)"}}>When you cast a sorcerer spell, choose or roll how your tie to order shows itself.</div>
                                                   {manif!=null&&manif!==""&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{Number(manif)+1}</span> — {CLOCKWORK_MANIFEST[Number(manif)]}</div>}
                                                 </div>
                                               </FC>,
