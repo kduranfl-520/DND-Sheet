@@ -4399,7 +4399,7 @@ const themeLum=hex=>{const n=parseInt(hex.slice(1),16);const f=x=>{x/=255;return
 const themeRatio=(a,b)=>{const x=themeLum(a),y=themeLum(b);return(Math.max(x,y)+0.05)/(Math.min(x,y)+0.05);};
 const THEME_DEFAULT={on:true,grad:true,same:true,tint:18,ctint:8,l1:themeHsv("#6366f1"),l2:themeHsv("#06b6d4"),d1:themeHsv("#818cf8"),d2:themeHsv("#22d3ee")};
 const themeTokens=dark=>dark?{bg:"#0f1117",surface:"#1a1e26",card:"#252b36"}:{bg:"#dde3ec",surface:"#f8fafc",card:"#ffffff"};
-const themeEff=(th,dark)=>{let p1=th[(dark?"d":"l")+"1"],p2=th[(dark?"d":"l")+"2"];if(dark&&th.same){p1=themeDerive(th.l1);p2=themeDerive(th.l2);}return[themeHex(p1),themeHex(p2)];};
+const themeEff=(th,dark)=>{let p1=th[(dark?"d":"l")+"1"],p2=th[(dark?"d":"l")+"2"];if(dark){p1=themeDerive(th.l1);p2=themeDerive(th.l2);}return[themeHex(p1),themeHex(p2)];};
 const buildThemeCss=(th,dark)=>{
   if(!th||!th.on)return"";
   const T=themeTokens(dark);const[a1,a2]=themeEff(th,dark);const A2=th.grad?a2:a1;
@@ -4439,7 +4439,7 @@ function ThemeWheel({c,label,onPick,onBright,full}){
 }
 function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
   const th=theme||{...THEME_DEFAULT,on:false};
-  const dark=darkMode;const editKey=(th.same||!dark)?"l":"d";
+  const dark=darkMode;const editKey="l";
   const upd=fn=>setTheme(prev=>{const b=prev||THEME_DEFAULT;return{...b,on:true,...fn(b)};});
   const e1=th[editKey+"1"],e2=th[editKey+"2"];
   const[a1]=themeEff(th,dark);const T=themeTokens(dark);
@@ -4464,7 +4464,7 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
         <button onClick={()=>setDarkMode(false)} style={seg(!dark)}>☀ Light mode</button>
         <button onClick={()=>setDarkMode(true)} style={seg(dark)}>☾ Dark mode</button>
       </div>
-      <div style={{fontSize:11,lineHeight:1.4,color:"var(--muted)"}}>{th.same?"These base colors apply in light and dark. Switch the tab to preview the other mode.":(dark?"Editing your own dark mode pair. Light mode keeps its colors.":"Editing your own light mode pair. Dark mode keeps its colors.")}</div>
+      <div style={{fontSize:11,lineHeight:1.4,color:"var(--muted)"}}>These colors apply in both light and dark mode (dark mode lightens them automatically so text stays readable). Switch the tab to preview the other mode.</div>
       <div style={{display:"flex",gap:14,justifyContent:"space-between"}}>
         <ThemeWheel c={e1} label="COLOR 1" full={themeHex({...e1,v:1})} onPick={(h,s)=>upd(b=>({[editKey+"1"]:{...b[editKey+"1"],h,s}}))} onBright={v=>upd(b=>({[editKey+"1"]:{...b[editKey+"1"],v}}))}/>
         <div style={{display:"flex",flex:"1 1 0",minWidth:0,opacity:th.grad?1:0.35}}>
@@ -4480,10 +4480,10 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
         {slider("Background tint",th.tint,45,"tint","linear-gradient(90deg,"+T.bg+","+themeMix(T.bg,mid,0.45)+")")}
         {slider("Card tint",th.ctint,25,"ctint","linear-gradient(90deg,"+T.card+","+themeMix(T.card,mid,0.25)+")")}
       </div>
-      <label style={{display:"flex",alignItems:"flex-start",gap:8,fontSize:12,lineHeight:1.35,color:"var(--text)"}}>
-        <input type="checkbox" checked={!!th.same} onChange={()=>upd(b=>b.same?{same:false,d1:themeDerive(b.l1),d2:themeDerive(b.l2)}:{same:true})} style={{marginTop:2,width:16,height:16}}/>
-        <span>Use these colors in both modes <span style={{color:"var(--muted)"}}>(dark mode auto-lightens them so text stays readable)</span></span>
-      </label>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
+        <span style={{fontSize:11,fontWeight:600,padding:"3px 9px",borderRadius:6,background:ok?"rgba(34,197,94,.16)":"rgba(245,158,11,.2)",color:ok?(dark?"#86efac":"#15803d"):(dark?"#fcd34d":"#92400e")}}>{ok?"Readable: accent text on cards "+cr.toFixed(1)+":1 ✓":"Low contrast "+cr.toFixed(1)+":1 — try a darker Color 1"}</span>
+        <button onClick={()=>setTheme(null)} style={{height:44,padding:"0 12px",borderRadius:8,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>↺ Reset to default</button>
+      </div>
       <div style={{display:"flex",flexDirection:"column",gap:6}}>
         <div style={lbl}>PRESETS</div>
         <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
@@ -4491,10 +4491,6 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
             <button key={p[0]} aria-label={p[0]} title={p[0]} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
               style={{width:44,height:44,borderRadius:"50%",border:"2px solid "+(sel?"var(--text)":"transparent"),background:"linear-gradient(135deg,"+p[1]+","+p[2]+")",padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>);})}
         </div>
-      </div>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
-        <span style={{fontSize:11,fontWeight:600,padding:"3px 9px",borderRadius:6,background:ok?"rgba(34,197,94,.16)":"rgba(245,158,11,.2)",color:ok?(dark?"#86efac":"#15803d"):(dark?"#fcd34d":"#92400e")}}>{ok?"Readable: accent text on cards "+cr.toFixed(1)+":1 ✓":"Low contrast "+cr.toFixed(1)+":1 — try a darker Color 1"}</span>
-        <button onClick={()=>setTheme(null)} style={{height:44,padding:"0 12px",borderRadius:8,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>↺ Reset to default</button>
       </div>
     </div>
   );
