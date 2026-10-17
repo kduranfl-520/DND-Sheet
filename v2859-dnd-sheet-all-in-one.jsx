@@ -20768,7 +20768,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                   <option value="">-- Choose a Dragon Ancestor --</option>
                                                   {Object.keys(dragons).map(k=><option key={k} value={k}>{k} — {dragons[k]}</option>)}
                                                 </select>
-                                                {dr&&flexEnd(<span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Dragon-related CHA check bonus: +{chaMod+pb*2}</span>)}
+                                                {flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();rollCheck("CHA check (dragons)",chaMod+pb*2);}}>🎲 CHA check (dragons) {chaMod+pb*2>=0?"+":""}{chaMod+pb*2}</button>)}
                                               </FC>,
                                               <FC key="dres" label="Draconic Resilience (1st)" minLvl={1}>
                                                 <Body>Your hit point maximum rises by 1 for every sorcerer level, and draconic scales protect you: with no armor, your AC is 13 + your Dexterity modifier.</Body>
