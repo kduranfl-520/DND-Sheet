@@ -21044,7 +21044,26 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const revPick=char.sorcRevPick||[];
                                             const impUsed=!!char.sorcImplosionUsed;
                                             const impDC=spellDCs;
+                                            const ABR=[
+                                              "You were exposed to the Far Realm's warping influence. You're convinced a tentacle is growing on you, but no one else can see it.",
+                                              "A psychic wind from the Astral Plane carried psionic energy to you. When you use your powers, faint motes of light sparkle around you.",
+                                              "You once suffered the dominating powers of an aboleth, leaving a psychic splinter in your mind.",
+                                              "You were implanted with a mind flayer tadpole, but the ceremorphosis never finished, and its psionic power is now yours. When you use it, your flesh shines with a strange mucus.",
+                                              "As a child you had an imaginary friend that looked like a flumph or a strange platypus-like creature. It gifted you psionic powers, which ended up being not so imaginary.",
+                                              "Your nightmares whisper the truth to you: your psionic powers aren't your own. You draw them from your parasitic twin!"
+                                            ];
+                                            const abrPick=char.sorcAberrantOrigin||0;
                                             return wrapCol(
+                                              <div key="abr" style={{display:"flex",flexDirection:"column",gap:4,marginBottom:4}}>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                                  <span style={sorcLbl}>Aberrant Origin (d6)</span>
+                                                  <span style={{display:"flex",alignItems:"center",gap:8}}>
+                                                    {abrPick>0&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("sorcAberrantOrigin",0);}}>↺ Clear</button>}
+                                                    <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setSkillRoll({label:"Aberrant Origin",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:6,r1:r,r2:null,isAdv:false,isDis:false});setF("sorcAberrantOrigin",r);}}>🎲 Roll d6</button>
+                                                  </span>
+                                                </div>
+                                                {abrPick>0&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{abrPick}</span> — {ABR[abrPick-1]}</div>}
+                                              </div>,
                                               <FC key="ps" label="Psionic Spells (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another divination or enchantment spell from the sorcerer, warlock or wizard list.</Body>
                                                 <div style={{display:"flex",flexDirection:"column",gap:2,marginTop:6}}>
