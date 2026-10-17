@@ -12224,7 +12224,7 @@ function App() {
                                               {(()=>{
                                                 const BO=[
                                                   "One of your parents is a lycanthrope, and you've inherited some of their curse.",
-                                                  "You are descended from an archdruid and inherited the ability to partly change shape.",
+                                                  "You are descended from an archdruid and inherited the ability to partially change shape.",
                                                   "A fey spirit gifted you with the ability to adopt different bestial aspects.",
                                                   "An ancient animal spirit dwells within you, allowing you to walk this path."
                                                 ];
@@ -12239,7 +12239,7 @@ function App() {
                                                           <option value="">-- Choose an origin --</option>
                                                           {BO.map((t,i)=><option key={i} value={i+1}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
                                                         </select>
-                                                        <button style={bBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*4)+1;setSkillRoll({label:"Origin of the Beast",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:4,r1:r,r2:null,isAdv:false,isDis:false});setF("beastOrigin",r);}}>🎲 Roll d4</button>
+                                                        <button style={bBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*4)+1;setF("beastOrigin",r);}}>🎲 Roll d4</button>
                                                       </span>
                                                     </div>
                                                     {bp>0&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{bp}</span> — {BO[bp-1]}</div>}
@@ -21110,11 +21110,11 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const impUsed=!!char.sorcImplosionUsed;
                                             const impDC=spellDCs;
                                             const ABR=[
-                                              "You were exposed to the Far Realm's warping influence. You're convinced a tentacle is growing on you, but no one else can see it.",
+                                              "You were exposed to the Far Realm's warping influence. You are convinced that a tentacle is now growing on you, but no one else can see it.",
                                               "A psychic wind from the Astral Plane carried psionic energy to you. When you use your powers, faint motes of light sparkle around you.",
                                               "You once suffered the dominating powers of an aboleth, leaving a psychic splinter in your mind.",
-                                              "You were implanted with a mind flayer tadpole, but the ceremorphosis never finished, and its psionic power is now yours. When you use it, your flesh shines with a strange mucus.",
-                                              "As a child you had an imaginary friend that looked like a flumph or a strange platypus-like creature. It gifted you psionic powers, which ended up being not so imaginary.",
+                                              "You were implanted with a mind flayer tadpole, but the ceremorphosis never completed. And now its psionic power is yours. When you use it, your flesh shines with a strange mucus.",
+                                              "As a child you had an imaginary friend that looked like a flumph or a strange platypus-like creature. One day, it gifted you with psionic powers, which have ended up being not so imaginary.",
                                               "Your nightmares whisper the truth to you: your psionic powers aren't your own. You draw them from your parasitic twin!"
                                             ];
                                             const abrPick=char.sorcAberrantOrigin||0;
@@ -21127,7 +21127,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                       <option value="">-- Choose an origin --</option>
                                                       {ABR.map((t,i)=><option key={i} value={i+1}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
                                                     </select>
-                                                    <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setSkillRoll({label:"Aberrant Origin",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:6,r1:r,r2:null,isAdv:false,isDis:false});setF("sorcAberrantOrigin",r);}}>🎲 Roll d6</button>
+                                                    <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setF("sorcAberrantOrigin",r);}}>🎲 Roll d6</button>
                                                   </span>
                                                 </div>
                                                 {abrPick>0&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{abrPick}</span> — {ABR[abrPick-1]}</div>}
