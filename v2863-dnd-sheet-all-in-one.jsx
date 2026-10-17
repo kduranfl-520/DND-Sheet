@@ -20856,6 +20856,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="bl" label="Bend Luck (6th)" minLvl={6}>
                                                 <Body>As a reaction, spend 2 sorcery points when another creature you can see makes an attack roll, ability check or saving throw. Roll 1d4 and add it to or subtract it from that roll.</Body>
+                                                {note("You can use this after the creature rolls but before any effects of the roll occur.")}
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   {sorcReadout}
                                                   {dieBtn("Bend Luck",4,"🎲 d4")}
