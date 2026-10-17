@@ -5597,15 +5597,15 @@ function App() {
   };
   const SORC_META = [
     {n:"Careful Spell",cost:1,d:()=>"When you cast a spell that forces other creatures to make saving throws, choose up to "+Math.max(1,abilityMod(eff.CHA||10))+" creature"+(Math.max(1,abilityMod(eff.CHA||10))>1?"s":"")+" to automatically succeed. Creatures that would take half damage on a success take none."},
-    {n:"Distant Spell",cost:1,d:()=>"Double the range of a spell that has a range of 5 feet or more. A touch spell instead gets a range of 30 feet."},
-    {n:"Empowered Spell",cost:1,d:()=>"After rolling damage for a spell, reroll up to "+Math.max(1,abilityMod(eff.CHA||10))+" of the damage dice and keep the new rolls. You can pair this with another Metamagic option."},
-    {n:"Extended Spell",cost:1,d:()=>"Double the duration of a spell that lasts 1 minute or longer, up to a maximum of 24 hours."},
-    {n:"Heightened Spell",cost:3,d:()=>"Choose one target of a save-based spell; it has disadvantage on its first saving throw against the spell."},
-    {n:"Quickened Spell",cost:2,d:()=>"Cast a spell with a casting time of 1 action as a bonus action instead."},
-    {n:"Seeking Spell",cost:2,d:()=>"If you miss with a spell attack roll, reroll the d20 and use the new roll. You can pair this with another Metamagic option."},
-    {n:"Subtle Spell",cost:1,d:()=>"Cast a spell without any somatic or verbal components."},
-    {n:"Transmuted Spell",cost:1,d:()=>"Change a spell's damage type from acid, cold, fire, lightning, poison or thunder to another type on that list."},
-    {n:"Twinned Spell",cost:"var",d:()=>"When a spell targets only one creature and can't target more at higher levels, spend points equal to the spell's level (1 for a cantrip) to target a second creature in range."},
+    {n:"Distant Spell",cost:1,d:()=>"When you cast a spell that has a range of 5 feet or more, double its range. A spell with a range of touch instead gets a range of 30 feet."},
+    {n:"Empowered Spell",cost:1,d:()=>"When you roll damage for a spell you cast, reroll up to "+Math.max(1,abilityMod(eff.CHA||10))+" of the damage dice and keep the new rolls. You can pair this with another Metamagic option."},
+    {n:"Extended Spell",cost:1,d:()=>"When you cast a spell that has a duration of 1 minute or longer, double its duration, up to a maximum of 24 hours."},
+    {n:"Heightened Spell",cost:3,d:()=>"When you cast a spell that forces a creature to make a saving throw, choose one target; it has disadvantage on its first saving throw against the spell."},
+    {n:"Quickened Spell",cost:2,d:()=>"When you cast a spell that has a casting time of 1 action, you can cast it as a bonus action instead."},
+    {n:"Seeking Spell",cost:2,d:()=>"When you make an attack roll for a spell you cast and miss, reroll the d20 and use the new roll. You can pair this with another Metamagic option."},
+    {n:"Subtle Spell",cost:1,d:()=>"When you cast a spell, you can cast it without any somatic or verbal components."},
+    {n:"Transmuted Spell",cost:1,d:()=>"When you cast a spell that deals acid, cold, fire, lightning, poison or thunder damage, change that damage type to another type on that list."},
+    {n:"Twinned Spell",cost:"var",d:()=>"When you cast a spell that can target only one creature at its current level (and doesn't have a range of self), spend points equal to the spell's level (1 for a cantrip) to target a second creature in range with it."},
   ];
   const sorcMetaBox = (nm)=>{
           const m=SORC_META.find(x=>x.n===nm); if(!m) return null;
