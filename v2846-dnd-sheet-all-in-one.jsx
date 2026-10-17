@@ -5649,7 +5649,8 @@ function App() {
   };
   const toughnessBonus = char.subrace==="Hill Dwarf" ? (char.level||1) : 0;
   const toughFeatBonus = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Tough") ? (char.level||1)*2 : 0;
-  const effHpMax = (char.hp?.max||0) + toughnessBonus + toughFeatBonus;
+  const draconicHpBonus = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)") ? sorcLvl : 0;
+  const effHpMax = (char.hp?.max||0) + toughnessBonus + toughFeatBonus + draconicHpBonus;
 
  const eff = {};
  const subBonus = SUBRACE_BONUS[char.subrace] || {};
@@ -6238,7 +6239,8 @@ function App() {
  const hasMedArmorMaster = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Medium Armor Master");
  const mamDEXMod = Math.floor(((eff.DEX||10)-10)/2);
  const mamWearingMedium = hasMedArmorMaster && (char.armorItems||[]).some(i=>{if(typeof i!=="object"||!i.equipped||!i.name) return false;const entry=libEntries.find(e=>e.title===i.name&&e.category==="Armor");return entry?.notes?.match(/Type: (\w+)/)?.[1]?.toLowerCase()==="medium";});
- const hasDragonHide=Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Dragon Hide");
+ const hasDraconicRes=char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)";
+ const hasDragonHide=hasDraconicRes||Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Dragon Hide");
  const medArmorMasterBonus = (mamWearingMedium && mamDEXMod>=3) ? 1 : 0;
  const hasDefenseFightingStyle = char.classFightingStyle==="Defense"||char.fiStyle==="Defense"||char.championExtraStyle==="Defense";
  const wearingHeavyArmor = (char.armorItems||[]).some(i=>{if(typeof i!=="object"||!i.equipped||!i.name) return false;const entry=libEntries.find(e=>e.title===i.name&&e.category==="Armor");return entry?.notes?.match(/Type: (\w+)/)?.[1]?.toLowerCase()==="heavy";});
@@ -6517,6 +6519,7 @@ function App() {
                 {(char.clericKnowledgeLangs||[]).filter(Boolean).map((lang,i)=>(
                   <PopChip key={`ckl${i}`} k={mkPopKey("langClericKnowledge",i)} className="hdr-chip" style={{background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",color:"var(--accent)"}} label="Blessings of Knowledge">{lang}</PopChip>
                 ))}
+                {char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&!(char.languages||[]).includes("Draconic")&&!(RACE_LANGUAGES[char.species]||[]).includes("Draconic")&&<PopChip k="langSorcDraconic" className="hdr-chip" style={{background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",color:"var(--accent)"}} label="Dragon Ancestor (Draconic Bloodline)">Draconic</PopChip>}
                 {char.charClass==="Rogue"&&!(char.languages||[]).includes("Thieves' Cant")&&<PopChip k="langRogueCant" className="hdr-chip" style={{background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",color:"var(--accent)"}} label="Thieves' Cant (Rogue)">Thieves' Cant</PopChip>}
                 {rogueLvlC>=3&&char.rogueArchetype==="Mastermind (Rogue)"&&(char.rogueMastermindLangs||[]).filter(Boolean).map((lang,i)=>(
                   <PopChip key={`rml${i}`} k={mkPopKey("langRogueMastermind",i)} className="hdr-chip" style={{background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",color:"var(--accent)"}} label="Master of Intrigue (Mastermind)">{lang}</PopChip>
@@ -7029,7 +7032,7 @@ function App() {
                                 {(equippedArmor.length>0&&hasDefenseFightingStyle)&&<span style={{color:"var(--accent)"}}>+1 Defense (Fighting Style)</span>}
                                 {soulOfForgeBonus>0&&<span style={{color:"#b45309"}}>+1 Soul of the Forge</span>}
                                 {blessingForgeACBonus>0&&<span style={{color:"#b45309"}}>+1 Blessing of the Forge</span>}
-                                {hasDragonHide&&!equippedArmor.length&&!isBarbUnarmored&&!isMonkUnarmored&&<span style={{color:"#14b8a6"}}>Dragon Hide (13 + DEX)</span>}
+                                {hasDragonHide&&!equippedArmor.length&&!isBarbUnarmored&&!isMonkUnarmored&&<span style={{color:"#14b8a6"}}>{hasDraconicRes?"Draconic Resilience":"Dragon Hide"} (13 + DEX)</span>}
                               </div>
                               </>
                             );
@@ -7144,6 +7147,7 @@ function App() {
                   const stormbornOn = char.charClass==="Cleric"&&char.divineDomain==="Tempest Domain (Cleric)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17;
                   const dragonFlyOn = char.charClass==="Druid"&&char.druidCircle==="Circle of Stars (Druid)"&&char.druidStarryFormActive&&char.druidConstellation==="Dragon"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=10;
                   const avengingAngelOn = char.charClass==="Paladin"&&char.sacredOath==="Oath of Vengeance (Paladin)"&&!!char.paladinAvengingAngelActive;
+                  const dragonWingsOn = char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=14&&!!char.sorcDragonWingsActive;
                   const swimBeastOn = char.charClass==="Barbarian"&&char.primalPath==="Path of the Beast (Barbarian)"&&char.beastSoul==="Swimming"&&(char.level||1)>=6;
                   const stormSwimOn = char.charClass==="Barbarian"&&char.primalPath==="Path of the Storm Herald (Barbarian)"&&char.stormEnvironment==="Sea"&&(char.level||1)>=6;
                   const climbBeastOn = char.charClass==="Barbarian"&&char.primalPath==="Path of the Beast (Barbarian)"&&char.beastSoul==="Climbing"&&(char.level||1)>=6;
@@ -7171,11 +7175,12 @@ function App() {
                   const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV);
 
                   const extraCells=[];
-                  const flyValue = eagleFlyActive?displaySpeed:avengingAngelOn?60:stormbornOn?(char.speed||30):dragonFlyOn?20:0;
-                  const flyColor = eagleFlyActive?"var(--green)":avengingAngelOn?"var(--gold, #eab308)":stormbornOn?"var(--accent)":dragonFlyOn?"#38bdf8":"var(--muted)";
+                  const flyValue = eagleFlyActive?displaySpeed:dragonWingsOn?displaySpeed:avengingAngelOn?60:stormbornOn?(char.speed||30):dragonFlyOn?20:0;
+                  const flyColor = eagleFlyActive?"var(--green)":dragonWingsOn?"#ef4444":avengingAngelOn?"var(--gold, #eab308)":stormbornOn?"var(--accent)":dragonFlyOn?"#38bdf8":"var(--muted)";
                   const flyDetails=[];
                   if(eagleFlyActive) flyDetails.push({text:"Eagle Totemic Attunement",color:"var(--green)"});
                   else if(eagleAttuned) flyDetails.push({text:"Eagle Totemic Attunement (raging only)",color:"var(--muted)"});
+                  if(dragonWingsOn) flyDetails.push({text:"Dragon Wings",color:"#ef4444"});
                   if(avengingAngelOn) flyDetails.push({text:"Avenging Angel",color:"var(--gold, #eab308)"});
                   if(stormbornOn) flyDetails.push({text:"Stormborn",color:"var(--accent)"});
                   if(dragonFlyOn) flyDetails.push({text:"Twinkling Constellations",color:"#38bdf8"});
@@ -7822,7 +7827,7 @@ function App() {
  setF("deathSaves.successes", 0);
  setF("deathSaves.failures", 0);
  TRINKET_TXT.length=0;
- setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
+ setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, sorcDracResistOn:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
  setF("wisSpellUsed_ConsultTheSpirits", false);
  setF("libItemState", resetLibItemUses(char, libEntries, "long"));
  setF("fighterIndomitableUsed", 0);
@@ -8910,6 +8915,8 @@ function App() {
  const rangerArchetypeEntry = isRangerArchetype&&char.rangerArchetype ? libEntries.find(e=>e.title===char.rangerArchetype) : null;
  const isRogueArchetype = feat==="Roguish Archetype" && char.charClass==="Rogue";
  const rogueArchetypeEntry = isRogueArchetype&&char.rogueArchetype ? libEntries.find(e=>e.title===char.rogueArchetype) : null;
+ const isSorcOrigin = feat==="Sorcerous Origin" && char.charClass==="Sorcerer";
+ const sorcOriginEntry = isSorcOrigin&&char.sorcOrigin ? libEntries.find(e=>e.title===char.sorcOrigin) : null;
  const isMartialArchetype = feat==="Martial Archetype" && char.charClass==="Fighter";
  const archetypeEntry = isMartialArchetype&&char.martialArchetype ? libEntries.find(e=>e.title===char.martialArchetype) : null;
  const isMonasticTradition = feat==="Monastic Tradition" && char.charClass==="Monk";
@@ -10468,7 +10475,6 @@ function App() {
                                           <option value="">-- Choose a Sorcerous Origin --</option>
                                           {origins.map(a=><option key={a} value={a}>{a}</option>)}
                                         </select>
-                                        {char.sorcOrigin&&<div style={{fontSize:11,color:"var(--muted)",fontStyle:"italic",marginTop:8,paddingLeft:10}}>Full interactive feature cards for this origin haven't been built yet.</div>}
                                       </div>
                                     );
                                   })()}
@@ -20598,6 +20604,183 @@ function App() {
                                   </div>
                                 </div>
                               )}
+                              {isSorcOrigin&&char.sorcOrigin&&(
+                                <div style={{marginLeft:16,display:"flex",flexDirection:"column",gap:6}}>
+                                  <div className="ft-card ft-card-race ft-card-class" style={{borderRadius:14,borderLeft:"3px solid rgba(99,102,241,0.3)"}}>
+                                    <div className={"ft-lib-section-hdr ft-lib-section-hdr-btn"+(openTrait("sorcOriginSubclass")?"":" ft-lib-section-hdr-collapsed")}
+                                      onClick={e=>{e.stopPropagation();setOpenTrait("sorcOriginSubclass");}}>
+                                      <span>{char.sorcOrigin.replace(/\s*\(Sorcerer\)\s*$/,"")}</span>
+                                      <span className="ft-hdr-chev">{openTrait("sorcOriginSubclass")?"^":"v"}</span>
+                                    </div>
+                                    {openTrait("sorcOriginSubclass")&&sorcOriginEntry&&(
+                                      <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                                        {sorcOriginEntry.desc&&<div className="ft-lib-desc">{sorcOriginEntry.desc}</div>}
+                                        {(()=>{
+                                          const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
+                                          const orig=char.sorcOrigin;
+                                          const dexMod=abilityMod(eff.DEX||10);
+                                          const chaMod=abilityMod(eff.CHA||10);
+                                          const wisMod=abilityMod(eff.WIS||10);
+const FC=({label,minLvl,headerBadge,children})=>{
+                                            if(lvl<minLvl) return null;
+                                            return(
+                                              <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:4,gap:8}}>
+                                                  <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase"}}>{label}</div>
+                                                  {headerBadge}
+                                                </div>
+                                                {children}
+                                              </div>
+                                            );
+                                          };
+                                          const Body=({children})=><div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>{children}</div>;
+                                          const neutralBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(99,102,241,0.4)",background:"rgba(99,102,241,0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"};
+                                          const linkBtn={fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
+                                          const skObjR=n=>Object.values(SKILLS_BY_ABILITY||{}).flat().find(x=>x.name===n);
+                                          // Skill check row: shows the live bonus and rolls through the shared check roller
+                                          const skillRollBtn=(n,txt,adv)=>{
+                                            const o=skObjR(n); if(!o) return null;
+                                            const bn=skBonus(o);
+                                            return <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollCheck(n,bn,20,!!adv);}}>🎲 {txt||n} {bn>=0?"+":""}{bn}</button>;
+                                          };
+                                          const flexEnd=(...kids)=><div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>{kids.map((k,i)=>k?React.createElement(React.Fragment,{key:i},k):null)}</div>;
+                                          const pipRow=(usedKey,max,note)=>{
+                                            const used=Math.min(max,char[usedKey]||0);
+                                            return(
+                                              <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginTop:6}}>
+                                                <div style={{display:"flex",gap:4}}>
+                                                  {Array.from({length:max},(_,pi)=>{
+                                                    const spent=pi<used;
+                                                    return(
+                                                      <button key={pi} title={spent?"Spent — click to restore":"Available — click to spend"}
+                                                        style={{width:18,height:18,borderRadius:"50%",border:"2px solid",flexShrink:0,cursor:"pointer",padding:0,background:spent?"var(--input)":"rgba(99,102,241,0.2)",borderColor:spent?"var(--border)":"var(--accent)"}}
+                                                        onClick={e=>{e.stopPropagation();setF(usedKey,spent?pi:pi+1);}}/>
+                                                    );
+                                                  }).reverse()}
+                                                </div>
+                                                <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({max-used}/{max})</span>
+                                                {used>0&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF(usedKey,0);}}>↺ Reset</button>}
+                                              </div>
+                                            );
+                                          };
+                                          const onceRow=(key,readyTxt,usedTxt,extra)=>{
+                                            const u=!!char[key];
+                                            return(
+                                              <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,marginTop:6}}>
+                                                <span style={{fontSize:11,color:u?"var(--muted)":"var(--accent)",fontWeight:700}}>{u?(usedTxt||"Used — recharges on a Short or Long Rest"):(readyTxt||"Ready — 1 use per rest")}</span>
+                                                <button style={u?linkBtn:neutralBtn} onClick={e=>{e.stopPropagation();setF(key,!u);}}>{u?"↺ Reset":"Mark Used"}</button>
+         {extra||null}
+                                              </div>
+                                            );
+                                          };
+                                          const toggleRow=(key,onTxt,offTxt,onBtn,offBtn)=>{
+                                            const on=!!char[key];
+                                            return(
+                                              <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,marginTop:6}}>
+                                                <span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?onTxt:offTxt}</span>
+                                                <button style={on?linkBtn:neutralBtn} onClick={e=>{e.stopPropagation();setF(key,!on);}}>{on?"↺ Clear":offBtn}</button>
+                                              </div>
+                                            );
+                                          };
+                                          // Target's saving throw vs. your DC: Succeeded / Failed / Clear, then the outcome line
+                                          const saveRow=(saveKey,abil,dc,okTxt,failTxt,lbl)=>{
+                                            const res=char.saveResults?.[saveKey];
+                                            return(
+                                              <>
+                                                <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6}}>
+                                                  <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{lbl||(abil+" save DC "+dc)}</span>
+                                                  <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:res==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[saveKey]:"success"}}));}}>✓ Succeeded</button>
+                                                  <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:res==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[saveKey]:"fail"}}));}}>✗ Failed</button>
+                                                  {res&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>{const n={...(p.saveResults||{})};delete n[saveKey];return {...p,saveResults:n};});}}>↺ Clear</button>}
+                                                </div>
+                                                {res==="success"&&<div style={{fontSize:11,color:"var(--green)",marginTop:4}}>{okTxt}</div>}
+                                                {res==="fail"&&<div style={{fontSize:11,color:"var(--red)",marginTop:4}}>{failTxt}</div>}
+                                              </>
+                                            );
+                                          };
+                                          const rollBtn=(label,type,sides,count,flat,text)=>{
+                                            const col=dmgTypeColor(type);
+                                            return <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col.border,background:col.bg,color:col.fg,cursor:"pointer",fontFamily:"inherit"}}
+                                              onClick={e=>{e.stopPropagation();const rolls=Array.from({length:count},()=>Math.floor(Math.random()*sides)+1);const total=Math.max(1,rolls.reduce((a,r)=>a+r,0)+flat);setSkillRoll({label:label+" ("+count+"d"+sides+(flat?(flat>0?"+":"")+flat:"")+" "+type+")",roll:rolls[0],bonus:flat,total,isCrit:false,isFail:false,sides,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:flat,dmgType:type,dmgDice:count+"d"+sides+(flat?(flat>0?"+":"")+flat:""),diceSides:sides,baseDiceCount:count});}}>{text}</button>;
+                                          };
+                                          const dieBtn=(label,sides,text)=><button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*sides)+1;setSkillRoll({label,roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides,r1:r,r2:null,isAdv:false,isDis:false});}}>{text}</button>;
+                                          const note=(txt)=><div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>{txt}</span></div>;
+                                          const wrapCol=(...kids)=><div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>{kids.map((k,i)=>k?React.createElement(React.Fragment,{key:i},k):null)}</div>;
+                                          const spellDCs=8+pb+chaMod;
+                                          
+                                          if(orig==="Draconic Bloodline (Sorcerer)"){
+                                            const dragons={Black:"acid",Blue:"lightning",Brass:"fire",Bronze:"lightning",Copper:"acid",Gold:"fire",Green:"poison",Red:"fire",Silver:"cold",White:"cold"};
+                                            const dr=char.sorcDragon||""; const dt=dragons[dr]||"";
+                                            const dtCol=dt?dmgTypeColor(dt):null;
+                                            const dtTag=dt?<span style={{fontSize:11,fontWeight:700,padding:"2px 8px",borderRadius:6,border:"1px solid "+dtCol.border,background:dtCol.bg,color:dtCol.fg,textTransform:"capitalize"}}>{dt}</span>:null;
+                                            const resOn=!!char.sorcDracResistOn;
+                                            const canRes=sorcSPLeft>=1;
+                                            const presOn=!!char.sorcPresenceOn;
+                                            const canPres=sorcSPLeft>=5;
+                                            return wrapCol(
+                                              <FC key="da" label="Dragon Ancestor (1st)" minLvl={1} headerBadge={dtTag}>
+                                                <Body>Pick the dragon your magic descends from. It sets the damage type for your other draconic features. You speak, read and write Draconic, and when a Charisma check involves dragons your proficiency bonus counts double.</Body>
+                                                <select className="ri-sel" value={dr} onClick={e=>e.stopPropagation()} onChange={e=>setF("sorcDragon",e.target.value)}
+                                                  style={{borderColor:"rgba(99,102,241,0.4)",color:dr?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
+                                                  <option value="">-- Choose a Dragon Ancestor --</option>
+                                                  {Object.keys(dragons).map(k=><option key={k} value={k}>{k} — {dragons[k]}</option>)}
+                                                </select>
+                                                {dr&&flexEnd(<span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Dragon-related CHA check bonus: +{chaMod+pb*2}</span>)}
+                                              </FC>,
+                                              <FC key="dres" label="Draconic Resilience (1st)" minLvl={1}>
+                                                <Body>Your hit point maximum rises by 1 for every sorcerer level, and draconic scales protect you: with no armor, your AC is 13 + your Dexterity modifier.</Body>
+                                                {flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{lvl} max HP · Unarmored AC {13+dexMod}</span>)}
+                                              </FC>,
+                                              <FC key="ea" label="Elemental Affinity (6th)" minLvl={6} headerBadge={resOn?<DurationBadge id="sorc-draconic-resist-duration" short="1 hr" full="Duration: 1 hour." total={1} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
+                                                <Body>When a spell you cast deals {dt||"your ancestor's"} damage, add your Charisma modifier to one damage roll of that spell. You can also spend 1 sorcery point to gain resistance to that damage type for 1 hour.</Body>
+                                                {dt&&flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{chaMod} to one {dt} damage roll</span>)}
+                                                {dt&&(
+                                                  <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
+                                                    {sorcReadout}
+                                                    {resOn?<>
+                                                      <span style={{fontSize:11,color:"var(--accent)",fontWeight:700,textTransform:"capitalize"}}>Resistant to {dt}</span>
+                                                      <button style={linkBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>{const dc={...(p.durationCounters||{})};const dtm={...(p.durationTimers||{})};delete dc["sorc-draconic-resist-duration"];delete dtm["sorc-draconic-resist-duration"];return {...p,sorcDracResistOn:false,durationCounters:dc,durationTimers:dtm};});}}>↺ End</button>
+                                                    </>:<button style={canRes?sorcBtn:sorcOffBtn} disabled={!canRes} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+1),sorcDracResistOn:true}));}}>Resistance (1 SP)</button>}
+                                                  </div>
+                                                )}
+                                                {!dt&&note("Choose a Dragon Ancestor above to see your damage type.")}
+                                              </FC>,
+                                              <FC key="dw" label="Dragon Wings (14th)" minLvl={14}>
+                                                <Body>As a bonus action you can sprout dragon wings and gain a flying speed equal to your current speed. Dismiss them as a bonus action. You can't do this in armor unless it was made to fit them, and armor not made for wings may tear.</Body>
+                                                {toggleRow("sorcDragonWingsActive","Wings out — flying speed "+(char.speed||30)+" ft.","Wings folded","","Sprout Wings")}
+                                              </FC>,
+                                              <FC key="dp" label="Draconic Presence (18th)" minLvl={18} headerBadge={presOn?<DurationBadge id="sorc-draconic-presence-duration" short="1 min" full="Duration: 1 minute, requires concentration." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
+                                                <Body>Use an action and spend 5 sorcery points to call up an aura of awe or fear (your pick) in a 60-foot radius. It lasts 1 minute while you concentrate. A hostile creature that starts its turn there makes a Wisdom save or is charmed (awe) or frightened (fear) until the aura ends. A creature that passes the save is immune for 24 hours.</Body>
+                                                <select className="ri-sel" value={char.sorcPresenceMode||""} onClick={e=>e.stopPropagation()} onChange={e=>setF("sorcPresenceMode",e.target.value)}
+                                                  style={{borderColor:"rgba(99,102,241,0.4)",color:char.sorcPresenceMode?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
+                                                  <option value="">-- Choose Awe or Fear --</option>
+                                                  <option value="Awe">Awe (charmed)</option>
+                                                  <option value="Fear">Fear (frightened)</option>
+                                                </select>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
+                                                  {sorcReadout}
+                                                  {presOn?<>
+                                                    <span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>{char.sorcPresenceMode||"Aura"} aura active</span>
+                                                    <button style={linkBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>{const dc={...(p.durationCounters||{})};const dtm={...(p.durationTimers||{})};delete dc["sorc-draconic-presence-duration"];delete dtm["sorc-draconic-presence-duration"];return {...p,sorcPresenceOn:false,durationCounters:dc,durationTimers:dtm};});}}>↺ End</button>
+                                                  </>:<button style={(canPres&&char.sorcPresenceMode)?sorcBtn:sorcOffBtn} disabled={!(canPres&&char.sorcPresenceMode)} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+5),sorcPresenceOn:true}));}}>Use (5 SP)</button>}
+                                                </div>
+                                                {presOn&&saveRow("sorcPresence","WIS",spellDCs,"Unaffected, and immune to your Draconic Presence for 24 hours.","Now "+(char.sorcPresenceMode==="Fear"?"frightened":"charmed")+" until the aura ends.","WIS save DC "+spellDCs)}
+                                              </FC>
+                                            );
+                                          }
+
+                                          return(
+                                            <div style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic",padding:"8px 0"}}>Full interactive feature cards for {orig.replace(/\s*\(Sorcerer\)\s*$/,"")} haven't been built yet.</div>
+                                          );
+                                        })()}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+
                               {isSacredOath&&char.sacredOath&&(
                                 <div style={{marginLeft:16,display:"flex",flexDirection:"column",gap:6}}>
                                   <div className="ft-card ft-card-race ft-card-class" style={{borderRadius:14,borderLeft:"3px solid rgba(99,102,241,0.3)"}}>
@@ -27512,7 +27695,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                   });
                   const isBarbUnarmoredR=char.charClass==="Barbarian"&&equippedArmorR.length===0;
                   const isMonkUnarmoredR=char.charClass==="Monk"&&equippedArmorR.length===0;
-                  const hasDragonHideR=Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Dragon Hide");
+                  const hasDragonHideR=hasDraconicRes||Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Dragon Hide");
                   const arACR=computeArmorAC(char.armorItems,eff,libEntries,char.charClass);
                   const dhACR=hasDragonHideR&&arACR==null?(13+abilityMod(eff.DEX)):null;
                   const plBonusR=(char.charClass==="Barbarian"&&char.primalPath==="Path of Wild Magic (Barbarian)"&&char.rageActive&&(char.wildSurgeResult||0)===6)?1:0;
@@ -27551,7 +27734,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                             {medArmorMasterBonus>0&&<span style={{color:"#14b8a6"}}>+1 Medium Armor Master</span>}
                             {soulOfForgeBonus>0&&<span style={{color:"#b45309"}}>+1 Soul of the Forge</span>}
                                 {blessingForgeACBonus>0&&<span style={{color:"#b45309"}}>+1 Blessing of the Forge</span>}
-                            {hasDragonHideR&&!equippedArmorR.length&&!isBarbUnarmoredR&&!isMonkUnarmoredR&&<span style={{color:"#14b8a6"}}>Dragon Hide (13 + DEX)</span>}
+                            {hasDragonHideR&&!equippedArmorR.length&&!isBarbUnarmoredR&&!isMonkUnarmoredR&&<span style={{color:"#14b8a6"}}>{hasDraconicRes?"Draconic Resilience":"Dragon Hide"} (13 + DEX)</span>}
                           </div>
                           </>
                         );
@@ -28128,6 +28311,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  "Uncanny Dodge":"When an attacker you can see hits you, you can use your reaction to halve the damage.",
  "Font of Magic — Flexible Casting":"Trade a spell slot for sorcery points whenever you like, or spend points to create a spell slot as a bonus action. Created slots vanish on a long rest.",
  "Metamagic — Modify a Spell":"Spend sorcery points to alter a spell as you cast it. You can use only one option on a spell, except Empowered Spell and Seeking Spell.",
+ "Dragon Wings — Sprout or Dismiss":"Sprout dragon wings for a flying speed equal to your current speed, or dismiss them. Not usable in armor that wasn't made for them.",
+ "Draconic Presence — Aura of Awe or Fear":"Spend 5 sorcery points for a 60-foot aura of awe or fear lasting 1 minute (concentration). Hostile creatures starting their turn inside make a Wisdom save or are charmed or frightened.",
  "Quickened Spell — Cast as a Bonus Action":"Spend 2 sorcery points to cast a spell that normally takes 1 action as a bonus action this turn.",
  "Sneak Attack":"Once per turn, deal extra damage to a creature you hit with a finesse or ranged weapon if you have advantage on the attack, or if another enemy of the target is within 5 feet of it and you don't have disadvantage.",
  "Tokens of the Departed — Create a Soul Trinket":"When a creature you can see dies within 30 feet of you, create a soul trinket. You can hold a number of trinkets up to your proficiency bonus.",
@@ -28453,6 +28638,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       const wrapS=kids=>(<div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",flexDirection:"column",gap:6}} onClick={e=>e.stopPropagation()}>{kids}</div>);
                                       if(nm.startsWith("Font of Magic")) return wrapS(<>{sorcPips()}{sorcFlex()}</>);
                                       if(nm.startsWith("Metamagic")) return wrapS(sorcMetaUse());
+                                      if(nm.startsWith("Dragon Wings")){const on=!!char.sorcDragonWingsActive;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8}}><span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?"Wings out — flying speed "+(char.speed||30)+" ft.":"Wings folded"}</span><button style={on?{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}:sorcBtn} onClick={e=>{e.stopPropagation();setF("sorcDragonWingsActive",!on);}}>{on?"↺ Dismiss":"Sprout Wings"}</button></div>);}
+                                      if(nm.startsWith("Draconic Presence")){const on=!!char.sorcPresenceOn;const can=sorcSPLeft>=5&&!!char.sorcPresenceMode;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>{sorcReadout}{!char.sorcPresenceMode&&<span style={{fontSize:11,color:"var(--muted)"}}>Pick Awe or Fear on the Features tab</span>}{on?<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setF("sorcPresenceOn",false);}}>↺ End</button>:<button style={can?sorcBtn:sorcOffBtn} disabled={!can} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+5),sorcPresenceOn:true}));}}>Use (5 SP)</button>}</div>);}
                                       if(nm.startsWith("Quickened Spell")){const can=sorcSPLeft>=2;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8}}><button style={can?sorcBtn:sorcOffBtn} disabled={!can} onClick={e=>{e.stopPropagation();if(can)sorcSpend(2);}}>Spend 2 SP</button>{sorcReadout}</div>);}
                                       return null;
                                     })()}
@@ -31300,6 +31487,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 }
               }
               if(char.charClass==="Sorcerer"&&sorcLvl>=3&&sorcChosenMeta.length>0) actFeatures.push("Metamagic — Modify a Spell");
+              if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=18) actFeatures.push("Draconic Presence — Aura of Awe or Fear");
               if(char.charClass==="Rogue"){
                 const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
                 const arch=char.rogueArchetype;
@@ -31956,6 +32144,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               if(char.charClass==="Sorcerer"){
                 if(sorcLvl>=2) baFeatures.push("Font of Magic — Flexible Casting");
                 if(sorcChosenMeta.includes("Quickened Spell")) baFeatures.push("Quickened Spell — Cast as a Bonus Action");
+                if(char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=14) baFeatures.push("Dragon Wings — Sprout or Dismiss");
               }
               if(char.charClass==="Rogue"){
                 const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
@@ -32430,6 +32619,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const stormbornOnR = char.charClass==="Cleric"&&char.divineDomain==="Tempest Domain (Cleric)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17;
  const dragonFlyOnR = char.charClass==="Druid"&&char.druidCircle==="Circle of Stars (Druid)"&&char.druidStarryFormActive&&char.druidConstellation==="Dragon"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=10;
  const avengingAngelOnR = char.charClass==="Paladin"&&char.sacredOath==="Oath of Vengeance (Paladin)"&&!!char.paladinAvengingAngelActive;
+ const dragonWingsOnR = char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=14&&!!char.sorcDragonWingsActive;
  const swimBeastOnR = char.charClass==="Barbarian"&&char.primalPath==="Path of the Beast (Barbarian)"&&char.beastSoul==="Swimming"&&(char.level||1)>=6;
  const stormSwimOnR = char.charClass==="Barbarian"&&char.primalPath==="Path of the Storm Herald (Barbarian)"&&char.stormEnvironment==="Sea"&&(char.level||1)>=6;
  const climbBeastOnR = char.charClass==="Barbarian"&&char.primalPath==="Path of the Beast (Barbarian)"&&char.beastSoul==="Climbing"&&(char.level||1)>=6;
@@ -32457,12 +32647,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const umbralSightDVR=(char.charClass==="Ranger"&&char.rangerArchetype==="Gloom Stalker (Ranger)"&&eonLvlR>=3)?(racialDVR>0?racialDVR+30:60):0;
  const darkvisionRangeR=Math.max(racialDVR,eyesOfNightDVR,stoneRuneDVR,umbralSightDVR);
 
- const flyValueR = eagleFlyRaging?totalSpeed:avengingAngelOnR?60:stormbornOnR?(char.speed||30):dragonFlyOnR?20:0;
- const flyColorR = eagleFlyRaging?"var(--green)":avengingAngelOnR?"var(--gold, #eab308)":stormbornOnR?"var(--accent)":dragonFlyOnR?"#38bdf8":"var(--muted)";
- const flyCaptionR = eagleFlyRaging?"Falls at turn end":avengingAngelOnR?"Avenging Angel":stormbornOnR?"Not underground/indoors":dragonFlyOnR?"Dragon form, hover included":null;
+ const flyValueR = eagleFlyRaging?totalSpeed:dragonWingsOnR?totalSpeed:avengingAngelOnR?60:stormbornOnR?(char.speed||30):dragonFlyOnR?20:0;
+ const flyColorR = eagleFlyRaging?"var(--green)":dragonWingsOnR?"#ef4444":avengingAngelOnR?"var(--gold, #eab308)":stormbornOnR?"var(--accent)":dragonFlyOnR?"#38bdf8":"var(--muted)";
+ const flyCaptionR = eagleFlyRaging?"Falls at turn end":dragonWingsOnR?"Dragon Wings":avengingAngelOnR?"Avenging Angel":stormbornOnR?"Not underground/indoors":dragonFlyOnR?"Dragon form, hover included":null;
  const flyDetailsR=[];
  if(eagleFlyRaging) flyDetailsR.push({text:"Eagle Totemic Attunement",color:"var(--green)"});
  else if(eagleAttunedR) flyDetailsR.push({text:"Eagle Totemic Attunement (raging only)",color:"var(--muted)"});
+ if(dragonWingsOnR) flyDetailsR.push({text:"Dragon Wings",color:"#ef4444"});
  if(avengingAngelOnR) flyDetailsR.push({text:"Avenging Angel",color:"var(--gold, #eab308)"});
  if(stormbornOnR) flyDetailsR.push({text:"Stormborn",color:"var(--accent)"});
  if(dragonFlyOnR) flyDetailsR.push({text:"Twinkling Constellations",color:"#38bdf8"});
