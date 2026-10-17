@@ -5596,7 +5596,7 @@ function App() {
     );
   };
   const SORC_META = [
-    {n:"Careful Spell",cost:1,d:()=>"When a spell forces saving throws, choose up to "+Math.max(1,abilityMod(eff.CHA||10))+" creature"+(Math.max(1,abilityMod(eff.CHA||10))>1?"s":"")+" to automatically succeed. Creatures that would take half damage on a success take none."},
+    {n:"Careful Spell",cost:1,d:()=>"When you cast a spell that forces other creatures to make saving throws, choose up to "+Math.max(1,abilityMod(eff.CHA||10))+" creature"+(Math.max(1,abilityMod(eff.CHA||10))>1?"s":"")+" to automatically succeed. Creatures that would take half damage on a success take none."},
     {n:"Distant Spell",cost:1,d:()=>"Double the range of a spell that has a range of 5 feet or more. A touch spell instead gets a range of 30 feet."},
     {n:"Empowered Spell",cost:1,d:()=>"After rolling damage for a spell, reroll up to "+Math.max(1,abilityMod(eff.CHA||10))+" of the damage dice and keep the new rolls. You can pair this with another Metamagic option."},
     {n:"Extended Spell",cost:1,d:()=>"Double the duration of a spell that lasts 1 minute or longer, up to a maximum of 24 hours."},
