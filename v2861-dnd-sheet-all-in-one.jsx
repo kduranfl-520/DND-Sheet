@@ -20791,7 +20791,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="ea" label="Elemental Affinity (6th)" minLvl={6} headerBadge={resOn?<DurationBadge id="sorc-draconic-resist-duration" short="1 hr" full="Duration: 1 hour." total={1} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>When a spell you cast deals {dt||"your ancestor's"} damage, add your Charisma modifier to one damage roll of that spell. You can also spend 1 sorcery point to gain resistance to that damage type for 1 hour.</Body>
-                                                {dt&&flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{chaMod} to one {dt} damage roll — added automatically to your {dt} spells</span>)}
+                                                {dt&&flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{chaMod} to one {dt} damage roll</span>)}
                                                 {dt&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                     {sorcReadout}
