@@ -21132,8 +21132,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </div>,
                                               <FC key="ps" label="Psionic Spells (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another divination or enchantment spell from the sorcerer, warlock or wizard list.</Body>
-                                                {sorcSpellRows(psi,lvl,lvl>=6?(nm,t)=>nm==="Mind Sliver"?0:(t+1)/2:null)}
-                                                {lvl>=6&&sorcNote("Psionic Sorcery (6th): cast a psionic spell by paying the SP shown instead of a slot — no verbal or somatic components, and no material components unless they're consumed.")}
+                                                {sorcSpellRows(psi,lvl)}
                                               </FC>,
                                               <FC key="tsp" label="Telepathic Speech (1st)" minLvl={1} headerBadge={telOn?<DurationBadge id="sorc-telepathy-duration" short={lvl+" min"} full={"Duration: "+lvl+" minutes."} total={lvl} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>As a bonus action, pick a creature you can see within 30 feet. You can talk to it telepathically while you're within {miles} mile{miles>1?"s":""} of each other (your Charisma modifier, minimum 1), if you share a language. It lasts {lvl} minutes (your sorcerer level), and ends early if you're incapacitated or die, or if you link a different creature.</Body>
