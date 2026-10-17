@@ -4430,7 +4430,7 @@ function ThemeWheel({c,label,onPick,onBright,full}){
         <div style={{position:"absolute",inset:0,borderRadius:"50%",background:"rgba(0,0,0,"+(1-c.v).toFixed(2)+")",pointerEvents:"none"}}/>
         <div style={{position:"absolute",left:R+R*c.s*Math.sin(ang),top:R-R*c.s*Math.cos(ang),width:16,height:16,margin:"-8px 0 0 -8px",borderRadius:"50%",border:"2px solid #fff",boxShadow:"0 0 0 1.5px rgba(0,0,0,.55)",background:hex,pointerEvents:"none"}}/>
       </div>
-      <label style={{display:"flex",flexDirection:"column",gap:2,width:120,fontSize:9,color:"var(--muted)",fontWeight:600}}>Brightness (dark → bright)
+      <label style={{display:"flex",flexDirection:"column",gap:2,width:120,fontSize:9,color:"var(--muted)",fontWeight:600}}>Brightness
         <input className="theme-bright" type="range" min="10" max="100" value={Math.round(c.v*100)} onChange={e=>onBright(Number(e.target.value)/100)} style={{"--track":"linear-gradient(90deg,#000,"+full+")"}}/>
       </label>
       <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,padding:"2px 8px",borderRadius:5,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)"}}>{hex}</span>
