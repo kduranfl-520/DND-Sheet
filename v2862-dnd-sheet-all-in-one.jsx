@@ -20832,7 +20832,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const rollSurge=()=>{
                                               const n=lvl>=14?2:1;
                                               const out=Array.from({length:n},()=>{const r=Math.floor(Math.random()*100)+1;return {r,t:WILD_SURGE_TABLE[Math.ceil(r/2)-1]};});
-                                              setCharSaving(p=>({...p,sorcSurge:out}));
+                                              setCharSaving(p=>({...p,sorcSurge:out,sorcTidesUsed:false}));
                                             };
                                             return wrapCol(
                                               <FC key="wms" label="Wild Magic Surge (1st)" minLvl={1}>
