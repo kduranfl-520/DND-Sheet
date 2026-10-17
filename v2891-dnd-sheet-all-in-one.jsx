@@ -21239,9 +21239,9 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               <FC key="cc" label="Clockwork Cavalcade (18th)" minLvl={18}>
                                                 <Body>As an action, summon intangible, invulnerable spirits (modrons or other constructs) in a 30-foot cube from you. Before they vanish they do all of the following:</Body>
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6,paddingLeft:10}}>
-                                                  <div style={{display:"flex",gap:6,fontSize:12,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--text)"}}>Restore</b> — up to 100 hit points, divided as you choose among creatures in the cube</span></div>
-                                                  <div style={{display:"flex",gap:6,fontSize:12,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--text)"}}>Repair</b> — instantly repairs any damaged objects entirely inside the cube</span></div>
-                                                  <div style={{display:"flex",gap:6,fontSize:12,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--text)"}}>End spells</b> — every spell of 6th level or lower on creatures and objects of your choice in the cube</span></div>
+                                                  <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>Restore</b> — up to 100 hit points, divided as you choose among creatures in the cube</span></div>
+                                                  <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>Repair</b> — instantly repairs any damaged objects entirely inside the cube</span></div>
+                                                  <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>End spells</b> — every spell of 6th level or lower on creatures and objects of your choice in the cube</span></div>
                                                 </div>
                                                 <div style={{marginTop:6}}><Body>After using it you need a long rest, unless you spend 7 sorcery points.</Body></div>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
