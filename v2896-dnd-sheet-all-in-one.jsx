@@ -4437,7 +4437,7 @@ function ThemeWheel({c,label,onPick,onBright,full}){
     </div>
   );
 }
-function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
+function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved}){
   const th=theme||{...THEME_DEFAULT,on:false};
   const dark=darkMode;const editKey="l";
   const upd=fn=>setTheme(prev=>{const b=prev||THEME_DEFAULT;return{...b,on:true,...fn(b)};});
@@ -4454,6 +4454,9 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
       <input className="theme-bright" type="range" min="0" max={max} value={val} onChange={e=>{const v=Number(e.target.value);upd(()=>({[key]:v}));}} style={{"--track":track}}/>
     </label>);
   const mid=themeMix(a1,themeEff(th,dark)[1],0.5);
+  const isSel=p=>th.on&&themeHex(th.l1)===p.c1&&themeHex(th.l2)===p.c2&&th.grad===p.grad&&th.tint===p.tint&&th.ctint===p.ctint;
+  const selIdx=saved.findIndex(isSel);
+  const saveCurrent=()=>{if(!th.on)return;const p={id:Date.now(),c1:themeHex(th.l1),c2:themeHex(th.l2),grad:th.grad,tint:th.tint,ctint:th.ctint};setSaved(a=>a.some(x=>x.c1===p.c1&&x.c2===p.c2&&x.grad===p.grad&&x.tint===p.tint&&x.ctint===p.ctint)?a:[...a,p].slice(-8));};
   return (
     <div style={{position:"absolute",left:0,top:30,width:352,maxWidth:"calc(100vw - 16px)",boxSizing:"border-box",padding:14,borderRadius:14,background:"var(--card)",border:"1px solid var(--border)",boxShadow:"0 14px 40px rgba(15,23,42,.28)",zIndex:1000,display:"flex",flexDirection:"column",gap:12,color:"var(--text)",maxHeight:"calc(100dvh - 44px)",overflowY:"auto",fontSize:12}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
@@ -4490,7 +4493,12 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose}){
           {THEME_PRESETS.map(p=>{const sel=themeHex(e1)===p[1]&&themeHex(e2)===p[2];return(
             <button key={p[0]} aria-label={p[0]} title={p[0]} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
               style={{width:44,height:44,borderRadius:"50%",border:"2px solid "+(sel?"var(--text)":"transparent"),background:"linear-gradient(135deg,"+p[1]+","+p[2]+")",padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>);})}
+          {saved.map((p,i)=>(
+            <button key={p.id} aria-label={"My preset "+(i+1)} title={"My preset "+(i+1)} onClick={()=>upd(()=>({l1:themeHsv(p.c1),l2:themeHsv(p.c2),grad:p.grad,tint:p.tint,ctint:p.ctint}))}
+              style={{width:44,height:44,borderRadius:"50%",border:"2px "+(isSel(p)?"solid var(--text)":"dashed var(--border)"),background:p.grad?"linear-gradient(135deg,"+p.c1+","+p.c2+")":p.c1,padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>))}
+          <button onClick={saveCurrent} aria-label="Save current colors as a preset" title="Save current colors as a preset" style={{width:44,height:44,borderRadius:"50%",border:"2px dashed var(--border)",background:"transparent",color:"var(--muted)",fontSize:22,lineHeight:1,cursor:th.on?"pointer":"default",opacity:th.on?1:0.4,padding:0}}>+</button>
         </div>
+        {selIdx>=0&&<button onClick={()=>setSaved(a=>a.filter((_,i)=>i!==selIdx))} style={{alignSelf:"flex-start",minHeight:32,padding:"0 4px",border:0,background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer",textDecoration:"underline"}}>Delete this saved preset</button>}
       </div>
     </div>
   );
@@ -5192,6 +5200,8 @@ function App() {
  const [darkMode, setDarkMode] = useState(()=>{try{return localStorage.getItem("dndDarkMode")==="true";}catch(e){return false;}});
  const [theme, setTheme] = useState(()=>{try{const t=JSON.parse(localStorage.getItem("dnd5e_theme")||"null");return t&&typeof t==="object"&&t.l1&&t.l2?t:null;}catch(e){return null;}});
  const [themeOpen, setThemeOpen] = useState(false);
+ const [themeSaved, setThemeSaved] = useState(()=>{try{const a=JSON.parse(localStorage.getItem("dnd5e_theme_presets")||"[]");return Array.isArray(a)?a.filter(p=>p&&p.c1&&p.c2):[];}catch(e){return [];}});
+ React.useEffect(()=>{try{localStorage.setItem("dnd5e_theme_presets",JSON.stringify(themeSaved));}catch(e){}},[themeSaved]);
  React.useEffect(()=>{try{if(theme)localStorage.setItem("dnd5e_theme",JSON.stringify(theme));else localStorage.removeItem("dnd5e_theme");}catch(e){}},[theme]);
  const [openActionSections, setOpenActionSections] = useState({actionUsed:false,bonusActionUsed:false,reactionUsed:false});
   const [actionPickerOpen, setActionPickerOpen] = useState(null);
@@ -6601,7 +6611,7 @@ function App() {
           <button onClick={()=>setThemeOpen(o=>!o)} aria-label="Sheet colors" aria-expanded={themeOpen} title="Sheet colors" style={{display:"flex",alignItems:"center",gap:5,height:20,padding:"0 8px 0 3px",borderRadius:10,border:"1px solid var(--border)",background:"transparent",color:"var(--subtle)",fontSize:10,fontWeight:600,cursor:"pointer"}}>
             <span style={{display:"block",width:14,height:14,borderRadius:"50%",background:"linear-gradient(135deg,var(--accent),var(--accent2,#06b6d4))",boxShadow:"inset 0 0 0 1px rgba(255,255,255,.5)"}}/>Colors
           </button>
-          {themeOpen&&<ThemePicker theme={theme} setTheme={setTheme} darkMode={darkMode} setDarkMode={setDarkMode} onClose={()=>setThemeOpen(false)}/>}
+          {themeOpen&&<ThemePicker theme={theme} setTheme={setTheme} darkMode={darkMode} setDarkMode={setDarkMode} onClose={()=>setThemeOpen(false)} saved={themeSaved} setSaved={setThemeSaved}/>}
         </div>
         <div style={{display:"flex",alignItems:"center",gap:2}} title="Text size">
           <button onClick={()=>setFontScale(fontScale-0.1)} disabled={fontScale<=0.7} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:4,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",cursor:fontScale<=0.7?"default":"pointer",fontFamily:"inherit",opacity:fontScale<=0.7?0.4:1}}>A−</button>
