@@ -21056,9 +21056,12 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               <div key="abr" style={{display:"flex",flexDirection:"column",gap:4,marginBottom:4}}>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
-                                                  <span style={sorcLbl}>Aberrant Origin (d6)</span>
-                                                  <span style={{display:"flex",alignItems:"center",gap:8}}>
-                                                    {abrPick>0&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("sorcAberrantOrigin",0);}}>↺ Clear</button>}
+                                                  <span style={sorcLbl}>Aberrant Origin</span>
+                                                  <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                                                    <select className="ri-sel" value={abrPick||""} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("sorcAberrantOrigin",+e.target.value||0);}} style={{borderColor:"rgba(99,102,241,0.4)",color:abrPick?"var(--accent)":"var(--subtle)"}}>
+                                                      <option value="">-- Choose an origin --</option>
+                                                      {ABR.map((t,i)=><option key={i} value={i+1}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
+                                                    </select>
                                                     <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setSkillRoll({label:"Aberrant Origin",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:6,r1:r,r2:null,isAdv:false,isDis:false});setF("sorcAberrantOrigin",r);}}>🎲 Roll d6</button>
                                                   </span>
                                                 </div>
