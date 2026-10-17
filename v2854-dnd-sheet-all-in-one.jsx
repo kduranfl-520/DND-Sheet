@@ -5578,7 +5578,7 @@ function App() {
           <div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{fontSize:11,color:"var(--muted)"}}>Slot → points</span>
             <select style={sel} value={selA} disabled={toPts.length===0} onChange={e=>setF("sorcFlexA",Number(e.target.value))}>
-              {toPts.length===0?<option value={1}>No slots left</option>:toPts.map(l=><option key={l} value={l}>Level {l} slot</option>)}
+              {toPts.length===0?<option value={1}>No slots left</option>:toPts.map(l=><option key={l} value={l}>Level {l} slot ({sorcSlotsLeft(l)}/{slots[l-1]||0} left)</option>)}
             </select>
           </div>
           <button style={canA?sorcBtn:sorcOffBtn} disabled={!canA} onClick={e=>{e.stopPropagation();if(!canA)return;setCharSaving(p=>{const sus=Array.from({length:9},(_,k)=>(Array.isArray(p.spellSlotsUsed)?p.spellSlotsUsed:[])[k]||0);sus[selA-1]+=1;return {...p,spellSlotsUsed:sus,sorcSPUsed:Math.max(0,(p.sorcSPUsed||0)-selA)};});}}>Convert (+{Math.min(selA,sorcSPUsed)} SP)</button>
@@ -5587,7 +5587,7 @@ function App() {
           <div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{fontSize:11,color:"var(--muted)"}}>Points → slot</span>
             <select style={sel} value={selB} onChange={e=>setF("sorcFlexB",Number(e.target.value))}>
-              {[1,2,3,4,5].map(l=><option key={l} value={l}>Level {l} slot ({SORC_SLOT_COST[l]} SP)</option>)}
+              {[1,2,3,4,5].map(l=><option key={l} value={l}>Level {l} slot ({SORC_SLOT_COST[l]} SP{(Array.isArray(char.sorcCreatedSlots)&&char.sorcCreatedSlots[l-1]>0)?", "+char.sorcCreatedSlots[l-1]+" created":""})</option>)}
             </select>
           </div>
           <button style={canB?sorcBtn:sorcOffBtn} disabled={!canB} onClick={e=>{e.stopPropagation();if(!canB)return;setCharSaving(p=>{const cs=Array.from({length:9},(_,k)=>(Array.isArray(p.sorcCreatedSlots)?p.sorcCreatedSlots:[])[k]||0);cs[selB-1]+=1;return {...p,sorcCreatedSlots:cs,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+costB)};});}}>Create slot (−{costB} SP)</button>
