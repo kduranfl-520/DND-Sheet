@@ -12181,6 +12181,31 @@ function App() {
                                           const rollTailAC=()=>{const roll=Math.floor(Math.random()*8)+1;const baseAC=char.ac||10;const newAC=baseAC+roll;setSkillRoll({label:"Tail Reaction — AC +"+roll+" = "+newAC,roll,bonus:baseAC,total:newAC,isCrit:false,isFail:false,sides:8,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:"AC bonus (base "+baseAC+" + "+roll+")",diceSides:8,baseDiceCount:1,saveDC:null,saveType:null,spiritShield:false});};
                                           return(
                                             <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:4}}>
+                                              {(()=>{
+                                                const BO=[
+                                                  "One of your parents is a lycanthrope, and you've inherited some of their curse.",
+                                                  "You are descended from an archdruid and inherited the ability to partly change shape.",
+                                                  "A fey spirit gifted you with the ability to adopt different bestial aspects.",
+                                                  "An ancient animal spirit dwells within you, allowing you to walk this path."
+                                                ];
+                                                const bp=char.beastOrigin||0;
+                                                const bBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid var(--border)",background:"var(--input)",color:"var(--text)",cursor:"pointer",fontFamily:"inherit"};
+                                                return(
+                                                  <div style={{display:"flex",flexDirection:"column",gap:4,marginBottom:4}}>
+                                                    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                                      <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Origin of the Beast</span>
+                                                      <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                                                        <select className="ri-sel" value={bp||""} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("beastOrigin",+e.target.value||0);}} style={{borderColor:"rgba(99,102,241,0.4)",color:bp?"var(--accent)":"var(--subtle)"}}>
+                                                          <option value="">-- Choose an origin --</option>
+                                                          {BO.map((t,i)=><option key={i} value={i+1}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
+                                                        </select>
+                                                        <button style={bBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*4)+1;setSkillRoll({label:"Origin of the Beast",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:4,r1:r,r2:null,isAdv:false,isDis:false});setF("beastOrigin",r);}}>🎲 Roll d4</button>
+                                                      </span>
+                                                    </div>
+                                                    {bp>0&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{bp}</span> — {BO[bp-1]}</div>}
+                                                  </div>
+                                                );
+                                              })()}
                                               {lvl>=3&&(
                                                 <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Form of the Beast (3rd)</div>
