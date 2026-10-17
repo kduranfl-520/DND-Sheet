@@ -21176,11 +21176,20 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               <FC key="wi" label="Warping Implosion (18th)" minLvl={18}>
                                                 <Body>As an action, teleport to an unoccupied space you can see within 120 feet. Right after you vanish, each creature within 30 feet of the space you left makes a Strength save against your spell save DC. On a failure it takes 3d10 force damage and is pulled straight toward that space, stopping in the nearest unoccupied space. On a success it takes half damage and isn't pulled. You can use this once per long rest, or again by spending 5 sorcery points.</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-                                                  {rollBtn("Warping Implosion","force",10,3,0,"🎲 3d10 force")}
+                                                  {(()=>{
+                                                    const half=char.saveResults?.sorcImplosion==="success";
+                                                    const col=dmgTypeColor("force");
+                                                    return <>
+                                                      {half&&<span style={{fontSize:10,color:"var(--green)",fontWeight:700}}>Save succeeded — half damage</span>}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col.border,background:col.bg,color:col.fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                        onClick={e=>{e.stopPropagation();const rolls=Array.from({length:3},()=>Math.floor(Math.random()*10)+1);const full=rolls.reduce((a,r)=>a+r,0);const total=half?Math.floor(full/2):full;setSkillRoll({label:"Warping Implosion (3d10 force"+(half?" — half, save succeeded: "+full+"→"+total:"")+")",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:10,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"force",dmgDice:"3d10",diceSides:10,baseDiceCount:3});}}>{half?"🎲 3d10 force (half)":"🎲 3d10 force"}</button>
+                                                    </>;
+                                                  })()}
                                                 </div>
                                                 {saveRow("sorcImplosion","STR",impDC,"Half damage, not pulled.","Full damage and pulled toward the vacated space.","STR save DC "+impDC)}
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   <span style={{fontSize:11,color:impUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{impUsed?"Used — recharges on a Long Rest, or spend 5 SP":"Ready — 1 free use per long rest"}</span>
+                                                  {sorcReadout}
                                                   {impUsed&&<button style={sorcSPLeft>=5?sorcBtn:sorcOffBtn} disabled={sorcSPLeft<5} onClick={e=>{e.stopPropagation();sorcSpend(5);}}>Use again (5 SP)</button>}
                                                   <button style={impUsed?linkBtn:neutralBtn} onClick={e=>{e.stopPropagation();setF("sorcImplosionUsed",!impUsed);}}>{impUsed?"↺ Reset":"Mark Used"}</button>
                                                 </div>
