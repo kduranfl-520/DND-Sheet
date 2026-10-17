@@ -5607,11 +5607,7 @@ function App() {
     {n:"Transmuted Spell",cost:1,d:()=>"Change a spell's damage type from acid, cold, fire, lightning, poison or thunder to another type on that list."},
     {n:"Twinned Spell",cost:"var",d:()=>"When a spell targets only one creature and can't target more at higher levels, spend points equal to the spell's level (1 for a cantrip) to target a second creature in range."},
   ];
-  const sorcMetaUse = ()=>{
-    if(sorcChosenMeta.length===0) return <div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic",marginTop:6}}>Pick your Metamagic options on the Features tab.</div>;
-    return(
-      <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:6}} onClick={e=>e.stopPropagation()}>
-        {sorcChosenMeta.map(nm=>{
+  const sorcMetaBox = (nm)=>{
           const m=SORC_META.find(x=>x.n===nm); if(!m) return null;
           const twin=m.cost==="var";
           const tl=Math.min(9,Math.max(0,char.sorcTwinLvl||0));
@@ -5632,7 +5628,12 @@ function App() {
               </div>
             </div>
           );
-        })}
+  };
+  const sorcMetaUse = ()=>{
+    if(sorcChosenMeta.length===0) return <div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic",marginTop:6}}>Pick your Metamagic options on the Features tab.</div>;
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:6}} onClick={e=>e.stopPropagation()}>
+        {sorcChosenMeta.map(nm=><React.Fragment key={nm}>{sorcMetaBox(nm)}</React.Fragment>)}
         <div style={{display:"flex",justifyContent:"flex-end"}}>{sorcReadout}</div>
       </div>
     );
@@ -5644,11 +5645,15 @@ function App() {
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
         {cur.map((c,i)=>(
-          <select key={i} className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(99,102,241,0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
-            <option value="">-- Choose Metamagic option {i+1} --</option>
-            {SORC_META.map(m=><option key={m.n} value={m.n} disabled={cur.includes(m.n)&&m.n!==c}>{m.n} ({m.cost==="var"?"1 SP per spell level":m.cost+" SP"})</option>)}
-          </select>
+          <React.Fragment key={i}>
+            <select className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(99,102,241,0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
+              <option value="">-- Choose Metamagic option {i+1} --</option>
+              {SORC_META.map(m=><option key={m.n} value={m.n} disabled={cur.includes(m.n)&&m.n!==c}>{m.n} ({m.cost==="var"?"1 SP per spell level":m.cost+" SP"})</option>)}
+            </select>
+            {c&&sorcMetaBox(c)}
+          </React.Fragment>
         ))}
+        {sorcChosenMeta.length>0&&<div style={{display:"flex",justifyContent:"flex-end"}}>{sorcReadout}</div>}
       </div>
     );
   };
@@ -10525,7 +10530,6 @@ function App() {
                                   {feat==="Metamagic"&&char.charClass==="Sorcerer"&&(
                                     <div style={{marginTop:4}}>
                                       {sorcMetaPick()}
-                                      {sorcChosenMeta.length>0&&sorcMetaUse()}
                                       {sorcNote("You can use only one Metamagic option on a spell, except Empowered Spell and Seeking Spell, which can be added to another option.")}
                                     </div>
                                   )}
