@@ -21105,7 +21105,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const telOn=!!char.sorcTelepathyOn;
                                             const miles=Math.max(1,chaMod);
                                             const revOn=!!char.sorcRevOn;
-                                            const REV=[["Sight","See invisible creatures within 60 ft that aren't behind total cover."],["Flight","Flying speed equal to your walking speed, and you can hover."],["Swimming","Swimming speed of twice your walking speed, and you can breathe underwater."],["Pliable Body","Pass through 1-inch spaces without squeezing; spend 5 ft of movement to escape nonmagical restraints or a grapple."]];
+                                            const REV=[["Sight","See invisible creatures within 60 ft that aren't behind total cover.","Your eyes turn black or become writhing sensory tendrils."],["Flight","Flying speed equal to your walking speed, and you can hover.","While you fly, your skin glistens with mucus or shines with an otherworldly light."],["Swimming","Swimming speed of twice your walking speed, and you can breathe underwater.","Gills grow from your neck or fan out behind your ears, your fingers become webbed, or writhing cilia extend through your clothing."],["Pliable Body","Pass through 1-inch spaces without squeezing; spend 5 ft of movement to escape nonmagical restraints or a grapple.","Your body and everything you wear or carry becomes slimy and pliable."]];
                                             const revPick=char.sorcRevPick||[];
                                             const impUsed=!!char.sorcImplosionUsed;
                                             const impDC=spellDCs;
@@ -21153,12 +21153,14 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               <FC key="rif" label="Revelation in Flesh (14th)" minLvl={14} headerBadge={revOn?<DurationBadge id="sorc-revelation-duration" short="10 min" full="Duration: 10 minutes." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>As a bonus action, spend 1 or more sorcery points to transform your body for 10 minutes. For each point spent, choose one benefit below; they last until the transformation ends.</Body>
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}}>
-                                                  {REV.map(([n,d])=>{
+                                                  {REV.map(([n,d,tf])=>{
                                                     const on=revOn?(char.sorcRevOpts||[]).includes(n):revPick.includes(n);
                                                     return(
                                                       <label key={n} style={{display:"flex",alignItems:"flex-start",gap:8,fontSize:12,color:"var(--text)",cursor:revOn?"default":"pointer"}} onClick={e=>e.stopPropagation()}>
                                                         <input type="checkbox" checked={on} disabled={revOn} onChange={()=>setF("sorcRevPick",on?revPick.filter(x=>x!==n):[...revPick,n])} style={{marginTop:2}}/>
-                                                        <span><b>{n}.</b> {d}</span>
+                                                        <span><b>{n}.</b> {d}
+                                                          <span style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",marginTop:2}}><span>✨</span><span>{tf}</span></span>
+                                                        </span>
                                                       </label>
                                                     );
                                                   })}
