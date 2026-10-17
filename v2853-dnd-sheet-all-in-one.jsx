@@ -25439,7 +25439,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const pl=p.toLowerCase();
  const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");
  const wTags=(entry?.tags||"").toLowerCase();
- return pl.includes("simple")&&wTags.includes("simple")||pl.includes("martial")&&wTags.includes("martial")||pl.includes(name.toLowerCase());
+ return pl.includes("simple")&&wTags.includes("simple")||pl.includes("martial")&&wTags.includes("martial")||pl.includes(name.toLowerCase())||(name.includes(",")&&pl.includes(name.toLowerCase().split(",").reverse().map(x=>x.trim()).join(" ")));
                       }) || racialWpnProfs.some(rp=>rp===name.toLowerCase()||name.toLowerCase().includes(rp)||rp.includes(name.toLowerCase()))
                       || ((hasValorMartial||hasClericDomainMartial)&&(()=>{const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");return (entry?.tags||"").toLowerCase().includes("martial");})())
                       || (hasSwordsScimitar&&name.toLowerCase()==="scimitar");
