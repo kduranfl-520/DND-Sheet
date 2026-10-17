@@ -20966,6 +20966,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                   <option value="">-- Choose an Affinity --</option>
                                                   {Object.keys(DIVINE_SOUL_AFFINITY).map(k=><option key={k} value={k}>{k} — {DIVINE_SOUL_AFFINITY[k]}</option>)}
                                                 </select>
+                                                {affSp&&SPELL_DATA[affSp]&&<div style={{marginTop:6}} onClick={e=>e.stopPropagation()}><SpellSaveBox name={affSp} sd={SPELL_DATA[affSp]} dc={8+pb+abilityMod(char.abilities?.CHA||10)} saveKey={"divineAffinity_"+affSp} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                               </FC>,
                                               <FC key="fg" label="Favored by the Gods (1st)" minLvl={1}>
                                                 <Body>When you fail a saving throw or miss with an attack roll, roll 2d4 and add it to the total. That can turn the failure into a success. Once used, you need a short or long rest to use it again.</Body>
