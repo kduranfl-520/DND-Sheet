@@ -9064,7 +9064,7 @@ function App() {
                                   })()}
                                   {feat==="Sorcerous Versatility"&&char.charClass==="Sorcerer"&&(()=>{
                                     const clsLvl=char.multiClassLevel>0?char.classLevel:char.level||1;
-                                    const extraLevels=[{l:8,ord:"8th"},{l:12,ord:"12th"},{l:16,ord:"16th"},{l:20,ord:"20th"}].filter(x=>clsLvl>=x.l);
+                                    const extraLevels=[{l:8,ord:"8th"},{l:12,ord:"12th"},{l:16,ord:"16th"},{l:19,ord:"19th"}].filter(x=>clsLvl>=x.l);
                                     return extraLevels.map(x=>(
                                       <span key={x.l} style={{fontSize:9,fontWeight:700,letterSpacing:".06em",color:"var(--accent)",background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.2)",borderRadius:4,padding:"1px 5px",textTransform:"uppercase",flexShrink:0}}>{x.ord}</span>
                                     ));
