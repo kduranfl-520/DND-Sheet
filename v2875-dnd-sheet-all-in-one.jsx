@@ -7689,7 +7689,9 @@ function App() {
  const sorcAffType = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=6&&char.sorcDracResistOn)
                   ? ({Black:"Acid",Blue:"Lightning",Brass:"Fire",Bronze:"Lightning",Copper:"Acid",Gold:"Fire",Green:"Poison",Red:"Fire",Silver:"Cold",White:"Cold"}[char.sorcDragon]||null)
                   : null;
+ const sorcPsychicDef = char.charClass==="Sorcerer"&&char.sorcOrigin==="Aberrant Mind (Sorcerer)"&&sorcLvl>=6&&!(char.resistances||[]).find(x=>String(x).toLowerCase()==="psychic");
  const allEntries = [
+                  ...(sorcPsychicDef?[{type:"Resistance",damage:"Psychic",racial:false,auto:true,label:"Psychic Defenses"}]:[]),
                   ...(sorcAffType&&!(char.resistances||[]).find(x=>x.toLowerCase()===sorcAffType.toLowerCase())?[{type:"Resistance",damage:sorcAffType,racial:false,auto:true,label:"Elemental Affinity (1 hr)"}]:[]),
                   ...(char.resistances||[]).map(d=>({type:"Resistance",damage:d,racial:false})),
                   ...(char.immunities||[]).map(d=>({type:"Immunity",damage:d,racial:false})),
@@ -7771,7 +7773,7 @@ function App() {
                               {damage}
                               {racial?<span className="ri-tag-type" style={{marginLeft:2,opacity:0.7}}>RACE</span>
                               :rage?<span className="ri-tag-type" style={{marginLeft:2,opacity:0.9}}>🔥</span>
-                              :auto?<span className="ri-tag-type" style={{marginLeft:2,opacity:0.9}}>{label==="Infernal Constitution"?"😈":label==="Avatar of Battle"?"⚔️":label==="Soul of the Forge"||label==="Saint of Forge and Fire"?"🔥":label==="Full of Stars"?"✨":"⛈"}</span>
+                              :auto?<span className="ri-tag-type" style={{marginLeft:2,opacity:0.9}}>{label==="Infernal Constitution"?"😈":label==="Avatar of Battle"?"⚔️":label==="Soul of the Forge"||label==="Saint of Forge and Fire"?"🔥":label==="Full of Stars"?"✨":label==="Psychic Defenses"?"🧠":(label||"").startsWith("Elemental Affinity")?"🐉":"⛈"}</span>
                               :<button className="ri-tag-x" onClick={ev=>{ev.stopPropagation();removeEntry(type,damage);}}>x</button>}
                               {wearingInfo===riKey&&(<><div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/><SmartPopup desc={"Source: "+riSource}/></>)}
                             </span>
