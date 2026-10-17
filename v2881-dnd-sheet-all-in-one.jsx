@@ -21201,10 +21201,19 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               <FC key="cm" label="Clockwork Magic (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another abjuration or transmutation spell from the sorcerer, warlock or wizard list.</Body>
                                                 {sorcSpellRows(cs,lvl)}
-                                                <Body><span style={{display:"block",marginTop:8}}>When you cast a sorcerer spell, you can pick or roll how your tie to order shows itself.</span></Body>
-                                                <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-                                                  {manif!=null&&manif!==""&&<span style={{fontSize:12,color:"var(--text)"}}>{Number(manif)+1}. {CLOCKWORK_MANIFEST[Number(manif)]}</span>}
-                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();setF("sorcManif",Math.floor(Math.random()*6));}}>🎲 d6 manifestation</button>
+                                                <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8}}>
+                                                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                                    <span style={sorcLbl}>Manifestations of Order</span>
+                                                    <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                                                      <select className="ri-sel" value={manif==null?"":String(manif)} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("sorcManif",e.target.value===""?"":Number(e.target.value));}} style={{borderColor:"rgba(99,102,241,0.4)",color:(manif!=null&&manif!=="")?"var(--accent)":"var(--subtle)"}}>
+                                                        <option value="">-- Choose a manifestation --</option>
+                                                        {CLOCKWORK_MANIFEST.map((t,i)=><option key={i} value={i}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
+                                                      </select>
+                                                      <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setSkillRoll({label:"Manifestation of Order",roll:r+1,bonus:0,total:r+1,isCrit:false,isFail:false,sides:6,r1:r+1,r2:null,isAdv:false,isDis:false});setF("sorcManif",r);}}>🎲 Roll d6</button>
+                                                    </span>
+                                                  </div>
+                                                  <div style={{fontSize:11,color:"var(--muted)"}}>When you cast a sorcerer spell, choose or roll how your tie to order shows itself.</div>
+                                                  {manif!=null&&manif!==""&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{Number(manif)+1}</span> — {CLOCKWORK_MANIFEST[Number(manif)]}</div>}
                                                 </div>
                                               </FC>,
                                               <FC key="rb" label="Restore Balance (1st)" minLvl={1}>
