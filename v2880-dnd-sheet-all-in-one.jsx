@@ -33757,15 +33757,15 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                         {skillRoll.dmgBonus?<> + <b style={{color:"#60a5fa"}}>{skillRoll.dmgBonus}</b> bonus</>:null}
                         {" · "}{skillRoll.dmgType}
                       </div>
-                      {typeof skillRoll.saveHalf==="number"&&(
+                      {(typeof skillRoll.saveHalf==="number"||(skillRoll.noHalf&&skillRoll.saveDC))&&(
                         <div style={{display:"flex",justifyContent:"center",gap:10,marginTop:6}}>
                           <div style={{background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.3)",borderRadius:6,padding:"3px 10px"}}>
                             <div style={{fontSize:10,color:"var(--red)",fontWeight:700,textTransform:"uppercase",letterSpacing:".04em"}}>Fail</div>
                             <div style={{fontFamily:"'DM Mono',monospace",fontSize:16,fontWeight:800,color:"var(--red)"}}>{skillRoll.dmgTotal}</div>
                           </div>
                           <div style={{background:"rgba(34,197,94,0.1)",border:"1px solid rgba(34,197,94,0.3)",borderRadius:6,padding:"3px 10px"}}>
-                            <div style={{fontSize:10,color:"var(--green)",fontWeight:700,textTransform:"uppercase",letterSpacing:".04em"}}>Success (half)</div>
-                            <div style={{fontFamily:"'DM Mono',monospace",fontSize:16,fontWeight:800,color:"var(--green)"}}>{skillRoll.saveHalf}</div>
+                            <div style={{fontSize:10,color:"var(--green)",fontWeight:700,textTransform:"uppercase",letterSpacing:".04em"}}>{typeof skillRoll.saveHalf==="number"?"Success (half)":"Success (none)"}</div>
+                            <div style={{fontFamily:"'DM Mono',monospace",fontSize:16,fontWeight:800,color:"var(--green)"}}>{typeof skillRoll.saveHalf==="number"?skillRoll.saveHalf:0}</div>
                           </div>
                         </div>
                       )}
@@ -33775,7 +33775,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                         <div style={{fontSize:12,color:"var(--text)"}}>Reduce ally damage by <b style={{color:"var(--accent)"}}>{skillRoll.dmgTotal}</b></div>
                         {(skillRoll.spiritShieldLvl||0)>=14&&<div style={{fontSize:12,color:"var(--red)",fontWeight:600}}>Vengeful Ancestors: attacker takes <b>{skillRoll.dmgTotal}</b> force damage</div>}
                       </div>
-                    ):(skillRoll.saveDC&&typeof skillRoll.saveHalf!=="number")?(
+                    ):(skillRoll.saveDC&&typeof skillRoll.saveHalf!=="number"&&!skillRoll.noHalf)?(
                       <div style={{background:"var(--input)",borderRadius:8,padding:"8px 10px",display:"flex",flexDirection:"column",gap:3}}>
                         <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>{skillRoll.saveType} Save DC {skillRoll.saveDC}</div>
                         <div style={{fontSize:12,color:"var(--text)"}}>Fail: <b style={{color:"#60a5fa"}}>{skillRoll.dmgTotal}</b> {skillRoll.dmgType} damage</div>
