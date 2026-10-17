@@ -5173,14 +5173,17 @@ function App() {
      r={total:cnt*sides, breakdown:Array(cnt).fill(sides).join("+")+" (Supreme Healing — maximized)"};
    }
  }
- const modBonusBase=(sd.cantripMod?(spellMod||0):potentCantripBonus(sd))+discipleOfLifeBonus(sd,sl);
+ const eaBonus=elementalAffinityBonus(sd);
+ const modBonusBase0=(sd.cantripMod?(spellMod||0):potentCantripBonus(sd))+discipleOfLifeBonus(sd,sl);
+ const modBonusBase=modBonusBase0+eaBonus;
  const wfSpiritActive = char.charClass==="Druid" && char.druidCircle==="Circle of Wildfire (Druid)" && char.druidWildfireSpiritActive;
  const enhancedBondEligible = wfSpiritActive && (sd.dmgType==="fire" || sd.atkType==="heal");
  const enhancedBondRoll = enhancedBondEligible ? Math.floor(Math.random()*8)+1 : 0;
  const modBonus=modBonusBase+enhancedBondRoll;
  const total=r.total+modBonus;
  const bonusLabels=[];
- if(modBonusBase) bonusLabels.push(modBonusBase+(sd.cantripMod?" (mod)":discipleOfLifeBonus(sd,sl)?" (Disciple of Life)":" (Potent Spellcasting)"));
+ if(modBonusBase0) bonusLabels.push(modBonusBase0+(sd.cantripMod?" (mod)":discipleOfLifeBonus(sd,sl)?" (Disciple of Life)":" (Potent Spellcasting)"));
+ if(eaBonus) bonusLabels.push(eaBonus+" (Elemental Affinity)");
  if(enhancedBondRoll) bonusLabels.push("+"+enhancedBondRoll+" (Enhanced Bond)");
  const breakdown=bonusLabels.length?r.breakdown+" + "+bonusLabels.join(" + "):r.breakdown;
  setSpellRoll(p=>({...p,[key]:{total,breakdown,dice,slot:sl}}));
@@ -5847,7 +5850,14 @@ function App() {
  const hasPotentSpellcasting = char.charClass==="Cleric" && potentSpellcastingDomains.includes(char.divineDomain) && (char.multiClassLevel>0?char.classLevel:char.level||1)>=8;
  const potentWisMod = Math.floor(((char.abilities?.WIS||10)-10)/2);
  const potentCantripBonus = (sd) => (hasPotentSpellcasting && sd && sd.cantripDie && sd.dmg && sd.atkType!=="heal") ? potentWisMod : 0;
- const cantripDisplayBonus = (sd) => sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd);
+ // Elemental Affinity (Draconic Bloodline, 6th) — add CHA mod to a damage roll of a spell dealing the ancestor's damage type
+ const elementalAffinityBonus = (sd) => {
+   if(!(char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=6)) return 0;
+   const dt={Black:"acid",Blue:"lightning",Brass:"fire",Bronze:"lightning",Copper:"acid",Gold:"fire",Green:"poison",Red:"fire",Silver:"cold",White:"cold"}[char.sorcDragon];
+   if(!dt||!sd||!sd.dmg||sd.atkType==="heal") return 0;
+   return String(sd.dmgType||"").toLowerCase().includes(dt)?Math.max(0,abilityMod(eff.CHA||10)):0;
+ };
+ const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd);
  // Disciple of Life (Cleric: Life domain) — 1st-level-or-higher healing spells restore +2+slot level extra HP
  const discipleOfLifeBonus = (sd, slotLvl) => (char.charClass==="Cleric" && char.divineDomain==="Life Domain (Cleric)" && sd && sd.atkType==="heal" && slotLvl>=1) ? (2+slotLvl) : 0;
  // Blessed Healer (Cleric: Life domain, 6th level) — casting a 1st-level-or-higher healing spell on another creature also heals you for 2+slot level
@@ -7635,7 +7645,12 @@ function App() {
  );
  const hasHillRunePoison = hillRuneEquipped && !(char.resistances||[]).find(x=>x.toLowerCase()==="poison");
  const hillRuneActiveTypes = char.hillRuneBuffActive ? ["Bludgeoning (nonmagical)","Piercing (nonmagical)","Slashing (nonmagical)"].filter(d=>!(char.resistances||[]).find(x=>x.toLowerCase()===d.toLowerCase())) : [];
+ // Elemental Affinity (Draconic Bloodline, 6th) — 1 SP for resistance to the ancestor's damage type for 1 hour
+ const sorcAffType = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=6&&char.sorcDracResistOn)
+                  ? ({Black:"Acid",Blue:"Lightning",Brass:"Fire",Bronze:"Lightning",Copper:"Acid",Gold:"Fire",Green:"Poison",Red:"Fire",Silver:"Cold",White:"Cold"}[char.sorcDragon]||null)
+                  : null;
  const allEntries = [
+                  ...(sorcAffType&&!(char.resistances||[]).find(x=>x.toLowerCase()===sorcAffType.toLowerCase())?[{type:"Resistance",damage:sorcAffType,racial:false,auto:true,label:"Elemental Affinity (1 hr)"}]:[]),
                   ...(char.resistances||[]).map(d=>({type:"Resistance",damage:d,racial:false})),
                   ...(char.immunities||[]).map(d=>({type:"Immunity",damage:d,racial:false})),
                   ...(char.vulnerabilities||[]).map(d=>({type:"Vulnerability",damage:d,racial:false})),
@@ -20776,7 +20791,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="ea" label="Elemental Affinity (6th)" minLvl={6} headerBadge={resOn?<DurationBadge id="sorc-draconic-resist-duration" short="1 hr" full="Duration: 1 hour." total={1} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>When a spell you cast deals {dt||"your ancestor's"} damage, add your Charisma modifier to one damage roll of that spell. You can also spend 1 sorcery point to gain resistance to that damage type for 1 hour.</Body>
-                                                {dt&&flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{chaMod} to one {dt} damage roll</span>)}
+                                                {dt&&flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>+{chaMod} to one {dt} damage roll — added automatically to your {dt} spells</span>)}
                                                 {dt&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                     {sorcReadout}
