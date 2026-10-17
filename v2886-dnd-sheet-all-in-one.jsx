@@ -5113,7 +5113,9 @@ function App() {
  const [openPartyTreasure, setOpenPartyTreasure] = useState(true);
  const [openFaction, setOpenFaction] = useState(true);
  const [openDeity, setOpenDeity] = useState(true);
- const [openTraitSet, setOpenTraitSet] = useState(new Set());
+ // Open/closed Features-tab cards survive a reload (so a new sheet version keeps your open cards); switching class collapses them all
+ const [openTraitSet, setOpenTraitSet] = useState(()=>{try{const a=JSON.parse(localStorage.getItem("dnd5e_open_traits")||"[]");return new Set(Array.isArray(a)?a:[]);}catch(e){return new Set();}});
+ React.useEffect(()=>{try{localStorage.setItem("dnd5e_open_traits",JSON.stringify([...openTraitSet]));}catch(e){}},[openTraitSet]);
  const openTrait = (key) => openTraitSet.has(key);
  const setOpenTrait = (key) => setOpenTraitSet(prev => {
    const next = new Set(prev);
@@ -6409,6 +6411,7 @@ function App() {
   };
 
  const changeClass = nv => {
+ collapseAllTraits();
  const nc = CLASSES[nv] || null;
  const u = {charClass: nv, classSkills: [], spellsKnown: [], domainChoice: "", spellSlotsUsed: []};
  const effDex = char.abilities.DEX + (spc?.abilityBonus?.DEX||0) + (subBonus.DEX||0);
@@ -21202,16 +21205,14 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another abjuration or transmutation spell from the sorcerer, warlock or wizard list.</Body>
                                                 {sorcSpellRows(cs,lvl)}
                                                 <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:8}}>
+                                                  <span style={sorcLbl}>Manifestations of Order</span>
                                                   <div style={{fontSize:11,color:"var(--muted)"}}>When you cast a sorcerer spell, choose or roll how your tie to order shows itself.</div>
-                                                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
-                                                    <span style={sorcLbl}>Manifestations of Order</span>
-                                                    <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
-                                                      <select className="ri-sel" value={manif==null?"":String(manif)} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("sorcManif",e.target.value===""?"":Number(e.target.value));}} style={{borderColor:"rgba(99,102,241,0.4)",color:(manif!=null&&manif!=="")?"var(--accent)":"var(--subtle)"}}>
-                                                        <option value="">-- Choose a manifestation --</option>
-                                                        {CLOCKWORK_MANIFEST.map((t,i)=><option key={i} value={i}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
-                                                      </select>
-                                                      <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setF("sorcManif",r);}}>🎲 Roll d6</button>
-                                                    </span>
+                                                  <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+                                                    <select className="ri-sel" value={manif==null?"":String(manif)} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("sorcManif",e.target.value===""?"":Number(e.target.value));}} style={{borderColor:"rgba(99,102,241,0.4)",color:(manif!=null&&manif!=="")?"var(--accent)":"var(--subtle)"}}>
+                                                      <option value="">-- Choose a manifestation --</option>
+                                                      {CLOCKWORK_MANIFEST.map((t,i)=><option key={i} value={i}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
+                                                    </select>
+                                                    <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setF("sorcManif",r);}}>🎲 Roll d6</button>
                                                   </div>
                                                   {manif!=null&&manif!==""&&<div style={{background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{Number(manif)+1}</span> — {CLOCKWORK_MANIFEST[Number(manif)]}</div>}
                                                 </div>
