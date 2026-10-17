@@ -21209,7 +21209,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                         <option value="">-- Choose a manifestation --</option>
                                                         {CLOCKWORK_MANIFEST.map((t,i)=><option key={i} value={i}>{i+1} — {t.split(/[.,]/)[0].slice(0,48)}</option>)}
                                                       </select>
-                                                      <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setSkillRoll({label:"Manifestation of Order",roll:r+1,bonus:0,total:r+1,isCrit:false,isFail:false,sides:6,r1:r+1,r2:null,isAdv:false,isDis:false});setF("sorcManif",r);}}>🎲 Roll d6</button>
+                                                      <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6);setF("sorcManif",r);}}>🎲 Roll d6</button>
                                                     </span>
                                                   </div>
                                                   <div style={{fontSize:11,color:"var(--muted)"}}>When you cast a sorcerer spell, choose or roll how your tie to order shows itself.</div>
