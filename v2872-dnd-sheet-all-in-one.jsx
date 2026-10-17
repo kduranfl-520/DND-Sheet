@@ -5551,12 +5551,18 @@ function App() {
   const sorcLink = {fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
   const sorcLbl = {fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"};
   // Always-known spell list, same look as the Druid "Circle Spells" rows: level label + pills, locked tiers faded
-  const sorcSpellRows = (rows,cl)=>(
+  const sorcSpellRows = (rows,cl,cast)=>(
     <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}}>
       {rows.map(([t,sp])=>{const on=cl>=t;return(
         <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
           <span style={{fontSize:10,fontWeight:700,color:on?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
-          {sp.map(x=><span key={x} className="ft-note-tag" style={{fontSize:10,opacity:on?1:0.4,background:on?"rgba(99,102,241,0.1)":"var(--input)",borderColor:on?"rgba(99,102,241,0.3)":"var(--border)",color:on?"var(--accent)":"var(--subtle)"}}>{x}</span>)}
+          {sp.map(x=>{
+            const pill=<span className="ft-note-tag" style={{fontSize:10,opacity:on?1:0.4,background:on?"rgba(99,102,241,0.1)":"var(--input)",borderColor:on?"rgba(99,102,241,0.3)":"var(--border)",color:on?"var(--accent)":"var(--subtle)"}}>{x}</span>;
+            const sl=cast&&on?cast(x,t):0;
+            if(!sl) return <React.Fragment key={x}>{pill}</React.Fragment>;
+            const ok=sorcSPLeft>=sl;
+            return <span key={x} style={{display:"inline-flex",alignItems:"center",gap:3}}>{pill}<button style={{...(ok?sorcBtn:sorcOffBtn),fontSize:9,padding:"1px 6px"}} disabled={!ok} onClick={e=>{e.stopPropagation();sorcSpend(sl);}}>{sl} SP</button></span>;
+          })}
         </div>
       );})}
     </div>
@@ -21106,7 +21112,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </div>,
                                               <FC key="ps" label="Psionic Spells (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another divination or enchantment spell from the sorcerer, warlock or wizard list.</Body>
-                                                {sorcSpellRows(psi,lvl)}
+                                                {sorcSpellRows(psi,lvl,lvl>=6?(nm,t)=>nm==="Mind Sliver"?0:(t+1)/2:null)}
+                                                {lvl>=6&&sorcNote("Psionic Sorcery (6th): cast a psionic spell by paying the SP shown instead of a slot — no verbal or somatic components, and no material components unless they're consumed.")}
                                               </FC>,
                                               <FC key="tsp" label="Telepathic Speech (1st)" minLvl={1} headerBadge={telOn?<DurationBadge id="sorc-telepathy-duration" short={lvl+" min"} full={"Duration: "+lvl+" minutes."} total={lvl} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>As a bonus action, pick a creature you can see within 30 feet. You can talk to it telepathically while you're within {miles} mile{miles>1?"s":""} of each other (your Charisma modifier, minimum 1), if you share a language. It lasts {lvl} minutes (your sorcerer level), and ends early if you're incapacitated or die, or if you link a different creature.</Body>
