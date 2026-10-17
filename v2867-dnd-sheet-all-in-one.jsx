@@ -10573,7 +10573,6 @@ function App() {
                                         {sorcReadout}
                                         <button style={sorcSPLeft>=1?sorcBtn:sorcOffBtn} disabled={sorcSPLeft<1} onClick={e=>{e.stopPropagation();sorcSpend(1);const r=Math.floor(Math.random()*20)+1;setSkillRoll({label:"Magical Guidance (new d20 — use this roll)",roll:r,bonus:0,total:r,isCrit:r===20,isFail:r===1,sides:20,r1:r,r2:null,isAdv:false,isDis:false});}}>Spend 1 SP · 🎲 d20</button>
                                       </div>
-                                      {sorcNote("Use it after an ability check fails. The new d20 replaces the old one — add the same modifiers as before.")}
                                       <span style={{position:"absolute",bottom:0,right:0,fontSize:8,fontWeight:700,padding:"1px 5px",borderRadius:4,background:"rgba(8,145,178,0.12)",border:"1px solid rgba(8,145,178,0.35)",color:"#0891b2",letterSpacing:".03em"}}>TCE</span>
                                     </div>
                                   )}
