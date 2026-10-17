@@ -4387,6 +4387,7 @@ const ABERRANT_SPELLS = [{lvl:1,spell:"Mind Sliver",spellLvl:"cantrips"},{lvl:1,
 const CLOCKWORK_SPELLS = [{lvl:1,spell:"Alarm",spellLvl:1},{lvl:1,spell:"Protection from Evil and Good",spellLvl:1},{lvl:3,spell:"Aid",spellLvl:2},{lvl:3,spell:"Lesser Restoration",spellLvl:2},{lvl:5,spell:"Dispel Magic",spellLvl:3},{lvl:5,spell:"Protection from Energy",spellLvl:3},{lvl:7,spell:"Freedom of Movement",spellLvl:4},{lvl:7,spell:"Summon Construct",spellLvl:4},{lvl:9,spell:"Greater Restoration",spellLvl:5},{lvl:9,spell:"Wall of Force",spellLvl:5}];
 const CLOCKWORK_MANIFEST = ["Spectral cogwheels appear around you.","Clock hands appear in your eyes.","Your skin takes on a brassy sheen.","Floating equations surround you.","A Tiny clockwork device appears as a spellcasting focus.","You hear ticking or ringing."];
 const WILD_SURGE_TABLE = ["Roll on this table at the start of each of your turns for the next minute (ignore this result on later rolls).", "For 1 minute you can see invisible creatures you have line of sight to.", "A DM-controlled modron appears within 5 ft of you, then vanishes after 1 minute.", "You cast fireball (3rd level) centered on yourself.", "You cast magic missile at 5th level.", "Roll a d10: your height changes by that many inches (odd shrinks, even grows).", "You cast confusion centered on yourself.", "For 1 minute you regain 5 HP at the start of each of your turns.", "You grow a feathery beard that bursts into feathers when you sneeze.", "You cast grease centered on yourself.", "For 1 minute, creatures have disadvantage on saves against the next spell you cast that forces a save.", "Your skin turns bright blue until remove curse ends it.", "For 1 minute a forehead eye gives you advantage on sight-based Perception checks.", "For 1 minute, your 1-action spells can be cast as a bonus action.", "You teleport up to 60 ft to an unoccupied space you can see.", "You are sent to the Astral Plane until the end of your next turn, then return.", "Maximize the damage of the next damaging spell you cast within 1 minute.", "Roll a d10: your age changes by that many years (odd younger, even older).", "1d6 flumphs (DM-controlled, frightened of you) appear within 60 ft and vanish after 1 minute.", "You regain 2d10 hit points.", "You become a potted plant until the start of your next turn: incapacitated, vulnerable to all damage. If the pot breaks you revert.", "For 1 minute you can teleport up to 20 ft as a bonus action each turn.", "You cast levitate on yourself.", "A DM-controlled unicorn appears within 5 ft, then vanishes after 1 minute.", "For 1 minute you can't speak; pink bubbles float out when you try.", "A spectral shield gives you +2 AC and immunity to magic missile for 1 minute.", "You can't be intoxicated by alcohol for 5d6 days.", "Your hair falls out and regrows within 24 hours.", "For 1 minute, loose flammable objects you touch burst into flame.", "You regain your lowest-level expended spell slot.", "For 1 minute you must shout whenever you speak.", "You cast fog cloud centered on yourself.", "Up to three creatures you choose within 30 ft take 4d10 lightning damage.", "You are frightened of the nearest creature until the end of your next turn.", "Every creature within 30 ft turns invisible for 1 minute (ends if it attacks or casts).", "You gain resistance to all damage for 1 minute.", "A random creature within 60 ft is poisoned for 1d4 hours.", "You shed bright light in 30 ft for 1 minute; creatures ending their turn within 5 ft are blinded until the end of their next turn.", "You cast polymorph on yourself; if you fail the save you become a sheep for the duration.", "Illusory butterflies and petals drift within 10 ft of you.", "You can take one extra action right now.", "Each creature within 30 ft takes 1d10 necrotic damage, and you regain HP equal to the total dealt.", "You cast mirror image.", "You cast fly on a random creature within 60 ft.", "You turn invisible and silent for 1 minute (ends if you attack or cast).", "If you die within 1 minute, you return to life as if by reincarnate.", "Your size increases by one category for 1 minute.", "You and every creature within 30 ft gain vulnerability to piercing damage for 1 minute.", "Faint ethereal music surrounds you for 1 minute.", "You regain all expended sorcery points."];
+const spellOrdLbl=(n)=>n+(n===1?"st":n===2?"nd":n===3?"rd":"th");
 const DurationBadge = ({id,short,full,total,unit,openFeat,setOpenFeat,char,setF}) => {
   const isCountdown = total!=null && char && setF;
   const secondsPerUnit = unit==="hr"?3600:unit==="min"?60:1;
@@ -5549,6 +5550,17 @@ function App() {
   const sorcOffBtn = {...sorcBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6};
   const sorcLink = {fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
   const sorcLbl = {fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"};
+  // Always-known spell list, same look as the Druid "Circle Spells" rows: level label + pills, locked tiers faded
+  const sorcSpellRows = (rows,cl)=>(
+    <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}}>
+      {rows.map(([t,sp])=>{const on=cl>=t;return(
+        <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+          <span style={{fontSize:10,fontWeight:700,color:on?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
+          {sp.map(x=><span key={x} className="ft-note-tag" style={{fontSize:10,opacity:on?1:0.4,background:on?"rgba(99,102,241,0.1)":"var(--input)",borderColor:on?"rgba(99,102,241,0.3)":"var(--border)",color:on?"var(--accent)":"var(--subtle)"}}>{x}</span>)}
+        </div>
+      );})}
+    </div>
+  );
   const sorcNote = (txt)=><div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>{txt}</span></div>;
   const sorcSetUsed = (v)=>setCharSaving(p=>({...p,sorcSPUsed:Math.max(0,Math.min(sorcSPMax,v))}));
   const sorcSpend = (n)=>setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+n)}));
@@ -18224,7 +18236,7 @@ function App() {
                                                     <div style={{display:"flex",flexDirection:"column",gap:4}}>
                                                       {[3,5,7,9].map(t=>(
                                                         <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
-                                                          <span style={{fontSize:10,fontWeight:700,color:unlockedTiers.includes(t)?"var(--muted)":"var(--subtle)",minWidth:34}}>{t}th lvl</span>
+                                                          <span style={{fontSize:10,fontWeight:700,color:unlockedTiers.includes(t)?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
                                                           {spellTiers[t].map(s=>(
                                                             <span key={s} className="ft-note-tag" style={{fontSize:10,opacity:unlockedTiers.includes(t)?1:0.4,background:unlockedTiers.includes(t)?"rgba(99,102,241,0.1)":"var(--input)",borderColor:unlockedTiers.includes(t)?"rgba(99,102,241,0.3)":"var(--border)",color:unlockedTiers.includes(t)?"var(--accent)":"var(--subtle)"}}>{s}</span>
                                                           ))}
@@ -18407,7 +18419,7 @@ function App() {
                                                   <div style={{display:"flex",flexDirection:"column",gap:4}}>
                                                     {[[3,["Blindness/Deafness","Gentle Repose"]],[5,["Animate Dead","Gaseous Form"]],[7,["Blight","Confusion"]],[9,["Cloudkill","Contagion"]]].map(([t,sp])=>(
                                                       <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
-                                                        <span style={{fontSize:10,fontWeight:700,color:lvl>=t?"var(--muted)":"var(--subtle)",minWidth:34}}>{t}th lvl</span>
+                                                        <span style={{fontSize:10,fontWeight:700,color:lvl>=t?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
                                                         {sp.map(s=>(
                                                           <span key={s} className="ft-note-tag" style={{fontSize:10,opacity:lvl>=t?1:0.4,background:lvl>=t?"rgba(99,102,241,0.1)":"var(--input)",borderColor:lvl>=t?"rgba(99,102,241,0.3)":"var(--border)",color:lvl>=t?"var(--accent)":"var(--subtle)"}}>{s}</span>
                                                         ))}
@@ -21061,7 +21073,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             );
                                           }
                                           if(orig==="Aberrant Mind (Sorcerer)"){
-                                            const psi=[["1st-level",[1,"Arms of Hadar, Dissonant Whispers, Mind Sliver"]],["3rd-level",[3,"Calm Emotions, Detect Thoughts"]],["5th-level",[5,"Hunger of Hadar, Sending"]],["7th-level",[7,"Evard's Black Tentacles, Summon Aberration"]],["9th-level",[9,"Rary's Telepathic Bond, Telekinesis"]]].filter(x=>lvl>=x[1][0]);
+                                            const psi=[[1,["Arms of Hadar","Dissonant Whispers","Mind Sliver"]],[3,["Calm Emotions","Detect Thoughts"]],[5,["Hunger of Hadar","Sending"]],[7,["Evard's Black Tentacles","Summon Aberration"]],[9,["Rary's Telepathic Bond","Telekinesis"]]];
                                             const telOn=!!char.sorcTelepathyOn;
                                             const miles=Math.max(1,chaMod);
                                             const revOn=!!char.sorcRevOn;
@@ -21094,9 +21106,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </div>,
                                               <FC key="ps" label="Psionic Spells (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another divination or enchantment spell from the sorcerer, warlock or wizard list.</Body>
-                                                <div style={{display:"flex",flexDirection:"column",gap:2,marginTop:6}}>
-                                                  {psi.map(([l,[,names]])=><div key={l} style={{fontSize:12,color:"var(--text)"}}><span style={{fontWeight:700,color:"var(--accent)"}}>{l}:</span> {names}</div>)}
-                                                </div>
+                                                {sorcSpellRows(psi,lvl)}
                                               </FC>,
                                               <FC key="tsp" label="Telepathic Speech (1st)" minLvl={1} headerBadge={telOn?<DurationBadge id="sorc-telepathy-duration" short={lvl+" min"} full={"Duration: "+lvl+" minutes."} total={lvl} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>:null}>
                                                 <Body>As a bonus action, pick a creature you can see within 30 feet. You can talk to it telepathically while you're within {miles} mile{miles>1?"s":""} of each other (your Charisma modifier, minimum 1), if you share a language. It lasts {lvl} minutes (your sorcerer level), and ends early if you're incapacitated or die, or if you link a different creature.</Body>
@@ -21148,7 +21158,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             );
                                           }
                                           if(orig==="Clockwork Soul (Sorcerer)"){
-                                            const cs=[["1st-level",1,"Alarm, Protection from Evil and Good"],["3rd-level",3,"Aid, Lesser Restoration"],["5th-level",5,"Dispel Magic, Protection from Energy"],["7th-level",7,"Freedom of Movement, Summon Construct"],["9th-level",9,"Greater Restoration, Wall of Force"]].filter(x=>lvl>=x[1]);
+                                            const cs=[[1,["Alarm","Protection from Evil and Good"]],[3,["Aid","Lesser Restoration"]],[5,["Dispel Magic","Protection from Energy"]],[7,["Freedom of Movement","Summon Construct"]],[9,["Greater Restoration","Wall of Force"]]];
                                             const manif=char.sorcManif;
                                             const bastion=Math.max(0,Number(char.sorcBastionDice)||0);
                                             const bastionPick=Number(char.sorcBastionPick)||1;
@@ -21158,9 +21168,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               <FC key="cm" label="Clockwork Magic (1st)" minLvl={1}>
                                                 <Body>You learn extra spells as you level. They count as sorcerer spells but not against your spells known. When you gain a sorcerer level, you can swap one of them for another abjuration or transmutation spell from the sorcerer, warlock or wizard list.</Body>
-                                                <div style={{display:"flex",flexDirection:"column",gap:2,marginTop:6}}>
-                                                  {cs.map(([l,,names])=><div key={l} style={{fontSize:12,color:"var(--text)"}}><span style={{fontWeight:700,color:"var(--accent)"}}>{l}:</span> {names}</div>)}
-                                                </div>
+                                                {sorcSpellRows(cs,lvl)}
                                                 <Body><span style={{display:"block",marginTop:8}}>When you cast a sorcerer spell, you can pick or roll how your tie to order shows itself.</span></Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   {manif!=null&&manif!==""&&<span style={{fontSize:12,color:"var(--text)"}}>{Number(manif)+1}. {CLOCKWORK_MANIFEST[Number(manif)]}</span>}
