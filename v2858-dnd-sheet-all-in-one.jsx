@@ -5600,7 +5600,7 @@ function App() {
     {n:"Distant Spell",cost:1,d:()=>"When you cast a spell that has a range of 5 feet or more, double its range. A spell with a range of touch instead gets a range of 30 feet."},
     {n:"Empowered Spell",cost:1,d:()=>"When you roll damage for a spell you cast, reroll up to "+Math.max(1,abilityMod(eff.CHA||10))+" of the damage dice and keep the new rolls. You can pair this with another Metamagic option."},
     {n:"Extended Spell",cost:1,d:()=>"When you cast a spell that has a duration of 1 minute or longer, double its duration, up to a maximum of 24 hours."},
-    {n:"Heightened Spell",cost:3,d:()=>"When you cast a spell that forces a creature to make a saving throw, choose one target; it has disadvantage on its first saving throw against the spell."},
+    {n:"Heightened Spell",cost:3,d:()=>"When you cast a spell that forces a creature to make a saving throw to resist its effects, choose one target of the spell; it has disadvantage on its first saving throw made against the spell."},
     {n:"Quickened Spell",cost:2,d:()=>"When you cast a spell that has a casting time of 1 action, you can cast it as a bonus action instead."},
     {n:"Seeking Spell",cost:2,d:()=>"When you make an attack roll for a spell you cast and miss, reroll the d20 and use the new roll. You can pair this with another Metamagic option."},
     {n:"Subtle Spell",cost:1,d:()=>"When you cast a spell, you can cast it without any somatic or verbal components."},
