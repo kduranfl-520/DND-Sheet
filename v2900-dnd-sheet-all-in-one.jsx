@@ -4473,11 +4473,7 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved
         <div style={{fontSize:14,fontWeight:700}}>Sheet colors</div>
         <button onClick={onClose} style={{minWidth:44,height:28,borderRadius:7,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>Done</button>
       </div>
-      <div style={segWrap}>
-        <button onClick={()=>setDarkMode(false)} style={seg(!dark)}>☀ Light mode</button>
-        <button onClick={()=>setDarkMode(true)} style={seg(dark)}>☾ Dark mode</button>
-      </div>
-      <div style={{fontSize:11,lineHeight:1.4,color:"var(--muted)"}}>These colors apply in both light and dark mode (dark mode lightens them automatically so text stays readable). Switch the tab to preview the other mode.</div>
+      <div style={{fontSize:11,lineHeight:1.4,color:"var(--muted)"}}>Applies to light and dark mode — dark mode lightens the colors automatically.</div>
       <div style={{display:"flex",gap:14,justifyContent:"space-between"}}>
         <ThemeWheel c={e1} label="COLOR 1" full={themeHex({...e1,v:1})} onPick={(h,s)=>upd(b=>({[editKey+"1"]:{...b[editKey+"1"],h,s}}))} onBright={v=>upd(b=>({[editKey+"1"]:{...b[editKey+"1"],v}}))}/>
         <div style={{display:"flex",flex:"1 1 0",minWidth:0,opacity:th.grad?1:0.35}}>
