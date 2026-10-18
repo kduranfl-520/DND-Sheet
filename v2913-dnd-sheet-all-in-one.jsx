@@ -4152,18 +4152,42 @@ function charLoad() {
  return BLANK;
 }
 
+// Shrink an image file to a compact JPEG data URL so it fits in browser storage (phone photos are several MB).
+function shrinkImage(file,maxDim,quality){
+  return new Promise(res=>{
+    const raw=()=>{const r=new FileReader();r.onload=ev=>res(ev.target.result);r.onerror=()=>res("");r.readAsDataURL(file);};
+    try{
+      const url=URL.createObjectURL(file);const img=new Image();
+      img.onload=()=>{try{
+        const k=Math.min(1,maxDim/Math.max(img.width,img.height));
+        const cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(img.width*k));cv.height=Math.max(1,Math.round(img.height*k));
+        const cx=cv.getContext("2d");cx.fillStyle="#fff";cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(img,0,0,cv.width,cv.height);
+        URL.revokeObjectURL(url);res(cv.toDataURL("image/jpeg",quality));
+      }catch(e){URL.revokeObjectURL(url);raw();}};
+      img.onerror=()=>{URL.revokeObjectURL(url);raw();};
+      img.src=url;
+    }catch(e){raw();}
+  });
+}
+let _saveWarned=false;
 function charSave(c) {
- try {
+  const warn=(m)=>{if(_saveWarned)return;_saveWarned=true;try{window.alert(m);}catch(_){}};
+  try {
     localStorage.setItem(CHAR_KEY, JSON.stringify(c));
   } catch(e) {
-    // If quota exceeded, try saving without the media arrays first, then save media separately
-    try {
-      const {photos,cards,documents,...rest}=c;
-      localStorage.setItem(CHAR_KEY, JSON.stringify(rest));
-      try { if(photos&&photos.length) localStorage.setItem(CHAR_KEY+"_photos", JSON.stringify(photos)); } catch(_){}
-      try { if(cards&&cards.length) localStorage.setItem(CHAR_KEY+"_cards", JSON.stringify(cards)); } catch(_){}
-      try { if(documents&&documents.length) localStorage.setItem(CHAR_KEY+"_docs", JSON.stringify(documents)); } catch(_){}
-    } catch(_) {}
+    // Storage full: save everything except the big media first, then try the media separately
+    const {photos,cards,documents,...rest}=c;
+    let ok=false;
+    try { localStorage.setItem(CHAR_KEY, JSON.stringify(rest)); ok=true; } catch(_){}
+    if(!ok){
+      try { localStorage.setItem(CHAR_KEY, JSON.stringify({...rest,avatarPhoto:""})); ok=true; warn("Browser storage is full, so the character photo could not be saved (everything else was). Try a smaller photo or remove some Photos-tab images."); } catch(_){}
+    }
+    if(!ok){ warn("Browser storage is full — changes could not be saved. Remove some photos or documents, then try again."); return; }
+    const fails=[];
+    try { if(photos&&photos.length) localStorage.setItem(CHAR_KEY+"_photos", JSON.stringify(photos)); } catch(_){fails.push("photos");}
+    try { if(cards&&cards.length) localStorage.setItem(CHAR_KEY+"_cards", JSON.stringify(cards)); } catch(_){fails.push("cards");}
+    try { if(documents&&documents.length) localStorage.setItem(CHAR_KEY+"_docs", JSON.stringify(documents)); } catch(_){fails.push("documents");}
+    if(fails.length) warn("Browser storage is full — your "+fails.join(", ")+" could not be saved. Remove some images or use smaller ones.");
   }
 }
 
@@ -6663,9 +6687,7 @@ function App() {
       <input ref={photoRef} type="file" accept="image/*" style={{display:"none"}}
  onChange={e=>{
  const file=e.target.files[0]; if(!file) return;
- const r=new FileReader();
- r.onload=ev=>setCharSaving(p=>({...p,avatarPhoto:ev.target.result}));
- r.readAsDataURL(file);
+ shrinkImage(file,900,0.85).then(d=>{if(d)setCharSaving(p=>({...p,avatarPhoto:d}));});
  e.target.value="";
         }}/>
 
@@ -28194,17 +28216,17 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
 
             {/* Hidden file inputs */}
             <input ref={photoRef} type="file" accept="image/*" multiple style={{display:"none"}} onChange={e=>{
-              Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>setCharSaving(p=>({...p,photos:[...(p.photos||[]),ev.target.result]}));r.readAsDataURL(file);});
+              Array.from(e.target.files).forEach(file=>{shrinkImage(file,1600,0.8).then(d=>{if(d)setCharSaving(p=>({...p,photos:[...(p.photos||[]),d]}));});});
             }}/>
             <input ref={cardsRef} type="file" accept="image/*" multiple style={{display:"none"}} onChange={e=>{
-              Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>setCharSaving(p=>({...p,cards:[...(p.cards||[]),ev.target.result]}));r.readAsDataURL(file);});
+              Array.from(e.target.files).forEach(file=>{shrinkImage(file,1600,0.8).then(d=>{if(d)setCharSaving(p=>({...p,cards:[...(p.cards||[]),d]}));});});
             }}/>
             <input ref={docsRef} type="file" accept="image/*,application/pdf" multiple style={{display:"none"}} onChange={e=>{
               Array.from(e.target.files).forEach(file=>{
                 const isPdf=file.type==="application/pdf";
-                const r=new FileReader();
-                r.onload=ev=>setCharSaving(p=>({...p,documents:[...(p.documents||[]),{src:ev.target.result,type:isPdf?"pdf":"image",name:file.name}]}));
-                r.readAsDataURL(file);
+                const add=src=>{if(src)setCharSaving(p=>({...p,documents:[...(p.documents||[]),{src,type:isPdf?"pdf":"image",name:file.name}]}));};
+                if(isPdf){const r=new FileReader();r.onload=ev=>add(ev.target.result);r.readAsDataURL(file);}
+                else shrinkImage(file,1800,0.82).then(add);
               });
             }}/>
 
