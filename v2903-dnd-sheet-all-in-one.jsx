@@ -6622,15 +6622,15 @@ function App() {
       {/* Clear Sheet button — top right, discrete */}
       <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",gap:56,padding:"4px 8px 0",height:28,flexShrink:0,boxSizing:"border-box"}}>
         <div style={{position:"relative",marginRight:"auto"}}>
-          <button onClick={()=>setThemeOpen(o=>!o)} aria-label="Sheet colors" aria-expanded={themeOpen} title="Sheet colors" style={{display:"flex",alignItems:"center",gap:5,height:20,padding:"0 8px 0 3px",borderRadius:10,border:"1px solid var(--border)",background:"transparent",color:"var(--subtle)",fontSize:10,fontWeight:600,cursor:"pointer"}}>
+          <button onClick={()=>setThemeOpen(o=>!o)} aria-label="Sheet colors" aria-expanded={themeOpen} title="Sheet colors" style={{display:"flex",alignItems:"center",gap:5,height:20,padding:"0 8px 0 3px",borderRadius:10,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",fontSize:10,fontWeight:600,cursor:"pointer"}}>
             <span style={{display:"block",width:14,height:14,borderRadius:"50%",background:"linear-gradient(135deg,var(--accent),var(--accent2,#06b6d4))",boxShadow:"inset 0 0 0 1px rgba(255,255,255,.5)"}}/>Colors
           </button>
           {themeOpen&&<ThemePicker theme={theme} setTheme={setTheme} darkMode={darkMode} setDarkMode={setDarkMode} onClose={()=>setThemeOpen(false)} saved={themeSaved} setSaved={setThemeSaved} hidden={themeHidden} setHidden={setThemeHidden}/>}
         </div>
         <div style={{display:"flex",alignItems:"center",gap:2}} title="Text size">
-          <button onClick={()=>setFontScale(fontScale-0.1)} disabled={fontScale<=0.7} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:4,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",cursor:fontScale<=0.7?"default":"pointer",fontFamily:"inherit",opacity:fontScale<=0.7?0.4:1}}>A−</button>
-          <button onClick={()=>setFontScale(1)} title="Reset text size" style={{fontSize:10,fontWeight:600,padding:"2px 6px",borderRadius:4,border:"none",background:"transparent",color:"var(--subtle)",cursor:"pointer",fontFamily:"inherit",minWidth:34}}>{Math.round(fontScale*100)}%</button>
-          <button onClick={()=>setFontScale(fontScale+0.1)} disabled={fontScale>=1.6} style={{fontSize:12,fontWeight:700,padding:"1px 8px",borderRadius:4,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",cursor:fontScale>=1.6?"default":"pointer",fontFamily:"inherit",opacity:fontScale>=1.6?0.4:1}}>A+</button>
+          <button onClick={()=>setFontScale(fontScale-0.1)} disabled={fontScale<=0.7} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:4,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:fontScale<=0.7?"default":"pointer",fontFamily:"inherit",opacity:fontScale<=0.7?0.4:1}}>A−</button>
+          <button onClick={()=>setFontScale(1)} title="Reset text size" style={{fontSize:10,fontWeight:600,padding:"2px 6px",borderRadius:4,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:"pointer",fontFamily:"inherit",minWidth:40}}>{Math.round(fontScale*100)}%</button>
+          <button onClick={()=>setFontScale(fontScale+0.1)} disabled={fontScale>=1.6} style={{fontSize:12,fontWeight:700,padding:"1px 8px",borderRadius:4,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:fontScale>=1.6?"default":"pointer",fontFamily:"inherit",opacity:fontScale>=1.6?0.4:1}}>A+</button>
         </div>
         <button
           title="Clear all fields and start fresh"
@@ -6639,9 +6639,9 @@ function App() {
               setChar({...BLANK});
             }
           }}
-          style={{fontSize:10,fontWeight:600,padding:"2px 8px",borderRadius:4,border:"1px solid var(--border)",background:"transparent",color:"var(--subtle)",cursor:"pointer",fontFamily:"inherit",letterSpacing:".04em",opacity:0.6}}
-          onMouseEnter={e=>{e.currentTarget.style.opacity="1";e.currentTarget.style.borderColor="var(--red)";e.currentTarget.style.color="var(--red)";}}
-          onMouseLeave={e=>{e.currentTarget.style.opacity="0.6";e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.color="var(--subtle)";}}>
+          style={{fontSize:10,fontWeight:600,padding:"2px 8px",borderRadius:4,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",cursor:"pointer",fontFamily:"inherit",letterSpacing:".04em"}}
+          onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--red)";e.currentTarget.style.color="var(--red)";}}
+          onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.color="var(--text)";}}>
           ✕ Clear Sheet
         </button>
       </div>
