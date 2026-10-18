@@ -4424,7 +4424,7 @@ const buildThemeCss=(th,dark)=>{
    +[".08",".1",".12",".14",".15"].flatMap(x=>[", ",","].map(sp=>".sheet button[style*=\"background: rgba(var(--accent-rgb),"+sp.slice(1)+"0"+x+")\"]")).join(",")+",.hdr-chip-accent,.hdr-dice-btn,.adv-dice-box,.ri-add-btn,.hdr-xp-add-btn,.lp-add,.ri-confirm-btn,.dt-roll-btn,.dt-reroll-btn{background:rgba(var(--accent-rgb),0.22)!important;border-color:rgba(var(--accent-rgb),0.65)!important;color:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}"
    +".hdr-xp-add-btn:disabled{opacity:0.75!important;}"
    +(dark?".sheet input::placeholder,.sheet textarea::placeholder{color:#b4c0d3!important;opacity:1!important;}.hdr-xp-add-btn:disabled{opacity:1!important;}":"")
-   +(dark?".sheet [style*=\"color: rgb(100, 116, 139)\"],.sheet [style*=\"color: rgb(71, 85, 105)\"]{color:#b4c0d3!important;}.sheet [style*=\"color: rgb(148, 163, 184)\"]{color:#d3dcea!important;}":"")
+   +(dark?".sheet [style*=\"color: rgb(100, 116, 139)\"],.sheet [style*=\"color: rgb(71, 85, 105)\"]{color:#b4c0d3!important;}.sheet [style*=\"color: rgb(148, 163, 184)\"]{color:#d3dcea!important;}.sheet [style*=\"color: rgb(124, 58, 237)\"]{color:#d8b4fe!important;}":"")
    +".adv-dice-box svg,.adv-dice-box svg *{stroke:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}"
    +".hdr-dice-btn svg,.hdr-dice-btn svg *{stroke:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}";
 };
@@ -6689,7 +6689,7 @@ function App() {
           <div className="hdr-chips">
             {char.species  && <span className="hdr-chip">{char.species}</span>}
             {char.charClass && <span className="hdr-chip hdr-chip-accent">{char.charClass} {char.multiClassLevel > 0 ? char.classLevel : char.level}</span>}
-            {char.multiClass && char.multiClassLevel > 0 && char.multiClass !== char.charClass && (CLASSES[char.multiClass] || libEntries.find(e=>e.category==="Class"&&e.title===char.multiClass)) && <span className="hdr-chip" style={{background:"rgba(168,85,247,0.1)",borderColor:"rgba(168,85,247,0.3)",color:"#7c3aed",cursor:"default",display:"inline-flex",alignItems:"center",gap:"4px"}}>/ {char.multiClass} {char.multiClassLevel}</span>}
+            {char.multiClass && char.multiClassLevel > 0 && char.multiClass !== char.charClass && (CLASSES[char.multiClass] || libEntries.find(e=>e.category==="Class"&&e.title===char.multiClass)) && <span className="hdr-chip" style={{background:darkMode?"rgba(168,85,247,0.3)":"rgba(168,85,247,0.1)",borderColor:darkMode?"rgba(216,180,254,0.7)":"rgba(168,85,247,0.3)",color:darkMode?"#e9d5ff":"#7c3aed",cursor:"default",display:"inline-flex",alignItems:"center",gap:"4px"}}>/ {char.multiClass} {char.multiClassLevel}</span>}
             {char.alignment && <span className="hdr-chip">{{"Lawful Good":"LG","Neutral Good":"NG","Chaotic Good":"CG","Lawful Neutral":"LN","True Neutral":"TN","Chaotic Neutral":"CN","Lawful Evil":"LE","Neutral Evil":"NE","Chaotic Evil":"CE"}[char.alignment]||char.alignment}</span>}
           </div>
           {/* Languages row */}
