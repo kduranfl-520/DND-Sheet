@@ -21160,7 +21160,9 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 </div>
                                               </FC>,
                                               <FC key="ow" label="Otherworldly Wings (14th)" minLvl={14}>
-                                                <Body>As a bonus action you can manifest spectral wings (their look follows your affinity) and gain a flying speed of 30 feet. Dismiss them as a bonus action. You can't do this in armor unless it was made to accommodate wings.</Body>
+                                                <Body>As a bonus action you can manifest spectral wings and gain a flying speed of 30 feet. Dismiss them as a bonus action.</Body>
+                                                {(()=>{const af=char.sorcAffinity||"";const wk=(af==="Good"||af==="Law")?"Eagle wings":(af==="Evil"||af==="Chaos")?"Bat wings":af==="Neutrality"?"Dragonfly wings":"";return <div style={{display:"flex",gap:6,fontSize:11,marginTop:6,color:"var(--text)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>Your wings</b> — {wk?<>{wk} <span style={{color:"var(--muted)"}}>({af} affinity)</span></>:<span style={{color:"var(--muted)"}}>choose an affinity under Divine Magic to set what they look like.</span>}</span></div>;})()}
+                                                <div style={{fontSize:10,fontStyle:"italic",color:"var(--muted)",marginTop:5}}>Note: You can't do this in armor unless it was made to accommodate wings.</div>
                                                 {toggleRow("sorcOtherWingsActive","Wings out — flying speed 30 ft.","Wings away","","Manifest Wings")}
                                               </FC>,
                                               <FC key="ur" label="Unearthly Recovery (18th)" minLvl={18}>
