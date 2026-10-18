@@ -4391,6 +4391,8 @@ const BOOK_NAMES=["TCE","XGE","SCAG"];
 const bookOf=e=>{if(!e)return null;const t=String(e.tags||"").split(",").map(x=>x.trim().toUpperCase());for(const b of BOOK_NAMES){if(t.includes(b))return b;}const m=/^[a-z]+_(tce|xge|scag)_/i.exec(e.id||"");return m?m[1].toUpperCase():null;};
 // ===== THEME (user-chosen colors) =====
 const THEME_PRESETS=[["Indigo Dusk","#6366f1","#06b6d4"],["Blue & Pink","#2563eb","#ec4899"],["Ember","#ea580c","#e11d48"],["Forest","#16a34a","#0d9488"],["Arcane","#7c3aed","#db2777"],["Gilded","#b45309","#ca8a04"],["Frost","#0284c7","#6366f1"]];
+const CLASS_PRESETS=[["Artificer","#8a583a","#c19678"],["Barbarian","#cb0000","#fb7676"],["Bard","#2e6867","#759b9a"],["Cleric","#1e45c0","#498cd5"],["Druid","#3aa803","#8fe04f"],["Dungeon Master","#6a0000","#a30f0f"],["Fighter","#d85031","#f2a07a"],["Monk","#4e2d0f","#835b32"],["Paladin","#9a8a04","#e2ce25"],["Ranger","#2a5608","#437317"],["Rogue","#404040","#a19587"],["Sorcerer","#81488b","#d897f0"],["Warlock","#7b176c","#aa5586"],["Wizard","#b05508","#fe983b"]];
+const ALL_BUILT_PRESETS=[...THEME_PRESETS,...CLASS_PRESETS];
 const themeHsv=hex=>{const n=parseInt(hex.slice(1),16);const r=((n>>16)&255)/255,g=((n>>8)&255)/255,b=(n&255)/255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;let h=0;if(d){if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h=h/6;if(h<0)h+=1;}return{h,s:mx?d/mx:0,v:mx};};
 const themeHex=c=>{const h6=c.h*6,i=Math.floor(h6)%6,f=h6-Math.floor(h6);const p=c.v*(1-c.s),q=c.v*(1-f*c.s),t=c.v*(1-(1-f)*c.s);const rgb=[[c.v,t,p],[q,c.v,p],[p,c.v,t],[p,q,c.v],[t,p,c.v],[c.v,p,q]][i];return"#"+rgb.map(x=>Math.round(x*255).toString(16).padStart(2,"0")).join("");};
 const themeDerive=c=>({h:c.h,s:c.s*0.9,v:0.5+0.5*c.v});
@@ -4456,8 +4458,11 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved
   const mid=themeMix(a1,themeEff(th,dark)[1],0.5);
   const isSel=p=>th.on&&themeHex(th.l1)===p.c1&&themeHex(th.l2)===p.c2&&th.grad===p.grad&&th.tint===p.tint&&th.ctint===p.ctint;
   const selIdx=saved.findIndex(isSel);
-  const selBuilt=THEME_PRESETS.find(p=>!hidden.includes(p[0])&&themeHex(th.l1)===p[1]&&themeHex(th.l2)===p[2]);
-  const saveCurrent=()=>{if(!th.on)return;const p={id:Date.now(),c1:themeHex(th.l1),c2:themeHex(th.l2),grad:th.grad,tint:th.tint,ctint:th.ctint};setSaved(a=>a.some(x=>x.c1===p.c1&&x.c2===p.c2&&x.grad===p.grad&&x.tint===p.tint&&x.ctint===p.ctint)?a:[...a,p].slice(-8));};
+  const selBuilt=ALL_BUILT_PRESETS.find(p=>!hidden.includes(p[0])&&themeHex(th.l1)===p[1]&&themeHex(th.l2)===p[2]);
+  const builtBtn=p=>{const sel=themeHex(e1)===p[1]&&themeHex(e2)===p[2];return(
+    <button key={p[0]} aria-label={p[0]} title={p[0]} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
+      style={{width:44,height:44,borderRadius:"50%",border:"2px solid "+(sel?"var(--text)":"transparent"),background:"linear-gradient(135deg,"+p[1]+","+p[2]+")",padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>);};
+  const saveCurrent=()=>{if(!th.on)return;const p={id:Date.now(),c1:themeHex(th.l1),c2:themeHex(th.l2),grad:th.grad,tint:th.tint,ctint:th.ctint};setSaved(a=>a.some(x=>x.c1===p.c1&&x.c2===p.c2&&x.grad===p.grad&&x.tint===p.tint&&x.ctint===p.ctint)?a:[...a,p].slice(-40));};
   return (
     <div style={{position:"absolute",left:0,top:30,width:352,maxWidth:"calc(100vw - 16px)",boxSizing:"border-box",padding:14,borderRadius:14,background:"var(--card)",border:"1px solid var(--border)",boxShadow:"0 14px 40px rgba(15,23,42,.28)",zIndex:1000,display:"flex",flexDirection:"column",gap:12,color:"var(--text)",maxHeight:"calc(100dvh - 44px)",overflowY:"auto",fontSize:12}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
@@ -4491,9 +4496,14 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved
       <div style={{display:"flex",flexDirection:"column",gap:6}}>
         <div style={lbl}>PRESETS</div>
         <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-          {THEME_PRESETS.filter(p=>!hidden.includes(p[0])).map(p=>{const sel=themeHex(e1)===p[1]&&themeHex(e2)===p[2];return(
-            <button key={p[0]} aria-label={p[0]} title={p[0]} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
-              style={{width:44,height:44,borderRadius:"50%",border:"2px solid "+(sel?"var(--text)":"transparent"),background:"linear-gradient(135deg,"+p[1]+","+p[2]+")",padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>);})}
+          {THEME_PRESETS.filter(p=>!hidden.includes(p[0])).map(builtBtn)}
+        </div>
+        {CLASS_PRESETS.some(p=>!hidden.includes(p[0]))&&<div style={{...lbl,marginTop:4}}>CLASS DICE</div>}
+        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+          {CLASS_PRESETS.filter(p=>!hidden.includes(p[0])).map(builtBtn)}
+        </div>
+        <div style={{...lbl,marginTop:4}}>MY PRESETS</div>
+        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
           {saved.map((p,i)=>(
             <button key={p.id} aria-label={"My preset "+(i+1)} title={"My preset "+(i+1)} onClick={()=>upd(()=>({l1:themeHsv(p.c1),l2:themeHsv(p.c2),grad:p.grad,tint:p.tint,ctint:p.ctint}))}
               style={{width:44,height:44,borderRadius:"50%",border:"2px "+(isSel(p)?"solid var(--text)":"dashed var(--border)"),background:p.grad?"linear-gradient(135deg,"+p.c1+","+p.c2+")":p.c1,padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>))}
