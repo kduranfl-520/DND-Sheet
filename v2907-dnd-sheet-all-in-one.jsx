@@ -4414,7 +4414,8 @@ const buildThemeCss=(th,dark)=>{
   const innerG="linear-gradient(135deg,"+themeMix(T.surface,a1,kc*0.7)+","+themeMix(T.surface,A2,kc*0.7)+")";
   const cardSel=".cls-skill-card,.ab-stat-card,.hp-card,.cstat-card,.ri-card,.adv-row,.adv-dice-box,.iad-card,.rest-card,.card-wrap,.ab-box,.ft-card,.feat-unified-card,.feat-card,.sheet [style*=\"background: var(--card)\"]";
   const innerSel=".ft-lib-section-hdr,.feat-section-hdr,.ab-save-row,.sheet [style*=\"background: var(--surface)\"]";
-  return ":root,.sheet{--accent:"+a1+";--accent2:"+A2+";--accent-rgb:"+rgb+";--accent-dark:"+themeMix(a1,"#000000",0.28)+";--border-focus:"+a1+";--bg:"+themeMix(T.bg,mid,kb)+";--card:"+themeMix(T.card,mid,kc)+";--surface:"+themeMix(T.surface,mid,kc*0.7)+";}"
+  const aTxt=dark?themeMix(a1,"#ffffff",0.38):a1;
+  return ":root,.sheet{--accent:"+aTxt+";--accent2:"+A2+";--accent-rgb:"+rgb+";--accent-dark:"+themeMix(a1,"#000000",0.28)+";--border-focus:"+aTxt+";"+(dark?"--text:#f8fafc;--muted:#d3dcea;--subtle:#b4c0d3;":"")+"--bg:"+themeMix(T.bg,mid,kb)+";--card:"+themeMix(T.card,mid,kc)+";--surface:"+themeMix(T.surface,mid,kc*0.7)+";}"
    +"html,body{background:"+pageBg+"!important;background-attachment:fixed;}.sheet{background:transparent!important;}"
    +cardSel+"{background-image:"+cardG+"!important;}"
    +innerSel+"{background-image:"+innerG+"!important;}"
@@ -4422,6 +4423,8 @@ const buildThemeCss=(th,dark)=>{
    +".tab-on{border-image:linear-gradient(90deg,"+a1+","+A2+") 1!important;}"
    +[".08",".1",".12",".14",".15"].flatMap(x=>[", ",","].map(sp=>".sheet button[style*=\"background: rgba(var(--accent-rgb),"+sp.slice(1)+"0"+x+")\"]")).join(",")+",.hdr-chip-accent,.hdr-dice-btn,.adv-dice-box,.ri-add-btn,.hdr-xp-add-btn,.lp-add,.ri-confirm-btn,.dt-roll-btn,.dt-reroll-btn{background:rgba(var(--accent-rgb),0.22)!important;border-color:rgba(var(--accent-rgb),0.65)!important;color:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}"
    +".hdr-xp-add-btn:disabled{opacity:0.75!important;}"
+   +(dark?".sheet input::placeholder,.sheet textarea::placeholder{color:#b4c0d3!important;opacity:1!important;}.hdr-xp-add-btn:disabled{opacity:1!important;}":"")
+   +(dark?".sheet [style*=\"color: rgb(100, 116, 139)\"],.sheet [style*=\"color: rgb(71, 85, 105)\"]{color:#b4c0d3!important;}.sheet [style*=\"color: rgb(148, 163, 184)\"]{color:#d3dcea!important;}":"")
    +".adv-dice-box svg,.adv-dice-box svg *{stroke:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}"
    +".hdr-dice-btn svg,.hdr-dice-btn svg *{stroke:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}";
 };
