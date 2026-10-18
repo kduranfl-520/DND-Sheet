@@ -4452,7 +4452,7 @@ const buildThemeCss=(th,dark)=>{
    +".hdr-charname,.hdr-charname .hdr-name-empty{color:"+nameCol+"!important;}.hdr-charname .hdr-name-empty{opacity:0.75;}"
    +(dark?"":".sheet [style*=\"color: rgb(100, 116, 139)\"]{color:#475569!important;}.sheet [style*=\"color: rgb(148, 163, 184)\"]{color:#64748b!important;}.sheet input::placeholder,.sheet textarea::placeholder{color:#64748b!important;opacity:1!important;}")
    +(dark?"":".hdr-chip:not(.hdr-chip-accent):not([style*=\"168, 85, 247\"]){background:rgba(var(--accent-rgb),0.1)!important;border-color:rgba(var(--accent-rgb),0.35)!important;color:var(--text)!important;}.hdr-chip-lang-auto,.hdr-chip-lang-racial,.hdr-chip-lang{color:var(--text)!important;}.hdr-chip-accent,.hdr-chip[style*=\"168, 85, 247\"]{background:rgba(var(--accent-rgb),0.24)!important;border-color:rgba(var(--accent-rgb),0.75)!important;color:var(--accent-dark)!important;}")
-   +(dark?".hdr-chip:not(.hdr-chip-accent):not([style*=\"168, 85, 247\"]){background:rgba(var(--accent-rgb),0.14)!important;border-color:var(--accent)!important;color:#f1f5f9!important;}.hdr-chip-lang-auto,.hdr-chip-lang-racial,.hdr-chip-lang{color:#f1f5f9!important;}.hdr-chip-accent,.hdr-chip[style*=\"168, 85, 247\"]{background:rgba(var(--accent-rgb),0.42)!important;border-color:var(--accent)!important;color:#fff!important;}":"")
+   +(dark?".card-wrap{border:1px solid var(--border)!important;}":"")+(dark?".hdr-chip:not(.hdr-chip-accent):not([style*=\"168, 85, 247\"]){background:rgba(var(--accent-rgb),0.14)!important;border-color:var(--accent)!important;color:#f1f5f9!important;}.hdr-chip-lang-auto,.hdr-chip-lang-racial,.hdr-chip-lang{color:#f1f5f9!important;}.hdr-chip-accent,.hdr-chip[style*=\"168, 85, 247\"]{background:rgba(var(--accent-rgb),0.42)!important;border-color:var(--accent)!important;color:#fff!important;}":"")
    +(dark?".sheet input::placeholder,.sheet textarea::placeholder{color:#b4c0d3!important;opacity:1!important;}.hdr-xp-add-btn:disabled{opacity:1!important;}":"")
    +(dark?".sheet [style*=\"color: rgb(100, 116, 139)\"],.sheet [style*=\"color: rgb(71, 85, 105)\"]{color:#b4c0d3!important;}.sheet [style*=\"color: rgb(148, 163, 184)\"]{color:#d3dcea!important;}.sheet [style*=\"color: rgb(124, 58, 237)\"]{color:#d8b4fe!important;}":"")
    +".adv-dice-box svg,.adv-dice-box svg *{stroke:"+(dark?"var(--accent)":"var(--accent-dark)")+"!important;}"
@@ -28831,7 +28831,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           cursor:"pointer", transition:"all .18s", fontFamily:"inherit",
                           opacity:used?0.45:1,
                         }}>
-                        <div style={{fontSize:23,lineHeight:1,opacity:used?0.3:1,transition:"opacity .18s"}}>{emoji}</div>
+                        <div style={{fontSize:23,lineHeight:1,color,opacity:used?0.3:1,transition:"opacity .18s"}}>{emoji}</div>
                         <div style={{fontSize:13,fontWeight:800,color:used?"var(--muted)":color}}>{label}</div>
                         <div style={{fontSize:10,color:"var(--subtle)",fontWeight:500}}>{used?"Used":"Available"}</div>
                       </button>
