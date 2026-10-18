@@ -4459,8 +4459,12 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved
   const isSel=p=>th.on&&themeHex(th.l1)===p.c1&&themeHex(th.l2)===p.c2&&th.grad===p.grad&&th.tint===p.tint&&th.ctint===p.ctint;
   const selIdx=saved.findIndex(isSel);
   const selBuilt=ALL_BUILT_PRESETS.find(p=>!hidden.includes(p[0])&&themeHex(th.l1)===p[1]&&themeHex(th.l2)===p[2]);
+  const [closed,setClosed]=useState(()=>{try{const a=JSON.parse(localStorage.getItem("dnd5e_theme_closed")||"null");return Array.isArray(a)?a:["class"];}catch(e){return ["class"];}});
+  const [tip,setTip]=useState(null);
+  const togg=k=>setClosed(a=>{const n=a.includes(k)?a.filter(x=>x!==k):[...a,k];try{localStorage.setItem("dnd5e_theme_closed",JSON.stringify(n));}catch(e){}return n;});
+  const secHdr=(k,label,n,extra)=>(<button onClick={()=>togg(k)} aria-expanded={!closed.includes(k)} style={{display:"flex",alignItems:"center",gap:6,width:"100%",minHeight:32,padding:0,border:0,background:"transparent",cursor:"pointer",textAlign:"left",...lbl}}><span style={{fontSize:10,width:10}}>{closed.includes(k)?"▸":"▾"}</span><span>{label}</span><span style={{fontWeight:500,opacity:0.7}}>({n})</span>{extra&&<span style={{marginLeft:"auto",fontWeight:700,color:"var(--accent)",letterSpacing:0,fontSize:11}}>{extra}</span>}</button>);
   const builtBtn=p=>{const sel=themeHex(e1)===p[1]&&themeHex(e2)===p[2];return(
-    <button key={p[0]} aria-label={p[0]} title={p[0]} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
+    <button key={p[0]} aria-label={p[0]} title={p[0]} onMouseEnter={()=>setTip(p[0])} onMouseLeave={()=>setTip(null)} onClick={()=>upd(()=>({[editKey+"1"]:themeHsv(p[1]),[editKey+"2"]:themeHsv(p[2])}))}
       style={{width:44,height:44,borderRadius:"50%",border:"2px solid "+(sel?"var(--text)":"transparent"),background:"linear-gradient(135deg,"+p[1]+","+p[2]+")",padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>);};
   const saveCurrent=()=>{if(!th.on)return;const p={id:Date.now(),c1:themeHex(th.l1),c2:themeHex(th.l2),grad:th.grad,tint:th.tint,ctint:th.ctint};setSaved(a=>a.some(x=>x.c1===p.c1&&x.c2===p.c2&&x.grad===p.grad&&x.tint===p.tint&&x.ctint===p.ctint)?a:[...a,p].slice(-40));};
   return (
@@ -4494,21 +4498,21 @@ function ThemePicker({theme,setTheme,darkMode,setDarkMode,onClose,saved,setSaved
         <button onClick={()=>setTheme(null)} style={{height:44,padding:"0 12px",borderRadius:8,border:"1px solid var(--border)",background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>↺ Reset to default</button>
       </div>
       <div style={{display:"flex",flexDirection:"column",gap:6}}>
-        <div style={lbl}>PRESETS</div>
-        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+        {secHdr("pre","PRESETS",THEME_PRESETS.filter(p=>!hidden.includes(p[0])).length)}
+        {!closed.includes("pre")&&<div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
           {THEME_PRESETS.filter(p=>!hidden.includes(p[0])).map(builtBtn)}
-        </div>
-        {CLASS_PRESETS.some(p=>!hidden.includes(p[0]))&&<div style={{...lbl,marginTop:4}}>CLASS DICE</div>}
-        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+        </div>}
+        {secHdr("class","CLASS DICE",CLASS_PRESETS.filter(p=>!hidden.includes(p[0])).length,(()=>{const c=CLASS_PRESETS.find(p=>p[0]===tip)||(th.on&&CLASS_PRESETS.find(p=>!hidden.includes(p[0])&&themeHex(th.l1)===p[1]&&themeHex(th.l2)===p[2]));return c?c[0]:null;})())}
+        {!closed.includes("class")&&<div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
           {CLASS_PRESETS.filter(p=>!hidden.includes(p[0])).map(builtBtn)}
-        </div>
-        <div style={{...lbl,marginTop:4}}>MY PRESETS</div>
-        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+        </div>}
+        {secHdr("mine","MY PRESETS",saved.length)}
+        {!closed.includes("mine")&&<div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
           {saved.map((p,i)=>(
             <button key={p.id} aria-label={"My preset "+(i+1)} title={"My preset "+(i+1)} onClick={()=>upd(()=>({l1:themeHsv(p.c1),l2:themeHsv(p.c2),grad:p.grad,tint:p.tint,ctint:p.ctint}))}
               style={{width:44,height:44,borderRadius:"50%",border:"2px "+(isSel(p)?"solid var(--text)":"dashed var(--border)"),background:p.grad?"linear-gradient(135deg,"+p.c1+","+p.c2+")":p.c1,padding:0,cursor:"pointer",boxShadow:"inset 0 0 0 2px var(--card)"}}/>))}
           <button onClick={saveCurrent} aria-label="Save current colors as a preset" title="Save current colors as a preset" style={{width:44,height:44,borderRadius:"50%",border:"2px dashed var(--border)",background:"transparent",color:"var(--muted)",fontSize:22,lineHeight:1,cursor:th.on?"pointer":"default",opacity:th.on?1:0.4,padding:0}}>+</button>
-        </div>
+        </div>}
         {(selIdx>=0||(th.on&&selBuilt))&&<button onClick={()=>{if(selIdx>=0)setSaved(a=>a.filter((_,i)=>i!==selIdx));else setHidden(h=>[...h,selBuilt[0]]);}} style={{alignSelf:"flex-start",minHeight:32,padding:"0 4px",border:0,background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer",textDecoration:"underline"}}>Delete this preset</button>}
         {hidden.length>0&&<button onClick={()=>setHidden([])} style={{alignSelf:"flex-start",minHeight:32,padding:"0 4px",border:0,background:"transparent",color:"var(--muted)",fontSize:11,fontWeight:600,cursor:"pointer",textDecoration:"underline"}}>Restore deleted presets</button>}
       </div>
