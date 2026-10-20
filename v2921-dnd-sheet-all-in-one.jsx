@@ -21217,12 +21217,13 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 )}
                                               </FC>,
                                               <FC key="sotg" label="Strength of the Grave (1st)" minLvl={1}>
-                                                <Body>When damage would drop you to 0 hit points, make a Charisma save against DC 5 + the damage taken. On a success you drop to 1 hit point instead. It doesn't work against radiant damage or a critical hit. After a success you need a long rest to use it again.</Body>
-                                                <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-                                                  <span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Damage taken</span>
-                                                  <input type="number" min="0" value={char.sorcGraveDmg||""} placeholder="0" onClick={e=>e.stopPropagation()} onChange={e=>setF("sorcGraveDmg",e.target.value)} style={{width:60,fontSize:12,padding:"3px 6px",borderRadius:6,border:"1px solid var(--border)",background:"var(--input)",color:"var(--text)",fontFamily:"inherit"}}/>
-                                                  <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>CHA save DC {graveDC}</span>
-                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();rollCheck("Strength of the Grave (CHA save)",chaSave);}}>🎲 CHA save {chaSave>=0?"+":""}{chaSave}</button>
+                                                <Body>When damage would drop you to 0 hit points, make a Charisma save against DC 5 + the damage taken. On a success you drop to 1 hit point instead. After a success you need a long rest to use it again.</Body>
+                                                <div style={{fontSize:10,fontStyle:"italic",color:"var(--muted)",marginTop:5}}>Note: It doesn't work against radiant damage or a critical hit.</div>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:6,flexWrap:"nowrap",marginTop:6}}>
+                                                  <span style={{fontSize:11,color:"var(--muted)",fontWeight:700,whiteSpace:"nowrap"}}>Damage taken</span>
+                                                  <input type="number" min="0" key={"grave"+(char.sorcGraveDmg||"")} defaultValue={char.sorcGraveDmg||""} placeholder="0" onClick={e=>e.stopPropagation()} onBlur={e=>{if(String(e.target.value)!==String(char.sorcGraveDmg||""))setF("sorcGraveDmg",e.target.value);}} onKeyDown={e=>{if(e.key==="Enter")e.target.blur();}} style={{width:60,fontSize:12,padding:"3px 6px",borderRadius:6,border:"1px solid var(--border)",background:"var(--input)",color:"var(--text)",fontFamily:"inherit"}}/>
+                                                  <span style={{fontSize:12,color:"var(--red)",fontWeight:700,whiteSpace:"nowrap"}}>DC {graveDC}</span>
+                                                  <button style={{...neutralBtn,whiteSpace:"nowrap"}} onClick={e=>{e.stopPropagation();rollCheck("Strength of the Grave (CHA save)",chaSave);}}>🎲 CHA save {chaSave>=0?"+":""}{chaSave}</button>
                                                 </div>
                                                 {onceRow("sorcGraveUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
                                               </FC>,
