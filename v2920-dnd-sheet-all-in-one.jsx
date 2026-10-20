@@ -21208,6 +21208,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </div>,
                                               <FC key="eod" label="Eyes of the Dark (1st)" minLvl={1}>
                                                 <Body>You have darkvision out to 120 feet.{lvl>=3?" You also know the darkness spell without it counting against your spells known. Cast it with a spell slot, or spend 2 sorcery points instead; the point version lets you see through the darkness it makes.":" At 3rd level you also learn darkness, castable for 2 sorcery points."}</Body>
+                                                {lvl>=3&&SPELL_DATA["Darkness"]&&<div style={{marginTop:6}} onClick={e=>e.stopPropagation()}><SpellSaveBox name="Darkness" sd={SPELL_DATA["Darkness"]} dc={8+pb+chaMod} saveKey="shadowDarkness" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                                 {lvl>=3&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                     {sorcReadout}
