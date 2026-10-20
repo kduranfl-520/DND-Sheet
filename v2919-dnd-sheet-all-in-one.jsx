@@ -21207,7 +21207,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {shqPick>0&&<div style={{background:"rgba(var(--accent-rgb),0.08)",border:"1px solid rgba(var(--accent-rgb),0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{shqPick}</span> — {SHQ[shqPick-1]}</div>}
                                               </div>,
                                               <FC key="eod" label="Eyes of the Dark (1st)" minLvl={1}>
-                                                <Body>You have darkvision out to 120 feet (shown on Core and Rounds).{lvl>=3?" You also know the darkness spell without it counting against your spells known. Cast it with a spell slot, or spend 2 sorcery points instead; the point version lets you see through the darkness it makes.":" At 3rd level you also learn darkness, castable for 2 sorcery points."}</Body>
+                                                <Body>You have darkvision out to 120 feet.{lvl>=3?" You also know the darkness spell without it counting against your spells known. Cast it with a spell slot, or spend 2 sorcery points instead; the point version lets you see through the darkness it makes.":" At 3rd level you also learn darkness, castable for 2 sorcery points."}</Body>
                                                 {lvl>=3&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                     {sorcReadout}
