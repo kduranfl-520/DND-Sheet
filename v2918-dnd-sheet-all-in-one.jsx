@@ -21182,7 +21182,30 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const chaSave=chaMod+pb;
                                             const houndOn=!!char.sorcHoundOn;
                                             const umbralOn=!!char.sorcUmbralOn;
+                                            const SHQ=[
+                                              "You are always icy cold to the touch.",
+                                              "When you are asleep, you don't appear to breathe (though you must still breathe to survive).",
+                                              "You barely bleed, even when badly injured.",
+                                              "Your heart beats once per minute. This event sometimes surprises you.",
+                                              "You have trouble remembering that living creatures and corpses should be treated differently.",
+                                              "You blinked. Once. Last week."
+                                            ];
+                                            const SHQL=["Always icy cold","Don't appear to breathe asleep","Barely bleed","Heart beats once a minute","Living creatures vs. corpses","You blinked. Once."];
+                                            const shqPick=char.sorcShadowQuirk||0;
                                             return wrapCol(
+                                              <div key="shq" style={{display:"flex",flexDirection:"column",gap:4,marginBottom:4}}>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                                  <span style={sorcLbl}>Shadow Sorcerer Quirk</span>
+                                                  <span style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                                                    <select className="ri-sel" value={shqPick||""} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF("sorcShadowQuirk",+e.target.value||0);}} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:shqPick?"var(--accent)":"var(--subtle)"}}>
+                                                      <option value="">-- Choose a quirk --</option>
+                                                      {SHQ.map((t,i)=><option key={i} value={i+1}>{i+1} — {SHQL[i]}</option>)}
+                                                    </select>
+                                                    <button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setF("sorcShadowQuirk",r);}}>🎲 Roll d6</button>
+                                                  </span>
+                                                </div>
+                                                {shqPick>0&&<div style={{background:"rgba(var(--accent-rgb),0.08)",border:"1px solid rgba(var(--accent-rgb),0.25)",borderRadius:6,padding:"6px 8px",fontSize:12,color:"var(--text)",lineHeight:1.45}}><span style={{fontWeight:700,color:"var(--accent)"}}>{shqPick}</span> — {SHQ[shqPick-1]}</div>}
+                                              </div>,
                                               <FC key="eod" label="Eyes of the Dark (1st)" minLvl={1}>
                                                 <Body>You have darkvision out to 120 feet (shown on Core and Rounds).{lvl>=3?" You also know the darkness spell without it counting against your spells known. Cast it with a spell slot, or spend 2 sorcery points instead; the point version lets you see through the darkness it makes.":" At 3rd level you also learn darkness, castable for 2 sorcery points."}</Body>
                                                 {lvl>=3&&(
