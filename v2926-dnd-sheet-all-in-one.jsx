@@ -21241,7 +21241,6 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                     <button style={linkBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>houndOffPatch(p));}}>↺ Dismiss</button>
                                                   </>:<button style={sorcSPLeft>=3?sorcBtn:sorcOffBtn} disabled={sorcSPLeft<3} onClick={e=>{e.stopPropagation();setCharSaving(p=>houndOnPatch(p,sorcLvl,sorcSPMax));}}>Summon (3 SP)</button>}
                                                 </div>
-                                                {note("The hound's bite is the dire wolf's: +5 to hit, 2d6+3 piercing, and a DC 13 Strength save or the target is knocked prone. When summoned, the hound is added to your Companions tab with its temporary hit points.")}
                                               </FC>,
                                               <FC key="sw" label="Shadow Walk (14th)" minLvl={14}>
                                                 <Body>While you are in dim light or darkness, use a bonus action to teleport up to 120 feet to an unoccupied space you can see that is also in dim light or darkness.</Body>
