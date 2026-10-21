@@ -28604,7 +28604,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 {key:"actionUsed",     label:"Action",       emoji:"🎯", color:"var(--accent)",  bg:"rgba(var(--accent-rgb),0.1)",  border:"rgba(var(--accent-rgb),0.35)",  hints:"Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object, Grapple, Shove, Improvise"},
                 {key:"bonusActionUsed",label:"Bonus Action", emoji:"+", color:"var(--amber)",   bg:"rgba(245,158,11,0.1)",  border:"rgba(245,158,11,0.35)", hints:""},
                 {key:"reactionUsed",   label:"Reaction",     emoji:"!", color:"var(--green)",   bg:"rgba(34,197,94,0.1)",   border:"rgba(34,197,94,0.35)",  hints:"", actionDice:true},
-              ].map(({key,label,emoji,color,bg,border,hints,actionDice})=>{
+              ].map(({key,label,emoji,color:color0,bg,border,hints,actionDice})=>{
+                const color=darkMode?color0:(color0==="var(--amber)"?"#b45309":color0==="var(--green)"?"#15803d":color0);
                 const used = char[key];
                 const itemKey = key.replace("Used","Items");
                 const storedItems = char[itemKey]||[];
@@ -28864,9 +28865,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           cursor:"pointer", transition:"all .18s", fontFamily:"inherit",
                           opacity:used?0.45:1,
                         }}>
-                        <div style={{fontSize:23,lineHeight:1,color,opacity:used?0.3:1,transition:"opacity .18s"}}>{emoji}</div>
-                        <div style={{fontSize:13,fontWeight:800,color:used?"var(--muted)":color}}>{label}</div>
-                        <div style={{fontSize:10,color:"var(--muted)",fontWeight:600}}>{used?"Used":"Available"}</div>
+                        <div style={{fontSize:23,lineHeight:1,color,opacity:used?0.3:1,transition:"opacity .18s",textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>{emoji}</div>
+                        <div style={{fontSize:13,fontWeight:800,color:used?"var(--muted)":color,textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>{label}</div>
+                        <div style={{fontSize:10,color:"var(--muted)",fontWeight:600,textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>{used?"Used":"Available"}</div>
                       </button>
                       {/* Action card — always open */}
                       <div style={{flex:1,background:"var(--card)",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden",minHeight:66}}>
@@ -28917,7 +28918,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                 <option value="healing">Healing</option>
                               </optgroup>
                             </select>
-                            <button style={{fontSize:12,fontWeight:700,color:color,background:"rgba(0,0,0,0.04)",border:"1px solid "+border,borderRadius:7,padding:"2px 9px",cursor:"pointer",fontFamily:"inherit"}}
+                            <button style={{fontSize:12,fontWeight:700,color:color,background:"rgba(0,0,0,0.04)",border:"1px solid "+border,textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)",borderRadius:7,padding:"2px 9px",cursor:"pointer",fontFamily:"inherit"}}
                               onClick={e=>{e.stopPropagation();setActionPickerOpen(actionPickerOpen===key?null:key);}}>+ Add</button>
                           </div>
                         </div>
