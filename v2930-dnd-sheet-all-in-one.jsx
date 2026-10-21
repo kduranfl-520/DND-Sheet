@@ -5770,7 +5770,7 @@ function App() {
   const sorcNote = (txt)=><div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>{txt}</span></div>;
   const sorcSetUsed = (v)=>setCharSaving(p=>({...p,sorcSPUsed:Math.max(0,Math.min(sorcSPMax,v))}));
   const sorcSpend = (n)=>setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+n)}));
-  const sorcReadout = <span style={{fontSize:11,color:"var(--muted)",fontWeight:700,textTransform:"uppercase"}}>Sorcery Points ({sorcSPLeft}/{sorcSPMax})</span>;
+  const sorcReadout = <span style={{fontSize:11,color:"var(--muted)",fontWeight:700,textTransform:"uppercase",letterSpacing:".05em"}}>Sorcery Points ({sorcSPLeft}/{sorcSPMax})</span>;
   const sorcPips = ()=>(
     <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginTop:6}}>
       <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
@@ -24999,8 +24999,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
   const _label=_prepFormula?"Prepared":_skt?"Known":null;
   return(
     <div style={{display:"flex",justifyContent:"center",gap:16,padding:"4px 0 6px",fontSize:13,fontWeight:600}}>
-      <span style={{color:(_k-_r)>=_m?"#f87171":"#a78bfa"}}>Cantrips: {Math.max(0,_k-_r)}/{_m}{_r?" (+1 racial)":""}</span>
-      {_sm&&<span style={{color:_sk>=_sm?"#f87171":"#a78bfa"}}>Spells {_label||"Known"}: {_sk}/{_sm}</span>}
+      <span style={{color:(_k-_r)>=_m?"var(--red)":"var(--accent)"}}>Cantrips: {Math.max(0,_k-_r)}/{_m}{_r?" (+1 racial)":""}</span>
+      {_sm&&<span style={{color:_sk>=_sm?"var(--red)":"var(--accent)"}}>Spells {_label||"Known"}: {_sk}/{_sm}</span>}
     </div>
   );
 })()}
@@ -27339,7 +27339,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           <span style={{fontSize:12}}>📖</span>
                           <span style={{fontSize:10,fontWeight:700,letterSpacing:".07em",textTransform:"uppercase",color:"var(--muted)"}}>Spell Books</span>
                         </div>
-                        <button className="ri-add-btn"
+                        <button style={{fontSize:12,fontWeight:700,color:"var(--accent)",background:"rgba(var(--accent-rgb),0.08)",border:"1px solid rgba(var(--accent-rgb),0.25)",borderRadius:6,padding:"1px 8px",cursor:"pointer"}}
                           onClick={()=>{
                             const name = prompt("Spellbook name:");
                             if(name&&name.trim()) updateBooks([...sbBooks,{name:name.trim(),spells:[]}]);
@@ -28866,7 +28866,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                         }}>
                         <div style={{fontSize:23,lineHeight:1,color,opacity:used?0.3:1,transition:"opacity .18s"}}>{emoji}</div>
                         <div style={{fontSize:13,fontWeight:800,color:used?"var(--muted)":color}}>{label}</div>
-                        <div style={{fontSize:10,color:"var(--subtle)",fontWeight:500}}>{used?"Used":"Available"}</div>
+                        <div style={{fontSize:10,color:"var(--muted)",fontWeight:600}}>{used?"Used":"Available"}</div>
                       </button>
                       {/* Action card — always open */}
                       <div style={{flex:1,background:"var(--card)",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden",minHeight:66}}>
@@ -32088,7 +32088,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                       </div>
                     </div>
                     {/* Hints below both */}
-                    <div style={{fontSize:10,color:"var(--subtle)",lineHeight:1.6,paddingLeft:2}}>{hints}</div>
+                    <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.6,paddingLeft:2}}>{hints}</div>
                   </div>
                 );
               })}
