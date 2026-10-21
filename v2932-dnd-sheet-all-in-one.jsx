@@ -28629,6 +28629,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                   const hasFeat=f=>Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat===f);
                   const alreadyIn=name=>storedItems.some(i=>i.name.startsWith(name));
                   const actHasCantrip=acts.some(i=>SPELL_DATA[i.name]?.level===0);
+                  // Storm Sorcery — Tempestuous Magic pops up when a 1st-level-or-higher spell is in the Action slot
+                  if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&acts.some(i=>(SPELL_DATA[i.name]?.level||0)>=1)&&!alreadyIn("Tempestuous Magic")){
+                    autoInjectBA.push("⚡ Tempestuous Magic — Fly 10 ft");
+                  }
                   // Battle Magic — Valor Bard L14+, spell as action
                   if(char.charClass==="Bard"&&char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=14&&actHasSpell&&!alreadyIn("Battle Magic")){
                     autoInjectBA.push("⚡ Battle Magic — Weapon attack");
@@ -29011,6 +29015,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  "Hound of Ill Omen — Summon the Hound":"Spend 3 sorcery points to call a spectral dire wolf against a creature within 120 feet. It lasts 5 minutes, and while it is next to the target, that target has disadvantage on saves against your spells.",
  "Shadow Walk — Teleport 120 ft":"From dim light or darkness, teleport up to 120 feet to an unoccupied space you can see that is also in dim light or darkness.",
  "Umbral Form — Become Shadow":"Spend 6 sorcery points to become a shadowy form for 1 minute: resistance to all damage except force and radiant, and you can move through creatures and objects.",
+ "Storm Guide — Stop the Rain":"Stop rain from falling in a 20-foot-radius sphere centered on you. You can end the effect as a bonus action.",
+ "Storm Guide — Set the Wind":"Once per round, choose the direction of the wind in a 100-foot-radius sphere centered on you. It holds until the end of your next turn and doesn't change the wind's speed.",
  "Tempestuous Magic — Fly 10 ft":"Right before or after casting a spell of 1st level or higher, fly up to 10 feet without provoking opportunity attacks.",
  "Storm's Fury — Lightning Retort":"When a melee attack hits you, deal lightning damage equal to your sorcerer level to the attacker, who also makes a Strength save against your spell save DC or is pushed up to 20 feet.",
  "Wind Soul — Share Flight":"Drop your own flying speed to 30 feet for 1 hour to give a 30-foot flying speed to up to 3 + your Charisma modifier creatures within 30 feet. Once per short or long rest.",
@@ -32211,6 +32217,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               if(char.charClass==="Sorcerer"&&sorcLvl>=3&&sorcChosenMeta.length>0) actFeatures.push("Metamagic — Modify a Spell");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=18) actFeatures.push("Draconic Presence — Aura of Awe or Fear");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=18) actFeatures.push("Wind Soul — Share Flight");
+              if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=6) actFeatures.push("Storm Guide — Stop the Rain");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Aberrant Mind (Sorcerer)"&&sorcLvl>=18) actFeatures.push("Warping Implosion — Teleport and Pull");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Clockwork Soul (Sorcerer)"&&sorcLvl>=6) actFeatures.push("Bastion of Law — Create a Ward");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Clockwork Soul (Sorcerer)"&&sorcLvl>=18) actFeatures.push("Clockwork Cavalcade — Heal and Repair");
@@ -32873,6 +32880,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 if(char.sorcOrigin==="Draconic Bloodline (Sorcerer)"&&sorcLvl>=14) baFeatures.push("Dragon Wings — Sprout or Dismiss");
                 if(char.sorcOrigin==="Divine Soul (Sorcerer)"&&sorcLvl>=14) baFeatures.push("Otherworldly Wings — Manifest or Dismiss");
                 if(char.sorcOrigin==="Storm Sorcery (Sorcerer)") baFeatures.push("Tempestuous Magic — Fly 10 ft");
+                if(char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=6) baFeatures.push("Storm Guide — Set the Wind");
                 if(char.sorcOrigin==="Aberrant Mind (Sorcerer)") baFeatures.push("Telepathic Speech — Link Minds");
                 if(char.sorcOrigin==="Clockwork Soul (Sorcerer)"&&sorcLvl>=14) baFeatures.push("Trance of Order — Enter Trance");
                 if(char.sorcOrigin==="Aberrant Mind (Sorcerer)"&&sorcLvl>=14) baFeatures.push("Revelation in Flesh — Transform");
