@@ -7876,7 +7876,9 @@ function App() {
                   ? ({Black:"Acid",Blue:"Lightning",Brass:"Fire",Bronze:"Lightning",Copper:"Acid",Gold:"Fire",Green:"Poison",Red:"Fire",Silver:"Cold",White:"Cold"}[char.sorcDragon]||null)
                   : null;
  const sorcPsychicDef = char.charClass==="Sorcerer"&&char.sorcOrigin==="Aberrant Mind (Sorcerer)"&&sorcLvl>=6&&!(char.resistances||[]).find(x=>String(x).toLowerCase()==="psychic");
+ const sorcHeartStorm = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=6)?["Lightning","Thunder"].filter(d=>!(char.resistances||[]).find(x=>String(x).toLowerCase()===d.toLowerCase())):[];
  const allEntries = [
+                  ...sorcHeartStorm.map(d=>({type:"Resistance",damage:d,racial:false,auto:true,label:"Heart of the Storm"})),
                   ...(sorcPsychicDef?[{type:"Resistance",damage:"Psychic",racial:false,auto:true,label:"Psychic Defenses"}]:[]),
                   ...(sorcAffType&&!(char.resistances||[]).find(x=>x.toLowerCase()===sorcAffType.toLowerCase())?[{type:"Resistance",damage:sorcAffType,racial:false,auto:true,label:"Elemental Affinity (1 hr)"}]:[]),
                   ...(char.resistances||[]).map(d=>({type:"Resistance",damage:d,racial:false})),
