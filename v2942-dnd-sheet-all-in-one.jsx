@@ -6017,6 +6017,7 @@ function App() {
     const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
+        {warNote("You can swap one invocation for another each time you gain a warlock level. Prerequisites use your warlock level; the spell and feature prerequisites are shown but not checked.")}
         {cur.map((c,i)=>(
           <React.Fragment key={i}>
             <select className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
@@ -6027,7 +6028,6 @@ function App() {
           </React.Fragment>
         ))}
         <div style={{display:"flex",justifyContent:"flex-end"}}><span style={sorcLbl}>Invocations ({warChosenInv.length}/{warInvMax})</span></div>
-        {warNote("You can swap one invocation for another each time you gain a warlock level. Prerequisites use your warlock level; the spell and feature prerequisites are shown but not checked.")}
       </div>
     );
   };
