@@ -8131,8 +8131,8 @@ function App() {
  setF("runeKnightInvokeUsed", {}); setF("frostRuneBuffActive", false); setF("hillRuneBuffActive", false);
                     }}>
                     <div>
-                      <div className="rest-btn-title" style={{color:"var(--accent)"}}>🌙 Long Rest</div>
-                      <div className="rest-btn-sub">Full restore</div>
+                      <div className="rest-btn-title" style={{color:"var(--accent)",textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>🌙 Long Rest</div>
+                      <div className="rest-btn-sub" style={{textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>Full restore</div>
                     </div>
                   </button>
                 </div>
