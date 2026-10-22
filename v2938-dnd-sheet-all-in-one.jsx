@@ -2549,6 +2549,8 @@ const BLANK = {
  bgFeat:"", bgToolChoice:"", bgLangChoices:[], bgConChoice:"", bgScheme:"", bgCrimSpec:"", bgEquipChosen:[], bgRoutine:"", bgDefEvent:"", bgGuildBiz:"", bgSeclusion:"", bgOutlanderOrigin:"", bgSageSpec:"", bgSoldierSpec:"", bgVariant:false, bgVariantTool:"", bgFactionSpec:"", bgKnightOrder:"", bgUthgardtTribe:"", bgSkillChoice:"", bgFactionSkill:"", bgFarWhy:"", bgFarFrom:"", bgInheritItem:"", bgKnightSkill:"", bgUBHSkills:[], bgUBHTools:[],
 };
 
+// Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
+const SHEET_UPDATED = "Oct 21, 2026";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8396,7 +8398,7 @@ function App() {
                 </div>
               )}
 
-              <div className="core-sheet-footer">Character Sheet . D&amp;D 2014 . 5th Edition . Updated Oct 21, 2026</div>
+              <div className="core-sheet-footer">Character Sheet . D&amp;D 2014 . 5th Edition . Updated {SHEET_UPDATED}</div>
             </div>
 
           </div>
