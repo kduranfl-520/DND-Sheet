@@ -8106,8 +8106,8 @@ function App() {
  setF("monkKiUsed", 0); setF("monkWholenessOfBodyUsed", false); setF("monkTranquilityUsed", false); setF("monkTranquilityActive", false); setF("monkShadowStepUsed", false); setF("monkTouchOfDeathUsed", false); setF("monkHourOfReapingUsed", false); setF("monkDrunkardsLuckUsed", false); setF("monkEmptyBodyInvisUsed", false);
                     }}>
                     <div>
-                      <div className="rest-btn-title" style={{color:"var(--amber)"}}>⚡ Short Rest</div>
-                      <div className="rest-btn-sub">Roll 1 hit die</div>
+                      <div className="rest-btn-title" style={{color:darkMode?"var(--amber)":"#b45309",textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>⚡ Short Rest</div>
+                      <div className="rest-btn-sub" style={{textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>Roll 1 hit die</div>
                     </div>
                   </button>
                   <button className="rest-btn rest-long"
