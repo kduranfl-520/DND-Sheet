@@ -6101,7 +6101,6 @@ function App() {
             </div>
           );
         })}
-        {warNote("Each Mystic Arcanum spell is cast once per long rest without a spell slot.")}
       </div>
     );
   };
