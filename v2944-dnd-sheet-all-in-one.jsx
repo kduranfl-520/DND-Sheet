@@ -6027,7 +6027,7 @@ function App() {
     const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
-        {warNote("You can swap one invocation for another each time you gain a warlock level. Invocations marked ! have prerequisites you don't meet yet. Eldritch Blast and Hex count once you choose them on the Spells tab (Hexblade's Curse and Sign of Ill Omen also count for the hex ones).")}
+        {warNote("You can swap one invocation for another each time you gain a warlock level. Invocations marked ! have prerequisites you don't meet yet.")}
         {cur.map((c,i)=>(
           <React.Fragment key={i}>
             <select className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
