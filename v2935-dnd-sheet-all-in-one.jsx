@@ -56,7 +56,7 @@ window.DND_LIBRARY = {
  {id:"cl_ranger", title:"Ranger", category:"Class", phb:true, tags:"nature,combat,PHB", desc:"A warrior who uses martial prowess and nature magic to combat threats on the edges of civilization.", notes:"Hit Die: d10. Primary: DEX, WIS. Saves: STR, DEX. Armor: Light, Medium, Shields. Weapons: Simple, Martial. Multiclass Prereq: DEX 13 and WIS 13. Spellcasting: WIS-based, half caster. Key Features: Favored Enemy, Natural Explorer, Fighting Style, Primeval Awareness, Extra Attack, Land's Stride, Hide in Plain Sight, Feral Senses."},
  {id:"cl_rogue", title:"Rogue", category:"Class", phb:true, tags:"stealth,sneak,PHB", desc:"A scoundrel who uses stealth and trickery to overcome obstacles and enemies.", notes:"Hit Die: d8. Primary: DEX. Saves: DEX, INT. Armor: Light. Weapons: Simple, hand crossbow, longsword, rapier, shortsword. Multiclass Prereq: DEX 13. No spellcasting (base). Key Features: Expertise, Sneak Attack (1d6, scales), Thieves' Cant, Cunning Act, Uncanny Dodge, Evasion, Reliable Talent, Blindsense, Slippery Mind."},
  {id:"cl_sorcerer", title:"Sorcerer", category:"Class", phb:true, tags:"innate,magic,PHB", desc:"A spellcaster who draws on inherent magic from a gift or bloodline.", notes:"Hit Die: d6. Primary: CHA. Saves: CON, CHA. Armor: None. Weapons: Simple. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, full caster, limited spells known. Key Features: Sorcerous Origin (subclass at 1), Font of Magic (Sorcery Points), Metamagic, Sorcerous Restoration."},
- {id:"cl_warlock", title:"Warlock", category:"Class", phb:true, tags:"patron,pact,PHB", desc:"A wielder of magic derived from a bargain with an extraplanar entity.", notes:"Hit Die: d8. Primary: CHA. Saves: WIS, CHA. Armor: Light. Weapons: Simple. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, Pact Magic (SR slots, all slots same level). Key Features: Otherworldly Patron (subclass at 1), Eldritch Invocations, Pact Boon (Blade/Chain/Rod/Tome), Mystic Arcanum, Eldritch Master."},
+ {id:"cl_warlock", title:"Warlock", category:"Class", phb:true, tags:"patron,pact,PHB", desc:"A wielder of magic derived from a bargain with an extraplanar entity.", notes:"Hit Die: d8. Primary: CHA. Saves: WIS, CHA. Armor: Light. Weapons: Simple. Multiclass Prereq: CHA 13. Spellcasting: CHA-based, Pact Magic (SR slots, all slots same level). Key Features: Otherworldly Patron (subclass at 1), Eldritch Invocations, Pact Boon (Blade/Chain/Tome), Mystic Arcanum, Eldritch Master."},
  {id:"cl_wizard", title:"Wizard", category:"Class", phb:true, tags:"arcane,scholar,PHB", desc:"A scholarly magic-user capable of manipulating structures of reality.", notes:"Hit Die: d6. Primary: INT. Saves: INT, WIS. Armor: None. Weapons: Simple. Multiclass Prereq: INT 13. Multiclass Gains: Spellcasting (if first level taken). Spellcasting: INT-based, prepared from spellbook, all wizard spells. Slots: Full caster."},
  {id:"cl_artificer", title:"Artificer", category:"Class", phb:true, tags:"magic,crafting,PHB2024", desc:"Masters of unlocking magic in everyday objects, artificers are supreme inventors who use tools and ingenuity to create.", notes:"Hit Die: d8. Primary: INT. Saves: CON, INT. Armor: Light, Medium, Shields. Weapons: Simple. Tools: Thieves' tools, tinker's tools, one artisan's tools. Multiclass Prereq: INT 13. Multiclass Gains: Light & medium armor, shields, thieves' tools, tinker's tools. Spellcasting: INT-based, half caster. Key Features: Magical Tinkering, Infuse Item, Arcane Armor, Tool Expertise."},
 
@@ -1460,8 +1460,12 @@ window.DND_LIBRARY = {
  {id:"ft_druid_cantrip_versatility",title:"Cantrip Versatility",category:"Feature",phb:false,tags:"druid,TCE",desc:"Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you know from this class with another cantrip from the druid spell list.",notes:""},
  {id:"ft_monastic_tradition",title:"Monastic Tradition",category:"Feature",phb:true,tags:"monk,subclass,PHB",desc:"At 3rd level, you commit yourself to a monastic tradition of your choosing.",notes:"Notes: Additional features from your chosen tradition at levels 6, 11, and 17."},
  {id:"ft_arcane_recovery",title:"Arcane Recovery",category:"Feature",phb:true,tags:"wizard,PHB",desc:"You have learned to regain some of your magical energy by studying your spellbook.",notes:"Activation: During a short rest | Benefit: Recover spell slots with a combined level equal to half your wizard level (rounded up); no slot above 5th level | Notes: Once per day. Does not work during a long rest."},
- {id:"ft_pact_magic",title:"Pact Magic",category:"Feature",phb:true,tags:"warlock,PHB",desc:"Your arcane research and the magic bestowed on you by your patron have given you facility with spells.",notes:"Benefit: Cast warlock spells using Pact Magic spell slots, which recharge on a short or long rest | Notes: All Pact Magic slots are the same level (scales with character level). You have very few slots but recover them on any rest. Spellcasting ability is Charisma."},
- {id:"ft_eldritch_invocations",title:"Eldritch Invocations",category:"Feature",phb:true,tags:"warlock,PHB",desc:"In your study of occult lore, you have unearthed Eldritch Invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability.",notes:"Benefit: Choose invocations from the warlock list — each grants a persistent ability or spell you can cast | Notes: You gain more invocations as you level. You can replace one invocation when you gain a warlock level."},
+ {id:"ft_pact_magic",title:"Pact Magic",category:"Feature",phb:true,tags:"warlock,PHB",desc:"Your patron's gift lets you cast warlock spells using Charisma. You have only a few spell slots, but they are all the same level, and they come back whenever you finish a short or long rest. An arcane focus works as your spellcasting focus.",notes:""},
+ {id:"ft_eldritch_invocations",title:"Eldritch Invocations",category:"Feature",phb:true,tags:"warlock,PHB",desc:"You unearth fragments of forbidden knowledge that grant you abiding magical abilities. You learn two invocations at 2nd level and more at 5th, 7th, 9th, 12th, 15th, and 18th level. Each time you gain a warlock level, you can swap one invocation for another you qualify for.",notes:""},
+ {id:"ft_otherworldly_patron",title:"Otherworldly Patron",category:"Feature",phb:true,tags:"warlock,PHB",desc:"You have struck a bargain with an otherworldly being. Your patron grants features at 1st level and again at 6th, 10th, and 14th level.",notes:""},
+ {id:"ft_pact_boon",title:"Pact Boon",category:"Feature",phb:true,tags:"warlock,PHB",desc:"At 3rd level your patron rewards your service with a gift: a familiar, a pact weapon, or a Book of Shadows.",notes:""},
+ {id:"ft_mystic_arcanum",title:"Mystic Arcanum",category:"Feature",phb:true,tags:"warlock,PHB",desc:"Your patron bestows magical secrets called arcana. You choose a 6th-level warlock spell at 11th level, then a 7th, 8th, and 9th-level spell at 13th, 15th, and 17th level. You can cast each one once without a spell slot, and you regain every use on a long rest.",notes:""},
+ {id:"ft_eldritch_master",title:"Eldritch Master",category:"Feature",phb:true,tags:"warlock,PHB",desc:"You can spend 1 minute entreating your patron to regain all your expended Pact Magic spell slots. Once you do, you must finish a long rest before you can do it again.",notes:""},
  {id:"ft_ki",title:"Ki",category:"Feature",phb:true,tags:"monk,PHB",desc:"Starting at 2nd level, your training allows you to harness the mystic energy of ki.",notes:"Activation: Varies by ki ability used | Benefit: Spend ki points to use Flurry of Blows (2 unarmed strikes, BA), Patient Defense (Dodge, BA), Step of the Wind (Dash/Disengage, BA), and Stunning Strike | Notes: Ki points = monk level. Recharge on short or long rest."},
  {id:"ft_martial_arts",title:"Martial Arts",category:"Feature",phb:true,tags:"monk,PHB",desc:"Your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons.",notes:"Benefit: Use DEX instead of STR for unarmed strikes and monk weapons | Benefit: Unarmed strikes deal 1d4 (scales to 1d10 at L17) instead of 1 | Benefit: After attacking with unarmed strike or monk weapon, make one unarmed strike as a bonus action | Notes: Monk weapons are shortswords and simple weapons without heavy/two-handed properties"},
  {id:"ft_metamagic",title:"Metamagic",category:"Feature",phb:true,tags:"sorcerer,PHB",desc:"From 3rd level you can twist your spells to suit your needs. You choose two Metamagic options, and learn another at 10th and again at 17th level.",notes:""},
@@ -2364,7 +2368,7 @@ const CLASSES = {
   Ranger: { spellsKnownTable:[0,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11],halfCaster:true,hitDie:10, primaryAbility:"DEX/WIS", savingThrows:["STR","DEX"], armorProf:["Light","Medium","Shields"], weaponProf:["Simple","Martial"], skillChoices:["Animal Handling","Athletics","Insight","Investigation","Nature","Perception","Stealth","Survival"], skillCount:3, features:{1:["Favored Enemy","Natural Explorer"],2:["Fighting Style","Spellcasting (WIS)"],3:["Ranger Archetype (Subclass)","Primeval Awareness"],4:["Ability Score Increase","Martial Versatility"],5:["Extra Attack"],6:["Favored Enemy (2nd enemy)","Natural Explorer (2nd terrain)"],7:["Ranger Archetype Feature"],8:["Ability Score Increase","Land's Stride"],10:["Natural Explorer (3rd terrain)","Hide in Plain Sight"],11:["Ranger Archetype Feature"],12:["Ability Score Increase"],14:["Favored Enemy (3rd enemy)","Vanish"],15:["Ranger Archetype Feature"],16:["Ability Score Increase"],18:["Feral Senses"],19:["Ability Score Increase"],20:["Foe Slayer"]}, startingEquipment:"Scale mail or leather armor; Two shortswords or two simple melee weapons; Dungeoneer's Pack or Explorer's Pack; Longbow + 20 arrows", spellcastingAbility:"WIS", spells:{1:["Absorb Elements","Alarm","Animal Friendship","Beast Bond","Cure Wounds","Detect Magic","Detect Poison and Disease","Ensnaring Strike","Entangle","Fog Cloud","Goodberry","Hail of Thorns","Hunter's Mark","Jump","Longstrider","Snare","Speak with Animals","Zephyr Strike"],2:["Aid","Animal Messenger","Barkskin","Beast Sense","Cordon of Arrows","Darkvision","Find Traps","Gust of Wind","Healing Spirit","Lesser Restoration","Locate Animals or Plants","Locate Object","Magic Weapon","Pass without Trace","Protection from Poison","Silence","Spike Growth","Summon Beast"],3:["Conjure Animals","Conjure Barrage","Daylight","Dispel Magic","Elemental Weapon","Flame Arrows","Lightning Arrow","Meld into Stone","Nondetection","Plant Growth","Protection from Energy","Revivify","Speak with Plants","Summon Fey","Water Breathing","Water Walk","Wind Wall"],4:["Conjure Woodland Beings","Dominate Beast","Freedom of Movement","Grasping Vine","Guardian of Nature","Locate Creature","Stoneskin","Summon Elemental"],5:["Commune with Nature","Conjure Volley","Greater Restoration","Steel Wind Strike","Swift Quiver","Tree Stride","Wrath of Nature"]} },
   Rogue: { hitDie:8, primaryAbility:"DEX", savingThrows:["DEX","INT"], armorProf:["Light"], weaponProf:["Simple","Hand Crossbow","Longsword","Rapier","Shortsword"], toolProf:["Thieves' tools"], cantripKnown:[0,0,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4], spellsKnownTable:[0,0,3,4,4,4,5,6,6,7,8,8,9,10,10,11,11,11,12,13], skillChoices:["Acrobatics","Athletics","Deception","Insight","Intimidation","Investigation","Perception","Persuasion","Sleight of Hand","Stealth"], skillCount:4, features:{1:["Expertise (2 skills)","Sneak Attack","Thieves' Cant"],2:["Cunning Action"],3:["Steady Aim","Roguish Archetype (Subclass)"],4:["Ability Score Increase"],5:["Uncanny Dodge"],6:["Expertise (2 more skills)"],7:["Evasion"],8:["Ability Score Increase"],9:["Roguish Archetype Feature"],10:["Ability Score Increase"],11:["Reliable Talent"],12:["Ability Score Increase"],13:["Roguish Archetype Feature"],14:["Blindsense"],15:["Slippery Mind"],16:["Ability Score Increase"],17:["Roguish Archetype Feature"],18:["Elusive"],19:["Ability Score Increase"],20:["Stroke of Luck"]}, startingEquipment:"Rapier or shortsword; Shortbow + 20 arrows or shortsword; Burglar's Pack, Dungeoneer's Pack, or Explorer's Pack; Leather armor, two daggers, and thieves' tools", spellcastingAbility:null, spells:{} },
   Sorcerer: { spellsKnownTable:[2,3,4,5,6,7,8,9,10,11,12,12,13,13,14,14,15,15,15,15],cantripKnown:[4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6],hitDie:6, primaryAbility:"CHA", savingThrows:["CON","CHA"], armorProf:[], weaponProf:["Daggers","Darts","Slings","Quarterstaffs","Light Crossbows"], skillChoices:["Arcana","Deception","Insight","Intimidation","Persuasion","Religion"], skillCount:2, features:{1:["Spellcasting (CHA)","Sorcerous Origin (Subclass)"],2:["Font of Magic"],3:["Metamagic"],4:["Ability Score Increase","Sorcerous Versatility"],5:["Magical Guidance"],6:["Subclass Feature"],8:["Ability Score Increase"],10:["Metamagic"],12:["Ability Score Increase"],14:["Subclass Feature"],16:["Ability Score Increase"],17:["Metamagic"],18:["Subclass Feature"],19:["Ability Score Increase"],20:["Sorcerous Restoration"]}, startingEquipment:"Light crossbow + 20 bolts or any simple weapon; Component pouch or arcane focus; Dungeoneer's Pack or Explorer's Pack; Two daggers", spellcastingAbility:"CHA", spells:{cantrips:["Acid Splash","Blade Ward","Booming Blade","Chill Touch","Control Flames","Create Bonfire","Dancing Lights","Fire Bolt","Friends","Frostbite","Green-Flame Blade","Gust","Infestation","Light","Lightning Lure","Mage Hand","Message","Mind Sliver","Minor Illusion","Mold Earth","Poison Spray","Prestidigitation","Ray of Frost","Shape Water","Shocking Grasp","Sword Burst","Thunderclap","True Strike"],1:["Absorb Elements","Burning Hands","Catapult","Chaos Bolt","Charm Person","Chromatic Orb","Color Spray","Comprehend Languages","Detect Magic","Disguise Self","Earth Tremor","Expeditious Retreat","False Life","Feather Fall","Fog Cloud","Grease","Ice Knife","Jump","Mage Armor","Magic Missile","Ray of Sickness","Shield","Silent Image","Sleep","Tasha's Caustic Brew","Thunderwave","Witch Bolt"],2:["Aganazzar's Scorcher","Alter Self","Arcane Vigor","Blindness/Deafness","Blur","Cloud of Daggers","Crown of Madness","Darkness","Darkvision","Detect Thoughts","Dragon's Breath","Dust Devil","Earthbind","Enhance Ability","Enlarge/Reduce","Flame Blade","Flaming Sphere","Gust of Wind","Hold Person","Invisibility","Knock","Levitate","Magic Weapon","Maximilian's Earthen Grasp","Mind Spike","Mirror Image","Misty Step","Phantasmal Force","Pyrotechnics","Scorching Ray","See Invisibility","Shadow Blade","Shatter","Snilloc's Snowball Swarm","Spider Climb","Suggestion","Tasha's Mind Whip","Warding Wind","Web"],3:["Blink","Catnap","Clairvoyance","Counterspell","Daylight","Dispel Magic","Enemies Abound","Erupting Earth","Fear","Fireball","Flame Arrows","Fly","Gaseous Form","Haste","Hypnotic Pattern","Intellect Fortress","Lightning Bolt","Major Image","Melf's Minute Meteors","Protection from Energy","Sleet Storm","Slow","Stinking Cloud","Thunder Step","Tidal Wave","Tongues","Vampiric Touch","Wall of Water","Water Breathing","Water Walk"],4:["Banishment","Blight","Charm Monster","Confusion","Dimension Door","Dominate Beast","Fire Shield","Greater Invisibility","Ice Storm","Polymorph","Sickening Radiance","Storm Sphere","Stoneskin","Vitriolic Sphere","Wall of Fire","Watery Sphere"],5:["Animate Objects","Bigby's Hand","Cloudkill","Cone of Cold","Control Winds","Creation","Dominate Person","Enervation","Far Step","Hold Monster","Immolation","Insect Plague","Seeming","Skill Empowerment","Synaptic Static","Telekinesis","Teleportation Circle","Wall of Light","Wall of Stone"],6:["Arcane Gate","Chain Lightning","Circle of Death","Disintegrate","Eyebite","Flesh to Stone","Globe of Invulnerability","Investiture of Flame","Investiture of Ice","Investiture of Stone","Investiture of Wind","Mass Suggestion","Mental Prison","Move Earth","Otiluke's Freezing Sphere","Scatter","Sunbeam","Tasha's Otherworldly Guise","True Seeing"],7:["Crown of Stars","Delayed Blast Fireball","Dream of the Blue Veil","Etherealness","Finger of Death","Fire Storm","Plane Shift","Power Word Pain","Prismatic Spray","Reverse Gravity","Teleport","Whirlwind"],8:["Abi-Dalzim's Horrid Wilting","Demiplane","Dominate Monster","Earthquake","Incendiary Cloud","Power Word Stun","Sunburst"],9:["Blade of Disaster","Gate","Mass Polymorph","Meteor Swarm","Power Word Kill","Psychic Scream","Time Stop","Wish"]} },
-  Warlock: { warlockCaster:true,spellsKnownTable:[2,3,4,5,6,7,8,9,10,10,11,11,12,12,13,13,14,14,15,15],cantripKnown:[2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],hitDie:8, primaryAbility:"CHA", savingThrows:["WIS","CHA"], armorProf:["Light"], weaponProf:["Simple"], skillChoices:["Arcana","Deception","History","Intimidation","Investigation","Nature","Religion"], skillCount:2, features:{1:["Eldritch Invocations (1)","Pact Magic (CHA, SR recharge)","Weapon Mastery"],2:["Eldritch Invocations (2 total)"],3:["Pact Boon (Blade/Chain/Talisman/Tome)","Otherworldly Patron (Subclass)"],4:["Ability Score Increase"],5:["Eldritch Invocations (3 total)","Pact Magic 3rd-level"],6:["Subclass Feature"],7:["Eldritch Invocations (4 total)"],8:["Ability Score Increase"],9:["Contact Patron","Pact Magic 5th-level"],10:["Subclass Feature","Eldritch Invocations (5 total)"]}, startingEquipment:"Light crossbow + 20 bolts or any simple weapon; Component pouch or arcane focus; Scholar's Pack or Dungeoneer's Pack; Leather armor; Any simple weapon; Two daggers", spellcastingAbility:"CHA", spells:{cantrips:["Blade Ward","Booming Blade","Chill Touch","Create Bonfire","Eldritch Blast","Friends","Frostbite","Green-Flame Blade","Infestation","Lightning Lure","Mage Hand","Magic Stone","Mind Sliver","Minor Illusion","Poison Spray","Prestidigitation","Sword Burst","Thunderclap","Toll the Dead","True Strike"],1:["Armor of Agathys","Arms of Hadar","Bane","Cause Fear","Charm Person","Comprehend Languages","Detect Magic","Expeditious Retreat","Hex","Hellish Rebuke","Illusory Script","Protection from Evil and Good","Speak with Animals","Tasha's Hideous Laughter","Unseen Servant","Witch Bolt"],2:["Cloud of Daggers","Crown of Madness","Darkness","Earthbind","Enthrall","Hold Person","Invisibility","Mind Spike","Mirror Image","Misty Step","Ray of Enfeeblement","Shadow Blade","Shatter","Spider Climb","Suggestion"],3:["Counterspell","Dispel Magic","Enemies Abound","Fear","Fly","Gaseous Form","Hunger of Hadar","Hypnotic Pattern","Intellect Fortress","Magic Circle","Major Image","Remove Curse","Spirit Shroud","Summon Fey","Summon Lesser Demons","Summon Shadowspawn","Summon Undead","Thunder Step","Tongues","Vampiric Touch"],4:["Banishment","Blight","Charm Monster","Dimension Door","Elemental Bane","Hallucinatory Terrain","Shadow of Moil","Sickening Radiance","Summon Aberration","Summon Greater Demon"],5:["Contact Other Plane","Danse Macabre","Dream","Enervation","Far Step","Hold Monster","Infernal Calling","Jallarzi's Storm of Radiance","Mislead","Negative Energy Flood","Planar Binding","Scrying","Synaptic Static","Teleportation Circle","Wall of Light"],6:["Arcane Gate","Circle of Death","Conjure Fey","Create Undead","Eyebite","Flesh to Stone","Investiture of Flame","Investiture of Ice","Investiture of Stone","Investiture of Wind","Mass Suggestion","Mental Prison","Scatter","Soul Cage","Summon Fiend","Tasha's Bubbling Cauldron","Tasha's Otherworldly Guise","True Seeing"],7:["Crown of Stars","Dream of the Blue Veil","Etherealness","Finger of Death","Forcecage","Plane Shift","Power Word Pain"],8:["Befuddlement","Demiplane","Dominate Monster","Feeblemind","Glibness","Maddening Darkness","Power Word Stun"],9:["Astral Projection","Blade of Disaster","Foresight","Gate","Imprisonment","Power Word Kill","Psychic Scream","True Polymorph","Weird"]} },
+  Warlock: { warlockCaster:true,spellsKnownTable:[2,3,4,5,6,7,8,9,10,10,11,11,12,12,13,13,14,14,15,15],cantripKnown:[2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],hitDie:8, primaryAbility:"CHA", savingThrows:["WIS","CHA"], armorProf:["Light"], weaponProf:["Simple"], skillChoices:["Arcana","Deception","History","Intimidation","Investigation","Nature","Religion"], skillCount:2, features:{1:["Otherworldly Patron (Subclass)","Pact Magic"],2:["Eldritch Invocations"],3:["Pact Boon"],4:["Ability Score Increase"],6:["Subclass Feature"],8:["Ability Score Increase"],10:["Subclass Feature"],11:["Mystic Arcanum"],12:["Ability Score Increase"],13:["Mystic Arcanum"],14:["Subclass Feature"],15:["Mystic Arcanum"],16:["Ability Score Increase"],17:["Mystic Arcanum"],19:["Ability Score Increase"],20:["Eldritch Master"]}, startingEquipment:"Light crossbow + 20 bolts or any simple weapon; Component pouch or arcane focus; Scholar's Pack or Dungeoneer's Pack; Leather armor; Any simple weapon; Two daggers", spellcastingAbility:"CHA", spells:{cantrips:["Blade Ward","Booming Blade","Chill Touch","Create Bonfire","Eldritch Blast","Friends","Frostbite","Green-Flame Blade","Infestation","Lightning Lure","Mage Hand","Magic Stone","Mind Sliver","Minor Illusion","Poison Spray","Prestidigitation","Sword Burst","Thunderclap","Toll the Dead","True Strike"],1:["Armor of Agathys","Arms of Hadar","Bane","Cause Fear","Charm Person","Comprehend Languages","Detect Magic","Expeditious Retreat","Hex","Hellish Rebuke","Illusory Script","Protection from Evil and Good","Speak with Animals","Tasha's Hideous Laughter","Unseen Servant","Witch Bolt"],2:["Cloud of Daggers","Crown of Madness","Darkness","Earthbind","Enthrall","Hold Person","Invisibility","Mind Spike","Mirror Image","Misty Step","Ray of Enfeeblement","Shadow Blade","Shatter","Spider Climb","Suggestion"],3:["Counterspell","Dispel Magic","Enemies Abound","Fear","Fly","Gaseous Form","Hunger of Hadar","Hypnotic Pattern","Intellect Fortress","Magic Circle","Major Image","Remove Curse","Spirit Shroud","Summon Fey","Summon Lesser Demons","Summon Shadowspawn","Summon Undead","Thunder Step","Tongues","Vampiric Touch"],4:["Banishment","Blight","Charm Monster","Dimension Door","Elemental Bane","Hallucinatory Terrain","Shadow of Moil","Sickening Radiance","Summon Aberration","Summon Greater Demon"],5:["Contact Other Plane","Danse Macabre","Dream","Enervation","Far Step","Hold Monster","Infernal Calling","Jallarzi's Storm of Radiance","Mislead","Negative Energy Flood","Planar Binding","Scrying","Synaptic Static","Teleportation Circle","Wall of Light"],6:["Arcane Gate","Circle of Death","Conjure Fey","Create Undead","Eyebite","Flesh to Stone","Investiture of Flame","Investiture of Ice","Investiture of Stone","Investiture of Wind","Mass Suggestion","Mental Prison","Scatter","Soul Cage","Summon Fiend","Tasha's Bubbling Cauldron","Tasha's Otherworldly Guise","True Seeing"],7:["Crown of Stars","Dream of the Blue Veil","Etherealness","Finger of Death","Forcecage","Plane Shift","Power Word Pain"],8:["Befuddlement","Demiplane","Dominate Monster","Feeblemind","Glibness","Maddening Darkness","Power Word Stun"],9:["Astral Projection","Blade of Disaster","Foresight","Gate","Imprisonment","Power Word Kill","Psychic Scream","True Polymorph","Weird"]} },
   Wizard: { preparedFormula:"INT+level",cantripKnown:[3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5],hitDie:6, primaryAbility:"INT", savingThrows:["INT","WIS"], armorProf:[], weaponProf:["Daggers","Darts","Slings","Quarterstaffs","Light Crossbows"], skillChoices:["Arcana","History","Insight","Investigation","Medicine","Religion"], skillCount:3, features:{1:["Arcane Recovery (½ level slots/SR)","Memorize Spell","Spellcasting (INT)","Weapon Mastery"],2:["Scholar (Expertise: Arcana or History)"],3:["Arcane Tradition (Subclass)","Cantrip Formulas"],4:["Ability Score Increase"],5:["Memorize Spell improvement"],6:["Subclass Feature"],7:["Spell Mastery (cantrip)"],8:["Ability Score Increase"],9:["Spell Mastery (1st-level)"],10:["Subclass Feature"]}, startingEquipment:"Quarterstaff or dagger; Component pouch or arcane focus; Scholar's Pack or Explorer's Pack; Spellbook", spellcastingAbility:"INT", spells:{cantrips:["Acid Splash","Blade Ward","Booming Blade","Chill Touch","Control Flames","Create Bonfire","Dancing Lights","Elementalism","Fire Bolt","Friends","Frostbite","Green-Flame Blade","Gust","Infestation","Light","Lightning Lure","Mage Hand","Mending","Message","Mind Sliver","Minor Illusion","Mold Earth","Poison Spray","Prestidigitation","Ray of Frost","Shape Water","Shocking Grasp","Sword Burst","Thunderclap","Toll the Dead","True Strike"],1:["Absorb Elements","Alarm","Burning Hands","Catapult","Cause Fear","Charm Person","Chromatic Orb","Color Spray","Comprehend Languages","Detect Magic","Disguise Self","Earth Tremor","Expeditious Retreat","False Life","Feather Fall","Find Familiar","Fog Cloud","Grease","Ice Knife","Identify","Illusory Script","Jump","Longstrider","Mage Armor","Magic Missile","Protection from Evil and Good","Ray of Sickness","Shield","Silent Image","Sleep","Snare","Tasha's Caustic Brew","Tasha's Hideous Laughter","Tenser's Floating Disc","Thunderwave","Unseen Servant","Witch Bolt"],2:["Aganazzar's Scorcher","Alter Self","Arcane Lock","Arcane Vigor","Augury","Blindness/Deafness","Blur","Cloud of Daggers","Continual Flame","Crown of Madness","Darkness","Darkvision","Detect Thoughts","Dragon's Breath","Dust Devil","Earthbind","Enhance Ability","Enlarge/Reduce","Flaming Sphere","Gentle Repose","Gust of Wind","Hold Person","Invisibility","Knock","Levitate","Locate Object","Magic Mouth","Magic Weapon","Maximilian's Earthen Grasp","Melf's Acid Arrow","Mind Spike","Mirror Image","Misty Step","Nystul's Magic Aura","Phantasmal Force","Pyrotechnics","Ray of Enfeeblement","Rope Trick","Scorching Ray","See Invisibility","Shadow Blade","Shatter","Skywrite","Snilloc's Snowball Swarm","Spider Climb","Suggestion","Tasha's Mind Whip","Warding Wind","Web"],3:["Animate Dead","Bestow Curse","Blink","Catnap","Clairvoyance","Counterspell","Dispel Magic","Enemies Abound","Erupting Earth","Fear","Feign Death","Fireball","Flame Arrows","Fly","Gaseous Form","Glyph of Warding","Haste","Hypnotic Pattern","Intellect Fortress","Life Transference","Lightning Bolt","Magic Circle","Major Image","Melf's Minute Meteors","Nondetection","Phantom Steed","Protection from Energy","Remove Curse","Sending","Sleet Storm","Slow","Speak with Dead","Spirit Shroud","Stinking Cloud","Summon Fey","Summon Lesser Demons","Summon Shadowspawn","Summon Undead","Thunder Step","Tidal Wave","Tiny Servant","Tongues","Vampiric Touch","Wall of Sand","Wall of Water","Water Breathing"],4:["Arcane Eye","Banishment","Blight","Charm Monster","Confusion","Conjure Minor Elementals","Control Water","Dimension Door","Divination","Elemental Bane","Evard's Black Tentacles","Fabricate","Fire Shield","Greater Invisibility","Hallucinatory Terrain","Ice Storm","Leomund's Secret Chest","Locate Creature","Mordenkainen's Faithful Hound","Mordenkainen's Private Sanctum","Otiluke's Resilient Sphere","Phantasmal Killer","Polymorph","Sickening Radiance","Stone Shape","Stoneskin","Storm Sphere","Summon Aberration","Summon Construct","Summon Elemental","Summon Greater Demon","Vitriolic Sphere","Wall of Fire","Watery Sphere"],5:["Animate Objects","Bigby's Hand","Circle of Power","Cloudkill","Cone of Cold","Conjure Elemental","Contact Other Plane","Control Winds","Creation","Danse Macabre","Dawn","Dominate Person","Dream","Enervation","Far Step","Geas","Hold Monster","Immolation","Infernal Calling","Jallarzi's Storm of Radiance","Legend Lore","Mislead","Modify Memory","Negative Energy Flood","Passwall","Planar Binding","Rary's Telepathic Bond","Scrying","Seeming","Skill Empowerment","Steel Wind Strike","Summon Dragon","Synaptic Static","Telekinesis","Teleportation Circle","Transmute Rock","Wall of Force","Wall of Light","Wall of Stone","Yolande's Regal Presence"],6:["Arcane Gate","Chain Lightning","Circle of Death","Contingency","Create Homunculus","Create Undead","Disintegrate","Drawmij's Instant Summons","Eyebite","Flesh to Stone","Globe of Invulnerability","Guards and Wards","Investiture of Flame","Investiture of Ice","Investiture of Stone","Investiture of Wind","Magic Jar","Mass Suggestion","Mental Prison","Move Earth","Otiluke's Freezing Sphere","Otto's Irresistible Dance","Programmed Illusion","Scatter","Soul Cage","Summon Fiend","Sunbeam","Tasha's Bubbling Cauldron","Tasha's Otherworldly Guise","Tenser's Transformation","True Seeing","Wall of Ice"],7:["Crown of Stars","Delayed Blast Fireball","Dream of the Blue Veil","Etherealness","Finger of Death","Forcecage","Mirage Arcane","Mordenkainen's Magnificent Mansion","Mordenkainen's Sword","Plane Shift","Power Word Pain","Prismatic Spray","Project Image","Reverse Gravity","Sequester","Simulacrum","Symbol","Teleport","Whirlwind"],8:["Abi-Dalzim's Horrid Wilting","Antimagic Field","Antipathy/Sympathy","Befuddlement","Clone","Control Weather","Demiplane","Dominate Monster","Feeblemind","Illusory Dragon","Incendiary Cloud","Maddening Darkness","Maze","Mighty Fortress","Mind Blank","Power Word Stun","Sunburst","Telepathy","Trap the Soul"],9:["Astral Projection","Blade of Disaster","Foresight","Gate","Imprisonment","Invulnerability","Mass Polymorph","Meteor Swarm","Power Word Kill","Prismatic Wall","Psychic Scream","Shapechange","Time Stop","True Polymorph","Weird","Wish"]} },
 };
 
@@ -2396,6 +2400,73 @@ const SPELL_SLOTS_THIRD = {
   10:[4,3],11:[4,3],12:[4,3],13:[4,3,2],14:[4,3,2],15:[4,3,2],
   16:[4,3,3],17:[4,3,3],18:[4,3,3],19:[4,3,3,1],20:[4,3,3,1],
 };
+// ===== WARLOCK data (2014 PHB + XGE; TCE options held back until Kelly decides) =====
+const WAR_INV_KNOWN=[0,2,2,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8];
+const WAR_ARCANUM_LVL={6:11,7:13,8:15,9:17};
+const WAR_BOONS=[
+  {n:"Pact of the Chain",pts:[
+    "You learn find familiar and can cast it as a ritual; it doesn't count against your spells known.",
+    "Your familiar can take the form of an imp, pseudodragon, quasit, or sprite, as well as the usual forms.",
+    "When you take the Attack action, you can give up one of your own attacks so your familiar can make one attack of its own using its reaction."]},
+  {n:"Pact of the Blade",pts:[
+    "You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it while you wield it, and it counts as magical.",
+    "It vanishes if it is ever more than 5 feet from you for 1 minute or more, if you use this feature again, if you dismiss it (no action), or if you die.",
+    "You can bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest). You can then dismiss it into an extradimensional space and summon it again with this feature."]},
+  {n:"Pact of the Tome",pts:[
+    "Your patron gives you a Book of Shadows. Choose three cantrips from the spell lists of any class; while the book is on you, you can cast them at will.",
+    "They count as warlock cantrips for you but not against your cantrips known.",
+    "If you lose the book you can perform a 1-hour ceremony to receive a replacement, and the book crumbles to ashes when you die."]}
+];
+// Eldritch Invocations. min = warlock level, boon = needed Pact Boon, need = spell/feature prerequisite (shown, not enforced), use = once-per-rest tracker
+const WAR_INV=[
+  {n:"Agonizing Blast",min:0,need:"Eldritch Blast cantrip",b:"PHB",d:"When you cast eldritch blast, add your Charisma modifier to the damage it deals on a hit (each beam)."},
+  {n:"Armor of Shadows",min:0,b:"PHB",d:"You can cast mage armor on yourself at will, without expending a spell slot or material components."},
+  {n:"Beast Speech",min:0,b:"PHB",d:"You can cast speak with animals at will, without expending a spell slot."},
+  {n:"Beguiling Influence",min:0,b:"PHB",d:"You gain proficiency in the Deception and Persuasion skills."},
+  {n:"Devil's Sight",min:0,b:"PHB",d:"You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet."},
+  {n:"Eldritch Sight",min:0,b:"PHB",d:"You can cast detect magic at will, without expending a spell slot."},
+  {n:"Eldritch Spear",min:0,need:"Eldritch Blast cantrip",b:"PHB",d:"When you cast eldritch blast, its range is 300 feet."},
+  {n:"Eyes of the Rune Keeper",min:0,b:"PHB",d:"You can read all writing."},
+  {n:"Fiendish Vigor",min:0,b:"PHB",d:"You can cast false life on yourself at will as a 1st-level spell, without expending a spell slot or material components."},
+  {n:"Gaze of Two Minds",min:0,b:"PHB",d:"You can use your action to touch a willing humanoid and perceive through its senses until the end of your next turn. While you're on the same plane, you can use your action on later turns to keep the link going. You gain any special senses it has, but you are blinded and deafened to your own surroundings."},
+  {n:"Grasp of Hadar",min:0,need:"Eldritch Blast cantrip",b:"XGE",d:"Once on each of your turns when you hit a creature with eldritch blast, you can move that creature in a straight line 10 feet closer to you."},
+  {n:"Lance of Lethargy",min:0,need:"Eldritch Blast cantrip",b:"XGE",d:"Once on each of your turns when you hit a creature with eldritch blast, you can reduce that creature's speed by 10 feet until the end of your next turn."},
+  {n:"Mask of Many Faces",min:0,b:"PHB",d:"You can cast disguise self at will, without expending a spell slot."},
+  {n:"Misty Visions",min:0,b:"PHB",d:"You can cast silent image at will, without expending a spell slot or material components."},
+  {n:"Repelling Blast",min:0,need:"Eldritch Blast cantrip",b:"PHB",d:"When you hit a creature with eldritch blast, you can push it up to 10 feet away from you in a straight line."},
+  {n:"Thief of Five Fates",min:0,b:"PHB",use:"lr",d:"You can cast bane once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Aspect of the Moon",min:0,boon:"Pact of the Tome",b:"XGE",d:"You no longer need to sleep and can't be forced to sleep by any means. To gain the benefits of a long rest, you can spend all 8 hours doing light activity, such as reading your Book of Shadows and keeping watch."},
+  {n:"Book of Ancient Secrets",min:0,boon:"Pact of the Tome",b:"PHB",d:"You can inscribe magical rituals in your Book of Shadows. Choose two 1st-level spells with the ritual tag from any class's list; you can cast them as rituals while the book is on you (not with spell slots). You can add more ritual spells you find if their level is no higher than half your warlock level (rounded up); each level of transcription takes 2 hours and 50 gp of inks."},
+  {n:"Gift of the Ever-Living Ones",min:0,boon:"Pact of the Chain",b:"XGE",d:"Whenever you regain hit points while your familiar is within 100 feet of you, treat any dice you roll to determine the amount as having rolled their maximum value."},
+  {n:"Improved Pact Weapon",min:0,boon:"Pact of the Blade",b:"XGE",d:"You can use any pact weapon you create as a spellcasting focus. If it lacks a magic bonus, it gains +1 to attack and damage rolls. The pact weapon can also be a shortbow, longbow, light crossbow, or heavy crossbow."},
+  {n:"Voice of the Chain Master",min:0,boon:"Pact of the Chain",b:"PHB",d:"You can communicate telepathically with your familiar and perceive through its senses as long as you are on the same plane. While perceiving through it, you can also speak through it in your own voice, even if it can't normally speak."},
+  {n:"Cloak of Flies",min:5,b:"XGE",use:"sr",d:"As a bonus action, you surround yourself with a 5-foot aura of buzzing flies until you're incapacitated or dismiss it (bonus action). You have advantage on Intimidation checks and disadvantage on all other Charisma checks. Any other creature that starts its turn in the aura takes poison damage equal to your Charisma modifier (minimum 1). Once used, you need a short or long rest to use it again."},
+  {n:"Eldritch Smite",min:5,boon:"Pact of the Blade",b:"XGE",d:"Once per turn when you hit a creature with your pact weapon, you can expend a warlock spell slot to deal extra force damage: 1d8 plus another 1d8 per level of the slot. If the target is Huge or smaller, you can also knock it prone."},
+  {n:"Gift of the Depths",min:5,b:"XGE",use:"lr",d:"You can breathe underwater and gain a swimming speed equal to your walking speed. You can also cast water breathing once without expending a spell slot, and regain that use when you finish a long rest."},
+  {n:"Maddening Hex",min:5,need:"a hex spell or a warlock feature that curses",b:"XGE",d:"As a bonus action, you cause a psychic spike to lash out from a target cursed by your hex spell or a warlock feature such as Hexblade's Curse or Sign of Ill Omen. The cursed target and each creature of your choice within 5 feet of it take psychic damage equal to your Charisma modifier (minimum 1). You must see the target, and it must be within 30 feet of you."},
+  {n:"Mire the Mind",min:5,b:"PHB",use:"lr",d:"You can cast slow once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"One with Shadows",min:5,b:"PHB",d:"When you're in an area of dim light or darkness, you can use your action to become invisible until you move or take an action or reaction."},
+  {n:"Sign of Ill Omen",min:5,b:"PHB",use:"lr",d:"You can cast bestow curse once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Thirsting Blade",min:5,boon:"Pact of the Blade",b:"PHB",d:"You can attack with your pact weapon twice, instead of once, whenever you take the Attack action on your turn."},
+  {n:"Tomb of Levistus",min:5,b:"XGE",use:"sr",d:"As a reaction when you take damage, you can entomb yourself in ice that melts away at the end of your next turn. You gain 10 temporary hit points per warlock level, which absorb as much of the triggering damage as possible. Right after the damage, you gain vulnerability to fire damage, your speed drops to 0, and you're incapacitated. These effects, and any remaining temporary hit points, end when the ice melts. Once used, you need a short or long rest to use it again."},
+  {n:"Bewitching Whispers",min:7,b:"PHB",use:"lr",d:"You can cast compulsion once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Dreadful Word",min:7,b:"PHB",use:"lr",d:"You can cast confusion once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Ghostly Gaze",min:7,b:"XGE",use:"sr",d:"As an action, you gain the ability to see through solid objects to a range of 30 feet. Within that range you have darkvision if you don't already. This sight lasts until the end of your next turn. Once used, you need a short or long rest to use it again."},
+  {n:"Relentless Hex",min:7,need:"a hex spell or a warlock feature that curses",b:"XGE",d:"As a bonus action, you can teleport up to 30 feet to an unoccupied space you can see that is within 5 feet of a target cursed by your hex spell or a warlock feature such as Hexblade's Curse or Sign of Ill Omen. You must see the target to do so."},
+  {n:"Sculptor of Flesh",min:7,b:"PHB",use:"lr",d:"You can cast polymorph once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Trickster's Escape",min:7,b:"XGE",use:"lr",d:"You can cast freedom of movement once on yourself, without expending a spell slot. You regain the ability to do so when you finish a long rest."},
+  {n:"Ascendant Step",min:9,b:"PHB",d:"You can cast levitate on yourself at will, without expending a spell slot or material components."},
+  {n:"Minions of Chaos",min:9,b:"PHB",use:"lr",d:"You can cast conjure elemental once using a warlock spell slot. You can't do so again until you finish a long rest."},
+  {n:"Otherworldly Leap",min:9,b:"PHB",d:"You can cast jump on yourself at will, without expending a spell slot or material components."},
+  {n:"Whispers of the Grave",min:9,b:"PHB",d:"You can cast speak with dead at will, without expending a spell slot."},
+  {n:"Lifedrinker",min:12,boon:"Pact of the Blade",b:"PHB",d:"When you hit a creature with your pact weapon, it takes extra necrotic damage equal to your Charisma modifier (minimum 1)."},
+  {n:"Chains of Carceri",min:15,boon:"Pact of the Chain",b:"PHB",d:"You can cast hold monster at will, targeting only a celestial, fiend, or elemental, without expending a spell slot or material components. You must finish a long rest before you can use this invocation on the same creature again."},
+  {n:"Master of Myriad Forms",min:15,b:"PHB",d:"You can cast alter self at will, without expending a spell slot."},
+  {n:"Shroud of Shadow",min:15,b:"XGE",d:"You can cast invisibility on yourself at will, without expending a spell slot."},
+  {n:"Visions of Distant Realms",min:15,b:"PHB",d:"You can cast arcane eye at will, without expending a spell slot."},
+  {n:"Witch Sight",min:15,b:"PHB",d:"You can see the true form of any shapechanger or creature concealed by illusion or transmutation magic while the creature is within 30 feet of you and within line of sight."}
+];
+const warInvPre=(i)=>[i.min>0?spellOrdLbl(i.min)+" level":"",i.boon||"",i.need||""].filter(Boolean).join(", ");
 // Warlock Pact Magic: all slots are same level, regain on short rest
 // Array index = slot level (1-based), value = number of slots
 // Warlock always uses their highest slot level for all slots
@@ -5880,6 +5951,159 @@ function App() {
       </div>
     );
   };
+  // ===== WARLOCK — Pact Magic slots, Invocations, Pact Boon, Mystic Arcanum, Eldritch Master (shared by Features + Rounds) =====
+  const warLvl = char.charClass==="Warlock" ? (char.multiClassLevel>0?char.classLevel:char.level||1) : 0;
+  const warInvMax = warLvl>=2 ? WAR_INV_KNOWN[Math.min(20,warLvl)-1] : 0;
+  const warInvUsedMap = (char.warInvUsed&&typeof char.warInvUsed==="object")?char.warInvUsed:{};
+  const warChosenInv = (Array.isArray(char.warInv)?char.warInv:[]).slice(0,warInvMax).filter(Boolean);
+  const warHas = (n)=>warLvl>0&&warChosenInv.includes(n);
+  const warBoon = warLvl>=3 ? (char.warBoon||"") : "";
+  const warBtn = sorcBtn, warLink = sorcLink, warNote = sorcNote;
+  const warInvOk = (i)=>warLvl>=i.min && (!i.boon || warBoon===i.boon);
+  const warPactPips = ()=>{
+    const a=Array.isArray(slots)?slots:[];
+    const li=a.findIndex(x=>x>0);
+    if(li<0) return null;
+    const total=a[li];
+    const sus=Array.isArray(char.spellSlotsUsed)?char.spellSlotsUsed:[];
+    const used=Math.min(total,sus[li]||0);
+    const left=total-used;
+    const setUsed=(n)=>setCharSaving(p=>{const s=Array.from({length:9},(_,k)=>(Array.isArray(p.spellSlotsUsed)?p.spellSlotsUsed:[])[k]||0);s[li]=Math.max(0,Math.min(total,n));return {...p,spellSlotsUsed:s};});
+    return(
+      <div style={{marginTop:6}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+          <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
+            {Array.from({length:total},(_,pi)=>{
+              const avail=pi<left;
+              return <button key={pi} title={avail?"Available — click to spend":"Spent — click to restore"} style={{width:18,height:18,borderRadius:"50%",border:"2px solid",flexShrink:0,cursor:"pointer",padding:0,background:avail?"rgba(var(--accent-rgb),0.2)":"var(--input)",borderColor:avail?"var(--accent)":"var(--border)"}}
+                onClick={e=>{e.stopPropagation();setUsed(avail?used+1:used-1);}}/>;
+            })}
+          </div>
+          <span style={sorcLbl}>Pact slots ({left}/{total}) · {spellOrdLbl(li+1)} level</span>
+        </div>
+        {used>0&&<div style={{display:"flex",justifyContent:"flex-end",marginTop:2}}><button style={warLink} onClick={e=>{e.stopPropagation();setUsed(0);}}>↺ Reset</button></div>}
+      </div>
+    );
+  };
+  const warInvBox = (nm)=>{
+    const i=WAR_INV.find(x=>x.n===nm);
+    if(!i) return null;
+    const pre=warInvPre(i);
+    const ok=warInvOk(i);
+    const used=!!warInvUsedMap[nm];
+    return(
+      <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
+          <span style={{fontSize:10,fontWeight:700,color:"var(--accent)",marginBottom:2}}>{i.n}</span>
+          {pre&&<span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>{pre}</span>}
+        </div>
+        <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{i.d}</div>
+        {!ok&&<div style={{fontSize:10,color:"var(--amber)",fontWeight:600,marginTop:4}}>⚠ You no longer meet the prerequisites — swap this for another invocation.</div>}
+        {i.use&&(
+          <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
+            <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}</span>
+            <button style={used?warLink:warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}}));}}>{used?"↺ Reset":"Mark Used"}</button>
+          </div>
+        )}
+      </div>
+    );
+  };
+  const warInvPick = ()=>{
+    if(warInvMax===0) return null;
+    const cur=Array.from({length:warInvMax},(_,i)=>warChosenInv[i]||"");
+    const setSlot=(i,v)=>setCharSaving(p=>{const a=Array.from({length:8},(_,k)=>(Array.isArray(p.warInv)?p.warInv:[])[k]||"");a[i]=v;return {...p,warInv:a};});
+    const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
+        {cur.map((c,i)=>(
+          <React.Fragment key={i}>
+            <select className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
+              <option value="">-- Choose invocation {i+1} --</option>
+              {opts.filter(o=>o.n===c||warInvOk(o)).map(o=>{const pre=warInvPre(o);return <option key={o.n} value={o.n} disabled={cur.includes(o.n)&&o.n!==c}>{o.n}{pre?" ("+pre+")":""}</option>;})}
+            </select>
+            {c&&warInvBox(c)}
+          </React.Fragment>
+        ))}
+        <div style={{display:"flex",justifyContent:"flex-end"}}><span style={sorcLbl}>Invocations ({warChosenInv.length}/{warInvMax})</span></div>
+        {warNote("You can swap one invocation for another each time you gain a warlock level. Prerequisites use your warlock level; the spell and feature prerequisites are shown but not checked.")}
+      </div>
+    );
+  };
+  const warBoonPick = ()=>{
+    if(warLvl<3) return null;
+    const sel=WAR_BOONS.find(b=>b.n===warBoon);
+    return(
+      <div style={{marginTop:8}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+          {WAR_BOONS.map(b=>{
+            const on=warBoon===b.n;
+            return <button key={b.n} className="ft-note-tag" style={{cursor:"pointer",fontFamily:"inherit",fontWeight:on?800:600,opacity:on?1:0.75,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)"}}
+              onClick={e=>{e.stopPropagation();setF("warBoon",on?"":b.n);}}>{b.n.replace("Pact of the ","")}</button>;
+          })}
+        </div>
+        {sel&&(
+          <div style={{display:"flex",flexDirection:"column",gap:4,paddingLeft:10,marginTop:8}}>
+            {sel.pts.map((t,k)=>(<div key={k} style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>))}
+          </div>
+        )}
+        {warBoon&&warChosenInv.some(n=>{const i=WAR_INV.find(x=>x.n===n);return i&&i.boon&&i.boon!==warBoon;})&&<div style={{fontSize:10,color:"var(--amber)",fontWeight:600,marginTop:6}}>⚠ Some of your invocations need a different Pact Boon.</div>}
+      </div>
+    );
+  };
+  const warArcanumPick = ()=>{
+    if(warLvl<11) return null;
+    const chaMod=abilityMod(eff.CHA||10);
+    const saveDC=8+pb+chaMod;
+    const picks=(char.warArcanum&&typeof char.warArcanum==="object")?char.warArcanum:{};
+    const maUsedMap=(char.mysticArcanum&&typeof char.mysticArcanum==="object")?char.mysticArcanum:{};
+    const wl=CLASSES.Warlock.spells||{};
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:8}} onClick={e=>e.stopPropagation()}>
+        {[6,7,8,9].filter(t=>warLvl>=WAR_ARCANUM_LVL[t]).map(t=>{
+          const cur=picks[t]||"";
+          const used=!!maUsedMap["lvl"+t];
+          const setPick=(v)=>setCharSaving(p=>{
+            const wp={...((p.warArcanum&&typeof p.warArcanum==="object")?p.warArcanum:{})};
+            const old=wp[t]||"";
+            wp[t]=v;
+            let sk=Array.isArray(p.spellsKnown)?p.spellsKnown.filter(s=>s!==old):[];
+            if(v&&!sk.includes(v)) sk=[...sk,v];
+            return {...p,warArcanum:wp,spellsKnown:sk};
+          });
+          return(
+            <div key={t} style={{display:"flex",flexDirection:"column",gap:4}}>
+              <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                <span style={{fontSize:10,color:"var(--muted)",fontWeight:700,minWidth:46}}>{spellOrdLbl(t)} lvl</span>
+                <select className="ri-sel" value={cur} onChange={e=>setPick(e.target.value)} style={{flex:1,minWidth:140,borderColor:"rgba(var(--accent-rgb),0.4)",color:cur?"var(--accent)":"var(--subtle)"}}>
+                  <option value="">-- Choose a {spellOrdLbl(t)}-level spell --</option>
+                  {(wl[t]||[]).slice().sort().map(s=><option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+              {cur&&<SpellSaveBox name={cur} sd={SPELL_DATA[cur]} dc={saveDC} saveKey={"warArcanum_"+cur} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>}
+              {cur&&(
+                <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+                  <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Cast — long rest":"Ready — no slot needed"}</span>
+                  <button style={used?warLink:warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,mysticArcanum:{...(p.mysticArcanum||{}),["lvl"+t]:!used}}));}}>{used?"↺ Reset":"Mark Cast"}</button>
+                </div>
+              )}
+            </div>
+          );
+        })}
+        {warNote("Each Mystic Arcanum spell is cast once per long rest without a spell slot.")}
+      </div>
+    );
+  };
+  const warMasterCard = ()=>{
+    if(warLvl<20) return null;
+    const used=!!char.warMasterUsed;
+    return(
+      <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:8}} onClick={e=>e.stopPropagation()}>
+        <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — long rest":"Ready — 1 per long rest"}</span>
+        {!used&&<button style={warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warMasterUsed:true,spellSlotsUsed:Array(9).fill(0)}));}}>Regain all Pact slots</button>}
+        {used&&<button style={warLink} onClick={e=>{e.stopPropagation();setF("warMasterUsed",false);}}>↺ Reset</button>}
+      </div>
+    );
+  };
   const toughnessBonus = char.subrace==="Hill Dwarf" ? (char.level||1) : 0;
   const toughFeatBonus = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Tough") ? (char.level||1)*2 : 0;
   const draconicHpBonus = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)") ? sorcLvl : 0;
@@ -8102,6 +8326,7 @@ function App() {
  setF("arcaneArcherShotUsed", 0);
  setF("runeKnightInvokeUsed", {}); setF("frostRuneBuffActive", false); setF("hillRuneBuffActive", false);
  setF("relentlessRageDC", 10); setF("sorcRestoUsed", false); setF("sorcFavoredUsed", false); setF("sorcWindUsed", false);
+ if(char.charClass==="Warlock"){ setF("spellSlotsUsed", Array(9).fill(0)); setF("warInvUsed", Object.fromEntries(Object.entries(char.warInvUsed||{}).filter(([k])=>{const wi=WAR_INV.find(x=>x.n===k);return !(wi&&wi.use==="sr");}))); }
  setF("paladinVowActive", false); setF("rangerNemesisUsed", false); setF("rangerSlayersPreyOn", false); setF("rangerDetectPortalUsed", false); setF("rangerEtherealStepUsed", false);
  setF("monkKiUsed", 0); setF("monkWholenessOfBodyUsed", false); setF("monkTranquilityUsed", false); setF("monkTranquilityActive", false); setF("monkShadowStepUsed", false); setF("monkTouchOfDeathUsed", false); setF("monkHourOfReapingUsed", false); setF("monkDrunkardsLuckUsed", false); setF("monkEmptyBodyInvisUsed", false);
                     }}>
@@ -8116,7 +8341,7 @@ function App() {
  setF("deathSaves.successes", 0);
  setF("deathSaves.failures", 0);
  TRINKET_TXT.length=0;
- setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
+ setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, warInvUsed:{}, warMasterUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
  setF("wisSpellUsed_ConsultTheSpirits", false);
  setF("libItemState", resetLibItemUses(char, libEntries, "long"));
  setF("fighterIndomitableUsed", 0);
@@ -9206,6 +9431,8 @@ function App() {
  const rogueArchetypeEntry = isRogueArchetype&&char.rogueArchetype ? libEntries.find(e=>e.title===char.rogueArchetype) : null;
  const isSorcOrigin = feat==="Sorcerous Origin" && char.charClass==="Sorcerer";
  const sorcOriginEntry = isSorcOrigin&&char.sorcOrigin ? libEntries.find(e=>e.title===char.sorcOrigin) : null;
+ const isWarPatron = feat==="Otherworldly Patron" && char.charClass==="Warlock";
+ const warPatronEntry = isWarPatron&&char.warPatron ? libEntries.find(e=>e.title===char.warPatron) : null;
  const isMartialArchetype = feat==="Martial Archetype" && char.charClass==="Fighter";
  const archetypeEntry = isMartialArchetype&&char.martialArchetype ? libEntries.find(e=>e.title===char.martialArchetype) : null;
  const isMonasticTradition = feat==="Monastic Tradition" && char.charClass==="Monk";
@@ -10756,6 +10983,29 @@ function App() {
                                   })()}
                                   {/* ===== ROGUE FEATURES ===== */}
                                   {/* Roguish Archetype — subclass picker (the archetype's own card is the sibling block at the end of the per-feat loop) */}
+                                  {/* ===== WARLOCK FEATURES ===== */}
+                                  {feat==="Otherworldly Patron"&&char.charClass==="Warlock"&&(()=>{
+                                    const pats=libEntries.filter(e=>e.category==="Subclass"&&/\(Warlock\)\s*$/.test(e.title)).map(e=>e.title).sort();
+                                    return (
+                                      <div style={{marginTop:8}}>
+                                        <select className="ri-sel" value={char.warPatron||""} onChange={e=>setF("warPatron",e.target.value)}
+                                          style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:char.warPatron?"var(--accent)":"var(--subtle)",width:"100%"}}>
+                                          <option value="">-- Choose an Otherworldly Patron --</option>
+                                          {pats.map(a=><option key={a} value={a}>{a}</option>)}
+                                        </select>
+                                      </div>
+                                    );
+                                  })()}
+                                  {feat==="Pact Magic"&&char.charClass==="Warlock"&&(
+                                    <div style={{marginTop:4}}>
+                                      {warPactPips()}
+                                      {warNote("All your slots are the same level, and they all come back when you finish a short or long rest.")}
+                                    </div>
+                                  )}
+                                  {feat==="Eldritch Invocations"&&char.charClass==="Warlock"&&warInvPick()}
+                                  {feat==="Pact Boon"&&char.charClass==="Warlock"&&warBoonPick()}
+                                  {feat==="Mystic Arcanum"&&char.charClass==="Warlock"&&warArcanumPick()}
+                                  {feat==="Eldritch Master"&&char.charClass==="Warlock"&&warMasterCard()}
                                   {/* ===== SORCERER FEATURES ===== */}
                                   {feat==="Sorcerous Origin"&&char.charClass==="Sorcerer"&&(()=>{
                                     const origins=libEntries.filter(e=>e.category==="Subclass"&&/\(Sorcerer\)\s*$/.test(e.title)).map(e=>e.title).sort();
@@ -21464,6 +21714,45 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                           }
                                           return(
                                             <div style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic",padding:"8px 0"}}>Full interactive feature cards for {orig.replace(/\s*\(Sorcerer\)\s*$/,"")} haven't been built yet.</div>
+                                          );
+                                        })()}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+
+                              {isWarPatron&&char.warPatron&&(
+                                <div style={{marginLeft:16,display:"flex",flexDirection:"column",gap:6}}>
+                                  <div className="ft-card ft-card-race ft-card-class" data-book={bookOf(libEntries.find(e=>e.category==="Subclass"&&e.title===char.warPatron))||undefined} style={{borderRadius:14,borderLeft:"3px solid rgba(var(--accent-rgb),0.3)"}}>
+                                    <div className={"ft-lib-section-hdr ft-lib-section-hdr-btn"+(openTrait("warPatronSubclass")?"":" ft-lib-section-hdr-collapsed")}
+                                      onClick={e=>{e.stopPropagation();setOpenTrait("warPatronSubclass");}}>
+                                      <span>{char.warPatron.replace(/\s*\(Warlock\)\s*$/,"")}</span>
+                                      <span className="ft-hdr-chev">{openTrait("warPatronSubclass")?"^":"v"}</span>
+                                    </div>
+                                    {openTrait("warPatronSubclass")&&warPatronEntry&&(
+                                      <div className="ft-lib-entry" onClick={e=>e.stopPropagation()}>
+                                        {warPatronEntry.desc&&<div className="ft-lib-desc">{warPatronEntry.desc}</div>}
+                                        {(()=>{
+                                          const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
+                                          const pat=char.warPatron;
+                                          const chaMod=abilityMod(eff.CHA||10);
+                                          const FC=({label,minLvl,headerBadge,children})=>{
+                                            if(lvl<minLvl) return null;
+                                            return(
+                                              <div style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
+                                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:4,gap:8}}>
+                                                  <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase"}}>{label}</div>
+                                                  {headerBadge}
+                                                </div>
+                                                {children}
+                                              </div>
+                                            );
+                                          };
+                                          const Body=({children})=><div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>{children}</div>;
+                                          /*WARLOCK_BRANCHES_END*/
+                                          return(
+                                            <div style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic",padding:"8px 0"}}>Full interactive feature cards for {pat.replace(/\s*\(Warlock\)\s*$/,"")} haven't been built yet.</div>
                                           );
                                         })()}
                                       </div>
