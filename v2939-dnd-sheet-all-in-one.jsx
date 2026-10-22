@@ -8398,9 +8398,9 @@ function App() {
                 </div>
               )}
 
-              <div className="core-sheet-footer">Character Sheet . D&amp;D 2014 . 5th Edition . Updated {SHEET_UPDATED}</div>
             </div>
 
+            <div className="core-sheet-footer" style={{gridColumn:"1 / -1"}}>Character Sheet . D&amp;D 2014 . 5th Edition . Updated {SHEET_UPDATED}</div>
           </div>
         )}
 
