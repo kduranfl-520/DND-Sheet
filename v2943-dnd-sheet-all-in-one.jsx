@@ -5961,7 +5961,17 @@ function App() {
   const warHas = (n)=>warLvl>0&&warChosenInv.includes(n);
   const warBoon = warLvl>=3 ? (char.warBoon||"") : "";
   const warBtn = sorcBtn, warLink = sorcLink, warNote = sorcNote;
-  const warInvOk = (i)=>warLvl>=i.min && (!i.boon || warBoon===i.boon);
+  const warKnows = (n)=>(Array.isArray(char.spellsKnown)&&char.spellsKnown.includes(n))||(Array.isArray(alwaysKnownSpells)&&alwaysKnownSpells.some(x=>x&&x.spell===n));
+  const warHasEB = ()=>warKnows("Eldritch Blast");
+  const warHasCurse = ()=>warKnows("Hex") || char.warPatron==="The Hexblade (Warlock)" || warHas("Sign of Ill Omen");
+  const warInvFailed = (i)=>{
+    const f=[];
+    if(warLvl<i.min) f.push(spellOrdLbl(i.min)+" level");
+    if(i.boon&&warBoon!==i.boon) f.push(i.boon);
+    if(i.need&&!(/Eldritch Blast/.test(i.need)?warHasEB():warHasCurse())) f.push(i.need);
+    return f;
+  };
+  const warInvOk = (i)=>warInvFailed(i).length===0;
   const warPactPips = ()=>{
     const a=Array.isArray(slots)?slots:[];
     const li=a.findIndex(x=>x>0);
@@ -6000,7 +6010,7 @@ function App() {
           {pre&&<span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>{pre}</span>}
         </div>
         <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{i.d}</div>
-        {!ok&&<div style={{fontSize:10,color:"var(--amber)",fontWeight:600,marginTop:4}}>⚠ You no longer meet the prerequisites — swap this for another invocation.</div>}
+        {!ok&&<div className="mc-warn" style={{marginTop:4}}>⚠ Needs {warInvFailed(i).join(" & ")} to take {i.n}</div>}
         {i.use&&(
           <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
             <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}</span>
@@ -6017,12 +6027,12 @@ function App() {
     const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
-        {warNote("You can swap one invocation for another each time you gain a warlock level. Prerequisites use your warlock level; the spell and feature prerequisites are shown but not checked.")}
+        {warNote("You can swap one invocation for another each time you gain a warlock level. Invocations marked ! have prerequisites you don't meet yet. Eldritch Blast and Hex count once you choose them on the Spells tab (Hexblade's Curse and Sign of Ill Omen also count for the hex ones).")}
         {cur.map((c,i)=>(
           <React.Fragment key={i}>
             <select className="ri-sel" value={c} onChange={e=>setSlot(i,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
               <option value="">-- Choose invocation {i+1} --</option>
-              {opts.filter(o=>o.n===c||warInvOk(o)).map(o=>{const pre=warInvPre(o);return <option key={o.n} value={o.n} disabled={cur.includes(o.n)&&o.n!==c}>{o.n}{pre?" ("+pre+")":""}</option>;})}
+              {opts.map(o=>{const pre=warInvPre(o);return <option key={o.n} value={o.n} disabled={cur.includes(o.n)&&o.n!==c}>{o.n}{pre?" ("+pre+")":""}{warInvOk(o)?"":" !"}</option>;})}
             </select>
             {c&&warInvBox(c)}
           </React.Fragment>
