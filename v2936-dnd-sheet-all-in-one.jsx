@@ -8396,7 +8396,7 @@ function App() {
                 </div>
               )}
 
-              <div className="core-sheet-footer">Character Sheet . D&amp;D 2024 . 5th Edition</div>
+              <div className="core-sheet-footer">Character Sheet . D&amp;D 2014 . 5th Edition</div>
             </div>
 
           </div>
