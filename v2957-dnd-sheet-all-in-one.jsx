@@ -2397,6 +2397,13 @@ const SPELL_SLOTS_THIRD = {
 // ===== WARLOCK data (2014 PHB + XGE; TCE options held back until Kelly decides) =====
 const WAR_INV_KNOWN=[0,2,2,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8];
 const WAR_ARCANUM_LVL={6:11,7:13,8:15,9:17};
+// Magic weapons: base weapon forms (printed DMG item types) so Gear/Rounds can roll damage
+const MAGIC_BASE={"Sun Blade *":"Longsword","Sword of Answering *":"Longsword","Dagger of Venom *":"Dagger","Mace of Disruption *":"Mace","Mace of Smiting *":"Mace","Mace of Terror *":"Mace","Scimitar of Speed *":"Scimitar","Trident of Fish Command *":"Trident","Moon Sickle *":"Sickle","Javelin of Lightning *":"Javelin","Oathbow *":"Longbow","Hammer of Thunderbolts *":"Maul"};
+const MAGIC_ANY={"Flame Tongue *":"sword","Frost Brand *":"sword","Defender *":"sword","Holy Avenger *":"sword","Dancing Sword *":"sword","Dragon Slayer *":"sword","Luck Blade *":"sword","Nine Lives Stealer *":"sword","Sword of Vengeance *":"sword","Sword of Wounding *":"sword","Sword of Life Stealing *":"sword","Moon-Touched Sword *":"sword","Vorpal Sword *":"slashsword","Giant Slayer *":"axesword","Berserker Axe *":"axe","Vicious Weapon *":"weapon","Weapon of Warning *":"weapon"};
+const MAGIC_ANY_OPTS={sword:["Greatsword","Longsword","Rapier","Scimitar","Shortsword"],slashsword:["Greatsword","Longsword","Scimitar"],axe:["Battleaxe","Greataxe","Handaxe"],axesword:["Battleaxe","Greataxe","Handaxe","Greatsword","Longsword","Rapier","Scimitar","Shortsword"]};
+const MAGIC_DMG_TYPE={"Sun Blade *":"radiant"};
+const magicBaseName=(item)=>{ if(!item||typeof item!=="object") return ""; return item.baseWeapon||MAGIC_BASE[item.name]||""; };
+const mergeMagicBase=(entry,baseEntry)=>{ if(!entry||!baseEntry) return entry; let bn=baseEntry.notes||""; const t=MAGIC_DMG_TYPE[entry.title]; if(t) bn=bn.replace(/(Dmg: \S+ )\S+/,"$1"+t); return {...entry,tags:(baseEntry.tags||"")+","+(entry.tags||""),notes:bn+" "+(entry.notes||"")}; };
 const WAR_BOONS=[
   {n:"Pact of the Chain",sum:"You learn find familiar and can cast it as a ritual without it counting against your spells known. Your familiar can take the form of an imp, pseudodragon, quasit, or sprite as well as the usual forms. When you take the Attack action, you can give up one of your attacks so your familiar can make one of its own using its reaction.",pts:[]},
   {n:"Pact of the Blade",sum:"You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it, and it counts as magical. It vanishes if it stays more than 5 feet from you for 1 minute, if you use this feature again, if you dismiss it, or if you die. You can also bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest), then dismiss it and summon it again with this feature.",pts:[]},
@@ -26180,11 +26187,11 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const isKenseiWeapon=char.charClass==="Monk"&&char.monasticTradition==="Way of the Kensei (Monk)"&&(char.monkKenseiWeapons||[]).some(kw=>kw&&kw.toLowerCase()===name?.toLowerCase());
  const isProficient = !name || isKenseiWeapon || (typeof item==="object"&&!!item.pact) || (cls?.weaponProf||[]).some(p=>{
  const pl=p.toLowerCase();
- const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");
+ const entry=libEntries.find(e=>e.title===(magicBaseName(item)||name)&&e.category==="Weapon");
  const wTags=(entry?.tags||"").toLowerCase();
- return pl.includes("simple")&&wTags.includes("simple")||pl.includes("martial")&&wTags.includes("martial")||pl.includes(name.toLowerCase())||(name.includes(",")&&pl.includes(name.toLowerCase().split(",").reverse().map(x=>x.trim()).join(" ")));
+ return pl.includes("simple")&&wTags.includes("simple")||pl.includes("martial")&&wTags.includes("martial")||pl.includes((magicBaseName(item)||name).toLowerCase())||(name.includes(",")&&pl.includes(name.toLowerCase().split(",").reverse().map(x=>x.trim()).join(" ")));
                       }) || racialWpnProfs.some(rp=>rp===name.toLowerCase()||name.toLowerCase().includes(rp)||rp.includes(name.toLowerCase()))
-                      || ((hasValorMartial||hasClericDomainMartial)&&(()=>{const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");return (entry?.tags||"").toLowerCase().includes("martial");})())
+                      || ((hasValorMartial||hasClericDomainMartial)&&(()=>{const entry=libEntries.find(e=>e.title===(magicBaseName(item)||name)&&e.category==="Weapon");return (entry?.tags||"").toLowerCase().includes("martial");})())
                       || (hasSwordsScimitar&&name.toLowerCase()==="scimitar");
  return (
                         <div key={idx} style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap",background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"6px 8px",overflow:"visible",...(isAmmo&&typeof item==="object"&&item.parentWeapon?{marginLeft:20,borderLeft:"2px solid rgba(var(--accent-rgb),0.3)",background:"var(--card)"}:{})}}>
@@ -26260,7 +26267,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                   const wType = (wEntry?.tags||"").toLowerCase().includes("finesse")?"DEX/STR":(wEntry?.tags||"").toLowerCase().includes("ranged")?"DEX":"STR";
                                   const isTwoHanded = (wEntry?.notes||"").toLowerCase().includes("two-handed");
                                   const wIsMagic=(wEntry?.tags||"").toLowerCase().split(",").includes("magic")&&wEntry?.category==="Weapon";
-                                  const wBonusM=wIsMagic?((wEntry.desc||"").match(/^\+(\d)\b/)||(wEntry.title||"").match(/\+(\d)\s*\*?$/)):null;
+                                  const wBonusM=wIsMagic?((wEntry.desc||"").match(/^\+(\d)\b/)||(wEntry.desc||"").match(/You gain a \+(\d) bonus/)||(wEntry.notes||"").match(/Bonus: \+(\d) atk/)):null;
                                   updateWeapon({name:e.target.value, damage:dmg, abilityMod:wType, weaponType:wEntry?.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||"", magic:wIsMagic, magicBonus:wBonusM?Number(wBonusM[1]):0, attuned:false, kind:"", ...(isTwoHanded?{hand:"BH"}:{})});
                                 }}>
                                 <option value="">{placeholder}</option>
@@ -26283,6 +26290,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                             return (
                               <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
                                 {parentWeapon&&<span style={{fontSize:10,color:"var(--subtle)",fontStyle:"italic"}}>for {parentWeapon}</span>}
+                                <button title="Magic ammunition bonus — adds to attack and damage with your ranged weapons. Tap to cycle"
+ style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",minWidth:24,textAlign:"center",
+ background:(Number(item.magicBonus)||0)?"rgba(var(--accent-rgb),0.12)":"var(--input)",borderColor:(Number(item.magicBonus)||0)?"rgba(var(--accent-rgb),0.4)":"var(--border)",color:(Number(item.magicBonus)||0)?"var(--accent)":"var(--muted)"}}
+ onClick={()=>updateWeapon({magicBonus:((Number(item.magicBonus)||0)+1)%4})}>{"+"+(Number(item.magicBonus)||0)}</button>
                                 <div style={{display:"flex",alignItems:"center",gap:3,flexShrink:0}}>
                                   <button style={{width:22,height:22,borderRadius:5,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",fontSize:15,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1}}
                                     onClick={()=>updateWeapon({ammoCount:Math.max(0,(cnt||0)-1)})}>−</button>
@@ -26298,7 +26309,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                         {name&&!isAmmo&&<>
                             {(()=>{
  const wAbil = (typeof item==="object"?item.abilityMod:"")||"STR";
- const wEntry2 = name?libEntries.find(e=>e.title===name&&e.category==="Weapon"):null;
+ const wEntry2 = name?(()=>{const e0=libEntries.find(e=>e.title===name&&e.category==="Weapon");const bn=magicBaseName(item);return bn?mergeMagicBase(e0,libEntries.find(e=>e.title===bn&&e.category==="Weapon")):e0;})():null;
  const tags2 = (wEntry2?.tags||"").toLowerCase();
  const isFinesse = tags2.includes("finesse");
  const isRanged = tags2.includes("ranged");
@@ -26310,9 +26321,18 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const bonus = wAbil==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[wAbil]||10);
  const hasArchery = isRanged && (char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery");
  const archeryBonus = hasArchery?2:0;
- const gMagB = (typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0;
+ const gAmmoB = tags2.includes("ranged")?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===name)).map(i=>Number(i.magicBonus)||0)):0;
+ const gMagB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+gAmmoB;
  return (
                                 <div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
+                                  {MAGIC_ANY[name]&&(()=>{
+                                    const ao=MAGIC_ANY_OPTS[MAGIC_ANY[name]]||libEntries.filter(e=>e.category==="Weapon"&&e.phb&&!((e.tags||"").toLowerCase().includes("ranged"))&&e.title!=="Unarmed Strike").map(e=>e.title).sort();
+                                    return <select className="gi gi-sm" title="Which weapon this magic item is" style={{width:96,flexShrink:0,fontSize:11,padding:"2px 2px",color:item.baseWeapon?"var(--accent)":"var(--subtle)"}} value={item.baseWeapon||""}
+ onChange={e=>{const be=libEntries.find(x=>x.title===e.target.value&&x.category==="Weapon");const bt=(be?.tags||"").toLowerCase();updateWeapon({baseWeapon:e.target.value,abilityMod:bt.includes("finesse")?"DEX/STR":bt.includes("ranged")?"DEX":"STR",...((be?.notes||"").toLowerCase().includes("two-handed")?{hand:"BH"}:{})});}}>
+                                      <option value="">-- Base weapon --</option>
+                                      {ao.map(o=><option key={o} value={o}>{o}</option>)}
+                                    </select>;
+                                  })()}
                                   <select className="gi gi-sm" style={{width:44,flexShrink:0,fontSize:11,padding:"2px 2px",color:"var(--accent)"}}
  value={wAbil}
  onChange={e=>updateWeapon({abilityMod:e.target.value})}>
@@ -26329,7 +26349,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                             })()}
                             {(()=>{
  const wAbil = (typeof item==="object"?item.abilityMod:"")||"STR";
- const wEntry = name?libEntries.find(e=>e.title===name&&e.category==="Weapon"):null;
+ const wEntry = name?(()=>{const e0=libEntries.find(e=>e.title===name&&e.category==="Weapon");const bn=magicBaseName(item);return bn?mergeMagicBase(e0,libEntries.find(e=>e.title===bn&&e.category==="Weapon")):e0;})():null;
  const dmgRaw = (wEntry?.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"");
  const dmgParts = dmgRaw.match(/^(\S+)\s+(.+)$/);
  const hasUnarmedFightingStyle=char.classFightingStyle==="Unarmed Fighting"||char.fiStyle==="Unarmed Fighting"||char.championExtraStyle==="Unarmed Fighting";
@@ -26352,7 +26372,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const dmgBonus = wAbil==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[wAbil]||10);
  const blessedWeaponBonus2=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===name)?1:0;
  const archeryBonus=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&typeVal==="Ranged")?2:0;
- const magicB = (typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0;
+ const gAmmoB2 = (wEntry?.tags||"").toLowerCase().includes("ranged")?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===name)).map(i=>Number(i.magicBonus)||0)):0;
+ const magicB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+gAmmoB2;
  const atkBonus = dmgBonus + pb + blessedWeaponBonus2 + archeryBonus + magicB;
  // Rage: +2/+3/+4 to melee STR damage (skip if finesse and DEX > STR)
  const rageBonus = (char.rageActive
@@ -29360,7 +29381,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                               const sd=SPELL_DATA[item.name];
                               const ikey=item.name;
                               const matchName=item.name.replace(/^⚡\s*/,"").trim();
-                              const libEntry=libEntries.find(e=>e.title===item.name&&(e.category==="Weapon"||e.category==="Magic Item"||e.category==="Equipment"||e.category==="Wand & Rod"||e.category==="Armor"||e.category==="Shield"||e.category==="Potion"||e.category==="Scroll"||!!e.interactive));
+                              const libEntry0=libEntries.find(e=>e.title===item.name&&(e.category==="Weapon"||e.category==="Magic Item"||e.category==="Equipment"||e.category==="Wand & Rod"||e.category==="Armor"||e.category==="Shield"||e.category==="Potion"||e.category==="Scroll"||!!e.interactive));
+                              const libEntry=(()=>{ if(!libEntry0||libEntry0.category!=="Weapon") return libEntry0; const bn=magicBaseName((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.name===item.name)); return bn?mergeMagicBase(libEntry0,libEntries.find(e=>e.title===bn&&e.category==="Weapon")):libEntry0; })();
                               // Parse dice from library entry notes e.g. "Dmg: 1d8 slashing"
                               let libDmg=libEntry?(()=>{const m=(libEntry.notes||"").match(/Dmg[^:]*:\s*([\dd+\-\/]+)\s*(\w+)/i);return m?{dice:m[1].split("/")[0],type:m[2]}:null;})():null;
                               // Unarmed Fighting style overrides Unarmed Strike's base 1-point damage with a real die
@@ -32252,7 +32274,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     const atkBonus=wEntry?.atk??(mod+pb);
                                     const blessedWeaponBonus=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===item.name)?1:0;
                                     const archeryBonusR=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&isRanged)?2:0;
-                                    const magicBR=Number(((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.equipped&&(!i.pact||i.bonded)&&i.name===item.name)||{}).magicBonus)||0;
+                                    const magicBR=(Number(((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.equipped&&(!i.pact||i.bonded)&&i.name===item.name)||{}).magicBonus)||0)+(isRanged?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===item.name)).map(i=>Number(i.magicBonus)||0)):0);
                                     const atkBonusNum=(typeof atkBonus==="string"?parseInt(atkBonus)||0:atkBonus||0)+blessedWeaponBonus+archeryBonusR+magicBR;
                                     const rageBonus=(char.rageActive&&!isRanged&&(!isFinesse||strMod>=dexMod))
                                       ?((char.level||1)>=16?4:(char.level||1)>=9?3:2):0;
