@@ -2550,7 +2550,7 @@ const BLANK = {
 };
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
-const SHEET_UPDATED = "Oct 21, 2026";
+const SHEET_UPDATED = "Oct 22, 2026";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -3254,6 +3254,10 @@ const HOUND_ID="sorc-hound";
 const houndCompObj=(lvl)=>{const d=COMPANION_DATA["Hound of Ill Omen"];return {id:HOUND_ID,name:"Hound of Ill Omen",type:"Hound of Ill Omen",ac:d.ac,hp:d.hp,hpCurrent:d.hp,tempHp:String(Math.floor((lvl||1)/2)),speed:d.speed,STR:d.str,DEX:d.dex,CON:d.con,INT:d.int,WIS:d.wis,CHA:d.cha,attacks:d.attacks.map(a=>({name:a.name||"",atk:a.atk||"",dmg:a.dmg||"",atkType:a.atkType||"",reach:a.reach||"",atk2:a.atk2||"",dmg2:a.dmg2||""})),notes:d.notes};};
 const houndOnPatch=(p,lvl,spMax)=>({...p,sorcSPUsed:Math.min(spMax,(p.sorcSPUsed||0)+3),sorcHoundOn:true,companions:[...(p.companions||[]).filter(c=>c.id!==HOUND_ID),houndCompObj(lvl)]});
 const houndOffPatch=(p)=>{const dc={...(p.durationCounters||{})};const dtm={...(p.durationTimers||{})};delete dc["sorc-hound-duration"];delete dtm["sorc-hound-duration"];return {...p,sorcHoundOn:false,durationCounters:dc,durationTimers:dtm,companions:(p.companions||[]).filter(c=>c.id!==HOUND_ID)};};
+const WAR_FAM_ID="war-familiar";
+const WAR_FAM_STD=["Bat","Cat","Crab","Frog","Hawk","Lizard","Octopus","Owl","Poisonous Snake","Quipper","Rat","Raven","Sea Horse","Spider","Weasel"];
+const WAR_FAM_CHAIN=["Imp","Pseudodragon","Quasit","Sprite"];
+const warFamObj=(form,name)=>{const d=COMPANION_DATA[form];return {id:WAR_FAM_ID,name:name||form,type:form,ac:d.ac,hp:d.hp,hpCurrent:d.hp,speed:d.speed,STR:d.str,DEX:d.dex,CON:d.con,INT:d.int,WIS:d.wis,CHA:d.cha,attacks:(d.attacks&&d.attacks.length?d.attacks:[{}]).map(a=>({name:a.name||"",atk:a.atk||"",dmg:a.dmg||"",atkType:a.atkType||"",reach:a.reach||"",atk2:a.atk2||"",dmg2:a.dmg2||""})),notes:d.notes||""};};
 const COMPANION_DATA = {
   "Bat":            {type:"Familiar",hd:1,creatureType:"Beast",size:"Tiny",ac:"12",hp:"1",speed:"5ft / fly 30ft",str:2,dex:15,con:8,int:2,wis:12,cha:4,attacks:[{name:"Bite",atk:"+0",dmg:"1"}],notes:"Echolocation: no blindsight while deafened<br>Blindsight 60ft"},
   "Cat":            {type:"Familiar",hd:1,creatureType:"Beast",size:"Tiny",ac:"12",hp:"2",speed:"40ft / climb 30ft",str:3,dex:15,con:10,int:3,wis:12,cha:7,attacks:[{name:"Claws",atk:"+0",dmg:"1 slash"}],skills:[{name:"Perception",bonus:3},{name:"Stealth",bonus:4}],notes:"Keen Smell"},
@@ -6041,6 +6045,38 @@ function App() {
       </div>
     );
   };
+  const warFamExists = ()=>(char.companions||[]).some(c=>c.id===WAR_FAM_ID);
+  const warFindFamBox = ()=>{
+    const sd=SPELL_DATA["Find Familiar"];
+    if(!sd) return null;
+    return <SpellSaveBox name="Find Familiar" sd={sd} dc={8+pb+abilityMod(eff.CHA||10)} saveKey="warFindFamiliar" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>;
+  };
+  const warFamPicker = ()=>{
+    const form=char.warFamiliar||"";
+    const exists=warFamExists();
+    const setForm=(v)=>setCharSaving(p=>{
+      const cur=(p.companions||[]).find(c=>c.id===WAR_FAM_ID);
+      if(!cur||!v) return {...p,warFamiliar:v};
+      const keep=cur.name&&cur.name!==cur.type?cur.name:undefined;
+      return {...p,warFamiliar:v,companions:(p.companions||[]).map(c=>c.id===WAR_FAM_ID?warFamObj(v,keep):c)};
+    });
+    const create=()=>{ if(!form||!COMPANION_DATA[form]) return; setCharSaving(p=>({...p,warFamiliar:form,companions:[...(p.companions||[]).filter(c=>c.id!==WAR_FAM_ID),warFamObj(form)]})); };
+    const dismiss=()=>setCharSaving(p=>({...p,companions:(p.companions||[]).filter(c=>c.id!==WAR_FAM_ID)}));
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:6,margin:"2px 0 4px"}} onClick={e=>e.stopPropagation()}>
+        <select className="ri-sel" value={form} onChange={e=>setForm(e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)",width:"100%"}}>
+          <option value="">-- Choose your familiar --</option>
+          <optgroup label="Find Familiar forms">{WAR_FAM_STD.map(n=><option key={n} value={n}>{n}</option>)}</optgroup>
+          <optgroup label="Pact of the Chain forms">{WAR_FAM_CHAIN.map(n=><option key={n} value={n}>{n}</option>)}</optgroup>
+        </select>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+          {exists
+            ?<><span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>On the Companion tab</span><button style={warLink} onClick={e=>{e.stopPropagation();dismiss();}}>↺ Dismiss</button></>
+            :<button style={form?warBtn:{...warBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6}} disabled={!form} onClick={e=>{e.stopPropagation();create();}}>Create familiar</button>}
+        </div>
+      </div>
+    );
+  };
   const warBoonPick = ()=>{
     if(warLvl<3) return null;
     const sel=WAR_BOONS.find(b=>b.n===warBoon);
@@ -6055,7 +6091,13 @@ function App() {
         </div>
         {sel&&(
           <div style={{display:"flex",flexDirection:"column",gap:4,paddingLeft:10,marginTop:8}}>
-            {sel.pts.map((t,k)=>(<div key={k} style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>))}
+            {sel.pts.map((t,k)=>(
+              <React.Fragment key={k}>
+                <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>
+                {sel.n==="Pact of the Chain"&&k===0&&warFindFamBox()}
+                {sel.n==="Pact of the Chain"&&k===1&&warFamPicker()}
+              </React.Fragment>
+            ))}
           </div>
         )}
         {warBoon&&warChosenInv.some(n=>{const i=WAR_INV.find(x=>x.n===n);return i&&i.boon&&i.boon!==warBoon;})&&<div style={{fontSize:10,color:"var(--amber)",fontWeight:600,marginTop:6}}>⚠ Some of your invocations need a different Pact Boon.</div>}
@@ -34009,7 +34051,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                       </div>
                       <div style={{flex:"2 1 200px"}}>
                         <Lbl>Type / Species</Lbl>
-                        {comp.id===HOUND_ID?<div className="gi gi-sm" style={{display:"flex",alignItems:"center",color:"var(--muted)"}}>Hound of Ill Omen · Monstrosity · Medium (from Shadow Magic)</div>:<select className="gi gi-sm" style={{cursor:"pointer"}} value={comp.type||""}
+                        {comp.id===HOUND_ID?<div className="gi gi-sm" style={{display:"flex",alignItems:"center",color:"var(--muted)"}}>Hound of Ill Omen · Monstrosity · Medium (from Shadow Magic)</div>:comp.id===WAR_FAM_ID?<div className="gi gi-sm" style={{display:"flex",alignItems:"center",color:"var(--muted)"}}>{comp.type} · Familiar · Tiny (from Pact of the Chain)</div>:<select className="gi gi-sm" style={{cursor:"pointer"}} value={comp.type||""}
                           onChange={e=>{
                             const name=e.target.value;
                             const d=COMPANION_DATA[name];
