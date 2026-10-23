@@ -26265,7 +26265,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                   const dmg = wEntry?.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
                                   const wType = (wEntry?.tags||"").toLowerCase().includes("finesse")?"DEX/STR":(wEntry?.tags||"").toLowerCase().includes("ranged")?"DEX":"STR";
                                   const isTwoHanded = (wEntry?.notes||"").toLowerCase().includes("two-handed");
-                                  updateWeapon({name:e.target.value, damage:dmg, abilityMod:wType, weaponType:wEntry?.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||"", ...(isTwoHanded?{hand:"BH"}:{})});
+                                  const wIsMagic=(wEntry?.tags||"").toLowerCase().split(",").includes("magic")&&wEntry?.category==="Weapon";
+                                  const wBonusM=wIsMagic?((wEntry.desc||"").match(/^\+(\d)\b/)||(wEntry.title||"").match(/\+(\d)\s*\*?$/)):null;
+                                  updateWeapon({name:e.target.value, damage:dmg, abilityMod:wType, weaponType:wEntry?.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||"", magic:wIsMagic, magicBonus:wBonusM?Number(wBonusM[1]):0, attuned:false, kind:"", ...(isTwoHanded?{hand:"BH"}:{})});
                                 }}>
                                 <option value="">{placeholder}</option>
                                 <optgroup label="Weapons">
