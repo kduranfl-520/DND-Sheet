@@ -6078,7 +6078,7 @@ function App() {
     const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
     const isP=i=>typeof i==="object"&&i&&i.pact;
     const out=items.some(isP);
-    const isMelee=i=>{ if(typeof i!=="object"||!i||!i.name||i.pact) return false; const e=libEntries.find(x=>x.title===i.name&&x.category==="Weapon"); return !!e&&!(e.tags||"").toLowerCase().includes("ranged"); };
+    const isMelee=i=>{ if(typeof i!=="object"||!i||!i.name||i.pact||!i.magic||i.kind) return false; const e=libEntries.find(x=>x.title===i.name&&x.category==="Weapon"); return !!e&&!(e.tags||"").toLowerCase().includes("ranged"); };
     const bondable=items.filter(isMelee);
     const summon=()=>{
       if(bond){ setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{...bond,equipped:true,hand:bond.hand||"RH",pact:true,bonded:true}]})); return; }
@@ -6086,7 +6086,7 @@ function App() {
       const dmg=we.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
       const tg=(we.tags||"").toLowerCase();
       const two=(we.notes||"").toLowerCase().includes("two-handed");
-      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
+      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
     };
     const dismiss=()=>setCharSaving(p=>({...p,weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
     const doBond=(nm)=>setCharSaving(p=>{
@@ -6118,7 +6118,7 @@ function App() {
           <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",display:"flex",flexDirection:"column",gap:6}}>
             <span style={{fontSize:10,fontWeight:700,color:"var(--accent)"}}>Bond a magic weapon (1-hour ritual)</span>
             {bondable.length===0
-              ?<span style={{fontSize:11,color:"var(--muted)"}}>Add a melee weapon to your Gear tab first, then bond it here.</span>
+              ?<span style={{fontSize:11,color:"var(--muted)"}}>Mark a melee weapon as magical (✨, not artifact or sentient) on your Gear tab first, then bond it here.</span>
               :<div style={{display:"flex",gap:6,alignItems:"center"}}>
                 <select className="ri-sel" value={bondPick} onChange={e=>setF("warBladeBondPick",e.target.value)} style={{flex:1,color:bondPick?"var(--accent)":"var(--subtle)"}}>
                   <option value="">-- Choose a weapon from Gear --</option>
@@ -6126,7 +6126,7 @@ function App() {
                 </select>
                 {bondPick&&<button style={warBtn} onClick={e=>{e.stopPropagation();doBond(bondPick);}}>Bond</button>}
               </div>}
-            {warNote("It must be a magic weapon, and not an artifact or a sentient weapon. Once bonded it is the only form your pact weapon takes.")}
+            {warNote("Only weapons marked magical (✨) on your Gear tab are listed, and artifacts and sentient weapons can't be bonded. Once bonded it is the only form your pact weapon takes.")}
           </div>
         )}
         {bond&&(
@@ -26214,6 +26214,30 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                             );
                           })()}
                           {typeof item==="object"&&item&&item.pact&&<span title={item.bonded?"Bonded pact weapon":"Pact weapon — magical, summoned with Pact of the Blade"} style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,flexShrink:0,background:"rgba(var(--accent-rgb),0.12)",border:"1px solid rgba(var(--accent-rgb),0.35)",color:"var(--accent)"}}>PACT</span>}
+                          {!isAmmo&&typeof item==="object"&&item&&(()=>{
+ const isPactW=!!item.pact;
+ const mg=isPactW||!!item.magic;
+ const mb=Number(item.magicBonus)||0;
+ return (<>
+                              <button title={isPactW?"Pact weapons are always magical":mg?"Magical — tap to unmark":"Not magical — tap to mark as a magic weapon"}
+ style={{fontSize:11,padding:"1px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:isPactW?"default":"pointer",lineHeight:1.4,
+ background:mg?"rgba(var(--accent-rgb),0.12)":"var(--input)",borderColor:mg?"rgba(var(--accent-rgb),0.4)":"var(--border)",opacity:mg?1:0.55}}
+ onClick={()=>{ if(isPactW) return; updateWeapon(mg?{magic:false,magicBonus:0}:{magic:true}); }}>✨</button>
+                              {isPactW&&item.bonded&&mb>0&&<span style={{fontSize:10,fontWeight:800,color:"var(--accent)"}}>{"+"+mb}</span>}
+                              {mg&&!isPactW&&<button title={item.attuned?"Attuned — tap to unattune":"Not attuned — tap to attune (counts toward your 3 attunement slots)"}
+ style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",
+ background:item.attuned?"rgba(220,38,38,0.12)":"var(--input)",borderColor:item.attuned?"rgba(220,38,38,0.4)":"var(--border)",color:item.attuned?"#dc2626":"var(--muted)"}}
+ onClick={()=>updateWeapon({attuned:!item.attuned})}>AT</button>}
+                              {mg&&!isPactW&&<button title={item.kind==="artifact"?"Artifact — can't be bonded as a pact weapon. Tap to change":item.kind==="sentient"?"Sentient — can't be bonded as a pact weapon. Tap to change":"Standard magic weapon — tap to mark as artifact or sentient"}
+ style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",minWidth:30,textAlign:"center",
+ background:item.kind?"rgba(245,158,11,0.14)":"var(--input)",borderColor:item.kind?"rgba(245,158,11,0.5)":"var(--border)",color:item.kind?"var(--amber)":"var(--muted)"}}
+ onClick={()=>updateWeapon({kind:!item.kind?"artifact":item.kind==="artifact"?"sentient":""})}>{item.kind==="artifact"?"ART":item.kind==="sentient"?"SEN":"STD"}</button>}
+                              {mg&&!isPactW&&<button title="Enchantment bonus to attack and damage — tap to cycle"
+ style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,border:"1px solid",flexShrink:0,cursor:"pointer",minWidth:24,textAlign:"center",
+ background:mb?"rgba(var(--accent-rgb),0.12)":"var(--input)",borderColor:mb?"rgba(var(--accent-rgb),0.4)":"var(--border)",color:mb?"var(--accent)":"var(--muted)"}}
+ onClick={()=>updateWeapon({magic:true,magicBonus:(mb+1)%4})}>{"+"+mb}</button>}
+ </>);
+ })()}
                           {(()=>{
                             const wFilter = typeof item==="object"?item.filter:"";
                             const qty = typeof item==="object"?(item.qty??1):1;
@@ -26290,6 +26314,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const bonus = wAbil==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[wAbil]||10);
  const hasArchery = isRanged && (char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery");
  const archeryBonus = hasArchery?2:0;
+ const gMagB = (typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0;
  return (
                                 <div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
                                   <select className="gi gi-sm" style={{width:44,flexShrink:0,fontSize:11,padding:"2px 2px",color:"var(--accent)"}}
@@ -26299,9 +26324,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                   </select>
                                   <div style={{position:"relative",flexShrink:0,cursor:"pointer"}}
                                     onClick={ev=>{ev.stopPropagation();const k="wpToHit_"+name;setWearingInfo(wearingInfo===k?null:k);}}>
-                                    <span style={{fontSize:11,fontWeight:700,color:"var(--accent)",fontFamily:"'DM Mono',monospace",borderBottom:"1px dotted var(--accent)",cursor:"default"}}>{bonus+pb+archeryBonus>=0?"+":""}{bonus+pb+archeryBonus}</span>
+                                    <span style={{fontSize:11,fontWeight:700,color:"var(--accent)",fontFamily:"'DM Mono',monospace",borderBottom:"1px dotted var(--accent)",cursor:"default"}}>{bonus+pb+archeryBonus+gMagB>=0?"+":""}{bonus+pb+archeryBonus+gMagB}</span>
                                     {hasArchery&&<span style={{fontSize:9,color:"var(--accent)",marginLeft:2}}>🏹+2</span>}
-                                    {wearingInfo===("wpToHit_"+name)&&(()=>{const lbl=wAbil==="DEX/STR"?(abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)?"STR":"DEX"):wAbil;const desc=lbl+" "+(bonus>=0?"+":"")+bonus+" | Prof +"+pb+(hasArchery?" | Archery +2":"");return(<><div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/><SmartPopup desc={desc}/></>);})()}
+                                    {wearingInfo===("wpToHit_"+name)&&(()=>{const lbl=wAbil==="DEX/STR"?(abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)?"STR":"DEX"):wAbil;const desc=lbl+" "+(bonus>=0?"+":"")+bonus+" | Prof +"+pb+(hasArchery?" | Archery +2":"")+(gMagB>0?" | Magic +"+gMagB:"");return(<><div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/><SmartPopup desc={desc}/></>);})()}
                                   </div>
                                 </div>
                               );
@@ -26331,7 +26356,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const dmgBonus = wAbil==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[wAbil]||10);
  const blessedWeaponBonus2=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===name)?1:0;
  const archeryBonus=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&typeVal==="Ranged")?2:0;
- const atkBonus = dmgBonus + pb + blessedWeaponBonus2 + archeryBonus;
+ const magicB = (typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0;
+ const atkBonus = dmgBonus + pb + blessedWeaponBonus2 + archeryBonus + magicB;
  // Rage: +2/+3/+4 to melee STR damage (skip if finesse and DEX > STR)
  const rageBonus = (char.rageActive
    && (wAbil==="STR"||(wAbil==="DEX/STR"&&abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)))
@@ -26346,7 +26372,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const hasOffhandWeaponG=(char.weaponItems||[]).some(i=>typeof i==="object"&&i.equipped&&i.name&&i.hand==="LH"&&i.name!==name);
  const duelingBonus=(hasDuelingStyle&&!((wEntry?.tags||"").toLowerCase().includes("ranged"))&&!hasOffhandWeaponG)?2:0;
  const wpInfoKey="wpInfo_"+name;
- const wpInfoLines=(()=>{const lbl2=wAbil==="DEX/STR"?(abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)?"STR":"DEX"):wAbil;const lines=[dmgDice+(dmgType?" · "+dmgType:"")+" ("+lbl2+" "+(dmgBonus>=0?"+":"")+dmgBonus+")"];if(rageBonus>0) lines.push("🔥 Rage +"+rageBonus);if(chargerBonus>0) lines.push("⚡ Charger +"+chargerBonus);if(duelingBonus>0) lines.push("⚔️ Dueling +"+duelingBonus);if(thrownWeaponBonus>0) lines.push("🪃 Thrown Weapon Fighting +"+thrownWeaponBonus);if(blessedWeaponBonus2>0) lines.push("🔨 Blessing of the Forge +1");if(sporeEligible) lines.push("🍄 Symbiotic Entity +1d6 necrotic");return lines.join(" | ");})();
+ const wpInfoLines=(()=>{const lbl2=wAbil==="DEX/STR"?(abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)?"STR":"DEX"):wAbil;const lines=[dmgDice+(dmgType?" · "+dmgType:"")+" ("+lbl2+" "+(dmgBonus>=0?"+":"")+dmgBonus+")"];if(rageBonus>0) lines.push("🔥 Rage +"+rageBonus);if(chargerBonus>0) lines.push("⚡ Charger +"+chargerBonus);if(duelingBonus>0) lines.push("⚔️ Dueling +"+duelingBonus);if(thrownWeaponBonus>0) lines.push("🪃 Thrown Weapon Fighting +"+thrownWeaponBonus);if(blessedWeaponBonus2>0) lines.push("🔨 Blessing of the Forge +1");if(magicB>0) lines.push("✨ Magic weapon +"+magicB);if(sporeEligible) lines.push("🍄 Symbiotic Entity +1d6 necrotic");return lines.join(" | ");})();
  return (
                                 <>
                                   {diceSides ? (
@@ -26379,7 +26405,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         const sporeRolls = sporeEligible ? Array.from({length:isCrit?2:1},()=>Math.floor(Math.random()*6)+1) : [];
                                         const sporeTotal = sporeRolls.reduce((a,b)=>a+b,0);
                                         const hitTotal=finalHit+atkBonus;
-                                        const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+sporeTotal;
+                                        const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+magicB+sporeTotal;
                                         const dmgTotal=dmgRolls.reduce((a,b)=>a+b,0)+totalDmgBonus;
                                         setSkillRoll({
                                           label:(c.rageActive?"🔥 ":"")+(chargerBonus>0?"⚡ ":"")+(duelingBonus>0?"⚔️ ":"")+(thrownWeaponBonus>0?"🪃 ":"")+(sporeEligible?"🍄 ":"")+name+(recklessAdv?" ⚡":"")+(isCrit?" 💥":"")+(sporeEligible?" (+"+sporeRolls.length+"d6 necrotic)":""),
@@ -26468,7 +26494,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                   },0);
                   const attunedArmor=(char.armorItems||[]).filter(i=>typeof i==="object"&&i.attuned).length;
                   const attunedShield=(char.shieldItems||[]).filter(i=>typeof i==="object"&&i.attuned).length;
-                  const totalAttuned=attunedArmor+attunedShield+attunedFromWearing;
+                  const attunedWeapons=(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&!i.pact&&i.attuned).length+((char.warBladeBond&&char.warBladeBond.attuned)?1:0);
+                  const totalAttuned=attunedArmor+attunedShield+attunedFromWearing+attunedWeapons;
                   const overLimit=totalAttuned>3;
                   return (
                     <span title={overLimit?"Over the standard attunement limit":"Attuned items"} onClick={e=>e.stopPropagation()} style={{fontSize:10,fontWeight:700,color:overLimit?"var(--red)":"var(--muted)",background:overLimit?"rgba(239,68,68,0.1)":"transparent",border:overLimit?"1px solid rgba(239,68,68,0.3)":"none",borderRadius:4,padding:overLimit?"1px 5px":0,whiteSpace:"nowrap"}}>
@@ -32229,7 +32256,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     const atkBonus=wEntry?.atk??(mod+pb);
                                     const blessedWeaponBonus=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===item.name)?1:0;
                                     const archeryBonusR=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&isRanged)?2:0;
-                                    const atkBonusNum=(typeof atkBonus==="string"?parseInt(atkBonus)||0:atkBonus||0)+blessedWeaponBonus+archeryBonusR;
+                                    const magicBR=Number(((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.equipped&&(!i.pact||i.bonded)&&i.name===item.name)||{}).magicBonus)||0;
+                                    const atkBonusNum=(typeof atkBonus==="string"?parseInt(atkBonus)||0:atkBonus||0)+blessedWeaponBonus+archeryBonusR+magicBR;
                                     const rageBonus=(char.rageActive&&!isRanged&&(!isFinesse||strMod>=dexMod))
                                       ?((char.level||1)>=16?4:(char.level||1)>=9?3:2):0;
                                     const hasChargerFeatR=Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Charger");
@@ -32268,11 +32296,11 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     const hasTWF=hasTWFSwords||hasTWFFighter;
                                     // Without TWF, offhand gets no mod; with TWF, it gets full mod (already in totalDmgBonus)
                                     const twfModCorrection=isOffhand&&!hasTWF?-mod:0;
-                                    const totalDmgBonus=mod+diceFlatBonus+rageBonus+chargerBonusR+duelingBonus+thrownWeaponBonusR+twfModCorrection+blessedWeaponBonus;
+                                    const totalDmgBonus=mod+diceFlatBonus+rageBonus+chargerBonusR+duelingBonus+thrownWeaponBonusR+twfModCorrection+blessedWeaponBonus+magicBR;
                                     const dispBonus=totalDmgBonus!==0?(totalDmgBonus>0?" +"+totalDmgBonus:" "+totalDmgBonus):"";
                                     const isStrWeapon=!isFinesse||(strMod>=dexMod);
                                     const recklessAdv=char.recklessActive&&!isRanged&&isStrWeapon;
-                                    const dispDice=(m?m[1]+"d"+m[2]:libDmg.dice)+dispBonus+(rageBonus>0?" 🔥":"")+(chargerBonusR>0?" ⚡":"")+(duelingBonus>0?" ⚔️":"")+(thrownWeaponBonusR>0?" 🪃":"")+(blessedWeaponBonus>0?" 🔨":"");
+                                    const dispDice=(m?m[1]+"d"+m[2]:libDmg.dice)+dispBonus+(rageBonus>0?" 🔥":"")+(chargerBonusR>0?" ⚡":"")+(duelingBonus>0?" ⚔️":"")+(thrownWeaponBonusR>0?" 🪃":"")+(blessedWeaponBonus>0?" 🔨":"")+(magicBR>0?" ✨":"");
                                     // Divine Strike (Cleric, 8th level, 8 domains) — extra weapon-hit damage of a different type, auto-attaches via toggle
                                     const DIV_STRIKE_TYPE={"Life Domain (Cleric)":"radiant","Nature Domain (Cleric)":"cold, fire, or lightning","Tempest Domain (Cleric)":"thunder","Trickery Domain (Cleric)":"poison","War Domain (Cleric)":"the weapon's type","Forge Domain (Cleric)":"fire","Order Domain (Cleric)":"psychic","Twilight Domain (Cleric)":"radiant"};
                                     const clsLvlDS=char.multiClassLevel>0?char.classLevel:char.level||1;
