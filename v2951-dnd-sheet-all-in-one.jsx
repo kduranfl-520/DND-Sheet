@@ -6071,6 +6071,33 @@ function App() {
       </div>
     );
   };
+  const warBladeBox = ()=>{
+    const form=char.warBladeForm||"";
+    const opts=libEntries.filter(e=>e.category==="Weapon"&&!(e.tags||"").toLowerCase().includes("ranged")).sort((a,b)=>a.title.localeCompare(b.title));
+    const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
+    const out=items.some(i=>typeof i==="object"&&i&&i.pact);
+    const summon=()=>{
+      const we=libEntries.find(en=>en.title===form&&en.category==="Weapon"); if(!we) return;
+      const dmg=we.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
+      const tg=(we.tags||"").toLowerCase();
+      const two=(we.notes||"").toLowerCase().includes("two-handed");
+      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!(typeof i==="object"&&i&&i.pact)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
+    };
+    const dismiss=()=>setCharSaving(p=>({...p,weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!(typeof i==="object"&&i&&i.pact))}));
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:6}}>
+        <select className="ri-sel" value={form} onChange={e=>setF("warBladeForm",e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)",width:"100%"}}>
+          <option value="">-- Choose your pact weapon --</option>
+          {opts.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
+        </select>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+          <span style={{fontSize:11,color:out?"var(--accent)":"var(--muted)",fontWeight:700}}>{out?"Summoned — on your Gear tab":"Not summoned"}</span>
+          {form&&<button style={warBtn} onClick={e=>{e.stopPropagation();summon();}}>{out?"Re-summon":"Summon"}</button>}
+          {out&&<button style={warLink} onClick={e=>{e.stopPropagation();dismiss();}}>Dismiss</button>}
+        </div>
+      </div>
+    );
+  };
   const warBoonPick = ()=>{
     if(warLvl<3) return null;
     const sel=WAR_BOONS.find(b=>b.n===warBoon);
@@ -6086,7 +6113,8 @@ function App() {
         {sel&&sel.sum&&(
           <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}}>
             <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5}}>{sel.sum}</div>
-            {sel.n==="Pact of the Chain"&&warFindFamBox()}
+            {sel.n==="Pact of the Blade"&&warBladeBox()}
+        {sel.n==="Pact of the Chain"&&warFindFamBox()}
             {sel.n==="Pact of the Chain"&&warFamPicker()}
           </div>
         )}
@@ -26117,7 +26145,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const hasSwordsScimitar=char.bardCollege==="College of Swords (Bard)"&&(char.level||1)>=3;
  const hasClericDomainMartial=char.charClass==="Cleric"&&["Tempest Domain (Cleric)","War Domain (Cleric)","Twilight Domain (Cleric)"].includes(char.divineDomain);
  const isKenseiWeapon=char.charClass==="Monk"&&char.monasticTradition==="Way of the Kensei (Monk)"&&(char.monkKenseiWeapons||[]).some(kw=>kw&&kw.toLowerCase()===name?.toLowerCase());
- const isProficient = !name || isKenseiWeapon || (cls?.weaponProf||[]).some(p=>{
+ const isProficient = !name || isKenseiWeapon || (typeof item==="object"&&!!item.pact) || (cls?.weaponProf||[]).some(p=>{
  const pl=p.toLowerCase();
  const entry=libEntries.find(e=>e.title===name&&e.category==="Weapon");
  const wTags=(entry?.tags||"").toLowerCase();
@@ -26146,6 +26174,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  onClick={()=>updateWeapon({hand:nextHand})}>{hand||"--"}</button>
                             );
                           })()}
+                          {typeof item==="object"&&item&&item.pact&&<span title="Pact weapon — magical, summoned with Pact of the Blade" style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,flexShrink:0,background:"rgba(var(--accent-rgb),0.12)",border:"1px solid rgba(var(--accent-rgb),0.35)",color:"var(--accent)"}}>PACT</span>}
                           {(()=>{
                             const wFilter = typeof item==="object"?item.filter:"";
                             const qty = typeof item==="object"?(item.qty??1):1;
