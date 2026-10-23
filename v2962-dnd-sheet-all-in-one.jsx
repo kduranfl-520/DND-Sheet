@@ -6114,7 +6114,7 @@ function App() {
       const two=(we.notes||"").toLowerCase().includes("two-handed");
       setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
     };
-    const dismiss=()=>setCharSaving(p=>({...p,weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
+    const dismiss=()=>setCharSaving(p=>({...p,...(bond?{}:{warBladeForm:""}),weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
     const doBond=(nm)=>setCharSaving(p=>{
       const arr=Array.isArray(p.weaponItems)?p.weaponItems:[];
       const idx=arr.findIndex(i=>typeof i==="object"&&i&&!i.pact&&i.name===nm); if(idx<0) return p;
