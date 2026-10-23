@@ -2432,10 +2432,7 @@ const mergeMagicBase=(entry,baseEntry)=>{ if(!entry||!baseEntry) return entry; l
 const WAR_BOONS=[
   {n:"Pact of the Chain",sum:"You learn find familiar and can cast it as a ritual without it counting against your spells known. Your familiar can take the form of an imp, pseudodragon, quasit, or sprite as well as the usual forms. When you take the Attack action, you can give up one of your attacks so your familiar can make one of its own using its reaction.",pts:[]},
   {n:"Pact of the Blade",sum:"You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it, and it counts as magical. It vanishes if it stays more than 5 feet from you for 1 minute, if you use this feature again, if you dismiss it, or if you die. You can also bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest), then dismiss it and summon it again with this feature.",pts:[]},
-  {n:"Pact of the Tome",pts:[
-    "Your patron gives you a Book of Shadows. Choose three cantrips from the spell lists of any class; while the book is on you, you can cast them at will.",
-    "They count as warlock cantrips for you but not against your cantrips known.",
-    "If you lose the book you can perform a 1-hour ceremony to receive a replacement, and the book crumbles to ashes when you die."]}
+  {n:"Pact of the Tome",sum:"Your patron gives you a Book of Shadows. Choose three cantrips from the spell lists of any class, and you can cast them at will while the book is on you. They count as warlock cantrips for you but not against your cantrips known. If you lose the book, you can perform a 1-hour ceremony to receive a replacement. The book crumbles to ashes when you die.",pts:[]}
 ];
 // Eldritch Invocations. min = warlock level, boon = needed Pact Boon, need = spell/feature prerequisite (shown, not enforced), use = once-per-rest tracker
 const WAR_INV=[
@@ -6162,6 +6159,32 @@ function App() {
       </div>
     );
   };
+  const warTomeBox = ()=>{
+    const picks=Array.from({length:3},(_,i)=>(Array.isArray(char.warTome)?char.warTome[i]:"")||"");
+    const pool=[...new Set(Object.values(CLASSES).flatMap(c=>(c&&c.spells&&c.spells.cantrips)||[]))].sort();
+    const setPick=(i,v)=>setCharSaving(p=>{const a=Array.from({length:3},(_,k)=>(Array.isArray(p.warTome)?p.warTome[k]:"")||"");a[i]=v;return {...p,warTome:a};});
+    const dc=8+pb+abilityMod(eff.CHA||10);
+    const lost=!!char.warBookLost;
+    return(
+      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        {picks.map((c,i)=>(
+          <div key={i} style={{display:"flex",flexDirection:"column",gap:4}}>
+            <select className="ri-sel" value={c} onChange={e=>setPick(i,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%",opacity:lost?0.6:1}}>
+              <option value="">-- Choose cantrip {i+1} --</option>
+              {pool.filter(n=>n===c||!picks.includes(n)).map(n=><option key={n} value={n}>{n}</option>)}
+            </select>
+            {c&&!lost&&SPELL_DATA[c]&&<SpellSaveBox name={c} sd={SPELL_DATA[c]} dc={dc} saveKey={"warTome_"+c} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>}
+          </div>
+        ))}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+          {lost&&<span style={{fontSize:11,color:"var(--amber)",fontWeight:700,marginRight:"auto"}}>Book lost — cantrips unavailable until replaced</span>}
+          {lost&&<DurationBadge id="tome-ceremony-duration" short="1 hr" full="The ceremony to receive a replacement book takes 1 hour." total={1} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}
+          {!lost&&<button style={warBtn} title="Mark your Book of Shadows as lost" onClick={e=>{e.stopPropagation();setF("warBookLost",true);}}>Lost book</button>}
+          {lost&&<button style={warBtn} title="The 1-hour ceremony is done — you have a replacement" onClick={e=>{e.stopPropagation();setCharSaving(p=>{const nt={...(p.durationTimers||{})};delete nt["tome-ceremony-duration"];const nc={...(p.durationCounters||{})};delete nc["tome-ceremony-duration"];return {...p,warBookLost:false,durationTimers:nt,durationCounters:nc};});}}>Replacement received</button>}
+        </div>
+      </div>
+    );
+  };
   const warBoonPick = ()=>{
     if(warLvl<3) return null;
     const sel=WAR_BOONS.find(b=>b.n===warBoon);
@@ -6178,6 +6201,7 @@ function App() {
           <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}}>
             <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5}}>{sel.sum}</div>
             {sel.n==="Pact of the Blade"&&warBladeBox()}
+        {sel.n==="Pact of the Tome"&&warTomeBox()}
         {sel.n==="Pact of the Chain"&&warFindFamBox()}
             {sel.n==="Pact of the Chain"&&warFamPicker()}
           </div>
@@ -6643,6 +6667,10 @@ function App() {
  if(char.charClass==="Cleric"&&char.divineDomain==="Nature Domain (Cleric)"&&char.clericAcolyteNatureCantrip&&!result.find(r=>r.spell===char.clericAcolyteNatureCantrip)) result.push({spell:char.clericAcolyteNatureCantrip,source:"DOMAIN"});
  // Grave Domain Circle of Mortality — always know Spare the Dying, doesn't count against cantrips known; cast as a bonus action with 30 ft range for this cleric
  if(char.charClass==="Cleric"&&char.divineDomain==="Grave Domain (Cleric)"&&!result.find(r=>r.spell==="Spare the Dying")) result.push({spell:"Spare the Dying",source:"DOMAIN"});
+ // Warlock Pact of the Tome — three cantrips from any class list, at will while the Book of Shadows is on you (not against cantrips known)
+ if(char.charClass==="Warlock"&&warBoon==="Pact of the Tome"&&!char.warBookLost){
+   (Array.isArray(char.warTome)?char.warTome:[]).slice(0,3).forEach(sp=>{ if(sp&&!result.find(r=>r.spell===sp)) result.push({spell:sp,source:"Class"}); });
+ }
  // Arcana Domain Arcane Initiate — always know your 2 chosen wizard cantrips, doesn't count against cantrips known
  if(char.charClass==="Cleric"&&char.divineDomain==="Arcana Domain (Cleric)"){
    if(char.clericArcaneInitiateCantrip1&&!result.find(r=>r.spell===char.clericArcaneInitiateCantrip1)) result.push({spell:char.clericArcaneInitiateCantrip1,source:"DOMAIN"});
