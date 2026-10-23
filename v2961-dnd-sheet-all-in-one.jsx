@@ -6126,40 +6126,39 @@ function App() {
       return {...p,warBladeBond:null,weaponItems:(bd&&bd.name)?[...arr,{...bd,equipped:false}]:arr};
     });
     const bondPick=char.warBladeBondPick&&bondable.some(i=>i.name===char.warBladeBondPick)?char.warBladeBondPick:"";
+    const bondedView=!!bond||!!char.warBladeBondedView;
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6}}>
-        {!bond&&(
-          <select className="ri-sel" value={form} onChange={e=>setF("warBladeForm",e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)",width:"100%"}}>
-            <option value="">-- Choose your pact weapon form --</option>
-            {opts.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
-          </select>
-        )}
-        {bond&&<div style={{fontSize:11,color:"var(--text)"}}><span style={{fontWeight:700,color:"var(--accent)"}}>Bonded weapon:</span> {bond.name}{out?"":" (in its extradimensional space)"}</div>}
-        <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
-          <span style={{fontSize:11,color:out?"var(--accent)":"var(--muted)",fontWeight:700}}>{out?"Summoned — on your Gear tab":"Not summoned"}</span>
-          {(bond||form)&&<button style={warBtn} onClick={e=>{e.stopPropagation();summon();}}>{out?"Re-summon":"Summon"}</button>}
-          {out&&<button style={warLink} onClick={e=>{e.stopPropagation();dismiss();}}>Dismiss</button>}
+        <div style={{display:"flex",alignItems:"center",gap:6}}>
+          {!bondedView&&(
+            <select className="ri-sel" value={form} onChange={e=>setF("warBladeForm",e.target.value)} style={{flex:1,borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)"}}>
+              <option value="">-- Choose your pact weapon form --</option>
+              {opts.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
+            </select>
+          )}
+          {bondedView&&!bond&&(
+            bondable.length===0
+              ?<span style={{flex:1,fontSize:11,color:"var(--muted)"}}>Mark a melee weapon as magical (✨, not artifact or sentient) on your Gear tab first.</span>
+              :<select className="ri-sel" value={bondPick} onChange={e=>setF("warBladeBondPick",e.target.value)} style={{flex:1,color:bondPick?"var(--accent)":"var(--subtle)"}}>
+                <option value="">-- Choose a magic weapon from Gear --</option>
+                {[...new Set(bondable.map(i=>i.name))].map(n=><option key={n} value={n}>{n}</option>)}
+              </select>
+          )}
+          {bondedView&&bond&&<div style={{flex:1,fontSize:11,color:"var(--text)"}}><span style={{fontWeight:700,color:"var(--accent)"}}>Bonded:</span> {bond.name}{out?"":" (extradimensional space)"}</div>}
+          <button className="ft-note-tag" title={bond?"Your pact weapon is bonded — break the bond to go back to conjuring any form":"Bond a magic weapon (1-hour ritual) instead of conjuring one"}
+            style={{cursor:bond?"default":"pointer",fontFamily:"inherit",flexShrink:0,fontWeight:bondedView?800:600,opacity:bondedView?1:0.75,border:"1px solid "+(bondedView?"var(--accent)":"var(--border)"),background:bondedView?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:bondedView?"var(--accent)":"var(--muted)"}}
+            onClick={e=>{e.stopPropagation();if(!bond) setF("warBladeBondedView",!char.warBladeBondedView);}}>Bonded</button>
         </div>
-        {!bond&&(
-          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",display:"flex",flexDirection:"column",gap:6}}>
-            <span style={{fontSize:10,fontWeight:700,color:"var(--accent)"}}>Bond a magic weapon (1-hour ritual)</span>
-            {bondable.length===0
-              ?<span style={{fontSize:11,color:"var(--muted)"}}>Mark a melee weapon as magical (✨, not artifact or sentient) on your Gear tab first, then bond it here.</span>
-              :<div style={{display:"flex",gap:6,alignItems:"center"}}>
-                <select className="ri-sel" value={bondPick} onChange={e=>setF("warBladeBondPick",e.target.value)} style={{flex:1,color:bondPick?"var(--accent)":"var(--subtle)"}}>
-                  <option value="">-- Choose a weapon from Gear --</option>
-                  {[...new Set(bondable.map(i=>i.name))].map(n=><option key={n} value={n}>{n}</option>)}
-                </select>
-                {bondPick&&<button style={warBtn} onClick={e=>{e.stopPropagation();doBond(bondPick);}}>Bond</button>}
-              </div>}
-            {warNote("Only weapons marked magical (✨) on your Gear tab are listed, and artifacts and sentient weapons can't be bonded. Once bonded it is the only form your pact weapon takes.")}
-          </div>
-        )}
-        {bond&&(
-          <div style={{display:"flex",justifyContent:"flex-end"}}>
-            <button style={warLink} onClick={e=>{e.stopPropagation();breakBond();}}>Break bond (1-hour ritual)</button>
-          </div>
-        )}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+          {bondedView&&!bond&&bondPick&&<button style={warBtn} onClick={e=>{e.stopPropagation();doBond(bondPick);}}>Bond</button>}
+          {bondedView&&bond&&<button style={warLink} onClick={e=>{e.stopPropagation();breakBond();}}>Break bond</button>}
+          {(bond||(!bondedView&&form))&&<>
+            <span style={{fontSize:11,color:out?"var(--accent)":"var(--muted)",fontWeight:700}}>{out?"Summoned — on your Gear tab":"Not summoned"}</span>
+            <button style={warBtn} onClick={e=>{e.stopPropagation();summon();}}>{out?"Re-summon":"Summon"}</button>
+            {out&&<button style={warLink} onClick={e=>{e.stopPropagation();dismiss();}}>Dismiss</button>}
+          </>}
+        </div>
+        {bondedView&&!bond&&warNote("Only weapons marked magical (✨) on your Gear tab are listed; artifacts and sentient weapons can't be bonded. Once bonded it is your only pact weapon form.")}
       </div>
     );
   };
