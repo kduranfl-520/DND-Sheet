@@ -6100,7 +6100,7 @@ function App() {
   const warBladeBox = ()=>{
     const form=char.warBladeForm||"";
     const bond=(char.warBladeBond&&typeof char.warBladeBond==="object"&&char.warBladeBond.name)?char.warBladeBond:null;
-    const opts=libEntries.filter(e=>e.category==="Weapon"&&!(e.tags||"").toLowerCase().includes("ranged")).sort((a,b)=>a.title.localeCompare(b.title));
+    const opts=libEntries.filter(e=>e.category==="Weapon"&&!(e.tags||"").toLowerCase().split(",").some(t=>t==="ranged"||t==="magic")&&e.title!=="Unarmed Strike").sort((a,b)=>a.title.localeCompare(b.title));
     const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
     const isP=i=>typeof i==="object"&&i&&i.pact;
     const out=items.some(isP);
