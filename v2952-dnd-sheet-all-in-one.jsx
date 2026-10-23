@@ -6073,28 +6073,67 @@ function App() {
   };
   const warBladeBox = ()=>{
     const form=char.warBladeForm||"";
+    const bond=(char.warBladeBond&&typeof char.warBladeBond==="object"&&char.warBladeBond.name)?char.warBladeBond:null;
     const opts=libEntries.filter(e=>e.category==="Weapon"&&!(e.tags||"").toLowerCase().includes("ranged")).sort((a,b)=>a.title.localeCompare(b.title));
     const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
-    const out=items.some(i=>typeof i==="object"&&i&&i.pact);
+    const isP=i=>typeof i==="object"&&i&&i.pact;
+    const out=items.some(isP);
+    const isMelee=i=>{ if(typeof i!=="object"||!i||!i.name||i.pact) return false; const e=libEntries.find(x=>x.title===i.name&&x.category==="Weapon"); return !!e&&!(e.tags||"").toLowerCase().includes("ranged"); };
+    const bondable=items.filter(isMelee);
     const summon=()=>{
+      if(bond){ setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{...bond,equipped:true,hand:bond.hand||"RH",pact:true,bonded:true}]})); return; }
       const we=libEntries.find(en=>en.title===form&&en.category==="Weapon"); if(!we) return;
       const dmg=we.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
       const tg=(we.tags||"").toLowerCase();
       const two=(we.notes||"").toLowerCase().includes("two-handed");
-      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!(typeof i==="object"&&i&&i.pact)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
+      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
     };
-    const dismiss=()=>setCharSaving(p=>({...p,weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!(typeof i==="object"&&i&&i.pact))}));
+    const dismiss=()=>setCharSaving(p=>({...p,weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
+    const doBond=(nm)=>setCharSaving(p=>{
+      const arr=Array.isArray(p.weaponItems)?p.weaponItems:[];
+      const idx=arr.findIndex(i=>typeof i==="object"&&i&&!i.pact&&i.name===nm); if(idx<0) return p;
+      const {equipped,pact,bonded,...rest}=arr[idx];
+      return {...p,warBladeBond:rest,weaponItems:arr.filter((_,k)=>k!==idx&&!isP(arr[k]))};
+    });
+    const breakBond=()=>setCharSaving(p=>{
+      const bd=p.warBladeBond; const arr=(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!(typeof i==="object"&&i&&i.pact));
+      return {...p,warBladeBond:null,weaponItems:(bd&&bd.name)?[...arr,{...bd,equipped:false}]:arr};
+    });
+    const bondPick=char.warBladeBondPick&&bondable.some(i=>i.name===char.warBladeBondPick)?char.warBladeBondPick:"";
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6}}>
-        <select className="ri-sel" value={form} onChange={e=>setF("warBladeForm",e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)",width:"100%"}}>
-          <option value="">-- Choose your pact weapon --</option>
-          {opts.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
-        </select>
+        {!bond&&(
+          <select className="ri-sel" value={form} onChange={e=>setF("warBladeForm",e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:form?"var(--accent)":"var(--subtle)",width:"100%"}}>
+            <option value="">-- Choose your pact weapon form --</option>
+            {opts.map(o=><option key={o.id} value={o.title}>{o.title}</option>)}
+          </select>
+        )}
+        {bond&&<div style={{fontSize:11,color:"var(--text)"}}><span style={{fontWeight:700,color:"var(--accent)"}}>Bonded weapon:</span> {bond.name}{out?"":" (in its extradimensional space)"}</div>}
         <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
           <span style={{fontSize:11,color:out?"var(--accent)":"var(--muted)",fontWeight:700}}>{out?"Summoned — on your Gear tab":"Not summoned"}</span>
-          {form&&<button style={warBtn} onClick={e=>{e.stopPropagation();summon();}}>{out?"Re-summon":"Summon"}</button>}
+          {(bond||form)&&<button style={warBtn} onClick={e=>{e.stopPropagation();summon();}}>{out?"Re-summon":"Summon"}</button>}
           {out&&<button style={warLink} onClick={e=>{e.stopPropagation();dismiss();}}>Dismiss</button>}
         </div>
+        {!bond&&(
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:6,padding:"6px 8px",display:"flex",flexDirection:"column",gap:6}}>
+            <span style={{fontSize:10,fontWeight:700,color:"var(--accent)"}}>Bond a magic weapon (1-hour ritual)</span>
+            {bondable.length===0
+              ?<span style={{fontSize:11,color:"var(--muted)"}}>Add a melee weapon to your Gear tab first, then bond it here.</span>
+              :<div style={{display:"flex",gap:6,alignItems:"center"}}>
+                <select className="ri-sel" value={bondPick} onChange={e=>setF("warBladeBondPick",e.target.value)} style={{flex:1,color:bondPick?"var(--accent)":"var(--subtle)"}}>
+                  <option value="">-- Choose a weapon from Gear --</option>
+                  {[...new Set(bondable.map(i=>i.name))].map(n=><option key={n} value={n}>{n}</option>)}
+                </select>
+                {bondPick&&<button style={warBtn} onClick={e=>{e.stopPropagation();doBond(bondPick);}}>Bond</button>}
+              </div>}
+            {warNote("It must be a magic weapon, and not an artifact or a sentient weapon. Once bonded it is the only form your pact weapon takes.")}
+          </div>
+        )}
+        {bond&&(
+          <div style={{display:"flex",justifyContent:"flex-end"}}>
+            <button style={warLink} onClick={e=>{e.stopPropagation();breakBond();}}>Break bond (1-hour ritual)</button>
+          </div>
+        )}
       </div>
     );
   };
@@ -26174,7 +26213,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  onClick={()=>updateWeapon({hand:nextHand})}>{hand||"--"}</button>
                             );
                           })()}
-                          {typeof item==="object"&&item&&item.pact&&<span title="Pact weapon — magical, summoned with Pact of the Blade" style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,flexShrink:0,background:"rgba(var(--accent-rgb),0.12)",border:"1px solid rgba(var(--accent-rgb),0.35)",color:"var(--accent)"}}>PACT</span>}
+                          {typeof item==="object"&&item&&item.pact&&<span title={item.bonded?"Bonded pact weapon":"Pact weapon — magical, summoned with Pact of the Blade"} style={{fontSize:10,fontWeight:800,padding:"2px 5px",borderRadius:5,flexShrink:0,background:"rgba(var(--accent-rgb),0.12)",border:"1px solid rgba(var(--accent-rgb),0.35)",color:"var(--accent)"}}>PACT</span>}
                           {(()=>{
                             const wFilter = typeof item==="object"?item.filter:"";
                             const qty = typeof item==="object"?(item.qty??1):1;
