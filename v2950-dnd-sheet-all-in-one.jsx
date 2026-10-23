@@ -2405,10 +2405,7 @@ const WAR_INV_KNOWN=[0,2,2,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8];
 const WAR_ARCANUM_LVL={6:11,7:13,8:15,9:17};
 const WAR_BOONS=[
   {n:"Pact of the Chain",sum:"You learn find familiar and can cast it as a ritual without it counting against your spells known. Your familiar can take the form of an imp, pseudodragon, quasit, or sprite as well as the usual forms. When you take the Attack action, you can give up one of your attacks so your familiar can make one of its own using its reaction.",pts:[]},
-  {n:"Pact of the Blade",pts:[
-    "You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it while you wield it, and it counts as magical.",
-    "It vanishes if it is ever more than 5 feet from you for 1 minute or more, if you use this feature again, if you dismiss it (no action), or if you die.",
-    "You can bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest). You can then dismiss it into an extradimensional space and summon it again with this feature."]},
+  {n:"Pact of the Blade",sum:"You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it, and it counts as magical. It vanishes if it stays more than 5 feet from you for 1 minute, if you use this feature again, if you dismiss it, or if you die. You can also bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest), then dismiss it and summon it again with this feature.",pts:[]},
   {n:"Pact of the Tome",pts:[
     "Your patron gives you a Book of Shadows. Choose three cantrips from the spell lists of any class; while the book is on you, you can cast them at will.",
     "They count as warlock cantrips for you but not against your cantrips known.",
