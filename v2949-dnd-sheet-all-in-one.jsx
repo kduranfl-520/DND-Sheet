@@ -2404,10 +2404,7 @@ const SPELL_SLOTS_THIRD = {
 const WAR_INV_KNOWN=[0,2,2,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8];
 const WAR_ARCANUM_LVL={6:11,7:13,8:15,9:17};
 const WAR_BOONS=[
-  {n:"Pact of the Chain",pts:[
-    "You learn find familiar and can cast it as a ritual; it doesn't count against your spells known.",
-    "Your familiar can take the form of an imp, pseudodragon, quasit, or sprite, as well as the usual forms.",
-    "When you take the Attack action, you can give up one of your own attacks so your familiar can make one attack of its own using its reaction."]},
+  {n:"Pact of the Chain",sum:"You learn find familiar and can cast it as a ritual without it counting against your spells known. Your familiar can take the form of an imp, pseudodragon, quasit, or sprite as well as the usual forms. When you take the Attack action, you can give up one of your attacks so your familiar can make one of its own using its reaction.",pts:[]},
   {n:"Pact of the Blade",pts:[
     "You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it while you wield it, and it counts as magical.",
     "It vanishes if it is ever more than 5 feet from you for 1 minute or more, if you use this feature again, if you dismiss it (no action), or if you die.",
@@ -6089,15 +6086,16 @@ function App() {
               onClick={e=>{e.stopPropagation();setF("warBoon",on?"":b.n);}}>{b.n.replace("Pact of the ","")}</button>;
           })}
         </div>
-        {sel&&(
+        {sel&&sel.sum&&(
+          <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}}>
+            <div style={{fontSize:11,color:"var(--muted)",lineHeight:1.5}}>{sel.sum}</div>
+            {sel.n==="Pact of the Chain"&&warFindFamBox()}
+            {sel.n==="Pact of the Chain"&&warFamPicker()}
+          </div>
+        )}
+        {sel&&!sel.sum&&(
           <div style={{display:"flex",flexDirection:"column",gap:4,paddingLeft:10,marginTop:8}}>
-            {sel.pts.map((t,k)=>(
-              <React.Fragment key={k}>
-                <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>
-                {sel.n==="Pact of the Chain"&&k===0&&warFindFamBox()}
-                {sel.n==="Pact of the Chain"&&k===1&&warFamPicker()}
-              </React.Fragment>
-            ))}
+            {sel.pts.map((t,k)=>(<div key={k} style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>))}
           </div>
         )}
         {warBoon&&warChosenInv.some(n=>{const i=WAR_INV.find(x=>x.n===n);return i&&i.boon&&i.boon!==warBoon;})&&<div style={{fontSize:10,color:"var(--amber)",fontWeight:600,marginTop:6}}>⚠ Some of your invocations need a different Pact Boon.</div>}
