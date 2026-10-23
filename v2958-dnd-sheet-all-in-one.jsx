@@ -2401,6 +2401,31 @@ const WAR_ARCANUM_LVL={6:11,7:13,8:15,9:17};
 const MAGIC_BASE={"Sun Blade *":"Longsword","Sword of Answering *":"Longsword","Dagger of Venom *":"Dagger","Mace of Disruption *":"Mace","Mace of Smiting *":"Mace","Mace of Terror *":"Mace","Scimitar of Speed *":"Scimitar","Trident of Fish Command *":"Trident","Moon Sickle *":"Sickle","Javelin of Lightning *":"Javelin","Oathbow *":"Longbow","Hammer of Thunderbolts *":"Maul"};
 const MAGIC_ANY={"Flame Tongue *":"sword","Frost Brand *":"sword","Defender *":"sword","Holy Avenger *":"sword","Dancing Sword *":"sword","Dragon Slayer *":"sword","Luck Blade *":"sword","Nine Lives Stealer *":"sword","Sword of Vengeance *":"sword","Sword of Wounding *":"sword","Sword of Life Stealing *":"sword","Moon-Touched Sword *":"sword","Vorpal Sword *":"slashsword","Giant Slayer *":"axesword","Berserker Axe *":"axe","Vicious Weapon *":"weapon","Weapon of Warning *":"weapon"};
 const MAGIC_ANY_OPTS={sword:["Greatsword","Longsword","Rapier","Scimitar","Shortsword"],slashsword:["Greatsword","Longsword","Scimitar"],axe:["Battleaxe","Greataxe","Handaxe"],axesword:["Battleaxe","Greataxe","Handaxe","Greatsword","Longsword","Rapier","Scimitar","Shortsword"]};
+// Extra damage from magic weapons (from the library entries' text). mode: always | toggle (you mark it) | nat20 (on a natural 20)
+const MAGIC_EXTRA={
+ "Frost Brand *":[{k:"frost",label:"Frost Brand",n:1,d:6,type:"cold",mode:"always"}],
+ "Flame Tongue *":[{k:"ignite",label:"Ignited",n:2,d:6,type:"fire",mode:"toggle",tip:"While the sword is burning (bonus action to ignite)"}],
+ "Sun Blade *":[{k:"undead",label:"vs undead",n:1,d:8,type:"radiant",mode:"toggle",tip:"Target is undead"}],
+ "Dragon Slayer *":[{k:"dragon",label:"vs dragon",n:3,d:6,type:"weapon",mode:"toggle",tip:"Target is a dragon"}],
+ "Giant Slayer *":[{k:"giant",label:"vs giant",n:2,d:6,type:"weapon",mode:"toggle",tip:"Target is a giant (DC 15 STR save or fall prone)"}],
+ "Holy Avenger *":[{k:"fiend",label:"vs fiend/undead",n:2,d:10,type:"radiant",mode:"toggle",tip:"Target is a fiend or undead"}],
+ "Mace of Disruption *":[{k:"fiend",label:"vs fiend/undead",n:2,d:6,type:"radiant",mode:"toggle",tip:"Target is a fiend or undead"}],
+ "Oathbow *":[{k:"sworn",label:"sworn enemy",n:3,d:6,type:"piercing",mode:"toggle",tip:"Target is your sworn enemy"}],
+ "Vicious Weapon *":[{k:"vic",label:"Vicious",flat:7,type:"weapon",mode:"nat20",tip:"Extra 7 damage on a roll of 20"}],
+ "Sword of Life Stealing *":[{k:"ls",label:"Life Stealing",flat:10,type:"necrotic",mode:"nat20",tip:"On a roll of 20: extra 10 necrotic (not constructs or undead) and you gain 10 temp HP"}]
+};
+const magicExtraRoll=(name,onMap,d20,isCrit,wType)=>{
+  const out={rolls:[],total:0,types:[],labels:[]};
+  (MAGIC_EXTRA[name]||[]).forEach(x=>{
+    const on=x.mode==="always"||(x.mode==="toggle"&&onMap&&onMap[name+":"+x.k])||(x.mode==="nat20"&&d20===20);
+    if(!on) return;
+    let r=[];
+    if(x.flat) r=[x.flat]; else r=Array.from({length:x.n*(isCrit?2:1)},()=>Math.floor(Math.random()*x.d)+1);
+    out.rolls.push(...r); out.total+=r.reduce((a,b)=>a+b,0);
+    out.types.push(x.type==="weapon"?(wType||"weapon's type"):x.type); out.labels.push(x.label);
+  });
+  return out;
+};
 const MAGIC_DMG_TYPE={"Sun Blade *":"radiant"};
 const magicBaseName=(item)=>{ if(!item||typeof item!=="object") return ""; return item.baseWeapon||MAGIC_BASE[item.name]||""; };
 const mergeMagicBase=(entry,baseEntry)=>{ if(!entry||!baseEntry) return entry; let bn=baseEntry.notes||""; const t=MAGIC_DMG_TYPE[entry.title]; if(t) bn=bn.replace(/(Dmg: \S+ )\S+/,"$1"+t); return {...entry,tags:(baseEntry.tags||"")+","+(entry.tags||""),notes:bn+" "+(entry.notes||"")}; };
@@ -32344,6 +32369,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           {duelingBonus>0&&<span title="Dueling Fighting Style — +2 damage (one melee weapon, no other weapon in other hand)" style={{fontSize:10,fontWeight:700,color:"var(--accent)",background:"rgba(var(--accent-rgb),0.1)",border:"1px solid rgba(var(--accent-rgb),0.3)",borderRadius:4,padding:"1px 5px"}}>⚔️ DUELING +2</span>}
                                           {thrownWeaponBonusR>0&&<span title="Thrown Weapon Fighting — +2 damage on this weapon" style={{fontSize:10,fontWeight:700,color:"var(--accent)",background:"rgba(var(--accent-rgb),0.1)",border:"1px solid rgba(var(--accent-rgb),0.3)",borderRadius:4,padding:"1px 5px"}}>🪃 THROWN +2</span>}
                                           {sporeEligibleR&&<span title="Symbiotic Entity — extra 1d6 necrotic damage on melee weapon attacks" style={{fontSize:10,fontWeight:700,color:"#a78bfa",background:"rgba(167,139,250,0.1)",border:"1px solid rgba(167,139,250,0.3)",borderRadius:4,padding:"1px 5px"}}>🍄 SPORES +1d6</span>}
+                                          {(MAGIC_EXTRA[item.name]||[]).map(x=>{
+                                            const lbl="✨ "+x.label+" +"+(x.flat?x.flat:x.n+"d"+x.d)+(x.mode==="nat20"?" (nat 20)":"");
+                                            const onK=item.name+":"+x.k; const isOn=x.mode==="toggle"&&!!(char.magicExtraOn&&char.magicExtraOn[onK]);
+                                            if(x.mode==="toggle") return <button key={x.k} title={(x.tip||"")+" — tap to turn on for your next rolls"} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,magicExtraOn:{...(p.magicExtraOn||{}),[onK]:!isOn}}));}}
+                                              style={{fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"inherit",padding:"1px 5px",borderRadius:4,color:isOn?"#a78bfa":"var(--muted)",background:isOn?"rgba(167,139,250,0.14)":"rgba(148,163,184,0.08)",border:"1px solid "+(isOn?"rgba(167,139,250,0.45)":"var(--border)")}}>{lbl}{isOn?" (on)":""}</button>;
+                                            return <span key={x.k} title={x.tip||""} style={{fontSize:10,fontWeight:700,color:"#a78bfa",background:"rgba(167,139,250,0.1)",border:"1px solid rgba(167,139,250,0.3)",borderRadius:4,padding:"1px 5px"}}>{lbl}</span>;
+                                          })}
                                           {isOffhand&&hasTWF&&<span title="Two-Weapon Fighting Style — ability modifier added to offhand damage" style={{fontSize:10,fontWeight:700,color:"var(--green)",background:"rgba(34,197,94,0.1)",border:"1px solid rgba(34,197,94,0.3)",borderRadius:4,padding:"1px 5px"}}>🗡️ TWF +{mod}</span>}
                                           {hasDivineStrike&&<button onClick={e=>{e.stopPropagation();setF("clericDivStrikeArmed",!char.clericDivStrikeArmed);}}
                                             title="Once per turn — auto-adds to your next hit with this weapon"
@@ -32401,10 +32433,11 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                               spRolls=Array.from({length:isCrit?2:1},()=>Math.floor(Math.random()*6)+1);
                                               spTotal=spRolls.reduce((a,r)=>a+r,0);
                                             }
-                                            const bonusRollsCombined=[...dsRolls,...spRolls];
-                                            const bonusTotalCombined=dsTotal+spTotal;
-                                            const bonusTypeCombined=[divStrikeArmed?divStrikeType:null,sporeEligibleR?"necrotic":null].filter(Boolean).join(" + ");
-                                            const bonusLabelCombined=[divStrikeArmed?"Divine Strike":null,sporeEligibleR?"Symbiotic Entity":null].filter(Boolean).join(" + ");
+                                            const mx=magicExtraRoll(item.name,char.magicExtraOn,d20,isCrit,libDmg.type);
+                                            const bonusRollsCombined=[...dsRolls,...spRolls,...mx.rolls];
+                                            const bonusTotalCombined=dsTotal+spTotal+mx.total;
+                                            const bonusTypeCombined=[divStrikeArmed?divStrikeType:null,sporeEligibleR?"necrotic":null,...mx.types].filter(Boolean).join(" + ");
+                                            const bonusLabelCombined=[divStrikeArmed?"Divine Strike":null,sporeEligibleR?"Symbiotic Entity":null,...mx.labels].filter(Boolean).join(" + ");
                                             const dmgKey=item.id+"_"+Date.now();
                                             setCharSaving(p=>({...p,_turnDmgMap:{...(p._turnDmgMap||{}),[dmgKey]:dmgTotal+bonusTotalCombined}}));
                                             setSkillRoll({label:(recklessAdv?"⚡ ":"")+(rageBonus>0?"🔥 ":"")+(sporeEligibleR?"🍄 ":"")+(item.name||"Attack"),roll:d20,bonus:atkBonusNum,total:hitTotal,hitRoll:d20,atkBonus:atkBonusNum,hitTotal,isCrit,isFail:isMiss,sides:20,r1,r2,isAdv:recklessAdv,isDis:false,isWeaponRoll:true,dmgDice:libDmg.dice,dmgBonus:totalDmgBonus,dmgType:libDmg.type,baseDiceCount:baseCount,diceSides:dieSize,allDmgRolls:dmgRolls,dmgRolls,dmgTotal,brutalDice,bonusDmg:bonusTotalCombined,bonusDmgRolls:bonusRollsCombined,bonusDmgType:bonusTypeCombined,bonusDmgLabel:bonusLabelCombined});
