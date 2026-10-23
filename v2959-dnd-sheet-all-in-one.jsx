@@ -26446,6 +26446,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         const dmgRolls=Array.from({length:totalDiceCount},()=>Math.floor(Math.random()*sides)+1);
                                         const sporeRolls = sporeEligible ? Array.from({length:isCrit?2:1},()=>Math.floor(Math.random()*6)+1) : [];
                                         const sporeTotal = sporeRolls.reduce((a,b)=>a+b,0);
+                                        const mxG=magicExtraRoll(name,c.magicExtraOn,finalHit,isCrit,dmgType);
                                         const hitTotal=finalHit+atkBonus;
                                         const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+magicB+sporeTotal;
                                         const dmgTotal=dmgRolls.reduce((a,b)=>a+b,0)+totalDmgBonus;
@@ -26455,6 +26456,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           hitRoll:finalHit,atkBonus,hitTotal,
                                           isCrit,isFail:finalHit===1&&!useAdv,
                                           dmgRolls,dmgBonus:totalDmgBonus,dmgTotal,dmgDice,dmgType,
+                                          ...(mxG.rolls.length?{bonusDmg:mxG.total,bonusDmgRolls:mxG.rolls,bonusDmgType:mxG.types.join(" + "),bonusDmgLabel:mxG.labels.join(" + ")}:{}),
                                           sides:20,roll:finalHit,bonus:atkBonus,total:hitTotal,
                                           r1:hitRoll,r2:hitRoll2,isAdv:useAdv,isDis:false,
                                           allDmgRolls:dmgRolls,diceSides:sides,
@@ -26515,6 +26517,15 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           })()}
                             <button style={{fontSize:14,color:"var(--red)",background:"none",border:"none",cursor:"pointer",padding:"0 4px",lineHeight:1}}
  onClick={()=>setCharSaving(p=>{const a=[...(p.weaponItems||[])];a.splice(idx,1);return {...p,weaponItems:a};})}>X</button>
+                            {MAGIC_EXTRA[name]&&<div style={{flexBasis:"100%",display:"flex",gap:6,flexWrap:"wrap",paddingLeft:2}}>
+                              {MAGIC_EXTRA[name].map(x=>{
+                                const lbl="✨ "+x.label+" +"+(x.flat?x.flat:x.n+"d"+x.d)+(x.mode==="nat20"?" (nat 20)":"");
+                                const onK=name+":"+x.k; const isOn=x.mode==="toggle"&&!!(char.magicExtraOn&&char.magicExtraOn[onK]);
+                                if(x.mode==="toggle") return <button key={x.k} title={(x.tip||"")+" — tap to turn on for your next rolls"} onClick={()=>setCharSaving(p=>({...p,magicExtraOn:{...(p.magicExtraOn||{}),[onK]:!isOn}}))}
+                                  style={{fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"inherit",padding:"1px 5px",borderRadius:4,color:isOn?"#a78bfa":"var(--muted)",background:isOn?"rgba(167,139,250,0.14)":"rgba(148,163,184,0.08)",border:"1px solid "+(isOn?"rgba(167,139,250,0.45)":"var(--border)")}}>{lbl}{isOn?" (on)":""}</button>;
+                                return <span key={x.k} title={x.tip||""} style={{fontSize:10,fontWeight:700,color:"#a78bfa",background:"rgba(167,139,250,0.1)",border:"1px solid rgba(167,139,250,0.3)",borderRadius:4,padding:"1px 5px"}}>{lbl}</span>;
+                              })}
+                            </div>}
                           </>}
                         </div>
                       );
