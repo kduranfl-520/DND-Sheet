@@ -2,7 +2,7 @@
  "name": "D&D 5e Character Sheet",
  "short_name": "D&D Sheet",
  "start_url": ".",
- "display": "standalone",
+ "display": "browser",
  "background_color": "#0f0f0f",
  "theme_color": "#0f0f0f",
  "icons": [
