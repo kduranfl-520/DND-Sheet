@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2978";
+const SHEET_VERSION = "v2979";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22030,12 +22030,13 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {onceRow("warLuckUsed")}
                                               </FC>,
                                               <FC key="fr" label="Fiendish Resilience (10th)" minLvl={10}>
-                                                <Body>When you finish a short or long rest, you can choose one damage type and gain resistance to it until you choose a different one with this feature. Damage from magical weapons or silver weapons ignores this resistance.</Body>
+                                                <Body>When you finish a short or long rest, you can choose one damage type and gain resistance to it until you choose a different one with this feature.</Body>
                                                 <select className="ri-sel" value={rs} onClick={e=>e.stopPropagation()} onChange={e=>setF("warFiendResist",e.target.value)}
                                                   style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:rs?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
                                                   <option value="">-- Choose a damage type --</option>
                                                   {["Acid","Bludgeoning","Cold","Fire","Force","Lightning","Necrotic","Piercing","Poison","Psychic","Radiant","Slashing","Thunder"].map(t=><option key={t} value={t}>{t}</option>)}
                                                 </select>
+                                                <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Damage from magical weapons or silver weapons ignores this resistance.</span></div>
                                               </FC>,
                                               <FC key="hth" label="Hurl Through Hell (14th)" minLvl={14}>
                                                 <Body>When you hit a creature with an attack, you can instantly send it through the lower planes. It vanishes and hurtles through a nightmare landscape, then returns at the end of your next turn to the space it left or the nearest unoccupied space. If it is not a fiend, it takes 10d10 psychic damage from the ordeal. Once used, you need a long rest to use it again.</Body>
