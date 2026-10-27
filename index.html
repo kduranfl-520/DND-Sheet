@@ -48,9 +48,50 @@
         String(msg).replace(/</g,'&lt;') + '</pre></div>';
     }
 
+    var loadedName = '';
+    function verOf(n) { return parseInt((String(n).match(/v(\d+)/) || [0,0])[1]) || 0; }
+    function showUpdateBanner(name) {
+      if (document.getElementById('upd-banner')) return;
+      var b = document.createElement('div');
+      b.id = 'upd-banner';
+      b.style.cssText = 'position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:99999;background:#1e1b4b;color:#fff;font:600 13px sans-serif;padding:9px 14px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;gap:10px;align-items:center;white-space:nowrap;';
+      b.innerHTML = '<span>New version available (' + (String(name).match(/v\d+/)||['update'])[0] + ')</span>';
+      var btn = document.createElement('button');
+      btn.textContent = 'Reload';
+      btn.style.cssText = 'background:#a78bfa;color:#1e1b4b;border:0;border-radius:999px;padding:5px 12px;font:700 13px sans-serif;';
+      btn.onclick = function() { location.reload(); };
+      var x = document.createElement('button');
+      x.textContent = '\u2715';
+      x.style.cssText = 'background:transparent;color:#fff;border:0;font:700 13px sans-serif;';
+      x.onclick = function() { b.remove(); };
+      b.appendChild(btn); b.appendChild(x);
+      document.body.appendChild(b);
+    }
+    var lastCheck = 0;
+    function checkForUpdate() {
+      if (!loadedName || Date.now() - lastCheck < 20000) return;
+      lastCheck = Date.now();
+      fetch('https://api.github.com/repos/kduranfl-520/DND-Sheet/contents/', { cache: 'no-store' })
+        .then(function(r) { return r.json(); })
+        .then(function(files) {
+          var best = files.filter(function(f) { return /dnd-sheet-all-in-one\.jsx$/i.test(f.name); })
+            .sort(function(a, b) { return verOf(b.name) - verOf(a.name); })[0];
+          if (best && verOf(best.name) > verOf(loadedName)) {
+            // only offer it once GitHub Pages is actually serving the new file
+            return fetch(best.name, { method: 'HEAD', cache: 'no-store' }).then(function(r) { if (r.ok) showUpdateBanner(best.name); });
+          }
+        })
+        .catch(function() {});
+    }
+    document.addEventListener('visibilitychange', function() { if (document.visibilityState === 'visible') checkForUpdate(); });
+    window.addEventListener('pageshow', checkForUpdate);
+    window.addEventListener('focus', checkForUpdate);
+    setInterval(checkForUpdate, 300000);
+
     function loadSheet(filename) {
+      loadedName = filename;
       document.querySelector('#loading p').textContent = 'Loading ' + filename + '...';
-      fetch(filename)
+      fetch(filename, { cache: 'no-cache' })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
         .then(function(src) {
           try {
