@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2979";
+const SHEET_VERSION = "v2980";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8283,7 +8283,7 @@ function App() {
  const sorcHeartStorm = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=6&&sorcLvl<18)?["Lightning","Thunder"].filter(d=>!(char.resistances||[]).find(x=>String(x).toLowerCase()===d.toLowerCase())):[];
  const sorcWindSoul = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=18)?["Lightning","Thunder"].filter(d=>!(char.immunities||[]).find(x=>String(x).toLowerCase()===d.toLowerCase())):[];
  const warResistEntries = (char.charClass==="Warlock"&&warLvl>=10) ? [
-   ...((char.warPatron==="The Fiend (Warlock)"&&char.warFiendResist)?[{type:"Resistance",damage:char.warFiendResist+" (except magical or silver weapons)",racial:false,auto:true,label:"Fiendish Resilience"}]:[]),
+   ...((char.warPatron==="The Fiend (Warlock)"&&char.warFiendResist)?[{type:"Resistance",damage:char.warFiendResist,racial:false,auto:true,label:"Fiendish Resilience"}]:[]),
    ...((char.warPatron==="The Great Old One (Warlock)")?[{type:"Resistance",damage:"Psychic",racial:false,auto:true,label:"Thought Shield"}]:[])
  ] : [];
  const allEntries = [
