@@ -48,6 +48,21 @@
         String(msg).replace(/</g,'&lt;') + '</pre></div>';
     }
 
+    // If the Babel script from the first CDN failed to load (flaky network), try backups before giving up.
+    function loadScript(url) {
+      return new Promise(function(res, rej) {
+        var el = document.createElement('script');
+        el.src = url; el.onload = res; el.onerror = function() { rej(new Error('Could not load ' + url)); };
+        document.head.appendChild(el);
+      });
+    }
+    function ensureBabel() {
+      if (typeof Babel !== 'undefined') return Promise.resolve();
+      document.querySelector('#loading p').textContent = 'Retrying script download...';
+      return loadScript('https://cdn.jsdelivr.net/npm/@babel/standalone@7.23.2/babel.min.js')
+        .catch(function() { return loadScript('https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js'); })
+        .then(function() { if (typeof Babel === 'undefined') throw new Error('Babel did not load. Check your connection and reopen the app.'); });
+    }
     var loadedName = '';
     function verOf(n) { return parseInt((String(n).match(/v(\d+)/) || [0,0])[1]) || 0; }
     function showUpdateBanner(name) {
@@ -93,6 +108,7 @@
       document.querySelector('#loading p').textContent = 'Loading ' + filename + '...';
       fetch(filename, { cache: 'no-cache' })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+        .then(function(src) { return ensureBabel().then(function() { return src; }); })
         .then(function(src) {
           try {
             var result = Babel.transform(src, { presets: ['react'], sourceType: 'unambiguous' });
