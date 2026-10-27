@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2973";
+const SHEET_VERSION = "v2974";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22005,7 +22005,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {saveRow("warBeguiling","WIS",dcW,"The creature shakes off the charm.","The creature is charmed by you for 1 minute, or until it takes any damage.")}
                                               </FC>,
                                               <FC key="dd" label="Dark Delirium (14th)" minLvl={14} headerBadge={<DurationBadge id="war-delirium-duration" short="1 min" full="Duration: 1 minute, or until your concentration is broken or the creature takes any damage." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>You can use your action to choose a creature you can see within 60 feet. It makes a Wisdom saving throw against your warlock spell save DC, and on a failed save it is charmed or frightened by you (your choice) for 1 minute or until your concentration is broken, as if you were concentrating on a spell. The effect ends early if the creature takes any damage. Until it ends, the creature believes it is lost in a misty realm whose appearance you choose, and it can see and hear only itself, you, and the illusion. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>You can use your action to choose a creature you can see within 60 feet. It makes a Wisdom saving throw against your warlock spell save DC. On a failed save, it is charmed or frightened by you (your choice) for 1 minute, and you must concentrate on the effect as if it were a spell. It ends early if your concentration is broken or the creature takes any damage. While it lasts, the creature believes it is lost in a misty realm of your design and can see and hear only itself, you, and the illusion. Once used, you need a short or long rest to use it again.</Body>
                                                 {saveRow("warDarkDelirium","WIS",dcW,"The creature is not affected.","The creature is charmed or frightened by you (your choice) for 1 minute and lost in the misty realm.")}
                                                 {onceRow("warDelirUsed")}
                                               </FC>
