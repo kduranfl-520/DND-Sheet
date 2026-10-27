@@ -2575,6 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
+const SHEET_VERSION = "v2970";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8582,7 +8583,7 @@ function App() {
 
             </div>
 
-            <div className="core-sheet-footer" style={{gridColumn:"1 / -1"}}>Character Sheet . D&amp;D 2014 . 5th Edition . Updated {SHEET_UPDATED}</div>
+            <div className="core-sheet-footer" style={{gridColumn:"1 / -1"}}>Character Sheet . D&amp;D 2014 . 5th Edition . Updated {SHEET_UPDATED} . {SHEET_VERSION}</div>
           </div>
         )}
 
