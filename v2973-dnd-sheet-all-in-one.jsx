@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2972";
+const SHEET_VERSION = "v2973";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -7066,7 +7066,7 @@ function App() {
       {theme&&theme.on&&<style>{buildThemeCss(theme,darkMode)}</style>}
 
       {/* Clear Sheet button — top right, discrete */}
-      <div style={{display:"flex",justifyContent:"space-evenly",alignItems:"center",gap:12,padding:"18px 16px 6px",height:52,flexShrink:0,boxSizing:"border-box"}}>
+      <div style={{display:"flex",justifyContent:"space-evenly",alignItems:"center",gap:12,padding:"4px 16px 0",height:28,flexShrink:0,boxSizing:"border-box"}}>
         <div style={{position:"relative"}}>
           <button onClick={()=>setThemeOpen(o=>!o)} aria-label="Sheet colors" aria-expanded={themeOpen} title="Sheet colors" style={{display:"flex",alignItems:"center",gap:5,height:20,padding:"0 8px 0 3px",borderRadius:10,border:"1px solid var(--border)",background:"var(--card)",color:"var(--text)",fontSize:10,fontWeight:600,cursor:"pointer"}}>
             <span style={{display:"block",width:14,height:14,borderRadius:"50%",background:"linear-gradient(135deg,var(--accent),var(--accent2,#06b6d4))",boxShadow:"inset 0 0 0 1px rgba(255,255,255,.5)"}}/>Colors
