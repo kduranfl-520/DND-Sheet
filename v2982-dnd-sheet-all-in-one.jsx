@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2981";
+const SHEET_VERSION = "v2982";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -2904,7 +2904,7 @@ const SPELL_DATA = {
   "Dominate Person":{"level":5,"school":"Enchantment","cast":"1 action","range":"60 ft","comp":"V, S","dur":"Concentration, up to 1 minute","atkType":"save","saveAbl":"WIS","dmgScale":"longer duration","scaleBase":5,"scaleStep":1,"desc":"You attempt to beguile a humanoid you can see within range. It must succeed on a Wisdom saving throw or be charmed by you for the duration. Each time the target takes damage, it makes a new Wisdom saving throw. If the saving throw succeeds, the spell ends. At Higher Levels: 6th — 10 minutes, 7th — 1 hour, 8th+ — 8 hours.","failEffect":"Is charmed by you for the duration; you can issue telepathic commands (makes a new save whenever it takes damage)."},
   "Dream":{"level":5,"school":"Illusion","cast":"1 minute","range":"Special","comp":"V, S, M (a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird)","dur":"8 hours","saveAbl":"WIS","dmg":"3d6","dmgType":"psychic","desc":"This spell shapes a creature's dreams. Choose a creature known to you as the target. The target must be on the same plane of existence as you. Creatures that don't sleep can't be contacted by this spell. You, or a willing creature you touch, enters a trance state acting as a messenger. The messenger appears in the target's dreams and can converse with the target as long as it remains asleep. If the target is hostile, you can deliver a nightmare causing 3d6 psychic damage on a failed WIS save.","atkType":"auto"},
   "Druidcraft":{"level":0,"school":"Transmutation","cast":"1 action","range":"30 ft","comp":"V, S","dur":"Instantaneous","desc":"Whispering to the spirits of nature, you create one of the following: a tiny, harmless sensory effect that predicts what the weather will be, make a flower blossom/seed pod open/leaf bud bloom, create an instantaneous harmless sensory effect (falling leaves, puff of wind, sound of an animal, faint odor of skunk), or light or snuff out a candle, torch, or small campfire."},
-  "Eldritch Blast":{"level":0,"school":"Evocation","cast":"1 action","range":"120 ft","comp":"V, S","dur":"Instantaneous","desc":"A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage. You can create more beams when you reach higher levels: two beams at 5th level, three beams at 11th level, four beams at 17th level. You can direct the beams at the same target or at different ones.",dmg:"1d10",dmgType:"force",atkType:"ranged"},
+  "Eldritch Blast":{"level":0,"school":"Evocation","cast":"1 action","range":"120 ft","comp":"V, S","dur":"Instantaneous","desc":"A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage. You can create more beams when you reach higher levels: two beams at 5th level, three beams at 11th level, four beams at 17th level. You can direct the beams at the same target or at different ones.",dmg:"1d10",cantripDie:"d10",ebBlast:true,dmgType:"force",atkType:"ranged"},
   "Elemental Bane":{"source":"XGE","level":4,"school":"Transmutation","cast":"1 action","range":"90 ft","comp":"V, S","dur":"Concentration, up to 1 minute","atkType":"save","saveAbl":"CON","dmg":"2d6","dmgType":"varies","upcastSlots":true,"scaleBase":4,"upcastNote":"Slot 4 = 1 target, Slot 5 = 2 targets, Slot 6 = 3 targets, Slot 7 = 4 targets, Slot 8 = 5 targets, Slot 9 = 6 targets","desc":"Choose one creature you can see within range and one damage type: acid, cold, fire, lightning, or thunder. The target must succeed on a Constitution saving throw or be affected for the duration. The first time each turn the target takes damage of the chosen type, it takes an extra 2d6 of that type and loses resistance to it. At Higher Levels: +1 additional target per slot above 4th — the 2d6 damage does not increase."},
   "Elemental Weapon":{"level":3,"school":"Transmutation","cast":"1 action","range":"Touch","comp":"V, S","dur":"Concentration, up to 1 hour","atkType":"auto","dmg":"1d4","dmgType":"varies","dmgScale":"1d4","scaleBase":3,"scaleStep":2,"desc":"A nonmagical weapon you touch becomes a magic weapon. Choose acid, cold, fire, lightning, or thunder damage. The weapon gains a +1 to attack rolls and deals an extra 1d4 of the chosen damage type. At Higher Levels: +2 bonus and 2d4 extra at slots 5–6; +3 bonus and 3d4 extra at slots 7+."},
   "Enemies Abound":{"level":3,"school":"Enchantment","cast":"1 action","range":"120 ft","comp":"V, S","dur":"Concentration, up to 1 minute","source":"XGE","desc":"You reach into the mind of one creature you can see and force it to make an Intelligence saving throw. A creature automatically succeeds if it is immune to being frightened. On a failed save, the target loses the ability to distinguish friend from foe, regarding all creatures it can see as enemies until the spell ends. Each time the target takes damage, it can repeat the saving throw, ending the effect on itself on a success.","atkType":"save","saveAbl":"INT"},
@@ -5447,7 +5447,10 @@ function App() {
  const cMult=sd.cantripDie?(lv>=17?4:lv>=11?3:lv>=5?2:1):1;
  const baseDmg=sd.cantripDie?cMult+sd.cantripDie:sd.dmg;
  const sl=spellSlotSel[key]||(sd.scaleBase||sd.level||1);
- const dice=sd.cantripDie?baseDmg:getScaledDice(baseDmg,sd.dmgScale,sd.scaleBase,sl,sd.scaleStep);
+ const ebBeams=sd.ebBlast?(lv>=17?4:lv>=11?3:lv>=5?2:1):0;
+ const dice=ebBeams?ebBeams+'d10':(sd.cantripDie?baseDmg:getScaledDice(baseDmg,sd.dmgScale,sd.scaleBase,sl,sd.scaleStep));
+ const ebAgonizing=ebBeams>0&&char.charClass==='Warlock'&&(Array.isArray(char.warInv)?char.warInv:[]).includes('Agonizing Blast');
+ const ebAgBonus=ebAgonizing?ebBeams*abilityMod(eff.CHA||10):0;
  const clsLvlForSupreme=char.multiClassLevel>0?char.classLevel:lv;
  const hasSupremeHealing = char.charClass==="Cleric" && char.divineDomain==="Life Domain (Cleric)" && clsLvlForSupreme>=17 && sd.atkType==="heal";
  let r=rollSpellDice(dice);
@@ -5460,7 +5463,7 @@ function App() {
  }
  const eaBonus=elementalAffinityBonus(sd);
  const modBonusBase0=(sd.cantripMod?(spellMod||0):potentCantripBonus(sd))+discipleOfLifeBonus(sd,sl);
- const modBonusBase=modBonusBase0+eaBonus;
+ const modBonusBase=modBonusBase0+eaBonus+ebAgBonus;
  const wfSpiritActive = char.charClass==="Druid" && char.druidCircle==="Circle of Wildfire (Druid)" && char.druidWildfireSpiritActive;
  const enhancedBondEligible = wfSpiritActive && (sd.dmgType==="fire" || sd.atkType==="heal");
  const enhancedBondRoll = enhancedBondEligible ? Math.floor(Math.random()*8)+1 : 0;
@@ -5469,6 +5472,7 @@ function App() {
  const bonusLabels=[];
  if(modBonusBase0) bonusLabels.push(modBonusBase0+(sd.cantripMod?" (mod)":discipleOfLifeBonus(sd,sl)?" (Disciple of Life)":" (Potent Spellcasting)"));
  if(eaBonus) bonusLabels.push(eaBonus+" (Elemental Affinity)");
+ if(ebAgBonus) bonusLabels.push(ebAgBonus+" (Agonizing Blast: CHA "+(abilityMod(eff.CHA||10)>=0?"+":"")+abilityMod(eff.CHA||10)+" x "+ebBeams+(ebBeams>1?" beams":" beam")+")");
  if(enhancedBondRoll) bonusLabels.push("+"+enhancedBondRoll+" (Enhanced Bond)");
  const breakdown=bonusLabels.length?r.breakdown+" + "+bonusLabels.join(" + "):r.breakdown;
  setSpellRoll(p=>({...p,[key]:{total,breakdown,dice,slot:sl}}));
@@ -6473,7 +6477,8 @@ function App() {
    if(!dt||!sd||!sd.dmg||sd.atkType==="heal") return 0;
    return String(sd.dmgType||"").toLowerCase().includes(dt)?Math.max(0,abilityMod(eff.CHA||10)):0;
  };
- const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd);
+ const ebAgDisplay = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Agonizing Blast")) ? ((char.level||1)>=17?4:(char.level||1)>=11?3:(char.level||1)>=5?2:1)*abilityMod(eff.CHA||10) : 0;
+ const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd) + ebAgDisplay(sd);
  // Disciple of Life (Cleric: Life domain) — 1st-level-or-higher healing spells restore +2+slot level extra HP
  const discipleOfLifeBonus = (sd, slotLvl) => (char.charClass==="Cleric" && char.divineDomain==="Life Domain (Cleric)" && sd && sd.atkType==="heal" && slotLvl>=1) ? (2+slotLvl) : 0;
  // Blessed Healer (Cleric: Life domain, 6th level) — casting a 1st-level-or-higher healing spell on another creature also heals you for 2+slot level
