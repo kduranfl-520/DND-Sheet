@@ -2577,7 +2577,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2986";
+const SHEET_VERSION = "v2987";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6693,6 +6693,11 @@ function App() {
  // Warlock Pact of the Tome — three cantrips from any class list, at will while the Book of Shadows is on you (not against cantrips known)
  if(char.charClass==="Warlock"&&warBoon==="Pact of the Tome"&&!char.warBookLost){
    (Array.isArray(char.warTome)?char.warTome:[]).slice(0,3).forEach(sp=>{ if(sp&&!result.find(r=>r.spell===sp)) result.push({spell:sp,source:"Class"}); });
+ }
+ // Warlock invocations that let you cast a spell once using a warlock spell slot — always known, not counted against spells known
+ if(char.charClass==="Warlock"){
+   const slotInv={"Thief of Five Fates":"Bane","Mire the Mind":"Slow","Sign of Ill Omen":"Bestow Curse","Bewitching Whispers":"Compulsion","Dreadful Word":"Confusion","Sculptor of Flesh":"Polymorph","Minions of Chaos":"Conjure Elemental"};
+   (Array.isArray(char.warInv)?char.warInv:[]).forEach(n=>{ const sp=slotInv[n]; if(sp&&!result.find(r=>r.spell===sp)) result.push({spell:sp,source:"Class"}); });
  }
  // Arcana Domain Arcane Initiate — always know your 2 chosen wizard cantrips, doesn't count against cantrips known
  if(char.charClass==="Cleric"&&char.divineDomain==="Arcana Domain (Cleric)"){
