@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2997";
+const SHEET_VERSION = "v2998";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6581,12 +6581,12 @@ function App() {
   const devilsSightDV=(char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Devil's Sight"))?120:0;
   const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV,shadowDV,devilsSightDV);
   const details=[];
-  if(racialDV>0) details.push("Racial");
-  if(eyesOfNightDV>0) details.push("Eyes of Night");
-  if(stoneRuneDV>0) details.push("Stone Rune");
-  if(umbralSightDV>0) details.push("Umbral Sight");
-  if(shadowDV>0) details.push("Eyes of the Dark");
-  if(devilsSightDV>0) details.push("Devil's Sight, sees magical darkness");
+  if(racialDV>0) details.push(racialDV+"ft Racial darkvision");
+  if(eyesOfNightDV>0) details.push("300ft Eyes of Night");
+  if(stoneRuneDV>0) details.push(stoneRuneDV+"ft Stone Rune");
+  if(umbralSightDV>0) details.push(umbralSightDV+"ft Umbral Sight");
+  if(shadowDV>0) details.push(shadowDV+"ft Eyes of the Dark");
+  if(devilsSightDV>0) details.push(devilsSightDV+"ft Devil's Sight (magical darkness too)");
   return {range:darkvisionRange,details};
  })();
  const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
@@ -8051,11 +8051,14 @@ function App() {
                         {visionDV.range>0&&(<>
                         {wearingInfo==="coreVision"&&<div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/>}
                         <div className={"ab-mod-hover-tip"+(wearingInfo==="coreVision"?" ab-mod-hover-tip-open":"")} style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",marginTop:4,background:"var(--card)",border:"1px solid var(--border)",borderRadius:8,padding:"6px 10px",fontSize:11,fontWeight:600,whiteSpace:"nowrap",zIndex:999,boxShadow:"0 4px 12px rgba(0,0,0,0.25)",display:"flex",flexDirection:"column",gap:2}}>
-                          {visionDV.details.map(d=>(<span key={d} style={{color:"var(--text)"}}>{d}</span>))}
+                          {visionDV.details.map(d=>(<span key={d} style={{color:"var(--green)"}}>{d}</span>))}
                         </div>
                         </>)}
                       </div>
-                      <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"Normal"}</div>
+                      <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:0}}>
+                        <div className="cstat-val cstat-val-lg" style={{color:visionDV.range>0?"var(--green)":"var(--muted)"}}>{visionDV.range}</div>
+                        <span style={{fontFamily:"'DM Mono',monospace",fontSize:13,fontWeight:700,color:visionDV.range>0?"var(--green)":"var(--muted)",marginLeft:2}}>ft</span>
+                      </div>
                     </div>
                   </div>
                 </div>
