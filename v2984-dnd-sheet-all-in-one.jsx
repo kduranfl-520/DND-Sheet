@@ -2575,7 +2575,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2983";
+const SHEET_VERSION = "v2984";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6050,7 +6050,7 @@ function App() {
             <button style={used?warLink:warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}}));}}>{used?"↺ Reset":"Mark Used"}</button>
           </div>
         )}
-        {(()=>{const sp={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate"}[nm]; return sp&&SPELL_DATA[sp]?(
+        {(()=>{const sp={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals"}[nm]; return sp&&SPELL_DATA[sp]?(
           <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
         ):null;})()}
       </div>
