@@ -2577,7 +2577,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2985";
+const SHEET_VERSION = "v2986";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6401,6 +6401,7 @@ function App() {
  const mercySkills = (char.charClass==="Monk"&&char.monasticTradition==="Way of Mercy (Monk)")?["Insight","Medicine"]:[];
  const drunkenSkills = (char.charClass==="Monk"&&char.monasticTradition==="Way of the Drunken Master (Monk)")?["Performance"]:[];
  // Otherworldly Glamour (Ranger: Fey Wanderer, 3rd) — proficiency in Deception, Performance, or Persuasion (chosen on the feature card)
+ const warInvSkills = (char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Beguiling Influence"))?["Deception","Persuasion"]:[];
  const feyGlamourSkills = (char.charClass==="Ranger"&&char.rangerArchetype==="Fey Wanderer (Ranger)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=3&&["Deception","Performance","Persuasion"].includes(char.feyGlamourSkill))?[char.feyGlamourSkill]:[];
  const rogueLvlC = char.charClass==="Rogue" ? (char.multiClassLevel>0?char.classLevel:char.level||1) : 0;
  const rogueSubSkills = (rogueLvlC>=3&&char.rogueArchetype==="Scout (Rogue)") ? ["Nature","Survival"] : [];
@@ -6423,7 +6424,7 @@ function App() {
    return {w,a,t};
  })();
  const rogueSubTools = rogueLvlC>=3 ? (char.rogueArchetype==="Assassin (Rogue)" ? ["Disguise kit","Poisoner's kit"] : char.rogueArchetype==="Mastermind (Rogue)" ? ["Disguise kit","Forgery kit",char.rogueMastermindGameSet||"One gaming set"] : (char.rogueArchetype==="Phantom (Rogue)"&&char.roguePhantomProf&&!roguePhantomSkill.length) ? [char.roguePhantomProf] : []) : [];
- const preREEffSkillProfs = [...(char.skillProficiencies||[]), ...bgSkills, ...raceSkills, ...(char.classSkills||[]), ...varHumanSkill, ...halfElfSkillProfs, ...tigerSkills, ...arcanaDomainSkill, ...rogueSubSkills, ...roguePhantomSkill, ...mercySkills, ...drunkenSkills, ...feyGlamourSkills, ...(char.skilledChoices||[]).filter(c=>c&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(c)), ...(char.seSkill?[char.seSkill]:[]),...(char.prodigySkill?[char.prodigySkill]:[]),...(char.squatSkill?[char.squatSkill]:[]),...(char.samuraiBonusProf&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(char.samuraiBonusProf)?[char.samuraiBonusProf]:[]),...(char.arcaneArcherSkill?[char.arcaneArcherSkill]:[]), ...(char.cavalierSkill?[char.cavalierSkill]:[])].filter(Boolean);
+ const preREEffSkillProfs = [...(char.skillProficiencies||[]), ...warInvSkills, ...bgSkills, ...raceSkills, ...(char.classSkills||[]), ...varHumanSkill, ...halfElfSkillProfs, ...tigerSkills, ...arcanaDomainSkill, ...rogueSubSkills, ...roguePhantomSkill, ...mercySkills, ...drunkenSkills, ...feyGlamourSkills, ...(char.skilledChoices||[]).filter(c=>c&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(c)), ...(char.seSkill?[char.seSkill]:[]),...(char.prodigySkill?[char.prodigySkill]:[]),...(char.squatSkill?[char.squatSkill]:[]),...(char.samuraiBonusProf&&Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).includes(char.samuraiBonusProf)?[char.samuraiBonusProf]:[]),...(char.arcaneArcherSkill?[char.arcaneArcherSkill]:[]), ...(char.cavalierSkill?[char.cavalierSkill]:[])].filter(Boolean);
  const pdkAlreadyPersuasion = pdkLvl>=7 && preREEffSkillProfs.includes("Persuasion");
  const royalEnvoyGrant = pdkLvl>=7 ? (pdkAlreadyPersuasion ? (char.pdkRoyalEnvoySkill?[char.pdkRoyalEnvoySkill]:[]) : ["Persuasion"]) : [];
  const effSkillProfs = [...new Set([...preREEffSkillProfs, ...royalEnvoyGrant])];
@@ -7570,7 +7571,7 @@ function App() {
  const ie    = (char.skillExpertise||[]).includes(sk.name)||(char.seExpertise===sk.name)||(char.prodigyExpertise===sk.name)||(char.bardExpertise||[]).includes(sk.name)||(char.rogueExpertise||[]).includes(sk.name)||rogueSubSkills.includes(sk.name);
  const isBg    = bgSkills.includes(sk.name) && !(char.skillProficiencies||[]).includes(sk.name);
  const isRace  = (raceSkills.includes(sk.name)||halfElfSkillProfs.includes(sk.name)) && !isBg;
- const isSubclassPick = (rogueSubSkills.includes(sk.name) || roguePhantomSkill.includes(sk.name) || char.arcaneArcherSkill===sk.name || char.cavalierSkill===sk.name || char.samuraiBonusProf===sk.name || royalEnvoyGrant.includes(sk.name) || tigerSkills.includes(sk.name) || [char.bardLoreSkill1,char.bardLoreSkill2,char.bardLoreSkill3].filter(Boolean).includes(sk.name) || (char.charClass==="Monk"&&char.monasticTradition==="Way of Mercy (Monk)"&&(sk.name==="Insight"||sk.name==="Medicine")) || (char.charClass==="Monk"&&char.monasticTradition==="Way of the Drunken Master (Monk)"&&sk.name==="Performance") || feyGlamourSkills.includes(sk.name)) && !isBg && !isRace;
+ const isSubclassPick = (rogueSubSkills.includes(sk.name) || roguePhantomSkill.includes(sk.name) || char.arcaneArcherSkill===sk.name || char.cavalierSkill===sk.name || char.samuraiBonusProf===sk.name || royalEnvoyGrant.includes(sk.name) || tigerSkills.includes(sk.name) || [char.bardLoreSkill1,char.bardLoreSkill2,char.bardLoreSkill3].filter(Boolean).includes(sk.name) || (char.charClass==="Monk"&&char.monasticTradition==="Way of Mercy (Monk)"&&(sk.name==="Insight"||sk.name==="Medicine")) || (char.charClass==="Monk"&&char.monasticTradition==="Way of the Drunken Master (Monk)"&&sk.name==="Performance") || feyGlamourSkills.includes(sk.name) || warInvSkills.includes(sk.name)) && !isBg && !isRace;
  const isClass = ((char.classSkills||[]).includes(sk.name) && !(char.skillProficiencies||[]).includes(sk.name)) && !isBg && !isRace && !isSubclassPick;
  const isKnowledgeSkill = (char.clericKnowledgeSkills||[]).includes(sk.name) && !isBg && !isRace;
  const isDomainSkill = (char.clericAcolyteNatureSkill===sk.name || char.clericOrderSkill===sk.name || char.clericPeaceSkill===sk.name || (char.charClass==="Cleric"&&char.divineDomain==="Arcana Domain (Cleric)"&&sk.name==="Arcana")) && !isBg && !isRace && !isKnowledgeSkill;
@@ -15450,7 +15451,7 @@ function App() {
                                                 <Body>You can use your action to choose one skill or tool. For 10 minutes, you have proficiency with that skill or tool.</Body>
                                                 {(()=>{
                                                   const ALL_SKILL_NAMES=Object.values(SKILLS_BY_ABILITY||{}).flatMap(a=>a.map(s=>s.name)).sort();
-                                                  const effSkillProfs=[...new Set([...(char.skillProficiencies||[]),...bgSkills,...raceSkills,...(char.classSkills||[]),...varHumanSkill,...halfElfSkillProfs,...tigerSkills,...(char.skilledChoices||[]).filter(Boolean),...(char.seSkill?[char.seSkill]:[]),...(char.prodigySkill?[char.prodigySkill]:[]),...(char.squatSkill?[char.squatSkill]:[])])];
+                                                  const effSkillProfs=[...new Set([...(char.skillProficiencies||[]),...warInvSkills,...bgSkills,...raceSkills,...(char.classSkills||[]),...varHumanSkill,...halfElfSkillProfs,...tigerSkills,...(char.skilledChoices||[]).filter(Boolean),...(char.seSkill?[char.seSkill]:[]),...(char.prodigySkill?[char.prodigySkill]:[]),...(char.squatSkill?[char.squatSkill]:[])])];
                                                   const ALL_TOOL_NAMES=[...new Set([...Object.values(BG_TOOLS).flat(),...Object.values(BG_TOOL_CHOICE).flatMap(x=>x.options),...Object.values(RACE_TOOL_CHOICES).flatMap(x=>x.options),"Poisoner's kit","Disguise kit","Forgery kit","Herbalism kit","Thieves' tools","Navigator's tools"])].sort();
                                                   const knownTools=[...(BG_TOOLS[char.background]||[]),...(char.bgToolChoice?[char.bgToolChoice]:[]),...(char.bgUBHTools||[]),...(char.racialToolProf?[char.racialToolProf]:[]),...(char.bgVariantTool?[char.bgVariantTool]:[]),...((CLASSES[char.charClass]?.toolProf||[]).filter(t=>ALL_TOOL_NAMES.includes(t)))].filter(Boolean);
                                                   const availSkills=ALL_SKILL_NAMES.filter(s=>!effSkillProfs.includes(s));
