@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2992";
+const SHEET_VERSION = "v2993";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6556,6 +6556,37 @@ function App() {
    }
    return null;
  })();
+ const visionDV = (()=>{
+  const raceEntryDV = char.species?libEntries.find(e=>e.title===char.species&&e.category==="Race"):null;
+  const subEntryDV = char.subrace?libEntries.find(e=>e.title===char.subrace&&e.category==="Subrace"):null;
+  const parseDV=(entry)=>{
+    if(!entry?.notes) return 0;
+    const m=entry.notes.match(/Darkvision:\s*(\d+)\s*ft/i);
+    return m?Number(m[1]):0;
+  };
+  const racialDV=Math.max(parseDV(raceEntryDV),parseDV(subEntryDV));
+  const eonLvl=char.multiClassLevel>0?char.classLevel:char.level||1;
+  const hasEyesOfNight=char.charClass==="Cleric"&&char.divineDomain==="Twilight Domain (Cleric)"&&eonLvl>=1;
+  const eyesOfNightDV=hasEyesOfNight?300:0;
+  const WEARING_SLOTS_DV=["wearing_head","wearing_neck","wearing_shoulders","wearing_body","wearing_skin","wearing_arms","wearing_hands","wearing_hips","wearing_feet"];
+  const stoneRuneItemDV=(char.charClass==="Fighter"&&char.martialArchetype==="Rune Knight (Fighter)")?(char.runeKnightInscriptions||{})["Stone Rune"]:null;
+  const stoneRuneEquippedDV=stoneRuneItemDV&&(
+    (char.weaponItems||[]).some(w=>typeof w==="object"&&w.equipped&&w.name===stoneRuneItemDV)||
+    (char.armorItems||[]).some(a=>typeof a==="object"&&a.equipped&&a.name===stoneRuneItemDV)||
+    WEARING_SLOTS_DV.some(slot=>(Array.isArray(char[slot])?char[slot]:[]).some(w=>typeof w==="object"&&w.eq&&w.name===stoneRuneItemDV))
+  );
+  const stoneRuneDV=stoneRuneEquippedDV?120:0;
+  const umbralSightDV=(char.charClass==="Ranger"&&char.rangerArchetype==="Gloom Stalker (Ranger)"&&eonLvl>=3)?(racialDV>0?racialDV+30:60):0;
+  const shadowDV=(char.charClass==="Sorcerer"&&char.sorcOrigin==="Shadow Magic (Sorcerer)")?120:0;
+  const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV,shadowDV);
+  const details=[];
+  if(racialDV>0) details.push("Racial");
+  if(eyesOfNightDV>0) details.push("Eyes of Night");
+  if(stoneRuneDV>0) details.push("Stone Rune");
+  if(umbralSightDV>0) details.push("Umbral Sight");
+  if(shadowDV>0) details.push("Eyes of the Dark");
+  return {range:darkvisionRange,details};
+ })();
  const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
  const hasObservantFeat = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Observant");
  const displayPassPerc = passPerc + (hasObservantFeat ? 5 : 0);
@@ -7899,28 +7930,6 @@ function App() {
                   const stormSwimOn = char.charClass==="Barbarian"&&char.primalPath==="Path of the Storm Herald (Barbarian)"&&char.stormEnvironment==="Sea"&&(char.level||1)>=6;
                   const climbBeastOn = char.charClass==="Barbarian"&&char.primalPath==="Path of the Beast (Barbarian)"&&char.beastSoul==="Climbing"&&(char.level||1)>=6;
 
-                  const raceEntryDV = char.species?libEntries.find(e=>e.title===char.species&&e.category==="Race"):null;
-                  const subEntryDV = char.subrace?libEntries.find(e=>e.title===char.subrace&&e.category==="Subrace"):null;
-                  const parseDV=(entry)=>{
-                    if(!entry?.notes) return 0;
-                    const m=entry.notes.match(/Darkvision:\s*(\d+)\s*ft/i);
-                    return m?Number(m[1]):0;
-                  };
-                  const racialDV=Math.max(parseDV(raceEntryDV),parseDV(subEntryDV));
-                  const eonLvl=char.multiClassLevel>0?char.classLevel:char.level||1;
-                  const hasEyesOfNight=char.charClass==="Cleric"&&char.divineDomain==="Twilight Domain (Cleric)"&&eonLvl>=1;
-                  const eyesOfNightDV=hasEyesOfNight?300:0;
-                  const WEARING_SLOTS_DV=["wearing_head","wearing_neck","wearing_shoulders","wearing_body","wearing_skin","wearing_arms","wearing_hands","wearing_hips","wearing_feet"];
-                  const stoneRuneItemDV=(char.charClass==="Fighter"&&char.martialArchetype==="Rune Knight (Fighter)")?(char.runeKnightInscriptions||{})["Stone Rune"]:null;
-                  const stoneRuneEquippedDV=stoneRuneItemDV&&(
-                    (char.weaponItems||[]).some(w=>typeof w==="object"&&w.equipped&&w.name===stoneRuneItemDV)||
-                    (char.armorItems||[]).some(a=>typeof a==="object"&&a.equipped&&a.name===stoneRuneItemDV)||
-                    WEARING_SLOTS_DV.some(slot=>(Array.isArray(char[slot])?char[slot]:[]).some(w=>typeof w==="object"&&w.eq&&w.name===stoneRuneItemDV))
-                  );
-                  const stoneRuneDV=stoneRuneEquippedDV?120:0;
-                  const umbralSightDV=(char.charClass==="Ranger"&&char.rangerArchetype==="Gloom Stalker (Ranger)"&&eonLvl>=3)?(racialDV>0?racialDV+30:60):0;
-                  const shadowDV=(char.charClass==="Sorcerer"&&char.sorcOrigin==="Shadow Magic (Sorcerer)")?120:0;
-                  const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV,shadowDV);
 
                   const extraCells=[];
                   const flyValue = eagleFlyActive?displaySpeed:dragonWingsOn?displaySpeed:revOpts.includes("Flight")?displaySpeed:windSoulOn?(char.sorcWindActive?30:60):otherWingsOn?30:avengingAngelOn?60:stormbornOn?(char.speed||30):dragonFlyOn?20:0;
@@ -7951,23 +7960,11 @@ function App() {
                   if(climbBeastOn) climbDetails.push({text:"Path of the Beast",color:"#a78bfa"});
                   extraCells.push({key:"climb",label:"CLIMB",value:climbValue,color:climbColor,valColor:climbValue>0?climbColor:"var(--muted)",details:climbDetails});
 
-                  if(darkvisionRange>0){
-                    const dvDetails=[];
-                    if(racialDV>0) dvDetails.push({text:"Racial",color:"var(--text)"});
-                    if(eyesOfNightDV>0) dvDetails.push({text:"Eyes of Night",color:"var(--text)"});
-                    if(stoneRuneDV>0) dvDetails.push({text:"Stone Rune",color:"var(--text)"});
-                    if(umbralSightDV>0) dvDetails.push({text:"Umbral Sight",color:"var(--text)"});
-                    if(shadowDV>0) dvDetails.push({text:"Eyes of the Dark",color:"var(--text)"});
-                    extraCells.push({key:"dv",label:"DARKVISION",value:darkvisionRange,color:"var(--muted)",valColor:"var(--text)",auto:true,details:dvDetails});
-                  }
-
                   const cellCount=1+extraCells.length;
                   const labelSize=cellCount<=3?9:cellCount===4?8:7;
                   const valSize=cellCount<=3?16:cellCount===4?14:12;
                   const unitSize=cellCount<=3?13:cellCount===4?11:10;
                   const padH=cellCount<=3?6:cellCount===4?4:2;
-                  const dvCell=extraCells.find(c=>c.key==="dv");
-                  if(dvCell) dvCell.label = labelSize<=6?"DV":labelSize===7?"DARKVIS":"DARKVISION";
 
                   const isWoodElf=char.subrace==="Wood Elf";
                   const hasSpeedBonus=isWoodElf||scoutMobilityOn||fmActive||elkActive||elkAspectActive||hasMobileFeat||hasSquatNimble||monkMoveActive||drunkenTechSpeedBonus>0||alacrityOn;
@@ -8037,7 +8034,7 @@ function App() {
                     </div>
                   );
                 })()}
-                {/* Proficiency Bonus + Passive Perception — always paired together on their own row */}
+                {/* Proficiency Bonus + Vision */}
                 <div className="cstat-card cstat-wide">
                   <div style={{display:"flex",alignItems:"stretch",gap:0,width:"100%"}}>
                     <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
@@ -8046,9 +8043,21 @@ function App() {
                     </div>
                     <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
                     <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
+                      <div className="cstat-label" style={{whiteSpace:"nowrap"}}>VISION <span className="cstat-auto">AUTO</span></div>
+                      <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"—"}</div>
+                      <div style={{fontSize:9,color:"var(--muted)",textAlign:"center",lineHeight:1.2}}>{visionDV.range>0?"Darkvision"+(visionDV.details.length?" ("+visionDV.details.join(", ")+")":""):"No darkvision"}</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Passives: Perception, Insight, Investigation */}
+                <div className="cstat-card cstat-wide">
+                  <div style={{display:"flex",flexDirection:"column",alignItems:"center",width:"100%"}}>
+                    <div className="cstat-label" style={{whiteSpace:"nowrap",marginTop:2}}>PASSIVES <span className="cstat-auto">AUTO</span></div>
+                    <div style={{display:"flex",alignItems:"stretch",gap:0,width:"100%"}}>
+                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 4px"}}>
                       <div className={hasObservantFeat?"ab-mod-hover-wrap":""} style={{position:"relative"}}
                         onClick={hasObservantFeat?(ev=>{ev.stopPropagation();setWearingInfo(wearingInfo==="coreObservant"?null:"coreObservant");}):undefined}>
-                        <div className="cstat-label" style={{whiteSpace:"nowrap",cursor:hasObservantFeat?"default":"auto"}}>PASS PERC <span className="cstat-auto">AUTO</span></div>
+                        <div className="cstat-label" style={{whiteSpace:"nowrap",fontSize:9,letterSpacing:".03em",cursor:hasObservantFeat?"default":"auto"}}>PERCEPTION</div>
                         {hasObservantFeat&&(<>
                         {wearingInfo==="coreObservant"&&<div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/>}
                         <div className={"ab-mod-hover-tip"+(wearingInfo==="coreObservant"?" ab-mod-hover-tip-open":"")} style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",marginTop:4,background:"var(--card)",border:"1px solid var(--border)",borderRadius:8,padding:"6px 10px",fontSize:11,fontWeight:600,whiteSpace:"nowrap",zIndex:999,boxShadow:"0 4px 12px rgba(0,0,0,0.25)",display:"flex",flexDirection:"column",gap:2}}>
@@ -8059,23 +8068,21 @@ function App() {
                       </div>
                       <div className="cstat-val cstat-val-lg">{displayPassPerc}</div>
                     </div>
-                  </div>
-                </div>
-                {/* Passive Insight + Passive Investigation */}
-                <div className="cstat-card cstat-wide">
-                  <div style={{display:"flex",alignItems:"stretch",gap:0,width:"100%"}}>
-                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
-                      <div className="cstat-label" style={{whiteSpace:"nowrap"}}>PASS INSIGHT <span className="cstat-auto">AUTO</span></div>
+                    <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
+                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 4px"}}>
+                      <div className="cstat-label" style={{whiteSpace:"nowrap",fontSize:9,letterSpacing:".03em"}}>INSIGHT</div>
                       <div className="cstat-val cstat-val-lg">{passInsight}</div>
                     </div>
                     <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
-                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
-                      <div className="cstat-label" style={{whiteSpace:"nowrap"}}>PASS INVEST <span className="cstat-auto">AUTO</span></div>
+                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 4px"}}>
+                      <div className="cstat-label" style={{whiteSpace:"nowrap",fontSize:9,letterSpacing:".03em"}}>INVESTIGATION</div>
                       <div className="cstat-val cstat-val-lg">{passInvest}</div>
+                    </div>
                     </div>
                   </div>
                 </div>
               </div>
+
 
               {/* Hit Points card - death saves overlay at 0 HP */}
               <div style={{position:"relative"}}>
