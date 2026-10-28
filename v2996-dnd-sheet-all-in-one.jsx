@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2995";
+const SHEET_VERSION = "v2996";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8046,8 +8046,15 @@ function App() {
                     <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
                     <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
                       <div className="cstat-label" style={{whiteSpace:"nowrap"}}>VISION <span className="cstat-auto">AUTO</span></div>
-                      <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"Normal"}</div>
-                      <div style={{fontSize:9,color:"var(--muted)",textAlign:"center",lineHeight:1.2}}>{visionDV.range>0?"Darkvision"+(visionDV.details.length?" ("+visionDV.details.join(", ")+")":""):"Normal vision"}</div>
+                      <div className="ab-mod-hover-wrap" style={{position:"relative",cursor:"default"}}
+                        onClick={ev=>{ev.stopPropagation();setWearingInfo(wearingInfo==="coreVision"?null:"coreVision");}}>
+                        <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"Normal"}</div>
+                        {wearingInfo==="coreVision"&&<div className="ft-info-backdrop" onClick={ev=>{ev.stopPropagation();setWearingInfo(null);}}/>}
+                        <div className={"ab-mod-hover-tip"+(wearingInfo==="coreVision"?" ab-mod-hover-tip-open":"")} style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",marginTop:4,background:"var(--card)",border:"1px solid var(--border)",borderRadius:8,padding:"6px 10px",fontSize:11,fontWeight:600,whiteSpace:"nowrap",zIndex:999,boxShadow:"0 4px 12px rgba(0,0,0,0.25)",display:"flex",flexDirection:"column",gap:2}}>
+                          <span style={{color:"var(--muted)"}}>{visionDV.range>0?"Darkvision "+visionDV.range+" ft":"Normal vision"}</span>
+                          {visionDV.details.map(d=>(<span key={d} style={{color:"var(--accent)"}}>{d}</span>))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
