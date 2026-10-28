@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 28, 2026";
-const SHEET_VERSION = "v2999";
+const SHEET_VERSION = "v3001";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4781,7 +4781,7 @@ const SpellSearchPick = ({maxL,onPick}) => {
 };
 const SCHOOL_COLORS={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
 const schoolColor=(spell)=>{const sc=typeof spell==="string"&&SCHOOL_COLORS[spell]?spell:(typeof spell==="string"?SPELL_DATA[spell]?.school:spell);return SCHOOL_COLORS[sc]||"var(--border)";};
-const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
+const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll,tempRoll}) => {
   if(!sd) return null;
   const isHeal = sd.dmgType==="healing";
   const isSave = sd.atkType==="save" && !!saveKey;
@@ -4793,6 +4793,12 @@ const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
     const rolls=[]; for(let i=0;i<dieCount;i++){ rolls.push(Math.floor(Math.random()*dieSides)+1); }
     const total=rolls.reduce((a,b)=>a+b,0);
     setSkillRoll({label:name+" ("+sd.dmg+(sd.dmgType?" "+sd.dmgType:"")+")",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:dieSides,r1:rolls[0],r2:null,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:sd.dmgType,dmgDice:sd.dmg,diceSides:dieSides,baseDiceCount:dieCount,saveHalf:Math.floor(total/2)});
+  };
+  const rollTemp = () => {
+    const tm=tempRoll.dice.match(/(\d+)d(\d+)/); const n=parseInt(tm[1]), sides=parseInt(tm[2]); const bonus=tempRoll.bonus||0;
+    const rolls=[]; for(let i=0;i<n;i++) rolls.push(Math.floor(Math.random()*sides)+1);
+    const total=rolls.reduce((a,b)=>a+b,0)+bonus;
+    setSkillRoll({label:name+" ("+tempRoll.dice+(bonus?"+"+bonus:"")+" temp HP)",roll:rolls[0],bonus,total,isCrit:false,isFail:false,sides,r1:rolls[0],r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:bonus,dmgType:"healing",dmgDice:tempRoll.dice,diceSides:sides,baseDiceCount:n,saveDC:null,saveType:null,spiritShield:false});
   };
   const setRes = (val) => setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[saveKey]:val}}));
   const clearRes = () => setCharSaving(p=>{const n={...(p.saveResults||{})}; delete n[saveKey]; return {...p,saveResults:n};});
@@ -4809,6 +4815,12 @@ const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll}) => {
           </div>
         )}
       </div>
+      {tempRoll&&!isSave&&(
+        <div style={{display:"flex",justifyContent:"flex-end",marginTop:4}}>
+          <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.1)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+            onClick={rollTemp}>🎲 {tempRoll.dice}{tempRoll.bonus?"+"+tempRoll.bonus:""} temp HP</button>
+        </div>
+      )}
       {isSave&&(
         <div style={{marginTop:5}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:4}}>
@@ -6102,7 +6114,7 @@ function App() {
           );
         })()}
         {(()=>{const sp=WAR_INV_SPELL[nm]; return sp&&SPELL_DATA[sp]?(
-          <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
+          <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} tempRoll={sp==="False Life"?{dice:"1d4",bonus:4}:undefined} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
         ):null;})()}
       </div>
     );
@@ -6532,6 +6544,8 @@ function App() {
    if(!dt||!sd||!sd.dmg||sd.atkType==="heal") return 0;
    return String(sd.dmgType||"").toLowerCase().includes(dt)?Math.max(0,abilityMod(eff.CHA||10)):0;
  };
+ const warSpearOn = (sd) => !!(sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Eldritch Spear"));
+ const warSpearNote = (sd) => warSpearOn(sd) ? <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ 300 ft <span style={{fontSize:10,opacity:.8}}>(Eldritch Spear)</span></span> : null;
  const ebAgDisplay = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Agonizing Blast")) ? ((char.level||1)>=17?4:(char.level||1)>=11?3:(char.level||1)>=5?2:1)*abilityMod(eff.CHA||10) : 0;
  const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd) + ebAgDisplay(sd);
  // Disciple of Life (Cleric: Life domain) — 1st-level-or-higher healing spells restore +2+slot level extra HP
@@ -25334,7 +25348,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                     <span><b style={{color:"var(--text)"}}>Level:</b> {sd.level===0?"Cantrip":sd.level===1?"1st":sd.level===2?"2nd":sd.level===3?"3rd":sd.level+"th"}</span>
                                     <span><b style={{color:"var(--text)"}}>School:</b> {sd.school}</span>
                                     <span><b style={{color:"var(--text)"}}>Casting Time:</b> {sd.cast}</span>
-                                    <span><b style={{color:"var(--text)"}}>Range:</b> {sd.range}{(()=>{if(!Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Spell Sniper")) return null;const at=sd.atkType||"";if(at==="save"||at==="auto"||!at) return null;const m=(sd.range||"").match(/(\d+)\s*ft/i);if(!m) return null;const doubled=(sd.range||"").replace(/(\d+)\s*ft/i,(Number(m[1])*2)+"ft");return <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ {doubled} <span style={{fontSize:10,opacity:.8}}>(Spell Sniper)</span></span>;})()}</span>
+                                    <span><b style={{color:"var(--text)"}}>Range:</b> {sd.range}{warSpearNote(sd)}{(()=>{if(!Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Spell Sniper")) return null;const at=sd.atkType||"";if(at==="save"||at==="auto"||!at) return null;const baseR=warSpearOn(sd)?"300 ft":(sd.range||"");const m=baseR.match(/(\d+)\s*ft/i);if(!m) return null;const doubled=baseR.replace(/(\d+)\s*ft/i,(Number(m[1])*2)+"ft");return <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ {doubled} <span style={{fontSize:10,opacity:.8}}>(Spell Sniper)</span></span>;})()}</span>
                                     <span><b style={{color:"var(--text)"}}>Components:</b> {sd.comp}</span>
                                     <span><b style={{color:"var(--text)"}}>Duration:</b> {sd.dur}{sd.dur&&sd.dur.toLowerCase().includes("concentration")&&<span style={{marginLeft:6,fontSize:9,fontWeight:800,color:"#f59e0b",background:"rgba(245,158,11,0.1)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:3,padding:"1px 4px"}}>C</span>}</span>
                                   </div>
@@ -25590,7 +25604,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                         <span><b style={{color:"var(--text)"}}>Level:</b> {sd3.level===0?"Cantrip":sd3.level===1?"1st":sd3.level===2?"2nd":sd3.level===3?"3rd":sd3.level+"th"}</span>
                                         <span><b style={{color:"var(--text)"}}>School:</b> {sd3.school}</span>
                                         <span><b style={{color:"var(--text)"}}>Casting Time:</b> {sd3.cast}</span>
-                                        <span><b style={{color:"var(--text)"}}>Range:</b> {sd3.range}</span>
+                                        <span><b style={{color:"var(--text)"}}>Range:</b> {sd3.range}{warSpearNote(sd3)}</span>
                                         <span><b style={{color:"var(--text)"}}>Components:</b> {sd3.comp}</span>
                                         <span><b style={{color:"var(--text)"}}>Duration:</b> {sd3.dur}{sd3.dur&&sd3.dur.toLowerCase().includes("concentration")&&<span style={{marginLeft:6,fontSize:9,fontWeight:800,color:"#f59e0b",background:"rgba(245,158,11,0.1)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:3,padding:"1px 4px"}}>C</span>}</span>
                                       </div>
@@ -25739,7 +25753,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     <span><b style={{color:"var(--text)"}}>Level:</b> {sd2.level===0?"Cantrip":sd2.level===1?"1st":sd2.level===2?"2nd":sd2.level===3?"3rd":sd2.level+"th"}</span>
                                     <span><b style={{color:"var(--text)"}}>School:</b> {sd2.school}</span>
                                     <span><b style={{color:"var(--text)"}}>Casting Time:</b> {sd2.cast}</span>
-                                    <span><b style={{color:"var(--text)"}}>Range:</b> {sd2.range}</span>
+                                    <span><b style={{color:"var(--text)"}}>Range:</b> {sd2.range}{warSpearNote(sd2)}</span>
                                     <span><b style={{color:"var(--text)"}}>Components:</b> {sd2.comp}</span>
                                     <span><b style={{color:"var(--text)"}}>Duration:</b> {sd2.dur}{sd2.dur&&sd2.dur.toLowerCase().includes("concentration")&&<span style={{marginLeft:6,fontSize:9,fontWeight:800,color:"#f59e0b",background:"rgba(245,158,11,0.1)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:3,padding:"1px 4px"}}>C</span>}</span>
                                   </div>
@@ -25894,7 +25908,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       <span><b style={{color:"var(--text)"}}>Level:</b> {sd3.level===0?"Cantrip":sd3.level===1?"1st":sd3.level===2?"2nd":sd3.level===3?"3rd":sd3.level+"th"}</span>
                                       <span><b style={{color:"var(--text)"}}>School:</b> {sd3.school}</span>
                                       <span><b style={{color:"var(--text)"}}>Casting Time:</b> {sd3.cast}</span>
-                                      <span><b style={{color:"var(--text)"}}>Range:</b> {sd3.range}</span>
+                                      <span><b style={{color:"var(--text)"}}>Range:</b> {sd3.range}{warSpearNote(sd3)}</span>
                                       <span><b style={{color:"var(--text)"}}>Components:</b> {sd3.comp}</span>
                                       <span><b style={{color:"var(--text)"}}>Duration:</b> {sd3.dur}</span>
                                     </div>
@@ -32739,7 +32753,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     {/* Spell info */}
                                     <div style={{display:"flex",flexDirection:"column",gap:2,marginBottom:8,color:"var(--muted)",fontSize:12}}>
                                       <span><b style={{color:"var(--text)"}}>Level:</b> {sd.level===0?"Cantrip":sd.level===1?"1st":sd.level===2?"2nd":sd.level===3?"3rd":sd.level+"th"} · <b style={{color:"var(--text)"}}>School:</b> {sd.school}</span>
-                                      <span><b style={{color:"var(--text)"}}>Range:</b> {sd.range} · <b style={{color:"var(--text)"}}>Duration:</b> {sd.dur}</span>
+                                      <span><b style={{color:"var(--text)"}}>Range:</b> {sd.range}{warSpearNote(sd)} · <b style={{color:"var(--text)"}}>Duration:</b> {sd.dur}</span>
                                     </div>
                                     <div style={{color:"var(--text)",lineHeight:1.5,fontSize:12,borderTop:"1px solid var(--divider)",paddingTop:6,marginBottom:6}}>{sd.desc}</div>
                                     {/* Slots left + Use for description-only spells */}
