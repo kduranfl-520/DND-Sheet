@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2990";
+const SHEET_VERSION = "v2991";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6559,6 +6559,8 @@ function App() {
  const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
  const hasObservantFeat = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Observant");
  const displayPassPerc = passPerc + (hasObservantFeat ? 5 : 0);
+ const passInsight = 10 + skBonus({name:"Insight",ability:"WIS"});
+ const passInvest = 10 + skBonus({name:"Investigation",ability:"INT"}) + (hasObservantFeat ? 5 : 0);
   // Build available spells, merging in domain spells if cleric with a domain chosen
  const availSpells = (() => {
  const base = isEK ? (()=>{const wiz=CLASSES.Wizard?.spells||{};const maxLvl=(SPELL_SLOTS_THIRD[char.level]||[]).length;const out={cantrips:(wiz.cantrips||[]).slice()};for(let l=1;l<=maxLvl;l++){if(wiz[l]) out[l]=wiz[l].slice();}return JSON.parse(JSON.stringify(out));})() : cls?.spells ? JSON.parse(JSON.stringify(cls.spells)) : {};
@@ -8056,6 +8058,20 @@ function App() {
                         </>)}
                       </div>
                       <div className="cstat-val cstat-val-lg">{displayPassPerc}</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Passive Insight + Passive Investigation */}
+                <div className="cstat-card cstat-wide">
+                  <div style={{display:"flex",alignItems:"stretch",gap:0,width:"100%"}}>
+                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
+                      <div className="cstat-label" style={{whiteSpace:"nowrap"}}>PASS INSIGHT <span className="cstat-auto">AUTO</span></div>
+                      <div className="cstat-val cstat-val-lg">{passInsight}</div>
+                    </div>
+                    <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
+                    <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
+                      <div className="cstat-label" style={{whiteSpace:"nowrap"}}>PASS INVEST <span className="cstat-auto">AUTO</span></div>
+                      <div className="cstat-val cstat-val-lg">{passInvest}</div>
                     </div>
                   </div>
                 </div>
