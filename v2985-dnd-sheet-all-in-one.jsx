@@ -2490,6 +2490,8 @@ const WAR_INV=[
   {n:"Visions of Distant Realms",min:15,b:"PHB",d:"You can cast arcane eye at will, without expending a spell slot."},
   {n:"Witch Sight",min:15,b:"PHB",d:"You can see the true form of any shapechanger or creature concealed by illusion or transmutation magic while the creature is within 30 feet of you and within line of sight."}
 ];
+// Warlock invocations that let you cast a spell: invocation name -> spell shown in its boxed summary
+const WAR_INV_SPELL={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals","Eldritch Sight":"Detect Magic","Fiendish Vigor":"False Life","Mask of Many Faces":"Disguise Self","Misty Visions":"Silent Image","Thief of Five Fates":"Bane","Gift of the Depths":"Water Breathing","Mire the Mind":"Slow","Sign of Ill Omen":"Bestow Curse","Bewitching Whispers":"Compulsion","Dreadful Word":"Confusion","Sculptor of Flesh":"Polymorph","Trickster's Escape":"Freedom of Movement","Minions of Chaos":"Conjure Elemental","Otherworldly Leap":"Jump","Whispers of the Grave":"Speak with Dead","Chains of Carceri":"Hold Monster","Master of Myriad Forms":"Alter Self","Shroud of Shadow":"Invisibility","Visions of Distant Realms":"Arcane Eye"};
 const warInvPre=(i)=>[i.min>0?spellOrdLbl(i.min)+" level":"",i.boon||"",i.need||""].filter(Boolean).join(", ");
 // Warlock Pact Magic: all slots are same level, regain on short rest
 // Array index = slot level (1-based), value = number of slots
@@ -2575,7 +2577,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2984";
+const SHEET_VERSION = "v2985";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6050,7 +6052,7 @@ function App() {
             <button style={used?warLink:warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}}));}}>{used?"↺ Reset":"Mark Used"}</button>
           </div>
         )}
-        {(()=>{const sp={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals"}[nm]; return sp&&SPELL_DATA[sp]?(
+        {(()=>{const sp=WAR_INV_SPELL[nm]; return sp&&SPELL_DATA[sp]?(
           <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
         ):null;})()}
       </div>
