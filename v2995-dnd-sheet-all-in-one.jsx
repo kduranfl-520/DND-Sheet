@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2994";
+const SHEET_VERSION = "v2995";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8046,8 +8046,8 @@ function App() {
                     <div style={{width:1,alignSelf:"stretch",background:"var(--divider)",flexShrink:0}}/>
                     <div style={{flex:"1 1 0",minWidth:0,display:"flex",flexDirection:"column",alignItems:"center",gap:1,padding:"4px 6px"}}>
                       <div className="cstat-label" style={{whiteSpace:"nowrap"}}>VISION <span className="cstat-auto">AUTO</span></div>
-                      <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"—"}</div>
-                      <div style={{fontSize:9,color:"var(--muted)",textAlign:"center",lineHeight:1.2}}>{visionDV.range>0?"Darkvision"+(visionDV.details.length?" ("+visionDV.details.join(", ")+")":""):"No darkvision"}</div>
+                      <div className="cstat-val cstat-val-lg">{visionDV.range>0?visionDV.range+" ft":"Normal"}</div>
+                      <div style={{fontSize:9,color:"var(--muted)",textAlign:"center",lineHeight:1.2}}>{visionDV.range>0?"Darkvision"+(visionDV.details.length?" ("+visionDV.details.join(", ")+")":""):"Normal vision"}</div>
                     </div>
                   </div>
                 </div>
