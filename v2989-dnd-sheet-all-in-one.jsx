@@ -2492,6 +2492,20 @@ const WAR_INV=[
 ];
 // Warlock invocations that let you cast a spell: invocation name -> spell shown in its boxed summary
 const WAR_INV_SPELL={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals","Eldritch Sight":"Detect Magic","Fiendish Vigor":"False Life","Mask of Many Faces":"Disguise Self","Misty Visions":"Silent Image","Thief of Five Fates":"Bane","Gift of the Depths":"Water Breathing","Mire the Mind":"Slow","Sign of Ill Omen":"Bestow Curse","Bewitching Whispers":"Compulsion","Dreadful Word":"Confusion","Sculptor of Flesh":"Polymorph","Trickster's Escape":"Freedom of Movement","Minions of Chaos":"Conjure Elemental","Otherworldly Leap":"Jump","Whispers of the Grave":"Speak with Dead","Chains of Carceri":"Hold Monster","Master of Myriad Forms":"Alter Self","Shroud of Shadow":"Invisibility","Visions of Distant Realms":"Arcane Eye"};
+// Book of Ancient Secrets: 1st-level ritual spells (any class list) you can inscribe in your Book of Shadows
+const WAR_RITUALS_1=["Alarm","Ceremony","Comprehend Languages","Detect Magic","Detect Poison and Disease","Find Familiar","Identify","Illusory Script","Purify Food and Drink","Speak with Animals","Tenser's Floating Disk","Unseen Servant"];
+// Keeps a "Book of Shadows" entry in the Gear tab Spell Books in step with the chosen ritual spells
+const warApplyRitualBook=(p)=>{
+  const raw=Array.isArray(p.spellbooks)?p.spellbooks:(p.spellbooks?String(p.spellbooks).split("\n").map(x=>x.trim()).filter(Boolean).map(n=>({name:n,spells:[]})):[]);
+  const rest=raw.filter(b=>!(b&&b.warRitual));
+  const active=p.charClass==="Warlock"&&(p.level||1)>=3&&p.warBoon==="Pact of the Tome"&&(Array.isArray(p.warInv)?p.warInv:[]).includes("Book of Ancient Secrets");
+  const rit=(Array.isArray(p.warRituals)?p.warRituals:[]).filter(Boolean).slice(0,2);
+  const had=raw.length!==rest.length;
+  if(!active||!rit.length) return had?{...p,spellbooks:rest}:p;
+  return {...p,spellbooks:[{name:"Book of Shadows",warRitual:true,spells:rit.map(n=>({name:n,level:1}))},...rest]};
+};
+// Invocations that cast a spell once by spending a warlock spell slot
+const WAR_INV_SLOT=["Thief of Five Fates","Mire the Mind","Sign of Ill Omen","Bewitching Whispers","Dreadful Word","Sculptor of Flesh","Minions of Chaos"];
 const warInvPre=(i)=>[i.min>0?spellOrdLbl(i.min)+" level":"",i.boon||"",i.need||""].filter(Boolean).join(", ");
 // Warlock Pact Magic: all slots are same level, regain on short rest
 // Array index = slot level (1-based), value = number of slots
@@ -2577,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2987";
+const SHEET_VERSION = "v2989";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6048,10 +6062,45 @@ function App() {
         {!ok&&<div className="mc-warn" style={{marginTop:4}}>⚠ Needs {warInvFailed(i).join(" & ")} to take {i.n}</div>}
         {i.use&&(
           <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-            <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}</span>
-            <button style={used?warLink:warBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}}));}}>{used?"↺ Reset":"Mark Used"}</button>
+            <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}{WAR_INV_SLOT.includes(nm)?" (spends a slot)":""}</span>
+            {(()=>{
+              const needSlot=WAR_INV_SLOT.includes(nm);
+              const sl=(slots||[]).reduce((m,v,k)=>v>0?k:m,-1);
+              const sus=Array.isArray(char.spellSlotsUsed)?char.spellSlotsUsed:[];
+              const noSlot=needSlot&&!used&&(sl<0||(sus[sl]||0)>=(slots[sl]||0));
+              return <button style={used?warLink:warBtn} disabled={noSlot} title={needSlot?"Spends one warlock spell slot":""} onClick={e=>{e.stopPropagation();
+                setCharSaving(p=>{
+                  let np={...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}};
+                  if(needSlot&&sl>=0){
+                    const arr=Array.isArray(p.spellSlotsUsed)?[...p.spellSlotsUsed]:[];
+                    while(arr.length<=sl) arr.push(0);
+                    arr[sl]=used?Math.max(0,(arr[sl]||0)-1):Math.min(slots[sl]||0,(arr[sl]||0)+1);
+                    np.spellSlotsUsed=arr;
+                  }
+                  return np;
+                });
+              }}>{used?"↺ Reset":(noSlot?"No slot left":"Mark Used")}</button>;
+            })()}
           </div>
         )}
+        {nm==="Book of Ancient Secrets"&&(()=>{
+          const rit=Array.isArray(char.warRituals)?char.warRituals:[];
+          const setRit=(k,v)=>setCharSaving(p=>{const a=[(p.warRituals||[])[0]||"",(p.warRituals||[])[1]||""];a[k]=v;return warApplyRitualBook({...p,warRituals:a});});
+          return(
+            <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:6}}>
+              {[0,1].map(k=>{const c=rit[k]||"";return(
+                <React.Fragment key={k}>
+                  <select className="ri-sel" value={c} onClick={e=>e.stopPropagation()} onChange={e=>setRit(k,e.target.value)} style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:c?"var(--accent)":"var(--subtle)",width:"100%"}}>
+                    <option value="">-- Choose ritual spell {k+1} --</option>
+                    {WAR_RITUALS_1.filter(n=>SPELL_DATA[n]).map(n=><option key={n} value={n} disabled={rit.includes(n)&&n!==c}>{n}</option>)}
+                  </select>
+                  {c&&SPELL_DATA[c]&&<SpellSaveBox name={c} sd={SPELL_DATA[c]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warRitual_"+k+"_"+c} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>}
+                </React.Fragment>
+              );})}
+              {warNote("Cast these only as rituals while the Book of Shadows is on you. They are listed in your Gear tab spell books and under Always Known.")}
+            </div>
+          );
+        })()}
         {(()=>{const sp=WAR_INV_SPELL[nm]; return sp&&SPELL_DATA[sp]?(
           <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
         ):null;})()}
@@ -6061,7 +6110,7 @@ function App() {
   const warInvPick = ()=>{
     if(warInvMax===0) return null;
     const cur=Array.from({length:warInvMax},(_,i)=>warChosenInv[i]||"");
-    const setSlot=(i,v)=>setCharSaving(p=>{const a=Array.from({length:8},(_,k)=>(Array.isArray(p.warInv)?p.warInv:[])[k]||"");a[i]=v;return {...p,warInv:a};});
+    const setSlot=(i,v)=>setCharSaving(p=>{const a=Array.from({length:8},(_,k)=>(Array.isArray(p.warInv)?p.warInv:[])[k]||"");a[i]=v;return warApplyRitualBook({...p,warInv:a});});
     const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
@@ -6693,6 +6742,10 @@ function App() {
  // Warlock Pact of the Tome — three cantrips from any class list, at will while the Book of Shadows is on you (not against cantrips known)
  if(char.charClass==="Warlock"&&warBoon==="Pact of the Tome"&&!char.warBookLost){
    (Array.isArray(char.warTome)?char.warTome:[]).slice(0,3).forEach(sp=>{ if(sp&&!result.find(r=>r.spell===sp)) result.push({spell:sp,source:"Class"}); });
+ }
+ // Book of Ancient Secrets — the two chosen ritual spells are always known (ritual only, while the Book of Shadows is on you)
+ if(char.charClass==="Warlock"&&warBoon==="Pact of the Tome"&&!char.warBookLost&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Book of Ancient Secrets")){
+   (Array.isArray(char.warRituals)?char.warRituals:[]).slice(0,2).forEach(sp=>{ if(sp&&!result.find(r=>r.spell===sp)) result.push({spell:sp,source:"Class"}); });
  }
  // Warlock invocations that let you cast a spell once using a warlock spell slot — always known, not counted against spells known
  if(char.charClass==="Warlock"){
