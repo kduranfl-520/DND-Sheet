@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 26, 2026";
-const SHEET_VERSION = "v2989";
+const SHEET_VERSION = "v2990";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6110,7 +6110,7 @@ function App() {
   const warInvPick = ()=>{
     if(warInvMax===0) return null;
     const cur=Array.from({length:warInvMax},(_,i)=>warChosenInv[i]||"");
-    const setSlot=(i,v)=>setCharSaving(p=>{const a=Array.from({length:8},(_,k)=>(Array.isArray(p.warInv)?p.warInv:[])[k]||"");a[i]=v;return warApplyRitualBook({...p,warInv:a});});
+    const setSlot=(i,v)=>setCharSaving(p=>{const a=(Array.isArray(p.warInv)?p.warInv:[]).filter(Boolean).slice(0,8);if(v){if(i<a.length)a[i]=v;else a.push(v);}else if(i<a.length){a.splice(i,1);}return warApplyRitualBook({...p,warInv:a});});
     const opts=WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n));
     return(
       <div style={{display:"flex",flexDirection:"column",gap:6,marginTop:8}} onClick={e=>e.stopPropagation()}>
