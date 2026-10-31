@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3048";
+const SHEET_VERSION = "v3049";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6195,8 +6195,11 @@ function App() {
               </div>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:4}}>
                 {Array.from({length:pb},(_,k)=>(
-                  <input key={k} type="text" value={names[k]||""} placeholder={"Name "+(k+1)} onChange={e=>{const v=e.target.value;setCharSaving(p=>{const arr=Array.isArray(p.warFarScribeNames)?[...p.warFarScribeNames]:[];while(arr.length<=k)arr.push("");arr[k]=v;return {...p,warFarScribeNames:arr};});}}
-                    style={{fontSize:11,padding:"4px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit",minWidth:0}}/>
+                  <div key={k} style={{position:"relative",display:"flex",minWidth:0}}>
+                    <input type="text" value={names[k]||""} placeholder={"Name "+(k+1)} onChange={e=>{const v=e.target.value;setCharSaving(p=>{const arr=Array.isArray(p.warFarScribeNames)?[...p.warFarScribeNames]:[];while(arr.length<=k)arr.push("");arr[k]=v;return {...p,warFarScribeNames:arr};});}}
+                      style={{flex:1,fontSize:11,padding:"4px 22px 4px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit",minWidth:0}}/>
+                    {names[k]&&<button title="Erase name" onClick={e=>{e.stopPropagation();setCharSaving(p=>{const arr=Array.isArray(p.warFarScribeNames)?[...p.warFarScribeNames]:[];arr[k]="";return {...p,warFarScribeNames:arr};});}} style={{position:"absolute",right:3,top:"50%",transform:"translateY(-50%)",width:16,height:16,lineHeight:"14px",padding:0,fontSize:11,borderRadius:8,border:"none",background:"rgba(var(--accent-rgb),0.15)",color:"var(--accent)",cursor:"pointer"}}>✕</button>}
+                  </div>
                 ))}
               </div>
               <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>You can erase a name by touching it as an action. The writing disappears after 1 minute.</span></div>
