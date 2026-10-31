@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3041";
+const SHEET_VERSION = "v3042";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -7258,7 +7258,7 @@ function App() {
  const fliesOn = char.charClass==="Warlock" && !!char.warFliesOn && (Array.isArray(char.warInv)?char.warInv:[]).includes("Cloak of Flies");
  const fliesAdv = fliesOn && label==="Intimidation";
  const fliesDis = fliesOn && !fliesAdv && (["Deception","Performance","Persuasion"].includes(label) || /^(CHA|Charisma)( check)?$/i.test(label) || /^CHA check/i.test(label));
- const eldMindAdv = char.charClass==="Warlock" && !!char.concentrating && warHas("Eldritch Mind") && label==="Constitution Save";
+ const eldMindAdv = char.charClass==="Warlock" && !!char.concentrating && warHas("Eldritch Mind") && label==="Constitution Check";
  const isAdv = (eldMindAdv || fliesAdv || char.advantage || rageAdv || actorAdv || cloudRuneAdv || frostRuneAdv || stoneRuneAdv || stormRuneAdv || giantsMightAdv || visageAdv || supremeSneakAdv || impostorAdv || steadyEyeAdv || forceAdv) && !char.disadvantage && !armorStealthDis && !fliesDis;
  const isDis = (char.disadvantage && !char.advantage && !rageAdv) || armorStealthDis || (fliesDis && !(char.advantage||actorAdv||cloudRuneAdv||impostorAdv));
  const r1 = Math.floor(Math.random()*sides)+1;
@@ -7780,6 +7780,7 @@ function App() {
                       }}>
                       {ABILITY_NAMES[k]}
                       {k==="CHA"&&char.charClass==="Paladin"&&char.sacredOath==="Oath of Glory (Paladin)"&&char.paladinLivingLegendActive&&<span style={{fontSize:10,color:"var(--accent)",marginLeft:3}}>🌟 ADV</span>}
+                      {k==="CON"&&char.charClass==="Warlock"&&!!char.concentrating&&warHas("Eldritch Mind")&&<span title="Eldritch Mind: advantage while concentrating" style={{fontSize:10,color:"var(--accent)",marginLeft:3}}>🧠 ADV</span>}
                     </div>
 
                     {/* Body: pill on left, skills on right */}
