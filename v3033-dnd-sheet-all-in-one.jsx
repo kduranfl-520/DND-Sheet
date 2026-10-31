@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3032";
+const SHEET_VERSION = "v3033";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6099,7 +6099,7 @@ function App() {
           const fin=pw&&(pw.abilityMod==="DEX/STR"||(we&&(we.tags||"").toLowerCase().includes("finesse")));
           const mod=(pw&&pw.abilityMod==="CHA")?abilityMod(eff.CHA||10):(pw&&pw.abilityMod==="DEX")?abilityMod(eff.DEX||10):abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
           const hexB=(char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?pb:0;
-          const magicB=pw&&pw.bonded?(Number(pw.magicBonus)||0):0;
+          const magicB=(pw&&pw.bonded?(Number(pw.magicBonus)||0):0)+ipwB(pw);
           const atk=mod+pb+magicB;
           const slI=(slots||[]).reduce((m,v,q)=>v>0?q:m,-1);
           const slLeft=slI>=0?Math.max(0,(slots[slI]||0)-((Array.isArray(char.spellSlotsUsed)?char.spellSlotsUsed:[])[slI]||0)):0;
@@ -6262,6 +6262,7 @@ function App() {
       </div>
     );
   };
+  const ipwB = (it)=>(it&&typeof it==="object"&&it.pact&&warHas("Improved Pact Weapon")&&!(Number(it.magicBonus)>0))?1:0;
   const warBladeBox = ()=>{
     const form=char.warBladeForm||"";
     const bond=(char.warBladeBond&&typeof char.warBladeBond==="object"&&char.warBladeBond.name)?char.warBladeBond:null;
@@ -26934,7 +26935,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const hasArchery = isRanged && (char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery");
  const archeryBonus = hasArchery?2:0;
  const gAmmoB = tags2.includes("ranged")?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===name)).map(i=>Number(i.magicBonus)||0)):0;
- const gMagB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+gAmmoB;
+ const gMagB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+ipwB(item)+gAmmoB;
  return (
                                 <div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
                                   {MAGIC_ANY[name]&&(()=>{
@@ -26985,7 +26986,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const blessedWeaponBonus2=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===name)?1:0;
  const archeryBonus=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&typeVal==="Ranged")?2:0;
  const gAmmoB2 = (wEntry?.tags||"").toLowerCase().includes("ranged")?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===name)).map(i=>Number(i.magicBonus)||0)):0;
- const magicB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+gAmmoB2;
+ const magicB = ((typeof item==="object"&&item&&(!item.pact||item.bonded))?(Number(item.magicBonus)||0):0)+ipwB(item)+gAmmoB2;
  const atkBonus = dmgBonus + pb + blessedWeaponBonus2 + archeryBonus + magicB;
  // Rage: +2/+3/+4 to melee STR damage (skip if finesse and DEX > STR)
  const rageBonus = (char.rageActive
@@ -32898,7 +32899,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     const atkBonus=wEntry?.atk??(mod+pb);
                                     const blessedWeaponBonus=(char.charClass==="Cleric"&&char.divineDomain==="Forge Domain (Cleric)"&&char.clericBlessingForgeType==="weapon"&&char.clericBlessingForgeItem===item.name)?1:0;
                                     const archeryBonusR=((char.classFightingStyle==="Archery"||char.fiStyle==="Archery"||char.championExtraStyle==="Archery")&&isRanged)?2:0;
-                                    const magicBR=(Number(((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.equipped&&(!i.pact||i.bonded)&&i.name===item.name)||{}).magicBonus)||0)+(isRanged?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===item.name)).map(i=>Number(i.magicBonus)||0)):0);
+                                    const magicBR=ipwB((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.pact&&i.equipped&&i.name===item.name))+(Number(((char.weaponItems||[]).find(i=>typeof i==="object"&&i&&i.equipped&&(!i.pact||i.bonded)&&i.name===item.name)||{}).magicBonus)||0)+(isRanged?Math.max(0,...(char.weaponItems||[]).filter(i=>typeof i==="object"&&i&&libEntries.some(e=>e.title===i.name&&e.category==="Equipment"&&(e.tags||"").toLowerCase().includes("ammunition"))&&(!i.parentWeapon||i.parentWeapon===item.name)).map(i=>Number(i.magicBonus)||0)):0);
                                     const atkBonusNum=(typeof atkBonus==="string"?parseInt(atkBonus)||0:atkBonus||0)+blessedWeaponBonus+archeryBonusR+magicBR;
                                     const rageBonus=(char.rageActive&&!isRanged&&(!isFinesse||strMod>=dexMod))
                                       ?((char.level||1)>=16?4:(char.level||1)>=9?3:2):0;
