@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3042";
+const SHEET_VERSION = "v3043";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6182,6 +6182,20 @@ function App() {
               <PipRow label={nm==="Bond of the Talisman"?"Teleports":"Save d4"} count={pb} used={tu} color="fail" onSet={v=>setF(key,v)}/>
               {nm==="Bond of the Talisman"&&<button style={warBtn} disabled={tu>=pb} onClick={e=>{e.stopPropagation();setF(key,tu+1);}}>{tu>=pb?"No uses left":"Use teleport"}</button>}
               {nm==="Protection of the Talisman"&&<button style={warBtn} disabled={tu>=pb} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*4)+1;setF(key,tu+1);setSkillRoll({label:"Protection of the Talisman (d4 added to a failed save)",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:4,r1:r,r2:null,isAdv:false,isDis:false});}}>{tu>=pb?"No uses left":"🎲 Add d4"}</button>}
+            </div>
+          );
+        })()}
+        {nm==="Far Scribe"&&ok&&(()=>{
+          const names=Array.isArray(char.warFarScribeNames)?char.warFarScribeNames:[];
+          return(
+            <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}} onClick={e=>e.stopPropagation()}>
+              <span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>Names on the page ({names.filter(x=>x&&x.trim()).length}/{pb})</span>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:4}}>
+                {Array.from({length:pb},(_,k)=>(
+                  <input key={k} type="text" value={names[k]||""} placeholder={"Name "+(k+1)} onChange={e=>{const v=e.target.value;setCharSaving(p=>{const arr=Array.isArray(p.warFarScribeNames)?[...p.warFarScribeNames]:[];while(arr.length<=k)arr.push("");arr[k]=v;return {...p,warFarScribeNames:arr};});}}
+                    style={{fontSize:11,padding:"4px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit",minWidth:0}}/>
+                ))}
+              </div>
             </div>
           );
         })()}
