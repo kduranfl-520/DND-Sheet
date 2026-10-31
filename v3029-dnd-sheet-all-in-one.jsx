@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3028";
+const SHEET_VERSION = "v3029";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6158,6 +6158,15 @@ function App() {
             })()}
           </div>
         )}
+        {nm==="Maddening Hex"&&ok&&(()=>{
+          const n=Math.max(1,abilityMod(eff.CHA||10));
+          return(
+            <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
+              <span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Bonus action · target within 30 ft</span>
+              <button style={warBtn} onClick={e=>{e.stopPropagation();setSkillRoll({label:"Maddening Hex (psychic, "+n+" to the cursed target and each creature of your choice within 5 ft)",roll:n,bonus:0,total:n,isCrit:false,isFail:false,sides:6,r1:n,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,dmgTotal:n,allDmgRolls:[],dmgRolls:[],dmgBonus:n,dmgType:"psychic",dmgDice:"",diceSides:6,baseDiceCount:0,saveDC:null,saveType:null,spiritShield:false});}}>💥 Psychic spike {n}</button>
+            </div>
+          );
+        })()}
         {nm==="Cloak of Flies"&&ok&&(()=>{
           const on=!!char.warFliesOn; const dmg=Math.max(0,abilityMod(eff.CHA||10));
           return(
