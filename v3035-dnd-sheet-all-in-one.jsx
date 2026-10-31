@@ -2442,7 +2442,7 @@ const WAR_BOONS=[
   {n:"Pact of the Chain",sum:"You learn find familiar and can cast it as a ritual without it counting against your spells known. Your familiar can take the form of an imp, pseudodragon, quasit, or sprite as well as the usual forms. When you take the Attack action, you can give up one of your attacks so your familiar can make one of its own using its reaction.",pts:[]},
   {n:"Pact of the Blade",sum:"You can use your action to create a pact weapon in your empty hand, choosing any melee weapon form each time. You are proficient with it, and it counts as magical. It vanishes if it stays more than 5 feet from you for 1 minute, if you use this feature again, if you dismiss it, or if you die. You can also bond a magic melee weapon to yourself with a 1-hour ritual (it can be done during a short rest), then dismiss it and summon it again with this feature.",pts:[]},
   {n:"Pact of the Tome",sum:"Your patron gives you a Book of Shadows. Choose three cantrips from the spell lists of any class, and you can cast them at will while the book is on you. They count as warlock cantrips for you but not against your cantrips known. If you lose the book, you can perform a 1-hour ceremony to receive a replacement. The book crumbles to ashes when you die.",pts:[]},
-  {n:"Pact of the Talisman",sum:"Your patron gives you an amulet, a talisman that can aid the wearer when the need is great. When the wearer fails an ability check, they can add a d4 to the roll, potentially turning the roll into a success. This benefit can be used a number of times equal to your proficiency bonus, and all expended uses are restored when you finish a long rest. If you lose the talisman, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and it destroys the previous amulet. The talisman turns to ashes when you die.",pts:[]}
+  {n:"Pact of the Talisman",sum:"Your patron gives you an amulet that helps whoever wears it. When the wearer fails an ability check, they can add a d4 to the roll, which may turn the failure into a success. You can use this a number of times equal to your proficiency bonus, regaining all uses on a long rest. If the amulet is lost, a 1-hour ceremony (during a short or long rest) gets you a replacement and destroys the old one. It turns to ash when you die.",pts:[]}
 ];
 // Eldritch Invocations. min = warlock level, boon = needed Pact Boon, need = spell/feature prerequisite (shown, not enforced), use = once-per-rest tracker
 const WAR_INV=[
@@ -2594,7 +2594,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3034";
+const SHEET_VERSION = "v3035";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
