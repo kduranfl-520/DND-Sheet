@@ -2590,8 +2590,8 @@ const BLANK = {
 };
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
-const SHEET_UPDATED = "Oct 28, 2026";
-const SHEET_VERSION = "v3003";
+const SHEET_UPDATED = "Oct 31, 2026";
+const SHEET_VERSION = "v3004";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
