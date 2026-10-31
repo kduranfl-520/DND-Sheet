@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3023";
+const SHEET_VERSION = "v3024";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8070,12 +8070,14 @@ function App() {
                   if(dragonFlyOn) flyDetails.push({text:"Twinkling Constellations",color:"#38bdf8"});
                   extraCells.push({key:"fly",label:"FLY",value:flyValue,color:flyColor,valColor:flyValue>0?flyColor:"var(--muted)",details:flyDetails});
 
-                  const swimValue = revOpts.includes("Swimming")?displaySpeed*2:swimBeastOn?beastSpd:stormSwimOn?30:0;
-                  const swimColor = (swimBeastOn||stormSwimOn||revOpts.includes("Swimming"))?"#60a5fa":"var(--muted)";
+                  const giftDepthsOn = char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Gift of the Depths");
+                  const swimValue = Math.max(revOpts.includes("Swimming")?displaySpeed*2:swimBeastOn?beastSpd:stormSwimOn?30:0, giftDepthsOn?displaySpeed:0);
+                  const swimColor = (swimBeastOn||stormSwimOn||giftDepthsOn||revOpts.includes("Swimming"))?"#60a5fa":"var(--muted)";
                   const swimDetails=[];
                   if(revOpts.includes("Swimming")) swimDetails.push({text:"Revelation in Flesh",color:"#a855f7"});
                   if(swimBeastOn) swimDetails.push({text:"Path of the Beast",color:"#60a5fa"});
                   if(stormSwimOn) swimDetails.push({text:"Storm Herald",color:"#60a5fa"});
+                  if(giftDepthsOn) swimDetails.push({text:"Gift of the Depths (equal to walking speed; breathe underwater)",color:"#60a5fa"});
                   extraCells.push({key:"swim",label:"SWIM",value:swimValue,color:swimColor,valColor:swimValue>0?swimColor:"var(--muted)",details:swimDetails});
 
                   const climbValue = climbBeastOn?beastSpd:0;
@@ -34475,12 +34477,14 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  if(stormbornOnR) flyDetailsR.push({text:"Stormborn",color:"var(--accent)"});
  if(dragonFlyOnR) flyDetailsR.push({text:"Twinkling Constellations",color:"#38bdf8"});
 
- const swimValueR = revOptsR.includes("Swimming")?totalSpeed*2:swimBeastOnR?beastSpdR:stormSwimOnR?30:0;
- const swimColorR = (swimBeastOnR||stormSwimOnR||revOptsR.includes("Swimming"))?"#60a5fa":"var(--muted)";
+  const giftDepthsOnR = char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Gift of the Depths");
+ const swimValueR = Math.max(revOptsR.includes("Swimming")?totalSpeed*2:swimBeastOnR?beastSpdR:stormSwimOnR?30:0, giftDepthsOnR?totalSpeed:0);
+ const swimColorR = (swimBeastOnR||stormSwimOnR||giftDepthsOnR||revOptsR.includes("Swimming"))?"#60a5fa":"var(--muted)";
  const swimDetailsR=[];
  if(revOptsR.includes("Swimming")) swimDetailsR.push({text:"Revelation in Flesh",color:"#a855f7"});
  if(swimBeastOnR) swimDetailsR.push({text:"Path of the Beast",color:"#60a5fa"});
  if(stormSwimOnR) swimDetailsR.push({text:"Storm Herald",color:"#60a5fa"});
+ if(giftDepthsOnR) swimDetailsR.push({text:"Gift of the Depths (equal to walking speed; breathe underwater)",color:"#60a5fa"});
 
  const climbValueR = climbBeastOnR?beastSpdR:0;
  const climbColorR = climbBeastOnR?"#a78bfa":"var(--muted)";
