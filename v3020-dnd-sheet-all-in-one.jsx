@@ -2466,7 +2466,7 @@ const WAR_INV=[
   {n:"Gift of the Ever-Living Ones",min:0,boon:"Pact of the Chain",b:"XGE",d:"Whenever you regain hit points while your familiar is within 100 feet of you, treat any dice you roll to determine the amount as having rolled their maximum value."},
   {n:"Improved Pact Weapon",min:0,boon:"Pact of the Blade",b:"XGE",d:"You can use any pact weapon you create as a spellcasting focus. If it lacks a magic bonus, it gains +1 to attack and damage rolls. The pact weapon can also be a shortbow, longbow, light crossbow, or heavy crossbow."},
   {n:"Voice of the Chain Master",min:0,boon:"Pact of the Chain",b:"PHB",d:"You can communicate telepathically with your familiar and perceive through its senses as long as you are on the same plane. While perceiving through it, you can also speak through it in your own voice, even if it can't normally speak."},
-  {n:"Cloak of Flies",min:5,b:"XGE",use:"sr",d:"As a bonus action, you surround yourself with a 5-foot aura of buzzing flies until you're incapacitated or dismiss it (bonus action). You have advantage on Intimidation checks and disadvantage on all other Charisma checks. Any other creature that starts its turn in the aura takes poison damage equal to your Charisma modifier (minimum 1). Once used, you need a short or long rest to use it again."},
+  {n:"Cloak of Flies",min:5,b:"XGE",use:"sr",d:"As a bonus action, you surround yourself with a magical aura that looks like buzzing flies. It extends 5 feet from you in every direction, but not through total cover, and lasts until you're incapacitated or dismiss it (bonus action). The aura gives you advantage on Charisma (Intimidation) checks but disadvantage on all other Charisma checks. Any other creature that starts its turn in the aura takes poison damage equal to your Charisma modifier (minimum of 0). Once used, you need a short or long rest to use it again."},
   {n:"Eldritch Smite",min:5,boon:"Pact of the Blade",b:"XGE",d:"Once per turn when you hit a creature with your pact weapon, you can expend a warlock spell slot to deal extra force damage: 1d8 plus another 1d8 per level of the slot. If the target is Huge or smaller, you can also knock it prone."},
   {n:"Gift of the Depths",min:5,b:"XGE",use:"lr",d:"You can breathe underwater and gain a swimming speed equal to your walking speed. You can also cast water breathing once without expending a spell slot, and regain that use when you finish a long rest."},
   {n:"Maddening Hex",min:5,need:"a hex spell or a warlock feature that curses",b:"XGE",d:"As a bonus action, you cause a psychic spike to lash out from a target cursed by your hex spell or a warlock feature such as Hexblade's Curse or Sign of Ill Omen. The cursed target and each creature of your choice within 5 feet of it take psychic damage equal to your Charisma modifier (minimum 1). You must see the target, and it must be within 30 feet of you."},
@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3019";
+const SHEET_VERSION = "v3020";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6136,6 +6136,7 @@ function App() {
               return <button style={used?warLink:warBtn} disabled={noSlot} title={needSlot?"Spends one warlock spell slot":""} onClick={e=>{e.stopPropagation();
                 setCharSaving(p=>{
                   let np={...p,warInvUsed:{...(p.warInvUsed||{}),[nm]:!used}};
+                  if(nm==="Cloak of Flies") np.warFliesOn=!used;
                   if(needSlot&&sl>=0){
                     const arr=Array.isArray(p.spellSlotsUsed)?[...p.spellSlotsUsed]:[];
                     while(arr.length<=sl) arr.push(0);
@@ -6148,6 +6149,16 @@ function App() {
             })()}
           </div>
         )}
+        {nm==="Cloak of Flies"&&ok&&(()=>{
+          const on=!!char.warFliesOn; const dmg=Math.max(0,abilityMod(eff.CHA||10));
+          return(
+            <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
+              <span style={{fontSize:11,color:on?"#22c55e":"var(--muted)",fontWeight:700}}>{on?"🪰 Aura active — Intimidation adv, other CHA checks disadv":"Aura inactive"}</span>
+              <span style={{fontSize:10,fontWeight:800,padding:"2px 7px",borderRadius:5,background:"rgba(168,85,247,0.1)",border:"1px solid rgba(168,85,247,0.35)",color:"#a855f7"}}>{dmg} poison / creature</span>
+              {on&&<button style={warLink} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warFliesOn:false}));}}>Dismiss</button>}
+            </div>
+          );
+        })()}
         {nm==="Book of Ancient Secrets"&&(()=>{
           const rit=Array.isArray(char.warRituals)?char.warRituals:[];
           const setRit=(k,v)=>setCharSaving(p=>{const a=[(p.warRituals||[])[0]||"",(p.warRituals||[])[1]||""];a[k]=v;return warApplyRitualBook({...p,warRituals:a});});
@@ -7178,8 +7189,11 @@ function App() {
  const steadyEyeAdv = char.charClass==="Rogue" && (char.multiClassLevel>0?char.classLevel:char.level||1)>=9 && char.rogueArchetype==="Inquisitive (Rogue)" && !!char.rogueSteadyEyeOn && (label==="Perception"||label==="Investigation");
  const impostorAdv = char.charClass==="Rogue" && (char.multiClassLevel>0?char.classLevel:char.level||1)>=13 && char.rogueArchetype==="Assassin (Rogue)" && !!char.rogueImpostorOn && label==="Deception";
  const visageAdv = char.charClass==="Monk" && char.monasticTradition==="Way of the Astral Self (Monk)" && char.monkAstralVisageActive && (label==="Insight"||label==="Intimidation");
- const isAdv = (char.advantage || rageAdv || actorAdv || cloudRuneAdv || frostRuneAdv || stoneRuneAdv || stormRuneAdv || giantsMightAdv || visageAdv || supremeSneakAdv || impostorAdv || steadyEyeAdv || forceAdv) && !char.disadvantage && !armorStealthDis;
- const isDis = (char.disadvantage && !char.advantage && !rageAdv) || armorStealthDis;
+ const fliesOn = char.charClass==="Warlock" && !!char.warFliesOn && (Array.isArray(char.warInv)?char.warInv:[]).includes("Cloak of Flies");
+ const fliesAdv = fliesOn && label==="Intimidation";
+ const fliesDis = fliesOn && !fliesAdv && (["Deception","Performance","Persuasion"].includes(label) || /^(CHA|Charisma)( check)?$/i.test(label) || /^CHA check/i.test(label));
+ const isAdv = (fliesAdv || char.advantage || rageAdv || actorAdv || cloudRuneAdv || frostRuneAdv || stoneRuneAdv || stormRuneAdv || giantsMightAdv || visageAdv || supremeSneakAdv || impostorAdv || steadyEyeAdv || forceAdv) && !char.disadvantage && !armorStealthDis && !fliesDis;
+ const isDis = (char.disadvantage && !char.advantage && !rageAdv) || armorStealthDis || (fliesDis && !(char.advantage||actorAdv||cloudRuneAdv||impostorAdv));
  const r1 = Math.floor(Math.random()*sides)+1;
  const r2 = (isAdv||isDis) ? Math.floor(Math.random()*sides)+1 : null;
  const roll0 = isAdv ? Math.max(r1,r2) : isDis ? Math.min(r1,r2) : r1;
@@ -7189,7 +7203,7 @@ function App() {
  const total = roll + bonus + frostRuneBonus;
  const isCrit = roll0===sides;
  const isFail = roll===1;
- setSkillRoll({label:(rtApplied?"🎯 ":"")+(supremeSneakAdv?"🥷 ":"")+(steadyEyeAdv?"👁 ":"")+(forceAdv?"🤸 ":"")+(impostorAdv?"🎭 ":"")+(rageAdv?"🔥 ":actorAdv?"🎭 ":giantsMightAdv?"🗿 ":visageAdv?"👻 ":(cloudRuneAdv||frostRuneBonus>0||stoneRuneAdv||stormRuneAdv)?"🔯 ":"")+label, roll, bonus:bonus+frostRuneBonus, total, isCrit, isFail, sides, r1, r2, isAdv, isDis});
+ setSkillRoll({label:(rtApplied?"🎯 ":"")+(supremeSneakAdv?"🥷 ":"")+(steadyEyeAdv?"👁 ":"")+(forceAdv?"🤸 ":"")+((fliesAdv||fliesDis)?"🪰 ":"")+(impostorAdv?"🎭 ":"")+(rageAdv?"🔥 ":actorAdv?"🎭 ":giantsMightAdv?"🗿 ":visageAdv?"👻 ":(cloudRuneAdv||frostRuneBonus>0||stoneRuneAdv||stormRuneAdv)?"🔯 ":"")+label, roll, bonus:bonus+frostRuneBonus, total, isCrit, isFail, sides, r1, r2, isAdv, isDis});
   };
 
  const changeClass = nv => {
