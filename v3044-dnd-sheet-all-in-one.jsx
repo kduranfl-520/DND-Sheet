@@ -2503,7 +2503,7 @@ const WAR_INV=[
   {n:"Witch Sight",min:15,b:"PHB",d:"You can see the true form of any shapechanger or creature concealed by illusion or transmutation magic while the creature is within 30 feet of you and within line of sight."}
 ];
 // Warlock invocations that let you cast a spell: invocation name -> spell shown in its boxed summary
-const WAR_INV_SPELL={"Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals","Eldritch Sight":"Detect Magic","Fiendish Vigor":"False Life","Mask of Many Faces":"Disguise Self","Misty Visions":"Silent Image","Thief of Five Fates":"Bane","Gift of the Depths":"Water Breathing","Mire the Mind":"Slow","Sign of Ill Omen":"Bestow Curse","Bewitching Whispers":"Compulsion","Dreadful Word":"Confusion","Sculptor of Flesh":"Polymorph","Trickster's Escape":"Freedom of Movement","Minions of Chaos":"Conjure Elemental","Otherworldly Leap":"Jump","Whispers of the Grave":"Speak with Dead","Chains of Carceri":"Hold Monster","Master of Myriad Forms":"Alter Self","Shroud of Shadow":"Invisibility","Visions of Distant Realms":"Arcane Eye"};
+const WAR_INV_SPELL={"Far Scribe":"Sending","Armor of Shadows":"Mage Armor","Ascendant Step":"Levitate","Beast Speech":"Speak with Animals","Eldritch Sight":"Detect Magic","Fiendish Vigor":"False Life","Mask of Many Faces":"Disguise Self","Misty Visions":"Silent Image","Thief of Five Fates":"Bane","Gift of the Depths":"Water Breathing","Mire the Mind":"Slow","Sign of Ill Omen":"Bestow Curse","Bewitching Whispers":"Compulsion","Dreadful Word":"Confusion","Sculptor of Flesh":"Polymorph","Trickster's Escape":"Freedom of Movement","Minions of Chaos":"Conjure Elemental","Otherworldly Leap":"Jump","Whispers of the Grave":"Speak with Dead","Chains of Carceri":"Hold Monster","Master of Myriad Forms":"Alter Self","Shroud of Shadow":"Invisibility","Visions of Distant Realms":"Arcane Eye"};
 // Book of Ancient Secrets: 1st-level ritual spells (any class list) you can inscribe in your Book of Shadows
 const WAR_RITUALS_1=["Alarm","Ceremony","Comprehend Languages","Detect Magic","Detect Poison and Disease","Find Familiar","Identify","Illusory Script","Purify Food and Drink","Speak with Animals","Tenser's Floating Disk","Unseen Servant"];
 // Keeps a "Book of Shadows" entry in the Gear tab Spell Books in step with the chosen ritual spells
@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3043";
+const SHEET_VERSION = "v3044";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
