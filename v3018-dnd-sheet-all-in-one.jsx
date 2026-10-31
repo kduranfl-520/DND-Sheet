@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3017";
+const SHEET_VERSION = "v3018";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6094,7 +6094,7 @@ function App() {
           const sel=char.warPactSel&&pw&&char.warPactSel===pw.name?char.warPactSel:"";
           const we=pw?libEntries.find(e=>e.title===pw.name&&e.category==="Weapon"):null;
           const dmgTxt=(pw&&pw.damage)||(we&&we.notes?(we.notes.match(/Dmg: ([^.]+)/)||[])[1]:"")||"";
-          const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=(dmgTxt.replace(/(\d+)d(\d+)\s*/,"").trim())||"";
+          const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=dmgTxt.replace(/\d+d\d+|\//g,"").trim();
           const fin=pw&&(pw.abilityMod==="DEX/STR"||(we&&(we.tags||"").toLowerCase().includes("finesse")));
           const mod=(pw&&pw.abilityMod==="CHA")?abilityMod(eff.CHA||10):abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
           const hexB=(char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?pb:0;
@@ -22290,6 +22290,41 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                     <option value="">-- Choose a weapon to use Charisma --</option>
                                                     {hwChoices.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>}
+                                                {(()=>{
+                                                  const hwItem=hwSel?items.find(i=>typeof i==="object"&&i&&!i.pact&&i.name===hwSel):null;
+                                                  const pwItem=items.find(i=>typeof i==="object"&&i&&i.pact&&i.name);
+                                                  const sgn=(n)=>(n>=0?"+":"")+n;
+                                                  const lines=[];
+                                                  let roller=null;
+                                                  if(hwItem){
+                                                    const we=libEntries.find(x=>x.title===hwSel&&x.category==="Weapon");
+                                                    const da=defAbil(hwSel);
+                                                    const oldMod=da==="DEX/STR"?Math.max(abilityMod(eff.STR||10),abilityMod(eff.DEX||10)):abilityMod(eff[da]||10);
+                                                    const oldLbl=da==="DEX/STR"?(abilityMod(eff.STR||10)>=abilityMod(eff.DEX||10)?"STR":"DEX"):da;
+                                                    const magicB=Number(hwItem.magicBonus)||0;
+                                                    const atk=chaMod+pb+magicB;
+                                                    const dmgTxt=(we&&we.notes?(we.notes.match(/Dmg: ([^.]+)/)||[])[1]:"")||"";
+                                                    const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=dmgTxt.replace(/\d+d\d+|\//g,"").trim();
+                                                    lines.push(hwSel+" — CHA "+sgn(chaMod)+" to attack and damage (was "+oldLbl+" "+sgn(oldMod)+")");
+                                                    const doHW=()=>{
+                                                      const c=charRef.current; const d20=Math.floor(Math.random()*20)+1; const isCrit=d20>=critThreshold(c);
+                                                      const n=dm?parseInt(dm[1]):1, sides=dm?parseInt(dm[2]):6;
+                                                      const rolls=Array.from({length:isCrit?n*2:n},()=>Math.floor(Math.random()*sides)+1);
+                                                      const hexB=(c.warHexCurseOn)?pb:0;
+                                                      const dmgBonus=chaMod+magicB+hexB; const dmgTotal=rolls.reduce((a,b)=>a+b,0)+dmgBonus;
+                                                      setSkillRoll({label:hwSel+(c.warHexCurseOn?" ☠":"")+(isCrit?" 💥":""),isWeaponRoll:true,hitRoll:d20,atkBonus:atk,hitTotal:d20+atk,isCrit,isFail:d20===1,dmgRolls:rolls,dmgBonus,dmgTotal,dmgDice:dm?dm[0]:"",dmgType:dType,sides:20,roll:d20,bonus:atk,total:d20+atk,r1:d20,r2:null,isAdv:false,isDis:false,allDmgRolls:rolls,diceSides:sides,baseDiceCount:n,brutalDice:0,isMelee:true});
+                                                    };
+                                                    roller=<button style={neutralBtn} onClick={e=>{e.stopPropagation();doHW();}}>🎲 Attack {sgn(atk)}</button>;
+                                                  }
+                                                  if(pwItem) lines.push("Pact weapon: "+pwItem.name+(pwItem.abilityMod==="CHA"?" — uses Charisma for attack and damage":" — re-summon it to use Charisma"));
+                                                  if(!lines.length) return null;
+                                                  return(
+                                                    <div style={{marginTop:6}}>
+                                                      {lines.map((t,i)=><div key={i} style={{fontSize:11,color:"var(--accent)",fontWeight:600}}>{t}</div>)}
+                                                      {roller&&flexEnd(roller)}
+                                                    </div>
+                                                  );
+                                                })()}
                                               </FC>,
                                               <FC key="as" label="Accursed Specter (6th)" minLvl={6}>
                                                 <Body>When you slay a humanoid, you can cause its spirit to rise from its corpse as a specter. It gains temporary hit points equal to half your warlock level ({Math.floor(lvl/2)}), rolls its own initiative, and acts on its own turns, obeying your verbal commands. It remains until the end of your next long rest, when it vanishes. Once used, you need a long rest to use it again.</Body>
