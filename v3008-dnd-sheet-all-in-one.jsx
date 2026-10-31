@@ -2592,7 +2592,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3007";
+const SHEET_VERSION = "v3008";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -34852,7 +34852,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                   <>
                     <div style={{display:"flex",gap:4,flexWrap:"wrap",justifyContent:"center",marginBottom:4}}>
                       {(skillRoll.allDmgRolls||[]).map((r,i)=>(
-                        <DieSVG key={i} sides={skillRoll.diceSides||6} roll={r} size={52} color={skillRoll.spiritShield?"var(--accent)":"#60a5fa"}/>
+                        <DieSVG key={i} sides={skillRoll.diceSides||6} roll={r} size={52} color={diceColor}/>
                       ))}
                     </div>
                     <div style={{textAlign:"center"}}>
@@ -35231,7 +35231,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               <div style={{fontSize:12,color:"var(--muted)"}}>Reduce an ally's damage by the rolled amount.</div>
               <div style={{display:"flex",justifyContent:"center",gap:6,flexWrap:"wrap"}}>
                 {Array.from({length:numDice},(_,i)=>(
-                  <DieSVG key={i} sides={6} roll={ssResult?.rolls?.[i]||null} size={44} color="var(--accent)"/>
+                  <DieSVG key={i} sides={6} roll={ssResult?.rolls?.[i]||null} size={44} color={diceColor}/>
                 ))}
               </div>
               {ssResult&&(
