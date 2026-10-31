@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3047";
+const SHEET_VERSION = "v3048";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6199,7 +6199,7 @@ function App() {
                     style={{fontSize:11,padding:"4px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit",minWidth:0}}/>
                 ))}
               </div>
-              <span style={{fontSize:10,color:"var(--muted)",fontStyle:"italic"}}>You can erase a name by touching it as an action. The writing disappears after 1 minute.</span>
+              <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10}}><span>✨</span><span>You can erase a name by touching it as an action. The writing disappears after 1 minute.</span></div>
             </div>
           );
         })()}
