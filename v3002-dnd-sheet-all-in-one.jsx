@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 28, 2026";
-const SHEET_VERSION = "v3001";
+const SHEET_VERSION = "v3002";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6544,6 +6544,7 @@ function App() {
    if(!dt||!sd||!sd.dmg||sd.atkType==="heal") return 0;
    return String(sd.dmgType||"").toLowerCase().includes(dt)?Math.max(0,abilityMod(eff.CHA||10)):0;
  };
+ const warLifedrinker = (item,mx) => { if(!(item&&typeof item==="object"&&item.pact&&char.charClass==="Warlock"&&(char.level||1)>=12&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Lifedrinker"))) return mx; const v=Math.max(1,abilityMod(eff.CHA||10)); return {rolls:[...mx.rolls,v],total:mx.total+v,types:[...mx.types,"necrotic"],labels:[...mx.labels,"Lifedrinker"]}; };
  const warSpearOn = (sd) => !!(sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Eldritch Spear"));
  const warSpearNote = (sd) => warSpearOn(sd) ? <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ 300 ft <span style={{fontSize:10,opacity:.8}}>(Eldritch Spear)</span></span> : null;
  const ebAgDisplay = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Agonizing Blast")) ? ((char.level||1)>=17?4:(char.level||1)>=11?3:(char.level||1)>=5?2:1)*abilityMod(eff.CHA||10) : 0;
@@ -26738,7 +26739,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         const dmgRolls=Array.from({length:totalDiceCount},()=>Math.floor(Math.random()*sides)+1);
                                         const sporeRolls = sporeEligible ? Array.from({length:isCrit?2:1},()=>Math.floor(Math.random()*6)+1) : [];
                                         const sporeTotal = sporeRolls.reduce((a,b)=>a+b,0);
-                                        const mxG=magicExtraRoll(name,c.magicExtraOn,finalHit,isCrit,dmgType);
+                                        const mxG=warLifedrinker(item,magicExtraRoll(name,c.magicExtraOn,finalHit,isCrit,dmgType));
                                         const hitTotal=finalHit+atkBonus;
                                         const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+magicB+sporeTotal;
                                         const dmgTotal=dmgRolls.reduce((a,b)=>a+b,0)+totalDmgBonus;
@@ -32736,7 +32737,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                               spRolls=Array.from({length:isCrit?2:1},()=>Math.floor(Math.random()*6)+1);
                                               spTotal=spRolls.reduce((a,r)=>a+r,0);
                                             }
-                                            const mx=magicExtraRoll(item.name,char.magicExtraOn,d20,isCrit,libDmg.type);
+                                            const mx=warLifedrinker(item,magicExtraRoll(item.name,char.magicExtraOn,d20,isCrit,libDmg.type));
                                             const bonusRollsCombined=[...dsRolls,...spRolls,...mx.rolls];
                                             const bonusTotalCombined=dsTotal+spTotal+mx.total;
                                             const bonusTypeCombined=[divStrikeArmed?divStrikeType:null,sporeEligibleR?"necrotic":null,...mx.types].filter(Boolean).join(" + ");
