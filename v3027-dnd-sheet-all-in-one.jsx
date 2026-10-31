@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3026";
+const SHEET_VERSION = "v3027";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6643,7 +6643,7 @@ function App() {
      </div>
    );
  };
- const warRepelNote = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Repelling Blast")) ? <span style={{display:"block",marginTop:4,color:"var(--green)",fontWeight:600}}>Repelling Blast: when you hit a creature with eldritch blast, you can push it up to 10 feet away from you in a straight line.</span> : null;
+ const warRepelNote = (sd) => { if(!(sd&&sd.ebBlast&&char.charClass==="Warlock")) return null; const inv=Array.isArray(char.warInv)?char.warInv:[]; const nt=(t)=><span style={{display:"block",marginTop:4,color:"var(--green)",fontWeight:600}}>{t}</span>; return (inv.includes("Repelling Blast")||inv.includes("Grasp of Hadar"))?<>{inv.includes("Repelling Blast")&&nt("Repelling Blast: when you hit a creature with eldritch blast, you can push it up to 10 feet away from you in a straight line.")}{inv.includes("Grasp of Hadar")&&nt("Grasp of Hadar: once on each of your turns when you hit a creature with eldritch blast, you can move that creature in a straight line 10 feet closer to you.")}</>:null; };
  const warSpearOn = (sd) => !!(sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Eldritch Spear"));
  const warSpearNote = (sd) => warSpearOn(sd) ? <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ 300 ft <span style={{fontSize:10,opacity:.8}}>(Eldritch Spear)</span></span> : null;
  const ebAgDisplay = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Agonizing Blast")) ? ((char.level||1)>=17?4:(char.level||1)>=11?3:(char.level||1)>=5?2:1)*abilityMod(eff.CHA||10) : 0;
