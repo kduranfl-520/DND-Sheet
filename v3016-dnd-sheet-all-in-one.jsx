@@ -1664,7 +1664,7 @@ window.DND_LIBRARY = {
  {id:"sc_fiend", title:"The Fiend (Warlock)", category:"Subclass", phb:true, tags:"warlock,devil,PHB", desc:"You have made a pact with a fiend from the lower planes. Such beings desire the corruption or destruction of all things, ultimately including you.", notes:"Parent Class: Warlock. Features: Expanded Spell List (1st), Dark One's Blessing (1st -- temp HP on killing a hostile), Dark One's Own Luck (6th -- add d10 to a check or save, 1/SR), Fiendish Resilience (10th -- resistance to a chosen damage type), Hurl Through Hell (14th -- 10d10 psychic, 1/LR)."},
  {id:"sc_tce_genie", title:"The Genie (Warlock)", category:"Subclass",phb:false,tags:"warlock,genie,TCE", desc:"You have made a pact with one of the rarest kinds of genie, a noble genie. You rest in a magical bottle, call on elemental gifts, and later grant yourself a limited wish. Grand, flashy, and full of wonder.", notes:"Parent Class: Warlock. Genie types: Dao (earth), Djinni (air), Efreeti (fire), Marid (water). Features: Genie's Vessel (extra-dimensional space), Elemental Gift, Sanctuary Vessel, Limited Wish."},
  {id:"sc_greatoldone",title:"The Great Old One (Warlock)", category:"Subclass", phb:true, tags:"warlock,cosmic,PHB", desc:"Your patron is a mysterious entity whose nature is utterly foreign to the fabric of reality.", notes:"Parent Class: Warlock. Features: Expanded Spell List (1st), Awakened Mind (1st -- telepathy 30 ft), Entropic Ward (6th -- reaction: disadvantage on an attack, 1/SR), Thought Shield (10th -- thoughts protected, psychic resistance and reflect), Create Thrall (14th -- charm an incapacitated humanoid)."},
- {id:"sc_hexblade", title:"The Hexblade (Warlock)", category:"Subclass", phb:false, tags:"warlock,martial,XGE", desc:"You have made your pact with a mysterious entity from the Shadowfell. You curse enemies, fight with a pact weapon using Charisma, and call a spectral ally from slain foes. A warlock who is as good with a sword as a spell.", notes:"Parent Class: Warlock. Features: Hexblade's Curse (bonus dmg + crit on 19, recover HP on kill, 1/SR), Hex Warrior (CHA to weapon attacks), Accursed Specter, Armor of Hexes, Master of Hexes."},
+ {id:"sc_hexblade", title:"The Hexblade (Warlock)", category:"Subclass", phb:false, tags:"warlock,martial,XGE", desc:"You have made your pact with a mysterious entity from the Shadowfell, a force that manifests in sentient magic weapons carved from the stuff of shadow. You curse your foes, fight with Charisma-powered weapons, and call spectres from the slain.", notes:"Parent Class: Warlock. Features: Expanded Spell List (1st), Hexblade's Curse (1st -- bonus action, cursed target takes +PB damage from you, you crit on 19-20, regain HP when it dies, 1/SR), Hex Warrior (1st -- medium armor, shields, martial weapons, use CHA with one weapon or your pact weapon), Accursed Specter (6th -- slain humanoid rises as a specter, 1/LR), Armor of Hexes (10th -- reaction d6, 4+ makes the cursed target's hit miss), Master of Hexes (14th -- move the curse when the target dies)."},
  {id:"sc_tce_bladesinging", title:"Bladesinging (Wizard)", category:"Subclass", phb:false, tags:"wizard,bladesong,melee,TCE", desc:"An elven tradition that weaves swordplay and magic into a dance. You gain light armor and a one-handed weapon, and Bladesong makes you fast and agile, adds your Intelligence to AC, and sharpens your concentration. A wizard who dances through the battlefield.", notes:"Parent Class: Wizard. Restriction: Elf or half-elf (can be waived by DM). Features: Training in War and Song (light armor, one one-handed weapon, Performance prof), Bladesong (BA 1/SR -- +INT to AC, +10 ft speed, Concentration adv, +INT to Acrobatics), Extra Attack (can cast cantrip in place of one attack), Song of Defense (spend spell slot to reduce damage), Song of Victory (+INT to melee weapon damage)."},
  {id:"sc_tce_ordersorc", title:"Order of Scribes (Wizard)", category:"Subclass",phb:false,tags:"wizard,scribes,TCE", desc:"Magic of the book. You bring your spellbook to life with a sentient quill and an awakened spellbook that changes the damage type of your spells. Later your mind and writing become one. A scholarly, wonderfully nerdy wizard.", notes:"Parent Class: Wizard. Features: Wizardly Quill (magic quill), Awakened Spellbook (use spellbook as focus, change damage type), Manifest Mind (tiny spirit provides light/help), Master Scrivener, One with the Word."},
  {id:"sc_abjuration", title:"School of Abjuration (Wizard)", category:"Subclass", phb:true, tags:"wizard,protection,PHB",desc:"A master of magic that blocks, banishes, and protects. You conjure an arcane ward that soaks up damage, project it onto allies, and resist spells. A defensive wizard who makes your whole party hard to hurt.", notes:"Parent Class: Wizard. Features: Abjuration Savant, Arcane Ward, Projected Ward, Improved Abjuration, Spell Resist."},
@@ -2432,6 +2432,7 @@ const mergeMagicBase=(entry,baseEntry)=>{ if(!entry||!baseEntry) return entry; l
 // Warlock patron Expanded Spell Lists: [spell level, [spells]] (PHB)
 const WAR_PATRON_SPELLS={
  "The Archfey (Warlock)":[[1,["Faerie Fire","Sleep"]],[2,["Calm Emotions","Phantasmal Force"]],[3,["Blink","Plant Growth"]],[4,["Dominate Beast","Greater Invisibility"]],[5,["Dominate Person","Seeming"]]],
+ "The Hexblade (Warlock)":[[1,["Shield","Wrathful Smite"]],[2,["Blur","Branding Smite"]],[3,["Blink","Elemental Weapon"]],[4,["Phantasmal Killer","Staggering Smite"]],[5,["Banishing Smite","Cone of Cold"]]],
  "The Celestial (Warlock)":[[1,["Cure Wounds","Guiding Bolt"]],[2,["Flaming Sphere","Lesser Restoration"]],[3,["Daylight","Revivify"]],[4,["Guardian of Faith","Wall of Fire"]],[5,["Flame Strike","Greater Restoration"]]],
  "The Fiend (Warlock)":[[1,["Burning Hands","Command"]],[2,["Blindness/Deafness","Scorching Ray"]],[3,["Fireball","Stinking Cloud"]],[4,["Fire Shield","Wall of Fire"]],[5,["Flame Strike","Hallow"]]],
  "The Great Old One (Warlock)":[[1,["Dissonant Whispers","Tasha's Hideous Laughter"]],[2,["Detect Thoughts","Phantasmal Force"]],[3,["Clairvoyance","Sending"]],[4,["Dominate Beast","Evard's Black Tentacles"]],[5,["Dominate Person","Telekinesis"]]]
@@ -2592,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3014";
+const SHEET_VERSION = "v3016";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -3554,7 +3555,17 @@ function parseCompanionStatsFromNotes(notes){
 // "Extra Attack (3)", or "Action Surge (1/rest)" / "Action Surge (2/rest)") to just the highest-level one reached.
 // Returns the minimum d20 roll that counts as a critical hit for this character —
 // widened by Champion's Improved Critical (19-20 at 3rd) and Superior Critical (18-20 at 15th).
+// Class data with patron-granted proficiencies applied (Hexblade: Hex Warrior gives medium armor, shields and martial weapons)
+function clsFor(char){
+  const c=CLASSES[char.charClass];
+  if(c&&char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)") return {...c,armorProf:[...(c.armorProf||[]),"Medium","Shields"],weaponProf:[...(c.weaponProf||[]),"Martial"]};
+  return c;
+}
 function critThreshold(char){
+  const t=critThresholdBase(char);
+  return (char&&char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?Math.min(t,19):t;
+}
+function critThresholdBase(char){
   if(char&&char.charClass==="Fighter"&&char.martialArchetype==="Champion (Fighter)"){
     const lvl=char.multiClassLevel>0?char.classLevel:char.level||1;
     if(lvl>=15) return 18;
@@ -5682,7 +5693,7 @@ function App() {
  if (libRaceEntry) return { traits:[{name:libRaceEntry.title, desc:(libRaceEntry.desc||"")+(libRaceEntry.notes?"\n\n"+libRaceEntry.notes:"")}], abilityBonus:{}, size:"Medium", speed:30 };
  return null;
   })();
- const cls = CLASSES[char.charClass] || null;
+ const cls = clsFor(char) || null;
  const pb  = profBonus(char.level);
  // Shared equipped-weapon attack roller (weapon dropdown + attack/damage roll, optional extra-damage rider). Used by feature cards.
  // Divine Smite controls — shared by the Features tab and the Rounds tab
@@ -6085,14 +6096,15 @@ function App() {
           const dmgTxt=(pw&&pw.damage)||(we&&we.notes?(we.notes.match(/Dmg: ([^.]+)/)||[])[1]:"")||"";
           const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=(dmgTxt.replace(/(\d+)d(\d+)\s*/,"").trim())||"";
           const fin=pw&&(pw.abilityMod==="DEX/STR"||(we&&(we.tags||"").toLowerCase().includes("finesse")));
-          const mod=abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
+          const mod=(pw&&pw.abilityMod==="CHA")?abilityMod(eff.CHA||10):abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
+          const hexB=(char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?pb:0;
           const magicB=pw&&pw.bonded?(Number(pw.magicBonus)||0):0;
           const atk=mod+pb+magicB;
           const doAtk=(k)=>{
             const c=charRef.current; const d20=Math.floor(Math.random()*20)+1; const isCrit=d20>=critThreshold(c);
             const n=dm?parseInt(dm[1]):1, sides=dm?parseInt(dm[2]):6;
             const rolls=Array.from({length:isCrit?n*2:n},()=>Math.floor(Math.random()*sides)+1);
-            const dmgBonus=mod+magicB; const dmgTotal=rolls.reduce((a,b)=>a+b,0)+dmgBonus;
+            const dmgBonus=mod+magicB+hexB; const dmgTotal=rolls.reduce((a,b)=>a+b,0)+dmgBonus;
             const mx=warLifedrinker(pw,{rolls:[],total:0,types:[],labels:[]});
             setSkillRoll({label:pw.name+(nm==="Thirsting Blade"?" — attack "+k+" of 2":"")+(isCrit?" 💥":""),isWeaponRoll:true,hitRoll:d20,atkBonus:atk,hitTotal:d20+atk,isCrit,isFail:d20===1,
               dmgRolls:rolls,dmgBonus,dmgTotal,dmgDice:dm?dm[0]:"",dmgType:dType,
@@ -6222,12 +6234,12 @@ function App() {
     const isMelee=i=>{ if(typeof i!=="object"||!i||!i.name||i.pact||!i.magic||i.kind) return false; const e=libEntries.find(x=>x.title===i.name&&x.category==="Weapon"); return !!e&&!(e.tags||"").toLowerCase().includes("ranged"); };
     const bondable=items.filter(isMelee);
     const summon=()=>{
-      if(bond){ setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{...bond,equipped:true,hand:bond.hand||"RH",pact:true,bonded:true}]})); return; }
+      if(bond){ setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{...bond,equipped:true,hand:bond.hand||"RH",pact:true,bonded:true,...(p.warPatron==="The Hexblade (Warlock)"?{abilityMod:"CHA"}:{})}]})); return; }
       const we=libEntries.find(en=>en.title===form&&en.category==="Weapon"); if(!we) return;
       const dmg=we.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
       const tg=(we.tags||"").toLowerCase();
       const two=(we.notes||"").toLowerCase().includes("two-handed");
-      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:tg.includes("finesse")?"DEX/STR":"STR",weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
+      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:(p.warPatron==="The Hexblade (Warlock)")?"CHA":(tg.includes("finesse")?"DEX/STR":"STR"),weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
     };
     const dismiss=()=>setCharSaving(p=>({...p,...(bond?{}:{warBladeForm:""}),weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
     const doBond=(nm)=>setCharSaving(p=>{
@@ -6449,10 +6461,10 @@ function App() {
    const clericMartialDomains=["Tempest Domain (Cleric)","War Domain (Cleric)","Twilight Domain (Cleric)"];
    const clericDomainHeavyArmor=char.charClass==="Cleric"&&clericHeavyArmorDomains.includes(char.divineDomain);
    const clericDomainMartial=char.charClass==="Cleric"&&clericMartialDomains.includes(char.divineDomain);
-   const armorProfs = [...(char.armorProficiencies||[]),...(CLASSES[cls]?.armorProf||[]),...valorBonusArmor,...valorShields,...(clericDomainHeavyArmor?["heavy"]:[])].map(x=>x.toLowerCase());
+   const armorProfs = [...(char.armorProficiencies||[]),...(CLASSES[cls]?.armorProf||[]),...valorBonusArmor,...valorShields,...(clericDomainHeavyArmor?["heavy"]:[]),...((char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)")?["Medium","Shields"]:[])].map(x=>x.toLowerCase());
    const hasSpellcasting = !!(CLASSES[cls]?.spellcastingAbility||(char.spellsKnown||[]).length);
    const valorBonusMartial=char.charClass==="Bard"&&char.bardCollege==="College of Valor (Bard)"&&(char.level||1)>=3;
-   const hasMartialProf = valorBonusMartial||clericDomainMartial||(CLASSES[cls]?.weaponProf||[]).some(w=>w.toLowerCase().includes("martial"));
+   const hasMartialProf = valorBonusMartial||clericDomainMartial||(char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)")||(CLASSES[cls]?.weaponProf||[]).some(w=>w.toLowerCase().includes("martial"));
    const scoreOk = (ab, minVal) => (eff[ab]||10) >= minVal;
    if(p.includes("spellcasting")&&p.includes("pact magic")) return hasSpellcasting;
    if(p.includes("spellcasting")) return hasSpellcasting;
@@ -8700,7 +8712,7 @@ function App() {
  setF("arcaneArcherShotUsed", 0);
  setF("runeKnightInvokeUsed", {}); setF("frostRuneBuffActive", false); setF("hillRuneBuffActive", false);
  setF("relentlessRageDC", 10); setF("sorcRestoUsed", false); setF("sorcFavoredUsed", false); setF("sorcWindUsed", false);
- if(char.charClass==="Warlock"){ setF("spellSlotsUsed", Array(9).fill(0)); setF("warFeyUsed",false); setF("warMistyUsed",false); setF("warDelirUsed",false); setF("warLuckUsed",false); setF("warEntropicUsed",false); setF("warInvUsed", Object.fromEntries(Object.entries(char.warInvUsed||{}).filter(([k])=>{const wi=WAR_INV.find(x=>x.n===k);return !(wi&&wi.use==="sr");}))); }
+ if(char.charClass==="Warlock"){ setF("spellSlotsUsed", Array(9).fill(0)); setF("warFeyUsed",false); setF("warMistyUsed",false); setF("warDelirUsed",false); setF("warLuckUsed",false); setF("warEntropicUsed",false); setF("warHexUsed",false); setF("warHexCurseOn",false); setF("warInvUsed", Object.fromEntries(Object.entries(char.warInvUsed||{}).filter(([k])=>{const wi=WAR_INV.find(x=>x.n===k);return !(wi&&wi.use==="sr");}))); }
  setF("paladinVowActive", false); setF("rangerNemesisUsed", false); setF("rangerSlayersPreyOn", false); setF("rangerDetectPortalUsed", false); setF("rangerEtherealStepUsed", false);
  setF("monkKiUsed", 0); setF("monkWholenessOfBodyUsed", false); setF("monkTranquilityUsed", false); setF("monkTranquilityActive", false); setF("monkShadowStepUsed", false); setF("monkTouchOfDeathUsed", false); setF("monkHourOfReapingUsed", false); setF("monkDrunkardsLuckUsed", false); setF("monkEmptyBodyInvisUsed", false);
                     }}>
@@ -8715,7 +8727,7 @@ function App() {
  setF("deathSaves.successes", 0);
  setF("deathSaves.failures", 0);
  TRINKET_TXT.length=0;
- setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, warInvUsed:{}, warMasterUsed:false, warFeyUsed:false, warMistyUsed:false, warDelirUsed:false, warLuckUsed:false, warEntropicUsed:false, warHurlUsed:false, warHealUsed:0, warSearUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
+ setCharSaving(p=>({...p, saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, warInvUsed:{}, warMasterUsed:false, warFeyUsed:false, warMistyUsed:false, warDelirUsed:false, warLuckUsed:false, warEntropicUsed:false, warHurlUsed:false, warHexUsed:false, warHexCurseOn:false, warSpecterUsed:false, warHealUsed:0, warSearUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
  setF("wisSpellUsed_ConsultTheSpirits", false);
  setF("libItemState", resetLibItemUses(char, libEntries, "long"));
  setF("fighterIndomitableUsed", 0);
@@ -22234,6 +22246,58 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>
                                             );
                                           }
+                                          if(pat==="The Hexblade (Warlock)"){
+                                            const hcOn=!!char.warHexCurseOn, hcUsed=!!char.warHexUsed;
+                                            const hcHeal=Math.max(1,lvl+chaMod);
+                                            const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
+                                            const hwChoices=[...new Set(items.filter(i=>typeof i==="object"&&i&&i.name&&!i.pact).map(i=>i.name).filter(n=>{const e=libEntries.find(x=>x.title===n&&x.category==="Weapon");return !(e&&(e.notes||"").toLowerCase().includes("two-handed"));}))];
+                                            const hwSel=char.warHexWeapon&&hwChoices.includes(char.warHexWeapon)?char.warHexWeapon:"";
+                                            const defAbil=(n)=>{const e=libEntries.find(x=>x.title===n&&x.category==="Weapon");const t=(e?.tags||"").toLowerCase();return t.includes("finesse")?"DEX/STR":t.includes("ranged")?"DEX":"STR";};
+                                            const pickHW=(nm)=>setCharSaving(p=>{
+                                              const prev=p.warHexWeapon;
+                                              const arr=(Array.isArray(p.weaponItems)?p.weaponItems:[]).map(i=>{
+                                                if(typeof i!=="object"||!i||i.pact) return i;
+                                                if(nm&&i.name===nm) return {...i,abilityMod:"CHA"};
+                                                if(prev&&i.name===prev) return {...i,abilityMod:defAbil(i.name)};
+                                                return i;
+                                              });
+                                              return {...p,warHexWeapon:nm,weaponItems:arr};
+                                            });
+                                            return wrapCol(
+                                              spellsFC(),
+                                              <FC key="hc" label="Hexblade's Curse (1st)" minLvl={1} headerBadge={<DurationBadge id="war-hexcurse-duration" short="1 min" full="Duration: 1 minute." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
+                                                <Body>As a bonus action, you choose one creature you can see within 30 feet of you to curse for 1 minute. Until the curse ends, you gain these benefits against the cursed target: you gain a bonus to damage rolls equal to your proficiency bonus, any attack roll you make against it is a critical hit on a roll of 19 or 20, and if it dies you regain hit points equal to your warlock level + your Charisma modifier (minimum of 1). The curse ends early if the target dies, you die, or you are incapacitated. Once used, you need a short or long rest to use it again.</Body>
+                                                {flexEnd(
+                                                  <span style={{fontSize:11,color:hcOn?"var(--accent)":"var(--muted)",fontWeight:700}}>{hcOn?"Cursed — +"+pb+" damage · crit on 19–20":(hcUsed?"Used — short or long rest":"Ready — 1 use per short or long rest")}</span>,
+                                                  !hcOn&&<button style={hcUsed?linkBtn:neutralBtn} disabled={hcUsed} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warHexCurseOn:true,warHexUsed:true}));}}>☠ Curse a creature</button>,
+                                                  hcOn&&<button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,hp:{...p.hp,current:Math.min(p.hp?.max||0,(p.hp?.current||0)+hcHeal)},...(lvl>=14?{}:{warHexCurseOn:false})}));}}>Target died — regain {hcHeal} HP</button>,
+                                                  hcOn&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("warHexCurseOn",false);}}>End curse</button>,
+                                                  (hcUsed&&!hcOn)&&<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("warHexUsed",false);}}>↺ Reset</button>
+                                                )}
+                                              </FC>,
+                                              <FC key="hw" label="Hex Warrior (1st)" minLvl={1}>
+                                                <Body>You gain proficiency with medium armor, shields, and martial weapons. The magic of your patron lets you use your Charisma modifier, instead of Strength or Dexterity, for the attack and damage rolls of one weapon that lacks the two-handed property. Choose the weapon whenever you finish a long rest; the benefit lasts until your next one. If you later gain the Pact of the Blade feature, this benefit extends to every pact weapon you conjure with that feature, no matter the weapon's type.</Body>
+                                                {hwChoices.length===0
+                                                  ?<div style={{fontSize:11,color:"var(--muted)",marginTop:6}}>Add a one-handed weapon on your Gear tab to choose it here.</div>
+                                                  :<select className="ri-sel" value={hwSel} onClick={e=>e.stopPropagation()} onChange={e=>pickHW(e.target.value)}
+                                                    style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:hwSel?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
+                                                    <option value="">-- Choose a weapon to use Charisma --</option>
+                                                    {hwChoices.map(n=><option key={n} value={n}>{n}</option>)}
+                                                  </select>}
+                                              </FC>,
+                                              <FC key="as" label="Accursed Specter (6th)" minLvl={6}>
+                                                <Body>When you slay a humanoid, you can cause its spirit to rise from its corpse as a specter. It gains temporary hit points equal to half your warlock level ({Math.floor(lvl/2)}), rolls its own initiative, and acts on its own turns, obeying your verbal commands. It remains until the end of your next long rest, when it vanishes. Once used, you need a long rest to use it again.</Body>
+                                                {onceRow("warSpecterUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
+                                              </FC>,
+                                              <FC key="ah" label="Armor of Hexes (10th)" minLvl={10}>
+                                                <Body>If the target cursed by your Hexblade's Curse hits you with an attack roll, you can use your reaction to roll a d6. On a 4 or higher, the attack instead misses you, regardless of its roll.</Body>
+                                                {flexEnd(dieBtn("Armor of Hexes (d6)",6,"🎲 Roll d6 (4+ = miss)"))}
+                                              </FC>,
+                                              <FC key="mh" label="Master of Hexes (14th)" minLvl={14}>
+                                                <Body>When the creature cursed by your Hexblade's Curse dies, you can apply the curse to a different creature you can see within 30 feet of you, provided you aren't incapacitated. When you apply the curse this way, you don't regain hit points from the death of the previously cursed creature.</Body>
+                                              </FC>
+                                            );
+                                          }
                                           if(pat==="The Celestial (Warlock)"){
                                             const hlMax=1+lvl; const hlUsed=Math.min(hlMax,char.warHealUsed||0); const hlLeft=hlMax-hlUsed;
                                             const capN=Math.max(1,chaMod); const hlN=Math.max(1,Math.min(char.warHealN||1,capN,Math.max(1,hlLeft)));
@@ -26778,7 +26842,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                   <select className="gi gi-sm" style={{width:44,flexShrink:0,fontSize:11,padding:"2px 2px",color:"var(--accent)"}}
  value={wAbil}
  onChange={e=>updateWeapon({abilityMod:e.target.value})}>
-                                    {opts.map(o=><option key={o.v} value={o.v}>{o.l}</option>)}
+                                    {[...opts,...(wAbil==="CHA"?[{v:"CHA",l:"CHA"}]:[])].map(o=><option key={o.v} value={o.v}>{o.l}</option>)}
                                   </select>
                                   <div style={{position:"relative",flexShrink:0,cursor:"pointer"}}
                                     onClick={ev=>{ev.stopPropagation();const k="wpToHit_"+name;setWearingInfo(wearingInfo===k?null:k);}}>
@@ -26865,7 +26929,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                         const sporeTotal = sporeRolls.reduce((a,b)=>a+b,0);
                                         const mxG=warLifedrinker(item,magicExtraRoll(name,c.magicExtraOn,finalHit,isCrit,dmgType));
                                         const hitTotal=finalHit+atkBonus;
-                                        const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+magicB+sporeTotal;
+                                        const hexCurseB=(char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)"&&c.warHexCurseOn)?pb:0;
+                                        const totalDmgBonus=dmgBonus+rageBonus+chargerBonus+duelingBonus+thrownWeaponBonus+blessedWeaponBonus2+magicB+sporeTotal+hexCurseB;
                                         const dmgTotal=dmgRolls.reduce((a,b)=>a+b,0)+totalDmgBonus;
                                         setSkillRoll({
                                           label:(c.rageActive?"🔥 ":"")+(chargerBonus>0?"⚡ ":"")+(duelingBonus>0?"⚔️ ":"")+(thrownWeaponBonus>0?"🪃 ":"")+(sporeEligible?"🍄 ":"")+name+(recklessAdv?" ⚡":"")+(isCrit?" 💥":"")+(sporeEligible?" (+"+sporeRolls.length+"d6 necrotic)":""),
@@ -32767,7 +32832,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                     const hasTWF=hasTWFSwords||hasTWFFighter;
                                     // Without TWF, offhand gets no mod; with TWF, it gets full mod (already in totalDmgBonus)
                                     const twfModCorrection=isOffhand&&!hasTWF?-mod:0;
-                                    const totalDmgBonus=mod+diceFlatBonus+rageBonus+chargerBonusR+duelingBonus+thrownWeaponBonusR+twfModCorrection+blessedWeaponBonus+magicBR;
+                                    const hexCurseBR=(char.charClass==="Warlock"&&char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?pb:0;
+                                    const totalDmgBonus=mod+diceFlatBonus+rageBonus+chargerBonusR+duelingBonus+thrownWeaponBonusR+twfModCorrection+blessedWeaponBonus+magicBR+hexCurseBR;
                                     const dispBonus=totalDmgBonus!==0?(totalDmgBonus>0?" +"+totalDmgBonus:" "+totalDmgBonus):"";
                                     const isStrWeapon=!isFinesse||(strMod>=dexMod);
                                     const recklessAdv=char.recklessActive&&!isRanged&&isStrWeapon;
@@ -33046,7 +33112,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 {name:"Shove",emoji:"💥",desc:"Push a creature 5 feet or knock it prone with a STR (Athletics) check.",rolls:[{label:"Shove — Athletics",sk:{name:"Athletics",ability:"STR"},adv:false}]},
               ];
               const actFeatures=[];
-              const cls=CLASSES[char.charClass];
+              const cls=clsFor(char);
               if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(f==="Cunning Action") return;if((fl.includes("action")||fl.includes("attack"))&&!fl.includes("spellcast")&&!fl.includes("cast a spell"))actFeatures.push(f);});}
               // Two-Weapon Fighting — manual action option, always available, pulls up both weapon slots at once
               actFeatures.push("Two-Weapon Fighting");
@@ -33432,7 +33498,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               const baAlwaysKnownNames=alwaysKnownSpells.map(({spell})=>spell);
               const baSpells=[...new Set([...(char.spellsKnown||[]),...baAlwaysKnownNames])].filter(s=>{const sd=SPELL_DATA[s];if(!sd) return false;const c=sd.cast||"";const isAlways=baAlwaysKnownNames.includes(s);const isGraveSTD=s==="Spare the Dying"&&char.charClass==="Cleric"&&char.divineDomain==="Grave Domain (Cleric)";return c==="1 bonus action"||(isAlways&&c.startsWith("1 bonus"))||isGraveSTD;}).sort();
               const baFeatures=[];
-              const cls=CLASSES[char.charClass];
+              const cls=clsFor(char);
               if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(fl.includes("bonus action")||fl.includes("bardic inspiration")||fl.includes("healing word")||fl.includes("wild shape")||fl.includes("second wind")||fl.includes("cunning action")||fl.includes("flurry")||fl.includes("patient defense")||fl.includes("step of the wind"))baFeatures.push(f);});}
               // Battle Master maneuvers — bonus-action maneuvers
               if(char.charClass==="Fighter"&&char.martialArchetype==="Battle Master (Fighter)"){
@@ -33933,7 +33999,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Clockwork Soul (Sorcerer)") rxnFeatures.push("Restore Balance — Cancel Advantage or Disadvantage");
               // Lucky feat — luck points are spent out of turn, so it lives under Reaction
               if(Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Lucky")) rxnFeatures.push("Lucky — Use Luck Point");
-              const cls=CLASSES[char.charClass];
+              const cls=clsFor(char);
               if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(fl.includes("reaction")||fl.includes("uncanny dodge")||fl.includes("deflect")||fl.includes("slow fall")||fl.includes("sentinel")||fl.includes("riposte")||fl.includes("parry")||fl.includes("opportunity"))rxnFeatures.push(f);});}
               // Battle Master maneuvers — reaction maneuvers
               if(char.charClass==="Fighter"&&char.martialArchetype==="Battle Master (Fighter)"){
