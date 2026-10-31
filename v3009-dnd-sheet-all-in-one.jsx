@@ -2592,7 +2592,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3008";
+const SHEET_VERSION = "v3009";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22237,7 +22237,6 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="rs" label="Radiant Soul (6th)" minLvl={6}>
                                                 <Body>You have resistance to radiant damage. When you cast a spell that deals radiant or fire damage, you can add your Charisma modifier to one damage roll of that spell against one of its targets.</Body>
-                                                {note("Radiant resistance is applied automatically. Charisma bonus to add: "+(chaMod>=0?"+":"")+chaMod+".")}
                                               </FC>,
                                               <FC key="cr" label="Celestial Resilience (10th)" minLvl={10}>
                                                 <Body>When you finish a short or long rest, you gain temporary hit points equal to your warlock level + your Charisma modifier. Choose up to five creatures you can see to gain temporary hit points equal to half your warlock level + your Charisma modifier.</Body>
