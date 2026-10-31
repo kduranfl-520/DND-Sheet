@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3038";
+const SHEET_VERSION = "v3039";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6180,6 +6180,7 @@ function App() {
           return(
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap",marginTop:6}}>
               <PipRow label={nm==="Bond of the Talisman"?"Teleports":"Save d4"} count={pb} used={tu} color="fail" onSet={v=>setF(key,v)}/>
+              {nm==="Bond of the Talisman"&&<button style={warBtn} disabled={tu>=pb} onClick={e=>{e.stopPropagation();setF(key,tu+1);}}>{tu>=pb?"No uses left":"Use teleport"}</button>}
               {nm==="Protection of the Talisman"&&<button style={warBtn} disabled={tu>=pb} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*4)+1;setF(key,tu+1);setSkillRoll({label:"Protection of the Talisman (d4 added to a failed save)",roll:r,bonus:0,total:r,isCrit:false,isFail:false,sides:4,r1:r,r2:null,isAdv:false,isDis:false});}}>{tu>=pb?"No uses left":"🎲 Add d4"}</button>}
             </div>
           );
