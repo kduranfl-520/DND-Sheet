@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3016";
+const SHEET_VERSION = "v3017";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22266,7 +22266,13 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="hc" label="Hexblade's Curse (1st)" minLvl={1} headerBadge={<DurationBadge id="war-hexcurse-duration" short="1 min" full="Duration: 1 minute." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>As a bonus action, you choose one creature you can see within 30 feet of you to curse for 1 minute. Until the curse ends, you gain these benefits against the cursed target: you gain a bonus to damage rolls equal to your proficiency bonus, any attack roll you make against it is a critical hit on a roll of 19 or 20, and if it dies you regain hit points equal to your warlock level + your Charisma modifier (minimum of 1). The curse ends early if the target dies, you die, or you are incapacitated. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>As a bonus action, you choose one creature you can see within 30 feet of you to curse for 1 minute. Until the curse ends, you gain these benefits against the cursed target:
+                                                  <ul style={{margin:"4px 0 4px 18px",padding:0,display:"flex",flexDirection:"column",gap:2}}>
+                                                    <li>You gain a bonus to damage rolls equal to your proficiency bonus.</li>
+                                                    <li>Any attack roll you make against it is a critical hit on a roll of 19 or 20.</li>
+                                                    <li>If it dies, you regain hit points equal to your warlock level + your Charisma modifier (minimum of 1).</li>
+                                                  </ul>
+                                                  The curse ends early if the target dies, you die, or you are incapacitated. Once used, you need a short or long rest to use it again.</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:hcOn?"var(--accent)":"var(--muted)",fontWeight:700}}>{hcOn?"Cursed — +"+pb+" damage · crit on 19–20":(hcUsed?"Used — short or long rest":"Ready — 1 use per short or long rest")}</span>,
                                                   !hcOn&&<button style={hcUsed?linkBtn:neutralBtn} disabled={hcUsed} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warHexCurseOn:true,warHexUsed:true}));}}>☠ Curse a creature</button>,
