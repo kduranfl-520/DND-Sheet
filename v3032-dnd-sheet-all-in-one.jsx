@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3031";
+const SHEET_VERSION = "v3032";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6097,7 +6097,7 @@ function App() {
           const dmgTxt=(pw&&pw.damage)||(we&&we.notes?(we.notes.match(/Dmg: ([^.]+)/)||[])[1]:"")||"";
           const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=dmgTxt.replace(/\d+d\d+|\//g,"").trim();
           const fin=pw&&(pw.abilityMod==="DEX/STR"||(we&&(we.tags||"").toLowerCase().includes("finesse")));
-          const mod=(pw&&pw.abilityMod==="CHA")?abilityMod(eff.CHA||10):abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
+          const mod=(pw&&pw.abilityMod==="CHA")?abilityMod(eff.CHA||10):(pw&&pw.abilityMod==="DEX")?abilityMod(eff.DEX||10):abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
           const hexB=(char.warPatron==="The Hexblade (Warlock)"&&char.warHexCurseOn)?pb:0;
           const magicB=pw&&pw.bonded?(Number(pw.magicBonus)||0):0;
           const atk=mod+pb+magicB;
@@ -6265,7 +6265,8 @@ function App() {
   const warBladeBox = ()=>{
     const form=char.warBladeForm||"";
     const bond=(char.warBladeBond&&typeof char.warBladeBond==="object"&&char.warBladeBond.name)?char.warBladeBond:null;
-    const opts=libEntries.filter(e=>e.category==="Weapon"&&!(e.tags||"").toLowerCase().split(",").some(t=>t==="ranged"||t==="magic")&&e.title!=="Unarmed Strike").sort((a,b)=>a.title.localeCompare(b.title));
+    const ipw=warHas("Improved Pact Weapon"); const IPW_RANGED=["Shortbow","Longbow","Crossbow, Light","Crossbow, Heavy"];
+    const opts=libEntries.filter(e=>e.category==="Weapon"&&((ipw&&IPW_RANGED.includes(e.title))||!(e.tags||"").toLowerCase().split(",").some(t=>t==="ranged"||t==="magic"))&&e.title!=="Unarmed Strike").sort((a,b)=>a.title.localeCompare(b.title));
     const items=Array.isArray(char.weaponItems)?char.weaponItems:[];
     const isP=i=>typeof i==="object"&&i&&i.pact;
     const out=items.some(isP);
@@ -6277,7 +6278,7 @@ function App() {
       const dmg=we.notes?.match(/Dmg: ([^.]+)/)?.[1]?.trim()||"";
       const tg=(we.tags||"").toLowerCase();
       const two=(we.notes||"").toLowerCase().includes("two-handed");
-      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:(p.warPatron==="The Hexblade (Warlock)")?"CHA":(tg.includes("finesse")?"DEX/STR":"STR"),weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
+      setCharSaving(p=>({...p,weaponItems:[...(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i)),{name:form,equipped:true,hand:two?"BH":"RH",pact:true,magic:true,damage:dmg,abilityMod:(p.warPatron==="The Hexblade (Warlock)")?"CHA":(tg.includes("ranged")?"DEX":tg.includes("finesse")?"DEX/STR":"STR"),weaponType:we.notes?.match(/Type: ([^.]+)/)?.[1]?.trim()||""}]}));
     };
     const dismiss=()=>setCharSaving(p=>({...p,...(bond?{}:{warBladeForm:""}),weaponItems:(Array.isArray(p.weaponItems)?p.weaponItems:[]).filter(i=>!isP(i))}));
     const doBond=(nm)=>setCharSaving(p=>{
