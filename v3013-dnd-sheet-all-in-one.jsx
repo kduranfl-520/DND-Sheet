@@ -2592,7 +2592,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3012";
+const SHEET_VERSION = "v3013";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5540,7 +5540,8 @@ function App() {
  const [mediaLightbox, setMediaLightbox] = useState(null);
  const [showLibrary, setShowLibrary] = useState(false);
  const [showDice, setShowDice]    = useState(false);
- const [diceColor, setDiceColor]   = useState("blue");
+ const [diceColor, setDiceColorRaw] = useState(()=>{ try{ const v=localStorage.getItem("dnd5e_dice_color"); return ["blue","purple","red","green","black","gold","white","pink","teal","orange"].includes(v)?v:"blue"; }catch(e){ return "blue"; } });
+ const setDiceColor = (c)=>{ setDiceColorRaw(c); try{ localStorage.setItem("dnd5e_dice_color",c); }catch(e){} };
  const [libEntries, setLibEntries] = useState(() => libLoad());
  const [xpAdd, setXpAdd] = useState("");
  const [levelUpMsg, setLevelUpMsg] = useState("");
