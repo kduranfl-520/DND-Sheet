@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3024";
+const SHEET_VERSION = "v3025";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8077,7 +8077,7 @@ function App() {
                   if(revOpts.includes("Swimming")) swimDetails.push({text:"Revelation in Flesh",color:"#a855f7"});
                   if(swimBeastOn) swimDetails.push({text:"Path of the Beast",color:"#60a5fa"});
                   if(stormSwimOn) swimDetails.push({text:"Storm Herald",color:"#60a5fa"});
-                  if(giftDepthsOn) swimDetails.push({text:"Gift of the Depths (equal to walking speed; breathe underwater)",color:"#60a5fa"});
+                  if(giftDepthsOn) swimDetails.push({text:"Gift of the Depths",color:"#60a5fa"});
                   extraCells.push({key:"swim",label:"SWIM",value:swimValue,color:swimColor,valColor:swimValue>0?swimColor:"var(--muted)",details:swimDetails});
 
                   const climbValue = climbBeastOn?beastSpd:0;
@@ -34484,7 +34484,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  if(revOptsR.includes("Swimming")) swimDetailsR.push({text:"Revelation in Flesh",color:"#a855f7"});
  if(swimBeastOnR) swimDetailsR.push({text:"Path of the Beast",color:"#60a5fa"});
  if(stormSwimOnR) swimDetailsR.push({text:"Storm Herald",color:"#60a5fa"});
- if(giftDepthsOnR) swimDetailsR.push({text:"Gift of the Depths (equal to walking speed; breathe underwater)",color:"#60a5fa"});
+ if(giftDepthsOnR) swimDetailsR.push({text:"Gift of the Depths",color:"#60a5fa"});
 
  const climbValueR = climbBeastOnR?beastSpdR:0;
  const climbColorR = climbBeastOnR?"#a78bfa":"var(--muted)";
