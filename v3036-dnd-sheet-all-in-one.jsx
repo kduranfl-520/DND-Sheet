@@ -2594,7 +2594,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3035";
+const SHEET_VERSION = "v3036";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4536,8 +4536,8 @@ const PipRow = ({label,count,used,color,onSet}) => (
   <div className="pip-row">
     <span className="pip-lbl">{label}</span>
     <div className="pips">{Array.from({length:count},(_,i)=>(
-      <div key={i} className={`pip ${i<used?`pip-${color}`:""}`} onClick={()=>onSet(i<used?used-1:i+1)}/>
-    )).reverse()}</div>
+      <div key={i} className={`pip ${i<used?`pip-${color}`:""}`} onClick={()=>onSet(i<used?i:i+1)}/>
+    ))}</div>
   </div>
 );
 const Empty = ({icon,msg}) => <div className="empty-state"><div style={{fontSize:33,marginBottom:8}}>{icon}</div>{msg}</div>;
