@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3025";
+const SHEET_VERSION = "v3026";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6702,8 +6702,8 @@ function App() {
   if(stoneRuneDV>0) details.push(stoneRuneDV+"ft Stone Rune");
   if(umbralSightDV>0) details.push(umbralSightDV+"ft Umbral Sight");
   if(shadowDV>0) details.push(shadowDV+"ft Eyes of the Dark");
-  if(devilsSightDV>0) details.push(devilsSightDV+"ft Devil's Sight (magical darkness too)");
-  if(ghostlyDV>0) details.push("30ft Ghostly Gaze (active until end of your next turn — see through solid objects"+(racialDV>0||devilsSightDV>0||eyesOfNightDV>0||stoneRuneDV>0||umbralSightDV>0||shadowDV>0?"; darkvision only if you don't already have it":"")+")");
+  if(devilsSightDV>0) details.push(devilsSightDV+"ft Devil's Sight");
+  if(ghostlyDV>0) details.push("30ft Ghostly Gaze");
   return {range:darkvisionRange,details};
  })();
  const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
