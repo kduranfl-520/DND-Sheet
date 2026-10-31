@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3039";
+const SHEET_VERSION = "v3040";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -29645,8 +29645,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                   ].filter(s=>{const sd=SPELL_DATA[s];return sd&&sd.dur&&sd.dur.toLowerCase().includes("concentration");}).sort().filter((s,i,a)=>a.indexOf(s)===i);
                   const conSave=svBonus("CON");
                   const hasWarCaster=Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="War Caster");
+                  const hasEldMind=char.charClass==="Warlock"&&warHas("Eldritch Mind");
+                  const hasConcAdv=hasWarCaster||hasEldMind;
                   const hasResilientCON=resilientAbilities.has("CON")&&!(cls?.savingThrows?.includes("CON"));
-                  const btnTitle=["CON Save · DC 10",hasWarCaster?"War Caster: roll with advantage":null,hasResilientCON?"Resilient: CON save proficiency":null].filter(Boolean).join(" · ");
+                  const btnTitle=["CON Save · DC 10",hasWarCaster?"War Caster: roll with advantage":null,hasEldMind?"Eldritch Mind: roll with advantage":null,hasResilientCON?"Resilient: CON save proficiency":null].filter(Boolean).join(" · ");
                   return(
                     <div style={{display:"flex",gap:4,alignItems:"center"}}>
                       <select value={char.concentrating||""} onChange={e=>setF("concentrating",e.target.value)}
@@ -29659,10 +29661,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                         style={{flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",width:28,height:28,borderRadius:7,border:"1px solid rgba(var(--accent-rgb),0.25)",background:"rgba(var(--accent-rgb),0.1)",cursor:"pointer",padding:3}}
                         onClick={()=>{
                           const r1=Math.floor(Math.random()*20)+1;
-                          const r2=hasWarCaster?Math.floor(Math.random()*20)+1:null;
-                          const roll=hasWarCaster?Math.max(r1,r2):r1;
+                          const r2=hasConcAdv?Math.floor(Math.random()*20)+1:null;
+                          const roll=hasConcAdv?Math.max(r1,r2):r1;
                           const total=roll+conSave;
-                          setSkillRoll({label:"Concentration — CON Save (DC 10)",roll,bonus:conSave,total,isCrit:roll===20,isFail:r1===1,sides:20,r1,r2,isAdv:hasWarCaster,isDis:false});
+                          setSkillRoll({label:"Concentration — CON Save (DC 10)",roll,bonus:conSave,total,isCrit:roll===20,isFail:r1===1,sides:20,r1,r2,isAdv:hasConcAdv,isDis:false});
                           if(total<10) setF("concentrating","");
                         }}><DieSVG sides={20} roll={null} size={20} color="var(--accent)"/></button>
                     </div>
