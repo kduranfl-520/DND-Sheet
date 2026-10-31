@@ -2592,7 +2592,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3009";
+const SHEET_VERSION = "v3010";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5491,8 +5491,9 @@ function App() {
    }
  }
  const eaBonus=elementalAffinityBonus(sd);
+ const rsBonus=radiantSoulBonus(sd);
  const modBonusBase0=(sd.cantripMod?(spellMod||0):potentCantripBonus(sd))+discipleOfLifeBonus(sd,sl);
- const modBonusBase=modBonusBase0+eaBonus+ebAgBonus;
+ const modBonusBase=modBonusBase0+eaBonus+rsBonus+ebAgBonus;
  const wfSpiritActive = char.charClass==="Druid" && char.druidCircle==="Circle of Wildfire (Druid)" && char.druidWildfireSpiritActive;
  const enhancedBondEligible = wfSpiritActive && (sd.dmgType==="fire" || sd.atkType==="heal");
  const enhancedBondRoll = enhancedBondEligible ? Math.floor(Math.random()*8)+1 : 0;
@@ -5501,6 +5502,7 @@ function App() {
  const bonusLabels=[];
  if(modBonusBase0) bonusLabels.push(modBonusBase0+(sd.cantripMod?" (mod)":discipleOfLifeBonus(sd,sl)?" (Disciple of Life)":" (Potent Spellcasting)"));
  if(eaBonus) bonusLabels.push(eaBonus+" (Elemental Affinity)");
+ if(rsBonus) bonusLabels.push(rsBonus+" (Radiant Soul)");
  if(ebAgBonus) bonusLabels.push(ebAgBonus+" (Agonizing Blast: CHA "+(abilityMod(eff.CHA||10)>=0?"+":"")+abilityMod(eff.CHA||10)+" x "+ebBeams+(ebBeams>1?" beams":" beam")+")");
  if(enhancedBondRoll) bonusLabels.push("+"+enhancedBondRoll+" (Enhanced Bond)");
  const breakdown=bonusLabels.length?r.breakdown+" + "+bonusLabels.join(" + "):r.breakdown;
@@ -6579,12 +6581,18 @@ function App() {
    if(!dt||!sd||!sd.dmg||sd.atkType==="heal") return 0;
    return String(sd.dmgType||"").toLowerCase().includes(dt)?Math.max(0,abilityMod(eff.CHA||10)):0;
  };
+ const radiantSoulBonus = (sd) => {
+   if(!(char.charClass==="Warlock"&&char.warPatron==="The Celestial (Warlock)"&&(char.level||1)>=6)) return 0;
+   if(!sd||!sd.dmg||sd.atkType==="heal") return 0;
+   const t=String(sd.dmgType||"").toLowerCase();
+   return (t.includes("fire")||t.includes("radiant"))?Math.max(0,abilityMod(eff.CHA||10)):0;
+ };
  const warLifedrinker = (item,mx) => { if(!(item&&typeof item==="object"&&item.pact&&char.charClass==="Warlock"&&(char.level||1)>=12&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Lifedrinker"))) return mx; const v=Math.max(1,abilityMod(eff.CHA||10)); return {rolls:[...mx.rolls,v],total:mx.total+v,types:[...mx.types,"necrotic"],labels:[...mx.labels,"Lifedrinker"]}; };
  const warRepelNote = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Repelling Blast")) ? <span style={{display:"block",marginTop:4,color:"var(--green)",fontWeight:600}}>Repelling Blast: when you hit a creature with eldritch blast, you can push it up to 10 feet away from you in a straight line.</span> : null;
  const warSpearOn = (sd) => !!(sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Eldritch Spear"));
  const warSpearNote = (sd) => warSpearOn(sd) ? <span style={{color:"var(--green)",fontWeight:700,marginLeft:6}}>→ 300 ft <span style={{fontSize:10,opacity:.8}}>(Eldritch Spear)</span></span> : null;
  const ebAgDisplay = (sd) => (sd&&sd.ebBlast&&char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Agonizing Blast")) ? ((char.level||1)>=17?4:(char.level||1)>=11?3:(char.level||1)>=5?2:1)*abilityMod(eff.CHA||10) : 0;
- const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd) + ebAgDisplay(sd);
+ const cantripDisplayBonus = (sd) => (sd&&sd.cantripMod ? (spellMod||0) : potentCantripBonus(sd)) + elementalAffinityBonus(sd) + radiantSoulBonus(sd) + ebAgDisplay(sd);
  // Disciple of Life (Cleric: Life domain) — 1st-level-or-higher healing spells restore +2+slot level extra HP
  const discipleOfLifeBonus = (sd, slotLvl) => (char.charClass==="Cleric" && char.divineDomain==="Life Domain (Cleric)" && sd && sd.atkType==="heal" && slotLvl>=1) ? (2+slotLvl) : 0;
  // Blessed Healer (Cleric: Life domain, 6th level) — casting a 1st-level-or-higher healing spell on another creature also heals you for 2+slot level
