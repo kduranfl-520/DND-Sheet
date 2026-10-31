@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 28, 2026";
-const SHEET_VERSION = "v3002";
+const SHEET_VERSION = "v3003";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6075,6 +6075,7 @@ function App() {
         {i.use&&(
           <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
             <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}{WAR_INV_SLOT.includes(nm)?" (spends a slot)":""}</span>
+            {WAR_INV_SLOT.includes(nm)&&(()=>{const sl0=(slots||[]).reduce((m,v,k)=>v>0?k:m,-1);const tot=sl0>=0?(slots[sl0]||0):0;const left=sl0>=0?Math.max(0,tot-((Array.isArray(char.spellSlotsUsed)?char.spellSlotsUsed:[])[sl0]||0)):0;return <span style={{fontSize:10,fontWeight:800,padding:"2px 7px",borderRadius:5,background:left>0?"rgba(34,197,94,0.1)":"rgba(239,68,68,0.1)",border:"1px solid "+(left>0?"rgba(34,197,94,0.3)":"rgba(239,68,68,0.3)"),color:left>0?"var(--green)":"var(--red)"}}>{sl0>=0?"Slots: "+left+"/"+tot+" (lvl "+(sl0+1)+")":"No slots"}</span>;})()}
             {(()=>{
               const needSlot=WAR_INV_SLOT.includes(nm);
               const sl=(slots||[]).reduce((m,v,k)=>v>0?k:m,-1);
