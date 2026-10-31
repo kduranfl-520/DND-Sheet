@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3046";
+const SHEET_VERSION = "v3047";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6189,7 +6189,10 @@ function App() {
           const names=Array.isArray(char.warFarScribeNames)?char.warFarScribeNames:[];
           return(
             <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}} onClick={e=>e.stopPropagation()}>
-              <span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>Names on the page ({names.filter(x=>x&&x.trim()).length}/{pb})</span>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
+                <span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>Names on the page ({names.filter(x=>x&&x.trim()).length}/{pb})</span>
+                <DurationBadge id="war-farscribe-duration" short="1 min" full="The writing disappears after 1 minute." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>
+              </div>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:4}}>
                 {Array.from({length:pb},(_,k)=>(
                   <input key={k} type="text" value={names[k]||""} placeholder={"Name "+(k+1)} onChange={e=>{const v=e.target.value;setCharSaving(p=>{const arr=Array.isArray(p.warFarScribeNames)?[...p.warFarScribeNames]:[];while(arr.length<=k)arr.push("");arr[k]=v;return {...p,warFarScribeNames:arr};});}}
