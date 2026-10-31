@@ -2593,7 +2593,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3022";
+const SHEET_VERSION = "v3023";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6693,7 +6693,9 @@ function App() {
   const umbralSightDV=(char.charClass==="Ranger"&&char.rangerArchetype==="Gloom Stalker (Ranger)"&&eonLvl>=3)?(racialDV>0?racialDV+30:60):0;
   const shadowDV=(char.charClass==="Sorcerer"&&char.sorcOrigin==="Shadow Magic (Sorcerer)")?120:0;
   const devilsSightDV=(char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Devil's Sight"))?120:0;
-  const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV,shadowDV,devilsSightDV);
+  const ghostTaken=char.charClass==="Warlock"&&(Array.isArray(char.warInv)?char.warInv:[]).includes("Ghostly Gaze");
+  const ghostlyDV=(ghostTaken&&char.warInvUsed&&char.warInvUsed["Ghostly Gaze"])?30:0;
+  const darkvisionRange=Math.max(racialDV,eyesOfNightDV,stoneRuneDV,umbralSightDV,shadowDV,devilsSightDV,ghostlyDV);
   const details=[];
   if(racialDV>0) details.push(racialDV+"ft Racial darkvision");
   if(eyesOfNightDV>0) details.push("300ft Eyes of Night");
@@ -6701,6 +6703,7 @@ function App() {
   if(umbralSightDV>0) details.push(umbralSightDV+"ft Umbral Sight");
   if(shadowDV>0) details.push(shadowDV+"ft Eyes of the Dark");
   if(devilsSightDV>0) details.push(devilsSightDV+"ft Devil's Sight (magical darkness too)");
+  if(ghostlyDV>0) details.push("30ft Ghostly Gaze (active until end of your next turn — see through solid objects"+(racialDV>0||devilsSightDV>0||eyesOfNightDV>0||stoneRuneDV>0||umbralSightDV>0||shadowDV>0?"; darkvision only if you don't already have it":"")+")");
   return {range:darkvisionRange,details};
  })();
  const passPerc = 10 + skBonus({name:"Perception",ability:"WIS"});
