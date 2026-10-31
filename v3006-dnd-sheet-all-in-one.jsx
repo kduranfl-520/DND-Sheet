@@ -2591,7 +2591,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3005";
+const SHEET_VERSION = "v3006";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6072,6 +6072,39 @@ function App() {
         </div>
         <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{i.d}</div>
         {!ok&&<div className="mc-warn" style={{marginTop:4}}>⚠ Needs {warInvFailed(i).join(" & ")} to take {i.n}</div>}
+        {(nm==="Thirsting Blade"||nm==="Lifedrinker")&&ok&&(()=>{
+          const pw=(Array.isArray(char.weaponItems)?char.weaponItems:[]).find(w=>typeof w==="object"&&w&&w.pact&&w.name);
+          const sel=char.warPactSel&&pw&&char.warPactSel===pw.name?char.warPactSel:"";
+          const we=pw?libEntries.find(e=>e.title===pw.name&&e.category==="Weapon"):null;
+          const dmgTxt=(pw&&pw.damage)||(we&&we.notes?(we.notes.match(/Dmg: ([^.]+)/)||[])[1]:"")||"";
+          const dm=dmgTxt.match(/(\d+)d(\d+)/); const dType=(dmgTxt.replace(/(\d+)d(\d+)\s*/,"").trim())||"";
+          const fin=pw&&(pw.abilityMod==="DEX/STR"||(we&&(we.tags||"").toLowerCase().includes("finesse")));
+          const mod=abilityMod(Math.max(eff.STR||10,fin?(eff.DEX||10):0));
+          const magicB=pw&&pw.bonded?(Number(pw.magicBonus)||0):0;
+          const atk=mod+pb+magicB;
+          const doAtk=(k)=>{
+            const c=charRef.current; const d20=Math.floor(Math.random()*20)+1; const isCrit=d20>=critThreshold(c);
+            const n=dm?parseInt(dm[1]):1, sides=dm?parseInt(dm[2]):6;
+            const rolls=Array.from({length:isCrit?n*2:n},()=>Math.floor(Math.random()*sides)+1);
+            const dmgBonus=mod+magicB; const dmgTotal=rolls.reduce((a,b)=>a+b,0)+dmgBonus;
+            const mx=warLifedrinker(pw,{rolls:[],total:0,types:[],labels:[]});
+            setSkillRoll({label:pw.name+(nm==="Thirsting Blade"?" — attack "+k+" of 2":"")+(isCrit?" 💥":""),isWeaponRoll:true,hitRoll:d20,atkBonus:atk,hitTotal:d20+atk,isCrit,isFail:d20===1,
+              dmgRolls:rolls,dmgBonus,dmgTotal,dmgDice:dm?dm[0]:"",dmgType:dType,
+              ...(mx.rolls.length?{bonusDmg:mx.total,bonusDmgRolls:mx.rolls,bonusDmgType:mx.types.join(" + "),bonusDmgLabel:mx.labels.join(" + ")}:{}),
+              sides:20,roll:d20,bonus:atk,total:d20+atk,r1:d20,r2:null,isAdv:false,isDis:false,allDmgRolls:rolls,diceSides:sides,baseDiceCount:n,brutalDice:0,isMelee:true});
+          };
+          return(
+            <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6}} onClick={e=>e.stopPropagation()}>
+              <select className="ri-sel" value={sel} disabled={!pw} onChange={e=>setF("warPactSel",e.target.value)} style={{flex:1,minWidth:140,color:sel?"var(--accent)":"var(--subtle)"}}>
+                <option value="">{pw?"-- Choose your pact weapon --":"-- Summon your pact weapon first --"}</option>
+                {pw&&<option value={pw.name}>{pw.name}</option>}
+              </select>
+              {sel&&(nm==="Thirsting Blade"?[1,2]:[1]).map(k=>(
+                <button key={k} style={warBtn} onClick={()=>doAtk(k)}>🎲 {nm==="Thirsting Blade"?"Attack "+k:"Attack"} {atk>=0?"+":""}{atk}</button>
+              ))}
+            </div>
+          );
+        })()}
         {i.use&&(
           <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
             <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — "+(i.use==="sr"?"short or long rest":"long rest"):"Ready — 1 use per "+(i.use==="sr"?"short or long rest":"long rest")}{WAR_INV_SLOT.includes(nm)?" (spends a slot)":""}</span>
