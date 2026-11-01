@@ -2616,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3059";
+const SHEET_VERSION = "v3060";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22539,7 +22539,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               spellsFC(null,warGenieSpells(gk),warLvl>=17?9:slotLvlW),
                                               <FC key="gv" label="Genie's Vessel (1st)" minLvl={1}>
-                                                <Body>Your patron gives you a Tiny vessel that works as a spellcasting focus for your warlock spells.</Body>
+                                                <Body>Your patron gives you a Tiny vessel that works as a spellcasting focus for your warlock spells. Its AC equals your spell save DC and its hit points equal your warlock level plus your proficiency bonus. It is immune to poison and psychic damage, and it vanishes if you die. If you lose it, a 1-hour ceremony during a rest gets you a new one.</Body>
                                                 <div style={{display:"flex",gap:6,alignItems:"center",marginTop:6}}>
                                                   <select className="ri-sel" value={char.warGenieVessel||""} onClick={e=>e.stopPropagation()} onChange={e=>setF("warGenieVessel",e.target.value)}
                                                     style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:char.warGenieVessel?"var(--accent)":"var(--subtle)",flex:1}}>
