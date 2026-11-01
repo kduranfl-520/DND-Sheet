@@ -2616,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3061";
+const SHEET_VERSION = "v3062";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22549,7 +22549,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                   <button style={neutralBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*6)+1;setF("warGenieVessel",GENIE_VESSELS[d-1]);}}>🎲 d6</button>
                                                 </div>
                                                 <div style={{display:"flex",gap:10,fontSize:11,fontWeight:700,color:"var(--muted)",marginTop:6}}><span>Vessel AC {dcW}</span><span>HP {lvl+pb}</span></div>
-                                                <div style={{fontSize:12,fontWeight:700,color:"var(--text)",marginTop:8}}>Bottled Respite</div>
+                                              </FC>,
+                                              <FC key="br" label="Bottled Respite (1st) — Genie's Vessel" minLvl={1}>
                                                 <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-bottle-duration" short={(pb*2)+" hr"} full={"You can stay inside for up to "+(pb*2)+" hours."} total={pb*2} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>As an action, you vanish into the vessel, a 20-foot-radius, 20-foot-high space. You can stay inside for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   <span style={{fontSize:11,color:inVessel?"#06b6d4":char.warBottleUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{inVessel?"Inside the vessel":char.warBottleUsed?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
@@ -22557,7 +22558,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                     :!char.warBottleUsed?<button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warBottleUsed:true,warBottleIn:true}));}}>Enter vessel</button>
                                                     :<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("warBottleUsed",false);}}>↺ Reset</button>}
                                                 </div>
-                                                <div style={{fontSize:12,fontWeight:700,color:"var(--text)",marginTop:8}}>Genie's Wrath</div>
+                                              </FC>,
+                                              <FC key="gw" label="Genie's Wrath (1st)" minLvl={1}>
                                                 <Body>Once per turn, when you hit with an attack roll, you can deal extra damage equal to your proficiency bonus. The type depends on your genie: bludgeoning (Dao), thunder (Djinni), fire (Efreeti) or cold (Marid).</Body>
                                                 {gInfo?flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();setSkillRoll({label:"Genie's Wrath — "+pb+" "+gDmg,roll:pb,bonus:0,total:pb,isCrit:false,isFail:false,sides:pb,isSpellDmg:true,dmgTotal:pb,allDmgRolls:[],dmgRolls:[],dmgBonus:pb,dmgType:gDmg});}}>+{pb} {gDmg}</button>):flexEnd(<span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Choose your genie kind above</span>)}
                                               </FC>,
