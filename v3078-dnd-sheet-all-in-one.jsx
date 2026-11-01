@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3077";
+const SHEET_VERSION = "v3078";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22909,6 +22909,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               <FC key="atd" label="Among the Dead (1st)" minLvl={1}>
                                                 <Body>You learn the Spare the Dying cantrip, which counts as a warlock cantrip for you. You also have advantage on saving throws against disease. In addition, if an undead targets you directly with an attack or a harmful spell, that creature must make a Wisdom saving throw against your spell save DC (it needn't save against area effects such as Fireball). On a failed save, it must choose a new target or forfeit the attack or spell. On a successful save, it is immune to this effect for 24 hours. An undead you target with an attack or harmful spell is also immune to this effect for 24 hours.</Body>
                                                 {saveRow("warUndeadWard","WIS",dcW,"The undead is immune to this effect for 24 hours.","The undead must choose a new target or forfeit the attack or spell.","Undead WIS save DC "+dcW)}
+                                                {SPELL_DATA["Spare the Dying"]&&<div style={{marginTop:6}}><SpellSaveBox name="Spare the Dying" sd={SPELL_DATA["Spare the Dying"]} dc={dcW} saveKey="warUndyingSpare" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                               </FC>,
                                               <FC key="dd" label="Defy Death (6th)" minLvl={6}>
                                                 <Body>When you succeed on a death saving throw or you stabilize a creature with Spare the Dying, you regain hit points equal to 1d8 + your Constitution modifier (minimum of 1). Once you use this feature, you can't use it again until you finish a long rest.</Body>
