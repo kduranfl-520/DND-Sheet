@@ -2441,10 +2441,10 @@ const WAR_PATRON_SPELLS={
 };
 const WAR_SLOT_MINLVL={1:1,2:3,3:5,4:7,5:9,9:17};
 const GENIE_KINDS={
- Dao:{dmg:"bludgeoning",sp:{1:"Sanctuary",2:"Spike Growth",3:"Meld into Stone",4:"Stone Shape",5:"Wall of Stone"}},
- Djinni:{dmg:"thunder",sp:{1:"Thunderwave",2:"Gust of Wind",3:"Wind Wall",4:"Greater Invisibility",5:"Seeming"}},
- Efreeti:{dmg:"fire",sp:{1:"Burning Hands",2:"Scorching Ray",3:"Fireball",4:"Fire Shield",5:"Flame Strike"}},
- Marid:{dmg:"cold",sp:{1:"Fog Cloud",2:"Blur",3:"Sleet Storm",4:"Control Water",5:"Cone of Cold"}}
+ Dao:{el:"Earth",dmg:"bludgeoning",sp:{1:"Sanctuary",2:"Spike Growth",3:"Meld into Stone",4:"Stone Shape",5:"Wall of Stone"}},
+ Djinni:{el:"Air",dmg:"thunder",sp:{1:"Thunderwave",2:"Gust of Wind",3:"Wind Wall",4:"Greater Invisibility",5:"Seeming"}},
+ Efreeti:{el:"Fire",dmg:"fire",sp:{1:"Burning Hands",2:"Scorching Ray",3:"Fireball",4:"Fire Shield",5:"Flame Strike"}},
+ Marid:{el:"Water",dmg:"cold",sp:{1:"Fog Cloud",2:"Blur",3:"Sleet Storm",4:"Control Water",5:"Cone of Cold"}}
 };
 const warGenieSpells=(kind)=>{
  const base={1:["Detect Evil and Good"],2:["Phantasmal Force"],3:["Create Food and Water"],4:["Phantasmal Killer"],5:["Creation"],9:["Wish"]};
@@ -2615,7 +2615,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3055";
+const SHEET_VERSION = "v3056";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22533,7 +22533,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <select className="ri-sel" value={gk} onClick={e=>e.stopPropagation()} onChange={e=>setF("warGenieKind",e.target.value)}
                                                   style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:gk?"var(--accent)":"var(--subtle)",width:"100%"}}>
                                                   <option value="">-- Choose the kind of genie --</option>
-                                                  {Object.keys(GENIE_KINDS).map(k=><option key={k} value={k}>{k} ({GENIE_KINDS[k].dmg})</option>)}
+                                                  {Object.keys(GENIE_KINDS).map(k=><option key={k} value={k}>{k} ({GENIE_KINDS[k].el})</option>)}
                                                 </select>
                                               </FC>,
                                               spellsFC(null,warGenieSpells(gk),warLvl>=17?9:slotLvlW),
