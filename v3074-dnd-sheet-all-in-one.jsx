@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3073";
+const SHEET_VERSION = "v3074";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4841,6 +4841,15 @@ const luSubOptions=(cls,libEntries,char)=>{
 };
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
 const LU_FEAT_AB={"Actor":"CHA","Heavily Armored":"STR","Heavy Armor Master":"STR","Keen Mind":"INT","Linguist":"INT","Durable":"CON"};
+const RGR_RACE_LANG={Aarakocra:"Aarakocra",Bugbear:"Goblin",Bullywug:"Bullywug",Dragonborn:"Draconic",Dwarf:"Dwarvish",Elf:"Elvish",Githyanki:"Gith",Githzerai:"Gith",Gnoll:"Gnoll",Gnome:"Gnomish",Goblin:"Goblin",Grimlock:"Undercommon","Half-Elf":"Elvish","Half-Orc":"Orc",Halfling:"Halfling",Hobgoblin:"Goblin",Human:"",Kenku:"",Kobold:"Draconic","Kuo-toa":"Undercommon",Lizardfolk:"Draconic",Locathah:"Primordial",Merfolk:"Primordial",Orc:"Orc",Sahuagin:"Sahuagin",Tiefling:"Infernal",Troglodyte:"Draconic","Yuan-ti Pureblood":""};
+const RGR_TYPE_LANG={Aberrations:"Deep Speech",Celestials:"Celestial",Dragons:"Draconic",Elementals:"Primordial",Fey:"Sylvan",Giants:"Giant"};
+const RGR_ENEMY_TYPES=["Aberrations","Beasts","Celestials","Constructs","Dragons","Elementals","Fey","Fiends","Giants","Monstrosities","Oozes","Plants","Undead"];
+const RGR_HUM="Two humanoid races";
+const RGR_TERRAINS=["Arctic","Coast","Desert","Forest","Grassland","Mountain","Swamp","Underdark"];
+const RGR_BM_ALLOWED=["Baboon","Badger","Bat","Blood Hawk","Boar","Cat","Crab","Deer","Eagle","Flying Snake","Frog","Giant Badger","Giant Centipede","Giant Crab","Giant Frog","Giant Poisonous Snake","Giant Rat","Giant Weasel","Goat","Hawk","Hyena","Jackal","Lizard","Mastiff","Mule","Octopus","Owl","Panther","Poisonous Snake","Pony","Pteranodon","Quipper","Rat","Raven","Sea Horse","Spider","Stirge","Velociraptor","Vulture","Weasel","Wolf"];
+const FE_DISC_PICK=[["Breath of Winter",17,6],["Clench of the North Wind",6,3],["Eternal Mountain Defense",17,5],["Fangs of the Fire Snake",3,1],["Fist of Four Thunders",3,2],["Fist of Unbroken Air",3,2],["Flames of the Phoenix",11,4],["Gong of the Summit",6,3],["Mist Stance",11,4],["Ride the Wind",11,4],["River of Hungry Flame",17,5],["Rush of the Gale Spirits",6,2],["Shape the Flowing River",6,1],["Sweeping Cinder Strike",6,2],["Water Whip",6,2],["Wave of Rolling Earth",17,6]];
+const KENSEI_MELEE=["Battleaxe","Glaive","Greatsword","Halberd","Longsword","War Pick"];
+const KENSEI_RANGED=["Hand Crossbow","Heavy Crossbow","Longbow","Net","Shortbow"];
 const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSpells,slots,skillProfs,sorcMetaNames}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
@@ -4967,6 +4976,73 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
       sec.lore={title:"Lore skill",slots:3,opts:all.filter(x=>!(skillProfs||[]).includes(x)).map(x=>({v:x,l:x})),fields:["bardLoreSkill1","bardLoreSkill2","bardLoreSkill3"]};
     }
   }
+  if(cls===char.charClass){
+    const subV=(subField&&char[subField])||subPick||"";
+    const ordS=n=>n+(n===1?"st":n===6||n===10||n===14||n===18?"th":"th");
+    const pickedElse=(prefix,self)=>Object.keys(sec).filter(k=>k.startsWith(prefix)&&k!==self).flatMap(k=>pk[k]||[]);
+    if(cls==="Ranger"){
+      const en=Array.isArray(char.rangerEnemies)?char.rangerEnemies:[];
+      const tryEn=[1,6,14].map((L,i)=>[L,i]).filter(([L,i])=>lvlN>=L&&!(en[i]&&en[i].type));
+      tryEn.forEach(([L,i])=>{
+        const takenT=[...en.filter((x,j)=>j!==i&&x&&x.type).map(x=>x.type),...tryEn.filter(([l2])=>l2!==L).map(([l2])=>(pk["en"+l2]||[])[0]).filter(Boolean)];
+        sec["en"+L]={title:"Favored enemy ("+ordS(L)+" level)",slots:1,fields:["rangerEnemies."+i+".type"],opts:[...RGR_ENEMY_TYPES.filter(t=>!takenT.includes(t)).map(t=>({v:t,l:t})),{v:RGR_HUM,l:RGR_HUM}],note:"Their language is added for you when they speak one you don't know."};
+        if(((pk["en"+L]||[])[0])===RGR_HUM){
+          const takenR=[...en.flatMap(x=>x?[x.race1,x.race2]:[]),...tryEn.filter(([l2])=>l2!==L).flatMap(([l2])=>pk["enr"+l2]||[])].filter(Boolean);
+          sec["enr"+L]={title:"Humanoid race",slots:2,fields:["rangerEnemies."+i+".race1","rangerEnemies."+i+".race2"],opts:Object.keys(RGR_RACE_LANG).filter(x=>!takenR.includes(x)).map(x=>({v:x,l:x}))};
+        }
+      });
+      const tr=Array.isArray(char.rangerTerrains)?char.rangerTerrains:[];
+      const tryT=[1,6,10].map((L,i)=>[L,i]).filter(([L,i])=>lvlN>=L&&!tr[i]);
+      tryT.forEach(([L,i])=>{
+        const takenT=[...tr.filter((x,j)=>j!==i&&x),...tryT.filter(([l2])=>l2!==L).map(([l2])=>(pk["ter"+l2]||[])[0]).filter(Boolean)];
+        sec["ter"+L]={title:"Favored terrain ("+ordS(L)+" level)",slots:1,fields:["rangerTerrains."+i],opts:RGR_TERRAINS.filter(t=>!takenT.includes(t)).map(t=>({v:t,l:t}))};
+      });
+      if(!char.rangerNEAbility) sec.neab={title:"Natural Explorer check (WIS or INT)",slots:1,fields:["rangerNEAbility"],opts:[{v:"WIS",l:"Wisdom (WIS)"},{v:"INT",l:"Intelligence (INT)"}]};
+      if(lvlN>=6&&!char.rangerNESkill){
+        const ab=char.rangerNEAbility||(pk.neab||[])[0];
+        if(ab) sec.nesk={title:"Natural Explorer skill",slots:1,fields:["rangerNESkill"],opts:(SKILLS_BY_ABILITY[ab]||[]).map(x=>({v:x.name,l:x.name+((skillProfs||[]).includes(x.name)?" ✓":"")}))};
+      }
+      if(subV==="Beast Master (Ranger)"&&lvlN>=3&&!char.rangerCompanionBeast) sec.beast={title:"Beast companion",slots:1,fields:["rangerCompanionBeast"],opts:RGR_BM_ALLOWED.filter(n=>COMPANION_DATA[n]).sort().map(n=>({v:n,l:n})),note:"Press Bond on the Ranger's Companion card to add it to the Companions tab."};
+    }
+    if(cls==="Barbarian"){
+      const skl=(CLASSES.Barbarian&&CLASSES.Barbarian.skillChoices)||[];
+      const mk=(k,field,other,pkOther,title)=>{ if(char[field]) return; const ot=char[other]||(pk[pkOther]||[])[0]; sec[k]={title,slots:1,fields:[field],opts:skl.filter(x=>x!==ot).map(x=>({v:x,l:x+((skillProfs||[]).includes(x)?" (already proficient)":"")}))}; };
+      if(lvlN>=3) mk("pkn1","primalKnowledgeSkill1","primalKnowledgeSkill2","pkn2","Primal Knowledge skill (3rd, TCE)");
+      if(lvlN>=10) mk("pkn2","primalKnowledgeSkill2","primalKnowledgeSkill1","pkn1","Primal Knowledge skill (10th, TCE)");
+    }
+    if(cls==="Bard"){
+      const slotLv=[0,1,1,2,2,3,3,4,4,5,5,5,6,6,7,7,8,8,9,9,9];
+      const maxL=slotLv[Math.min(lvlN,20)]||1;
+      const keysAll=["bardMS1","bardMS2","bardMS14a","bardMS14b","bardMS18a","bardMS18b","bardEMSa","bardEMSb"];
+      const groups=[["ms10",10,["bardMS1","bardMS2"],"Magical Secrets (10th)"],["ms14",14,["bardMS14a","bardMS14b"],"Magical Secrets (14th)"],["ms18",18,["bardMS18a","bardMS18b"],"Magical Secrets (18th)"]];
+      if(subV==="College of Lore (Bard)") groups.unshift(["ems",6,["bardEMSa","bardEMSb"],"Extra Magical Secrets (6th)"]);
+      groups.forEach(([k,L,fl,title])=>{
+        if(lvlN<L) return;
+        const empty=fl.filter(f=>!char[f]);
+        if(!empty.length) return;
+        const taken=new Set([...(char.spellsKnown||[]),...keysAll.map(x=>char[x]),...cPicks,...sPicks].filter(Boolean));
+        const others=groups.filter(g=>g[0]!==k).flatMap(g=>pk[g[0]]||[]);
+        const pool=Object.entries(SPELL_DATA).filter(([n,sd])=>{ const sl=typeof sd.level==="number"?sd.level:parseInt(sd.level)||0; return sl<=maxL&&!taken.has(n)&&!others.includes(n); }).map(([n])=>n).sort();
+        sec[k]={title,slots:empty.length,fields:empty,opts:pool.map(n=>({v:n,l:n})),note:"Learned from any class's list; they don't count against Spells Known."};
+      });
+    }
+    if(cls==="Monk"){
+      if(subV==="Way of the Four Elements (Monk)"&&lvlN>=3){
+        const kn=Array.isArray(char.monkFourElementsDisciplines)?char.monkFourElementsDisciplines:[];
+        const cnt=lvlN>=17?4:lvlN>=11?3:lvlN>=6?2:1;
+        const emptyIdx=[...Array(cnt).keys()].filter(i=>!kn[i]);
+        if(emptyIdx.length){
+          const taken=new Set(kn.filter(Boolean));
+          sec.disc={title:"Elemental discipline",slots:emptyIdx.length,fields:emptyIdx.map(i=>"monkFourElementsDisciplines."+i),opts:FE_DISC_PICK.filter(d=>d[1]<=lvlN&&!taken.has(d[0])).map(d=>({v:d[0],l:d[0]+" ("+d[2]+" ki)"}))};
+        }
+      }
+      if(subV==="Way of the Kensei (Monk)"&&lvlN>=3){
+        const kw=char.monkKenseiWeapons||[];
+        if(!kw[0]) sec.kenM={title:"Kensei melee weapon",slots:1,fields:["monkKenseiWeapons.0"],opts:KENSEI_MELEE.map(w=>({v:w,l:w}))};
+        if(!kw[1]) sec.kenR={title:"Kensei ranged weapon",slots:1,fields:["monkKenseiWeapons.1"],opts:KENSEI_RANGED.map(w=>({v:w,l:w}))};
+      }
+    }
+  }
   Object.keys(sec).forEach(k=>{ items.push({k:"pk_"+k,t:"Choose "+(sec[k].slots>1?sec[k].slots+" "+(({inv:"Eldritch Invocations",exp:"Expertise skills",meta:"Metamagic options",man:"Maneuvers"})[k]||sec[k].title):sec[k].title),tab:"features",sec:k}); });
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
@@ -5039,6 +5115,7 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
                     );
                   })}
                   {it.sec==="inv"&&<div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ Invocations marked ! have prerequisites you don't meet yet.</div>}
+                  {sec[it.sec].note&&<div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ {sec[it.sec].note}</div>}
                 </div>
               )}
               {it.k==="spl"&&spellsPick&&(
@@ -5942,7 +6019,17 @@ function App() {
    if(g("exp").length) { const key=pk._cls==="Rogue"?"rogueExpertise":"bardExpertise"; u[key]=[...(p[key]||[]),...g("exp")]; }
    if(g("meta").length){ const a=Array.from({length:4},(_,k)=>(Array.isArray(p.sorcMeta)?p.sorcMeta:[])[k]||""); g("meta").forEach(m=>{const i=a.findIndex(x=>!x); if(i>=0) a[i]=m;}); u.sorcMeta=a; }
    if(g("man").length) u.battleMasterManeuvers=[...(p.battleMasterManeuvers||[]),...g("man")];
-   if(pk._fields) Object.keys(pk._fields).forEach(k=>{ (pk[k]||[]).forEach((v,i)=>{ const fld=pk._fields[k][i]; if(v&&fld) u[fld]=v; }); });
+   if(pk._fields){
+     const setPath=(fld,v)=>{ const parts=fld.split("."); if(parts.length===1){ u[fld]=v; return; } const base=parts[0]; const arr=Array.isArray(u[base])?[...u[base]]:Array.isArray(p[base])?[...p[base]]:[]; const idx=+parts[1]; if(parts.length===2) arr[idx]=v; else arr[idx]={...(arr[idx]||{}),[parts[2]]:v}; u[base]=arr; };
+     Object.keys(pk._fields).forEach(k=>{ (pk[k]||[]).forEach((v,i)=>{ const fld=pk._fields[k][i]; if(v&&fld) setPath(fld,v); }); });
+     if(Array.isArray(u.rangerEnemies)){
+       const st={...p,...u};
+       const base=[...(st.languages||[]),...(RACE_LANGUAGES[st.species]||[]),...(st.bgLangChoices||[]),...(st.linguistLangs||[]),...(st.clericKnowledgeLangs||[])].filter(Boolean);
+       const arr=u.rangerEnemies.slice();
+       arr.forEach((e,i)=>{ if(!e||!e.type||e.lang) return; const blocked=[...base,...arr.filter((x,j)=>j!==i&&x&&x.lang&&x.lang!=="None").map(x=>x.lang)]; const cands=e.type===RGR_HUM?[RGR_RACE_LANG[e.race1],RGR_RACE_LANG[e.race2]]:[RGR_TYPE_LANG[e.type]]; const l=cands.find(x=>x&&!blocked.includes(x))||""; if(l) arr[i]={...e,lang:l,langAuto:true}; });
+       u.rangerEnemies=arr;
+     }
+   }
  }
  if(asi&&asi.key&&asi.value&&!(p.asiChoices&&p.asiChoices[asi.key]&&p.asiChoices[asi.key].choice)) u.asiChoices={...(p.asiChoices||{}),[asi.key]:asi.value};
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
