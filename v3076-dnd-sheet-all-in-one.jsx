@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3075";
+const SHEET_VERSION = "v3076";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22730,7 +22730,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                           const slotLvlW=(()=>{const a=Array.isArray(slots)?slots:[];const li=a.findIndex(x=>x>0);return li<0?0:li+1;})();
                                           const spellsFC=(label,spRows,clOv)=>(<FC key="esl" label={label||"Expanded Spell List (1st)"} minLvl={1}>
                                             <Body>These spells are added to the warlock spell list for you. Each time you learn a warlock spell, you can choose it from this list as well.</Body>
-                                            {sorcSpellRows(spRows||WAR_PATRON_SPELLS[pat]||[],clOv!=null?clOv:slotLvlW)}
+                                            {sorcSpellRows((spRows||WAR_PATRON_SPELLS[pat]||[]).filter(([t])=>t<=(clOv!=null?clOv:slotLvlW)),clOv!=null?clOv:slotLvlW)}
                                           </FC>);
                                           if(pat==="The Archfey (Warlock)"){
                                             return wrapCol(
