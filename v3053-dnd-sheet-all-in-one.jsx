@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3052";
+const SHEET_VERSION = "v3053";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6265,6 +6265,11 @@ function App() {
         {(()=>{const sp=WAR_INV_SPELL[nm]; return sp&&SPELL_DATA[sp]?(
           <div style={{marginTop:6}}><SpellSaveBox name={sp} sd={SPELL_DATA[sp]} dc={8+pb+abilityMod(eff.CHA||10)} saveKey={"warInvSpell_"+nm} tempRoll={sp==="False Life"?{dice:"1d4",bonus:4}:undefined} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>
         ):null;})()}
+        {i.b&&i.b!=="PHB"&&(
+          <div style={{display:"flex",justifyContent:"flex-end",marginTop:6}}>
+            {(()=>{const bc=i.b==="TCE"?"#0891b2":i.b==="XGE"?"#7c3aed":i.b==="SCAG"?"#2563eb":"var(--muted)";return <span style={{fontSize:8,fontWeight:800,letterSpacing:".06em",padding:"1px 5px",borderRadius:4,color:bc,border:"1px solid "+bc,opacity:0.9}}>{i.b}</span>;})()}
+          </div>
+        )}
       </div>
     );
   };
