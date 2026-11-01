@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3068";
+const SHEET_VERSION = "v3069";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4841,7 +4841,7 @@ const luSubOptions=(cls,libEntries,char)=>{
 };
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
 const LU_FEAT_AB={"Actor":"CHA","Heavily Armored":"STR","Heavy Armor Master":"STR","Keen Mind":"INT","Linguist":"INT","Durable":"CON"};
-const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames}) => {
+const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slots}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
   const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
@@ -4856,6 +4856,8 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames}) => {
   const [asiA1,setAsiA1] = useState("");
   const [asiA2,setAsiA2] = useState("");
   const [asiFeat,setAsiFeat] = useState("");
+  const [cPicks,setCPicks] = useState([]);
+  const [sPicks,setSPicks] = useState([]);
   const nc = CLASSES[cls]||null;
   const die = nc?nc.hitDie:8;
   const conBase = (eff&&eff.CON!=null) ? eff.CON : (char.abilities?.CON||10)+(SPECIES[char.species]?.abilityBonus?.CON||0);
@@ -4877,10 +4879,20 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames}) => {
   const subCanPick = subHere && subField && cls===char.charClass && !char[subField];
   const subOpts = subCanPick ? luSubOptions(cls,libEntries,char) : [];
   if(subHere) items.push({k:"sub",t:(subHere&&subField&&cls===char.charClass&&char[subField])?"Subclass: "+char[subField]:"Choose your subclass",tab:"features"});
-  if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:"Review spells known or prepared and your spell slots",tab:"spells"});
+  const scls = CLASSES[cls]||{};
+  const spCan = cls===char.charClass && !!availSpells;
+  const tblDelta = (tbl)=>tbl?Math.max(0,(tbl[Math.min(newClsLvl,20)-1]||0)-(tbl[Math.min(newClsLvl-1,20)-1]||0)):0;
+  const cDelta = spCan ? tblDelta(scls.cantripKnown) : 0;
+  const sDelta = spCan ? tblDelta(scls.spellsKnownTable) : 0;
+  const maxSpl = (()=>{ let m=0; (Array.isArray(slots)?slots:[]).forEach((x,i)=>{ if(x>0) m=i+1; }); return m; })();
+  const knownNow = new Set([...(char.spellsKnown||[]),...cPicks,...sPicks]);
+  const cantOpts = (spCan&&availSpells.cantrips) ? availSpells.cantrips.filter(x=>!knownNow.has(x)) : [];
+  const spellOpts = spCan ? [1,2,3,4,5,6,7,8,9].filter(l=>l<=maxSpl&&Array.isArray(availSpells[l])).map(l=>[l,availSpells[l].filter(x=>!knownNow.has(x))]).filter(g=>g[1].length) : [];
+  const spellsPick = cDelta>0||sDelta>0;
+  if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:spellsPick?"Learn "+[cDelta>0?cDelta+" new cantrip"+(cDelta>1?"s":""):"",sDelta>0?sDelta+" new spell"+(sDelta>1?"s":""):""].filter(Boolean).join(" and "):"Review spells known or prepared and your spell slots",tab:"spells"});
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
-  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null); };
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks].filter(Boolean)); };
   return (
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
@@ -4923,6 +4935,25 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames}) => {
                 {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
                 <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
               </div>
+              {it.k==="spl"&&spellsPick&&(
+                <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
+                  {Array.from({length:cDelta}).map((_,i)=>(
+                    <select key={"c"+i} className="ri-sel" value={cPicks[i]||""} onChange={e=>setCPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:11}}>
+                      <option value="">-- cantrip {i+1} --</option>
+                      {cPicks[i]&&<option value={cPicks[i]}>{cPicks[i]}</option>}
+                      {cantOpts.map(x=><option key={x} value={x}>{x}</option>)}
+                    </select>
+                  ))}
+                  {Array.from({length:sDelta}).map((_,i)=>(
+                    <select key={"s"+i} className="ri-sel" value={sPicks[i]||""} onChange={e=>setSPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:11}}>
+                      <option value="">-- spell {i+1} --</option>
+                      {sPicks[i]&&<option value={sPicks[i]}>{sPicks[i]}</option>}
+                      {spellOpts.map(([l,list])=><optgroup key={l} label={l+(l===1?"st":l===2?"nd":l===3?"rd":"th")+" level"}>{list.map(x=><option key={x} value={x}>{x}</option>)}</optgroup>)}
+                    </select>
+                  ))}
+                  <div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ To swap a spell you already know, use the Spells tab.</div>
+                </div>
+              )}
               {it.k==="asi"&&asiCanPick&&(
                 <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
@@ -5783,7 +5814,7 @@ function App() {
  setLevelUpPending(null);
   }, [levelUpPending]);
 
- const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub,asi) => {
+ const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub,asi,addSpells) => {
  setCharSaving(p => {
  const u = {...p};
  const n = p.lvlUpPending||0;
@@ -5794,6 +5825,7 @@ function App() {
  u.hp = {...p.hp, max:(p.hp?.max||0)+hpGain};
  u.lvlUpPending = Math.max(0,n-1);
  if(sub&&sub.field&&sub.value&&!p[sub.field]) u[sub.field]=sub.value;
+ if(addSpells&&addSpells.length) u.spellsKnown=[...new Set([...(p.spellsKnown||[]),...addSpells])];
  if(asi&&asi.key&&asi.value&&!(p.asiChoices&&p.asiChoices[asi.key]&&p.asiChoices[asi.key].choice)) u.asiChoices={...(p.asiChoices||{}),[asi.key]:asi.value};
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
  if(hasEldritchAdept){ u.eaInvocation=""; u.eaInvocationLevel=0; }
@@ -7862,7 +7894,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
-        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
+        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} availSpells={availSpells} slots={slots} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
