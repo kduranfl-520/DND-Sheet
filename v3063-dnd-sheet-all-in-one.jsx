@@ -2616,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3062";
+const SHEET_VERSION = "v3063";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22571,7 +22571,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 </div>
                                               </FC>,
                                               <FC key="sv" label="Sanctuary Vessel (10th)" minLvl={10}>
-                                                <Body>When you enter your vessel with Bottled Respite, you can bring up to five willing creatures you can see within 30 feet. As a bonus action, you can eject any number of them; everyone is ejected if you leave, die or the vessel is destroyed. A creature inside for at least 10 minutes gains the benefit of a short rest, and anyone spending Hit Dice during that rest adds your proficiency bonus to the hit points each die restores.</Body>
+                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-sanctuary-duration" short="10 min" full="A creature inside for at least 10 minutes gains the benefit of a short rest." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>When you enter your vessel with Bottled Respite, you can bring up to five willing creatures you can see within 30 feet. As a bonus action, you can eject any number of them; everyone is ejected if you leave, die or the vessel is destroyed. A creature inside for at least 10 minutes gains the benefit of a short rest, and anyone spending Hit Dice during that rest adds your proficiency bonus to the hit points each die restores.</Body>
                                                 {note("Each Hit Die spent inside restores an extra "+pb+" hit points.")}
                                               </FC>,
                                               <FC key="lw" label="Limited Wish (14th)" minLvl={14}>
