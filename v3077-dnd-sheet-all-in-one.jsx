@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3076";
+const SHEET_VERSION = "v3077";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6278,7 +6278,7 @@ function App() {
   // Always-known spell list, same look as the Druid "Circle Spells" rows: level label + pills, locked tiers faded
   const sorcSpellRows = (rows,cl,cast)=>(
     <div style={{display:"flex",flexDirection:"column",gap:4,marginTop:6}}>
-      {rows.map(([t,sp])=>{const on=cl>=t;return(
+      {rows.filter(([t])=>cl>=t).map(([t,sp])=>{const on=cl>=t;return(
         <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
           <span style={{fontSize:10,fontWeight:700,color:on?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
           {sp.map(x=>{
@@ -19613,7 +19613,7 @@ function App() {
                                                   </select>
                                                   {terrain&&(
                                                     <div style={{display:"flex",flexDirection:"column",gap:4}}>
-                                                      {[3,5,7,9].map(t=>(
+                                                      {[3,5,7,9].filter(t=>unlockedTiers.includes(t)).map(t=>(
                                                         <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                                                           <span style={{fontSize:10,fontWeight:700,color:unlockedTiers.includes(t)?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
                                                           {spellTiers[t].map(s=>(
@@ -19796,7 +19796,7 @@ function App() {
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Circle Spells (2nd)</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>You learn the Chill Touch cantrip — it doesn't count against your cantrips known. At 3rd, 5th, 7th, and 9th level you gain circle spells, always prepared and not counting against your prepared spells.</div>
                                                   <div style={{display:"flex",flexDirection:"column",gap:4}}>
-                                                    {[[3,["Blindness/Deafness","Gentle Repose"]],[5,["Animate Dead","Gaseous Form"]],[7,["Blight","Confusion"]],[9,["Cloudkill","Contagion"]]].map(([t,sp])=>(
+                                                    {[[3,["Blindness/Deafness","Gentle Repose"]],[5,["Animate Dead","Gaseous Form"]],[7,["Blight","Confusion"]],[9,["Cloudkill","Contagion"]]].filter(([t])=>lvl>=t).map(([t,sp])=>(
                                                       <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                                                         <span style={{fontSize:10,fontWeight:700,color:lvl>=t?"var(--muted)":"var(--subtle)",minWidth:34}}>{spellOrdLbl(t)} lvl</span>
                                                         {sp.map(s=>(
@@ -20184,7 +20184,7 @@ function App() {
                                                   <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>Circle Spells (2nd)</div>
                                                   <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginBottom:6}}>Your bond with your wildfire spirit grants spells, always prepared and not counting against your prepared spells.</div>
                                                   <div style={{display:"flex",flexDirection:"column",gap:4}}>
-                                                    {[[2,["Burning Hands","Cure Wounds"]],[3,["Flaming Sphere","Scorching Ray"]],[5,["Plant Growth","Revivify"]],[7,["Aura of Life","Fire Shield"]],[9,["Flame Strike","Mass Cure Wounds"]]].map(([t,sp])=>(
+                                                    {[[2,["Burning Hands","Cure Wounds"]],[3,["Flaming Sphere","Scorching Ray"]],[5,["Plant Growth","Revivify"]],[7,["Aura of Life","Fire Shield"]],[9,["Flame Strike","Mass Cure Wounds"]]].filter(([t])=>lvl>=t).map(([t,sp])=>(
                                                       <div key={t} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                                                         <span style={{fontSize:10,fontWeight:700,color:lvl>=t?"var(--muted)":"var(--subtle)",minWidth:34}}>{t}{t===2?"nd":t===3?"rd":"th"} lvl</span>
                                                         {sp.map(s=>(
@@ -20873,7 +20873,7 @@ function App() {
                                               <FC label="Fey Wanderer Magic (3rd)" minLvl={3}>
                                                 <Body>You learn extra spells at certain ranger levels. They count as ranger spells for you but don't count against the number of ranger spells you know. You also have a fey blessing: choose a Feywild Gift or roll for one.</Body>
                                                 <div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:6}}>
-                                                  {FEY_WANDERER_SPELLS.filter(x=>x.spell!=="Summon Fey").map(x=>(
+                                                  {FEY_WANDERER_SPELLS.filter(x=>x.spell!=="Summon Fey"&&lvl>=x.lvl).map(x=>(
                                                     <span key={x.spell} className="ft-cls-stat-tag" style={{opacity:lvl>=x.lvl?1:0.4}}>{x.spell} ({ord(x.lvl)})</span>
                                                   ))}
                                                 </div>
@@ -21043,7 +21043,7 @@ function App() {
                                               <FC label="Monster Slayer Magic (3rd)" minLvl={3}>
                                                 <Body>You learn extra spells at certain ranger levels. They count as ranger spells for you but don't count against the number of ranger spells you know.</Body>
                                                 <div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:6}}>
-                                                  {MONSTER_SLAYER_SPELLS.map(x=>(
+                                                  {MONSTER_SLAYER_SPELLS.filter(x=>lvl>=x.lvl).map(x=>(
                                                     <span key={x.spell} className="ft-cls-stat-tag" style={{opacity:lvl>=x.lvl?1:0.4}}>{x.spell} ({ord(x.lvl)})</span>
                                                   ))}
                                                 </div>
@@ -21200,7 +21200,7 @@ function App() {
                                               <FC label="Horizon Walker Magic (3rd)" minLvl={3}>
                                                 <Body>You learn extra spells at certain ranger levels. They count as ranger spells for you but don't count against the number of ranger spells you know.</Body>
                                                 <div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:6}}>
-                                                  {HORIZON_WALKER_SPELLS.map(x=>(
+                                                  {HORIZON_WALKER_SPELLS.filter(x=>lvl>=x.lvl).map(x=>(
                                                     <span key={x.spell} className="ft-cls-stat-tag" style={{opacity:lvl>=x.lvl?1:0.4}}>{x.spell} ({ord(x.lvl)})</span>
                                                   ))}
                                                 </div>
@@ -21325,7 +21325,7 @@ function App() {
                                               <FC label="Gloom Stalker Magic (3rd)" minLvl={3}>
                                                 <Body>You learn extra spells at certain ranger levels. They count as ranger spells for you but don't count against the number of ranger spells you know.</Body>
                                                 <div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:6}}>
-                                                  {GLOOM_STALKER_SPELLS.map(x=>(
+                                                  {GLOOM_STALKER_SPELLS.filter(x=>lvl>=x.lvl).map(x=>(
                                                     <span key={x.spell} className="ft-cls-stat-tag" style={{opacity:lvl>=x.lvl?1:0.4}}>{x.spell} ({ord(x.lvl)})</span>
                                                   ))}
                                                 </div>
@@ -21513,7 +21513,7 @@ function App() {
                                               <FC label="Swarmkeeper Magic (3rd)" minLvl={3}>
                                                 <Body>You learn mage hand (the hand appears as your swarm) and extra spells at certain ranger levels. They count as ranger spells for you but don't count against your spells known.</Body>
                                                 <div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:6}}>
-                                                  {SWARMKEEPER_SPELLS.map(x=>(
+                                                  {SWARMKEEPER_SPELLS.filter(x=>lvl>=x.lvl).map(x=>(
                                                     <span key={x.spell} className="ft-cls-stat-tag" style={{opacity:lvl>=x.lvl?1:0.4}}>{x.spell} ({ord(x.lvl)})</span>
                                                   ))}
                                                 </div>
