@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3071";
+const SHEET_VERSION = "v3072";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4941,10 +4941,35 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
       if(sl>0) sec.man={title:"Maneuver",slots:sl,opts:BATTLE_MASTER_MANEUVERS.filter(x=>!have.has(x.n)).map(x=>({v:x.n,l:x.n}))};
     }
   }
+  if(cls===char.charClass){
+    const subVal=(subField&&char[subField])||subPick||"";
+    const simple=(k,title,field,list)=>{ if(!char[field]) sec[k]={title,slots:1,opts:list.map(x=>({v:x,l:x})),fields:[field]}; };
+    if(subVal==="Path of the Totem Warrior (Barbarian)"){
+      const animals=["Bear","Eagle","Elk","Tiger","Wolf"];
+      if(lvlN>=3) simple("totS","Totem Spirit","totemSpirit",animals);
+      if(lvlN>=6) simple("totA","Aspect of the Beast","totemAspect",animals);
+      if(lvlN>=14) simple("totT","Totemic Attunement","totemAttunement",animals);
+      if(lvlN>=6&&(char.totemAspect||((pk.totA||[])[0]))==="Tiger"&&!char.tigerSkill1) sec.tigers={title:"Tiger skill",slots:2,opts:["Acrobatics","Athletics","Stealth","Survival"].map(x=>({v:x,l:x})),fields:["tigerSkill1","tigerSkill2"]};
+    }
+    if(subVal==="Hunter (Ranger)"){
+      if(lvlN>=3) simple("prey","Hunter's Prey","rangerHuntersPrey",["Colossus Slayer","Giant Killer","Horde Breaker"]);
+      if(lvlN>=7) simple("tact","Defensive Tactics","rangerDefensiveTactics",["Escape the Horde","Multiattack Defense","Steel Will"]);
+      if(lvlN>=11) simple("mult","Multiattack","rangerMultiattack",["Volley","Whirlwind Attack"]);
+      if(lvlN>=15) simple("sdef","Superior Hunter's Defense","rangerSuperiorDefense",["Evasion","Stand Against the Tide","Uncanny Dodge"]);
+    }
+    if(subVal==="Circle of the Land (Druid)"&&lvlN>=2){
+      simple("terr","Land terrain","druidLandTerrain",["Arctic","Coast","Desert","Forest","Grassland","Mountain","Swamp","Underdark"]);
+      simple("lcan","Bonus druid cantrip","druidLandCantrip",((CLASSES.Druid&&CLASSES.Druid.spells&&CLASSES.Druid.spells.cantrips)||[]).slice().sort());
+    }
+    if(subVal==="College of Lore (Bard)"&&lvlN>=3&&!char.bardLoreSkill1){
+      const all=Object.values(SKILLS_BY_ABILITY).flat().map(x=>x.name);
+      sec.lore={title:"Lore skill",slots:3,opts:all.filter(x=>!(skillProfs||[]).includes(x)).map(x=>({v:x,l:x})),fields:["bardLoreSkill1","bardLoreSkill2","bardLoreSkill3"]};
+    }
+  }
   Object.keys(sec).forEach(k=>{ items.push({k:"pk_"+k,t:"Choose "+(sec[k].slots>1?sec[k].slots+" "+(({inv:"Eldritch Invocations",exp:"Expertise skills",meta:"Metamagic options",man:"Maneuvers"})[k]||sec[k].title):sec[k].title),tab:"features",sec:k}); });
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
-  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks,...Object.keys(sec).filter(k=>sec[k].spell).flatMap(k=>pk[k]||[])].filter(Boolean),{...pk,_cls:cls}); };
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks,...Object.keys(sec).filter(k=>sec[k].spell).flatMap(k=>pk[k]||[])].filter(Boolean),{...pk,_cls:cls,_fields:Object.fromEntries(Object.keys(sec).filter(k=>sec[k].fields).map(k=>[k,sec[k].fields]))}); };
   return (
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
@@ -5915,6 +5940,7 @@ function App() {
    if(g("exp").length) { const key=pk._cls==="Rogue"?"rogueExpertise":"bardExpertise"; u[key]=[...(p[key]||[]),...g("exp")]; }
    if(g("meta").length){ const a=Array.from({length:4},(_,k)=>(Array.isArray(p.sorcMeta)?p.sorcMeta:[])[k]||""); g("meta").forEach(m=>{const i=a.findIndex(x=>!x); if(i>=0) a[i]=m;}); u.sorcMeta=a; }
    if(g("man").length) u.battleMasterManeuvers=[...(p.battleMasterManeuvers||[]),...g("man")];
+   if(pk._fields) Object.keys(pk._fields).forEach(k=>{ (pk[k]||[]).forEach((v,i)=>{ const fld=pk._fields[k][i]; if(v&&fld) u[fld]=v; }); });
  }
  if(asi&&asi.key&&asi.value&&!(p.asiChoices&&p.asiChoices[asi.key]&&p.asiChoices[asi.key].choice)) u.asiChoices={...(p.asiChoices||{}),[asi.key]:asi.value};
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
