@@ -2616,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3057";
+const SHEET_VERSION = "v3058";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22546,7 +22546,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                     <option value="">-- Choose your vessel --</option>
                                                     {GENIE_VESSELS.map(v=><option key={v} value={v}>{v}</option>)}
                                                   </select>
-                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*6)+1;setF("warGenieVessel",GENIE_VESSELS[d-1]);setSkillRoll({label:"Genie's Vessel — "+GENIE_VESSELS[d-1],roll:d,bonus:0,total:d,isCrit:false,isFail:false,sides:6,r1:d,r2:null,isAdv:false,isDis:false});}}>🎲 d6</button>
+                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*6)+1;setF("warGenieVessel",GENIE_VESSELS[d-1]);}}>🎲 d6</button>
                                                 </div>
                                                 <div style={{display:"flex",gap:10,fontSize:11,fontWeight:700,color:"var(--muted)",marginTop:6}}><span>Vessel AC {dcW}</span><span>HP {lvl+pb}</span></div>
                                                 <div style={{fontSize:12,fontWeight:700,color:"var(--text)",marginTop:8}}>Bottled Respite</div>
