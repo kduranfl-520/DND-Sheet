@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3066";
+const SHEET_VERSION = "v3067";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4821,8 +4821,26 @@ const SCHOOL_COLORS={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b
 const schoolColor=(spell)=>{const sc=typeof spell==="string"&&SCHOOL_COLORS[spell]?spell:(typeof spell==="string"?SPELL_DATA[spell]?.school:spell);return SCHOOL_COLORS[sc]||"var(--border)";};
 const LU_ASI={Fighter:[4,6,8,12,14,16,19],Rogue:[4,8,10,12,16,19]};
 const LU_SUB={Barbarian:3,Bard:3,Cleric:1,Druid:2,Fighter:3,Monk:3,Paladin:3,Ranger:3,Rogue:3,Sorcerer:1,Warlock:1,Wizard:2,Artificer:3};
+const LU_SUBFIELD={Barbarian:"primalPath",Bard:"bardCollege",Cleric:"divineDomain",Druid:"druidCircle",Fighter:"martialArchetype",Monk:"monasticTradition",Paladin:"sacredOath",Ranger:"rangerArchetype",Rogue:"rogueArchetype",Sorcerer:"sorcOrigin",Warlock:"warPatron"};
+const luSubOptions=(cls,libEntries,char)=>{
+  const subs=(libEntries||[]).filter(e=>e.category==="Subclass");
+  const tag=(e,t)=>(e.tags||"").toLowerCase().includes(t);
+  let l=[];
+  if(cls==="Barbarian") l=subs.filter(e=>tag(e,"barbarian")&&(e.title!=="Path of the Battlerager (Barbarian)"||((char.species||"")+(char.subrace||"")).toLowerCase().includes("dwarf")));
+  else if(cls==="Bard") l=subs.filter(e=>tag(e,"bard"));
+  else if(cls==="Cleric") l=subs.filter(e=>tag(e,"cleric")&&e.title.toLowerCase().includes("domain")&&e.title!=="Divine Domain");
+  else if(cls==="Druid") l=subs.filter(e=>tag(e,"druid")&&e.title.toLowerCase().includes("circle"));
+  else if(cls==="Fighter") l=subs.filter(e=>tag(e,"fighter"));
+  else if(cls==="Monk") l=subs.filter(e=>tag(e,"monk")&&e.title.toLowerCase().startsWith("way of"));
+  else if(cls==="Paladin") l=subs.filter(e=>tag(e,"paladin"));
+  else if(cls==="Ranger") l=subs.filter(e=>tag(e,"ranger")&&/\(Ranger\)\s*$/.test(e.title));
+  else if(cls==="Rogue") l=subs.filter(e=>tag(e,"rogue")&&/\(Rogue\)\s*$/.test(e.title));
+  else if(cls==="Sorcerer") l=subs.filter(e=>/\(Sorcerer\)\s*$/.test(e.title));
+  else if(cls==="Warlock") l=subs.filter(e=>/\(Warlock\)\s*$/.test(e.title));
+  return l.map(e=>e.title).sort();
+};
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
-const LevelUpChecklist = ({char,onApply}) => {
+const LevelUpChecklist = ({char,onApply,libEntries}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
   const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
@@ -4832,6 +4850,7 @@ const LevelUpChecklist = ({char,onApply}) => {
   const [rolled,setRolled] = useState(null);
   const [manual,setManual] = useState("");
   const [done,setDone] = useState({});
+  const [subPick,setSubPick] = useState("");
   const nc = CLASSES[cls]||null;
   const die = nc?nc.hitDie:8;
   const conMod = abilityMod((char.abilities?.CON||10)+(SPECIES[char.species]?.abilityBonus?.CON||0));
@@ -4840,11 +4859,15 @@ const LevelUpChecklist = ({char,onApply}) => {
   const asiLvls = LU_ASI[cls]||[4,8,12,16,19];
   const items = [];
   if(asiLvls.includes(newClsLvl)) items.push({k:"asi",t:"Ability Score Improvement or feat",tab:"features"});
-  if(LU_SUB[cls]===newClsLvl) items.push({k:"sub",t:"Choose your subclass",tab:"features"});
+  const subField = LU_SUBFIELD[cls];
+  const subHere = LU_SUB[cls]===newClsLvl;
+  const subCanPick = subHere && subField && cls===char.charClass && !char[subField];
+  const subOpts = subCanPick ? luSubOptions(cls,libEntries,char) : [];
+  if(subHere) items.push({k:"sub",t:(subHere&&subField&&cls===char.charClass&&char[subField])?"Subclass: "+char[subField]:"Choose your subclass",tab:"features"});
   if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:"Review spells known or prepared and your spell slots",tab:"spells"});
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
-  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after); };
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null); };
   return (
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
@@ -4883,6 +4906,7 @@ const LevelUpChecklist = ({char,onApply}) => {
               <div key={it.k} style={{display:"flex",alignItems:"center",gap:8}}>
                 <input type="checkbox" checked={!!done[it.k]} onChange={e=>setDone(d=>({...d,[it.k]:e.target.checked}))}/>
                 <span style={{flex:1,fontSize:12,color:done[it.k]?"var(--muted)":"var(--text)",textDecoration:done[it.k]?"line-through":"none"}}>{it.t}</span>
+                {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
                 <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
               </div>
             ))}
@@ -5722,7 +5746,7 @@ function App() {
  setLevelUpPending(null);
   }, [levelUpPending]);
 
- const applyLevelStep = (chosenClass,newClsLvl,hpGain,after) => {
+ const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub) => {
  setCharSaving(p => {
  const u = {...p};
  const n = p.lvlUpPending||0;
@@ -5732,6 +5756,7 @@ function App() {
  else { u.classLevel = p.classLevel||1; u.multiClassLevel = newClsLvl; }
  u.hp = {...p.hp, max:(p.hp?.max||0)+hpGain};
  u.lvlUpPending = Math.max(0,n-1);
+ if(sub&&sub.field&&sub.value&&!p[sub.field]) u[sub.field]=sub.value;
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
  if(hasEldritchAdept){ u.eaInvocation=""; u.eaInvocationLevel=0; }
  if([4,8,12,16,19].includes(u.level||0)){
@@ -7799,7 +7824,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
-        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep}/>}
+        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
