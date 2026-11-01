@@ -2466,7 +2466,7 @@ const WAR_INV=[
   {n:"Thief of Five Fates",min:0,b:"PHB",use:"lr",d:"You can cast bane once using a warlock spell slot. You can't do so again until you finish a long rest."},
   {n:"Aspect of the Moon",min:0,boon:"Pact of the Tome",b:"XGE",d:"You no longer need to sleep and can't be forced to sleep by any means. To gain the benefits of a long rest, you can spend all 8 hours doing light activity, such as reading your Book of Shadows and keeping watch."},
   {n:"Book of Ancient Secrets",min:0,boon:"Pact of the Tome",b:"PHB",d:"You can inscribe magical rituals in your Book of Shadows. Choose two 1st-level spells with the ritual tag from any class's list; you can cast them as rituals while the book is on you (not with spell slots). You can add more ritual spells you find if their level is no higher than half your warlock level (rounded up); each level of transcription takes 2 hours and 50 gp of inks."},
-  {n:"Investment of the Chain Master",min:0,boon:"Pact of the Chain",b:"TCE",d:"When you cast find familiar, you infuse the familiar with eldritch power. It gains a flying or swimming speed (your choice) of 40 feet; you can command it to take the Attack action as a bonus action; its weapon attacks are magical; if it forces a save it uses your spell save DC; and when it takes damage you can use your reaction to give it resistance to that damage."},
+  {n:"Investment of the Chain Master",min:0,boon:"Pact of the Chain",b:"TCE",d:"When you cast find familiar, you infuse the familiar with eldritch power, granting it these benefits:"},
   {n:"Rebuke of the Talisman",min:0,boon:"Pact of the Talisman",b:"TCE",d:"When the creature wearing your talisman is hit by an attacker you can see within 30 feet of you, you can use your reaction to deal psychic damage to the attacker equal to your proficiency bonus and push it up to 10 feet away from the wearer."},
   {n:"Gift of the Ever-Living Ones",min:0,boon:"Pact of the Chain",b:"XGE",d:"Whenever you regain hit points while your familiar is within 100 feet of you, treat any dice you roll to determine the amount as having rolled their maximum value."},
   {n:"Improved Pact Weapon",min:0,boon:"Pact of the Blade",b:"XGE",d:"You can use any pact weapon you create as a spellcasting focus. If it lacks a magic bonus, it gains +1 to attack and damage rolls. The pact weapon can also be a shortbow, longbow, light crossbow, or heavy crossbow."},
@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3050";
+const SHEET_VERSION = "v3051";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6185,6 +6185,13 @@ function App() {
             </div>
           );
         })()}
+        {nm==="Investment of the Chain Master"&&(
+          <div style={{display:"flex",flexDirection:"column",gap:4,paddingLeft:10,marginTop:4}}>
+            {["A flying or swimming speed (your choice) of 40 feet.","You can command it to take the Attack action as a bonus action.","Its weapon attacks are magical.","Any saving throw it forces uses your spell save DC.","When it takes damage, you can use your reaction to give it resistance to that damage."].map((t,k)=>(
+              <div key={k} style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>
+            ))}
+          </div>
+        )}
         {(nm==="Far Scribe"||nm==="Gift of the Protectors")&&ok&&(()=>{
           const nKey=nm==="Far Scribe"?"warFarScribeNames":"warGiftNames";
           const names=Array.isArray(char[nKey])?char[nKey]:[];
