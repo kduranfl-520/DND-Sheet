@@ -2616,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3060";
+const SHEET_VERSION = "v3061";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22550,9 +22550,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 </div>
                                                 <div style={{display:"flex",gap:10,fontSize:11,fontWeight:700,color:"var(--muted)",marginTop:6}}><span>Vessel AC {dcW}</span><span>HP {lvl+pb}</span></div>
                                                 <div style={{fontSize:12,fontWeight:700,color:"var(--text)",marginTop:8}}>Bottled Respite</div>
-                                                <Body>As an action, you vanish into the vessel, a 20-foot-radius, 20-foot-high space. You can stay inside for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
+                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-bottle-duration" short={(pb*2)+" hr"} full={"You can stay inside for up to "+(pb*2)+" hours."} total={pb*2} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>As an action, you vanish into the vessel, a 20-foot-radius, 20-foot-high space. You can stay inside for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-                                                  <DurationBadge id="war-bottle-duration" short={(pb*2)+" hr"} full={"You can stay inside for up to "+(pb*2)+" hours."} total={pb*2} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>
                                                   <span style={{fontSize:11,color:inVessel?"#06b6d4":char.warBottleUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{inVessel?"Inside the vessel":char.warBottleUsed?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
                                                   {inVessel?<button style={neutralBtn} onClick={e=>{e.stopPropagation();setF("warBottleIn",false);}}>Exit (bonus action)</button>
                                                     :!char.warBottleUsed?<button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warBottleUsed:true,warBottleIn:true}));}}>Enter vessel</button>
