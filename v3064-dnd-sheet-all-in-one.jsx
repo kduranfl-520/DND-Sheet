@@ -2446,6 +2446,7 @@ const GENIE_KINDS={
  Efreeti:{el:"Fire",dmg:"fire",sp:{1:"Burning Hands",2:"Scorching Ray",3:"Fireball",4:"Fire Shield",5:"Flame Strike"}},
  Marid:{el:"Water",dmg:"cold",sp:{1:"Fog Cloud",2:"Blur",3:"Sleet Storm",4:"Control Water",5:"Cone of Cold"}}
 };
+const warWishSpells=()=>Object.keys(SPELL_DATA).filter(n=>{const d=SPELL_DATA[n];return d&&typeof d.level==="number"&&d.level<=6&&/^1 action$/i.test(String(d.cast||"").trim());}).sort((a,b)=>SPELL_DATA[a].level-SPELL_DATA[b].level||a.localeCompare(b));
 const GENIE_VESSELS=["Oil lamp","Urn","Ring with a compartment","Stoppered bottle","Hollow statuette","Ornate lantern"];
 const warGenieSpells=(kind)=>{
  const base={1:["Detect Evil and Good"],2:["Phantasmal Force"],3:["Create Food and Water"],4:["Phantasmal Killer"],5:["Creation"],9:["Wish"]};
@@ -2616,7 +2617,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3063";
+const SHEET_VERSION = "v3064";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22576,6 +22577,14 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="lw" label="Limited Wish (14th)" minLvl={14}>
                                                 <Body>As an action, you can speak your wish to the vessel and cast one spell of 6th level or lower that has a casting time of 1 action, from any class list. You don't need to meet the spell's requirements, including costly components. After you do, you can't use this again until you finish 1d4 long rests.</Body>
+                                                {(()=>{const ws=warWishSpells();const cur=char.warWishSpell||"";return(<>
+                                                  <select className="ri-sel" value={cur} onClick={e=>e.stopPropagation()} onChange={e=>setF("warWishSpell",e.target.value)}
+                                                    style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:cur?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
+                                                    <option value="">-- Choose a spell to wish for --</option>
+                                                    {[0,1,2,3,4,5,6].map(l=>{const g=ws.filter(n=>SPELL_DATA[n].level===l);return g.length?<optgroup key={l} label={l===0?"Cantrips":spellOrdLbl(l)+" level"}>{g.map(n=><option key={n} value={n}>{n}</option>)}</optgroup>:null;})}
+                                                  </select>
+                                                  {cur&&SPELL_DATA[cur]&&<div style={{marginTop:6}}><SpellSaveBox name={cur} sd={SPELL_DATA[cur]} dc={dcW} saveKey="warLimitedWishSave" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
+                                                </>);})()}
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:wishLeft>0?"var(--muted)":"var(--accent)",fontWeight:700}}>{wishLeft>0?"Unavailable — "+wishLeft+" long rest"+(wishLeft>1?"s":"")+" remaining":"Ready"}</span>,
                                                   wishLeft>0?<button style={linkBtn} onClick={e=>{e.stopPropagation();setF("warWishLeft",0);}}>↺ Reset</button>
