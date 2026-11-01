@@ -2446,6 +2446,7 @@ const GENIE_KINDS={
  Efreeti:{el:"Fire",dmg:"fire",sp:{1:"Burning Hands",2:"Scorching Ray",3:"Fireball",4:"Fire Shield",5:"Flame Strike"}},
  Marid:{el:"Water",dmg:"cold",sp:{1:"Fog Cloud",2:"Blur",3:"Sleet Storm",4:"Control Water",5:"Cone of Cold"}}
 };
+const GENIE_VESSELS=["Oil lamp","Urn","Ring with a compartment","Stoppered bottle","Hollow statuette","Ornate lantern"];
 const warGenieSpells=(kind)=>{
  const base={1:["Detect Evil and Good"],2:["Phantasmal Force"],3:["Create Food and Water"],4:["Phantasmal Killer"],5:["Creation"],9:["Wish"]};
  const k=GENIE_KINDS[kind];
@@ -2615,7 +2616,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3056";
+const SHEET_VERSION = "v3057";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22539,7 +22540,14 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               spellsFC(null,warGenieSpells(gk),warLvl>=17?9:slotLvlW),
                                               <FC key="gv" label="Genie's Vessel (1st)" minLvl={1}>
                                                 <Body>Your patron gives you a Tiny vessel that works as a spellcasting focus for your warlock spells. Its AC equals your spell save DC and its hit points equal your warlock level plus your proficiency bonus. It is immune to poison and psychic damage, and it vanishes if you die. If you lose it, a 1-hour ceremony during a rest gets you a new one.</Body>
-                                                <input className="ri-sel" placeholder="Vessel form (lamp, urn, ring, bottle…)" value={char.warGenieVessel||""} onClick={e=>e.stopPropagation()} onChange={e=>setF("warGenieVessel",e.target.value)} style={{width:"100%",marginTop:6}}/>
+                                                <div style={{display:"flex",gap:6,alignItems:"center",marginTop:6}}>
+                                                  <select className="ri-sel" value={char.warGenieVessel||""} onClick={e=>e.stopPropagation()} onChange={e=>setF("warGenieVessel",e.target.value)}
+                                                    style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:char.warGenieVessel?"var(--accent)":"var(--subtle)",flex:1}}>
+                                                    <option value="">-- Choose your vessel --</option>
+                                                    {GENIE_VESSELS.map(v=><option key={v} value={v}>{v}</option>)}
+                                                  </select>
+                                                  <button style={neutralBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*6)+1;setF("warGenieVessel",GENIE_VESSELS[d-1]);setSkillRoll({label:"Genie's Vessel — "+GENIE_VESSELS[d-1],roll:d,bonus:0,total:d,isCrit:false,isFail:false,sides:6,r1:d,r2:null,isAdv:false,isDis:false});}}>🎲 d6</button>
+                                                </div>
                                                 <div style={{display:"flex",gap:10,fontSize:11,fontWeight:700,color:"var(--muted)",marginTop:6}}><span>Vessel AC {dcW}</span><span>HP {lvl+pb}</span></div>
                                                 <div style={{fontSize:12,fontWeight:700,color:"var(--text)",marginTop:8}}>Bottled Respite</div>
                                                 <Body>As an action, you vanish into the vessel, a 20-foot-radius, 20-foot-high space. You can stay inside for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
