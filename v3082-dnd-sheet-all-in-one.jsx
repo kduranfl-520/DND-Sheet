@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3081";
+const SHEET_VERSION = "v3082";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22736,20 +22736,20 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="fp" label="Fey Presence (1st)" minLvl={1}>
-                                                <Body>You can use your action to project a 10-foot cube from yourself. Each creature in it makes a Wisdom saving throw against your warlock spell save DC. On a failed save, the creature is charmed or frightened by you (your choice) until the end of your next turn. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>As an action, each creature in a 10-foot cube from you makes a WIS save or is charmed or frightened by you (your choice) until the end of your next turn.</Body>
                                                 {saveRow("warFeyPresence","WIS",dcW,"The creature is not charmed or frightened by you.","The creature is charmed or frightened by you (your choice) until the end of your next turn.")}
                                                 {onceRow("warFeyUsed")}
                                               </FC>,
                                               <FC key="me" label="Misty Escape (6th)" minLvl={6}>
-                                                <Body>When you take damage, you can use your reaction to turn invisible and teleport up to 60 feet to an unoccupied space you can see. You stay invisible until the start of your next turn or until you attack or cast a spell. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>When you take damage, use your reaction to turn invisible and teleport up to 60 feet to a space you can see. You stay invisible until the start of your next turn or until you attack or cast a spell.</Body>
                                                 {onceRow("warMistyUsed")}
                                               </FC>,
                                               <FC key="bd" label="Beguiling Defenses (10th)" minLvl={10} headerBadge={<DurationBadge id="war-beguiling-duration" short="1 min" full="Duration: 1 minute, or until the creature takes any damage." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>Your patron teaches you how to turn the mind-affecting magic of your enemies against them. You are immune to being charmed. When another creature attempts to charm you, you can use your reaction to turn the charm back on it. That creature makes a Wisdom saving throw against your warlock spell save DC, and on a failed save it is charmed by you for 1 minute or until it takes any damage.</Body>
+                                                <Body>You are immune to being charmed. When a creature tries to charm you, use your reaction to make it take a WIS save or be charmed by you instead for 1 minute, or until it takes damage.</Body>
                                                 {saveRow("warBeguiling","WIS",dcW,"The creature shakes off the charm.","The creature is charmed by you for 1 minute, or until it takes any damage.")}
                                               </FC>,
                                               <FC key="dd" label="Dark Delirium (14th)" minLvl={14} headerBadge={<DurationBadge id="war-delirium-duration" short="1 min" full="Duration: 1 minute, or until your concentration is broken." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>You can plunge a creature you can see within 60 feet of you into an illusory realm. It must make a Wisdom saving throw against your warlock spell save DC. On a failed save, it is charmed or frightened by you for 1 minute or until your concentration is broken. Until this illusion ends, the creature thinks it is lost in a misty realm, the appearance of which you choose. The creature can see and hear only itself, you, and the illusion. You must finish a short or long rest before you can use this feature again.</Body>
+                                                <Body>Pick a creature you can see within 60 feet. It makes a WIS save or is charmed or frightened by you for 1 minute, or until your concentration breaks. It believes it is lost in a misty, illusory realm of your choosing and can only see and hear itself, you and the illusion.</Body>
                                                 {saveRow("warDarkDelirium","WIS",dcW,"The creature is not affected.","The creature is charmed or frightened by you (your choice) for 1 minute and lost in the misty realm.")}
                                                 {onceRow("warDelirUsed")}
                                               </FC>
@@ -22762,19 +22762,19 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="dob" label="Dark One's Blessing (1st)" minLvl={1}>
-                                                <Body>When you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1).</Body>
+                                                <Body>When you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your CHA modifier + warlock level (minimum 1).</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Temp HP ({tempNow})</span>,
                                                   <button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,hp:{...p.hp,temp:Math.max(p.hp?.temp||0,blessAmt)}}));}}>Gain {blessAmt} temp HP</button>
                                                 )}
                                               </FC>,
                                               <FC key="doluck" label="Dark One's Own Luck (6th)" minLvl={6}>
-                                                <Body>You can call on your patron to alter fate in your favor. When you make an ability check or a saving throw, you can add a d10 to your roll, after seeing the initial roll but before any of its effects occur. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>Add a d10 to an ability check or saving throw after you see the roll, before its effects occur.</Body>
                                                 {flexEnd(dieBtn("Dark One's Own Luck (d10)",10,"🎲 Roll d10"))}
                                                 {onceRow("warLuckUsed")}
                                               </FC>,
                                               <FC key="fr" label="Fiendish Resilience (10th)" minLvl={10}>
-                                                <Body>When you finish a short or long rest, you can choose one damage type and gain resistance to it until you choose a different one with this feature.</Body>
+                                                <Body>After a short or long rest, choose a damage type to resist until you choose a different one.</Body>
                                                 <select className="ri-sel" value={rs} onClick={e=>e.stopPropagation()} onChange={e=>setF("warFiendResist",e.target.value)}
                                                   style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:rs?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
                                                   <option value="">-- Choose a damage type --</option>
@@ -22783,7 +22783,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Damage from magical weapons or silver weapons ignores this resistance.</span></div>
                                               </FC>,
                                               <FC key="hth" label="Hurl Through Hell (14th)" minLvl={14}>
-                                                <Body>When you hit a creature with an attack, you can instantly send it through the lower planes. It vanishes and hurtles through a nightmare landscape, then returns at the end of your next turn to the space it left or the nearest unoccupied space. If it is not a fiend, it takes 10d10 psychic damage from the ordeal. Once used, you need a long rest to use it again.</Body>
+                                                <Body>When you hit a creature with an attack, you can send it through the lower planes. It returns at the end of your next turn and, unless it is a fiend, takes 10d10 psychic damage.</Body>
                                                 {flexEnd(rollBtn("Hurl Through Hell","psychic",10,10,0,"🎲 Roll 10d10 psychic"))}
                                                 {onceRow("warHurlUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
                                               </FC>
@@ -22809,13 +22809,13 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="hc" label="Hexblade's Curse (1st)" minLvl={1} headerBadge={<DurationBadge id="war-hexcurse-duration" short="1 min" full="Duration: 1 minute." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>As a bonus action, you choose one creature you can see within 30 feet of you to curse for 1 minute. Until the curse ends, you gain these benefits against the cursed target:
+                                                <Body>As a bonus action, curse a creature you can see within 30 feet for 1 minute. Against it, you gain:
                                                   <ul style={{margin:"4px 0 4px 18px",padding:0,display:"flex",flexDirection:"column",gap:2}}>
-                                                    <li>You gain a bonus to damage rolls equal to your proficiency bonus.</li>
-                                                    <li>Any attack roll you make against it is a critical hit on a roll of 19 or 20.</li>
-                                                    <li>If it dies, you regain hit points equal to your warlock level + your Charisma modifier (minimum of 1).</li>
+                                                    <li>A damage bonus equal to your proficiency bonus.</li>
+                                                    <li>Critical hits on attack rolls of 19 or 20.</li>
+                                                    <li>If it dies, you regain hit points equal to your warlock level + CHA modifier (minimum 1).</li>
                                                   </ul>
-                                                  The curse ends early if the target dies, you die, or you are incapacitated. Once used, you need a short or long rest to use it again.</Body>
+                                                  The curse ends early if the target dies, you die, or you're incapacitated.</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:hcOn?"var(--accent)":"var(--muted)",fontWeight:700}}>{hcOn?"Cursed — +"+pb+" damage · crit on 19–20":(hcUsed?"Used — short or long rest":"Ready — 1 use per short or long rest")}</span>,
                                                   !hcOn&&<button style={hcUsed?linkBtn:neutralBtn} disabled={hcUsed} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warHexCurseOn:true,warHexUsed:true}));}}>☠ Curse a creature</button>,
@@ -22825,7 +22825,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 )}
                                               </FC>,
                                               <FC key="hw" label="Hex Warrior (1st)" minLvl={1}>
-                                                <Body>You gain proficiency with medium armor, shields, and martial weapons. The magic of your patron lets you use your Charisma modifier, instead of Strength or Dexterity, for the attack and damage rolls of one weapon that lacks the two-handed property. Choose the weapon whenever you finish a long rest; the benefit lasts until your next one. If you later gain the Pact of the Blade feature, this benefit extends to every pact weapon you conjure with that feature, no matter the weapon's type.</Body>
+                                                <Body>You gain proficiency with medium armor, shields and martial weapons. After each long rest, choose one weapon without the two-handed property to attack and deal damage with using CHA instead of STR or DEX. With Pact of the Blade, this applies to every pact weapon.</Body>
                                                 {hwChoices.length===0
                                                   ?<div style={{fontSize:11,color:"var(--muted)",marginTop:6}}>Add a one-handed weapon on your Gear tab to choose it here.</div>
                                                   :<select className="ri-sel" value={hwSel} onClick={e=>e.stopPropagation()} onChange={e=>pickHW(e.target.value)}
@@ -22870,7 +22870,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 })()}
                                               </FC>,
                                               <FC key="as" label="Accursed Specter (6th)" minLvl={6}>
-                                                <Body>When you slay a humanoid, you can cause its spirit to rise from its corpse as a specter. It gains temporary hit points equal to half your warlock level ({Math.floor(lvl/2)}), rolls its own initiative, and acts on its own turns, obeying your verbal commands. It remains until the end of your next long rest, when it vanishes. Once used, you need a long rest to use it again.</Body>
+                                                <Body>When you slay a humanoid, its spirit rises as a specter under your command until your next long rest. It rolls its own initiative, obeys your verbal commands and has temporary hit points equal to half your warlock level ({Math.floor(lvl/2)}).</Body>
                                                 {(()=>{
                                                   const spUsed=!!char.warSpecterUsed;
                                                   const spOn=(char.companions||[]).some(c=>c.id==="hexblade-specter");
@@ -22891,11 +22891,11 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 })()}
                                               </FC>,
                                               <FC key="ah" label="Armor of Hexes (10th)" minLvl={10}>
-                                                <Body>If the target cursed by your Hexblade's Curse hits you with an attack roll, you can use your reaction to roll a d6. On a 4 or higher, the attack instead misses you, regardless of its roll.</Body>
+                                                <Body>When your cursed target hits you with an attack, use your reaction to roll a d6. On a 4 or higher, the attack misses instead.</Body>
                                                 {flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*6)+1;setSkillRoll({label:"Armor of Hexes — "+(r>=4?"MISS (attack misses you)":"HIT (attack still lands)"),roll:r,bonus:0,total:r,isCrit:false,isFail:r<4,sides:6,r1:r,r2:null,isAdv:false,isDis:false});}}>🎲 Roll d6 (4+ = miss)</button>)}
                                               </FC>,
                                               <FC key="mh" label="Master of Hexes (14th)" minLvl={14}>
-                                                <Body>When the creature cursed by your Hexblade's Curse dies, you can apply the curse to a different creature you can see within 30 feet of you, provided you aren't incapacitated. When you apply the curse this way, you don't regain hit points from the death of the previously cursed creature.</Body>
+                                                <Body>When your cursed target dies, you can move the curse to another creature you can see within 30 feet (if you aren't incapacitated), without regaining hit points from the first death.</Body>
                                               </FC>
                                             );
                                           }
@@ -22913,17 +22913,17 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {SPELL_DATA["Spare the Dying"]&&<div style={{marginTop:6}}><SpellSaveBox name="Spare the Dying" sd={SPELL_DATA["Spare the Dying"]} dc={dcW} saveKey="warUndyingSpare" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                               </FC>,
                                               <FC key="dd" label="Defy Death (6th)" minLvl={6}>
-                                                <Body>When you succeed on a death saving throw or you stabilize a creature with Spare the Dying, you regain hit points equal to 1d8 + your Constitution modifier (minimum of 1). Once you use this feature, you can't use it again until you finish a long rest.</Body>
+                                                <Body>When you succeed on a death save or stabilize a creature with Spare the Dying, you regain 1d8 + CON modifier hit points (minimum 1).</Body>
                                                 {flexEnd(
                                                   <button style={neutralBtn} onClick={e=>{e.stopPropagation();healRoll("Defy Death",abilityMod(eff.CON||10));}}>🎲 Heal 1d8{abilityMod(eff.CON||10)>=0?"+":""}{abilityMod(eff.CON||10)}</button>
                                                 )}
                                                 {onceRow("warDeathUsed","Ready — 1 use per long rest","Used — recharges on a Long Rest")}
                                               </FC>,
                                               <FC key="un" label="Undying Nature (10th)" minLvl={10}>
-                                                <Body>You can hold your breath indefinitely. You don't require food, water or sleep, although you still need rest to reduce exhaustion and still benefit from short and long rests. In addition, you age more slowly: for every 10 years that pass, your body ages only 1 year, and you are immune to being magically aged.</Body>
+                                                <Body>You can hold your breath indefinitely and don't need food, water or sleep, though you still need rest to reduce exhaustion and to gain the benefits of resting. You age 1 year for every 10 that pass and can't be magically aged.</Body>
                                               </FC>,
                                               <FC key="il" label="Indestructible Life (14th)" minLvl={14}>
-                                                <Body>On your turn, you can use a bonus action to regain hit points equal to 1d8 + your warlock level. Additionally, if you put a severed body part of yours back in place when you use this feature, the part reattaches to you. Once you use this feature, you can't use it again until you finish a short or long rest.</Body>
+                                                <Body>On your turn, use a bonus action to regain 1d8 + your warlock level hit points. If you put a severed body part of yours back in place when you do, it reattaches.</Body>
                                                 {flexEnd(
                                                   <button style={neutralBtn} onClick={e=>{e.stopPropagation();healRoll("Indestructible Life",lvl);}}>🎲 Heal 1d8+{lvl}</button>
                                                 )}
@@ -22945,7 +22945,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               spellsFC(null,warGenieSpells(gk),warLvl>=17?9:slotLvlW),
                                               <FC key="gv" label="Genie's Vessel (1st)" minLvl={1}>
-                                                <Body>Your patron gives you a Tiny vessel that works as a spellcasting focus for your warlock spells. Its AC equals your spell save DC and its hit points equal your warlock level plus your proficiency bonus. It is immune to poison and psychic damage, and it vanishes if you die. If you lose it, a 1-hour ceremony during a rest gets you a new one.</Body>
+                                                <Body>Your patron gives you a Tiny vessel that serves as a spellcasting focus. Its AC equals your spell save DC, its hit points equal your warlock level + proficiency bonus, and it is immune to poison and psychic damage. It vanishes if you die; a 1-hour ceremony during a rest makes a new one.</Body>
                                                 <div style={{display:"flex",gap:6,alignItems:"center",marginTop:6}}>
                                                   <select className="ri-sel" value={char.warGenieVessel||""} onClick={e=>e.stopPropagation()} onChange={e=>setF("warGenieVessel",e.target.value)}
                                                     style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:char.warGenieVessel?"var(--accent)":"var(--subtle)",flex:1}}>
@@ -22957,7 +22957,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <div style={{display:"flex",gap:10,fontSize:11,fontWeight:700,color:"var(--muted)",marginTop:6}}><span>Vessel AC {dcW}</span><span>HP {lvl+pb}</span></div>
                                               </FC>,
                                               <FC key="br" label="Bottled Respite (1st) — Genie's Vessel" minLvl={1}>
-                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-bottle-duration" short={(pb*2)+" hr"} full={"You can stay inside for up to "+(pb*2)+" hours."} total={pb*2} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>As an action, you vanish into the vessel, a 20-foot-radius, 20-foot-high space. You can stay inside for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
+                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-bottle-duration" short={(pb*2)+" hr"} full={"You can stay inside for up to "+(pb*2)+" hours."} total={pb*2} unit="hr" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>As an action, vanish into the vessel's 20-foot-radius space for up to twice your proficiency bonus in hours. You leave with a bonus action, or if you die or the vessel is destroyed. You can't re-enter until you finish a long rest.</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   <span style={{fontSize:11,color:inVessel?"#06b6d4":char.warBottleUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{inVessel?"Inside the vessel":char.warBottleUsed?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
                                                   {inVessel?<button style={neutralBtn} onClick={e=>{e.stopPropagation();setF("warBottleIn",false);}}>Exit (bonus action)</button>
@@ -22966,22 +22966,22 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 </div>
                                               </FC>,
                                               <FC key="gw" label="Genie's Wrath (1st)" minLvl={1}>
-                                                <Body>Once per turn, when you hit with an attack roll, you can deal extra damage equal to your proficiency bonus. The type depends on your genie: bludgeoning (Dao), thunder (Djinni), fire (Efreeti) or cold (Marid).</Body>
+                                                <Body>Once per turn when you hit with an attack roll, deal extra damage equal to your proficiency bonus: bludgeoning (Dao), thunder (Djinni), fire (Efreeti) or cold (Marid).</Body>
                                                 {gInfo?flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();setSkillRoll({label:"Genie's Wrath — "+pb+" "+gDmg,roll:pb,bonus:0,total:pb,isCrit:false,isFail:false,sides:pb,isSpellDmg:true,dmgTotal:pb,allDmgRolls:[],dmgRolls:[],dmgBonus:pb,dmgType:gDmg});}}>+{pb} {gDmg}</button>):flexEnd(<span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Choose your genie kind above</span>)}
                                               </FC>,
                                               <FC key="eg" label="Elemental Gift (6th)" minLvl={6} headerBadge={<DurationBadge id="war-genie-fly-duration" short="10 min" full="Flight lasts 10 minutes." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>You gain resistance to the damage type of your genie (bludgeoning, thunder, fire or cold). As a bonus action, you can also give yourself a flying speed of 30 feet for 10 minutes, and you can hover. You can do this a number of times equal to your proficiency bonus, regaining all uses on a long rest.</Body>
+                                                <Body>You resist your genie's damage type. As a bonus action, gain a 30-foot flying speed with hover for 10 minutes, a number of times equal to your proficiency bonus (all uses return on a long rest).</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   <PipRow label={"Flights ("+gLeft+"/"+pb+")"} count={pb} used={gUsedN} color="fail" onSet={v=>setF("warGenieFlyUsed",v)}/>
                                                   <button style={gFly?linkBtn:neutralBtn} disabled={!gFly&&gLeft<1} onClick={e=>{e.stopPropagation();if(gFly){setF("warGenieFlyOn",false);}else setCharSaving(p=>({...p,warGenieFlyOn:true,warGenieFlyUsed:Math.min(pb,(p.warGenieFlyUsed||0)+1)}));}}>{gFly?"End flight":(gLeft<1?"No uses left":"Take flight")}</button>
                                                 </div>
                                               </FC>,
                                               <FC key="sv" label="Sanctuary Vessel (10th)" minLvl={10}>
-                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-sanctuary-duration" short="10 min" full="A creature inside for at least 10 minutes gains the benefit of a short rest." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>When you enter your vessel with Bottled Respite, you can bring up to five willing creatures you can see within 30 feet. As a bonus action, you can eject any number of them; everyone is ejected if you leave, die or the vessel is destroyed. A creature inside for at least 10 minutes gains the benefit of a short rest, and anyone spending Hit Dice during that rest adds your proficiency bonus to the hit points each die restores.</Body>
+                                                <Body><span style={{float:"right",marginLeft:8,marginBottom:4}}><DurationBadge id="war-sanctuary-duration" short="10 min" full="A creature inside for at least 10 minutes gains the benefit of a short rest." total={10} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/></span>When you enter with Bottled Respite, you can bring up to five willing creatures you can see within 30 feet. You can eject any of them as a bonus action; everyone leaves if you leave, die or the vessel is destroyed. Anyone inside for 10 minutes gains the benefit of a short rest, and each Hit Die spent during it heals extra equal to your proficiency bonus.</Body>
                                                 {note("Each Hit Die spent inside restores an extra "+pb+" hit points.")}
                                               </FC>,
                                               <FC key="lw" label="Limited Wish (14th)" minLvl={14}>
-                                                <Body>As an action, you can speak your wish to the vessel and cast one spell of 6th level or lower that has a casting time of 1 action, from any class list. You don't need to meet the spell's requirements, including costly components. After you do, you can't use this again until you finish 1d4 long rests.</Body>
+                                                <Body>As an action, speak a wish into the vessel to cast any spell of 6th level or lower from any class list that takes 1 action, ignoring its requirements and costly components. You can't do this again until you finish 1d4 long rests.</Body>
                                                 {(()=>{const ws=warWishSpells();const cur=char.warWishSpell||"";return(<>
                                                   <select className="ri-sel" value={cur} onClick={e=>e.stopPropagation()} onChange={e=>setF("warWishSpell",e.target.value)}
                                                     style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:cur?"var(--accent)":"var(--subtle)",width:"100%",marginTop:6}}>
@@ -23012,7 +23012,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="td" label="Tentacle of the Deeps (1st)" minLvl={1} headerBadge={<DurationBadge id="war-tentacle-duration" short="1 min" full="Duration: 1 minute, or until you create another tentacle." total={1} unit="min" openFeat={openFeat} setOpenFeat={setOpenFeat} char={char} setF={setF}/>}>
-                                                <Body>As a bonus action, you create a 10-foot-long spectral tentacle at a point you can see within 60 feet. It lasts 1 minute or until you create another one. When you create it, you can make a melee spell attack against a creature within 10 feet of it. On a hit, the target takes {tDice}d8 cold damage (2d8 at 10th level) and its speed drops by 10 feet until the start of your next turn. On each of your later turns, you can use a bonus action to move the tentacle up to 30 feet and attack again. You can create it a number of times equal to your proficiency bonus, regaining all uses on a long rest.</Body>
+                                                <Body>As a bonus action, create a 10-foot spectral tentacle within 60 feet for 1 minute, or until you create another. When you create it, and on later turns as a bonus action (moving it up to 30 feet), make a melee spell attack against a creature within 10 feet of it. On a hit, it takes {tDice}d8 cold damage (2d8 at 10th level) and its speed drops by 10 feet until the start of your next turn. You can create it a number of times equal to your proficiency bonus (all uses return on a long rest).</Body>
                                                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                   <PipRow label={"Uses ("+tLeft+"/"+pb+")"} count={pb} used={tUsedN} color="fail" onSet={v=>setF("warTentUsed",v)}/>
                                                   <button style={tOn?linkBtn:neutralBtn} disabled={!tOn&&tLeft<1} onClick={e=>{e.stopPropagation();if(tOn){setF("warTentOn",false);}else spendTent();}}>{tOn?"Dismiss tentacle":(tLeft<1?"No uses left":"Create tentacle")}</button>
@@ -23023,20 +23023,20 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 )}
                                               </FC>,
                                               <FC key="gs" label="Gift of the Sea (1st)" minLvl={1}>
-                                                <Body>You gain a swimming speed of 40 feet, and you can breathe underwater.</Body>
+                                                <Body>You gain a 40-foot swimming speed and can breathe underwater.</Body>
                                               </FC>,
                                               <FC key="os" label="Oceanic Soul (6th)" minLvl={6}>
-                                                <Body>You have resistance to cold damage. While you are fully submerged, any other creature that is also fully submerged can understand your speech.</Body>
+                                                <Body>You resist cold damage. While you are fully submerged, other fully submerged creatures can understand your speech.</Body>
                                               </FC>,
                                               <FC key="gc" label="Guardian Coil (6th)" minLvl={6}>
-                                                <Body>When you or a creature you can see within 10 feet of your tentacle takes damage, you can use your reaction to pick one of those creatures and reduce the damage it takes by 1d8 (2d8 at 10th level).</Body>
+                                                <Body>When you or a creature you can see within 10 feet of your tentacle takes damage, use your reaction to reduce it by 1d8 (2d8 at 10th level).</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:tOn?"var(--accent)":"var(--muted)",fontWeight:700}}>{tOn?"Reaction · tentacle active":"Needs your tentacle active"}</span>,
                                                   <button style={neutralBtn} disabled={!tOn} onClick={e=>{e.stopPropagation();const rolls=Array.from({length:tDice},()=>Math.floor(Math.random()*8)+1);const total=rolls.reduce((a,b)=>a+b,0);setSkillRoll({label:"Guardian Coil (damage reduced by "+tDice+"d8)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:8,r1:rolls[0],r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"reduction",dmgDice:tDice+"d8",diceSides:8,baseDiceCount:tDice,saveDC:null,saveType:null,spiritShield:false});}}>🎲 Reduce {tDice}d8</button>
                                                 )}
                                               </FC>,
                                               <FC key="gt" label="Grasping Tentacles (10th)" minLvl={10}>
-                                                <Body>You learn Evard's Black Tentacles. It counts as a warlock spell for you and doesn't count against your spells known. You can cast it once without a spell slot, and you regain that use on a long rest. When you cast it this way, you gain temporary hit points equal to your warlock level. Damage can't break your concentration on this spell.</Body>
+                                                <Body>You learn Evard's Black Tentacles as a warlock spell that doesn't count against your spells known. You can cast it once without a slot per long rest, gaining temporary hit points equal to your warlock level when you do. Damage can't break your concentration on it.</Body>
                                                 {SPELL_DATA["Evard's Black Tentacles"]&&<div style={{marginTop:6}}><SpellSaveBox name="Evard's Black Tentacles" sd={SPELL_DATA["Evard's Black Tentacles"]} dc={dcW} saveKey="warGraspTentacles" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:char.warGraspUsed?"var(--muted)":"var(--accent)",fontWeight:700}}>{char.warGraspUsed?"Used — recharges on a Long Rest":"Ready — 1 free cast per long rest"}</span>,
@@ -23045,7 +23045,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 )}
                                               </FC>,
                                               <FC key="fp" label="Fathomless Plunge (14th)" minLvl={14}>
-                                                <Body>As an action, you teleport yourself and up to five willing creatures you can see within 30 feet to a body of water you have seen, at least the size of a pond, within 1 mile. Each creature arrives in an unoccupied space in the water or within 30 feet of it. Once you use it, you need a short or long rest to use it again.</Body>
+                                                <Body>As an action, teleport yourself and up to five willing creatures within 30 feet to a body of water you have seen (pond-sized or larger) within 1 mile. Each arrives in or within 30 feet of the water.</Body>
                                                 {onceRow("warPlungeUsed","Ready — 1 use per short or long rest","Used — recharges on a Short or Long Rest")}
                                               </FC>
                                             );
@@ -23065,11 +23065,11 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="bc" label="Bonus Cantrips (1st)" minLvl={1}>
-                                                <Body>You learn the light and sacred flame cantrips. They count as warlock cantrips for you, but they don't count against your number of cantrips known.</Body>
+                                                <Body>You learn light and sacred flame as extra warlock cantrips that don't count against your cantrips known.</Body>
                                                 {["Light","Sacred Flame"].map(c=>SPELL_DATA[c]?<div key={c} style={{marginTop:6}}><SpellSaveBox name={c} sd={SPELL_DATA[c]} dc={dcW} saveKey={"warCelCantrip_"+c} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>:null)}
                                               </FC>,
                                               <FC key="hl" label="Healing Light (1st)" minLvl={1}>
-                                                <Body>You have a pool of d6s equal to 1 + your warlock level. As a bonus action, you can heal one creature you can see within 60 feet, spending dice from the pool up to your Charisma modifier (minimum of one die). Roll the dice spent and restore that many hit points. You regain all expended dice when you finish a long rest.</Body>
+                                                <Body>You have a pool of d6s equal to 1 + your warlock level. As a bonus action, heal a creature you can see within 60 feet by spending dice from the pool, up to your CHA modifier (minimum 1) at a time. The pool refills on a long rest.</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:hlLeft>0?"var(--accent)":"var(--red)",fontWeight:700}}>Dice left ({hlLeft}/{hlMax})</span>,
                                                   <span style={{display:"inline-flex",alignItems:"center",gap:4}}>
@@ -23082,17 +23082,17 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 )}
                                               </FC>,
                                               <FC key="rs" label="Radiant Soul (6th)" minLvl={6}>
-                                                <Body>You have resistance to radiant damage. When you cast a spell that deals radiant or fire damage, you can add your Charisma modifier to one damage roll of that spell against one of its targets.</Body>
+                                                <Body>You resist radiant damage. When you cast a spell that deals radiant or fire damage, add your CHA modifier to one damage roll against one target.</Body>
                                               </FC>,
                                               <FC key="cr" label="Celestial Resilience (10th)" minLvl={10}>
-                                                <Body>When you finish a short or long rest, you gain temporary hit points equal to your warlock level + your Charisma modifier. Choose up to five creatures you can see to gain temporary hit points equal to half your warlock level + your Charisma modifier.</Body>
+                                                <Body>After a short or long rest, you gain temporary hit points equal to your warlock level + CHA modifier, and up to five creatures you can see gain half your warlock level + CHA modifier.</Body>
                                                 {flexEnd(
                                                   <span style={{fontSize:11,color:"var(--muted)",fontWeight:700}}>Temp HP ({char.hp?.temp||0}) · allies +{allyTemp} each</span>,
                                                   <button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,hp:{...p.hp,temp:Math.max(p.hp?.temp||0,resTemp)}}));}}>Gain {resTemp} temp HP</button>
                                                 )}
                                               </FC>,
                                               <FC key="sv" label="Searing Vengeance (14th)" minLvl={14}>
-                                                <Body>When you have to make a death saving throw at the start of your turn, you can instead spring back to your feet with a burst of radiant energy. You regain hit points equal to half your hit point maximum, and each creature of your choice within 30 feet of you takes radiant damage equal to 2d8 + your Charisma modifier and is blinded until the end of the current turn. Once used, you need a long rest to use it again.</Body>
+                                                <Body>When you would make a death save at the start of your turn, you can instead rise in a burst of radiant energy: regain half your hit point maximum, and creatures of your choice within 30 feet take 2d8 + CHA modifier radiant damage and are blinded until the end of the turn.</Body>
                                                 {flexEnd(
                                                   rollBtn("Searing Vengeance","radiant",8,2,chaMod,"🎲 Roll 2d8"+(chaMod?(chaMod>0?"+":"")+chaMod:"")+" radiant"),
                                                   <button style={neutralBtn} disabled={!hpMax} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,hp:{...p.hp,current:Math.min(p.hp?.max||0,(p.hp?.current||0)+Math.floor((p.hp?.max||0)/2))}}));}}>Regain {arisen} HP</button>
@@ -23105,17 +23105,17 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             return wrapCol(
                                               spellsFC(),
                                               <FC key="am" label="Awakened Mind (1st)" minLvl={1}>
-                                                <Body>You can communicate telepathically with any creature you can see within 30 feet. The creature does not need to share a language with you, but it must be able to understand at least one language.</Body>
+                                                <Body>You can speak telepathically with any creature you can see within 30 feet that understands at least one language, even without a shared one.</Body>
                                               </FC>,
                                               <FC key="ew" label="Entropic Ward (6th)" minLvl={6}>
-                                                <Body>When a creature makes an attack roll against you, you can use your reaction to impose disadvantage on that roll. If the attack misses you, your next attack roll against that creature has advantage if you make it before the end of your next turn. Once used, you need a short or long rest to use it again.</Body>
+                                                <Body>When a creature attacks you, use your reaction to impose disadvantage on the roll. If it misses, your next attack against that creature has advantage if made before the end of your next turn.</Body>
                                                 {onceRow("warEntropicUsed")}
                                               </FC>,
                                               <FC key="ts" label="Thought Shield (10th)" minLvl={10}>
-                                                <Body>Your thoughts can't be read by telepathy or other means unless you allow it. You also have resistance to psychic damage, and whenever a creature deals psychic damage to you, that creature takes the same amount of damage that you do.</Body>
+                                                <Body>Your thoughts can't be read unless you allow it. You resist psychic damage, and any creature that deals psychic damage to you takes the same amount.</Body>
                                               </FC>,
                                               <FC key="ct" label="Create Thrall (14th)" minLvl={14}>
-                                                <Body>You can use your action to touch an incapacitated humanoid, which is then charmed by you until a remove curse spell is cast on it, the charmed condition is removed from it, or you use this feature again. You can communicate telepathically with the charmed creature as long as you are on the same plane of existence.</Body>
+                                                <Body>As an action, touch an incapacitated humanoid to charm it until it is hit by remove curse, loses the charm another way, or you use this again. You can speak telepathically with it while you share a plane.</Body>
                                                 {toggleRow("warThrallOn","Thrall charmed — telepathic link active","No thrall charmed","","Charm a Thrall")}
                                               </FC>
                                             );
