@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3070";
+const SHEET_VERSION = "v3071";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4841,7 +4841,7 @@ const luSubOptions=(cls,libEntries,char)=>{
 };
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
 const LU_FEAT_AB={"Actor":"CHA","Heavily Armored":"STR","Heavy Armor Master":"STR","Keen Mind":"INT","Linguist":"INT","Durable":"CON"};
-const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slots}) => {
+const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slots,skillProfs,sorcMetaNames}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
   const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
@@ -4857,6 +4857,7 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const [asiA2,setAsiA2] = useState("");
   const [asiFeat,setAsiFeat] = useState("");
   const [mcOpen,setMcOpen] = useState(false);
+  const [pk,setPk] = useState({});
   const [cPicks,setCPicks] = useState([]);
   const [sPicks,setSPicks] = useState([]);
   const nc = CLASSES[cls]||null;
@@ -4892,9 +4893,58 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const spellOpts = spCan ? [1,2,3,4,5,6,7,8,9].filter(l=>l<=maxSpl&&Array.isArray(availSpells[l])).map(l=>[l,availSpells[l].filter(x=>!knownNow.has(x))]).filter(g=>g[1].length) : [];
   const spellsPick = cDelta>0||sDelta>0;
   if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:spellsPick?"Learn "+[cDelta>0?cDelta+" new cantrip"+(cDelta>1?"s":""):"",sDelta>0?sDelta+" new spell"+(sDelta>1?"s":""):""].filter(Boolean).join(" and "):"Review spells known or prepared and your spell slots",tab:"spells"});
+  // ---- class-specific picks ----
+  const lvlN = newClsLvl;
+  const filledN = a=>(Array.isArray(a)?a:[]).filter(Boolean).length;
+  const sec = {};
+  if(cls===char.charClass){
+    const knownSp = knownNow;
+    if(cls==="Warlock"){
+      if(lvlN>=3&&!char.warBoon) sec.boon={title:"Pact Boon",slots:1,opts:WAR_BOONS.map(b=>({v:b.n,l:b.n}))};
+      const invSlots=Math.max(0,(WAR_INV_KNOWN[Math.min(20,lvlN)-1]||0)-filledN(char.warInv));
+      if(invSlots>0){
+        const boonNow=char.warBoon||((pk.boon||[])[0])||"";
+        const have=new Set((char.warInv||[]).filter(Boolean));
+        sec.inv={title:"Eldritch Invocation",slots:invSlots,opts:WAR_INV.slice().sort((x,y)=>x.n.localeCompare(y.n)).filter(o=>!have.has(o.n)).map(o=>{
+          const bad=(o.min>lvlN)||(o.boon&&boonNow!==o.boon)||(o.need&&!(/Eldritch Blast/.test(o.need)?knownSp.has("Eldritch Blast"):(knownSp.has("Hex")||char.warPatron==="The Hexblade (Warlock)")));
+          const pre=warInvPre(o);
+          return {v:o.n,l:o.n+(pre?" ("+pre+")":"")+(bad?" !":"")};
+        })};
+      }
+      Object.keys(WAR_ARCANUM_LVL).forEach(sl=>{
+        if(lvlN===WAR_ARCANUM_LVL[sl]&&availSpells&&Array.isArray(availSpells[sl])){
+          sec["arc"+sl]={title:"Mystic Arcanum ("+sl+"th level)",slots:1,spell:true,opts:availSpells[sl].filter(x=>!knownSp.has(x)).map(x=>({v:x,l:x}))};
+        }
+      });
+    }
+    const styleList=FIGHTING_STYLES_LIST.filter(x=>(x.n!=="Blessed Warrior"||cls==="Paladin")&&(x.n!=="Druidic Warrior"||cls==="Ranger")&&!(cls==="Paladin"&&["Archery","Superior Technique","Thrown Weapon Fighting","Two-Weapon Fighting","Unarmed Fighting"].includes(x.n))&&!(cls==="Ranger"&&["Great Weapon Fighting","Interception","Protection","Superior Technique","Unarmed Fighting"].includes(x.n))).map(x=>({v:x.n,l:x.n}));
+    if(!char.classFightingStyle&&(cls==="Fighter"||((cls==="Paladin"||cls==="Ranger")&&lvlN>=2))) sec.style={title:"Fighting Style",slots:1,opts:styleList};
+    if(cls==="Fighter"&&char.martialArchetype==="Champion (Fighter)"&&lvlN>=10&&!char.championExtraStyle) sec.champ={title:"Additional Fighting Style",slots:1,opts:styleList};
+    if(cls==="Rogue"||cls==="Bard"){
+      const key=cls==="Rogue"?"rogueExpertise":"bardExpertise";
+      const mx=cls==="Rogue"?(lvlN>=6?4:2):(lvlN>=10?4:lvlN>=3?2:0);
+      const sl=Math.max(0,mx-filledN(char[key]));
+      const have=new Set(char[key]||[]);
+      const list=[...new Set([...(skillProfs||[]),...(cls==="Rogue"?["Thieves' Tools"]:[])])].sort().filter(x=>!have.has(x));
+      if(sl>0&&list.length) sec.exp={title:"Expertise",slots:Math.min(sl,list.length),opts:list.map(x=>({v:x,l:x}))};
+    }
+    if(cls==="Sorcerer"){
+      const mx=lvlN>=17?4:lvlN>=10?3:lvlN>=3?2:0;
+      const sl=Math.max(0,mx-filledN(char.sorcMeta));
+      const have=new Set((char.sorcMeta||[]).filter(Boolean));
+      if(sl>0) sec.meta={title:"Metamagic",slots:sl,opts:(sorcMetaNames||[]).filter(x=>!have.has(x)).map(x=>({v:x,l:x}))};
+    }
+    if(cls==="Fighter"&&(char.martialArchetype==="Battle Master (Fighter)"||subPick==="Battle Master (Fighter)")){
+      const mx=lvlN>=15?7:lvlN>=7?5:3;
+      const sl=Math.max(0,mx-filledN(char.battleMasterManeuvers));
+      const have=new Set(char.battleMasterManeuvers||[]);
+      if(sl>0) sec.man={title:"Maneuver",slots:sl,opts:BATTLE_MASTER_MANEUVERS.filter(x=>!have.has(x.n)).map(x=>({v:x.n,l:x.n}))};
+    }
+  }
+  Object.keys(sec).forEach(k=>{ items.push({k:"pk_"+k,t:"Choose "+(sec[k].slots>1?sec[k].slots+" "+(({inv:"Eldritch Invocations",exp:"Expertise skills",meta:"Metamagic options",man:"Maneuvers"})[k]||sec[k].title):sec[k].title),tab:"features",sec:k}); });
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
-  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks].filter(Boolean)); };
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks,...Object.keys(sec).filter(k=>sec[k].spell).flatMap(k=>pk[k]||[])].filter(Boolean),{...pk,_cls:cls}); };
   return (
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
@@ -4950,6 +5000,20 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
                 {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
                 <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
               </div>
+              {it.sec&&sec[it.sec]&&(
+                <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
+                  {Array.from({length:sec[it.sec].slots}).map((_,i)=>{
+                    const cur=(pk[it.sec]||[]);
+                    return (
+                      <select key={i} className="ri-sel" value={cur[i]||""} onChange={e=>setPk(o=>{const a=(o[it.sec]||[]).slice();a[i]=e.target.value;return {...o,[it.sec]:a};})} style={{fontSize:11}}>
+                        <option value="">-- {sec[it.sec].title.toLowerCase()} {sec[it.sec].slots>1?i+1:""} --</option>
+                        {sec[it.sec].opts.map(o=><option key={o.v} value={o.v} disabled={cur.includes(o.v)&&cur[i]!==o.v}>{o.l}</option>)}
+                      </select>
+                    );
+                  })}
+                  {it.sec==="inv"&&<div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ Invocations marked ! have prerequisites you don't meet yet.</div>}
+                </div>
+              )}
               {it.k==="spl"&&spellsPick&&(
                 <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
                   {Array.from({length:cDelta}).map((_,i)=>(
@@ -5829,7 +5893,7 @@ function App() {
  setLevelUpPending(null);
   }, [levelUpPending]);
 
- const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub,asi,addSpells) => {
+ const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub,asi,addSpells,pk) => {
  setCharSaving(p => {
  const u = {...p};
  const n = p.lvlUpPending||0;
@@ -5842,6 +5906,16 @@ function App() {
  u.lvlUpPending = Math.max(0,n-1);
  if(sub&&sub.field&&sub.value&&!p[sub.field]) u[sub.field]=sub.value;
  if(addSpells&&addSpells.length) u.spellsKnown=[...new Set([...(p.spellsKnown||[]),...addSpells])];
+ if(pk){
+   const g=k=>(pk[k]||[]).filter(Boolean);
+   if(g("boon")[0]) u.warBoon=g("boon")[0];
+   if(g("inv").length) u.warInv=[...(Array.isArray(p.warInv)?p.warInv:[]).filter(Boolean),...g("inv")].slice(0,8);
+   if(g("style")[0]) u.classFightingStyle=g("style")[0];
+   if(g("champ")[0]) u.championExtraStyle=g("champ")[0];
+   if(g("exp").length) { const key=pk._cls==="Rogue"?"rogueExpertise":"bardExpertise"; u[key]=[...(p[key]||[]),...g("exp")]; }
+   if(g("meta").length){ const a=Array.from({length:4},(_,k)=>(Array.isArray(p.sorcMeta)?p.sorcMeta:[])[k]||""); g("meta").forEach(m=>{const i=a.findIndex(x=>!x); if(i>=0) a[i]=m;}); u.sorcMeta=a; }
+   if(g("man").length) u.battleMasterManeuvers=[...(p.battleMasterManeuvers||[]),...g("man")];
+ }
  if(asi&&asi.key&&asi.value&&!(p.asiChoices&&p.asiChoices[asi.key]&&p.asiChoices[asi.key].choice)) u.asiChoices={...(p.asiChoices||{}),[asi.key]:asi.value};
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
  if(hasEldritchAdept){ u.eaInvocation=""; u.eaInvocationLevel=0; }
@@ -5849,7 +5923,7 @@ function App() {
    if(Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Fighting Initiate")){ u.fiStyle=""; u.fiStyleLevel=0; }
    if(Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Metamagic Adept")){ u.mmOption1=""; u.mmOption1Level=0; u.mmOption2=""; u.mmOption2Level=0; }
  }
- return u;
+ return (pk&&(pk.inv||[]).some(Boolean))?warApplyRitualBook(u):u;
  });
  setLevelUpMsg(`🎉 ${chosenClass} → ${newClsLvl}. +${hpGain} HP.`);
  setTimeout(() => setLevelUpMsg(""), 6000);
@@ -7910,7 +7984,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
-        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} availSpells={availSpells} slots={slots} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
+        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} availSpells={availSpells} slots={slots} skillProfs={effSkillProfs} sorcMetaNames={SORC_META.map(m=>m.n)} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
