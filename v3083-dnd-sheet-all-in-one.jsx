@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3082";
+const SHEET_VERSION = "v3083";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5048,7 +5048,7 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
   const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks,...Object.keys(sec).filter(k=>sec[k].spell).flatMap(k=>pk[k]||[])].filter(Boolean),{...pk,_cls:cls,_fields:Object.fromEntries(Object.keys(sec).filter(k=>sec[k].fields).map(k=>[k,sec[k].fields]))}); };
   return (
-    mini ? <div style={{position:"fixed",left:0,right:0,bottom:0,zIndex:9999,display:"flex",justifyContent:"center",padding:"10px"}}><button style={{...btn(true),padding:"10px 18px",fontSize:14,boxShadow:"0 4px 16px rgba(0,0,0,.4)"}} onClick={()=>setMini(false)}>🎉 Back to Level {lvl} checklist</button></div> :
+    mini ? <div style={{position:"fixed",left:0,right:0,bottom:"calc(16px + env(safe-area-inset-bottom))",zIndex:9999,display:"flex",justifyContent:"center",padding:"10px",pointerEvents:"none"}}><button style={{...btn(true),padding:"12px 22px",fontSize:15,background:"var(--accent)",color:"#fff",border:"2px solid #fff",borderRadius:24,boxShadow:"0 6px 20px rgba(0,0,0,.6)",pointerEvents:"auto"}} onClick={()=>setMini(false)}>🎉 Back to Level {lvl} checklist</button></div> :
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
         <div className="levelup-modal-title" style={{textAlign:"center"}}>🎉 Level {lvl}!</div>
