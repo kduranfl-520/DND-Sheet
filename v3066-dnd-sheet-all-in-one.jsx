@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3065";
+const SHEET_VERSION = "v3066";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4819,6 +4819,84 @@ const SpellSearchPick = ({maxL,onPick}) => {
 };
 const SCHOOL_COLORS={Abjuration:"#2563eb",Conjuration:"#eab308",Divination:"#06b6d4",Enchantment:"#d946ef",Evocation:"#dc2626",Illusion:"#6d28d9",Necromancy:"#22c55e",Transmutation:"#64748b"};
 const schoolColor=(spell)=>{const sc=typeof spell==="string"&&SCHOOL_COLORS[spell]?spell:(typeof spell==="string"?SPELL_DATA[spell]?.school:spell);return SCHOOL_COLORS[sc]||"var(--border)";};
+const LU_ASI={Fighter:[4,6,8,12,14,16,19],Rogue:[4,8,10,12,16,19]};
+const LU_SUB={Barbarian:3,Bard:3,Cleric:1,Druid:2,Fighter:3,Monk:3,Paladin:3,Ranger:3,Rogue:3,Sorcerer:1,Warlock:1,Wizard:2,Artificer:3};
+const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
+const LevelUpChecklist = ({char,onApply}) => {
+  const n = char.lvlUpPending||0;
+  const lvl = (char.level||1)-n+1;
+  const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
+  const forced = mcValid && lvl===2 ? char.multiClass : null;
+  const [cls,setCls] = useState(forced||char.charClass);
+  const [mode,setMode] = useState("roll");
+  const [rolled,setRolled] = useState(null);
+  const [manual,setManual] = useState("");
+  const [done,setDone] = useState({});
+  const nc = CLASSES[cls]||null;
+  const die = nc?nc.hitDie:8;
+  const conMod = abilityMod((char.abilities?.CON||10)+(SPECIES[char.species]?.abilityBonus?.CON||0));
+  const hpGain = mode==="roll" ? (rolled==null?null:Math.max(1,rolled+conMod)) : mode==="avg" ? Math.max(1,Math.floor(die/2)+1+conMod) : (manual===""?null:Math.max(0,Number(manual)||0));
+  const newClsLvl = !mcValid ? lvl : (cls===char.charClass ? (char.classLevel||1)+1 : (char.multiClassLevel||0)+1);
+  const asiLvls = LU_ASI[cls]||[4,8,12,16,19];
+  const items = [];
+  if(asiLvls.includes(newClsLvl)) items.push({k:"asi",t:"Ability Score Improvement or feat",tab:"features"});
+  if(LU_SUB[cls]===newClsLvl) items.push({k:"sub",t:"Choose your subclass",tab:"features"});
+  if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:"Review spells known or prepared and your spell slots",tab:"spells"});
+  items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
+  const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after); };
+  return (
+    <div className="levelup-modal-backdrop">
+      <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
+        <div className="levelup-modal-title" style={{textAlign:"center"}}>🎉 Level {lvl}!</div>
+        {n>1&&<div style={{fontSize:11,color:"var(--muted)",textAlign:"center"}}>{n} levels to apply — this is the first.</div>}
+        <div>
+          <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>Class</div>
+          {mcValid&&!forced?(
+            <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+              {[char.charClass,char.multiClass].map(c=><button key={c} style={btn(cls===c)} onClick={()=>{setCls(c);setRolled(null);}}>{c} (d{CLASSES[c]?.hitDie})</button>)}
+            </div>
+          ):<div style={{fontSize:13,fontWeight:700,color:"var(--accent)"}}>{cls} → level {newClsLvl} (d{die})</div>}
+        </div>
+        <div>
+          <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>Hit points</div>
+          <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
+            <button style={btn(mode==="roll")} onClick={()=>setMode("roll")}>Roll</button>
+            <button style={btn(mode==="avg")} onClick={()=>setMode("avg")}>Average</button>
+            <button style={btn(mode==="man")} onClick={()=>setMode("man")}>Manual</button>
+          </div>
+          <div style={{display:"flex",gap:8,alignItems:"center",marginTop:8,flexWrap:"wrap"}}>
+            {mode==="roll"&&<button style={btn(false)} onClick={()=>setRolled(Math.floor(Math.random()*die)+1)}>🎲 {rolled==null?"Roll d"+die:"Re-roll"}</button>}
+            {mode==="man"&&<input type="number" className="ri-sel" placeholder="HP gained" value={manual} onChange={e=>setManual(e.target.value)} style={{width:110}}/>}
+            <span style={{fontSize:12,color:"var(--text)"}}>
+              {mode==="roll"&&(rolled==null?"Roll the hit die to continue.":"d"+die+" = "+rolled+(conMod>=0?" + ":" − ")+Math.abs(conMod)+" CON → ")}
+              {mode==="avg"&&"Average "+(Math.floor(die/2)+1)+(conMod>=0?" + ":" − ")+Math.abs(conMod)+" CON → "}
+              {mode==="man"&&(manual===""?"Enter the HP you gained.":"")}
+              {hpGain!=null&&<b style={{color:"var(--green)"}}>+{hpGain} HP</b>}
+            </span>
+          </div>
+        </div>
+        <div>
+          <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>Level {lvl} checklist</div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            {items.map(it=>(
+              <div key={it.k} style={{display:"flex",alignItems:"center",gap:8}}>
+                <input type="checkbox" checked={!!done[it.k]} onChange={e=>setDone(d=>({...d,[it.k]:e.target.checked}))}/>
+                <span style={{flex:1,fontSize:12,color:done[it.k]?"var(--muted)":"var(--text)",textDecoration:done[it.k]?"line-through":"none"}}>{it.t}</span>
+                <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
+              </div>
+            ))}
+          </div>
+          <div style={{fontSize:10,color:"var(--muted)",fontStyle:"italic",marginTop:6}}>Go applies your HP and level, then takes you to the right tab.</div>
+        </div>
+        <div style={{display:"flex",gap:8,marginTop:4}}>
+          <button style={{...btn(true),flex:1,padding:"10px",opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply(null)}>Update</button>
+          <button style={{...btn(false),flex:1,padding:"10px",opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({longRest:true})}>🌙 Long Rest</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll,tempRoll}) => {
   if(!sd) return null;
   const isHeal = sd.dmgType==="healing";
@@ -5644,6 +5722,30 @@ function App() {
  setLevelUpPending(null);
   }, [levelUpPending]);
 
+ const applyLevelStep = (chosenClass,newClsLvl,hpGain,after) => {
+ setCharSaving(p => {
+ const u = {...p};
+ const n = p.lvlUpPending||0;
+ const mcValid = !!(p.multiClass && p.multiClass!==p.charClass && CLASSES[p.multiClass]);
+ if (!mcValid) { u.classLevel = newClsLvl; }
+ else if (chosenClass===p.charClass) { u.classLevel = newClsLvl; u.multiClassLevel = p.multiClassLevel||0; }
+ else { u.classLevel = p.classLevel||1; u.multiClassLevel = newClsLvl; }
+ u.hp = {...p.hp, max:(p.hp?.max||0)+hpGain};
+ u.lvlUpPending = Math.max(0,n-1);
+ const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
+ if(hasEldritchAdept){ u.eaInvocation=""; u.eaInvocationLevel=0; }
+ if([4,8,12,16,19].includes(u.level||0)){
+   if(Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Fighting Initiate")){ u.fiStyle=""; u.fiStyleLevel=0; }
+   if(Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Metamagic Adept")){ u.mmOption1=""; u.mmOption1Level=0; u.mmOption2=""; u.mmOption2Level=0; }
+ }
+ return u;
+ });
+ setLevelUpMsg(`🎉 ${chosenClass} → ${newClsLvl}. +${hpGain} HP.`);
+ setTimeout(() => setLevelUpMsg(""), 6000);
+ if(after&&after.longRest) setLrAfterLevel(true);
+ if(after&&after.tab) setTab(after.tab);
+ };
+
  const handleAddXp = useCallback(() => {
  const gain = Math.max(0, Number(xpAdd) || 0);
  if (!gain) return;
@@ -5653,42 +5755,7 @@ function App() {
  const u = {...p, xp: newXp};
  if (newLvl > p.level) {
  u.level = newLvl;
-        // If multiclass exists (in CLASSES or library), show picker; otherwise auto-apply primary class
- const mcValid = p.multiClass && p.multiClass !== p.charClass &&
-          !!(CLASSES[p.multiClass]);
- if (mcValid) {
-          // At level 2: auto-split 1/1. Above level 2: show picker.
- if (newLvl === 2) {
- u.classLevel = 1;
- u.multiClassLevel = 1;
- const nc2 = CLASSES[p.charClass] || null;
- if (nc2) {
- const conMod2 = abilityMod(p.abilities.CON + (SPECIES[p.species]?.abilityBonus?.CON||0));
- const roll2 = Math.floor(Math.random() * nc2.hitDie) + 1;
- const hpGain2 = Math.max(1, roll2 + conMod2);
- u.hp = {...p.hp, max: (p.hp.max || 0) + hpGain2};
- setLevelUpMsg(`🎉 Level 2! ${p.charClass} 1 / ${p.multiClass} 1. +${hpGain2} HP from ${p.charClass} d${nc2.hitDie}. Max now ${u.hp.max}.`);
-            } else {
- setLevelUpMsg(`🎉 Level 2! ${p.charClass} 1 / ${p.multiClass} 1.`);
-            }
- setTimeout(() => setLevelUpMsg(""), 7000);
-          } else {
- setLevelUpPending({newLvl, primaryClass: p.charClass, multiClass: p.multiClass});
-          }
-        } else {
- const nc = CLASSES[p.charClass] || null;
- u.classLevel = (p.classLevel || 1) + 1;
- if (nc) {
- const conMod = abilityMod(p.abilities.CON + (SPECIES[p.species]?.abilityBonus?.CON||0));
- const roll = Math.floor(Math.random() * nc.hitDie) + 1;
- const hpGain = Math.max(1, roll + conMod);
- u.hp = {...p.hp, max: (p.hp.max || 0) + hpGain};
- setLevelUpMsg(`🎉 Level ${newLvl}! ${p.charClass} → ${u.classLevel}. +${hpGain} HP (rolled ${roll}${conMod>=0?"+":""}${conMod} CON on d${nc.hitDie}). Max now ${u.hp.max}.`);
-          } else {
- setLevelUpMsg(`🎉 Level ${newLvl}!`);
-          }
- setTimeout(() => setLevelUpMsg(""), 7000);
-        }
+ u.lvlUpPending=(p.lvlUpPending||0)+(newLvl-p.level);
       }
  return u;
     });
@@ -6530,6 +6597,27 @@ function App() {
   const toughFeatBonus = Object.values(char.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Tough") ? (char.level||1)*2 : 0;
   const draconicHpBonus = (char.charClass==="Sorcerer"&&char.sorcOrigin==="Draconic Bloodline (Sorcerer)") ? sorcLvl : 0;
   const effHpMax = (char.hp?.max||0) + toughnessBonus + toughFeatBonus + draconicHpBonus;
+  const doLongRest=()=>{
+ setF("hp.current", effHpMax);
+ setF("deathSaves.successes", 0);
+ setF("deathSaves.failures", 0);
+ TRINKET_TXT.length=0;
+ setCharSaving(p=>({...p, warInvUsed:{}, companions:(p.companions||[]).filter(c=>c.id!=="hexblade-specter"), saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, warInvUsed:{}, warMasterUsed:false, warFeyUsed:false, warMistyUsed:false, warDelirUsed:false, warLuckUsed:false, warEntropicUsed:false, warHurlUsed:false, warHexUsed:false, warHexCurseOn:false, warTombOn:false, warTentOn:false, warTentUsed:0, warGenieFlyOn:false, warGenieFlyUsed:0, warIndestUsed:false, warDeathUsed:false, warBottleUsed:false, warBottleIn:false, warWishLeft:Math.max(0,(p.warWishLeft||0)-1), warGraspUsed:false, warPlungeUsed:false, warTalismanUsed:0, warBondUsed:0, warTalSaveUsed:0, warSpecterUsed:false, warHealUsed:0, warSearUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
+ setF("wisSpellUsed_ConsultTheSpirits", false);
+ setF("libItemState", resetLibItemUses(char, libEntries, "long"));
+ setF("fighterIndomitableUsed", 0);
+ setF("rogueStrokeOfLuckUsed", false); setF("fighterSecondWindUsed", false); setF("fighterActionSurgeUsed", 0); setF("battleMasterDiceUsed", 0); setF("superiorTechniqueDiceUsed", false); setF("psiPoweredLeapUsedFree", false); setF("psiTelekineticMoveUsedFree", false);
+ setF("ekSlotsUsed", [0,0,0,0]);
+ setF("samuraiFightingSpiritUsed", 0);
+ setF("arcaneArcherShotUsed", 0); setF("cavalierWardingUsed", 0); setF("psiWarriorDiceUsed", 0); setF("runeKnightGiantsMightUsed", 0);
+ setF("cavalierMarkUsed", 0); setF("runeKnightShieldUsed", 0);
+ setF("bulwarkOfForceUsedFree", false);
+ setF("telekineticMasterUsedFree", false);
+ setF("runeKnightInscriptions", {});
+ setF("runeKnightInvokeUsed", {}); setF("frostRuneBuffActive", false); setF("hillRuneBuffActive", false);
+  };
+  const [lrAfterLevel,setLrAfterLevel]=useState(false);
+  useEffect(()=>{ if(lrAfterLevel){ setLrAfterLevel(false); doLongRest(); } },[lrAfterLevel]);
 
  const eff = {};
  const subBonus = SUBRACE_BONUS[char.subrace] || {};
@@ -7711,6 +7799,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
+        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
@@ -8885,25 +8974,7 @@ function App() {
                     </div>
                   </button>
                   <button className="rest-btn rest-long"
- onClick={()=>{
- setF("hp.current", effHpMax);
- setF("deathSaves.successes", 0);
- setF("deathSaves.failures", 0);
- TRINKET_TXT.length=0;
- setCharSaving(p=>({...p, warInvUsed:{}, companions:(p.companions||[]).filter(c=>c.id!=="hexblade-specter"), saveResults:{}, durationCounters:{}, durationTimers:{}, spellSlotsUsed: Array(9).fill(0), sorcSPUsed:0, sorcCreatedSlots:Array(9).fill(0), sorcRestoUsed:false, warInvUsed:{}, warMasterUsed:false, warFeyUsed:false, warMistyUsed:false, warDelirUsed:false, warLuckUsed:false, warEntropicUsed:false, warHurlUsed:false, warHexUsed:false, warHexCurseOn:false, warTombOn:false, warTentOn:false, warTentUsed:0, warGenieFlyOn:false, warGenieFlyUsed:0, warIndestUsed:false, warDeathUsed:false, warBottleUsed:false, warBottleIn:false, warWishLeft:Math.max(0,(p.warWishLeft||0)-1), warGraspUsed:false, warPlungeUsed:false, warTalismanUsed:0, warBondUsed:0, warTalSaveUsed:0, warSpecterUsed:false, warHealUsed:0, warSearUsed:false, psionicFreeCast:"", sorcDracResistOn:false, sorcTidesUsed:false, sorcBalUsed:0, sorcBastionDice:0, sorcTranceUsed:false, sorcTranceOn:false, sorcCavalcadeUsed:false, sorcImplosionUsed:false, sorcTelepathyOn:false, sorcRevOn:false, sorcRevOpts:[], sorcRevPick:[], sorcWindUsed:false, sorcWindActive:false, sorcGraveUsed:false, sorcHoundOn:false, sorcUmbralOn:false, sorcFavoredUsed:false, sorcUnearthlyUsed:false, sorcOtherWingsActive:false, sorcDragonWingsActive:false, sorcPresenceOn:false, mysticArcanum:{}, inspirationActive: false, breathWeaponUsed: false, rageUsed:0, relentlessRageDC:10, relentlessRageResult:null, actionUsed:false, bonusActionUsed:false, reactionUsed:false, moveUsed:0, beastSoul:"", infectiousFuryUsed:0, huntUsed:0, magicAwarenessUsed:0, bolsteringMagicUsed:0, bolsteringSlotUsed:false, bolsteringSlotRoll:0, bolsteringSlotChosen:0, zealousPresenceUsed:0, healerFeatUsed:false, inspiringLeaderUsed:false, luckyPointsUsed:[false,false,false], miSpellUsed:false, maSDUsed:false, aiSpellUsed:false, ftMistyStepUsed:false, ftSpellUsed:false, stInvisUsed:false, stSpellUsed:false, tpDetectUsed:false, dhmLevitateUsed:false, dhmDispelUsed:false, fadeAwayUsed:false, ftpMistyUsed:false, orcishFuryUsed:false, wemLongstriderUsed:false, wemPassUsed:false, mmSPUsed:[false,false], bardInspirationUsed:0, bardPoCUsed:false, bardPoCItem:"", bardCCItem1:"", bardCCItem2:"", bardCCItem3:"", bardCCItem4:"", bardAPUsed:false, bardUSUsed:false, bardIIUsed:0, bardEPUsed:false, bardMMUsed:false, bardUMUsed:false, bardMWActive:false, bardWTUsed:false, bardSLUsed:false, clericCDUsed:0, clericDIUsed:false, clericVisionsUsed:false, clericWardingFlareUsed:0, clericWrathStormUsed:0, clericWarPriestUsed:0, clericEmbodimentUsed:0, clericEmboldeningUsed:0, clericEyesOfNightSharedUsed:false, clericStepsOfNightUsed:0, clericBlessingForgeUsed:false, clericBlessingForgeType:"", clericBlessingForgeItem:"", clericEyesOfGraveUsed:0, clericSentinelDeathUsed:0, druidWildShapeUsed:0, druidWildShapeActive:false, druidWildShapeForm:"", druidCombatWildShapeUsed:false, druidNaturalRecoverySpent:0, druidSymbioticActive:false, druidSpreadingSporesActive:false, druidGuidingBoltUsed:0, druidStarryFormActive:false, druidCosmicOmen:"", druidCosmicOmenRoll:0, druidCosmicOmenUsed:0, druidWildfireSpiritActive:false, druidCauterizingUsed:0, druidBlazingRevivalUsed:false, druidBalmUsed:0, druidHearthActive:false, druidHiddenPathsUsed:0, druidWalkerUsed:false, druidSpiritTotemActive:false, druidSpiritTotemType:"", druidSpiritTotemUsed:false, druidFaithfulSummonsUsed:false, druidFaithfulSummonsPicking:false, druidFaithfulSummonsBeast1:"", druidFaithfulSummonsBeast2:"", druidFaithfulSummonsBeast3:"", druidFaithfulSummonsBeast4:"", druidFungalInfestationUsed:0, monkKiUsed:0, monkWholenessOfBodyUsed:false, monkTranquilityUsed:false, monkTranquilityActive:false, monkQuiveringPalmActive:false, monkQuiveringPalmDC:0, monkQuiveringPalmDaysLeft:0, monkEmptyBodyInvisUsed:false, monkEmptyBodyAstralUsed:false, monkShadowStepUsed:false, monkCloakOfShadowsActive:false, monkOpportunistUsed:false, monkSunBoltExtraUsed:false, monkSearingArcUsed:false, monkSearingSunburstUsed:false, monkTouchOfDeathUsed:false, monkHourOfReapingUsed:false, monkMasteryOfDeathUsed:false, monkSharpenBladeActive:0, monkDrunkenTechniqueActive:false, monkDrunkardsLuckUsed:false, monkUltimateMercyUsed:false, paladinAvengingAngelActive:false, paladinPeerlessAthleteActive:false, paladinLOHSpent:0, paladinDivineSenseUsed:0, paladinCDUsed:0, paladinVowActive:false, rogueStrokeOfLuckUsed:false, rogueSpellThiefUsed:false,rogueSpellThiefSpell:"",rogueSpellThiefQ:"", rogueVersatileOn:false, rogueAssassinateAdv:false, rogueSupremeSneakOn:false, rogueImpostorOn:false, rogueAssassinateSurprised:false, rogueInsightfulOn:false, rogueUnerringEyeUsed:0, rogueAmbushMarked:false, rogueSwashPanacheOn:false, rogueMasterDuelistUsed:false, roguePhantomWailsUsed:0, roguePhantomGhostWalkUsed:false, roguePhantomGhostOn:false, roguePhantomProf:"", roguePhantomTrinkets:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?1:(p.roguePhantomTrinkets||0)),roguePhantomTrinketNames:((p.charClass==="Rogue"&&p.rogueArchetype==="Phantom (Rogue)"&&(p.multiClassLevel>0?p.classLevel:p.level||1)>=17&&!(p.roguePhantomTrinkets>0))?["Free trinket - long rest"]:(p.roguePhantomTrinketNames||[])), rogueSoulDiceUsed:0, rogueSoulRegainUsed:false, rogueSoulVeilUsed:false, rogueSoulRendUsed:false, rogueSoulWhisperUsed:false, paladinHolyNimbusUsed:false, paladinUndyingSentinelUsed:false, paladinElderChampionUsed:false, paladinAvengingAngelUsed:false, paladinHarnessUsed:0, paladinCleansingTouchUsed:0, rangerHideActive:false, rangerMADefActive:false, rangerFeyReinforcementsUsed:false, rangerMistyWandererUsed:0, rangerWrithingTideUsed:0, rangerSwarmDispersalUsed:0, rangerDreadAmbusherUsed:false, rangerDetectPortalUsed:false, rangerEtherealStepUsed:false, rangerPlanarMarked:false, rangerNemesisUsed:false, rangerSlayersPreyOn:false, rangerHuntersSenseUsed:0, paladinGloriousDefenseUsed:0, paladinLivingLegendUsed:false, paladinLivingLegendActive:false, paladinMortalBulwarkUsed:false, paladinMortalBulwarkActive:false, paladinInvincibleConquerorUsed:false, paladinInvincibleConquerorActive:false, paladinEmissaryOfPeaceActive:false, paladinExaltedChampionUsed:false, paladinExaltedChampionActive:false, companions:(p.companions||[]).filter(c=>c.id!=="wildshape-form"&&c.id!==HOUND_ID&&!(c.id||"").toString().startsWith("fungal-zombie-")&&!(c.id||"").toString().startsWith("faithfulsummons-"))}));
- setF("wisSpellUsed_ConsultTheSpirits", false);
- setF("libItemState", resetLibItemUses(char, libEntries, "long"));
- setF("fighterIndomitableUsed", 0);
- setF("rogueStrokeOfLuckUsed", false); setF("fighterSecondWindUsed", false); setF("fighterActionSurgeUsed", 0); setF("battleMasterDiceUsed", 0); setF("superiorTechniqueDiceUsed", false); setF("psiPoweredLeapUsedFree", false); setF("psiTelekineticMoveUsedFree", false);
- setF("ekSlotsUsed", [0,0,0,0]);
- setF("samuraiFightingSpiritUsed", 0);
- setF("arcaneArcherShotUsed", 0); setF("cavalierWardingUsed", 0); setF("psiWarriorDiceUsed", 0); setF("runeKnightGiantsMightUsed", 0);
- setF("cavalierMarkUsed", 0); setF("runeKnightShieldUsed", 0);
- setF("bulwarkOfForceUsedFree", false);
- setF("telekineticMasterUsedFree", false);
- setF("runeKnightInscriptions", {});
- setF("runeKnightInvokeUsed", {}); setF("frostRuneBuffActive", false); setF("hillRuneBuffActive", false);
-                    }}>
+ onClick={doLongRest}>
                     <div>
                       <div className="rest-btn-title" style={{color:"var(--accent)",textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>🌙 Long Rest</div>
                       <div className="rest-btn-sub" style={{textShadow:darkMode?"none":"0 0 2px #fff,0 0 3px #fff,0 1px 4px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.8)"}}>Full restore</div>
