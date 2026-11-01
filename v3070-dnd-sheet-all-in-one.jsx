@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3069";
+const SHEET_VERSION = "v3070";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4856,6 +4856,7 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const [asiA1,setAsiA1] = useState("");
   const [asiA2,setAsiA2] = useState("");
   const [asiFeat,setAsiFeat] = useState("");
+  const [mcOpen,setMcOpen] = useState(false);
   const [cPicks,setCPicks] = useState([]);
   const [sPicks,setSPicks] = useState([]);
   const nc = CLASSES[cls]||null;
@@ -4864,7 +4865,8 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const conAdj = asiMode==="one"&&asiA1==="CON" ? 2 : asiMode==="two" ? ((asiA1==="CON"?1:0)+(asiA2==="CON"?1:0)) : (asiMode==="feat"&&(LU_FEAT_AB[asiFeat]==="CON")?1:0);
   const conMod = abilityMod(Math.min(20,conBase+conAdj));
   const hpGain = mode==="roll" ? (rolled==null?null:Math.max(1,rolled+conMod)) : mode==="avg" ? Math.max(1,Math.floor(die/2)+1+conMod) : (manual===""?null:Math.max(0,Number(manual)||0));
-  const newClsLvl = !mcValid ? lvl : (cls===char.charClass ? (char.classLevel||1)+1 : (char.multiClassLevel||0)+1);
+  const isNewMc = !mcValid && cls!==char.charClass;
+  const newClsLvl = isNewMc ? 1 : !mcValid ? lvl : (cls===char.charClass ? (char.classLevel||1)+1 : (char.multiClassLevel||0)+1);
   const asiLvls = LU_ASI[cls]||[4,8,12,16,19];
   const items = [];
   const asiKey = "asi_lvl"+newClsLvl;
@@ -4904,7 +4906,20 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
             <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
               {[char.charClass,char.multiClass].map(c=><button key={c} style={btn(cls===c)} onClick={()=>{setCls(c);setRolled(null);}}>{c} (d{CLASSES[c]?.hitDie})</button>)}
             </div>
-          ):<div style={{fontSize:13,fontWeight:700,color:"var(--accent)"}}>{cls} → level {newClsLvl} (d{die})</div>}
+          ):(<>
+            {(!mcValid&&lvl>=2)?(
+              <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
+                <button style={btn(!isNewMc)} onClick={()=>{setCls(char.charClass);setRolled(null);setMcOpen(false);}}>{char.charClass} → {lvl} (d{CLASSES[char.charClass]?.hitDie})</button>
+                <button style={btn(isNewMc||mcOpen)} onClick={()=>setMcOpen(o=>!o)}>+ Multiclass</button>
+                {mcOpen&&<select className="ri-sel" value={isNewMc?cls:""} onChange={e=>{ if(e.target.value){setCls(e.target.value);setRolled(null);} else {setCls(char.charClass);} }} style={{fontSize:11}}>
+                  <option value="">-- new class --</option>
+                  {Object.keys(CLASSES).filter(c=>c!==char.charClass).map(c=><option key={c} value={c}>{c}{mcPrereqMet(c,eff||{})?"":" !"}</option>)}
+                </select>}
+              </div>
+            ):<div style={{fontSize:13,fontWeight:700,color:"var(--accent)"}}>{cls} → level {newClsLvl} (d{die})</div>}
+            {isNewMc&&<div style={{fontSize:12,fontWeight:700,color:"var(--accent)",marginTop:6}}>{cls} → level 1 (d{die})</div>}
+            {isNewMc&&(()=>{const failed=mcFailedPrereqs(cls,eff||{}); if(!failed.length) return null; const isOr=!!MC_PREREQS_OR[cls]; return <div style={{fontSize:11,color:"var(--red)",marginTop:4}}>⚠ Needs {failed.map(([ab,sc])=>ab+" "+sc).join(isOr?" or ":" & ")} to multiclass into {cls}</div>;})()}
+          </>)}
         </div>
         <div>
           <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>Hit points</div>
@@ -5819,7 +5834,8 @@ function App() {
  const u = {...p};
  const n = p.lvlUpPending||0;
  const mcValid = !!(p.multiClass && p.multiClass!==p.charClass && CLASSES[p.multiClass]);
- if (!mcValid) { u.classLevel = newClsLvl; }
+ if (!mcValid && chosenClass!==p.charClass && CLASSES[chosenClass]) { u.multiClass = chosenClass; u.classLevel = (p.level||1)-n; u.multiClassLevel = 1; }
+ else if (!mcValid) { u.classLevel = newClsLvl; }
  else if (chosenClass===p.charClass) { u.classLevel = newClsLvl; u.multiClassLevel = p.multiClassLevel||0; }
  else { u.classLevel = p.classLevel||1; u.multiClassLevel = newClsLvl; }
  u.hp = {...p.hp, max:(p.hp?.max||0)+hpGain};
