@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3067";
+const SHEET_VERSION = "v3068";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4840,7 +4840,8 @@ const luSubOptions=(cls,libEntries,char)=>{
   return l.map(e=>e.title).sort();
 };
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
-const LevelUpChecklist = ({char,onApply,libEntries}) => {
+const LU_FEAT_AB={"Actor":"CHA","Heavily Armored":"STR","Heavy Armor Master":"STR","Keen Mind":"INT","Linguist":"INT","Durable":"CON"};
+const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
   const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
@@ -4851,14 +4852,26 @@ const LevelUpChecklist = ({char,onApply,libEntries}) => {
   const [manual,setManual] = useState("");
   const [done,setDone] = useState({});
   const [subPick,setSubPick] = useState("");
+  const [asiMode,setAsiMode] = useState("");
+  const [asiA1,setAsiA1] = useState("");
+  const [asiA2,setAsiA2] = useState("");
+  const [asiFeat,setAsiFeat] = useState("");
   const nc = CLASSES[cls]||null;
   const die = nc?nc.hitDie:8;
-  const conMod = abilityMod((char.abilities?.CON||10)+(SPECIES[char.species]?.abilityBonus?.CON||0));
+  const conBase = (eff&&eff.CON!=null) ? eff.CON : (char.abilities?.CON||10)+(SPECIES[char.species]?.abilityBonus?.CON||0);
+  const conAdj = asiMode==="one"&&asiA1==="CON" ? 2 : asiMode==="two" ? ((asiA1==="CON"?1:0)+(asiA2==="CON"?1:0)) : (asiMode==="feat"&&(LU_FEAT_AB[asiFeat]==="CON")?1:0);
+  const conMod = abilityMod(Math.min(20,conBase+conAdj));
   const hpGain = mode==="roll" ? (rolled==null?null:Math.max(1,rolled+conMod)) : mode==="avg" ? Math.max(1,Math.floor(die/2)+1+conMod) : (manual===""?null:Math.max(0,Number(manual)||0));
   const newClsLvl = !mcValid ? lvl : (cls===char.charClass ? (char.classLevel||1)+1 : (char.multiClassLevel||0)+1);
   const asiLvls = LU_ASI[cls]||[4,8,12,16,19];
   const items = [];
-  if(asiLvls.includes(newClsLvl)) items.push({k:"asi",t:"Ability Score Improvement or feat",tab:"features"});
+  const asiKey = "asi_lvl"+newClsLvl;
+  const asiHere = asiLvls.includes(newClsLvl);
+  const asiDone = !!(char.asiChoices&&char.asiChoices[asiKey]&&char.asiChoices[asiKey].choice);
+  const asiCanPick = asiHere && cls===char.charClass && !asiDone;
+  const asiComplete = asiMode==="one" ? !!asiA1 : asiMode==="two" ? (!!asiA1&&!!asiA2&&asiA1!==asiA2) : asiMode==="feat" ? !!asiFeat : false;
+  const asiVal = asiComplete ? (asiMode==="feat" ? {choice:"feat",feat:asiFeat,featAb:LU_FEAT_AB[asiFeat]||""} : asiMode==="one" ? {choice:"one",ab1:asiA1} : {choice:"two",ab1:asiA1,ab2:asiA2}) : null;
+  if(asiHere) items.push({k:"asi",t:asiDone?"Ability Score Improvement — already chosen":"Ability Score Improvement or feat",tab:"features"});
   const subField = LU_SUBFIELD[cls];
   const subHere = LU_SUB[cls]===newClsLvl;
   const subCanPick = subHere && subField && cls===char.charClass && !char[subField];
@@ -4867,7 +4880,7 @@ const LevelUpChecklist = ({char,onApply,libEntries}) => {
   if(LU_CASTERS.includes(cls)) items.push({k:"spl",t:"Review spells known or prepared and your spell slots",tab:"spells"});
   items.push({k:"ft",t:"Review the new "+cls+" features",tab:"features"});
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
-  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null); };
+  const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null); };
   return (
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
@@ -4903,12 +4916,36 @@ const LevelUpChecklist = ({char,onApply,libEntries}) => {
           <div style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>Level {lvl} checklist</div>
           <div style={{display:"flex",flexDirection:"column",gap:6}}>
             {items.map(it=>(
-              <div key={it.k} style={{display:"flex",alignItems:"center",gap:8}}>
+              <React.Fragment key={it.k}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
                 <input type="checkbox" checked={!!done[it.k]} onChange={e=>setDone(d=>({...d,[it.k]:e.target.checked}))}/>
                 <span style={{flex:1,fontSize:12,color:done[it.k]?"var(--muted)":"var(--text)",textDecoration:done[it.k]?"line-through":"none"}}>{it.t}</span>
                 {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
                 <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
               </div>
+              {it.k==="asi"&&asiCanPick&&(
+                <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
+                  <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                    <button style={btn(asiMode==="one")} onClick={()=>{setAsiMode("one");setAsiA2("");}}>+2 one ability</button>
+                    <button style={btn(asiMode==="two")} onClick={()=>setAsiMode("two")}>+1 two abilities</button>
+                    <button style={btn(asiMode==="feat")} onClick={()=>setAsiMode("feat")}>Feat</button>
+                  </div>
+                  {(asiMode==="one"||asiMode==="two")&&(()=>{
+                    const AB=["STR","DEX","CON","INT","WIS","CHA"]; const inc=asiMode==="one"?2:1; const cur=a=>(eff&&eff[a]!=null)?eff[a]:10;
+                    const opt=a=>a+" "+cur(a)+" → "+Math.min(20,cur(a)+inc);
+                    return (<div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                      <select className="ri-sel" value={asiA1} onChange={e=>setAsiA1(e.target.value)} style={{fontSize:11}}><option value="">-- {asiMode==="one"?"ability":"1st"} --</option>{AB.map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>
+                      {asiMode==="two"&&<select className="ri-sel" value={asiA2} onChange={e=>setAsiA2(e.target.value)} style={{fontSize:11}}><option value="">-- 2nd --</option>{AB.filter(a=>a!==asiA1).map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>}
+                    </div>);
+                  })()}
+                  {asiMode==="feat"&&(<>
+                    <select className="ri-sel" value={asiFeat} onChange={e=>setAsiFeat(e.target.value)} style={{fontSize:11,maxWidth:"100%"}}><option value="">-- choose a feat --</option>{(featNames||[]).map(f=><option key={f} value={f}>{f}</option>)}</select>
+                    {asiFeat&&<div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ Finish any choices this feat needs (skills, spells, ability) on the Features tab after you update.</div>}
+                  </>)}
+                  {asiMode&&!asiComplete&&<div style={{fontSize:10,color:"var(--muted)"}}>Finish the choice above, or update without it and pick later on the Features tab.</div>}
+                </div>
+              )}
+              </React.Fragment>
             ))}
           </div>
           <div style={{fontSize:10,color:"var(--muted)",fontStyle:"italic",marginTop:6}}>Go applies your HP and level, then takes you to the right tab.</div>
@@ -5746,7 +5783,7 @@ function App() {
  setLevelUpPending(null);
   }, [levelUpPending]);
 
- const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub) => {
+ const applyLevelStep = (chosenClass,newClsLvl,hpGain,after,sub,asi) => {
  setCharSaving(p => {
  const u = {...p};
  const n = p.lvlUpPending||0;
@@ -5757,6 +5794,7 @@ function App() {
  u.hp = {...p.hp, max:(p.hp?.max||0)+hpGain};
  u.lvlUpPending = Math.max(0,n-1);
  if(sub&&sub.field&&sub.value&&!p[sub.field]) u[sub.field]=sub.value;
+ if(asi&&asi.key&&asi.value&&!(p.asiChoices&&p.asiChoices[asi.key]&&p.asiChoices[asi.key].choice)) u.asiChoices={...(p.asiChoices||{}),[asi.key]:asi.value};
  const hasEldritchAdept=Object.values(u.asiChoices||{}).some(v=>v.choice==="feat"&&v.feat==="Eldritch Adept");
  if(hasEldritchAdept){ u.eaInvocation=""; u.eaInvocationLevel=0; }
  if([4,8,12,16,19].includes(u.level||0)){
@@ -7824,7 +7862,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
-        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries}/>}
+        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
