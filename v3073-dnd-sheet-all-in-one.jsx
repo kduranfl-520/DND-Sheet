@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3072";
+const SHEET_VERSION = "v3073";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -4841,7 +4841,7 @@ const luSubOptions=(cls,libEntries,char)=>{
 };
 const LU_CASTERS=["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard","Artificer"];
 const LU_FEAT_AB={"Actor":"CHA","Heavily Armored":"STR","Heavy Armor Master":"STR","Keen Mind":"INT","Linguist":"INT","Durable":"CON"};
-const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slots,skillProfs,sorcMetaNames}) => {
+const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSpells,slots,skillProfs,sorcMetaNames}) => {
   const n = char.lvlUpPending||0;
   const lvl = (char.level||1)-n+1;
   const mcValid = !!(char.multiClass && char.multiClass!==char.charClass && CLASSES[char.multiClass]);
@@ -4858,6 +4858,7 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const [asiFeat,setAsiFeat] = useState("");
   const [mcOpen,setMcOpen] = useState(false);
   const [pk,setPk] = useState({});
+  const [mini,setMini] = useState(false);
   const [cPicks,setCPicks] = useState([]);
   const [sPicks,setSPicks] = useState([]);
   const nc = CLASSES[cls]||null;
@@ -4971,6 +4972,7 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
   const btn = (on)=>({fontSize:12,fontWeight:700,padding:"6px 12px",borderRadius:8,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"});
   const apply = (after)=>{ if(hpGain==null) return; onApply(cls,newClsLvl,hpGain,after,(subCanPick&&subPick)?{field:subField,value:subPick}:null,(asiCanPick&&asiVal)?{key:asiKey,value:asiVal}:null,[...cPicks,...sPicks,...Object.keys(sec).filter(k=>sec[k].spell).flatMap(k=>pk[k]||[])].filter(Boolean),{...pk,_cls:cls,_fields:Object.fromEntries(Object.keys(sec).filter(k=>sec[k].fields).map(k=>[k,sec[k].fields]))}); };
   return (
+    mini ? <div style={{position:"fixed",left:0,right:0,bottom:0,zIndex:9999,display:"flex",justifyContent:"center",padding:"10px"}}><button style={{...btn(true),padding:"10px 18px",fontSize:14,boxShadow:"0 4px 16px rgba(0,0,0,.4)"}} onClick={()=>setMini(false)}>🎉 Back to Level {lvl} checklist</button></div> :
     <div className="levelup-modal-backdrop">
       <div className="levelup-modal" style={{width:"min(440px,94vw)",alignItems:"stretch",maxHeight:"90vh",overflowY:"auto"}}>
         <div className="levelup-modal-title" style={{textAlign:"center"}}>🎉 Level {lvl}!</div>
@@ -5023,7 +5025,7 @@ const LevelUpChecklist = ({char,onApply,libEntries,eff,featNames,availSpells,slo
                 <input type="checkbox" checked={!!done[it.k]} onChange={e=>setDone(d=>({...d,[it.k]:e.target.checked}))}/>
                 <span style={{flex:1,fontSize:12,color:done[it.k]?"var(--muted)":"var(--text)",textDecoration:done[it.k]?"line-through":"none"}}>{it.t}</span>
                 {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
-                <button style={{...btn(false),padding:"3px 10px",fontSize:11,opacity:hpGain==null?0.5:1}} disabled={hpGain==null} onClick={()=>apply({tab:it.tab})}>Go →</button>
+                <button style={{...btn(false),padding:"3px 10px",fontSize:11}} onClick={()=>{ setMini(true); onGoTab&&onGoTab(it.tab); }}>Go →</button>
               </div>
               {it.sec&&sec[it.sec]&&(
                 <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
@@ -8010,7 +8012,7 @@ function App() {
         {levelUpMsg && (
           <div className="levelup-toast" onClick={()=>setLevelUpMsg("")}>{levelUpMsg}</div>
         )}
-        {(char.lvlUpPending>0) && <LevelUpChecklist key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} availSpells={availSpells} slots={slots} skillProfs={effSkillProfs} sorcMetaNames={SORC_META.map(m=>m.n)} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
+        {(char.lvlUpPending>0) && <LevelUpChecklist onGoTab={setTab} key={(char.level||1)-(char.lvlUpPending||0)} char={char} onApply={applyLevelStep} libEntries={libEntries} availSpells={availSpells} slots={slots} skillProfs={effSkillProfs} sorcMetaNames={SORC_META.map(m=>m.n)} eff={eff} featNames={libEntries.filter(e=>e.category==="Feat"&&featPrereqMet(e.title)).map(e=>e.title).sort()}/>}
         {levelUpPending && (
           <div className="levelup-modal-backdrop">
             <div className="levelup-modal">
