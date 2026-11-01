@@ -2603,7 +2603,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Oct 31, 2026";
-const SHEET_VERSION = "v3051";
+const SHEET_VERSION = "v3052";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -6190,6 +6190,10 @@ function App() {
             {["A flying or swimming speed (your choice) of 40 feet.","You can command it to take the Attack action as a bonus action.","Its weapon attacks are magical.","Any saving throw it forces uses your spell save DC.","When it takes damage, you can use your reaction to give it resistance to that damage."].map((t,k)=>(
               <div key={k} style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span>{t}</span></div>
             ))}
+            <div style={{display:"flex",gap:6,alignItems:"center",marginTop:2}} onClick={e=>e.stopPropagation()}>
+              <span style={{fontSize:10,color:"var(--muted)",fontWeight:700}}>40 ft speed:</span>
+              {["fly","swim"].map(m=>{const on=(char.warIcmSpeed==="swim"?"swim":"fly")===m;return <button key={m} className="ft-note-tag" style={{cursor:"pointer",fontFamily:"inherit",fontWeight:on?800:600,opacity:on?1:0.75,border:"1px solid "+(on?"var(--accent)":"var(--border)"),background:on?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:on?"var(--accent)":"var(--muted)"}} onClick={e=>{e.stopPropagation();setF("warIcmSpeed",m);}}>{m==="fly"?"Fly":"Swim"}</button>;})}
+            </div>
           </div>
         )}
         {(nm==="Far Scribe"||nm==="Gift of the Protectors")&&ok&&(()=>{
@@ -7223,6 +7227,22 @@ function App() {
 
  const charRef = React.useRef(char);
  React.useEffect(()=>{charRef.current=char;},[char]);
+ // Investment of the Chain Master — keep the familiar's Companion card in step (speed + notes)
+ const icmInv=WAR_INV.find(x=>x.n==="Investment of the Chain Master");
+ const icmOn=char.charClass==="Warlock"&&!!icmInv&&warHas("Investment of the Chain Master")&&warInvOk(icmInv);
+ const icmMode=char.warIcmSpeed==="swim"?"swim":"fly";
+ const icmDC=8+pb+abilityMod(eff.CHA||10);
+ const icmHasFam=char.charClass==="Warlock"&&(char.companions||[]).some(c=>c.id===WAR_FAM_ID);
+ React.useEffect(()=>{
+  if(!icmHasFam) return;
+  const c=(charRef.current.companions||[]).find(x=>x.id===WAR_FAM_ID); if(!c) return;
+  const baseSpeed=String(c.speed||"").replace(/\s*\/\s*(?:fly|swim) 40ft \(Chain Master\)/,"");
+  const baseNotes=String(c.notes||"").replace(/(?:<br\s*\/?>)?Chain Master:[^<]*/gi,"").replace(/^(?:<br\s*\/?>)+/i,"");
+  const line="Chain Master: weapon attacks are magical; it can Attack as a bonus action on your command; saves it forces use DC "+icmDC+"; reaction: resistance to damage it takes";
+  const nSpeed=icmOn?baseSpeed+(baseSpeed?" / ":"")+icmMode+" 40ft (Chain Master)":baseSpeed;
+  const nNotes=icmOn?baseNotes+(baseNotes?"<br>":"")+line:baseNotes;
+  if(nSpeed!==c.speed||nNotes!==(c.notes||"")) setCharSaving(p=>({...p,companions:(p.companions||[]).map(x=>x.id===WAR_FAM_ID?{...x,speed:nSpeed,notes:nNotes}:x)}));
+ },[icmOn,icmMode,icmDC,icmHasFam,char.warFamiliar]);
  const setF = useCallback((path, val) => setCharSaving(p => {
  if (!path.includes(".")) return {...p,[path]:val};
  const [a,b] = path.split(".");
