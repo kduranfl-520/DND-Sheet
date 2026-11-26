@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3083";
+const SHEET_VERSION = "v3084";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5064,7 +5064,7 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
               <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
                 <button style={btn(!isNewMc)} onClick={()=>{setCls(char.charClass);setRolled(null);setMcOpen(false);}}>{char.charClass} → {lvl} (d{CLASSES[char.charClass]?.hitDie})</button>
                 <button style={btn(isNewMc||mcOpen)} onClick={()=>setMcOpen(o=>!o)}>+ Multiclass</button>
-                {mcOpen&&<select className="ri-sel" value={isNewMc?cls:""} onChange={e=>{ if(e.target.value){setCls(e.target.value);setRolled(null);} else {setCls(char.charClass);} }} style={{fontSize:11}}>
+                {mcOpen&&<select className="ri-sel" value={isNewMc?cls:""} onChange={e=>{ if(e.target.value){setCls(e.target.value);setRolled(null);} else {setCls(char.charClass);} }} style={{fontSize:12}}>
                   <option value="">-- new class --</option>
                   {Object.keys(CLASSES).filter(c=>c!==char.charClass).map(c=><option key={c} value={c}>{c}{mcPrereqMet(c,eff||{})?"":" !"}</option>)}
                 </select>}
@@ -5100,7 +5100,7 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
               <div style={{display:"flex",alignItems:"center",gap:8}}>
                 <input type="checkbox" checked={!!done[it.k]} onChange={e=>setDone(d=>({...d,[it.k]:e.target.checked}))}/>
                 <span style={{flex:1,fontSize:12,color:done[it.k]?"var(--muted)":"var(--text)",textDecoration:done[it.k]?"line-through":"none"}}>{it.t}</span>
-                {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:11,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
+                {it.k==="sub"&&subCanPick&&subOpts.length>0&&<select className="ri-sel" value={subPick} onChange={e=>{setSubPick(e.target.value);setDone(d=>({...d,sub:!!e.target.value}));}} style={{maxWidth:170,fontSize:12,borderColor:"rgba(var(--accent-rgb),0.4)",color:subPick?"var(--accent)":"var(--subtle)"}}><option value="">-- Choose --</option>{subOpts.map(o=><option key={o} value={o}>{o.replace(/ \([A-Za-z]+\)$/,"")}</option>)}</select>}
                 <button style={{...btn(false),padding:"3px 10px",fontSize:11}} onClick={()=>{ setMini(true); onGoTab&&onGoTab(it.tab); }}>Go →</button>
               </div>
               {it.sec&&sec[it.sec]&&(
@@ -5108,7 +5108,7 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
                   {Array.from({length:sec[it.sec].slots}).map((_,i)=>{
                     const cur=(pk[it.sec]||[]);
                     return (
-                      <select key={i} className="ri-sel" value={cur[i]||""} onChange={e=>setPk(o=>{const a=(o[it.sec]||[]).slice();a[i]=e.target.value;return {...o,[it.sec]:a};})} style={{fontSize:11}}>
+                      <select key={i} className="ri-sel" value={cur[i]||""} onChange={e=>setPk(o=>{const a=(o[it.sec]||[]).slice();a[i]=e.target.value;return {...o,[it.sec]:a};})} style={{fontSize:12}}>
                         <option value="">-- {sec[it.sec].title.toLowerCase()} {sec[it.sec].slots>1?i+1:""} --</option>
                         {sec[it.sec].opts.map(o=><option key={o.v} value={o.v} disabled={cur.includes(o.v)&&cur[i]!==o.v}>{o.l}</option>)}
                       </select>
@@ -5121,14 +5121,14 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
               {it.k==="spl"&&spellsPick&&(
                 <div style={{marginLeft:24,display:"flex",flexDirection:"column",gap:6,padding:"6px 8px",border:"1px solid var(--border)",borderRadius:8,background:"var(--input)"}}>
                   {Array.from({length:cDelta}).map((_,i)=>(
-                    <select key={"c"+i} className="ri-sel" value={cPicks[i]||""} onChange={e=>setCPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:11}}>
+                    <select key={"c"+i} className="ri-sel" value={cPicks[i]||""} onChange={e=>setCPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:12}}>
                       <option value="">-- cantrip {i+1} --</option>
                       {cPicks[i]&&<option value={cPicks[i]}>{cPicks[i]}</option>}
                       {cantOpts.map(x=><option key={x} value={x}>{x}</option>)}
                     </select>
                   ))}
                   {Array.from({length:sDelta}).map((_,i)=>(
-                    <select key={"s"+i} className="ri-sel" value={sPicks[i]||""} onChange={e=>setSPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:11}}>
+                    <select key={"s"+i} className="ri-sel" value={sPicks[i]||""} onChange={e=>setSPicks(a=>{const n=a.slice();n[i]=e.target.value;return n;})} style={{fontSize:12}}>
                       <option value="">-- spell {i+1} --</option>
                       {sPicks[i]&&<option value={sPicks[i]}>{sPicks[i]}</option>}
                       {spellOpts.map(([l,list])=><optgroup key={l} label={l+(l===1?"st":l===2?"nd":l===3?"rd":"th")+" level"}>{list.map(x=><option key={x} value={x}>{x}</option>)}</optgroup>)}
@@ -5148,12 +5148,12 @@ const LevelUpChecklist = ({char,onApply,onGoTab,libEntries,eff,featNames,availSp
                     const AB=["STR","DEX","CON","INT","WIS","CHA"]; const inc=asiMode==="one"?2:1; const cur=a=>(eff&&eff[a]!=null)?eff[a]:10;
                     const opt=a=>a+" "+cur(a)+" → "+Math.min(20,cur(a)+inc);
                     return (<div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                      <select className="ri-sel" value={asiA1} onChange={e=>setAsiA1(e.target.value)} style={{fontSize:11}}><option value="">-- {asiMode==="one"?"ability":"1st"} --</option>{AB.map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>
-                      {asiMode==="two"&&<select className="ri-sel" value={asiA2} onChange={e=>setAsiA2(e.target.value)} style={{fontSize:11}}><option value="">-- 2nd --</option>{AB.filter(a=>a!==asiA1).map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>}
+                      <select className="ri-sel" value={asiA1} onChange={e=>setAsiA1(e.target.value)} style={{fontSize:12}}><option value="">-- {asiMode==="one"?"ability":"1st"} --</option>{AB.map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>
+                      {asiMode==="two"&&<select className="ri-sel" value={asiA2} onChange={e=>setAsiA2(e.target.value)} style={{fontSize:12}}><option value="">-- 2nd --</option>{AB.filter(a=>a!==asiA1).map(a=><option key={a} value={a}>{opt(a)}</option>)}</select>}
                     </div>);
                   })()}
                   {asiMode==="feat"&&(<>
-                    <select className="ri-sel" value={asiFeat} onChange={e=>setAsiFeat(e.target.value)} style={{fontSize:11,maxWidth:"100%"}}><option value="">-- choose a feat --</option>{(featNames||[]).map(f=><option key={f} value={f}>{f}</option>)}</select>
+                    <select className="ri-sel" value={asiFeat} onChange={e=>setAsiFeat(e.target.value)} style={{fontSize:12,maxWidth:"100%"}}><option value="">-- choose a feat --</option>{(featNames||[]).map(f=><option key={f} value={f}>{f}</option>)}</select>
                     {asiFeat&&<div style={{fontSize:10,color:"var(--accent)",fontStyle:"italic"}}>✨ Finish any choices this feat needs (skills, spells, ability) on the Features tab after you update.</div>}
                   </>)}
                   {asiMode&&!asiComplete&&<div style={{fontSize:10,color:"var(--muted)"}}>Finish the choice above, or update without it and pick later on the Features tab.</div>}
@@ -5208,7 +5208,7 @@ const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll,tempRo
       </div>
       {tempRoll&&!isSave&&(
         <div style={{display:"flex",justifyContent:"flex-end",marginTop:4}}>
-          <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.1)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+          <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.1)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
             onClick={rollTemp}>🎲 {tempRoll.dice}{tempRoll.bonus?"+"+tempRoll.bonus:""} temp HP</button>
         </div>
       )}
@@ -5217,15 +5217,15 @@ const SpellSaveBox = ({name,sd,dc,saveKey,char,setCharSaving,setSkillRoll,tempRo
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:4}}>
             <div style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap"}}>
               <span style={{fontSize:10,color:"var(--red)",fontWeight:700}}>{sd.saveAbl||"?"} save DC {dc}</span>
-              <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid "+(res==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:res==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+              <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:res==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                 onClick={()=>setRes("success")}>✓ Succeeded</button>
-              <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid "+(res==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:res==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+              <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(res==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:res==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                 onClick={()=>setRes("fail")}>✗ Failed</button>
               {res&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                 onClick={clearRes}>↺ Clear</button>}
             </div>
             {sd.dmg&&(
-              <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid "+dmgTypeColor(sd.dmgType||"").border,background:dmgTypeColor(sd.dmgType||"").bg,color:dmgTypeColor(sd.dmgType||"").fg,cursor:"pointer",fontFamily:"inherit"}}
+              <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor(sd.dmgType||"").border,background:dmgTypeColor(sd.dmgType||"").bg,color:dmgTypeColor(sd.dmgType||"").fg,cursor:"pointer",fontFamily:"inherit"}}
                 onClick={rollDmg}>🎲 {sd.dmg}{sd.dmgType?" "+sd.dmgType:""}</button>
             )}
           </div>
@@ -6244,12 +6244,12 @@ function App() {
                                                  <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                    <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                    <select value={sel} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF(wkey,e.target.value);}}
-                                                     style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(sel?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:sel?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
+                                                     style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(sel?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:sel?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                      <option value="">-- Pick equipped {filter==="sneak"?"finesse or ranged ":filter?filter+" ":""}weapon --</option>
                                                      {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                    </select>
                                                  </div>
-                                                 {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter==="sneak"?"finesse or ranged ":filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                 {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter==="sneak"?"finesse or ranged ":filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                  {sel&&DM&&(
                                                    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                      <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -6388,7 +6388,7 @@ function App() {
               </div>
               <div style={{fontSize:11,color:"var(--text)",lineHeight:1.5}}>{m.d()}</div>
               <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,marginTop:6,flexWrap:"wrap"}}>
-                {twin&&<select value={tl} onChange={e=>setF("sorcTwinLvl",Number(e.target.value))} style={{fontSize:11,padding:"2px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit"}}>
+                {twin&&<select value={tl} onChange={e=>setF("sorcTwinLvl",Number(e.target.value))} style={{fontSize:12,padding:"2px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit"}}>
                   {[0,1,2,3,4,5,6,7,8,9].map(l=><option key={l} value={l}>{l===0?"Cantrip":"Level "+l+" spell"}</option>)}
                 </select>}
                 <button style={can?sorcBtn:sorcOffBtn} disabled={!can} onClick={e=>{e.stopPropagation();if(can)sorcSpend(cost);}}>Spend {cost} SP</button>
@@ -9712,7 +9712,7 @@ function App() {
                             return (
                               <div style={{padding:"8px 14px 12px"}}>
                                 <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:5}}>Extra Language</div>
-                                <select value={(char.languages||[])[0]||""} onChange={e=>{setF("languages",[e.target.value,...(char.languages||[]).slice(1)]);}} style={{width:"100%",background:"var(--input)",border:"1px solid "+(((char.languages||[])[0])?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:((char.languages||[])[0])?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+                                <select value={(char.languages||[])[0]||""} onChange={e=>{setF("languages",[e.target.value,...(char.languages||[]).slice(1)]);}} style={{width:"100%",background:"var(--input)",border:"1px solid "+(((char.languages||[])[0])?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:((char.languages||[])[0])?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                   <option value="">-- Choose a language --</option>
                                   {availHu.map(l=>(<option key={l} value={l}>{l}</option>))}
                                 </select>
@@ -9725,7 +9725,7 @@ function App() {
                                 {RACE_TOOL_CHOICES[char.species].label}
                               </div>
                               <select value={char.racialToolProf||""} onChange={e=>setF("racialToolProf",e.target.value)}
- style={{width:"100%",background:"var(--input)",border:"1px solid "+(char.racialToolProf?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:char.racialToolProf?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+ style={{width:"100%",background:"var(--input)",border:"1px solid "+(char.racialToolProf?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:char.racialToolProf?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                 <option value="">-- Choose a tool --</option>
                                 {RACE_TOOL_CHOICES[char.species].options.map(t=>(<option key={t} value={t}>{t}</option>))}
                               </select>
@@ -9737,7 +9737,7 @@ function App() {
                             return (
                               <div style={{padding:"8px 14px 4px"}}>
                                 <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:5}}>Extra Language</div>
-                                <select value={(char.languages||[])[0]||""} onChange={e=>{setF("languages",[e.target.value,...(char.languages||[]).slice(1)]);}} style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.languages||[])[0]?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:(char.languages||[])[0]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+                                <select value={(char.languages||[])[0]||""} onChange={e=>{setF("languages",[e.target.value,...(char.languages||[]).slice(1)]);}} style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.languages||[])[0]?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:(char.languages||[])[0]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                   <option value="">-- Choose a language --</option>
                                   {availHe.map(l=>(<option key={l} value={l}>{l}</option>))}
                                 </select>
@@ -9751,12 +9751,12 @@ function App() {
                               </div>
                               <div style={{display:"flex",flexDirection:"column",gap:5}}>
                                 <select value={(char.halfElfSkills||[])[0]||""} onChange={e=>{const next=[(e.target.value),(char.halfElfSkills||[])[1]||""].filter(Boolean);setF("halfElfSkills",next);}}
- style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.halfElfSkills||[])[0]?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:(char.halfElfSkills||[])[0]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+ style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.halfElfSkills||[])[0]?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:(char.halfElfSkills||[])[0]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                   <option value="">-- Choose skill 1 --</option>
                                   {["Acrobatics","Animal Handling","Arcana","Athletics","Deception","History","Insight","Intimidation","Investigation","Medicine","Nature","Perception","Performance","Persuasion","Religion","Sleight of Hand","Stealth","Survival"].filter(s=>s!==(char.halfElfSkills||[])[1]).map(s=>(<option key={s} value={s}>{s}</option>))}
                                 </select>
                                 <select value={(char.halfElfSkills||[])[1]||""} onChange={e=>{const next=[(char.halfElfSkills||[])[0]||"",(e.target.value)].filter(Boolean);setF("halfElfSkills",next);}}
- style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.halfElfSkills||[])[1]?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:(char.halfElfSkills||[])[1]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+ style={{width:"100%",background:"var(--input)",border:"1px solid "+((char.halfElfSkills||[])[1]?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:(char.halfElfSkills||[])[1]?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                   <option value="">-- Choose skill 2 --</option>
                                   {["Acrobatics","Animal Handling","Arcana","Athletics","Deception","History","Insight","Intimidation","Investigation","Medicine","Nature","Perception","Performance","Persuasion","Religion","Sleight of Hand","Stealth","Survival"].filter(s=>s!==(char.halfElfSkills||[])[0]).map(s=>(<option key={s} value={s}>{s}</option>))}
                                 </select>
@@ -10029,7 +10029,7 @@ function App() {
                                   <div style={{marginTop:6}}>
                                     <div style={{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:5}}>Tool Proficiency — Artisan's Tools or Musical Instrument</div>
                                     <select value={char.monkToolChoice||""} onChange={e=>setF("monkToolChoice",e.target.value)}
-                                      style={{width:"100%",background:"var(--input)",border:"1px solid "+(char.monkToolChoice?"var(--green)":"var(--border)"),borderRadius:8,padding:"6px 10px",fontSize:13,color:char.monkToolChoice?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
+                                      style={{width:"100%",background:"var(--input)",border:"1px solid "+(char.monkToolChoice?"var(--green)":"var(--border)"),borderRadius:6,padding:"4px 6px",fontSize:12,color:char.monkToolChoice?"var(--text)":"var(--subtle)",outline:"none",fontFamily:"inherit"}}>
                                       <option value="">-- Choose one --</option>
                                       {MONK_TOOL_OPTIONS.map(t=>(<option key={t} value={t}>{t}</option>))}
                                     </select>
@@ -10530,7 +10530,7 @@ function App() {
                                     const dexMod=abilityMod(char.abilities?.DEX||10);
                                     const toHit=dexMod+pb;
                                     const spendBtn=(label,extraField)=>(
-                                      <button key={label} disabled={kiLeft<1} style={{fontSize:11,fontWeight:700,padding:"3px 8px",borderRadius:5,border:"1px solid "+(kiLeft>=1?"rgba(var(--accent-rgb),0.4)":"var(--border)"),background:kiLeft>=1?"rgba(var(--accent-rgb),0.12)":"var(--input)",color:kiLeft>=1?"var(--accent)":"var(--muted)",cursor:kiLeft>=1?"pointer":"not-allowed",fontFamily:"inherit",flexShrink:0}}
+                                      <button key={label} disabled={kiLeft<1} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(kiLeft>=1?"rgba(var(--accent-rgb),0.4)":"var(--border)"),background:kiLeft>=1?"rgba(var(--accent-rgb),0.12)":"var(--input)",color:kiLeft>=1?"var(--accent)":"var(--muted)",cursor:kiLeft>=1?"pointer":"not-allowed",fontFamily:"inherit",flexShrink:0}}
                                         onClick={e=>{e.stopPropagation();if(kiLeft<1)return;setCharSaving(p=>({...p,monkKiUsed:(p.monkKiUsed||0)+1,...(extraField?{[extraField]:true}:{})}));}}>Spend 1</button>
                                     );
                                     return (
@@ -10562,7 +10562,7 @@ function App() {
                                             </div>
                                             <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
                                               <span style={{fontSize:10,color:"var(--muted)"}}>1d{die}{dexMod!==0?(dexMod>0?"+"+dexMod:dexMod):""} bludgeoning · <b style={{color:"var(--text)",fontFamily:"'DM Mono',monospace"}}>{toHit>=0?"+":""}{toHit}</b> to hit</span>
-                                              <button style={{marginLeft:"auto",fontSize:11,fontWeight:700,padding:"3px 8px",borderRadius:5,border:"1px solid "+dmgTypeColor("bludgeoning").border,background:dmgTypeColor("bludgeoning").bg,color:dmgTypeColor("bludgeoning").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                              <button style={{marginLeft:"auto",fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("bludgeoning").border,background:dmgTypeColor("bludgeoning").bg,color:dmgTypeColor("bludgeoning").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                 onClick={e=>{e.stopPropagation();const r1=Math.floor(Math.random()*20)+1;const dmgRoll=Math.floor(Math.random()*die)+1;setSkillRoll({label:"Flurry of Blows — Unarmed Strike",roll:r1,bonus:toHit,total:r1+toHit,hitRoll:r1,atkBonus:toHit,hitTotal:r1+toHit,isCrit:r1>=critThreshold(char),isFail:r1===1,sides:20,r1,r2:null,isAdv:false,isDis:false,isWeaponRoll:true,dmgDice:"1d"+die,dmgBonus:dexMod,dmgType:"bludgeoning",baseDiceCount:1,diceSides:die,allDmgRolls:[dmgRoll],dmgRolls:[dmgRoll],dmgTotal:dmgRoll+dexMod,brutalDice:0});}}>
                                                 🎲 Attack
                                               </button>
@@ -10710,7 +10710,7 @@ function App() {
                                         <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:6}}>
                                           <span style={{fontSize:10,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                           <select value={kfaWeapon} onChange={e=>setF("monkKiFueledWeapon",e.target.value)}
-                                            style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid rgba(var(--accent-rgb),0.4)",color:"var(--accent)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                            style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid rgba(var(--accent-rgb),0.4)",color:"var(--accent)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                             <option value="Unarmed Strike">Unarmed Strike</option>
                                             {kfaWeaponNames.map(n=><option key={n} value={n}>{n}</option>)}
                                           </select>
@@ -10819,7 +10819,7 @@ function App() {
                                           <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                             <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                             <select value={ssWeapon} onChange={e=>setF("monkStunWeapon",e.target.value)}
-                                              style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(ssWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:ssWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                              style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(ssWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:ssWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                               <option value="">-- Pick weapon --</option>
                                               {ssMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                               <option value="Unarmed Strike">Unarmed Strike</option>
@@ -10993,7 +10993,7 @@ function App() {
                                                   <div key={key} style={{display:"flex",gap:6,alignItems:"center"}}>
                                                     <span style={{fontSize:10,fontWeight:700,color:"var(--muted)",minWidth:60,textTransform:"uppercase",letterSpacing:".06em"}}>Cantrip {ci+1}</span>
                                                     <select value={char[key]||""} onChange={e=>setCharSaving(p=>({...p,[key]:e.target.value}))}
-                                                      style={{flex:1,fontSize:12,padding:"3px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit",cursor:"pointer"}}>
+                                                      style={{flex:1,fontSize:12,padding:"4px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit",cursor:"pointer"}}>
                                                       <option value="">-- Select cantrip --</option>
                                                       {bwCantrips.filter(n=>n!==char[other]).map(n=><option key={n} value={n}>{n}</option>)}
                                                     </select>
@@ -11015,7 +11015,7 @@ function App() {
                                                   <div key={key} style={{display:"flex",gap:6,alignItems:"center"}}>
                                                     <span style={{fontSize:10,fontWeight:700,color:"var(--muted)",minWidth:60,textTransform:"uppercase",letterSpacing:".06em"}}>Cantrip {ci+1}</span>
                                                     <select value={char[key]||""} onChange={e=>setCharSaving(p=>({...p,[key]:e.target.value}))}
-                                                      style={{flex:1,fontSize:12,padding:"3px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit"}}>
+                                                      style={{flex:1,fontSize:12,padding:"4px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit"}}>
                                                       <option value="">-- Select cantrip --</option>
                                                       {dwCantrips.filter(n=>n!==char[other]).map(n=><option key={n} value={n}>{n}</option>)}
                                                     </select>
@@ -11755,7 +11755,7 @@ function App() {
                                     const isExpert=!!skObj&&((char.skillExpertise||[]).includes(neSkill)||char.seExpertise===neSkill||(char.bardExpertise||[]).includes(neSkill)||(char.rogueExpertise||[]).includes(neSkill)||rogueSubSkills.includes(neSkill));
                                     const neBonus=skObj?skBonus(skObj)+((isProf&&!isExpert)?pb:0):0;
                                     const fmt=n=>(n>=0?"+":"")+n;
-                                    const selBase={width:"100%",borderColor:"rgba(var(--accent-rgb),0.4)"};
+                                    const selBase={width:"100%",borderColor:"rgba(var(--accent-rgb),0.4)",fontSize:12,padding:"4px 6px",borderRadius:6};
                                     return (
                                       <div style={{display:"flex",flexDirection:"column",gap:8}}>
                                         <div className="ft-lib-desc">You are especially familiar with one type of natural environment and are adept at traveling and surviving in it. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill you are proficient in.</div>
@@ -11790,7 +11790,7 @@ function App() {
                                                 {sl===10&&(
                                                   <div style={{display:"flex",flexDirection:"column",gap:3}}>
                                                     <button className="ft-note-tag ft-note-tag-clickable" disabled={!skObj}
-                                                      style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:skObj?"var(--accent)":"var(--muted)",opacity:skObj?1:0.6,cursor:skObj?"pointer":"not-allowed",width:"100%"}}
+                                                      style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:skObj?"var(--accent)":"var(--muted)",fontWeight:700,fontSize:11,opacity:skObj?1:0.6,cursor:skObj?"pointer":"not-allowed",width:"100%"}}
                                                       onClick={e=>{e.stopPropagation();if(!skObj) return;const roll=Math.floor(Math.random()*20)+1;const total=roll+neBonus;setSkillRoll({label:neSkill+" (Natural Explorer)",roll,bonus:neBonus,total,isCrit:roll===20,isFail:roll===1,sides:20,r1:roll,r2:null,isAdv:false,isDis:false});}}>
                                                       {skObj?"🎲 "+neSkill+" "+fmt(neBonus):"🎲 Choose a skill"}
                                                     </button>
@@ -12113,7 +12113,7 @@ function App() {
                                           </div>
                                           <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:".05em"}}>Uses ({maxUses-used}/{maxUses})</span>
                                           <button className="ft-note-tag" title={"Roll "+die+" inspiration die"}
-                                            style={{background:"rgba(var(--accent-rgb),0.12)",borderColor:"rgba(var(--accent-rgb),0.4)",color:"var(--accent)",fontWeight:700,fontSize:14,cursor:used<maxUses?"pointer":"default",opacity:used>=maxUses?0.4:1,marginLeft:"auto"}}
+                                            style={{background:"rgba(var(--accent-rgb),0.12)",borderColor:"rgba(var(--accent-rgb),0.4)",color:"var(--accent)",fontWeight:700,fontSize:11,cursor:used<maxUses?"pointer":"default",opacity:used>=maxUses?0.4:1,marginLeft:"auto"}}
                                             onClick={e=>{
                                               e.stopPropagation();
                                               if(used>=maxUses) return;
@@ -12618,7 +12618,7 @@ function App() {
                                           return (
                                             <div style={{marginTop:8,borderTop:"1px solid var(--divider)",paddingTop:6}}>
                                               <button onClick={()=>setBeastsSeenOpen(o=>!o)}
-                                                style={{fontSize:11,fontWeight:700,padding:"4px 10px",borderRadius:6,border:"1px solid "+(beastsSeenOpen?"var(--accent)":"var(--border)"),background:beastsSeenOpen?"rgba(var(--accent-rgb),0.1)":"var(--input)",color:beastsSeenOpen?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",gap:5}}>
+                                                style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(beastsSeenOpen?"var(--accent)":"var(--border)"),background:beastsSeenOpen?"rgba(var(--accent-rgb),0.1)":"var(--input)",color:beastsSeenOpen?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",gap:5}}>
                                                 🐾 Beasts Seen ({seenCount}/{allBeasts.length}) {beastsSeenOpen?"▲":"▼"}
                                               </button>
                                               {beastsSeenOpen&&(
@@ -12853,7 +12853,7 @@ function App() {
                                                 onClick={()=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],choice:"one"}}}))}>
                                                 <span style={{fontSize:11,fontWeight:700,color:choice==="one"?"var(--accent)":"var(--text)"}}>+2 one ability</span>
                                                 {choice==="one"&&(
-                                                  <select className="ri-sel" value={stored.ab1||""} style={{fontSize:11,padding:"2px 4px"}} onClick={e=>e.stopPropagation()}
+                                                  <select className="ri-sel" value={stored.ab1||""} style={{fontSize:12,padding:"2px 4px"}} onClick={e=>e.stopPropagation()}
                                                     onChange={e=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],ab1:e.target.value}}}))}>
                                                     <option value="">-- ability --</option>
                                                     {ABILITIES.map(a=><option key={a} value={a}>{a} {fmt(abilityMod(preASI(a)))} → {fmt(abilityMod(postASI2(a)))}</option>)}
@@ -12861,17 +12861,17 @@ function App() {
                                                 )}
                                               </div>
                                               {/* Option 2 */}
-                                              <div style={{opacity:dim("two")?0.3:1,transition:"opacity .15s",background:choice==="two"?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(choice==="two"?"rgba(var(--accent-rgb),0.35)":"var(--border)"),borderRadius:8,padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:4}}
+                                              <div style={{opacity:dim("two")?0.3:1,transition:"opacity .15s",background:choice==="two"?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(choice==="two"?"rgba(var(--accent-rgb),0.35)":"var(--border)"),borderRadius:6,padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:4}}
                                                 onClick={()=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],choice:"two"}}}))}>
-                                                <span style={{fontSize:11,fontWeight:700,color:choice==="two"?"var(--accent)":"var(--text)"}}>+1 two abilities</span>
+                                                <span style={{fontSize:12,fontWeight:700,color:choice==="two"?"var(--accent)":"var(--text)"}}>+1 two abilities</span>
                                                 {choice==="two"&&(
                                                   <div style={{display:"flex",flexDirection:"column",gap:3}} onClick={e=>e.stopPropagation()}>
-                                                    <select className="ri-sel" value={stored.ab1||""} style={{fontSize:11,padding:"2px 4px"}}
+                                                    <select className="ri-sel" value={stored.ab1||""} style={{fontSize:12,padding:"2px 4px"}}
                                                       onChange={e=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],ab1:e.target.value}}}))}>
                                                       <option value="">-- 1st --</option>
                                                       {ABILITIES.map(a=><option key={a} value={a}>{a} {fmt(abilityMod(preASI(a)))} → {fmt(abilityMod(postASI1(a)))}</option>)}
                                                     </select>
-                                                    <select className="ri-sel" value={stored.ab2||""} style={{fontSize:11,padding:"2px 4px"}}
+                                                    <select className="ri-sel" value={stored.ab2||""} style={{fontSize:12,padding:"2px 4px"}}
                                                       onChange={e=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],ab2:e.target.value}}}))}>
                                                       <option value="">-- 2nd --</option>
                                                       {ABILITIES.filter(a=>a!==stored.ab1).map(a=><option key={a} value={a}>{a} {fmt(abilityMod(preASI(a)))} → {fmt(abilityMod(postASI1(a)))}</option>)}
@@ -12880,11 +12880,11 @@ function App() {
                                                 )}
                                               </div>
                                               {/* Option 3: Feat */}
-                                              <div style={{opacity:dim("feat")?0.3:1,transition:"opacity .15s",background:choice==="feat"?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(choice==="feat"?"rgba(var(--accent-rgb),0.35)":"var(--border)"),borderRadius:8,padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:4}}
+                                              <div style={{opacity:dim("feat")?0.3:1,transition:"opacity .15s",background:choice==="feat"?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(choice==="feat"?"rgba(var(--accent-rgb),0.35)":"var(--border)"),borderRadius:6,padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:4}}
                                                 onClick={()=>setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],choice:"feat"}}}))}>
-                                                <span style={{fontSize:11,fontWeight:700,color:choice==="feat"?"var(--accent)":"var(--text)"}}>Feat</span>
+                                                <span style={{fontSize:12,fontWeight:700,color:choice==="feat"?"var(--accent)":"var(--text)"}}>Feat</span>
                                                 {choice==="feat"&&(
-                                                  <select className="ri-sel" value={stored.feat||""} style={{fontSize:11,padding:"2px 4px",color:stored.feat?"var(--accent)":"var(--muted)"}} onClick={e=>e.stopPropagation()}
+                                                  <select className="ri-sel" value={stored.feat||""} style={{fontSize:12,padding:"2px 4px",color:stored.feat?"var(--accent)":"var(--muted)"}} onClick={e=>e.stopPropagation()}
                                                     onChange={e=>{const val=e.target.value;setCharSaving(p=>({...p,asiChoices:{...(p.asiChoices||{}),[asiKey]:{...(p.asiChoices||{})[asiKey],feat:val,featAb:val==="Actor"?"CHA":val==="Athlete"?"":val==="Heavily Armored"?"STR":val==="Heavy Armor Master"?"STR":val==="Keen Mind"?"INT":val==="Linguist"?"INT":val==="Durable"?"CON":val==="Resilient"?"":val==="Weapon Master"?"":val==="Chef"?"":val==="Crusher"?"":val==="Dragon Hide"?"":val==="Dragon Fear"?"":val==="Elven Accuracy"?"":val==="Fey Teleportation"?"":val==="Fade Away"?"":val==="Squat Nimbleness"?"":val==="Orcish Fury"?"":val==="Second Chance"?"":val==="Flames of Phlegethos"?"":val==="Shadow Touched"?"":val==="Fey Touched"?"":((p.asiChoices||{})[asiKey]?.featAb||"")}}}));}}>
                                                     <option value="">-- feat --</option>
                                                     {featNames.map(f=><option key={f} value={f}>{f}</option>)}
@@ -12936,7 +12936,7 @@ function App() {
                                                     <div style={{fontSize:11,fontWeight:700,color:"var(--accent)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:4}}>{featName}</div>
                                                     <div style={{fontSize:12,color:"var(--text)",lineHeight:1.5}}>{data.desc}</div>
                                                     {data.roller==="frenzy"&&!char.rageActive&&(
-                                                      <div style={{marginTop:6,fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Start Rage to use this attack.</div>
+                                                      <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Start Rage to use this attack.</span></div>
                                                     )}
                                                     {data.roller==="frenzy"&&char.rageActive&&(()=>{
                                                       const fMelee=(char.weaponItems||[]).filter(w=>{
@@ -12966,7 +12966,7 @@ function App() {
                                                           <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                             <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                             <select value={fWeapon} onChange={e=>setF(fKey,e.target.value)}
-                                                              style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(fWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:fWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                              style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(fWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:fWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                               <option value="">-- Pick equipped melee weapon --</option>
                                                               {fMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                                             </select>
@@ -13042,7 +13042,7 @@ function App() {
                                                           <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                             <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                             <select value={rtWeapon} onChange={e=>setF(rtKey,e.target.value)}
-                                                              style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(rtWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:rtWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                              style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(rtWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:rtWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                               <option value="">-- Pick equipped melee weapon --</option>
                                                               {rtMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                                             </select>
@@ -13191,7 +13191,7 @@ function App() {
                                                 })()}
                                                 {/* Totemic Attunement — Wolf weapon dropdown (while raging) */}
                                                 {featName==="Totemic Attunement (14th)"&&val==="Wolf"&&(()=>{
-                                                  if(!char.rageActive) return <div style={{marginTop:6,fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Start Rage to use this attack.</div>;
+                                                  if(!char.rageActive) return <div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Start Rage to use this attack.</span></div>;
                                                   const wtMelee=(char.weaponItems||[]).filter(w=>{
                                                     const name=typeof w==="object"?w.name:w;
                                                     const equipped=typeof w==="object"?w.equipped:false;
@@ -13219,7 +13219,7 @@ function App() {
                                                       <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                         <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                         <select value={wtWeapon} onChange={e=>setF(wtKey,e.target.value)}
-                                                          style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(wtWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:wtWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                          style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(wtWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:wtWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                           <option value="">-- Pick equipped melee weapon --</option>
                                                           {wtMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                                         </select>
@@ -13538,14 +13538,14 @@ function App() {
                                                       return(
                                                         <div style={{display:"flex",alignItems:"center",gap:6,marginTop:6,justifyContent:"flex-end"}}>
                                                           <button onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,zealousPresenceUsed:spent?0:1}));}}
-                                                            style={{fontSize:11,fontWeight:700,padding:"3px 12px",borderRadius:6,cursor:"pointer",fontFamily:"inherit",
+                                                            style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,cursor:"pointer",fontFamily:"inherit",
                                                               border:"1px solid "+(spent?"rgba(239,68,68,0.35)":"rgba(var(--accent-rgb),0.3)"),
                                                               background:spent?"rgba(239,68,68,0.08)":"rgba(var(--accent-rgb),0.08)",
                                                               color:spent?"var(--red)":"var(--accent)"}}>
                                                             {spent?"✓ Used":"Use"}
                                                           </button>
                                                           {spent&&<button onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,zealousPresenceUsed:0}));}}
-                                                            style={{fontSize:10,fontWeight:600,padding:"2px 7px",borderRadius:5,border:"1px solid var(--border)",background:"var(--card)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}>↺ LR</button>}
+                                                            style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid var(--border)",background:"var(--card)",color:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}>↺ LR</button>}
                                                         </div>
                                                       );
                                                     })()}
@@ -13842,10 +13842,10 @@ function App() {
                                             <div style={{display:"flex",flexDirection:"column",gap:4}}>
                                               {label&&<div style={{fontSize:11,color:"var(--muted)",fontWeight:600}}>{label}</div>}
                                               <div style={{display:"flex",gap:4,alignItems:"center"}}>
-                                                <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit",flexShrink:0}}
+                                                <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit",flexShrink:0}}
                                                   onClick={()=>{const v=Math.floor(Math.random()*8)+1;setF(stateKey,v);if(onAnyChange)onAnyChange(v);}}>🎲 d8</button>
                                                 <select value={val||""} onChange={e=>{const v=Number(e.target.value);setF(stateKey,v);if(onAnyChange)onAnyChange(v);}}
-                                                  style={{flex:1,padding:"3px 5px",borderRadius:5,background:"var(--card)",border:"1px solid "+(val?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:val?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                  style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(val?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:val?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                   <option value="">-- roll or choose --</option>
                                                   {Object.entries(WILD_SURGE).map(([k,v])=><option key={k} value={k}>{k}. {v.name}</option>)}
                                                 </select>
@@ -13869,7 +13869,7 @@ function App() {
                                                         {char.saveResults?.[saveKeyBB]&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                           onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n[saveKeyBB];return {...p,saveResults:n};})}>↺ Clear</button>}
                                                       </div>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+dmgTypeColor("radiant").border,background:dmgTypeColor("radiant").bg,color:dmgTypeColor("radiant").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("radiant").border,background:dmgTypeColor("radiant").bg,color:dmgTypeColor("radiant").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>{
                                                           const roll=Math.floor(Math.random()*6)+1;
                                                           setSkillRoll({label:"Blinding Bolt — 1d6 Radiant",roll,bonus:0,total:roll,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:"radiant",dmgDice:"1d6",diceSides:6,baseDiceCount:1,isCrit:false,isFail:false,sides:6,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,saveDC:dc,saveType:"CON",noHalf:true});
@@ -13896,7 +13896,7 @@ function App() {
                                                         {char.saveResults?.[saveKeyIS]&&<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                           onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n[saveKeyIS];return {...p,saveResults:n};})}>↺ Clear</button>}
                                                       </div>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>{
                                                           const roll=Math.floor(Math.random()*6)+1;
                                                           setSkillRoll({label:"Intangible Spirit — 1d6 Force",roll,bonus:0,total:roll,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:"force",dmgDice:"1d6",diceSides:6,baseDiceCount:1,isCrit:false,isFail:false,sides:6,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,saveDC:dc,saveType:"DEX",noHalf:true});
@@ -13923,12 +13923,12 @@ function App() {
                                                           onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n[saveKeyST];return {...p,saveResults:n};})}>↺ Clear</button>}
                                                       </div>
                                                       <div style={{display:"flex",gap:6}}>
-                                                        <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+dmgTypeColor("necrotic").border,background:dmgTypeColor("necrotic").bg,color:dmgTypeColor("necrotic").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("necrotic").border,background:dmgTypeColor("necrotic").bg,color:dmgTypeColor("necrotic").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>{
                                                             const roll=Math.floor(Math.random()*12)+1;
                                                             setSkillRoll({label:"Shadowy Tendrils — 1d12 Necrotic",roll,bonus:0,total:roll,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:"necrotic",dmgDice:"1d12",diceSides:12,baseDiceCount:1,isCrit:false,isFail:false,sides:12,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,saveDC:dc,saveType:"CON",noHalf:true});
                                                           }}>🎲 1d12 Necrotic</button>
-                                                        <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>{
                                                             const roll=Math.floor(Math.random()*12)+1;
                                                             setSkillRoll({label:"Shadowy Tendrils — 1d12 Temp HP",roll,bonus:0,total:roll,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:"Temp HP",dmgDice:"1d12",diceSides:12,baseDiceCount:1,isCrit:false,isFail:false,sides:12,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,saveDC:null,saveType:null});
@@ -13943,7 +13943,7 @@ function App() {
                                               {val>0&&WILD_SURGE[val]?.rollers&&WILD_SURGE[val].name!=="Shadowy Tendrils"&&WILD_SURGE[val].name!=="Intangible Spirit"&&WILD_SURGE[val].name!=="Blinding Bolt"&&(
                                                 <div style={{display:"flex",gap:6,justifyContent:"flex-end"}}>
                                                   {WILD_SURGE[val].rollers.map(r=>(
-                                                    <button key={r.key} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:r.color||"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    <button key={r.key} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:r.color||"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
                                                       onClick={()=>{
                                                         const roll=Math.floor(Math.random()*r.sides)+1;
                                                         setSkillRoll({label:r.label+" — 1d"+r.sides,roll,bonus:0,total:roll,allDmgRolls:[roll],dmgRolls:[roll],dmgTotal:roll,dmgBonus:0,dmgType:r.label,dmgDice:"1d"+r.sides,diceSides:r.sides,baseDiceCount:1,isCrit:false,isFail:false,sides:r.sides,r1:roll,r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,saveDC:null,saveType:null,spiritShield:false});
@@ -14137,7 +14137,7 @@ function App() {
                                                       <div key={key} style={{display:"flex",flexDirection:"column",gap:4}}>
                                                         <SurgeRow stateKey={key} val={v} label={label}/>
                                                         {v>0&&<div style={{display:"flex",justifyContent:"flex-end"}}>
-                                                          <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                          <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(34,197,94,0.3)",background:"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                             onClick={()=>setCharSaving(p=>({...p,wildSurgeResult:v,[otherKey]:0,controlledSurgeTriggered:true}))}>✓ Use this as current effect</button>
                                                         </div>}
                                                       </div>
@@ -14459,7 +14459,7 @@ function App() {
                                                   {ownedWeapons.filter(n=>n!==bond).map((n,i)=><option key={i} value={n}>{n}</option>)}
                                                 </select>
                                               </div>
-                                              <div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Cantrips, spells, and spell slots are managed on the Spells tab.</div>
+                                              <div style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic"}}>Cantrips, spells, and spell slots are managed on the Spells tab.</div>
                                               {[
                                                 {min:7,name:"War Magic (7th)",d:"When you use your action to cast a cantrip, you can make one weapon attack as a bonus action."},
                                                 {min:10,name:"Eldritch Strike (10th)",d:"When you hit a creature with a weapon attack, that creature has disadvantage on the next saving throw it makes against a spell you cast before the end of your next turn."},
@@ -15251,7 +15251,7 @@ function App() {
                                                       <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                         <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                         <select value={umWeapon} onChange={e=>setF(umKey,e.target.value)}
-                                                          style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(umWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:umWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                          style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(umWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:umWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                           <option value="">-- Pick weapon --</option>
                                                           {umMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                                           <option value="Unarmed Strike">Unarmed Strike</option>
@@ -17025,7 +17025,7 @@ function App() {
                                                     <option value="remove">End charmed or frightened</option>
                                                   </select>
                                                   {char.clericTwilightSanctuaryChoice==="temphp"&&(
-                                                    <button style={{fontSize:11,fontWeight:700,padding:"4px 10px",borderRadius:6,background:cdLeft>0?dmgTypeColor("temp hp").bg:"var(--input)",border:"1px solid "+(cdLeft>0?dmgTypeColor("temp hp").border:"var(--border)"),color:cdLeft>0?dmgTypeColor("temp hp").fg:"var(--muted)",cursor:cdLeft>0?"pointer":"not-allowed",fontFamily:"inherit",alignSelf:"flex-start",opacity:cdLeft>0?1:0.4}}
+                                                    <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,background:cdLeft>0?dmgTypeColor("temp hp").bg:"var(--input)",border:"1px solid "+(cdLeft>0?dmgTypeColor("temp hp").border:"var(--border)"),color:cdLeft>0?dmgTypeColor("temp hp").fg:"var(--muted)",cursor:cdLeft>0?"pointer":"not-allowed",fontFamily:"inherit",alignSelf:"flex-start",opacity:cdLeft>0?1:0.4}}
                                                       disabled={cdLeft<=0}
                                                       onClick={e=>{
                                                         e.stopPropagation();
@@ -17606,7 +17606,7 @@ function App() {
                                                     return usableSlots.length>0?(
                                                       <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6,justifyContent:"flex-end"}}>
                                                         <select value={usableSlots.includes(usSlotLvl)?usSlotLvl:usableSlots[0]} onChange={e=>{e.stopPropagation();setF("bardUSSlotLvl",Number(e.target.value));}}
-                                                          style={{padding:"3px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:11,cursor:"pointer",fontFamily:"inherit"}}>
+                                                          style={{padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,cursor:"pointer",fontFamily:"inherit"}}>
                                                           {usableSlots.map(l=>{
                                                             const usedAtLvl=sus[l-1]||0;
                                                             const totalAtLvl=slots[l-1]||0;
@@ -17881,7 +17881,7 @@ function App() {
                                                     return usableSlots.length>0?(
                                                       <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6,justifyContent:"flex-end"}}>
                                                         <select value={usableSlots.includes(pocSlotLvl)?pocSlotLvl:usableSlots[0]} onChange={e=>{e.stopPropagation();setF("bardPoCSlotLvl",Number(e.target.value));}}
-                                                          style={{padding:"3px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:11,cursor:"pointer",fontFamily:"inherit"}}>
+                                                          style={{padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,cursor:"pointer",fontFamily:"inherit"}}>
                                                           {usableSlots.map(l=>{
                                                             const usedAtLvl=sus[l-1]||0;
                                                             const totalAtLvl=slots[l-1]||0;
@@ -17955,7 +17955,7 @@ function App() {
                                                     return usableSlots.length>0?(
                                                       <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginTop:6,justifyContent:"flex-end"}}>
                                                         <select value={usableSlots.includes(apSlotLvl)?apSlotLvl:usableSlots[0]} onChange={e=>{e.stopPropagation();setF("bardAPSlotLvl",Number(e.target.value));}}
-                                                          style={{padding:"3px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:11,cursor:"pointer",fontFamily:"inherit"}}>
+                                                          style={{padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,cursor:"pointer",fontFamily:"inherit"}}>
                                                           {usableSlots.map(l=>{
                                                             const usedAtLvl=sus[l-1]||0;
                                                             const totalAtLvl=slots[l-1]||0;
@@ -18319,9 +18319,9 @@ function App() {
                                                       <>
                                                       <div style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap"}}>
                                                         <span style={{fontSize:10,color:"var(--red)",fontWeight:700}}>WIS save DC {kiDC}</span>
-                                                        <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid "+(sancResult==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:sancResult==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(sancResult==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:sancResult==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),tranquilitySanctuary:"success"}}))}>✓ Succeeded</button>
-                                                        <button style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,border:"1px solid "+(sancResult==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:sancResult==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(sancResult==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:sancResult==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),tranquilitySanctuary:"fail"}}))}>✗ Failed</button>
                                                         {sancResult&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                           onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n.tranquilitySanctuary;return {...p,saveResults:n};})}>↺ Clear</button>}
@@ -18505,7 +18505,7 @@ function App() {
                                                       <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                         <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                         <select value={oppWeapon} onChange={e=>setF("monkOpportunistWeapon",e.target.value)}
-                                                          style={{flex:1,padding:"3px 6px",borderRadius:5,background:"var(--card)",border:"1px solid "+(oppWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:oppWeapon?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                          style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(oppWeapon?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:oppWeapon?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                           <option value="">-- Pick weapon --</option>
                                                           {oppMelee.map(n=><option key={n} value={n}>{n}</option>)}
                                                           <option value="Unarmed Strike">Unarmed Strike</option>
@@ -18912,9 +18912,9 @@ function App() {
                                                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6,marginBottom:4}}>
                                                   <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                     <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>DEX save DC {kiDC}</span>
-                                                    <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(armsRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:armsRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(armsRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:armsRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                       onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[armsResKey]:"success"}}))}>✓ Succeeded</button>
-                                                    <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(armsRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:armsRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                    <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(armsRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:armsRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                                                       onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),[armsResKey]:"fail"}}))}>✗ Failed</button>
                                                     {armsRes&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                       onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n[armsResKey];return {...p,saveResults:n};})}>↺ Clear</button>}
@@ -19028,7 +19028,7 @@ function App() {
                                                     <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)",alignItems:"center"}}>
                                                       <span>•</span>
                                                       <span style={{flex:1}}><b style={{color:"var(--accent)"}}>Deflect Energy</b> — When you take acid, cold, fire, force, lightning, or thunder damage, you can use your reaction to deflect it. The damage you take is reduced by 1d10 + your Wisdom modifier (minimum reduction of 1).</span>
-                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 8px",borderRadius:6,border:"1px solid "+dmgTypeColor("reduction").border,background:dmgTypeColor("reduction").bg,color:dmgTypeColor("reduction").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("reduction").border,background:dmgTypeColor("reduction").bg,color:dmgTypeColor("reduction").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>{const roll=Math.floor(Math.random()*10)+1;const total=Math.max(1,roll+wisMod);setSkillRoll({label:"Deflect Energy (1d10+WIS, min 1)",roll,bonus:wisMod,total,isCrit:false,isFail:false,sides:10});}}>
                                                         Deflect Energy
                                                       </button>
@@ -19036,7 +19036,7 @@ function App() {
                                                     <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)",alignItems:"center"}}>
                                                       <span>•</span>
                                                       <span style={{flex:1}}><b style={{color:"var(--accent)"}}>Empowered Arms</b> — Once on each of your turns when you hit a target with the Arms of the Astral Self, you can deal extra damage to the target equal to your Martial Arts die.</span>
-                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 8px",borderRadius:6,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>{const roll=Math.floor(Math.random()*maDie)+1;setSkillRoll({label:"Empowered Arms — Extra (1d"+maDie+" force)",roll,bonus:0,total:roll,isCrit:false,isFail:false,sides:maDie});}}>
                                                         Empowered Arms
                                                       </button>
@@ -19183,7 +19183,7 @@ function App() {
                                                     <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>Agile Parry</b> — If you make an unarmed strike as part of the Attack action and you're holding a kensei weapon, you gain a +2 bonus to AC until the start of your next turn, while the weapon is in your hand.</span></div>
                                                     {!agileParryActive?(
                                                       <div style={{display:"flex",justifyContent:"flex-end",paddingLeft:16}}>
-                                                        <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setF("monkAgileParryActive",true)}>Used with Attack</button>
                                                       </div>
                                                     ):(
@@ -19211,7 +19211,7 @@ function App() {
                                                       const ksToHit=dexMod+pb;
                                                       return (
                                                         <div style={{display:"flex",justifyContent:"flex-end",paddingLeft:16}}>
-                                                          <button disabled={!kw2} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(kw2?dmgTypeColor(ksDmgType).border:"var(--border)"),background:kw2?dmgTypeColor(ksDmgType).bg:"var(--input)",color:kw2?dmgTypeColor(ksDmgType).fg:"var(--muted)",cursor:kw2?"pointer":"not-allowed",fontFamily:"inherit"}}
+                                                          <button disabled={!kw2} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(kw2?dmgTypeColor(ksDmgType).border:"var(--border)"),background:kw2?dmgTypeColor(ksDmgType).bg:"var(--input)",color:kw2?dmgTypeColor(ksDmgType).fg:"var(--muted)",cursor:kw2?"pointer":"not-allowed",fontFamily:"inherit"}}
                                                             onClick={()=>{
                                                               if(!kw2) return;
                                                               const r1=Math.floor(Math.random()*20)+1;
@@ -19229,7 +19229,7 @@ function App() {
                                                     <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)"}}><span>•</span><span><b style={{color:"var(--accent)"}}>Way of the Brush</b> — You gain proficiency with calligrapher's supplies or painter's supplies (your choice).</span></div>
                                                     <div style={{display:"flex",gap:6,paddingLeft:16}}>
                                                       {["Calligrapher's Supplies","Painter's Supplies"].map(t=>(
-                                                        <button key={t} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:6,border:"1px solid "+(char.monkBrushTool===t?"rgba(var(--accent-rgb),0.5)":"var(--border)"),background:char.monkBrushTool===t?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:char.monkBrushTool===t?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
+                                                        <button key={t} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(char.monkBrushTool===t?"rgba(var(--accent-rgb),0.5)":"var(--border)"),background:char.monkBrushTool===t?"rgba(var(--accent-rgb),0.15)":"var(--input)",color:char.monkBrushTool===t?"var(--accent)":"var(--muted)",cursor:"pointer",fontFamily:"inherit"}}
                                                           onClick={()=>setF("monkBrushTool",t)}>{t}</button>
                                                       ))}
                                                     </div>
@@ -19245,7 +19245,7 @@ function App() {
                                                     <div style={{display:"flex",gap:6,fontSize:11,color:"var(--muted)",alignItems:"center"}}>
                                                       <span>•</span>
                                                       <span style={{flex:1}}><b style={{color:"var(--accent)"}}>Deft Strike</b> — Once on each of your turns when you hit a target with a kensei weapon, you can spend 1 ki point to deal extra damage equal to your Martial Arts die.</span>
-                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 8px",borderRadius:6,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{flexShrink:0,fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("force").border,background:dmgTypeColor("force").bg,color:dmgTypeColor("force").fg,cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>{const roll=Math.floor(Math.random()*maDie)+1;setSkillRoll({label:"Deft Strike — Extra (1d"+maDie+")",roll,bonus:0,total:roll,isCrit:false,isFail:false,sides:maDie});}}>
                                                         Deft Strike
                                                       </button>
@@ -19377,9 +19377,9 @@ function App() {
                                                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6,marginBottom:4}}>
                                                     <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                       <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>CON save DC {kiDC}</span>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(sunburstRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:sunburstRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(sunburstRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:sunburstRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),sunSoulSunburst:"success"}}))}>✓ Succeeded</button>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(sunburstRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:sunburstRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(sunburstRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:sunburstRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),sunSoulSunburst:"fail"}}))}>✗ Failed</button>
                                                       {sunburstRes&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n.sunSoulSunburst;return {...p,saveResults:n};})}>↺ Clear</button>}
@@ -19451,9 +19451,9 @@ function App() {
                                                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6,marginBottom:6}}>
                                                     <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                       <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>WIS save DC {kiDC}</span>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(reapingRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:reapingRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(reapingRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:reapingRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),longDeathReaping:"success"}}))}>✓ Succeeded</button>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(reapingRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:reapingRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(reapingRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:reapingRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),longDeathReaping:"fail"}}))}>✗ Failed</button>
                                                       {reapingRes&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n.longDeathReaping;return {...p,saveResults:n};})}>↺ Clear</button>}
@@ -19490,9 +19490,9 @@ function App() {
                                                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6,marginBottom:4}}>
                                                     <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                                                       <span style={{fontSize:11,color:"var(--red)",fontWeight:700}}>CON save DC {kiDC}</span>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(touchRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:touchRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(touchRes==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:touchRes==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),longDeathTouch:"success"}}))}>✓ Succeeded</button>
-                                                      <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid "+(touchRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:touchRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
+                                                      <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(touchRes==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:touchRes==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>({...p,saveResults:{...(p.saveResults||{}),longDeathTouch:"fail"}}))}>✗ Failed</button>
                                                       {touchRes&&<button style={{fontSize:9,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}
                                                         onClick={()=>setCharSaving(p=>{const n={...(p.saveResults||{})};delete n.longDeathTouch;return {...p,saveResults:n};})}>↺ Clear</button>}
@@ -20000,10 +20000,10 @@ function App() {
                                                     return (
                                                       <div style={{display:"flex",flexDirection:"column",gap:4,marginBottom:6}}>
                                                         <div style={{display:"flex",gap:4,alignItems:"center"}}>
-                                                          <button style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit",flexShrink:0}}
+                                                          <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.3)",background:"rgba(var(--accent-rgb),0.08)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit",flexShrink:0}}
                                                             onClick={()=>setF("druidStarMapForm",Math.floor(Math.random()*6)+1)}>🎲 Roll d6</button>
                                                           <select value={smForm||""} onChange={e=>setF("druidStarMapForm",Number(e.target.value))}
-                                                            style={{flex:1,padding:"3px 5px",borderRadius:5,background:"var(--card)",border:"1px solid "+(smForm?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:smForm?"var(--accent)":"var(--muted)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                            style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(smForm?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:smForm?"var(--accent)":"var(--muted)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                             <option value="">-- roll or choose a form --</option>
                                                             {Object.entries(STAR_MAP_FORMS).map(([k,v])=><option key={k} value={k}>{k}. {v}</option>)}
                                                           </select>
@@ -20631,7 +20631,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -20840,7 +20840,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -21017,7 +21017,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -21169,7 +21169,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -21300,7 +21300,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -21431,7 +21431,7 @@ function App() {
                                                     {names.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
                                                 </div>
-                                                {names.length===0&&<div style={{fontSize:11,color:"var(--subtle)",fontStyle:"italic"}}>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</div>}
+                                                {names.length===0&&<div style={{display:"flex",gap:5,fontSize:10,color:"var(--accent)",fontStyle:"italic",paddingLeft:10,marginTop:6}}><span>✨</span><span>Equip a {filter?filter+" ":""}weapon on the Gear tab to roll attacks.</span></div>}
                                                 {sel&&DM&&(
                                                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
                                                     <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
@@ -21798,7 +21798,7 @@ function App() {
                                                     const ck="rogueIMChar"+n, rk="rogueIMRes"+n, other=char["rogueIMChar"+(n===1?2:1)]||"";
                                                     const cur=char[ck]||"", res=char[rk]||"";
                                                     const OPTS=["Intelligence score","Wisdom score","Charisma score","Class levels"];
-                                                    const rb=(val,col)=>{const on=res===val;return <button key={val} style={{fontSize:11,fontWeight:700,padding:"3px 9px",borderRadius:6,border:"1px solid "+col+(on?"":"55"),background:on?col+"33":"transparent",color:on?col:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setF(rk,on?"":val);}}>{val}</button>;};
+                                                    const rb=(val,col)=>{const on=res===val;return <button key={val} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col+(on?"":"55"),background:on?col+"33":"transparent",color:on?col:"var(--muted)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setF(rk,on?"":val);}}>{val}</button>;};
                                                     return(
                                                       <div key={n} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                                                         <select className="ri-sel" value={cur} onClick={e=>e.stopPropagation()} onChange={e=>{e.stopPropagation();setF(ck,e.target.value);}}
@@ -22084,7 +22084,7 @@ function App() {
                                                     {!picked?(<SpellSearchPick maxL={maxL} onPick={n=>setCharSaving(p=>({...p,rogueSpellThiefSpell:n}))}/>):(<>
                                                       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
                                                         <span style={{fontSize:12,fontWeight:700,color:"var(--accent)"}}>{picked}</span>
-                                                        <button onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSpellThiefSpell:""}));}} style={{fontSize:10,fontWeight:700,padding:"2px 8px",borderRadius:5,cursor:"pointer",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.3)",color:"var(--red)"}}>Clear</button>
+                                                        <button onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,rogueSpellThiefSpell:""}));}} style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,cursor:"pointer",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.3)",color:"var(--red)"}}>Clear</button>
                                                       </div>
                                                       {SPELL_DATA[picked]&&<div style={{marginTop:6}}><SpellSaveBox name={picked} sd={SPELL_DATA[picked]} dc={atDC} saveKey={"rogueSpellThief_"+picked} char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/></div>}
                                                     </>)}
@@ -23193,7 +23193,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 <div style={{display:"flex",gap:6,alignItems:"center",marginTop:6}}>
                                                   <span style={{fontSize:11,color:"var(--muted)",fontWeight:600,flexShrink:0}}>Weapon:</span>
                                                   <select value={char.paladinSacredWeaponChoice||""} onChange={e=>{e.stopPropagation();setF("paladinSacredWeaponChoice",e.target.value);}}
-                                                    style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(char.paladinSacredWeaponChoice?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:char.paladinSacredWeaponChoice?"var(--accent)":"var(--subtle)",fontSize:11,fontFamily:"inherit",cursor:"pointer"}}>
+                                                    style={{flex:1,padding:"4px 6px",borderRadius:6,background:"var(--card)",border:"1px solid "+(char.paladinSacredWeaponChoice?"rgba(var(--accent-rgb),0.4)":"var(--border)"),color:char.paladinSacredWeaponChoice?"var(--accent)":"var(--subtle)",fontSize:12,fontFamily:"inherit",cursor:"pointer"}}>
                                                     <option value="">-- Pick equipped weapon --</option>
                                                     {sacredWeaponOptions.map(n=><option key={n} value={n}>{n}</option>)}
                                                   </select>
@@ -23968,7 +23968,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                     <div style={{display:"flex",gap:6,alignItems:"center"}}>
                                                       <span style={{fontSize:10,fontWeight:700,color:"var(--muted)",minWidth:72,textTransform:"uppercase",letterSpacing:".06em",flexShrink:0}}>Maneuver {mi+1}</span>
                                                       <select value={char[key]||""} onChange={e=>setCharSaving(p=>({...p,[key]:e.target.value}))}
-                                                        style={{flex:1,fontSize:12,padding:"3px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit",cursor:"pointer"}}>
+                                                        style={{flex:1,fontSize:12,padding:"4px 6px",borderRadius:6,background:char[key]?"rgba(var(--accent-rgb),0.08)":"var(--input)",border:"1px solid "+(char[key]?"var(--accent)":"var(--border)"),color:char[key]?"var(--accent)":"var(--muted)",fontFamily:"inherit",cursor:"pointer"}}>
                                                         <option value="">-- Choose maneuver --</option>
                                                         {maneuvers.filter(m=>m!==char[other]).map(m=><option key={m} value={m}>{m}</option>)}
                                                       </select>
