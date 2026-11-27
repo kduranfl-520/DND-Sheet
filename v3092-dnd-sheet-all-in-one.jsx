@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3091";
+const SHEET_VERSION = "v3092";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30324,11 +30324,11 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 </button>
               </div>
               {[
-                {key:"actionUsed",     label:"Action",       emoji:"🎯", color:"var(--accent)",  bg:"rgba(var(--accent-rgb),0.1)",  border:"rgba(var(--accent-rgb),0.35)",  hints:"Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object, Grapple, Shove, Improvise"},
+                {key:"actionUsed",     label:"Action",       emoji:"🎯", color:"#6366f1",  bg:"rgba(99,102,241,0.12)",  border:"rgba(99,102,241,0.4)",  hints:"Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object, Grapple, Shove, Improvise"},
                 {key:"bonusActionUsed",label:"Bonus Action", emoji:"+", color:"#f97316",   bg:"rgba(249,115,22,0.12)",  border:"rgba(249,115,22,0.4)", hints:""},
                 {key:"reactionUsed",   label:"Reaction",     emoji:"!", color:"var(--green)",   bg:"rgba(34,197,94,0.1)",   border:"rgba(34,197,94,0.35)",  hints:"", actionDice:true},
               ].map(({key,label,emoji,color:color0,bg,border,hints,actionDice})=>{
-                const color=darkMode?color0:(color0==="#f97316"?"#c2410c":color0==="var(--green)"?"#15803d":color0);
+                const color=darkMode?color0:(color0==="#f97316"?"#c2410c":color0==="#6366f1"?"#4f46e5":color0==="var(--green)"?"#15803d":color0);
                 const used = char[key];
                 const itemKey = key.replace("Used","Items");
                 const storedItems = char[itemKey]||[];
@@ -34201,7 +34201,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 reactionItems:[["Opportunity Attack","When a hostile creature the companion can see leaves its reach, it makes one melee attack against that creature."]],
               };
               const SLOTS=[
-                {key:"actionUsed",ik:"actionItems",label:"Action",emoji:"🎯",c0:"var(--accent)",cL:"var(--accent)",bg:"rgba(var(--accent-rgb),0.1)",bd:"rgba(var(--accent-rgb),0.35)"},
+                {key:"actionUsed",ik:"actionItems",label:"Action",emoji:"🎯",c0:"#818cf8",cL:"#4f46e5",bg:"rgba(99,102,241,0.12)",bd:"rgba(99,102,241,0.4)"},
                 {key:"bonusActionUsed",ik:"bonusActionItems",label:"Bonus Action",emoji:"+",c0:"#f97316",cL:"#c2410c",bg:"rgba(249,115,22,0.12)",bd:"rgba(249,115,22,0.4)"},
                 {key:"reactionUsed",ik:"reactionItems",label:"Reaction",emoji:"!",c0:"var(--green)",cL:"#15803d",bg:"rgba(34,197,94,0.1)",bd:"rgba(34,197,94,0.35)"},
               ];
@@ -34671,9 +34671,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               return(
                 <>
                 <div onClick={()=>{setActionPickerOpen(null);}} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.45)",zIndex:400}}/>
-                <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",zIndex:401,background:"var(--card)",border:"1px solid var(--accent)",borderRadius:14,padding:"14px 16px",width:"min(340px,92vw)",maxHeight:"75vh",overflowY:"auto",boxShadow:"0 8px 32px rgba(0,0,0,0.25)"}} onClick={e=>e.stopPropagation()}>
+                <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",zIndex:401,background:"var(--card)",border:"1px solid #6366f1",borderRadius:14,padding:"14px 16px",width:"min(340px,92vw)",maxHeight:"75vh",overflowY:"auto",boxShadow:"0 8px 32px rgba(0,0,0,0.25)"}} onClick={e=>e.stopPropagation()}>
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-                    <span style={{fontSize:14,fontWeight:700,color:"var(--accent)"}}>Add Action{dmgF&&<span style={{fontSize:11,fontWeight:600,color:"var(--muted)",marginLeft:6}}>({dmgF})</span>}</span>
+                    <span style={{fontSize:14,fontWeight:700,color:"#6366f1"}}>Add Action{dmgF&&<span style={{fontSize:11,fontWeight:600,color:"var(--muted)",marginLeft:6}}>({dmgF})</span>}</span>
                     <button onClick={()=>setActionPickerOpen(null)} style={{fontSize:15,fontWeight:700,color:"var(--muted)",background:"none",border:"none",cursor:"pointer",lineHeight:1}}>✕</button>
                   </div>
                   {/* Standard Actions quick-pick */}
@@ -34682,13 +34682,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                     <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
                       {STD_ACTIONS.map(a=>(
                         <button key={a.name} onClick={()=>{setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:a.name}]}));setActionPickerOpen(null);}}
-                          style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:"rgba(var(--accent-rgb),0.08)",border:"1px solid rgba(var(--accent-rgb),0.3)",color:"var(--text)"}}>
+                          style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.3)",color:"var(--text)"}}>
                           {a.emoji} {a.name}
                         </button>
                       ))}
                     </div>
                   </div>
-                  {[{label:"Weapons & Attacks",opts:weaponOpts,col:"rgba(var(--accent-rgb),0.08)",brd:"rgba(var(--accent-rgb),0.3)"},{label:"Spells",opts:spellOpts,col:"rgba(139,92,246,0.08)",brd:"rgba(139,92,246,0.3)"},{label:"Gear & Items",opts:gearOpts,col:"rgba(245,158,11,0.08)",brd:"rgba(245,158,11,0.3)"},{label:"Class Features",opts:featureOpts,col:"rgba(34,197,94,0.08)",brd:"rgba(34,197,94,0.3)"}].map(({label,opts,col,brd})=>opts.length===0?null:(
+                  {[{label:"Weapons & Attacks",opts:weaponOpts,col:"rgba(99,102,241,0.08)",brd:"rgba(99,102,241,0.3)"},{label:"Spells",opts:spellOpts,col:"rgba(139,92,246,0.08)",brd:"rgba(139,92,246,0.3)"},{label:"Gear & Items",opts:gearOpts,col:"rgba(245,158,11,0.08)",brd:"rgba(245,158,11,0.3)"},{label:"Class Features",opts:featureOpts,col:"rgba(34,197,94,0.08)",brd:"rgba(34,197,94,0.3)"}].map(({label,opts,col,brd})=>opts.length===0?null:(
                     <div key={label} style={{marginBottom:10}}>
                       <div style={{fontSize:10,fontWeight:700,color:"var(--muted)",letterSpacing:".07em",textTransform:"uppercase",marginBottom:5}}>{label}</div>
                       <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
@@ -34719,7 +34719,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                     <input id="act-custom-input" placeholder="Custom action..." style={{flex:1,padding:"5px 8px",borderRadius:7,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,fontFamily:"inherit"}}
                       onKeyDown={e=>{if(e.key==="Enter"&&e.target.value.trim()){setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:e.target.value.trim()}]}));setActionPickerOpen(null);}}}/>
                     <button onClick={()=>{const el=document.getElementById("act-custom-input");if(el&&el.value.trim()){setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:el.value.trim()}]}));setActionPickerOpen(null);}}}
-                      style={{fontSize:12,fontWeight:700,padding:"5px 10px",borderRadius:7,background:"rgba(var(--accent-rgb),0.1)",border:"1px solid rgba(var(--accent-rgb),0.3)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"}}>Add</button>
+                      style={{fontSize:12,fontWeight:700,padding:"5px 10px",borderRadius:7,background:"rgba(99,102,241,0.1)",border:"1px solid rgba(99,102,241,0.3)",color:"#6366f1",cursor:"pointer",fontFamily:"inherit"}}>Add</button>
                   </div>
                 </div>
                 </>
