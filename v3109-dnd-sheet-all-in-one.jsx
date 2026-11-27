@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3108";
+const SHEET_VERSION = "v3109";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22946,6 +22946,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const hp=Math.min(wardMax,Math.max(0,Number(char.wizWardHP)||0));
                                             const amt=Math.max(0,parseInt(char.wizWardAmt)||0);
                                                                                         const absorb=()=>{
+                                              const el=document.getElementById("wizWardAmtInp");
+                                              const amt=Math.max(0,parseInt(el&&el.value)||0);
                                               if(!made||hp<=0||amt<=0) return;
                                               const soak=Math.min(hp,amt), over=amt-soak;
                                               setCharSaving(p=>({...p,wizWardHP:hp-soak,wizWardAmt:"",wizWardLast:"Absorbed "+soak+(over>0?" — "+over+" passes through to the target":"")+(hp-soak<=0?" · ward is down":"")}));
@@ -22954,8 +22956,8 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const absorbRow=(btnTxt)=>(
                                               <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                 {char.wizWardLast&&<span style={{fontSize:11,color:"var(--muted)",marginRight:"auto"}}>{char.wizWardLast}</span>}
-                                                <input type="number" min={0} placeholder="Damage" value={char.wizWardAmt||""} style={inpSt} onClick={e=>e.stopPropagation()} onChange={e=>setF("wizWardAmt",e.target.value)}/>
-                                                <button style={(made&&hp>0&&amt>0)?neutralBtn:{...neutralBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6}} disabled={!(made&&hp>0&&amt>0)} onClick={e=>{e.stopPropagation();absorb();}}>{btnTxt}</button>
+                                                <input id="wizWardAmtInp" type="number" min={0} placeholder="Damage" defaultValue="" style={inpSt} onClick={e=>e.stopPropagation()}/>
+                                                <button style={(made&&hp>0)?neutralBtn:{...neutralBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6}} disabled={!(made&&hp>0)} onClick={e=>{e.stopPropagation();absorb();}}>{btnTxt}</button>
                                               </div>
                                             );
                                             const wardReadout=(
