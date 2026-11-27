@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3085";
+const SHEET_VERSION = "v3086";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30963,6 +30963,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       "Guardian Coil":"When you or a creature you can see near your tentacle takes damage, shrink the damage by a roll of your tentacle's dice.",
                                       "Entropic Ward":"Impose disadvantage on an attack against you. If it misses, your next attack against that creature has advantage.",
                                       "Armor of Hexes":"When your cursed target hits you, roll a d6; on a 4 or higher the attack misses instead.",
+                                      "Wholeness of Body":"Heal yourself for three times your monk level. You can do this once per long rest.",
+                                      "Hidden Paths — Teleport Ally":"Touch a willing creature and teleport it up to 30 feet to an unoccupied space you can see.",
+                                      "Hidden Paths — Teleport Self":"Teleport up to 60 feet to an unoccupied space you can see. Uses equal your WIS modifier (minimum 1) and return on a long rest.",
+                                      "Shadow Step":"From dim light or darkness, teleport up to 60 feet to an unoccupied space you can see that is also dim or dark. Your next melee attack this turn has advantage.",
+                                      "Sentinel at Death's Door":"When you or a creature you can see within 30 feet suffers a critical hit, you can turn it into a normal hit. Uses equal your WIS modifier (minimum 1) per long rest.",
+                                      "Opportunist":"When a creature within 5 feet of you is hit by an attack from someone other than you, use your reaction to make a melee attack against that creature.",
+                                      "Relentless Avenger":"After you hit with an opportunity attack, you can move up to half your speed as part of the same reaction, without provoking opportunity attacks.",
                                       "Shove":"Make a STR (Athletics) check contested by the target's STR (Athletics) or DEX (Acrobatics) to push the target 5 ft away or knock it prone. Target must be within reach and no more than one size larger than you.",
                                     };
                                     const featureNote = !sd&&!libEntry&&!matchName.startsWith("Wild Shape") ? (FEATURE_NOTES[matchName]||Object.entries(FEATURE_NOTES).find(([k])=>matchName.startsWith(k.split("(")[0].trim()))?.[1]) : null;
@@ -31254,6 +31261,46 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                               :<button style={wBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*4)+1;setF("warWishLeft",d);setSkillRoll({label:"Limited Wish — long rests until next use (1d4)",roll:d,bonus:0,total:d,isCrit:false,isFail:false,sides:4,r1:d,r2:null,isAdv:false,isDis:false});}}>Cast · roll 1d4 rests</button>}
                                           </>)}
                                         </>);
+                                      }
+                                      return null;
+                                    })()}
+                                    {/* Other-class Rounds controls (Grave, Dreams, Open Hand, Shadow) */}
+                                    {(()=>{
+                                      const nm=matchName;
+                                      const oLvl=char.multiClassLevel>0?char.classLevel:char.level||1;
+                                      const oBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"};
+                                      const oLink={fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
+                                      const oOff={...oBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6};
+                                      const wrapO=kids=>(<div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",flexDirection:"column",gap:6}} onClick={e=>e.stopPropagation()}>{kids}</div>);
+                                      const endO=kids=>(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>{kids}</div>);
+                                      const pipsO=(key,max)=>{
+                                        const used=Math.min(max,char[key]||0), left=max-used;
+                                        return (<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                          <PipRow label={"Uses ("+left+"/"+max+")"} count={max} used={used} color="fail" onSet={v=>setF(key,v)}/>
+                                          <span style={{display:"inline-flex",alignItems:"center",gap:8}}>
+                                            {used>0&&<button style={oLink} onClick={e=>{e.stopPropagation();setF(key,0);}}>↺ Reset</button>}
+                                            <button style={left>0?oBtn:oOff} disabled={left<=0} onClick={e=>{e.stopPropagation();if(left>0)setF(key,used+1);}}>Use</button>
+                                          </span>
+                                        </div>);
+                                      };
+                                      const wisO=Math.max(1,abilityMod(eff.WIS||10));
+                                      if(nm==="Sentinel at Death's Door"&&char.charClass==="Cleric") return wrapO(pipsO("clericSentinelDeathUsed",wisO));
+                                      if(nm.startsWith("Hidden Paths")&&char.charClass==="Druid") return wrapO(pipsO("druidHiddenPathsUsed",wisO));
+                                      if(nm==="Wholeness of Body"&&char.charClass==="Monk"){
+                                        const used=!!char.monkWholenessOfBodyUsed, heal=3*oLvl, col=dmgTypeColor("healing");
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:used?"var(--muted)":"var(--accent)",fontWeight:700}}>{used?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
+                                          {used?<button style={oLink} onClick={e=>{e.stopPropagation();setF("monkWholenessOfBodyUsed",false);}}>↺ Reset</button>
+                                            :<button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col.border,background:col.bg,color:col.fg,cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,monkWholenessOfBodyUsed:true,hp:{...p.hp,current:Math.min(p.hp?.max||0,(p.hp?.current||0)+heal)}}));}}>💚 Heal {heal} HP</button>}
+                                        </>));
+                                      }
+                                      if(nm==="Shadow Step"&&char.charClass==="Monk"){
+                                        const on=!!char.monkShadowStepUsed;
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?"⚡ Advantage ready (until end of turn)":"Needs dim light or darkness"}</span>
+                                          {on?<button style={oLink} onClick={e=>{e.stopPropagation();setF("monkShadowStepUsed",false);}}>↺ Clear</button>
+                                            :<button style={oBtn} onClick={e=>{e.stopPropagation();setF("monkShadowStepUsed",true);}}>Teleport — gain advantage</button>}
+                                        </>));
                                       }
                                       return null;
                                     })()}
@@ -34034,6 +34081,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(f==="Cunning Action") return;if((fl.includes("action")||fl.includes("attack"))&&!fl.includes("spellcast")&&!fl.includes("cast a spell"))actFeatures.push(f);});}
               // Two-Weapon Fighting — manual action option, always available, pulls up both weapon slots at once
               actFeatures.push("Two-Weapon Fighting");
+              // Open Hand / Dreams — actions
+              if(char.charClass==="Monk"&&char.monasticTradition==="Way of the Open Hand (Monk)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=6) actFeatures.push("Wholeness of Body");
+              if(char.charClass==="Druid"&&char.druidCircle==="Circle of Dreams (Druid)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=10) actFeatures.push("Hidden Paths — Teleport Ally");
               // Warlock — patron actions
               if(char.charClass==="Warlock"){
                 const wlA=char.multiClassLevel>0?char.classLevel:char.level||1;
@@ -34508,6 +34558,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 const balmLeft2=balmMax2-balmUsed2;
                 if(balmLeft2>0) baFeatures.push("Balm of the Summer Court ("+balmLeft2+"/"+balmMax2+" dice left)");
               }
+              // Shadow Step / Hidden Paths — bonus actions
+              if(char.charClass==="Monk"&&char.monasticTradition==="Way of the Shadow (Monk)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=6) baFeatures.push("Shadow Step");
+              if(char.charClass==="Druid"&&char.druidCircle==="Circle of Dreams (Druid)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=10) baFeatures.push("Hidden Paths — Teleport Self");
               // Warlock — patron bonus actions
               if(char.charClass==="Warlock"){
                 const wlB=char.multiClassLevel>0?char.classLevel:char.level||1;
@@ -34931,6 +34984,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               const rxnFeatures=[];
               // Opportunity Attack — available to all characters with a melee weapon or unarmed
               rxnFeatures.push("Opportunity Attack");
+              // Grave / Shadow / Vengeance — reactions
+              if(char.charClass==="Cleric"&&char.divineDomain==="Grave Domain (Cleric)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=6) rxnFeatures.push("Sentinel at Death's Door");
+              if(char.charClass==="Monk"&&char.monasticTradition==="Way of the Shadow (Monk)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17) rxnFeatures.push("Opportunist");
+              if(char.charClass==="Paladin"&&char.sacredOath==="Oath of Vengeance (Paladin)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=7) rxnFeatures.push("Relentless Avenger");
               // Warlock — patron reactions
               if(char.charClass==="Warlock"){
                 const wlR=char.multiClassLevel>0?char.classLevel:char.level||1;
