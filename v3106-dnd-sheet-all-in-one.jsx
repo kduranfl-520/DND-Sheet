@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3105";
+const SHEET_VERSION = "v3106";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5646,9 +5646,27 @@ function App() {
  const [hdrOpen, setHdrOpen] = useState(false);
  const [skillRoll, setSkillRoll] = useState(null);
  const [hpAmount, setHpAmount]   = useState("");
+ // Abjuration wizard: the Arcane Ward soaks damage before Temp HP and real HP
+ const wizWardOn = ()=>char.charClass==="Wizard"&&char.wizTradition==="School of Abjuration (Wizard)"&&!!char.wizWardMade;
+ const wizWardRegen = (sd, castLvl) => {
+   if(!wizWardOn()||!sd||sd.school!=="Abjuration"||!(castLvl>=1)) return;
+   const wl=char.multiClassLevel>0?char.classLevel:char.level||1;
+   const wMax=Math.max(0,2*wl+abilityMod(eff.INT||10));
+   setCharSaving(p=>{
+     if(!p.wizWardMade) return p;
+     const cur=Math.min(wMax,Math.max(0,Number(p.wizWardHP)||0));
+     const nx=Math.min(wMax,cur+2*castLvl);
+     return {...p,wizWardHP:nx,wizWardLast:"Regained "+(nx-cur)+" from a level "+castLvl+" abjuration spell"};
+   });
+ };
  const applyDamage = (amt) => {
-   const dmg = Math.abs(Number(amt)||0);
-   if(!dmg) return;
+   const dmgIn = Math.abs(Number(amt)||0);
+   if(!dmgIn) return;
+   const wardHp = wizWardOn()?Math.max(0,Number(char.wizWardHP)||0):0;
+   const wardSoak = Math.min(wardHp,dmgIn);
+   const wardPatch = wardSoak>0?{wizWardHP:wardHp-wardSoak,wizWardLast:"Absorbed "+wardSoak+" of your damage"+(dmgIn>wardSoak?" — "+(dmgIn-wardSoak)+" passed through":"")+(wardHp-wardSoak<=0?" · ward is down":"")}:{};
+   const dmg = dmgIn - wardSoak;
+   if(!dmg){ setCharSaving(p=>({...p,...wardPatch})); return; }
    const temp = char.hp?.temp||0;
    const tempAfter = Math.max(0, temp-dmg);
    const remainder = Math.max(0, dmg-temp);
@@ -5667,6 +5685,7 @@ function App() {
      setCharSaving(p=>({
        ...p,
        hp:{...p.hp,current:newHP,temp:tempAfter},
+       ...wardPatch,
        relentlessRageDC:newDC,
        relentlessRageResult:{roll,total,success,dc,bonus:conMod},
      }));
@@ -5675,6 +5694,7 @@ function App() {
      setCharSaving(p=>({
        ...p,
        hp:{...p.hp, current:curAfter, temp:tempAfter},
+       ...wardPatch,
      }));
    }
  };
@@ -5863,6 +5883,7 @@ function App() {
  nu[lv]=Math.min(total,used+1);
  const isConc = sd.dur&&sd.dur.toLowerCase().includes("concentration");
  setCharSaving(p=>({...p,spellSlotsUsed:nu,...(isConc?{concentrating:key}:{})}));
+ wizWardRegen(sd,sd.level||1);
  setSpellPopup(null);
  }catch(e){}
   };
@@ -5921,7 +5942,7 @@ function App() {
  const sus=Array.isArray(char.spellSlotsUsed)?char.spellSlotsUsed:[];
  const us=(sus[si]||0);
  const isConc = sd.dur&&sd.dur.toLowerCase().includes("concentration");
- if(us<tot){const nu=[...sus];while(nu.length<=si)nu.push(0);nu[si]=Math.min(tot,us+1);setCharSaving(p=>({...p,spellSlotsUsed:nu,...(isConc?{concentrating:key}:{})}));}
+ if(us<tot){const nu=[...sus];while(nu.length<=si)nu.push(0);nu[si]=Math.min(tot,us+1);setCharSaving(p=>({...p,spellSlotsUsed:nu,...(isConc?{concentrating:key}:{})}));wizWardRegen(sd,sl);}
  }catch(e){}
  }
   };
