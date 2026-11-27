@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3106";
+const SHEET_VERSION = "v3107";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22980,7 +22980,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {!made&&flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,wizWardMade:true,wizWardHP:wardMax,wizWardLast:""}));}}>Create Ward</button>)}
                                                 {made&&(
                                                   <>
-                                                    {absorbRow("Absorb damage")}
+                                                    {char.wizWardLast&&<div style={{fontSize:11,color:"var(--muted)",marginTop:6}}>{char.wizWardLast}</div>}
                                                     <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
                                                       <span style={{fontSize:11,color:"var(--muted)"}}>Abjuration spell level</span>
                                                       <select className="ri-sel" value={castLv} onClick={e=>e.stopPropagation()} onChange={e=>setF("wizWardCastLvl",e.target.value)} style={{flex:"none",width:60,fontSize:12,padding:"4px 6px",borderRadius:6}}>
