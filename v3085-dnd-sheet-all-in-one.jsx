@@ -2617,8 +2617,8 @@ const BLANK = {
 };
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
-const SHEET_UPDATED = "Nov 1, 2026";
-const SHEET_VERSION = "v3084";
+const SHEET_UPDATED = "Nov 26, 2026";
+const SHEET_VERSION = "v3085";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30455,9 +30455,16 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                     }
                   });
                 }
+                // Warlock — follow-up bonus actions that appear once the triggering action is spent
+                if(key==="bonusActionUsed"&&char.charClass==="Warlock"){
+                  if(char.warPatron==="The Fathomless (Warlock)"&&char.warTentOn&&!storedItems.some(i=>i.name.replace(/^⚡\s*/,"").startsWith("Tentacle — Move"))) autoInjectBA.push("⚡ Tentacle — Move & Attack");
+                  if(char.warPatron==="The Genie (Warlock)"&&char.warBottleIn&&!storedItems.some(i=>i.name.replace(/^⚡\s*/,"").startsWith("Bottled Respite — Exit"))) autoInjectBA.push("⚡ Bottled Respite — Exit Vessel");
+                }
                 const autoInjectRxn=[];
                 if(key==="reactionUsed"){
                   const alreadyInRxn=name=>storedItems.some(i=>i.name.startsWith(name));
+                  // Warlock — Guardian Coil appears while the tentacle is out
+                  if(char.charClass==="Warlock"&&char.warPatron==="The Fathomless (Warlock)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=6&&char.warTentOn&&!alreadyInRxn("Guardian Coil")) autoInjectRxn.push("Guardian Coil");
                   if(char.charClass==="Barbarian"){
                     const rlvl=char.level||1;
                     const rpb=Math.ceil(1+rlvl/4);
@@ -30938,6 +30945,24 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       "Blade Flourish":"When you hit with a melee weapon attack as part of the Attack action, choose one: add the die to your AC until your next turn (Defensive Flourish), add the die as extra damage (Slashing Flourish), or push the target and move without provoking (Mobile Flourish). Spends a Bardic Inspiration use.",
                                       "Steps of Night":"As a bonus action when you're in dim light or darkness, spend a use to give yourself a flying speed equal to your walking speed for 1 minute.",
                                       "Wrath of the Storm":"When a creature within 5 ft hits you with an attack, spend a use as a reaction to force a DEX save — 2d8 lightning or thunder damage on a failure, half on a success.",
+                                      "Fey Presence":"Creatures in a 10-foot cube from you each make a WIS save or are charmed or frightened by you (your pick) until the end of your next turn.",
+                                      "Dark Delirium":"Choose a creature within 60 feet. On a failed WIS save it is charmed or frightened and thinks it is lost in an illusory mist for up to a minute, while you hold concentration.",
+                                      "Bottled Respite — Enter Vessel":"Slip inside your genie's vessel with a few allies, safe from outside harm, for up to twice your proficiency bonus in hours.",
+                                      "Bottled Respite — Exit Vessel":"Leave the vessel (and anyone with you) as a bonus action, back to the space you entered from.",
+                                      "Limited Wish":"Wish any spell of 6th level or lower that takes one action, from any class list, with no requirements or costly components. It then takes 1d4 long rests before you can wish again.",
+                                      "Fathomless Plunge":"Teleport yourself and up to five willing creatures to a large body of water you have seen within a mile.",
+                                      "Create Thrall":"Touch an incapacitated humanoid to charm it, with a telepathic link, until the charm is broken or you create another thrall.",
+                                      "Hexblade's Curse":"Mark a creature within 30 feet for a minute. You add your proficiency bonus to damage against it, crit on 19–20 against it, and heal if it dies.",
+                                      "Tentacle of the Deeps":"Conjure a spectral tentacle within 60 feet that lasts a minute. It makes a melee spell attack when created and can be moved and used again on later turns.",
+                                      "Tentacle — Move & Attack":"Move your tentacle up to 30 feet and make another melee spell attack with it against a creature within 10 feet.",
+                                      "Healing Light":"Spend dice from your d6 healing pool (up to your CHA modifier at once) to heal a creature you can see within 60 feet.",
+                                      "Elemental Gift — Fly":"Gain a 30-foot hovering fly speed for 10 minutes. You have as many uses as your proficiency bonus.",
+                                      "Indestructible Life":"Heal 1d8 plus your warlock level, and reattach a severed body part if you put it back in place.",
+                                      "Misty Escape":"When you take damage, turn invisible and teleport up to 60 feet. The invisibility ends at the start of your next turn or when you attack or cast a spell.",
+                                      "Beguiling Defenses":"When something tries to charm you, the creature makes a WIS save or is charmed by you instead until it takes damage, up to a minute.",
+                                      "Guardian Coil":"When you or a creature you can see near your tentacle takes damage, shrink the damage by a roll of your tentacle's dice.",
+                                      "Entropic Ward":"Impose disadvantage on an attack against you. If it misses, your next attack against that creature has advantage.",
+                                      "Armor of Hexes":"When your cursed target hits you, roll a d6; on a 4 or higher the attack misses instead.",
                                       "Shove":"Make a STR (Athletics) check contested by the target's STR (Athletics) or DEX (Acrobatics) to push the target 5 ft away or knock it prone. Target must be within reach and no more than one size larger than you.",
                                     };
                                     const featureNote = !sd&&!libEntry&&!matchName.startsWith("Wild Shape") ? (FEATURE_NOTES[matchName]||Object.entries(FEATURE_NOTES).find(([k])=>matchName.startsWith(k.split("(")[0].trim()))?.[1]) : null;
@@ -31091,6 +31116,145 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       if(nm.startsWith("Dragon Wings")){const on=!!char.sorcDragonWingsActive;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8}}><span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?"Wings out — flying speed "+(char.speed||30)+" ft.":"Wings folded"}</span><button style={on?{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}:sorcBtn} onClick={e=>{e.stopPropagation();setF("sorcDragonWingsActive",!on);}}>{on?"↺ Dismiss":"Sprout Wings"}</button></div>);}
                                       if(nm.startsWith("Draconic Presence")){const on=!!char.sorcPresenceOn;const can=sorcSPLeft>=5&&!!char.sorcPresenceMode;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>{sorcReadout}{!char.sorcPresenceMode&&<span style={{fontSize:11,color:"var(--muted)"}}>Pick Awe or Fear on the Features tab</span>}{on?<button style={{fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setF("sorcPresenceOn",false);}}>↺ End</button>:<button style={can?sorcBtn:sorcOffBtn} disabled={!can} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,sorcSPUsed:Math.min(sorcSPMax,(p.sorcSPUsed||0)+5),sorcPresenceOn:true}));}}>Use (5 SP)</button>}</div>);}
                                       if(nm.startsWith("Quickened Spell")){const can=sorcSPLeft>=2;return wrapS(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8}}><button style={can?sorcBtn:sorcOffBtn} disabled={!can} onClick={e=>{e.stopPropagation();if(can)sorcSpend(2);}}>Spend 2 SP</button>{sorcReadout}</div>);}
+                                      return null;
+                                    })()}
+                                    {/* Warlock Rounds controls — same state keys as the Features tab */}
+                                    {(()=>{
+                                      if(char.charClass!=="Warlock") return null;
+                                      const nm=matchName;
+                                      const wlL=char.multiClassLevel>0?char.classLevel:char.level||1;
+                                      const wChaMod=abilityMod(eff.CHA||10);
+                                      const wDC=8+pb+wChaMod;
+                                      const wBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"};
+                                      const wLink={fontSize:10,color:"var(--subtle)",background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"};
+                                      const wOff={...wBtn,border:"1px solid var(--border)",background:"var(--input)",color:"var(--muted)",cursor:"not-allowed",opacity:0.6};
+                                      const wrapW=kids=>(<div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",flexDirection:"column",gap:6}} onClick={e=>e.stopPropagation()}>{kids}</div>);
+                                      const endW=kids=>(<div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>{kids}</div>);
+                                      const onceW=(key,ready,used)=>{
+                                        const u=!!char[key];
+                                        return endW(<>
+                                          <span style={{fontSize:11,color:u?"var(--muted)":"var(--accent)",fontWeight:700}}>{u?(used||"Used — recharges on a Short or Long Rest"):(ready||"Ready — 1 use per short or long rest")}</span>
+                                          <button style={u?wLink:wBtn} onClick={e=>{e.stopPropagation();setF(key,!u);}}>{u?"↺ Reset":"Mark Used"}</button>
+                                        </>);
+                                      };
+                                      const saveW=(saveKey,abil,okTxt,failTxt,lbl)=>{
+                                        const r=(char.saveResults||{})[saveKey];
+                                        const setR=v=>setCharSaving(p=>{const n={...(p.saveResults||{})};if(v)n[saveKey]=v;else delete n[saveKey];return {...p,saveResults:n};});
+                                        return (<div>
+                                          <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                                            <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{lbl||(abil+" save DC "+wDC)}</span>
+                                            <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:r==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("success");}}>✓ Succeeded</button>
+                                            <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:r==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("fail");}}>✗ Failed</button>
+                                            {r&&<button style={wLink} onClick={e=>{e.stopPropagation();setR(null);}}>↺ Clear</button>}
+                                          </div>
+                                          {r==="success"&&<div style={{fontSize:11,color:"var(--green)",marginTop:4}}>{okTxt}</div>}
+                                          {r==="fail"&&<div style={{fontSize:11,color:"var(--red)",marginTop:4}}>{failTxt}</div>}
+                                        </div>);
+                                      };
+                                      const d1=(label,sides,txt,fail)=><button style={wBtn} onClick={e=>{e.stopPropagation();const r=Math.floor(Math.random()*sides)+1;setSkillRoll({label:typeof label==="function"?label(r):label,roll:r,bonus:0,total:r,isCrit:false,isFail:!!(fail&&fail(r)),sides,r1:r,r2:null,isAdv:false,isDis:false});}}>{txt}</button>;
+                                      if(nm==="Fey Presence") return wrapW(<>{saveW("warFeyPresence","WIS","The creature is not charmed or frightened by you.","The creature is charmed or frightened by you (your choice) until the end of your next turn.")}{onceW("warFeyUsed")}</>);
+                                      if(nm==="Dark Delirium") return wrapW(<>{saveW("warDarkDelirium","WIS","The creature is not affected.","The creature is charmed or frightened by you (your choice) for 1 minute and lost in the misty realm.")}{onceW("warDelirUsed")}</>);
+                                      if(nm==="Misty Escape") return wrapW(onceW("warMistyUsed"));
+                                      if(nm==="Beguiling Defenses") return wrapW(saveW("warBeguiling","WIS","The creature shakes off the charm.","The creature is charmed by you for 1 minute, or until it takes any damage."));
+                                      if(nm==="Entropic Ward") return wrapW(onceW("warEntropicUsed"));
+                                      if(nm==="Fathomless Plunge") return wrapW(onceW("warPlungeUsed"));
+                                      if(nm==="Create Thrall"){
+                                        const on=!!char.warThrallOn;
+                                        return wrapW(endW(<>
+                                          <span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?"Thrall charmed — telepathic link active":"No thrall charmed"}</span>
+                                          <button style={on?wLink:wBtn} onClick={e=>{e.stopPropagation();setF("warThrallOn",!on);}}>{on?"↺ Clear":"Charm a Thrall"}</button>
+                                        </>));
+                                      }
+                                      if(nm==="Indestructible Life") return wrapW(<>{endW(<button style={wBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*8)+1;const t=d+wlL;setSkillRoll({label:"Indestructible Life (1d8+"+wlL+" healing)",roll:d,bonus:wlL,total:t,isCrit:false,isFail:false,sides:8,r1:d,r2:null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:t,allDmgRolls:[d],dmgRolls:[d],dmgBonus:wlL,dmgType:"healing",dmgDice:"1d8",diceSides:8,baseDiceCount:1,saveDC:null,saveType:null,spiritShield:false});}}>🎲 Heal 1d8+{wlL}</button>)}{onceW("warIndestUsed")}</>);
+                                      if(nm==="Armor of Hexes") return wrapW(endW(<>
+                                        <span style={{fontSize:11,color:char.warHexCurseOn?"var(--accent)":"var(--muted)",fontWeight:700}}>{char.warHexCurseOn?"Target is cursed":"Needs a cursed target"}</span>
+                                        {d1(r=>"Armor of Hexes — "+(r>=4?"MISS (attack misses you)":"HIT (attack still lands)"),6,"🎲 Roll d6 (4+ = miss)",r=>r<4)}
+                                      </>));
+                                      if(nm==="Hexblade's Curse"){
+                                        const on=!!char.warHexCurseOn, used=!!char.warHexUsed;
+                                        const heal=Math.max(1,wlL+wChaMod);
+                                        return wrapW(endW(<>
+                                          <span style={{fontSize:11,color:on?"var(--accent)":"var(--muted)",fontWeight:700}}>{on?"Cursed — +"+pb+" damage · crit on 19–20":(used?"Used — short or long rest":"Ready — 1 use per short or long rest")}</span>
+                                          {!on&&<button style={used?wOff:wBtn} disabled={used} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warHexCurseOn:true,warHexUsed:true}));}}>☠ Curse a creature</button>}
+                                          {on&&<button style={wBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,hp:{...p.hp,current:Math.min(p.hp?.max||0,(p.hp?.current||0)+heal)},...(wlL>=14?{}:{warHexCurseOn:false})}));}}>Target died — regain {heal} HP</button>}
+                                          {on&&<button style={wLink} onClick={e=>{e.stopPropagation();setF("warHexCurseOn",false);}}>End curse</button>}
+                                          {used&&!on&&<button style={wLink} onClick={e=>{e.stopPropagation();setF("warHexUsed",false);}}>↺ Reset</button>}
+                                        </>));
+                                      }
+                                      const tDiceW=wlL>=10?2:1, tUsedW=Math.min(pb,char.warTentUsed||0), tLeftW=pb-tUsedW, tOnW=!!char.warTentOn, spAtkW=pb+wChaMod;
+                                      const tentAtk=()=>{
+                                        const d20=Math.floor(Math.random()*20)+1; const isCrit=d20===20;
+                                        const rolls=Array.from({length:isCrit?tDiceW*2:tDiceW},()=>Math.floor(Math.random()*8)+1); const dmgTotal=rolls.reduce((a,b)=>a+b,0);
+                                        setSkillRoll({label:"Tentacle of the Deeps"+(isCrit?" 💥":"")+" — speed −10 ft",isWeaponRoll:true,hitRoll:d20,atkBonus:spAtkW,hitTotal:d20+spAtkW,isCrit,isFail:d20===1,dmgRolls:rolls,dmgBonus:0,dmgTotal,dmgDice:tDiceW+"d8",dmgType:"cold",sides:20,roll:d20,bonus:spAtkW,total:d20+spAtkW,r1:d20,r2:null,isAdv:false,isDis:false,allDmgRolls:rolls,diceSides:8,baseDiceCount:tDiceW,brutalDice:0,isMelee:true});
+                                      };
+                                      const tentBtn=()=>endW(<>
+                                        <span style={{fontSize:11,color:tOnW?"#38bdf8":"var(--muted)",fontWeight:700}}>{tOnW?"🐙 Tentacle active":"No tentacle out"}</span>
+                                        <button style={tOnW?wBtn:wOff} disabled={!tOnW} onClick={e=>{e.stopPropagation();tentAtk();}}>🎲 Attack {spAtkW>=0?"+":""}{spAtkW} · {tDiceW}d8 cold</button>
+                                      </>);
+                                      if(nm==="Tentacle of the Deeps") return wrapW(<>
+                                        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                          <PipRow label={"Uses ("+tLeftW+"/"+pb+")"} count={pb} used={tUsedW} color="fail" onSet={v=>setF("warTentUsed",v)}/>
+                                          <button style={tOnW?wLink:(tLeftW<1?wOff:wBtn)} disabled={!tOnW&&tLeftW<1} onClick={e=>{e.stopPropagation();if(tOnW){setF("warTentOn",false);}else setCharSaving(p=>({...p,warTentUsed:Math.min(pb,(p.warTentUsed||0)+1),warTentOn:true}));}}>{tOnW?"Dismiss tentacle":(tLeftW<1?"No uses left":"Create tentacle")}</button>
+                                        </div>
+                                        {tOnW&&tentBtn()}
+                                      </>);
+                                      if(nm==="Tentacle — Move & Attack") return wrapW(tentBtn());
+                                      if(nm==="Guardian Coil") return wrapW(endW(<>
+                                        <span style={{fontSize:11,color:tOnW?"var(--accent)":"var(--muted)",fontWeight:700}}>{tOnW?"Tentacle active":"Needs your tentacle active"}</span>
+                                        <button style={tOnW?wBtn:wOff} disabled={!tOnW} onClick={e=>{e.stopPropagation();const rolls=Array.from({length:tDiceW},()=>Math.floor(Math.random()*8)+1);const total=rolls.reduce((a,b)=>a+b,0);setSkillRoll({label:"Guardian Coil (damage reduced by "+tDiceW+"d8)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:8,r1:rolls[0],r2:null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"healing",dmgDice:tDiceW+"d8",diceSides:8,baseDiceCount:tDiceW,saveDC:null,saveType:null,spiritShield:false});}}>🎲 Reduce {tDiceW}d8</button>
+                                      </>));
+                                      if(nm==="Healing Light"){
+                                        const hlMax=1+wlL, hlUsed=Math.min(hlMax,char.warHealUsed||0), hlLeft=hlMax-hlUsed;
+                                        const capN=Math.max(1,wChaMod), hlN=Math.max(1,Math.min(char.warHealN||1,capN,Math.max(1,hlLeft)));
+                                        const rollHeal=()=>{
+                                          if(hlLeft<hlN) return;
+                                          const rolls=Array.from({length:hlN},()=>Math.floor(Math.random()*6)+1); const total=rolls.reduce((a,b)=>a+b,0);
+                                          setF("warHealUsed",hlUsed+hlN);
+                                          setSkillRoll({label:"Healing Light ("+hlN+"d6 healing)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:6,r1:rolls[0],r2:null,isAdv:false,isDis:false,isWeaponRoll:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"healing",dmgDice:hlN+"d6",diceSides:6,baseDiceCount:hlN,saveDC:null,saveType:null,spiritShield:false});
+                                        };
+                                        return wrapW(endW(<>
+                                          <span style={{fontSize:11,color:hlLeft>0?"var(--accent)":"var(--red)",fontWeight:700}}>Dice left ({hlLeft}/{hlMax})</span>
+                                          <span style={{display:"inline-flex",alignItems:"center",gap:4}}>
+                                            <button style={hlN<=1?wOff:wBtn} disabled={hlN<=1} onClick={e=>{e.stopPropagation();setF("warHealN",hlN-1);}}>−</button>
+                                            <span style={{fontSize:12,fontWeight:800,minWidth:16,textAlign:"center"}}>{hlN}</span>
+                                            <button style={(hlN>=capN||hlN>=hlLeft)?wOff:wBtn} disabled={hlN>=capN||hlN>=hlLeft} onClick={e=>{e.stopPropagation();setF("warHealN",hlN+1);}}>+</button>
+                                          </span>
+                                          <button style={hlLeft<hlN?wOff:wBtn} disabled={hlLeft<hlN} onClick={e=>{e.stopPropagation();rollHeal();}}>{hlLeft<hlN?"No dice left":"🎲 Heal "+hlN+"d6"}</button>
+                                          {hlUsed>0&&<button style={wLink} onClick={e=>{e.stopPropagation();setF("warHealUsed",0);}}>↺ Reset</button>}
+                                        </>));
+                                      }
+                                      if(nm==="Elemental Gift — Fly"){
+                                        const gUsed=Math.min(pb,char.warGenieFlyUsed||0), gLeft=pb-gUsed, gFly=!!char.warGenieFlyOn;
+                                        return wrapW(<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                          <PipRow label={"Flights ("+gLeft+"/"+pb+")"} count={pb} used={gUsed} color="fail" onSet={v=>setF("warGenieFlyUsed",v)}/>
+                                          <button style={gFly?wLink:(gLeft<1?wOff:wBtn)} disabled={!gFly&&gLeft<1} onClick={e=>{e.stopPropagation();if(gFly){setF("warGenieFlyOn",false);}else setCharSaving(p=>({...p,warGenieFlyOn:true,warGenieFlyUsed:Math.min(pb,(p.warGenieFlyUsed||0)+1)}));}}>{gFly?"End flight":(gLeft<1?"No uses left":"Take flight")}</button>
+                                        </div>);
+                                      }
+                                      if(nm==="Bottled Respite — Enter Vessel"||nm==="Bottled Respite — Exit Vessel"){
+                                        const inV=!!char.warBottleIn, usedB=!!char.warBottleUsed;
+                                        return wrapW(endW(<>
+                                          <span style={{fontSize:11,color:inV?"#06b6d4":usedB?"var(--muted)":"var(--accent)",fontWeight:700}}>{inV?"Inside the vessel":usedB?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
+                                          {inV?<button style={wBtn} onClick={e=>{e.stopPropagation();setF("warBottleIn",false);}}>Exit (bonus action)</button>
+                                            :!usedB?<button style={wBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,warBottleUsed:true,warBottleIn:true}));}}>Enter vessel</button>
+                                            :<button style={wLink} onClick={e=>{e.stopPropagation();setF("warBottleUsed",false);}}>↺ Reset</button>}
+                                        </>));
+                                      }
+                                      if(nm==="Limited Wish"){
+                                        const ws=warWishSpells(), cur=char.warWishSpell||"", wishLeft=char.warWishLeft||0;
+                                        return wrapW(<>
+                                          <select className="ri-sel" value={cur} onClick={e=>e.stopPropagation()} onChange={e=>setF("warWishSpell",e.target.value)}
+                                            style={{fontSize:12,padding:"4px 6px",borderRadius:6,borderColor:"rgba(var(--accent-rgb),0.4)",color:cur?"var(--accent)":"var(--subtle)",width:"100%"}}>
+                                            <option value="">-- Choose a spell to wish for --</option>
+                                            {[0,1,2,3,4,5,6].map(l=>{const g=ws.filter(n=>SPELL_DATA[n].level===l);return g.length?<optgroup key={l} label={l===0?"Cantrips":spellOrdLbl(l)+" level"}>{g.map(n=><option key={n} value={n}>{n}</option>)}</optgroup>:null;})}
+                                          </select>
+                                          {cur&&SPELL_DATA[cur]&&<SpellSaveBox name={cur} sd={SPELL_DATA[cur]} dc={wDC} saveKey="warLimitedWishSave" char={char} setCharSaving={setCharSaving} setSkillRoll={setSkillRoll}/>}
+                                          {endW(<>
+                                            <span style={{fontSize:11,color:wishLeft>0?"var(--muted)":"var(--accent)",fontWeight:700}}>{wishLeft>0?"Unavailable — "+wishLeft+" long rest"+(wishLeft>1?"s":"")+" remaining":"Ready"}</span>
+                                            {wishLeft>0?<button style={wLink} onClick={e=>{e.stopPropagation();setF("warWishLeft",0);}}>↺ Reset</button>
+                                              :<button style={wBtn} onClick={e=>{e.stopPropagation();const d=Math.floor(Math.random()*4)+1;setF("warWishLeft",d);setSkillRoll({label:"Limited Wish — long rests until next use (1d4)",roll:d,bonus:0,total:d,isCrit:false,isFail:false,sides:4,r1:d,r2:null,isAdv:false,isDis:false});}}>Cast · roll 1d4 rests</button>}
+                                          </>)}
+                                        </>);
+                                      }
                                       return null;
                                     })()}
                                     {/* Ranger / Paladin Rounds controls — same state keys as the Features tab */}
@@ -33870,6 +34034,15 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               if(cls?.features){levelGatedFeatures(cls.features,char.multiClassLevel>0?char.classLevel:char.level||1).forEach(f=>{const fl=f.toLowerCase();if(f==="Cunning Action") return;if((fl.includes("action")||fl.includes("attack"))&&!fl.includes("spellcast")&&!fl.includes("cast a spell"))actFeatures.push(f);});}
               // Two-Weapon Fighting — manual action option, always available, pulls up both weapon slots at once
               actFeatures.push("Two-Weapon Fighting");
+              // Warlock — patron actions
+              if(char.charClass==="Warlock"){
+                const wlA=char.multiClassLevel>0?char.classLevel:char.level||1;
+                const wp=char.warPatron;
+                if(wp==="The Archfey (Warlock)"){ actFeatures.push("Fey Presence"); if(wlA>=14) actFeatures.push("Dark Delirium"); }
+                if(wp==="The Genie (Warlock)"){ actFeatures.push("Bottled Respite — Enter Vessel"); if(wlA>=14) actFeatures.push("Limited Wish"); }
+                if(wp==="The Fathomless (Warlock)"&&wlA>=14) actFeatures.push("Fathomless Plunge");
+                if(wp==="The Great Old One (Warlock)"&&wlA>=14) actFeatures.push("Create Thrall");
+              }
               // Battle Master maneuvers — "on a hit" / attached-to-attack maneuvers go in Action
               if(char.charClass==="Fighter"&&char.martialArchetype==="Battle Master (Fighter)"){
                 const ON_HIT_MANEUVERS=["Disarming Attack","Distracting Strike","Evasive Footwork","Goading Attack","Lunging Attack","Maneuvering Attack","Menacing Attack","Precision Attack","Pushing Attack","Sweeping Attack","Trip Attack","Ambush","Bait and Switch","Commanding Presence","Tactical Assessment"];
@@ -34335,6 +34508,16 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 const balmLeft2=balmMax2-balmUsed2;
                 if(balmLeft2>0) baFeatures.push("Balm of the Summer Court ("+balmLeft2+"/"+balmMax2+" dice left)");
               }
+              // Warlock — patron bonus actions
+              if(char.charClass==="Warlock"){
+                const wlB=char.multiClassLevel>0?char.classLevel:char.level||1;
+                const wp=char.warPatron;
+                if(wp==="The Hexblade (Warlock)") baFeatures.push("Hexblade's Curse");
+                if(wp==="The Fathomless (Warlock)") baFeatures.push("Tentacle of the Deeps");
+                if(wp==="The Celestial (Warlock)") baFeatures.push("Healing Light");
+                if(wp==="The Genie (Warlock)"&&wlB>=6) baFeatures.push("Elemental Gift — Fly");
+                if(wp==="The Undying (Warlock)"&&wlB>=14) baFeatures.push("Indestructible Life");
+              }
               // Cleric — Nature Domain: Master of Nature (bonus action, L17+)
               if(char.charClass==="Cleric"&&char.divineDomain==="Nature Domain (Cleric)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17){
                 baFeatures.push("Master of Nature");
@@ -34748,6 +34931,15 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               const rxnFeatures=[];
               // Opportunity Attack — available to all characters with a melee weapon or unarmed
               rxnFeatures.push("Opportunity Attack");
+              // Warlock — patron reactions
+              if(char.charClass==="Warlock"){
+                const wlR=char.multiClassLevel>0?char.classLevel:char.level||1;
+                const wp=char.warPatron;
+                if(wp==="The Archfey (Warlock)"){ if(wlR>=6) rxnFeatures.push("Misty Escape"); if(wlR>=10) rxnFeatures.push("Beguiling Defenses"); }
+                if(wp==="The Fathomless (Warlock)"&&wlR>=6) rxnFeatures.push("Guardian Coil");
+                if(wp==="The Great Old One (Warlock)"&&wlR>=6) rxnFeatures.push("Entropic Ward");
+                if(wp==="The Hexblade (Warlock)"&&wlR>=10) rxnFeatures.push("Armor of Hexes");
+              }
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Wild Magic (Sorcerer)"&&sorcLvl>=6) rxnFeatures.push("Bend Luck — Add or Subtract a d4");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Storm Sorcery (Sorcerer)"&&sorcLvl>=14) rxnFeatures.push("Storm's Fury — Lightning Retort");
               if(char.charClass==="Sorcerer"&&char.sorcOrigin==="Clockwork Soul (Sorcerer)") rxnFeatures.push("Restore Balance — Cancel Advantage or Disadvantage");
