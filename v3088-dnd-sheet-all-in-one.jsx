@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3087";
+const SHEET_VERSION = "v3088";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30974,6 +30974,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       "Action Surge":"Take one extra action on your turn on top of your normal action and bonus action. It returns after a short or long rest.",
                                       "Ki-Fueled Attack":"After you spend ki during your action, you can make one unarmed strike or weapon attack as a bonus action.",
                                       "Deflect Missiles":"When a ranged weapon attack hits you, use your reaction to reduce the damage, and catch and throw back the missile if the damage drops to zero.",
+                                      "Sun Shield — Radiant Retort":"While your light is shining, when a creature hits you with a melee attack, you can use your reaction to deal radiant damage to it equal to 5 plus your WIS modifier.",
                                       "Shove":"Make a STR (Athletics) check contested by the target's STR (Athletics) or DEX (Acrobatics) to push the target 5 ft away or knock it prone. Target must be within reach and no more than one size larger than you.",
                                     };
                                     const featureNote = !sd&&!libEntry&&!matchName.startsWith("Wild Shape") ? (FEATURE_NOTES[matchName]||Object.entries(FEATURE_NOTES).find(([k])=>matchName.startsWith(k.split("(")[0].trim()))?.[1]) : null;
@@ -31377,6 +31378,46 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                             <button style={left>0?oBtn:oOff} disabled={left<=0} onClick={e=>{e.stopPropagation();if(left>0)setCharSaving(p=>({...p,fighterActionSurgeUsed:(p.fighterActionSurgeUsed||0)+1,actionSurgeUsedThisTurn:true}));}}>Use</button>
                                           </span>
                                         </div>);
+                                      }
+                                      if(nm==="Sun Shield — Radiant Retort"&&char.charClass==="Monk"){
+                                        const on=!!char.monkSunShieldActive, dmg=5+wisModO, col=dmgTypeColor("radiant");
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:on?"var(--amber)":"var(--muted)",fontWeight:700}}>{on?"☀️ Shedding light":"Light is out — ignite it first"}</span>
+                                          <button style={on?{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col.border,background:col.bg,color:col.fg,cursor:"pointer",fontFamily:"inherit"}:oOff} disabled={!on} onClick={e=>{e.stopPropagation();setSkillRoll({label:"Sun Shield (5+WIS radiant)",roll:dmg,bonus:0,total:dmg,isCrit:false,isFail:false,isSpellDmg:true,dmgTotal:dmg,allDmgRolls:[dmg],dmgRolls:[dmg],dmgBonus:0,dmgType:"radiant",dmgDice:String(dmg),diceSides:0,baseDiceCount:0,saveDC:null,saveType:null,spiritShield:false,sides:0});}}>Deal {dmg} radiant</button>
+                                        </>));
+                                      }
+                                      if(nm.startsWith("Searing Sunburst")&&char.charClass==="Monk"){
+                                        const ex=Math.max(0,Math.min(3,char.monkSunSunburstExtraKi||0,kiLeftO)), dice=2+ex*2;
+                                        return wrapO(<>
+                                          {endO(<>
+                                            <span style={{fontSize:11,fontWeight:700,color:"var(--muted)"}}>Extra ki</span>
+                                            <span style={{display:"inline-flex",alignItems:"center",gap:4}}>
+                                              <button style={ex<=0?oOff:oBtn} disabled={ex<=0} onClick={e=>{e.stopPropagation();setF("monkSunSunburstExtraKi",ex-1);}}>−</button>
+                                              <span style={{fontSize:12,fontWeight:800,minWidth:16,textAlign:"center"}}>{ex}</span>
+                                              <button style={(ex>=3||ex>=kiLeftO)?oOff:oBtn} disabled={ex>=3||ex>=kiLeftO} onClick={e=>{e.stopPropagation();setF("monkSunSunburstExtraKi",ex+1);}}>+</button>
+                                            </span>
+                                          </>)}
+                                          {saveO("sunSoulSunburst","The creature takes no damage.","The creature takes the full damage.","CON save DC "+kiDCO)}
+                                          {kiRow(ex,"🎲 "+dice+"d6 radiant"+(ex>0?" · "+ex+" ki":""),()=>dmgRoll("Searing Sunburst","radiant",6,dice,0,ex))}
+                                        </>);
+                                      }
+                                      if(nm.startsWith("Zealous Presence")&&char.charClass==="Barbarian"){
+                                        const sp=(char.zealousPresenceUsed||0)>=1;
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:sp?"var(--muted)":"var(--accent)",fontWeight:700}}>{sp?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>
+                                          <button style={sp?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("zealousPresenceUsed",sp?0:1);}}>{sp?"↺ Reset":"Use"}</button>
+                                        </>));
+                                      }
+                                      if(nm.startsWith("Intimidating Presence")&&char.charClass==="Barbarian") return wrapO(saveO("intimidatingPresence","The target isn't frightened and is immune to this for 24 hours.","The target is frightened of you for 1 minute.","WIS save DC "+(8+pb+abilityMod(eff.CHA||10))));
+                                      if(nm.startsWith("Enthralling Performance")&&char.charClass==="Bard"){
+                                        const eu=!!char.bardEPUsed;
+                                        return wrapO(<>
+                                          {saveO("enthrallingPerformance","The creature has no hint you tried to charm it.","The creature is charmed by you for 1 hour.","WIS save DC "+(8+pb+abilityMod(eff.CHA||10)))}
+                                          {endO(<>
+                                            <span style={{fontSize:11,color:eu?"var(--muted)":"var(--accent)",fontWeight:700}}>{eu?"Used — recharges on a Short or Long Rest":"Ready — 1 use per short or long rest"}</span>
+                                            <button style={eu?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("bardEPUsed",!eu);}}>{eu?"↺ Reset":"Mark Used"}</button>
+                                          </>)}
+                                        </>);
                                       }
                                       return null;
                                     })()}
@@ -35060,7 +35101,8 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               const rxnFeatures=[];
               // Opportunity Attack — available to all characters with a melee weapon or unarmed
               rxnFeatures.push("Opportunity Attack");
-              // Grave / Shadow / Vengeance — reactions
+              // Grave / Shadow / Vengeance / Sun Soul — reactions
+              if(char.charClass==="Monk"&&char.monasticTradition==="Way of the Sun Soul (Monk)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17) rxnFeatures.push("Sun Shield — Radiant Retort");
               if(char.charClass==="Cleric"&&char.divineDomain==="Grave Domain (Cleric)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=6) rxnFeatures.push("Sentinel at Death's Door");
               if(char.charClass==="Monk"&&char.monasticTradition==="Way of the Shadow (Monk)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=17) rxnFeatures.push("Opportunist");
               if(char.charClass==="Paladin"&&char.sacredOath==="Oath of Vengeance (Paladin)"&&(char.multiClassLevel>0?char.classLevel:char.level||1)>=7) rxnFeatures.push("Relentless Avenger");
