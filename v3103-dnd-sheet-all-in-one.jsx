@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3102";
+const SHEET_VERSION = "v3103";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -12078,12 +12078,13 @@ function App() {
                                   })()}
                                   {feat==="Spell Mastery"&&char.charClass==="Wizard"&&(()=>{
                                     const pick=(k,lv)=>{
-                                      const opts=(CLASSES.Wizard?.spells?.[lv]||[]).slice().sort();
+                                      const bookSet=new Set(char.wizSpellbook||[]);
+                                      const opts=(CLASSES.Wizard?.spells?.[lv]||[]).filter(n=>bookSet.has(n)).sort();
                                       const v=char[k]||"";
                                       return (
                                         <div key={k} style={{display:"flex",flexDirection:"column",gap:4}}>
                                           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
-                                            <span style={{fontSize:11,color:"var(--muted)"}}>{spellOrdLbl(lv)}-level spell</span>
+                                            <span style={{fontSize:11,color:"var(--muted)"}}>{spellOrdLbl(lv)}-level spell{opts.length===0&&<span style={{color:"var(--subtle)",fontStyle:"italic"}}> · none in spellbook</span>}</span>
                                             <select className="ri-sel" value={v} onClick={e=>e.stopPropagation()} onChange={e=>setF(k,e.target.value)}
                                               style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:v?"var(--accent)":"var(--subtle)",fontSize:12,padding:"4px 6px",borderRadius:6,maxWidth:"60%"}}>
                                               <option value="">-- Choose --</option>
