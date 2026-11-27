@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3107";
+const SHEET_VERSION = "v3108";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22945,9 +22945,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                             const made=!!char.wizWardMade;
                                             const hp=Math.min(wardMax,Math.max(0,Number(char.wizWardHP)||0));
                                             const amt=Math.max(0,parseInt(char.wizWardAmt)||0);
-                                            const maxSpLv=Math.min(9,Math.max(1,Math.ceil(lvl/2)));
-                                            const castLv=Math.min(maxSpLv,Number(char.wizWardCastLvl)||1);
-                                            const absorb=()=>{
+                                                                                        const absorb=()=>{
                                               if(!made||hp<=0||amt<=0) return;
                                               const soak=Math.min(hp,amt), over=amt-soak;
                                               setCharSaving(p=>({...p,wizWardHP:hp-soak,wizWardAmt:"",wizWardLast:"Absorbed "+soak+(over>0?" — "+over+" passes through to the target":"")+(hp-soak<=0?" · ward is down":"")}));
@@ -22981,12 +22979,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {made&&(
                                                   <>
                                                     {char.wizWardLast&&<div style={{fontSize:11,color:"var(--muted)",marginTop:6}}>{char.wizWardLast}</div>}
-                                                    <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap",marginTop:6}}>
-                                                      <span style={{fontSize:11,color:"var(--muted)"}}>Abjuration spell level</span>
-                                                      <select className="ri-sel" value={castLv} onClick={e=>e.stopPropagation()} onChange={e=>setF("wizWardCastLvl",e.target.value)} style={{flex:"none",width:60,fontSize:12,padding:"4px 6px",borderRadius:6}}>
-                                                        {Array.from({length:maxSpLv},(_,i)=>i+1).map(n=><option key={n} value={n}>{n}</option>)}
-                                                      </select>
-                                                      <button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,wizWardHP:Math.min(wardMax,hp+2*castLv),wizWardLast:"Regained "+Math.min(2*castLv,wardMax-hp)}));}}>Regain +{2*castLv}</button>
+                                                    <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginTop:6}}>
                                                       <button style={linkBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,wizWardMade:false,wizWardHP:0,wizWardAmt:"",wizWardLast:""}));}}>↺ Reset</button>
                                                     </div>
                                                   </>
