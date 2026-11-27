@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3088";
+const SHEET_VERSION = "v3089";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -31418,6 +31418,34 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                             <button style={eu?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("bardEPUsed",!eu);}}>{eu?"↺ Reset":"Mark Used"}</button>
                                           </>)}
                                         </>);
+                                      }
+                                      if(nm.startsWith("Mantle of Majesty")&&char.charClass==="Bard"){
+                                        const mu=!!char.bardMMUsed;
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:mu?"var(--accent)":"var(--muted)",fontWeight:700}}>{mu?"Active — cast Command as a bonus action each turn, no slot":"Ready — 1 use per long rest"}</span>
+                                          <button style={mu?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("bardMMUsed",!mu);}}>{mu?"↺ End / Reset":"Activate"}</button>
+                                        </>));
+                                      }
+                                      if(nm.startsWith("Unbreakable Majesty")&&char.charClass==="Bard"){
+                                        const uu=!!char.bardUMUsed;
+                                        return wrapO(<>
+                                          {saveO("unbreakableMajesty","The attacker can attack you normally.","The attacker must choose a new target or lose the attack.","CHA save DC "+(8+pb+abilityMod(eff.CHA||10)))}
+                                          {endO(<>
+                                            <span style={{fontSize:11,color:uu?"var(--accent)":"var(--muted)",fontWeight:700}}>{uu?"Active — recharges on a Short or Long Rest":"Ready — 1 use per short or long rest"}</span>
+                                            <button style={uu?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("bardUMUsed",!uu);}}>{uu?"↺ End / Reset":"Activate"}</button>
+                                          </>)}
+                                        </>);
+                                      }
+                                      if(nm.startsWith("Spiked Retribution")&&char.charClass==="Barbarian"){
+                                        const col=dmgTypeColor("piercing");
+                                        return wrapO(endO(<button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+col.border,background:col.bg,color:col.fg,cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setSkillRoll({label:"Spiked Retribution (3 piercing)",roll:3,bonus:0,total:3,isCrit:false,isFail:false,isSpellDmg:true,dmgTotal:3,allDmgRolls:[3],dmgRolls:[3],dmgBonus:0,dmgType:"piercing",dmgDice:"3",diceSides:0,baseDiceCount:0,saveDC:null,saveType:null,spiritShield:false,sides:0});}}>Deal 3 piercing</button>));
+                                      }
+                                      if(nm==="Reckless Attack"&&char.charClass==="Barbarian"){
+                                        const ra=!!char.recklessActive;
+                                        return wrapO(endO(<>
+                                          <span style={{fontSize:11,color:ra?"var(--amber)":"var(--muted)",fontWeight:700}}>{ra?"Reckless this turn — advantage on STR attacks, attackers have advantage":"Not reckless"}</span>
+                                          <button style={ra?oLink:oBtn} onClick={e=>{e.stopPropagation();setF("recklessActive",!ra);}}>{ra?"↺ Clear":"Attack recklessly"}</button>
+                                        </>));
                                       }
                                       return null;
                                     })()}
