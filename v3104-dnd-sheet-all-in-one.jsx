@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3103";
+const SHEET_VERSION = "v3104";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -12104,7 +12104,8 @@ function App() {
                                     );
                                   })()}
                                   {feat==="Signature Spells"&&char.charClass==="Wizard"&&(()=>{
-                                    const opts=(CLASSES.Wizard?.spells?.[3]||[]).slice().sort();
+                                    const bookSet3=new Set(char.wizSpellbook||[]);
+                                    const opts=(CLASSES.Wizard?.spells?.[3]||[]).filter(n=>bookSet3.has(n)).sort();
                                     const keys=["wizSignature1","wizSignature2"];
                                     const usedArr=Array.isArray(char.wizSignatureUsed)?char.wizSignatureUsed:[false,false];
                                     const setUsed=(i,val)=>{const n=[!!usedArr[0],!!usedArr[1]];n[i]=val;setF("wizSignatureUsed",n);};
@@ -12116,7 +12117,7 @@ function App() {
                                           return (
                                             <div key={k} style={{display:"flex",flexDirection:"column",gap:4}}>
                                               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
-                                                <span style={{fontSize:11,color:"var(--muted)"}}>Signature spell {i+1}</span>
+                                                <span style={{fontSize:11,color:"var(--muted)"}}>Signature spell {i+1}{opts.length===0&&<span style={{color:"var(--subtle)",fontStyle:"italic"}}> · none in spellbook</span>}</span>
                                                 <select className="ri-sel" value={v} onClick={e=>e.stopPropagation()} onChange={e=>setF(k,e.target.value)}
                                                   style={{borderColor:"rgba(var(--accent-rgb),0.4)",color:v?"var(--accent)":"var(--subtle)",fontSize:12,padding:"4px 6px",borderRadius:6,maxWidth:"60%"}}>
                                                   <option value="">-- Choose --</option>
