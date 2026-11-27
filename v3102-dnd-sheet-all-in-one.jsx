@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3101";
+const SHEET_VERSION = "v3102";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -8184,7 +8184,8 @@ function App() {
  return u;
               });
             }}
- onBlur={()=>{ if(char.xp==="") setCharSaving(p=>({...p,xp:0})); }}
+ onFocus={()=>{window.__fp=window.__fp||{};window.__fp.xp=char.xp;setCharSaving(p=>({...p,xp:""}));}}
+ onBlur={()=>{ if(char.xp==="") {const pv=(window.__fp||{}).xp; setCharSaving(p=>({...p,xp:(pv===""||pv==null||isNaN(Number(pv)))?0:Number(pv)})); } }}
  placeholder="0"/>
           <span className="hdr-xp-plus">+</span>
           <input className="hdr-xp-in" type="number" value={xpAdd}
@@ -8299,8 +8300,8 @@ function App() {
                         <input className="ab-stat-score-in" type="number"
  value={focusedAbility===k?char.abilities[k]:eff[k]} min={1} max={30}
  onChange={e=>changeAbility(k,e.target.value)}
- onFocus={()=>setFocusedAbility(k)}
- onBlur={()=>{blurAbility(k);setFocusedAbility(null);}}/>
+ onFocus={()=>{window.__fp=window.__fp||{};window.__fp["ab"+k]=char.abilities[k];setFocusedAbility(k);setCharSaving(p=>({...p,abilities:{...p.abilities,[k]:""}}));}}
+ onBlur={()=>{if(char.abilities[k]===""||isNaN(Number(char.abilities[k]))){const pv=(window.__fp||{})["ab"+k];setCharSaving(p=>({...p,abilities:{...p.abilities,[k]:(pv===""||pv==null||isNaN(Number(pv)))?10:Number(pv)}}));}setFocusedAbility(null);}}/>
                       </div>
 
                       {/* Right: skill rows */}
