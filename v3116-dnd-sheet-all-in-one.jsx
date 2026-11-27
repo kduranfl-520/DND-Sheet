@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 27, 2026";
-const SHEET_VERSION = "v3115";
+const SHEET_VERSION = "v3116";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5854,6 +5854,7 @@ function App() {
  const [spellView, setSpellView] = useState("cantrips");
   const [spFilter, setSpFilter] = useState({school:"",cast:"",range:"",dmgType:""});
   const [slotsOpen, setSlotsOpen] = useState(true);
+  const [bookOpen, setBookOpen] = useState(true);
   const [spellPopup, setSpellPopup] = useState(null);
   const [spellRoll, setSpellRoll] = useState({});
   const [spellAtkRoll, setSpellAtkRoll] = useState({});
@@ -26860,14 +26861,18 @@ const FC=({label,minLvl,headerBadge,children})=>{
                     const sorted=bk.slice().sort((a,b)=>{const la=SPELL_DATA[a]?.level??99, lb=SPELL_DATA[b]?.level??99;return la!==lb?la-lb:a.localeCompare(b);});
                     const known=new Set(char.spellsKnown||[]);
                     return(
-                      <Card>
-                        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                          <SecHead icon="*" title="Spellbook" style={{margin:"0 0 0 0"}}/>
-                          <div style={{display:"flex",gap:8,fontSize:12,fontWeight:700}}>
-                            <span style={{color:"#a78bfa"}}>{bk.length} spells<span style={{fontSize:10,fontWeight:400,color:"var(--muted)",marginLeft:3}}>(free allotment {freeTotal})</span></span>
+                      <Card style={{padding:bookOpen?"10px 12px":"2px 10px"}}>
+                        <div onClick={()=>setBookOpen(o=>!o)} style={{display:"flex",alignItems:"center",justifyContent:"space-between",cursor:"pointer",userSelect:"none",minHeight:bookOpen?24:18}}>
+                          {bookOpen
+                            ? <SecHead icon="*" title="Spellbook" style={{margin:"0 0 0 0"}}/>
+                            : <span style={{fontSize:11,fontWeight:700,color:"var(--muted)",letterSpacing:".06em",textTransform:"uppercase"}}>Spellbook</span>
+                          }
+                          <div style={{display:"flex",alignItems:"center",gap:8,fontSize:12,fontWeight:700}}>
+                            <span style={{color:"#a78bfa"}}>{bk.length} spells{bookOpen&&<span style={{fontSize:10,fontWeight:400,color:"var(--muted)",marginLeft:3}}>(free allotment {freeTotal})</span>}</span>
+                            <span style={{fontSize:11,color:"var(--muted)",paddingRight:2,transition:"transform .2s",transform:bookOpen?"rotate(0)":"rotate(-90deg)"}}>▾</span>
                           </div>
                         </div>
-                        <div className="sp-grid" style={fontScale>=1.4?{gridTemplateColumns:"repeat(2,minmax(0,1fr))"}:undefined}>
+                        {bookOpen&&<div className="sp-grid" style={fontScale>=1.4?{gridTemplateColumns:"repeat(2,minmax(0,1fr))"}:undefined}>
                           {sorted.map(s=>{
                             const sd3=SPELL_DATA[s];
                             const prepared=known.has(s);
@@ -26900,7 +26905,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                               </div>
                             );
                           })}
-                        </div>
+                        </div>}
                       </Card>
                     );
                   })()}
