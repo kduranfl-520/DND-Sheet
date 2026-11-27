@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3090";
+const SHEET_VERSION = "v3091";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30325,10 +30325,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               </div>
               {[
                 {key:"actionUsed",     label:"Action",       emoji:"🎯", color:"var(--accent)",  bg:"rgba(var(--accent-rgb),0.1)",  border:"rgba(var(--accent-rgb),0.35)",  hints:"Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object, Grapple, Shove, Improvise"},
-                {key:"bonusActionUsed",label:"Bonus Action", emoji:"+", color:"var(--amber)",   bg:"rgba(245,158,11,0.1)",  border:"rgba(245,158,11,0.35)", hints:""},
+                {key:"bonusActionUsed",label:"Bonus Action", emoji:"+", color:"#f97316",   bg:"rgba(249,115,22,0.12)",  border:"rgba(249,115,22,0.4)", hints:""},
                 {key:"reactionUsed",   label:"Reaction",     emoji:"!", color:"var(--green)",   bg:"rgba(34,197,94,0.1)",   border:"rgba(34,197,94,0.35)",  hints:"", actionDice:true},
               ].map(({key,label,emoji,color:color0,bg,border,hints,actionDice})=>{
-                const color=darkMode?color0:(color0==="var(--amber)"?"#b45309":color0==="var(--green)"?"#15803d":color0);
+                const color=darkMode?color0:(color0==="#f97316"?"#c2410c":color0==="var(--green)"?"#15803d":color0);
                 const used = char[key];
                 const itemKey = key.replace("Used","Items");
                 const storedItems = char[itemKey]||[];
@@ -34201,15 +34201,20 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 reactionItems:[["Opportunity Attack","When a hostile creature the companion can see leaves its reach, it makes one melee attack against that creature."]],
               };
               const SLOTS=[
-                {key:"actionUsed",ik:"actionItems",label:"Action",emoji:"🎯",c0:"var(--accent)",bg:"rgba(var(--accent-rgb),0.1)",bd:"rgba(var(--accent-rgb),0.35)"},
-                {key:"bonusActionUsed",ik:"bonusActionItems",label:"Bonus Action",emoji:"+",c0:"var(--amber)",bg:"rgba(245,158,11,0.1)",bd:"rgba(245,158,11,0.35)"},
-                {key:"reactionUsed",ik:"reactionItems",label:"Reaction",emoji:"!",c0:"var(--green)",bg:"rgba(34,197,94,0.1)",bd:"rgba(34,197,94,0.35)"},
+                {key:"actionUsed",ik:"actionItems",label:"Action",emoji:"🎯",c0:"var(--accent)",cL:"var(--accent)",bg:"rgba(var(--accent-rgb),0.1)",bd:"rgba(var(--accent-rgb),0.35)"},
+                {key:"bonusActionUsed",ik:"bonusActionItems",label:"Bonus Action",emoji:"+",c0:"#f97316",cL:"#c2410c",bg:"rgba(249,115,22,0.12)",bd:"rgba(249,115,22,0.4)"},
+                {key:"reactionUsed",ik:"reactionItems",label:"Reaction",emoji:"!",c0:"var(--green)",cL:"#15803d",bg:"rgba(34,197,94,0.1)",bd:"rgba(34,197,94,0.35)"},
               ];
+              const colOf=sl=>darkMode?sl.c0:sl.cL;
               const cBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"};
               return (
                 <div style={{display:"flex",flexDirection:"column",gap:12,marginTop:14,marginBottom:14}}>
                   {(char.companions||[]).map(comp=>{
                     const cid=comp.id;
+                    const open=compPickerOpen===cid;
+                    const atks=(comp.attacks||[]).filter(a=>a&&a.name&&a.name.trim());
+                    const addItem=(sl,name)=>{updC(cid,c=>({[sl.ik]:[...(c[sl.ik]||[]),{id:Date.now()+Math.random(),name}]}));setCompPickerOpen(null);};
+                    const all=SLOTS.flatMap(sl=>(comp[sl.ik]||[]).map(item=>({sl,item})));
                     return (
                       <div key={cid} style={{background:"var(--card)",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden"}}>
                         <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",padding:"8px 12px",borderBottom:"1px solid var(--divider)",background:"var(--surface)"}}>
@@ -34221,73 +34226,74 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                             {comp.speed&&<span style={{fontSize:12,fontWeight:700,color:"var(--muted)"}}><b style={{color:"var(--text)"}}>Spd</b> {comp.speed}</span>}
                           </span>
                         </div>
-                        {SLOTS.map(sl=>{
-                          const used=!!comp[sl.key];
-                          const items=comp[sl.ik]||[];
-                          const color=darkMode?sl.c0:(sl.c0==="var(--amber)"?"#b45309":sl.c0==="var(--green)"?"#15803d":sl.c0);
-                          const pk=cid+":"+sl.key;
-                          const open=compPickerOpen===pk;
-                          const atks=(comp.attacks||[]).filter(a=>a&&a.name&&a.name.trim());
-                          const opts=[
-                            ...(sl.key==="actionUsed"?atks.map(a=>[a.name.trim(),""]):[]),
-                            ...STD[sl.ik],
-                          ].filter(([n])=>!items.some(i=>i.name===n));
-                          const addItem=name=>{updC(cid,c=>({[sl.ik]:[...(c[sl.ik]||[]),{id:Date.now()+Math.random(),name}]}));setCompPickerOpen(null);};
-                          return (
-                            <div key={sl.key} style={{display:"flex",gap:10,alignItems:"flex-start",padding:"8px 12px",borderTop:sl.key==="actionUsed"?"none":"1px solid var(--divider)"}}>
-                              <button onClick={()=>updC(cid,{[sl.key]:!used})}
-                                style={{width:84,flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,padding:"6px 4px",borderRadius:10,border:"2px solid "+(used?"var(--border)":sl.bd),background:used?"var(--input)":sl.bg,cursor:"pointer",transition:"all .18s",fontFamily:"inherit",opacity:used?0.45:1}}>
-                                <div style={{fontSize:18,lineHeight:1,color,opacity:used?0.3:1}}>{sl.emoji}</div>
-                                <div style={{fontSize:12,fontWeight:800,color:used?"var(--muted)":color,textAlign:"center"}}>{sl.label}</div>
-                                <div style={{fontSize:10,color:"var(--muted)",fontWeight:600}}>{used?"Used":"Available"}</div>
+                        <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",padding:"8px 12px",borderBottom:"1px solid var(--divider)"}}>
+                          {SLOTS.map(sl=>{
+                            const used=!!comp[sl.key];
+                            return (
+                              <button key={sl.key} title={used?"Used — tap to restore":"Available — tap to mark used"} onClick={()=>updC(cid,{[sl.key]:!used})}
+                                style={{display:"flex",alignItems:"center",gap:6,padding:"5px 10px",borderRadius:20,border:"2px solid "+(used?"var(--border)":sl.bd),background:used?"var(--input)":sl.bg,cursor:"pointer",fontFamily:"inherit",opacity:used?0.5:1}}>
+                                <span style={{fontSize:13,lineHeight:1,color:colOf(sl)}}>{sl.emoji}</span>
+                                <span style={{fontSize:12,fontWeight:800,color:used?"var(--muted)":colOf(sl)}}>{sl.label}</span>
+                                <span style={{fontSize:10,fontWeight:600,color:"var(--muted)"}}>{used?"Used":"Ready"}</span>
                               </button>
-                              <div style={{flex:1,minWidth:0}}>
-                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",paddingBottom:items.length>0||open?6:0}}>
-                                  <span style={{fontSize:12,fontWeight:600,color:"var(--muted)",flex:1,minWidth:0,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{items.length>0?items.map(i=>i.name).join(", "):"--"}</span>
-                                  <button style={{fontSize:12,fontWeight:700,color,background:"rgba(0,0,0,0.04)",border:"1px solid "+sl.bd,borderRadius:6,padding:"3px 10px",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setCompPickerOpen(open?null:pk);}}>+ Add</button>
+                            );
+                          })}
+                          <button style={{marginLeft:"auto",fontSize:12,fontWeight:700,color:"var(--accent)",background:"rgba(var(--accent-rgb),0.08)",border:"1px solid rgba(var(--accent-rgb),0.35)",borderRadius:6,padding:"3px 10px",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setCompPickerOpen(open?null:cid);}}>+ Add</button>
+                        </div>
+                        {open&&(
+                          <div style={{padding:"8px 12px",borderBottom:"1px solid var(--divider)",display:"flex",flexDirection:"column",gap:8}}>
+                            {SLOTS.map(sl=>{
+                              const taken=(comp[sl.ik]||[]).map(i=>i.name);
+                              const opts=[...(sl.key==="actionUsed"?atks.map(a=>a.name.trim()):[]),...STD[sl.ik].map(x=>x[0])].filter(n=>!taken.includes(n));
+                              if(opts.length===0) return null;
+                              return (
+                                <div key={sl.key}>
+                                  <div style={{fontSize:10,fontWeight:700,color:colOf(sl),letterSpacing:".07em",textTransform:"uppercase",marginBottom:4}}>{sl.label}</div>
+                                  <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+                                    {opts.map(n=>(<button key={n} onClick={()=>addItem(sl,n)} style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:sl.bg,border:"1px solid "+sl.bd,color:"var(--text)"}}>{n}</button>))}
+                                  </div>
                                 </div>
-                                {open&&(
-                                  <div style={{paddingBottom:8,display:"flex",flexDirection:"column",gap:8}}>
-                                    <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-                                      {opts.map(([n])=>(<button key={n} onClick={()=>addItem(n)} style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:sl.bg,border:"1px solid "+sl.bd,color:"var(--text)"}}>{n}</button>))}
-                                      {opts.length===0&&<span style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic"}}>Everything available is already added.</span>}
-                                    </div>
-                                    <input placeholder={"Custom "+sl.label.toLowerCase()+"..."} style={{padding:"5px 8px",borderRadius:7,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,fontFamily:"inherit"}}
-                                      onKeyDown={e=>{if(e.key==="Enter"&&e.target.value.trim()) addItem(e.target.value.trim());}}/>
+                              );
+                            })}
+                            <div style={{display:"flex",gap:6}}>
+                              <select id={"comp-custom-type-"+cid} defaultValue="actionItems" style={{fontSize:12,padding:"4px 6px",borderRadius:6,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontFamily:"inherit"}}>
+                                {SLOTS.map(sl=><option key={sl.ik} value={sl.ik}>{sl.label}</option>)}
+                              </select>
+                              <input placeholder="Custom entry..." style={{flex:1,padding:"5px 8px",borderRadius:7,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,fontFamily:"inherit"}}
+                                onKeyDown={e=>{if(e.key==="Enter"&&e.target.value.trim()){const sel=document.getElementById("comp-custom-type-"+cid);const sl=SLOTS.find(x=>x.ik===(sel?sel.value:"actionItems"))||SLOTS[0];addItem(sl,e.target.value.trim());}}}/>
+                            </div>
+                          </div>
+                        )}
+                        <div style={{padding:"8px 12px",display:"flex",flexDirection:"column",gap:8}}>
+                          {all.length===0&&<span style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic"}}>No items added.</span>}
+                          {all.map(({sl,item})=>{
+                            const atk=sl.key==="actionUsed"?atks.find(a=>a.name.trim()===item.name):null;
+                            const std=STD[sl.ik].find(([n])=>n===item.name);
+                            const atkB=atk?(parseInt((atk.atk||"").replace(/[^0-9+-]/g,""),10)||0):0;
+                            const hasAtkB=atk&&/[+-]?\d+/.test(atk.atk||"");
+                            const dm=atk&&(atk.dmg||"").match(/(\d+)d(\d+)([+-]\d+)?/i);
+                            const dn=dm?parseInt(dm[1],10):0, ds=dm?parseInt(dm[2],10):0, db=dm&&dm[3]?parseInt(dm[3],10):0;
+                            const dtype=atk?((atk.dmg||"").replace(/^[^a-zA-Z]*\d+d\d+\s*[+-]?\s*\d*\s*/,"").trim()):"";
+                            const rollDmg=()=>{const rolls=Array.from({length:dn},()=>Math.floor(Math.random()*ds)+1);const total=rolls.reduce((a,b)=>a+b,0)+db;setSkillRoll({label:item.name+" Damage",roll:total,bonus:db,total,isCrit:rolls.every(r=>r===ds),isFail:rolls.every(r=>r===1),sides:ds,r1:rolls[0],r2:rolls[1]||null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:db,dmgType:(dtype||"").toLowerCase(),dmgDice:dn+"d"+ds,diceSides:ds,baseDiceCount:dn,saveDC:null,saveType:null,spiritShield:false});};
+                            return (
+                              <div key={item.id} style={{background:"var(--input)",border:"1px solid var(--border)",borderLeft:"4px solid "+colOf(sl),borderRadius:8,padding:"8px 10px"}}>
+                                <div style={{display:"flex",alignItems:"center",gap:6}}>
+                                  <span style={{flex:1,fontWeight:700,color:"var(--text)",fontSize:14}}>{item.name}</span>
+                                  <span style={{fontSize:10,fontWeight:800,padding:"1px 7px",borderRadius:10,background:sl.bg,border:"1px solid "+sl.bd,color:colOf(sl),whiteSpace:"nowrap"}}>{sl.label}</span>
+                                  <button onClick={()=>updC(cid,c=>({[sl.ik]:(c[sl.ik]||[]).filter(i=>i.id!==item.id)}))} style={{flexShrink:0,width:20,height:20,borderRadius:"50%",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.25)",color:"var(--red)",fontSize:13,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1,padding:0}}>×</button>
+                                </div>
+                                {atk&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{[atk.atkType,atk.reach&&("reach "+atk.reach)].filter(Boolean).join(" · ")||"Weapon attack"}{atk.atk?" — "+atk.atk+" to hit":""}{atk.dmg?", "+atk.dmg:""}.</div>}
+                                {std&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{std[1]}</div>}
+                                {atk&&(hasAtkB||dn>0)&&(
+                                  <div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+                                    {hasAtkB&&<button style={cBtn} onClick={()=>rollCheck(item.name+" To Hit",atkB)}>🎲 To hit {atkB>=0?"+":""}{atkB}</button>}
+                                    {dn>0&&<button style={cBtn} onClick={rollDmg}>🎲 {dn}d{ds}{db?(db>0?"+":"")+db:""}{dtype?" "+dtype.toLowerCase():""}</button>}
                                   </div>
                                 )}
-                                <div style={{display:"flex",flexDirection:"column",gap:8}}>
-                                  {items.map(item=>{
-                                    const atk=atks.find(a=>a.name.trim()===item.name);
-                                    const std=STD[sl.ik].find(([n])=>n===item.name);
-                                    const atkB=atk?(parseInt((atk.atk||"").replace(/[^0-9+-]/g,""),10)||0):0;
-                                    const hasAtkB=atk&&/[+-]?\d+/.test(atk.atk||"");
-                                    const dm=atk&&(atk.dmg||"").match(/(\d+)d(\d+)([+-]\d+)?/i);
-                                    const dn=dm?parseInt(dm[1],10):0, ds=dm?parseInt(dm[2],10):0, db=dm&&dm[3]?parseInt(dm[3],10):0;
-                                    const dtype=atk?((atk.dmg||"").replace(/^[^a-zA-Z]*\d+d\d+\s*[+-]?\s*\d*\s*/,"").trim()):"";
-                                    const rollDmg=()=>{const rolls=Array.from({length:dn},()=>Math.floor(Math.random()*ds)+1);const total=rolls.reduce((a,b)=>a+b,0)+db;setSkillRoll({label:item.name+" Damage",roll:total,bonus:db,total,isCrit:rolls.every(r=>r===ds),isFail:rolls.every(r=>r===1),sides:ds,r1:rolls[0],r2:rolls[1]||null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:db,dmgType:(dtype||"").toLowerCase(),dmgDice:dn+"d"+ds,diceSides:ds,baseDiceCount:dn,saveDC:null,saveType:null,spiritShield:false});};
-                                    return (
-                                      <div key={item.id} style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
-                                        <div style={{display:"flex",alignItems:"center",gap:6}}>
-                                          <span style={{flex:1,fontWeight:700,color:"var(--text)",fontSize:14}}>{item.name}</span>
-                                          <button onClick={()=>updC(cid,c=>({[sl.ik]:(c[sl.ik]||[]).filter(i=>i.id!==item.id)}))} style={{flexShrink:0,width:20,height:20,borderRadius:"50%",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.25)",color:"var(--red)",fontSize:13,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1,padding:0}}>×</button>
-                                        </div>
-                                        {atk&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{[atk.atkType,atk.reach&&("reach "+atk.reach)].filter(Boolean).join(" · ")||"Weapon attack"}{atk.atk?" — "+atk.atk+" to hit":""}{atk.dmg?", "+atk.dmg:""}.</div>}
-                                        {std&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{std[1]}</div>}
-                                        {atk&&(hasAtkB||dn>0)&&(
-                                          <div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
-                                            {hasAtkB&&<button style={cBtn} onClick={()=>rollCheck(item.name+" To Hit",atkB)}>🎲 To hit {atkB>=0?"+":""}{atkB}</button>}
-                                            {dn>0&&<button style={cBtn} onClick={rollDmg}>🎲 {dn}d{ds}{db?(db>0?"+":"")+db:""}{dtype?" "+dtype.toLowerCase():""}</button>}
-                                          </div>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
                     );
                   })}
@@ -35185,9 +35191,9 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
               return(
                 <>
                 <div onClick={()=>setActionPickerOpen(null)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.45)",zIndex:400}}/>
-                <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",zIndex:401,background:"var(--card)",border:"1px solid var(--amber)",borderRadius:14,padding:"14px 16px",width:"min(340px,92vw)",maxHeight:"75vh",overflowY:"auto",boxShadow:"0 8px 32px rgba(0,0,0,0.25)"}}>
+                <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",zIndex:401,background:"var(--card)",border:"1px solid #f97316",borderRadius:14,padding:"14px 16px",width:"min(340px,92vw)",maxHeight:"75vh",overflowY:"auto",boxShadow:"0 8px 32px rgba(0,0,0,0.25)"}}>
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-                    <span style={{fontSize:14,fontWeight:700,color:"var(--amber)"}}>Add Bonus Action</span>
+                    <span style={{fontSize:14,fontWeight:700,color:"#f97316"}}>Add Bonus Action</span>
                     <button onClick={()=>setActionPickerOpen(null)} style={{fontSize:15,fontWeight:700,color:"var(--muted)",background:"none",border:"none",cursor:"pointer",lineHeight:1}}>✕</button>
                   </div>
                   {allOptions.length===0&&<div style={{fontSize:12,color:"var(--muted)",paddingBottom:8}}>No bonus actions found — type a custom one below.</div>}
@@ -35209,7 +35215,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                           setActionPickerOpen(null);
                         }
                       }}
-                        style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:name.startsWith("Rage 🔥")?"rgba(245,158,11,0.1)":"rgba(245,158,11,0.08)",border:"1px solid "+(name.startsWith("Rage 🔥")?"rgba(245,158,11,0.4)":"rgba(245,158,11,0.3)"),color:name.startsWith("Rage 🔥")?"var(--amber)":"var(--text)"}}>
+                        style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:name.startsWith("Rage 🔥")?"rgba(249,115,22,0.1)":"rgba(249,115,22,0.08)",border:"1px solid "+(name.startsWith("Rage 🔥")?"rgba(249,115,22,0.4)":"rgba(249,115,22,0.3)"),color:name.startsWith("Rage 🔥")?"#f97316":"var(--text)"}}>
                         {name.split(' — ')[0].split(' (')[0].trim()||name}
                       </button>
                     ))}
@@ -35220,7 +35226,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                     <input id="ba-custom-input" placeholder="Custom bonus action..." style={{flex:1,padding:"5px 8px",borderRadius:7,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,fontFamily:"inherit"}}
                       onKeyDown={e=>{if(e.key==="Enter"&&e.target.value.trim()){setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:e.target.value.trim()}]}));setActionPickerOpen(null);}}}/>
                     <button onClick={()=>{const el=document.getElementById("ba-custom-input");if(el&&el.value.trim()){setCharSaving(p=>({...p,[itemKey]:[...(p[itemKey]||[]),{id:Date.now(),name:el.value.trim()}]}));setActionPickerOpen(null);}}}
-                      style={{fontSize:12,fontWeight:700,padding:"5px 10px",borderRadius:7,background:"rgba(245,158,11,0.1)",border:"1px solid rgba(245,158,11,0.3)",color:"var(--amber)",cursor:"pointer",fontFamily:"inherit"}}>Add</button>
+                      style={{fontSize:12,fontWeight:700,padding:"5px 10px",borderRadius:7,background:"rgba(249,115,22,0.1)",border:"1px solid rgba(249,115,22,0.3)",color:"#f97316",cursor:"pointer",fontFamily:"inherit"}}>Add</button>
                   </div>
                 </div>
                 </>
