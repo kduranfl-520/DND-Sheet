@@ -1754,6 +1754,8 @@ window.DND_LIBRARY = {
  {id:"eq_arcane_rod",title:"Arcane Focus - Rod",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A metal rod used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 10 gp. Weight: 2 lbs. Replaces non-costly material components."},
  {id:"eq_arcane_staff",title:"Arcane Focus - Staff",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A wooden staff used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 5 gp. Weight: 4 lbs. Replaces non-costly material components. Can also be used as a quarterstaff."},
  {id:"eq_arcane_wand",title:"Arcane Focus - Wand",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A slender wand used as a spellcasting focus for sorcerers and wizards.",notes:"Cost: 10 gp. Weight: 1 lb. Replaces non-costly material components."},
+ {id:"eq_holy_symbol",title:"Holy Symbol",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"An amulet, emblem or reliquary that serves as a divine spellcasting focus for clerics and paladins.",notes:"Choose the type in the dropdown: Amulet, Emblem or Reliquary, 5 gp each."},
+ {id:"eq_druidic_focus",title:"Druidic Focus",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A sprig of mistletoe, totem, wooden staff or yew wand that serves as a spellcasting focus for druids.",notes:"Choose the type in the dropdown: Sprig of Mistletoe 1 gp, Totem 1 gp, Wooden Staff 5 gp, Yew Wand 10 gp."},
  {id:"eq_arcane_focus",title:"Arcane Focus",category:"Equipment",phb:true,tags:"spellcasting,gear,PHB",desc:"A crystal, orb, rod, staff or wand that channels arcane magic. Sorcerers, warlocks and wizards can use one as a spellcasting focus.",notes:"Choose the type in the dropdown: Crystal 10 gp, Orb 20 gp, Rod 10 gp, Staff 5 gp, Wand 10 gp. Replaces non-costly material components."},
  {id:"eq_ball_bearings",title:"Ball Bearings (Bag of 1,000)",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"As an action, you can spill these ball bearings from their pouch to cover a 10-foot square area.",notes:"Cost: 1 gp. Weight: 2 lbs. Any creature crossing the area must DC 10 DEX save or fall prone. Large or larger creatures are unaffected."},
  {id:"eq_bell",title:"Bell",category:"Equipment",phb:true,tags:"gear,utility,PHB",desc:"A small bell used as an alarm or signal device.",notes:"Cost: 1 gp. Weight: --."},
@@ -2621,7 +2623,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3097";
+const SHEET_VERSION = "v3098";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -10182,11 +10184,11 @@ function App() {
                                                         const MISC_ITEMS=["Holy symbol","Component pouch","Arcane focus","Druidic focus","Holy symbol or druidic focus"];
                                                         const instrumentMatch = INSTRUMENT_NAMES.find(m=>sub.toLowerCase().includes(m.toLowerCase()));
                                                         const miscMatch = MISC_ITEMS.find(m=>sub.toLowerCase().includes(m.toLowerCase()));
-                                                        const toolishMatch=/^(component pouch|arcane focus)$/i.test(sub.trim());
+                                                        const toolishMatch=/^(component pouch|arcane focus|holy symbol|druidic focus)$/i.test(sub.trim());
                                                         if(toolishMatch){
                                                           const isPouch=/pouch/i.test(sub);
-                                                          const tn=isPouch?"Component Pouch":"Arcane Focus";
-                                                          const sameT=t=>typeof t==="object"&&t.source==="class"&&(isPouch?t.name===tn:/^Arcane Focus/.test(t.name||""));
+                                                          const tn=isPouch?"Component Pouch":/arcane/i.test(sub)?"Arcane Focus":/holy/i.test(sub)?"Holy Symbol":"Druidic Focus";
+                                                          const sameT=t=>typeof t==="object"&&t.source==="class"&&(isPouch?t.name===tn:(t.name||"").startsWith(tn));
                                                           if(nowChosen){ if(!newToolItems.some(sameT)) newToolItems.push({name:tn,qty:1,source:"class"}); }
                                                           else { newToolItems=newToolItems.filter(t=>!sameT(t)); }
                                                         } else if(instrumentMatch){
