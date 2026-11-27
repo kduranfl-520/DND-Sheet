@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 27, 2026";
-const SHEET_VERSION = "v3114";
+const SHEET_VERSION = "v3115";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -26850,6 +26850,60 @@ const FC=({label,minLvl,headerBadge,children})=>{
                       </div>
                     </Card>
                   )}
+
+                  {/* Wizard spellbook — same chip format as Spells Known / Prepared */}
+                  {char.charClass==="Wizard"&&(()=>{
+                    const bk=Array.isArray(char.wizSpellbook)?char.wizSpellbook:[];
+                    if(bk.length===0) return null;
+                    const wl=char.multiClassLevel>0?char.classLevel:char.level||1;
+                    const freeTotal=6+2*(wl-1);
+                    const sorted=bk.slice().sort((a,b)=>{const la=SPELL_DATA[a]?.level??99, lb=SPELL_DATA[b]?.level??99;return la!==lb?la-lb:a.localeCompare(b);});
+                    const known=new Set(char.spellsKnown||[]);
+                    return(
+                      <Card>
+                        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                          <SecHead icon="*" title="Spellbook" style={{margin:"0 0 0 0"}}/>
+                          <div style={{display:"flex",gap:8,fontSize:12,fontWeight:700}}>
+                            <span style={{color:"#a78bfa"}}>{bk.length} spells<span style={{fontSize:10,fontWeight:400,color:"var(--muted)",marginLeft:3}}>(free allotment {freeTotal})</span></span>
+                          </div>
+                        </div>
+                        <div className="sp-grid" style={fontScale>=1.4?{gridTemplateColumns:"repeat(2,minmax(0,1fr))"}:undefined}>
+                          {sorted.map(s=>{
+                            const sd3=SPELL_DATA[s];
+                            const prepared=known.has(s);
+                            return(
+                              <div key={s} style={{position:"relative"}} data-school={sd3?.school||""} className="sp-item sp-on">
+                                {sd3&&<span style={{flexShrink:0,fontSize:10,fontWeight:800,color:"var(--accent)",background:"rgba(var(--accent-rgb),0.15)",border:"1px solid rgba(var(--accent-rgb),0.3)",borderRadius:"50%",width:16,height:16,display:"inline-flex",alignItems:"center",justifyContent:"center"}}>{sd3.level===0?"C":sd3.level}</span>}
+                                <FitText>{s}</FitText>
+                                {RITUAL_SPELLS.has(s)&&<span style={{fontSize:9,fontWeight:800,color:"var(--green)",background:"rgba(34,197,94,0.1)",border:"1px solid rgba(34,197,94,0.3)",borderRadius:3,padding:"1px 4px",flexShrink:0}}>R</span>}
+                                {sd3&&sd3.dur&&sd3.dur.toLowerCase().includes("concentration")&&<span style={{fontSize:9,fontWeight:800,color:"#f59e0b",background:"rgba(245,158,11,0.1)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:3,padding:"1px 4px",flexShrink:0}}>C</span>}
+                                {sd3&&<span className="ft-info-icon" style={{flexShrink:0,marginLeft:4}} onClick={e=>{e.stopPropagation();setSpellPopup(spellPopup===s?null:s);}}>i</span>}
+                                <button title="Remove from spellbook" onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,wizSpellbook:(p.wizSpellbook||[]).filter(x=>x!==s),spellsKnown:(p.spellsKnown||[]).filter(x=>x!==s)}));}} style={{flexShrink:0,marginLeft:2,width:14,height:14,borderRadius:"50%",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.25)",color:"var(--red)",fontSize:10,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",padding:0,lineHeight:1}}>×</button>
+                                {!prepared&&spellPopup===s&&sd3&&(
+                                  <><div className="ft-info-backdrop" onClick={e=>{e.stopPropagation();setSpellPopup(null);}}/><div className="ft-info-popup" style={{zIndex:999}} onClick={e=>e.stopPropagation()}>
+                                    <div style={{position:"relative",background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"10px 12px",boxShadow:"0 4px 20px rgba(0,0,0,0.18)",zIndex:300,fontSize:13}}>
+                                      <div style={{fontWeight:700,color:"var(--text)",marginBottom:6,fontSize:14}}>{s}</div>
+                                      <div style={{display:"flex",flexDirection:"column",gap:2,marginBottom:8,color:"var(--muted)",fontSize:12}}>
+                                        <span><b style={{color:"var(--text)"}}>Level:</b> {sd3.level===0?"Cantrip":sd3.level===1?"1st":sd3.level===2?"2nd":sd3.level===3?"3rd":sd3.level+"th"}</span>
+                                        <span><b style={{color:"var(--text)"}}>School:</b> {sd3.school}</span>
+                                        <span><b style={{color:"var(--text)"}}>Casting Time:</b> {sd3.cast}</span>
+                                        <span><b style={{color:"var(--text)"}}>Range:</b> {sd3.range}</span>
+                                        <span><b style={{color:"var(--text)"}}>Components:</b> {sd3.comp}</span>
+                                        <span><b style={{color:"var(--text)"}}>Duration:</b> {sd3.dur}</span>
+                                      </div>
+                                      <div style={{color:"var(--text)",lineHeight:1.5,borderTop:"1px solid var(--divider)",paddingTop:6}}>{sd3.desc}</div>
+                                      <div style={{fontSize:11,color:"var(--muted)",marginTop:6,fontStyle:"italic"}}>In your spellbook — prepare it to cast it.</div>
+                                    </div>
+                                  </div>
+                                </>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </Card>
+                    );
+                  })()}
 
                   {/* Spells Known card — all spellcasting classes */}
                   {(()=>{
