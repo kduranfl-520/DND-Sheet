@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3089";
+const SHEET_VERSION = "v3090";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -5782,6 +5782,7 @@ function App() {
  React.useEffect(()=>{try{if(theme)localStorage.setItem("dnd5e_theme",JSON.stringify(theme));else localStorage.removeItem("dnd5e_theme");}catch(e){}},[theme]);
  const [openActionSections, setOpenActionSections] = useState({actionUsed:false,bonusActionUsed:false,reactionUsed:false});
   const [actionPickerOpen, setActionPickerOpen] = useState(null);
+  const [compPickerOpen, setCompPickerOpen] = useState(null);
   const [beastsSeenOpen, setBeastsSeenOpen] = useState(false);
   const [roundsSpellPopup, setRoundsSpellPopup] = useState(null);
   const [roundsSpellRoll, setRoundsSpellRoll] = useState({});
@@ -30297,6 +30298,7 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                     setCharSaving(p=>({...p,
                       actionUsed:false,bonusActionUsed:false,reactionUsed:false,
                       moveUsed:0,actionItems:[],bonusActionItems:[],reactionItems:[],dismissedAutoItems:[],
+                      companions:(p.companions||[]).map(c=>({...c,actionUsed:false,bonusActionUsed:false,reactionUsed:false,actionItems:[],bonusActionItems:[],reactionItems:[]})),
                       _turnDmgMap:{},
                       _actionDiceStart:p.actionDiceCount||0,
                       bardDFRoll:0,
@@ -34189,6 +34191,109 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                 );
               })}
             </div>
+
+            {/* ── Companion turn tracker — only when a companion exists ── */}
+            {(char.companions||[]).length>0&&(()=>{
+              const updC=(cid,patch)=>setCharSaving(p=>({...p,companions:(p.companions||[]).map(c=>c.id===cid?{...c,...(typeof patch==="function"?patch(c):patch)}:c)}));
+              const STD={
+                actionItems:[["Dash","Double the companion's movement for the turn."],["Disengage","The companion's movement doesn't provoke opportunity attacks this turn."],["Dodge","Attacks against the companion have disadvantage until its next turn, and it has advantage on DEX saves."],["Help","Give an ally advantage on their next ability check or attack against a creature near the companion."],["Hide","The companion makes a DEX (Stealth) check to hide."],["Search","The companion looks or listens for something with a WIS (Perception) check."],["Use an Object","The companion interacts with a second object, or uses a special object."]],
+                bonusActionItems:[],
+                reactionItems:[["Opportunity Attack","When a hostile creature the companion can see leaves its reach, it makes one melee attack against that creature."]],
+              };
+              const SLOTS=[
+                {key:"actionUsed",ik:"actionItems",label:"Action",emoji:"🎯",c0:"var(--accent)",bg:"rgba(var(--accent-rgb),0.1)",bd:"rgba(var(--accent-rgb),0.35)"},
+                {key:"bonusActionUsed",ik:"bonusActionItems",label:"Bonus Action",emoji:"+",c0:"var(--amber)",bg:"rgba(245,158,11,0.1)",bd:"rgba(245,158,11,0.35)"},
+                {key:"reactionUsed",ik:"reactionItems",label:"Reaction",emoji:"!",c0:"var(--green)",bg:"rgba(34,197,94,0.1)",bd:"rgba(34,197,94,0.35)"},
+              ];
+              const cBtn={fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:"rgba(var(--accent-rgb),0.12)",color:"var(--accent)",cursor:"pointer",fontFamily:"inherit"};
+              return (
+                <div style={{display:"flex",flexDirection:"column",gap:12,marginTop:14,marginBottom:14}}>
+                  {(char.companions||[]).map(comp=>{
+                    const cid=comp.id;
+                    return (
+                      <div key={cid} style={{background:"var(--card)",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden"}}>
+                        <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",padding:"8px 12px",borderBottom:"1px solid var(--divider)",background:"var(--surface)"}}>
+                          <span style={{fontSize:14,fontWeight:800,color:"var(--text)"}}>{comp.name||comp.type||"Companion"}</span>
+                          {comp.type&&comp.name&&<span style={{fontSize:11,fontWeight:600,color:"var(--accent)"}}>{comp.type}</span>}
+                          <span style={{marginLeft:"auto",display:"flex",gap:10}}>
+                            {comp.ac&&<span style={{fontSize:12,fontWeight:700,color:"var(--muted)"}}><b style={{color:"var(--text)"}}>AC</b> {comp.ac}</span>}
+                            {comp.hp&&<span style={{fontSize:12,fontWeight:700,color:"var(--red)"}}><b style={{color:"var(--text)"}}>HP</b> {comp.hpCurrent||comp.hp}/{comp.hp}</span>}
+                            {comp.speed&&<span style={{fontSize:12,fontWeight:700,color:"var(--muted)"}}><b style={{color:"var(--text)"}}>Spd</b> {comp.speed}</span>}
+                          </span>
+                        </div>
+                        {SLOTS.map(sl=>{
+                          const used=!!comp[sl.key];
+                          const items=comp[sl.ik]||[];
+                          const color=darkMode?sl.c0:(sl.c0==="var(--amber)"?"#b45309":sl.c0==="var(--green)"?"#15803d":sl.c0);
+                          const pk=cid+":"+sl.key;
+                          const open=compPickerOpen===pk;
+                          const atks=(comp.attacks||[]).filter(a=>a&&a.name&&a.name.trim());
+                          const opts=[
+                            ...(sl.key==="actionUsed"?atks.map(a=>[a.name.trim(),""]):[]),
+                            ...STD[sl.ik],
+                          ].filter(([n])=>!items.some(i=>i.name===n));
+                          const addItem=name=>{updC(cid,c=>({[sl.ik]:[...(c[sl.ik]||[]),{id:Date.now()+Math.random(),name}]}));setCompPickerOpen(null);};
+                          return (
+                            <div key={sl.key} style={{display:"flex",gap:10,alignItems:"flex-start",padding:"8px 12px",borderTop:sl.key==="actionUsed"?"none":"1px solid var(--divider)"}}>
+                              <button onClick={()=>updC(cid,{[sl.key]:!used})}
+                                style={{width:84,flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,padding:"6px 4px",borderRadius:10,border:"2px solid "+(used?"var(--border)":sl.bd),background:used?"var(--input)":sl.bg,cursor:"pointer",transition:"all .18s",fontFamily:"inherit",opacity:used?0.45:1}}>
+                                <div style={{fontSize:18,lineHeight:1,color,opacity:used?0.3:1}}>{sl.emoji}</div>
+                                <div style={{fontSize:12,fontWeight:800,color:used?"var(--muted)":color,textAlign:"center"}}>{sl.label}</div>
+                                <div style={{fontSize:10,color:"var(--muted)",fontWeight:600}}>{used?"Used":"Available"}</div>
+                              </button>
+                              <div style={{flex:1,minWidth:0}}>
+                                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",paddingBottom:items.length>0||open?6:0}}>
+                                  <span style={{fontSize:12,fontWeight:600,color:"var(--muted)",flex:1,minWidth:0,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{items.length>0?items.map(i=>i.name).join(", "):"--"}</span>
+                                  <button style={{fontSize:12,fontWeight:700,color,background:"rgba(0,0,0,0.04)",border:"1px solid "+sl.bd,borderRadius:6,padding:"3px 10px",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setCompPickerOpen(open?null:pk);}}>+ Add</button>
+                                </div>
+                                {open&&(
+                                  <div style={{paddingBottom:8,display:"flex",flexDirection:"column",gap:8}}>
+                                    <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+                                      {opts.map(([n])=>(<button key={n} onClick={()=>addItem(n)} style={{fontSize:12,fontWeight:600,padding:"4px 10px",borderRadius:8,cursor:"pointer",fontFamily:"inherit",background:sl.bg,border:"1px solid "+sl.bd,color:"var(--text)"}}>{n}</button>))}
+                                      {opts.length===0&&<span style={{fontSize:12,color:"var(--subtle)",fontStyle:"italic"}}>Everything available is already added.</span>}
+                                    </div>
+                                    <input placeholder={"Custom "+sl.label.toLowerCase()+"..."} style={{padding:"5px 8px",borderRadius:7,background:"var(--input)",border:"1px solid var(--border)",color:"var(--text)",fontSize:12,fontFamily:"inherit"}}
+                                      onKeyDown={e=>{if(e.key==="Enter"&&e.target.value.trim()) addItem(e.target.value.trim());}}/>
+                                  </div>
+                                )}
+                                <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                                  {items.map(item=>{
+                                    const atk=atks.find(a=>a.name.trim()===item.name);
+                                    const std=STD[sl.ik].find(([n])=>n===item.name);
+                                    const atkB=atk?(parseInt((atk.atk||"").replace(/[^0-9+-]/g,""),10)||0):0;
+                                    const hasAtkB=atk&&/[+-]?\d+/.test(atk.atk||"");
+                                    const dm=atk&&(atk.dmg||"").match(/(\d+)d(\d+)([+-]\d+)?/i);
+                                    const dn=dm?parseInt(dm[1],10):0, ds=dm?parseInt(dm[2],10):0, db=dm&&dm[3]?parseInt(dm[3],10):0;
+                                    const dtype=atk?((atk.dmg||"").replace(/^[^a-zA-Z]*\d+d\d+\s*[+-]?\s*\d*\s*/,"").trim()):"";
+                                    const rollDmg=()=>{const rolls=Array.from({length:dn},()=>Math.floor(Math.random()*ds)+1);const total=rolls.reduce((a,b)=>a+b,0)+db;setSkillRoll({label:item.name+" Damage",roll:total,bonus:db,total,isCrit:rolls.every(r=>r===ds),isFail:rolls.every(r=>r===1),sides:ds,r1:rolls[0],r2:rolls[1]||null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:db,dmgType:(dtype||"").toLowerCase(),dmgDice:dn+"d"+ds,diceSides:ds,baseDiceCount:dn,saveDC:null,saveType:null,spiritShield:false});};
+                                    return (
+                                      <div key={item.id} style={{background:"var(--input)",border:"1px solid var(--border)",borderRadius:8,padding:"8px 10px"}}>
+                                        <div style={{display:"flex",alignItems:"center",gap:6}}>
+                                          <span style={{flex:1,fontWeight:700,color:"var(--text)",fontSize:14}}>{item.name}</span>
+                                          <button onClick={()=>updC(cid,c=>({[sl.ik]:(c[sl.ik]||[]).filter(i=>i.id!==item.id)}))} style={{flexShrink:0,width:20,height:20,borderRadius:"50%",background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.25)",color:"var(--red)",fontSize:13,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1,padding:0}}>×</button>
+                                        </div>
+                                        {atk&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{[atk.atkType,atk.reach&&("reach "+atk.reach)].filter(Boolean).join(" · ")||"Weapon attack"}{atk.atk?" — "+atk.atk+" to hit":""}{atk.dmg?", "+atk.dmg:""}.</div>}
+                                        {std&&<div style={{fontSize:12,color:"var(--text)",lineHeight:1.5,marginTop:4}}>{std[1]}</div>}
+                                        {atk&&(hasAtkB||dn>0)&&(
+                                          <div style={{marginTop:6,borderTop:"1px solid var(--divider)",paddingTop:6,display:"flex",alignItems:"center",justifyContent:"flex-end",gap:8,flexWrap:"wrap"}}>
+                                            {hasAtkB&&<button style={cBtn} onClick={()=>rollCheck(item.name+" To Hit",atkB)}>🎲 To hit {atkB>=0?"+":""}{atkB}</button>}
+                                            {dn>0&&<button style={cBtn} onClick={rollDmg}>🎲 {dn}d{ds}{db?(db>0?"+":"")+db:""}{dtype?" "+dtype.toLowerCase():""}</button>}
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
 
             {/* Action picker popup — fixed centered modal */}
             {actionPickerOpen==="actionUsed"&&(()=>{
