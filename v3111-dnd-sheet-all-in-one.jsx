@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3110";
+const SHEET_VERSION = "v3111";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -22975,7 +22975,7 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                                 {flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>Abjuration copy: 1 hr · 25 gp per spell level</span>)}
                                               </FC>,
                                               <FC key="aw" label="Arcane Ward (2nd)" minLvl={2}>
-                                                <Body>When you cast an abjuration spell of 1st level or higher, you can also weave a ward around yourself that lasts until you finish a long rest. Its hit points equal twice your wizard level plus your Intelligence modifier. Damage aimed at you hits the ward first, and anything left over carries through to you. At 0 hit points it can't absorb damage, but it keeps its magic. Each time you cast an abjuration spell of 1st level or higher, the ward regains hit points equal to twice that spell's level. You can only create the ward once between long rests.</Body>
+                                                <Body>When you cast an abjuration spell of 1st level or higher, you can also weave a ward around yourself that lasts until you finish a long rest. Its hit points equal twice your wizard level plus your Intelligence modifier. Damage aimed at you hits the ward first, and anything left over carries through to you. At 0 hit points it can't absorb damage, but it keeps its magic. Each time you cast an abjuration spell of 1st level or higher, the ward regains hit points equal to twice that spell's level.</Body>
                                                 {wardReadout}
                                                 {!made&&flexEnd(<button style={neutralBtn} onClick={e=>{e.stopPropagation();setCharSaving(p=>({...p,wizWardMade:true,wizWardHP:wardMax,wizWardLast:""}));}}>Create Ward</button>)}
                                                 {made&&(
