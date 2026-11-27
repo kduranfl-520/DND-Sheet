@@ -2620,7 +2620,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3094";
+const SHEET_VERSION = "v3095";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -7738,7 +7738,7 @@ function App() {
  const changeClass = nv => {
  collapseAllTraits();
  const nc = CLASSES[nv] || null;
- const u = {charClass: nv, classSkills: [], spellsKnown: [], domainChoice: "", spellSlotsUsed: []};
+ const u = {charClass: nv, classSkills: [], spellsKnown: [], wizSpellbook: [], domainChoice: "", spellSlotsUsed: []};
  const effDex = char.abilities.DEX + (spc?.abilityBonus?.DEX||0) + (subBonus.DEX||0);
  const effCon = char.abilities.CON + (spc?.abilityBonus?.CON||0) + (subBonus.CON||0);
  if (nc) {
@@ -26920,12 +26920,30 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  const _label=_prepFormula?"Prepared":_skt?"Known":null;
  return (
                       <>
+                      {char.charClass==="Wizard"&&(()=>{
+                        const bk=Array.isArray(char.wizSpellbook)?char.wizSpellbook:[];
+                        const bm=!!char.wizBookMode;
+                        const wl=char.multiClassLevel>0?char.classLevel:char.level||1;
+                        const freeTotal=6+2*(wl-1);
+                        const bkLeveled=bk.filter(x=>!CLASSES.Wizard?.spells?.cantrips?.includes(x)).length;
+                        const segBtn=(on)=>({fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid rgba(var(--accent-rgb),0.4)",background:on?"var(--accent)":"rgba(var(--accent-rgb),0.12)",color:on?"#fff":"var(--accent)",cursor:"pointer",fontFamily:"inherit"});
+                        return (
+                          <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:"4px 0 2px"}}>
+                            <div style={{display:"flex",gap:6}}>
+                              <button style={segBtn(!bm)} onClick={()=>setF("wizBookMode",false)}>Prepare</button>
+                              <button style={segBtn(bm)} onClick={()=>setF("wizBookMode",true)}>Spellbook</button>
+                            </div>
+                            <div style={{fontSize:11,color:"var(--muted)"}}>Spellbook: {bkLeveled} spells · free allotment {freeTotal}{bm?" · tap a spell to add or remove it":(bk.length?"":" · add spells in Spellbook mode to limit what you can prepare")}</div>
+                          </div>
+                        );
+                      })()}
                       {_sm&&<div style={{textAlign:"center",padding:"4px 0 6px",fontSize:13,fontWeight:600,color:_sk>=_sm?"#f87171":"#a78bfa"}}>Spells {_label||"Known"}: {_sk}/{_sm}</div>}
                       {!_sm&&_sk>0&&<div style={{textAlign:"center",padding:"4px 0 6px",fontSize:13,fontWeight:600,color:"#a78bfa"}}>Spells Selected: {_sk}</div>}
                       <div className="sp-grid" style={fontScale>=1.4?{gridTemplateColumns:"repeat(2,minmax(0,1fr))"}:undefined}>
                         {spells.map(s=>{
  const isDomain = domainSpellSet.has(s);
  const isKnown = (char.spellsKnown||[]).includes(s);
+ const _wizB=char.charClass==="Wizard"; const _wBook=Array.isArray(char.wizSpellbook)?char.wizSpellbook:[]; const _wBM=_wizB&&!!char.wizBookMode; const _wIn=_wBook.includes(s); const _wBlocked=_wizB&&!_wBM&&_wBook.length>0&&!_wIn&&!isKnown;
  const sd3=SPELL_DATA[s];
  const isMysticArcanum = (CLASSES[char.charClass]?.warlockCaster||char.multiClass==="Warlock") && sd3?.level>=6;
  const maUsed = isMysticArcanum && (char.mysticArcanum||{})["lvl"+(sd3?.level||0)];
@@ -26934,9 +26952,13 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
  if(spFilter.range){if(spFilter.range==="ranged"){if(!sd3?.range||!/\d+\s*ft/i.test(sd3.range))return null;}else if(sd3?.range!==spFilter.range)return null;}
  if(spFilter.dmgType&&sd3?.dmgType!==spFilter.dmgType) return null;
  return (
-                            <div key={s} style={{position:"relative",opacity:maUsed?0.4:1}}
- data-school={sd3?.school||""} className={`sp-item ${isKnown?"sp-on":""} ${isDomain?"sp-item-domain":""} ${isMysticArcanum?"sp-item-arcanum":""}`}
- onClick={()=>tog("spellsKnown",s)}>
+                            <div key={s} style={{position:"relative",opacity:maUsed?0.4:(_wBlocked?0.35:1)}}
+ data-school={sd3?.school||""} className={`sp-item ${(_wBM?_wIn:isKnown)?"sp-on":""} ${isDomain?"sp-item-domain":""} ${isMysticArcanum?"sp-item-arcanum":""}`}
+ onClick={()=>{
+   if(_wBM){setCharSaving(p=>{const bk=Array.isArray(p.wizSpellbook)?p.wizSpellbook:[];const has=bk.includes(s);return {...p,wizSpellbook:has?bk.filter(x=>x!==s):[...bk,s],...(has?{spellsKnown:(p.spellsKnown||[]).filter(x=>x!==s)}:{})};});return;}
+   if(_wBlocked)return;
+   tog("spellsKnown",s);
+ }}>
                               <div className={`sp-dot ${isDomain?"sp-dot-domain":""}`}/>
                               <FitText>{s}</FitText>
                               {isMysticArcanum&&<span style={{fontSize:9,fontWeight:800,color:"#7c3aed",flexShrink:0,marginLeft:2}}>{maUsed?"✓":"🔮"}</span>}
