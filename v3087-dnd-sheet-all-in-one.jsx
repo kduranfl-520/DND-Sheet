@@ -2618,7 +2618,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 26, 2026";
-const SHEET_VERSION = "v3086";
+const SHEET_VERSION = "v3087";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -30970,6 +30970,10 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                       "Sentinel at Death's Door":"When you or a creature you can see within 30 feet suffers a critical hit, you can turn it into a normal hit. Uses equal your WIS modifier (minimum 1) per long rest.",
                                       "Opportunist":"When a creature within 5 feet of you is hit by an attack from someone other than you, use your reaction to make a melee attack against that creature.",
                                       "Relentless Avenger":"After you hit with an opportunity attack, you can move up to half your speed as part of the same reaction, without provoking opportunity attacks.",
+                                      "Extra Attack":"When you take the Attack action, you can attack more than once, as shown in your class table.",
+                                      "Action Surge":"Take one extra action on your turn on top of your normal action and bonus action. It returns after a short or long rest.",
+                                      "Ki-Fueled Attack":"After you spend ki during your action, you can make one unarmed strike or weapon attack as a bonus action.",
+                                      "Deflect Missiles":"When a ranged weapon attack hits you, use your reaction to reduce the damage, and catch and throw back the missile if the damage drops to zero.",
                                       "Shove":"Make a STR (Athletics) check contested by the target's STR (Athletics) or DEX (Acrobatics) to push the target 5 ft away or knock it prone. Target must be within reach and no more than one size larger than you.",
                                     };
                                     const featureNote = !sd&&!libEntry&&!matchName.startsWith("Wild Shape") ? (FEATURE_NOTES[matchName]||Object.entries(FEATURE_NOTES).find(([k])=>matchName.startsWith(k.split("(")[0].trim()))?.[1]) : null;
@@ -31301,6 +31305,78 @@ onClick={()=>{if(mhLocked)return;const _cp=CLASSES[char.charClass]?.cantripKnown
                                           {on?<button style={oLink} onClick={e=>{e.stopPropagation();setF("monkShadowStepUsed",false);}}>↺ Clear</button>
                                             :<button style={oBtn} onClick={e=>{e.stopPropagation();setF("monkShadowStepUsed",true);}}>Teleport — gain advantage</button>}
                                         </>));
+                                      }
+                                      const kiMaxO=oLvl, kiUsedO=char.monkKiUsed||0, kiLeftO=Math.max(0,kiMaxO-kiUsedO);
+                                      const wisModO=abilityMod(eff.WIS||10);
+                                      const maDieO=oLvl>=17?10:oLvl>=11?8:oLvl>=5?6:4;
+                                      const kiDCO=8+pb+wisModO;
+                                      const kiRow=(need,label,onClick)=>endO(<>
+                                        <span style={{fontSize:11,fontWeight:700,color:"var(--muted)"}}>KI ({kiLeftO}/{kiMaxO})</span>
+                                        <button style={kiLeftO>=need?oBtn:oOff} disabled={kiLeftO<need} onClick={e=>{e.stopPropagation();onClick();}}>{label}</button>
+                                        {kiUsedO>0&&<button style={oLink} onClick={e=>{e.stopPropagation();setF("monkKiUsed",0);}}>↺ Reset</button>}
+                                      </>);
+                                      const saveO=(saveKey,okTxt,failTxt,lbl)=>{
+                                        const r=(char.saveResults||{})[saveKey];
+                                        const setR=v=>setCharSaving(p=>{const n={...(p.saveResults||{})};if(v)n[saveKey]=v;else delete n[saveKey];return {...p,saveResults:n};});
+                                        return (<div>
+                                          <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                                            <span style={{fontSize:12,color:"var(--red)",fontWeight:700}}>{lbl}</span>
+                                            <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="success"?"rgba(34,197,94,0.5)":"rgba(34,197,94,0.3)"),background:r==="success"?"rgba(34,197,94,0.18)":"rgba(34,197,94,0.08)",color:"var(--green)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("success");}}>✓ Succeeded</button>
+                                            <button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+(r==="fail"?"rgba(239,68,68,0.5)":"rgba(239,68,68,0.3)"),background:r==="fail"?"rgba(239,68,68,0.18)":"rgba(239,68,68,0.08)",color:"var(--red)",cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();setR("fail");}}>✗ Failed</button>
+                                            {r&&<button style={oLink} onClick={e=>{e.stopPropagation();setR(null);}}>↺ Clear</button>}
+                                          </div>
+                                          {r==="success"&&<div style={{fontSize:11,color:"var(--green)",marginTop:4}}>{okTxt}</div>}
+                                          {r==="fail"&&<div style={{fontSize:11,color:"var(--red)",marginTop:4}}>{failTxt}</div>}
+                                        </div>);
+                                      };
+                                      const dmgRoll=(label,type,sides,count,flat,spendKi)=>{
+                                        const rolls=Array.from({length:count},()=>Math.floor(Math.random()*sides)+1);
+                                        const total=Math.max(0,rolls.reduce((a,b)=>a+b,0)+flat);
+                                        if(spendKi) setF("monkKiUsed",kiUsedO+spendKi);
+                                        setSkillRoll({label:label+" ("+count+"d"+sides+(flat?(flat>0?"+":"")+flat:"")+" "+type+")",roll:rolls[0],bonus:flat,total,isCrit:false,isFail:false,sides,r1:rolls[0],r2:null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:flat,dmgType:type,dmgDice:count+"d"+sides,diceSides:sides,baseDiceCount:count,saveDC:null,saveType:null,spiritShield:false});
+                                      };
+                                      if(char.charClass==="Monk"&&char.monasticTradition==="Way of Mercy (Monk)"){
+                                        if(nm==="Hand of Healing") return wrapO(kiRow(1,"💚 Heal 1d"+maDieO+"+"+wisModO+" · 1 ki",()=>dmgRoll("Hand of Healing","healing",maDieO,1,wisModO,1)));
+                                        if(nm==="Hand of Harm") return wrapO(kiRow(1,"🎲 Harm 1d"+maDieO+"+"+wisModO+" · 1 ki",()=>dmgRoll("Hand of Harm","necrotic",maDieO,1,wisModO,1)));
+                                        if(nm==="Hand of Ultimate Mercy"){
+                                          const um=!!char.monkUltimateMercyUsed;
+                                          return wrapO(<>
+                                            {kiRow(5,um?"Used":"💚 Revive 4d10+"+wisModO+" · 5 ki",()=>{if(um)return;setCharSaving(p=>({...p,monkUltimateMercyUsed:true}));dmgRoll("Hand of Ultimate Mercy","healing",10,4,wisModO,5);})}
+                                            {endO(<><span style={{fontSize:11,color:um?"var(--muted)":"var(--accent)",fontWeight:700}}>{um?"Used — recharges on a Long Rest":"Ready — 1 use per long rest"}</span>{um&&<button style={oLink} onClick={e=>{e.stopPropagation();setF("monkUltimateMercyUsed",false);}}>↺ Reset</button>}</>)}
+                                          </>);
+                                        }
+                                      }
+                                      if(nm==="Touch of the Long Death"&&char.charClass==="Monk"){
+                                        const tk=Math.max(1,Math.min(10,char.monkLongDeathTouchKi||1,Math.max(1,kiLeftO)));
+                                        return wrapO(<>
+                                          {endO(<>
+                                            <span style={{fontSize:11,fontWeight:700,color:"var(--muted)"}}>Ki to spend</span>
+                                            <span style={{display:"inline-flex",alignItems:"center",gap:4}}>
+                                              <button style={tk<=1?oOff:oBtn} disabled={tk<=1} onClick={e=>{e.stopPropagation();setF("monkLongDeathTouchKi",tk-1);}}>−</button>
+                                              <span style={{fontSize:12,fontWeight:800,minWidth:16,textAlign:"center"}}>{tk}</span>
+                                              <button style={(tk>=10||tk>=kiLeftO)?oOff:oBtn} disabled={tk>=10||tk>=kiLeftO} onClick={e=>{e.stopPropagation();setF("monkLongDeathTouchKi",tk+1);}}>+</button>
+                                            </span>
+                                          </>)}
+                                          {saveO("longDeathTouch","Half damage.","Full damage.","CON save DC "+kiDCO)}
+                                          {kiRow(tk,"🎲 "+(tk*2)+"d10 necrotic · "+tk+" ki",()=>dmgRoll("Touch of the Long Death","necrotic",10,tk*2,0,tk))}
+                                        </>);
+                                      }
+                                      if(nm==="Halo of Spores"&&char.charClass==="Druid"){
+                                        const hd=oLvl>=14?10:oLvl>=10?8:oLvl>=6?6:4, dd=char.druidSymbioticActive?2:1;
+                                        return wrapO(<>
+                                          {saveO("haloOfSpores","The creature takes no damage.","The creature takes the necrotic damage.","CON save DC "+(8+pb+abilityMod(eff.WIS||10)))}
+                                          {endO(<button style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:6,border:"1px solid "+dmgTypeColor("necrotic").border,background:dmgTypeColor("necrotic").bg,color:dmgTypeColor("necrotic").fg,cursor:"pointer",fontFamily:"inherit"}} onClick={e=>{e.stopPropagation();const rolls=Array.from({length:dd},()=>Math.floor(Math.random()*hd)+1);const total=rolls.reduce((a,b)=>a+b,0);setSkillRoll({label:"Halo of Spores ("+dd+"d"+hd+" necrotic)",roll:rolls[0],bonus:0,total,isCrit:false,isFail:false,sides:hd,r1:rolls[0],r2:rolls[1]||null,isAdv:false,isDis:false,isSpellDmg:true,dmgTotal:total,allDmgRolls:rolls,dmgRolls:rolls,dmgBonus:0,dmgType:"necrotic",dmgDice:dd+"d"+hd,diceSides:hd,baseDiceCount:dd,saveDC:null,saveType:null,spiritShield:false});}}>🍄 Roll {dd}d{hd} necrotic</button>)}
+                                        </>);
+                                      }
+                                      if(nm==="Action Surge"&&char.charClass==="Fighter"){
+                                        const max=oLvl>=17?2:1, used=Math.min(max,char.fighterActionSurgeUsed||0), left=max-used;
+                                        return wrapO(<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+                                          <PipRow label={"Uses ("+left+"/"+max+")"} count={max} used={used} color="fail" onSet={v=>setF("fighterActionSurgeUsed",v)}/>
+                                          <span style={{display:"inline-flex",alignItems:"center",gap:8}}>
+                                            {used>0&&<button style={oLink} onClick={e=>{e.stopPropagation();setF("fighterActionSurgeUsed",0);}}>↺ Reset</button>}
+                                            <button style={left>0?oBtn:oOff} disabled={left<=0} onClick={e=>{e.stopPropagation();if(left>0)setCharSaving(p=>({...p,fighterActionSurgeUsed:(p.fighterActionSurgeUsed||0)+1,actionSurgeUsedThisTurn:true}));}}>Use</button>
+                                          </span>
+                                        </div>);
                                       }
                                       return null;
                                     })()}
