@@ -2625,7 +2625,7 @@ const BLANK = {
 
 // Footer date on the Core tab. Set this to the current date every time the file is versioned/updated.
 const SHEET_UPDATED = "Nov 27, 2026";
-const SHEET_VERSION = "v3113";
+const SHEET_VERSION = "v3114";
 const CHAR_KEY = "dnd5e_character_v1";
 const BG_TRAITS = {
   "Acolyte":{
@@ -23008,7 +23008,6 @@ const FC=({label,minLvl,headerBadge,children})=>{
                                               </FC>,
                                               <FC key="sr" label="Spell Resistance (14th)" minLvl={14}>
                                                 <Body>You have advantage on saving throws against spells, and you take half damage from spells.</Body>
-                                                {flexEnd(<span style={{fontSize:11,color:"var(--accent)",fontWeight:700}}>Advantage on saves vs. spells · Resistance to spell damage</span>)}
                                               </FC>
                                             );
                                           }
